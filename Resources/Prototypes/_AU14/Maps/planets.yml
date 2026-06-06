@@ -393,6 +393,9 @@
     - wendigoThreat
     - abominationsThreatDistress
     thirdparties:
+    - IASFSurvLarge
+    - IASFSurvMedium
+    - IASFSurvSmall
     - WEYUSurvLarge
     - WEYUSurvMedium
     - WEYUSurvSmall
@@ -687,6 +690,9 @@
     daycycleenabled: true
     faction: ua
     thirdparties:
+    - IASFSurvLarge
+    - IASFSurvMedium
+    - IASFSurvSmall
     - WEYUSurvLarge
     - WEYUSurvMedium
     - WEYUSurvSmall

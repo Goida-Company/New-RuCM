@@ -41,6 +41,9 @@
       - GOVFOR
     - type: Marine
       Faction: govfor
+    - type: UserIFF
+      factions:
+      - GOVFOR
     - type: Skills
       skills:
         RMCSkillConstruction: 2

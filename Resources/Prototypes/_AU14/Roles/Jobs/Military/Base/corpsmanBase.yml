@@ -6,6 +6,22 @@
   playTimeTracker: AU14JobGOVFORPlatoonCorpsman
   basePlaytimeTracker: true
   hidden: true
+  inheritAddComponentSpecials: true
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: Marine
+      Faction: govfor
+    - type: NpcFactionMember
+      factions:
+      - GOVFOR
+    - type: UserIFF
+      factions:
+      - GOVFOR
+    - type: TacticalMapIcon
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: medic
 
 - type: playTimeTracker
   id: AU14JobGOVFORPlatoonCorpsman

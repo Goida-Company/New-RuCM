@@ -26,6 +26,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Players;
 using Content.Shared.Roles;
 using Content.Shared.Verbs;
+using Content.Shared._RMC14.Xenonids;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
 using Robust.Server.Player;
@@ -69,6 +70,8 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
     private readonly Dictionary<ICommonSession, GhostRolesEui> _openUis = new();
     private readonly Dictionary<ICommonSession, MakeGhostRoleEui> _openMakeGhostRoleUis = new();
+
+    private static readonly ProtoId<JobPrototype> XenoLarvaRole = "CMXenoLarva";
 
     [ViewVariables]
     public IReadOnlyCollection<Entity<GhostRoleComponent>> GhostRoles => _ghostRoles.Values;
@@ -643,7 +646,16 @@ public sealed partial class GhostRoleSystem : EntitySystem
             _mindSystem.WipeMind(player);
         }
 
-        var newMind = _mindSystem.CreateMind(player.UserId, Comp<MetaDataComponent>(mob).EntityName);
+        string characterName;
+        // I genuinely can't think of a single reason why ghost roles need a player's character name,
+        // Ghost roles should use anonymised names, but I'm going to leave this to re-enable functionality
+        // if (role.JobProto is { } jobId
+        //     && _prototype.TryIndex(jobId, out JobPrototype? jobProto)
+        //     && jobProto.UsePlayerProfile)
+        //     characterName = GetGhostRoleCharacterName(player, mob);
+        // else
+        characterName = Comp<MetaDataComponent>(mob).EntityName;
+        var newMind = _mindSystem.CreateMind(player.UserId, characterName);
 
         Log.Debug($"GhostRoleInternalCreateMindAndTransfer: created mind {newMind.Owner} for player {player.Name} (user {player.UserId}) targeting mob {mob}");
 
@@ -902,13 +914,20 @@ public sealed partial class GhostRoleSystem : EntitySystem
         return Resolve(uid, ref component, false) &&
                !component.Taken &&
                !MetaData(uid).EntityPaused &&
-               !IsControlledGhostRole(uid);
+               !IsControlledGhostRole(uid) &&
+               !IsBlockedXenoGhostRole(uid);
     }
 
     private bool IsControlledGhostRole(EntityUid uid)
     {
         return HasComp<ActorComponent>(uid) ||
                TryComp(uid, out MindContainerComponent? mind) && mind.HasMind;
+    }
+
+    private bool IsBlockedXenoGhostRole(EntityUid uid)
+    {
+        return TryComp(uid, out XenoComponent? xeno) &&
+               xeno.Role == XenoLarvaRole;
     }
 
     private void OnTakeoverTakeRole(EntityUid uid, GhostTakeoverAvailableComponent component, ref TakeGhostRoleEvent args)

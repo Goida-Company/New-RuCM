@@ -14,7 +14,6 @@ using Content.Shared.NPC.Prototypes;
 using Content.Shared.Popups;
 using Content.Shared.Prototypes;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -115,6 +114,7 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
 
     private void OnMapInit(Entity<HiveComponent> ent, ref MapInitEvent args)
     {
+        ent.Comp.InstantBuildsRemaining = ent.Comp.MaxInstantBuilds;
         ent.Comp.AnnouncedUnlocks.Clear();
         ent.Comp.Unlocks.Clear();
         ent.Comp.AnnouncementsLeft.Clear();
@@ -192,6 +192,7 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
             hive.Allies.Remove(faction);
         }
     }
+
     public void SetHiveIndividualAlly(EntityUid ent, EntityUid hiveEnt, bool alliance)
     {
         if (!TryComp<HiveComponent>(hiveEnt, out var hive))
@@ -205,13 +206,13 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
             hive.IndividualAllies.Remove(ent);
         }
     }
+
     public void ClearHiveIndividualAllies(EntityUid hiveEnt)
     {
         if (!TryComp<HiveComponent>(hiveEnt, out var hive))
             return;
         hive.IndividualAllies.Clear();
     }
-
 
     /// <summary>
     /// Returns true if the entity uid is at all in any way shape or form considered an "ally" of the hive.
@@ -224,6 +225,7 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
     {
         if (hiveEnt is null)
             return false;
+
         // if there's no hive comp then just return false
         if (!TryComp<HiveComponent>(hiveEnt, out var hive))
             return false;

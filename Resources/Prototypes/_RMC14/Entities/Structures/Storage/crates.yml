@@ -102,12 +102,13 @@
     virtualLeft: RMCVirtualCrateLeft
   - type: RMCCanBeFultoned
   - type: ReceiverXenoClaws
-    minimumClawStrength: ImpossiblySharp
+    minimumClawStrength: VerySharp
   - type: XenoCrusherChargable
+    passOnDestroy: true
     setDamage:
       types:
         Blunt: 0
-    throwRange: 2
+
   - type: CrashLandable
   - type: ParaDroppable
     dropScatter: 4
@@ -943,6 +944,10 @@
       map: ["enum.PaperLabelVisuals.Layer"]
   - type: Icon
     sprite: _RMC14/Structures/Storage/Crates/woodcrate.rsi
+  - type: ReceiverXenoClaws
+    minimumClawStrength: Normal
+  - type: XenoCrusherChargable
+    instantDestroy: true
   - type: Flamability
     chance: 0.9
     rate: 3.0

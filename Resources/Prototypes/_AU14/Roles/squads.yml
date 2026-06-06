@@ -439,6 +439,28 @@
     tags:
     - AU14SquadMSG
 
+- type: entity
+  parent: SquadBase
+  id: AU14SquadIASF
+  name: IASF
+  components:
+  - type: SquadTeam
+    color: "#3D6F43"
+    blacklistedSquadArmor:
+    - Helmet
+    - Goggles
+    - Armor
+    - Gloves
+    radio: TWESOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_twe
+    canSupplyDrop: false
+    group: VAIPO
+  - type: Tag
+    tags:
+    - AU14SquadIASF
+
 - type: Tag
   id: SquadHRT
 
@@ -486,3 +508,6 @@
 
 - type: Tag
   id: AU14SquadMSG
+
+- type: Tag
+  id: AU14SquadIASF
