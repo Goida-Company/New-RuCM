@@ -1,20 +1,30 @@
-ent-RMCSpawnPointSurvivorPanicRoomCommando = Специальная точка появления коммандос в комнате паники для выживших
-  .desc = Создатель заданий RMC14. 
+ent-RMCSpawnPointSurvivorPanicRoomCommando = спавн коммандос в комнате для паники
+    .desc = Спавн коммандос.
 
-ent-CMArmorM4PMCCommandoSurvivorFilled = поврежденный рисунок MY7 Commando Броня
-  .desc = Модификация лекал W-Y PMC Броня. 
+ent-CMArmorM4PMCCommandoSurvivorFilled = повреждённая броня коммандос MY7
+    .desc = Модификация брони ЧВК Ве-Ю для подразделения коммандос.
 
-ent-CMFirstAidKitFilledCommando = предмет хранения
+ent-CMFirstAidKitFilledCommando = {ent-CMFirstAidKit}
+    .desc = {ent-CMFirstAidKit.desc}
+    .suffix = Заполнена, Коммандос
 
-ent-RMCSurgicalCaseFilledCommandoElite = предмет хранения
+ent-RMCSurgicalCaseFilledCommandoElite = {ent-CMSurgicalCase}
+    .desc = {ent-CMSurgicalCase.desc}
+    .suffix = Заполнен, Коммандос
 
-ent-RMCSyringeCaseFilledCommando = предмет хранения
+ent-RMCSyringeCaseFilledCommando = {ent-RMCSyringeCase}
+    .desc = {ent-RMCSyringeCase.desc}
+    .suffix = Заполнен, Коммандос
 
-ent-CMMedicalUpgradeKitFilledCommando = предмет хранения
+ent-CMMedicalUpgradeKitFilledCommando = {ent-CMMedicalUpgradeKit}
+    .desc = {ent-CMMedicalUpgradeKit.desc}
+    .suffix = Заполнен, Коммандос
 
-ent-RMCBeltPMCFilledCommando = Установка для загрузки боеприпасов модели М305
-  .desc = М305 является штатной несущей техникой ЧВК Weston-Yamada. 
+ent-RMCBeltPMCFilledCommando = {ent-RMCBeltPMC}
+    .desc = {ent-RMCBeltPMC.desc}
+    .suffix = Заполнен, Коммандос
 
-ent-RMCSatchelPMCCommandoFilled = Боевой рюкзак We-Ya Commando
-  .desc = Эргономичный, защищенный, большой вместительный рюкзак, разработанный для коммандос Weston-Yamada.
+ent-RMCSatchelPMCCommandoFilled = боевой рюкзак коммандос Ве-Ю
+    .desc = Эргономичный, защищенный, большой рюкзак, разработанный для коммандос Ве-Ю.
+    .suffix = Заполнен
 

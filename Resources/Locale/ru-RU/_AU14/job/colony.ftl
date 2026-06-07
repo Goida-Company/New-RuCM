@@ -204,13 +204,20 @@ au14-job-description-investigationrightsobserver = Благодаря упорн
 au14-job-prefix-civilianrightsobserver = ИХРО
 
 au14-job-name-civiliannspainspector = Инспектор НСПА
-
 au14-job-description-civiliannspainspector = Вы инспектор полицейского управления сектора Нероидов. Обеспечьте в колонии верховенство закона и выполняйте аресты и ордера. (Роль доступна на Гибрисе и Порт-Нероиде)
-
 au14-job-prefix-civiliannspainspector = НСПЕЙНС
 
 au14-job-name-civilianiccliaison = Представитель Комиссии по межзвездной торговле
-
 au14-job-description-civilianiccliaison = Вы — представитель по корпоративным связям Комиссии по межзвездной торговле, опытный агент ICC, прикрепленный к команде NSPA. Вы работаете с NSPA специально для того, чтобы соблюдать надлежащую торговую практику и расследовать любые возможности контрабанды или деятельности на черном рынке.
-
 au14-job-prefix-civilianiccliaison = ИККЛ
+
+au14-job-name-orbitalarbiter = Орбитальный арбитр
+au14-job-description-orbitalarbiter = Отстаивай справедливость. Толкуй закон, выноси вердикты и председательствуй на судебных процессах.
+au14-job-prefix-orbitalarbiter = Орб. Арб.
+
+au14-job-name-orbitallawyer = Орбитальный консул
+au14-job-description-orbitallawyer = Защищай невиновных (и виновных), обвиняй или просто спорь, пока тебе не заплатят.
+au14-job-prefix-orbitallawyer = Орб. Кон.
+
+au14-department-orbitalstation = Орбитальная станция
+au14-department-orbitalstation-description = Управляет орбитальной станцией: торговля и утилизация, обработка грузов и стыковка, соблюдение регламентов и отправление правосудия.

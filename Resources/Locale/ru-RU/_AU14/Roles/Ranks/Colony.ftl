@@ -84,3 +84,15 @@ rank-AU14RankAmbassador = Посол
 
 rank-AU14RankTWEAmbassador = Верховный комиссар
   .prefix = Верх. Ком.
+
+rank-AU14RankOrbitalLawyer = Орбитальный консул
+  .prefix = Орб. Кон.
+
+rank-AU14RankSeniorOrbitalLawyer = Старший орбитальный консул
+  .prefix = Ст. Орб. Кон.
+
+rank-AU14RankOrbitalArbiter = Орбитальный арбитр
+  .prefix = Орб. Арб.
+
+rank-AU14RankSeniorOrbitalArbiter = Старший орбитальный арбитр
+  .prefix = Ст. Орб. Арб.

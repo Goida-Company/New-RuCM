@@ -140,22 +140,19 @@ rmc-xeno-designer-description = Вы становитесь строителем
     - Улучшения смолы
 rmc-xeno-designer-popup = Ты архитектор улья. Расширь его.
 
-# Missing entries synced from en-US
-
 rmc-xeno-trapper-name = Сапер
-
-rmc-xeno-trapper-description = Вы обмениваете свою бомбарду, нейротоксин, кислотный покров, кислотные брызги, немного скорости и немного здоровья, чтобы получить возможность создавать кислотные взрывы и сдерживать врагов внутри них.
-   You gain the ability to:
-   - Fire a close ranged shotgun of acid that deals high damage, further increased against trapped targets.
-   - - Gain stacks of Insight when you strike enemies with your shotgun, at 10 stacks you empower your next trap deployment.
-   - - - Hitting a trapped enemy will instantly give you max stacks of Insight.
-   - Place a line of restraining traps at a distance to set up ambushes or disrupt enemies.
-   - - When empowered, the traps restrain for longer and empower your next Acid Mine explosion.
-   - Remotely detonate hidden Acid Mines, causing a delayed explosion of acid that will burn enemies and corrode through structures.
-   - - When empowered, deals greatly increased damage to structures and slightly increased damage against enemies but also applying a lingering acid to them.
-   - Gain a temporary speed boost when hurt, allowing a swifter escape.
-
+rmc-xeno-trapper-description = Вы обмениваете бомбарду, нейротоксин, кислотный покров, кислотный спрей, немного скорости и немного здоровья, чтобы получить возможность создавать кислотные взрывы и сдерживать врагов внутри них.
+   Вы получаете:
+   - Стрельбу кислотным дробовиком в ближнем бою, наносящим высокий урон, ещё больший по захваченным целям.
+   - - Удары дробовиком по врагам дают заряды Прозорливости; при 10 зарядах усиливается следующее размещение ловушек.
+   - - - Попадание по захваченному врагу мгновенно даёт максимум зарядов Прозорливости.
+   - Размещение линии сдерживающих ловушек на расстоянии для засад или срыва атак.
+   - - При усилении ловушки удерживают дольше и усиливают следующий взрыв Кислотной мины.
+   - Дистанционную детонацию скрытых Кислотных мин, вызывающую отложенный кислотный взрыв, сжигающий врагов и разъедающий структуры.
+   - - При усилении наносит значительно больший урон структурам и немного больший урон врагам, а также оставляет на них остаточную кислоту.
+   - Временное ускорение при получении урона для быстрого отступления.
 rmc-xeno-trapper-popup = Поле битвы — мой холст, этот — мой художник. Растопите их там, где они стоят.
+
 rmc-xeno-heatshield-name = Огнещит
 rmc-xeno-heatshield-description = Вы меняете удар головой, взмах хвостом и укрепление на боевые инструменты, завязанные на огонь.
   Вы получаете:

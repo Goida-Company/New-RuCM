@@ -32,7 +32,7 @@
   dummyStartingGear: AU14GearGOVFORRadioTelephoneOperatorDummy
   icon: "AU14JobIconSarge"
   requireAdminNotify: false
-  spawnMenuRoleName: Fireteam Leader (GOVFOR)
+  # spawnMenuRoleName: Fireteam Leader (GOVFOR) // RuMC edit
   joinNotifyCrew: false
   supervisors: au14-job-supervisors-govfor
   accessGroups:

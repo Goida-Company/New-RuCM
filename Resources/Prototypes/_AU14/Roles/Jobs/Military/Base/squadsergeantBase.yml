@@ -6,7 +6,7 @@
   description: au14-job-description-govforsquadsergeant
   icon: "AU14JobIconSarge"
   #icon: "AU14JobIconPlatoonSarge" # unused
-  spawnMenuRoleName: Squad Sergeant (GOVFOR)
+  # spawnMenuRoleName: Squad Sergeant (GOVFOR) // RuMC edit
   supervisors: au14-job-supervisors-govfor
   startingGear: AU14GearGOVFORSquadSergeant
   dummyStartingGear: AU14GearGOVFORSquadSergeantDummy

@@ -29,7 +29,7 @@
   dummyStartingGear: AU14GearGOVFORDSPilotDummy
   icon: "AU14JobIconPilotOfficer"
   requireAdminNotify: true
-  spawnMenuRoleName: Pilot Officer (GOVFOR)
+  # spawnMenuRoleName: Pilot Officer (GOVFOR) //RuMC edit
   joinNotifyCrew: false
   supervisors: au14-job-supervisors-govfor
   accessGroups:

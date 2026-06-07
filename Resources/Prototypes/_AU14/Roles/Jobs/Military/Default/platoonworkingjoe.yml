@@ -15,7 +15,7 @@
     - NonResuscitable
     - Epilepsy
   icon: "AU14JobIconGovWorkingJoe"
-  spawnMenuRoleName: Working Joe (GOVFOR)
+  # spawnMenuRoleName: Working Joe (GOVFOR) // RuMC edit
   supervisors: au14-job-supervisors-workingjoe-military
   usePlayerProfile: false
   accessGroups:

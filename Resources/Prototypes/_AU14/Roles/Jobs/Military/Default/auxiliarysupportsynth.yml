@@ -37,7 +37,7 @@
   dummyStartingGear: AU14GearGOVFORAuxSupportSynthDummy
   icon: "AU14JobIconGovSynth"
   requireAdminNotify: false
-  spawnMenuRoleName: Support Synth (GOVFOR)
+  # spawnMenuRoleName: Support Synth (GOVFOR) // RuMC edit
   joinNotifyCrew: false
   supervisors: au14-job-supervisors-govforplatco
   accessGroups:

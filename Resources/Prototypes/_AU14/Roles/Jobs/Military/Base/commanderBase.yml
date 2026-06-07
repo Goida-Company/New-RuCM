@@ -7,7 +7,7 @@
   whitelisted: true
   whitelistParent: RMCWhitelistEasy
   icon: "AU14JobIconPlatCo"
-  spawnMenuRoleName: Platoon Commander (GOVFOR)
+  # spawnMenuRoleName: Platoon Commander (GOVFOR) // RuMC edit
   supervisors: au14-job-supervisors-govforplatco
   startingGear: AU14GearGOVFORPlatCo
   dummyStartingGear: AU14GearGOVFORPlatCoDummy

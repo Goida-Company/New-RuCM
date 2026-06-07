@@ -1,126 +1,126 @@
-ent-ComputerAlert-name = компьютер атмосферных предупреждений
-ent-ComputerAlert-desc = Используется для доступа к атмосферной автоматизированной системе оповещения станции.
+ent-ComputerAlert = компьютер атмосферных предупреждений
+    .desc = Используется для доступа к атмосферной автоматизированной системе оповещения станции.
 
-ent-ComputerAtmosMonitoring-name = атмосферный сетевой монитор
-ent-ComputerAtmosMonitoring-desc = Используется для мониторинга атмосферных сетей станции.
+ent-ComputerAtmosMonitoring = атмосферный сетевой монитор
+    .desc = Используется для мониторинга атмосферных сетей станции.
 
-ent-ComputerEmergencyShuttle-name = консоль аварийного шаттла
-ent-ComputerEmergencyShuttle-desc = Осуществляет авторизацию на ранний запуск шаттла.
+ent-ComputerEmergencyShuttle = консоль аварийного шаттла
+    .desc = Осуществляет авторизацию на ранний запуск шаттла.
 
-ent-BaseComputerShuttle-name = консоль шаттла
-ent-BaseComputerShuttle-desc = Используется для пилотирования шаттла.
+ent-BaseComputerShuttle = консоль шаттла
+    .desc = Используется для пилотирования шаттла.
 
-ent-ComputerShuttle-name = консоль шаттла
-ent-ComputerShuttle-desc = Используется для пилотирования шаттла.
+ent-ComputerShuttle = консоль шаттла
+    .desc = Используется для пилотирования шаттла.
 
-ent-ComputerShuttleSyndie-name = консоль шаттла синдиката
-ent-ComputerShuttleSyndie-desc = Используется для пилотирования шаттла синдиката.
+ent-ComputerShuttleSyndie = консоль шаттла синдиката
+    .desc = Используется для пилотирования шаттла синдиката.
 
-ent-ComputerShuttleCargo-name = консоль грузового шаттла
-ent-ComputerShuttleCargo-desc = Используется для пилотирования грузового шаттла.
+ent-ComputerShuttleCargo = консоль грузового шаттла
+    .desc = Используется для пилотирования грузового шаттла.
 
-ent-ComputerIFF-name = компьютер МФФ
-ent-ComputerIFF-desc = Позволяет управлять характеристиками IFF данного судна.
+ent-ComputerIFF = компьютер МФФ
+    .desc = Позволяет управлять характеристиками МФФ данного судна.
 
-ent-ComputerIFFSyndicate-name = компьютер МФФ
-ent-ComputerIFFSyndicate-desc = Позволяет управлять характеристиками IFF и скрытности этого судна.
+ent-ComputerIFFSyndicate = компьютер МФФ
+    .desc = Позволяет управлять характеристиками МФФ и скрытности данного судна.
 
-ent-ComputerPowerMonitoring-name = компьютер мониторинга мощности
-ent-ComputerPowerMonitoring-desc = Он контролирует уровень мощности на всей станции.
+ent-ComputerPowerMonitoring = компьютер мониторинга мощности
+    .desc = Контролирует уровень мощности на всей станции.
 
-ent-ComputerMedicalRecords-name = компьютер для медицинских записей
-ent-ComputerMedicalRecords-desc = Это можно использовать для проверки медицинских записей.
+ent-ComputerMedicalRecords = компьютер медицинских записей
+    .desc = Используется для проверки медицинских записей.
 
-ent-ComputerCriminalRecords-name = компьютер с уголовными делами
-ent-ComputerCriminalRecords-desc = Это можно использовать для проверки судимости. Только безопасность может их изменить.
+ent-ComputerCriminalRecords = компьютер криминальных записей
+    .desc = Используется для проверки криминальных записей.
 
-ent-ComputerStationRecords-name = станция записывает компьютер
-ent-ComputerStationRecords-desc = Это можно использовать для проверки записей станции.
+ent-ComputerStationRecords = компьютер записей станции
+    .desc = Используется для проверки записей станции.
 
-ent-ComputerCrewMonitoring-name = пульт наблюдения экипажа
-ent-ComputerCrewMonitoring-desc = Используется для мониторинга активных датчиков здоровья, встроенных в большую часть униформы экипажа.
+ent-ComputerCrewMonitoring = пульт наблюдения за экипажем
+    .desc = Используется для мониторинга активных датчиков здоровья, встроенных в большую часть формы экипажа.
 
-ent-ComputerResearchAndDevelopment-name = компьютер для исследований и разработок
-ent-ComputerResearchAndDevelopment-desc = Компьютер, используемый для взаимодействия с инструментами исследований и разработок.
+ent-ComputerResearchAndDevelopment = компьютер исследований и разработок
+    .desc = Компьютер для взаимодействия с инструментами исследований и разработок.
 
-ent-ComputerAnalysisConsole-name = консоль анализа
-ent-ComputerAnalysisConsole-desc = Компьютер, используемый для взаимодействия с анализатором артефактов.
+ent-ComputerAnalysisConsole = консоль анализа
+    .desc = Компьютер для взаимодействия с анализатором артефактов.
 
-ent-ComputerId-name = компьютер с удостоверением личности
-ent-ComputerId-desc = Терминал для программирования удостоверений личности сотрудников Нанотрасен для доступа к частям станции.
+ent-ComputerId = компьютер ID-карт
+    .desc = Терминал для программирования ID-карт сотрудников Нанотрасен для доступа к частям станции.
 
-ent-computerBodyScanner-name = компьютер для сканирования тела
-ent-computerBodyScanner-desc = Сканер тела.
+ent-computerBodyScanner = компьютер сканера тела
+    .desc = Сканер тела.
 
-ent-ComputerComms-name = компьютер связи
-ent-ComputerComms-desc = Компьютер, используемый для объявления объявлений на всей станции с помощью клавиатуры, установки соответствующего уровня оповещения и вызова аварийного шаттла.
+ent-ComputerComms = компьютер связи
+    .desc = Компьютер для объявлений по всей станции через клавиатуру, установки уровня тревоги и вызова аварийного шаттла.
 
-ent-SyndicateComputerComms-name = компьютер связи синдиката
-ent-SyndicateComputerComms-desc = Компьютер, способный удаленно взламывать системы связи станции. Если вы сделаете объявление, станция предупредит станцию ​​о вашем присутствии.
+ent-SyndicateComputerComms = компьютер связи Синдиката
+    .desc = Компьютер, способный удалённо взламывать системы связи станции. Использование его для объявлений предупредит станцию о вашем присутствии.
 
-ent-WizardComputerComms-name = компьютер связи мастера
-ent-WizardComputerComms-desc = Компьютер, способный волшебным образом проецировать вашу речь на станцию. Если вы сделаете объявление, станция предупредит станцию ​​о вашем присутствии.
+ent-WizardComputerComms = компьютер связи мага
+    .desc = Компьютер, способный магически транслировать вашу речь на станцию. Использование его для объявлений предупредит станцию о вашем присутствии.
 
-ent-CentcommComputerComms-name = центральный командный компьютер связи
-ent-CentcommComputerComms-desc = Компьютер, используемый для объявления объявлений по всему миру с помощью клавиатуры. Улучшенный родственник обычного коммуникационного компьютера.
+ent-CentcommComputerComms = компьютер связи Центком
+    .desc = Компьютер для объявлений по всему миру через клавиатуру. Улучшенный аналог обычного компьютера связи.
 
-ent-ComputerSolarControl-name = компьютер управления солнечной энергией
-ent-ComputerSolarControl-desc = Контроллер для массивов солнечных батарей.
+ent-ComputerSolarControl = компьютер управления солнечными панелями
+    .desc = Контроллер для массивов солнечных батарей.
 
-ent-ComputerRadar-name = компьютер массового сканера
-ent-ComputerRadar-desc = Компьютер для обнаружения близлежащих тел, отображения их по положению и массе.
+ent-ComputerRadar = компьютер сканнера массы
+    .desc = Компьютер для обнаружения близлежащих объектов, отображающий их по положению и массе.
 
-ent-ComputerCargoOrders-name = компьютер запроса груза
-ent-ComputerCargoOrders-desc = Используется для заказа расходных материалов и утверждения запросов.
+ent-ComputerCargoOrders = компьютер запросов груза
+    .desc = Используется для заказа расходных материалов и утверждения запросов.
 
-ent-ComputerCargoOrdersEngineering-name = компьютер инженерного запроса
-ent-ComputerCargoOrdersEngineering-desc = Используется инженерным отделом для заказа расходных материалов.
+ent-ComputerCargoOrdersEngineering = компьютер запросов инженерного отдела
+    .desc = Используется инженерным отделом для заказа расходных материалов.
 
-ent-ComputerCargoOrdersMedical-name = компьютер для медицинских запросов
-ent-ComputerCargoOrdersMedical-desc = Используется медицинским отделом для заказа расходных материалов.
+ent-ComputerCargoOrdersMedical = компьютер запросов медицинского отдела
+    .desc = Используется медицинским отделом для заказа расходных материалов.
 
-ent-ComputerCargoOrdersScience-name = компьютер запроса науки
-ent-ComputerCargoOrdersScience-desc = Используется научным отделом для заказа расходных материалов.
+ent-ComputerCargoOrdersScience = компьютер запросов научного отдела
+    .desc = Используется научным отделом для заказа расходных материалов.
 
-ent-ComputerCargoOrdersSecurity-name = компьютер запроса безопасности
-ent-ComputerCargoOrdersSecurity-desc = Используется отделом безопасности для заказа расходных материалов.
+ent-ComputerCargoOrdersSecurity = компьютер запросов службы безопасности
+    .desc = Используется отделом безопасности для заказа расходных материалов.
 
-ent-ComputerCargoOrdersService-name = компьютер запроса на обслуживание
-ent-ComputerCargoOrdersService-desc = Используется сервисным отделом для заказа расходных материалов.
+ent-ComputerCargoOrdersService = компьютер запросов сервисного отдела
+    .desc = Используется сервисным отделом для заказа расходных материалов.
 
-ent-ComputerCargoBounty-name = компьютер по вознаграждению за груз
-ent-ComputerCargoBounty-desc = Используется для управления текущими активными наградами.
+ent-ComputerCargoBounty = компьютер наград
+    .desc = Используется для управления текущими активными наградами.
 
-ent-ComputerFundingAllocation-name = компьютер распределения финансирования
-ent-ComputerFundingAllocation-desc = Терминал контроля распределения средств и оплаты по отделениям.
+ent-ComputerFundingAllocation = компьютер распределения финансирования
+    .desc = Терминал для контроля распределения средств и выплат по отделам.
 
-ent-ComputerCloningConsole-name = клонирование консольного компьютера
-ent-ComputerCloningConsole-desc = Центральный элемент системы клонирования, величайшее достижение медицины. У него много портов и проводов.
+ent-ComputerCloningConsole = консоль клонирования
+    .desc = Центральный элемент системы клонирования, величайшее достижение медицины. Имеет множество портов и проводов.
 
-ent-ComputerSalvageJobBoard-name = доска объявлений о спасении
-ent-ComputerSalvageJobBoard-desc = Консоль для доступа к работам по утилизации, если вы достаточно выносливы.
+ent-ComputerSalvageJobBoard = доска объявлений о спасательных работах
+    .desc = Консоль для доступа к спасательным работам, если вы достаточно выносливы.
 
-ent-ComputerSalvageExpedition-name = компьютер для спасательных экспедиций
-ent-ComputerSalvageExpedition-desc = Используется для выполнения миссий по спасению, если вы достаточно выносливы.
+ent-ComputerSalvageExpedition = компьютер спасательных экспедиций
+    .desc = Используется для принятия спасательных миссий, если вы достаточно выносливы.
 
-ent-ComputerSurveillanceCameraMonitor-name = монитор камеры
-ent-ComputerSurveillanceCameraMonitor-desc = Монитор камеры наблюдения. Вы наблюдаете за ними. Может быть.
+ent-ComputerSurveillanceCameraMonitor = монитор камер
+    .desc = Монитор камер видеонаблюдения. Вы наблюдаете за ними. Может быть.
 
-ent-ComputerSurveillanceWirelessCameraMonitor-name = беспроводной монитор камеры
-ent-ComputerSurveillanceWirelessCameraMonitor-desc = Монитор беспроводной камеры наблюдения. Вы наблюдаете за ними. Может быть.
+ent-ComputerSurveillanceWirelessCameraMonitor = беспроводной монитор камер
+    .desc = Беспроводной монитор камер видеонаблюдения. Вы наблюдаете за ними. Может быть.
 
-ent-ComputerPalletConsole-name = компьютер для продажи грузов
-ent-ComputerPalletConsole-desc = Используется для продажи товаров, загруженных на грузовые поддоны.
+ent-ComputerPalletConsole = компьютер продажи груза
+    .desc = Используется для продажи товаров, загруженных на грузовые поддоны.
 
-ent-ComputerMassMedia-name = консоль менеджера новостей
-ent-ComputerMassMedia-desc = Напишите свое послание миру!
+ent-ComputerMassMedia = консоль управления новостями
+    .desc = Напишите своё послание миру!
 
-ent-ComputerSensorMonitoring-name = компьютер мониторинга датчиков
-ent-ComputerSensorMonitoring-desc = Гибкая консоль для мониторинга всех видов датчиков.
+ent-ComputerSensorMonitoring = компьютер мониторинга датчиков
+    .desc = Гибкая консоль для мониторинга всех видов датчиков.
 
-ent-ComputerRoboticsControl-name = консоль управления робототехникой
-ent-ComputerRoboticsControl-desc = Используется для удаленного наблюдения, отключения и уничтожения киборгов станции.
+ent-ComputerRoboticsControl = консоль управления робототехникой
+    .desc = Используется для удалённого наблюдения, отключения и уничтожения киборгов станции.
 
-ent-StationAiUploadComputer-name = Консоль загрузки AI
-ent-StationAiUploadComputer-desc = Используется для обновления законов ИИ станции.
+ent-StationAiUploadComputer = консоль загрузки ИИ
+    .desc = Используется для обновления законов ИИ станции.
 

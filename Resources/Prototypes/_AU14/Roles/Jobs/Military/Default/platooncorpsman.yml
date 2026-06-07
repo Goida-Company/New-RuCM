@@ -28,7 +28,7 @@
   dummyStartingGear: AU14GearGOVFORCorpsmanDummy
   icon: "AU14JobIconCorpsman"
   requireAdminNotify: false
-  spawnMenuRoleName: Hospital Corpsman (GOVFOR)
+  # spawnMenuRoleName: Hospital Corpsman (GOVFOR) // RuMC edit
   joinNotifyCrew: false
   supervisors: au14-job-supervisors-govfor
   accessGroups:

@@ -5,7 +5,7 @@
   name: au14-job-name-govformilitarypoliceman
   description: au14-job-description-govformilitarypoliceman
   icon: "AU14JobIconRFN"
-  spawnMenuRoleName: Military Policeman (GOVFOR)
+  # spawnMenuRoleName: Military Policeman (GOVFOR) // RuMC edit
   supervisors: au14-job-supervisors-govfor
   startingGear: AU14GearGOVFORMilitaryPoliceMan
   dummyStartingGear: AU14GearGOVFORMilitaryPoliceManDummy

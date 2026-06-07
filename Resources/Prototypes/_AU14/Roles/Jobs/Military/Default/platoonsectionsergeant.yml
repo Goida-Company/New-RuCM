@@ -32,7 +32,7 @@
   dummyStartingGear: AU14GearGOVFORPlatoonSergantDummy
   icon: "AU14JobIconPlatoonSarge"
   requireAdminNotify: true
-  spawnMenuRoleName: Platoon Sergeant (GOVFOR)
+  # spawnMenuRoleName: Platoon Sergeant (GOVFOR) // RuMC edit
   joinNotifyCrew: false
   supervisors: au14-job-supervisors-govfor
   accessGroups:

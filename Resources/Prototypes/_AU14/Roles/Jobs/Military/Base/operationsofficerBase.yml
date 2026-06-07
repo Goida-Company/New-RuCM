@@ -5,7 +5,7 @@
   name: au14-job-name-govforplatop
   description: au14-job-description-govforplatop
   icon: "AU14JobIconOpsOfc"
-  spawnMenuRoleName: Junior Officer (GOVFOR)
+  # spawnMenuRoleName: Junior Officer (GOVFOR) // RuMC edit
   supervisors: au14-job-supervisors-govfor
   startingGear: AU14GearGOVFORPlatOp
   dummyStartingGear: AU14GearGOVFORPlatOpDummy

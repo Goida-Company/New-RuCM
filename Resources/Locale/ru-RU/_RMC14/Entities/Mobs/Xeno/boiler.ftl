@@ -1,5 +1,8 @@
 ent-CMXenoBoiler = Бойлер
-  .desc = Большой, гротескный ксенос, покрытый святящейся и булькающей желевидной кислотой.
+  .desc = Большой, ужасный ксенос, покрытый святящейся и булькающей желевидной кислотой.
 
-ent-RMCXenoBoiler = Бойлер
+ent-RMCXenoBoiler = { ent-CMXenoBoiler }
+  .desc = { ent-CMXenoBoiler.desc }
+
+ent-RMCXenoBoilerSapper = { ent-CMXenoBoiler }
   .desc = { ent-CMXenoBoiler.desc }
