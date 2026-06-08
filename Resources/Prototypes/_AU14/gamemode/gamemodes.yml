@@ -5,12 +5,12 @@
   name: au14-preset-forceonforce-title
   showInVote: true
   description: au14-preset-forceonforce-description
-  minPlayers: 550
+  minPlayers: 125
   requiresOpforVote: true
   requiresGovforVote: true
   supportedPlanets:
   #- AUPlanetGixensCaverns Rout of rotation till fixed - eg
-  - AUPlanetShepherdsPride
+  #- AUPlanetShepherdsPride
   #- AUPlanetFlight
   - AUPlanetLV759
   - AUPlanetLV327
@@ -37,12 +37,12 @@
   requiresGovforVote: true
   supportedPlanets:
     - AUPlanetShepherdsPride
-    #- AUPlanetLV624
+   # - AUPlanetLV327
     - CMUPlanetLament
     - AUPlanetStableGarrison
     #- AUPlanetLV747
-    #- AUPlanetSorokyne
-    #- AUPlanetLV759
+    - AUPlanetSorokyne
+    - AuPlanetChances
   rules:
   - AuVoteRule
   - PlatoonSpawn
@@ -62,9 +62,11 @@
   - AUPlanetSorokyne
   - AUPlanetCorsatStation
   - AUPlanetTrijent
-#  - AuPlanetFiorina -removed due to load errors
+  - AuPlanetFiorina
   - AuPlanetKutjevo
   - AuPlanetShivasSnowball
+  - AUPlanetLV327
+  - AuPlanetChances
   rules:
   - AuVoteRule
   - PlatoonSpawn
@@ -84,45 +86,42 @@
     - ColonyAntags
   supportedPlanets:
     - AUPlanetShepherdsPride
-   # - AUPlanetLV624
+    - AUPlanetLV327
     - AUPlanetStableGarrison
     - CMUPlanetLament
+    - AUPlanetSorokyne
+    - AuPlanetChances
+
 
 - type: gamePreset
   id: Jailbreak
   alias:
-    - jailbreak
+  - jailbreak
   name: Jailbreak
   showInVote: false
   description: Jailbreak mode
   rules:
-    - AuVoteRule
+  - AuVoteRule
 
 - type: gamePreset
   id: Prometheus
   alias:
-    - prometheus
+  - prometheus
   name: Prometheus
   showInVote: false
   description: Prometheus mode
   rules:
-    - AuVoteRule
+  - AuVoteRule
 
 - type: gamePreset
   id: Criminal
   alias:
-    - criminal
+  - criminal
   name: Criminal
   showInVote: false
   description: Criminal mode
   rules:
-    - AuVoteRule
-
-
-
-
-
-
+  - AuVoteRule
 
 - type: entity
   id: PlatoonSpawn
@@ -200,7 +199,6 @@
   - type: GameRule
   - type: ColonyAntagsRule
 
-
 - type: entity
   id: AuVoteRule
   parent: BaseGameRule
@@ -210,9 +208,6 @@
   - type: AuVoteRule
   - type: Bioscan
 
-
-
-
 - type: entity
   id: RemoveAllJobs
   parent: BaseGameRule
@@ -221,14 +216,11 @@
   components:
   - type: RemoveJobsRule
 
-
-
 - type: GamePlanetPool
   id: ColonyPlanetPool
   planets:
-    - AUPlanetLV747
-    - AUPlanetShepherdsPride
-    - AUPlanetStableGarrison
-    - AUPlanetLV624
-    - AUPlanetFlight
-
+  - AUPlanetLV747
+  - AUPlanetShepherdsPride
+  - AUPlanetStableGarrison
+  - AUPlanetLV624
+  - AUPlanetFlight

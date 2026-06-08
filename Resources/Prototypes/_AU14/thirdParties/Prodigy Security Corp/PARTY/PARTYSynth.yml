@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: AU14JobPARTYPartyContractorBase
   id: AU14JobProdigyPARTYSynth
   name: Prodigy Yankee Support Synthetic
   description: au14-prodigyparty-description
@@ -83,7 +83,6 @@
         types:
           Blunt: 35
     - type: Synth
-  hidden: false
 
 - type: entity
   parent: AU14BaseMobSpeciesSyntheticProdigy

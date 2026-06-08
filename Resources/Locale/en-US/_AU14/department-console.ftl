@@ -45,3 +45,5 @@ department-console-no-location = No location specified
 department-console-insufficient-budget = [bold]{ $department }[/bold]: Insufficient department budget (need ${ $need }, have ${ $have })
 department-console-salary-dispensed = [bold]{ $department }[/bold]: ${ $amount } dispensed
 department-console-salary-dispensed-tax = [bold]{ $department }[/bold]: ${ $amount } dispensed (${ $tax } income tax)
+colony-comms-console-announcement-title = Colony
+

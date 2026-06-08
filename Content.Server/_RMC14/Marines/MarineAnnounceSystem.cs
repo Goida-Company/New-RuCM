@@ -123,12 +123,11 @@ public sealed partial class MarineAnnounceSystem : SharedMarineAnnounceSystem
     {
         if (filter == null)
         {
-            var targetFaction = string.IsNullOrWhiteSpace(faction) ? "govfor" : faction.ToLowerInvariant();
+            var targetFaction = ResolveAnnouncementFaction(faction);
             filter = Filter.Empty().AddWhereAttachedEntity(e =>
             {
                 if (TryComp<MarineComponent>(e, out var marine))
-                    return !string.IsNullOrWhiteSpace(marine.Faction) &&
-                           string.Equals(marine.Faction, targetFaction, StringComparison.OrdinalIgnoreCase);
+                    return IsMarineAnnouncementRecipient(marine.Faction, targetFaction);
 
                 return HasComp<GhostComponent>(e);
             });
@@ -247,12 +246,11 @@ public sealed partial class MarineAnnounceSystem : SharedMarineAnnounceSystem
 
     private Filter BuildMarineAnnouncementFilter(string? faction)
     {
-        var targetFaction = string.IsNullOrWhiteSpace(faction) ? "govfor" : faction.ToLowerInvariant();
+        var targetFaction = ResolveAnnouncementFaction(faction);
         return Filter.Empty().AddWhereAttachedEntity(e =>
         {
             if (TryComp<MarineComponent>(e, out var marine))
-                return !string.IsNullOrWhiteSpace(marine.Faction) &&
-                       string.Equals(marine.Faction, targetFaction, StringComparison.OrdinalIgnoreCase);
+                return IsMarineAnnouncementRecipient(marine.Faction, targetFaction);
 
             return HasComp<GhostComponent>(e);
         });
