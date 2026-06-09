@@ -2430,6 +2430,95 @@
   id: 209
   time: '2026-06-06T10:00:06.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1213
+- author: HotdogMan52
+  changes:
+  - message: Added teargas_airburst_packet_e and teargas_airburst_packet
+    type: Add
+  - message: Increased the AGM-PDC packet to include five rounds instead of three
+    type: Tweak
+  - message: Replaced teargas_packet and teargas_packet_e with new versions
+    type: Tweak
+  - message: fixed updatePerSecond in teargassmoke.yml because the wrong value was
+      saved when I commit the last PR
+    type: Fix
+  id: 210
+  time: '2026-06-06T15:28:53.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1215
+- author: maertayn
+  changes:
+  - message: IdCards are blacklisted from Shopkeep vendor stoc
+    type: Fix
+  - message: WeYu Security has +1 CQC/Endurance/Fireman/Engi/Firearms
+    type: Tweak
+  - message: Vending machines (cash vendors) sprites
+    type: Fix
+  - message: Stereo .ogg audio files converted to mono (1-channel) - affected audio
+      should now be dimensional
+    type: Fix
+  - message: Wooden/metal crates used as cades against Xeno - charge can destroy &
+      sharp claws can destroy metal
+    type: Fix
+  - message: Cultists can use resin doors (any hive - they're xeno non-hostiles)
+    type: Fix
+  id: 211
+  time: '2026-06-06T16:09:50.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1229
+- author: maertayn
+  changes:
+  - message: Squad tracker breaking when assigning/reassigning SLs
+    type: Fix
+  - message: Squad tracker reverting back to FTL tracking when someone joins the fireteam
+    type: Fix
+  - message: Squad tracker could previously only be set/changed by the squad leader
+    type: Fix
+  - message: Fireteam management hidden if you can't interact with it (only SL/OW
+      can use it)
+    type: Fix
+  - message: Battle Buddy system would track stale state if your partner found a new
+      buddy
+    type: Fix
+  - message: Marine Orders (move/hold/focus) only if you have leadership>=1 or assigned
+      SL (duration is based on leadership)
+    type: Tweak
+  - message: Additional localization support (overwatch.ftl) for the OW consoles
+    type: Code
+  id: 212
+  time: '2026-06-06T16:10:11.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1233
+- author: toot521
+  changes:
+  - message: Added Imperial Armed Space Forces (IASF) Survivors
+    type: Add
+  - message: Added IASF Surv spawns to Hybrisa Metropolitan and Raijin Hydroelectric
+    type: Add
+  id: 213
+  time: '2026-06-06T16:13:00.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1214
+- author: Piticzu
+  changes:
+  - message: Crusher charge now plays a windup sound during the 0.6s delay before
+      charging.
+    type: Add
+  - message: Fixed crusher charge phasing through walls when aimed at the seam between
+      two tiles.
+    type: Fix
+  - message: Fixed crusher charge not hitting or flinging marines at range.
+    type: Fix
+  - message: Fixed crusher charge not damaging doors on impact.
+    type: Fix
+  - message: Crusher charge now plows through props (closets, lockers, racks, barrels,
+      filing cabinets, floodlights, disposal units, generators, platforms, hospital
+      dividers).
+    type: Tweak
+  - message: Doors, shutters, and non-loadout vendors now take structural damage from
+      crusher charge.
+    type: Tweak
+  - message: Crusher charge rewritten to use direct physics impulse instead of ThrownItemSystem,
+      matching the xeno leap pattern.
+    type: Code
+  id: 214
+  time: '2026-06-06T18:34:24.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1223
 - author: flex5hybrid
   changes:
   - message: "\u0418\u043D\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044F \u0438\u0433\
@@ -2438,7 +2527,7 @@
   - message: "\u041F\u043B\u044E\u0448\u043A\u0438 \u0441\u043F\u043E\u043D\u0441\u043E\
       \u0440\u0430\u043C"
     type: Add
-  id: 210
+  id: 215
   time: '2026-06-06T19:16:15.0000000+00:00'
   url: https://github.com/flex5hybrid/RussianCM/pull/211
 - author: flex5hybrid
@@ -2466,140 +2555,21 @@
       \u043E\u0434\u0435 \u0434\u043B\u044F \u043A\u043E\u043D\u0442\u0440\u0438\u0431\
       \u044C\u044E\u0442\u043E\u0440\u043E\u0432!"
     type: Code
-  id: 211
+  id: 216
   time: '2026-06-06T19:54:30.0000000+00:00'
   url: https://github.com/flex5hybrid/RussianCM/pull/213
 - author: RomiGur
   changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0434\u0435\u0431\
-      \u0430\u0433 \u0434\u0432\u0435\u0440\u0438, \u0447\u0442\u043E \u043D\u0435\
-      \ \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u044D\u043B\u0435\u043A\u0442\u0440\
-      \u0438\u0447\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0440\u0430\u0431\
-      \u043E\u0442\u044B."
-    type: Admin
-  id: 212
-  time: '2026-06-07T15:35:01.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/210
-- author: RomiGur
-  changes:
-  - message: "\u0423\u0434\u0430\u043B\u0435\u043D\u044B \u0444\u0438\u0433\u0443\u0440\
-      \u043A\u0438 \u0438\u0433\u0440\u043E\u043A\u043E\u0432 \u0441 \u0420\u041C\u0421"
-    type: Remove
-  id: 213
-  time: '2026-06-07T15:35:14.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/215
-- author: RomiGur
-  changes:
-  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u043A\u0440\u0430\
-      \u0448 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u0438 \u043F\u043E\
-      \u043F\u044B\u0442\u043A\u0435 \u0434\u043E\u0441\u0442\u0430\u0442\u044C \u0442\
-      \u043E\u043F\u043B\u0438\u0432\u043D\u0443\u044E \u044F\u0447\u0435\u0439\u043A\
-      \u0443 \u0438\u0437 \u0440\u0435\u0430\u043A\u0442\u043E\u0440\u0430"
-    type: Fix
-  id: 214
-  time: '2026-06-07T15:35:31.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/216
-- author: HotdogMan52
-  changes:
-  - message: Added teargas_airburst_packet_e and teargas_airburst_packet
-    type: Add
-  - message: Increased the AGM-PDC packet to include five rounds instead of three
-    type: Tweak
-  - message: Replaced teargas_packet and teargas_packet_e with new versions
-    type: Tweak
-  - message: fixed updatePerSecond in teargassmoke.yml because the wrong value was
-      saved when I commit the last PR
-    type: Fix
-  id: 207
-  time: '2026-06-06T15:28:53.0000000+00:00'
-  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1215
-- author: maertayn
-  changes:
-  - message: IdCards are blacklisted from Shopkeep vendor stoc
-    type: Fix
-  - message: WeYu Security has +1 CQC/Endurance/Fireman/Engi/Firearms
-    type: Tweak
-  - message: Vending machines (cash vendors) sprites
-    type: Fix
-  - message: Stereo .ogg audio files converted to mono (1-channel) - affected audio
-      should now be dimensional
-    type: Fix
-  - message: Wooden/metal crates used as cades against Xeno - charge can destroy &
-      sharp claws can destroy metal
-    type: Fix
-  - message: Cultists can use resin doors (any hive - they're xeno non-hostiles)
-    type: Fix
-  id: 208
-  time: '2026-06-06T16:09:50.0000000+00:00'
-  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1229
-- author: maertayn
-  changes:
-  - message: Squad tracker breaking when assigning/reassigning SLs
-    type: Fix
-  - message: Squad tracker reverting back to FTL tracking when someone joins the fireteam
-    type: Fix
-  - message: Squad tracker could previously only be set/changed by the squad leader
-    type: Fix
-  - message: Fireteam management hidden if you can't interact with it (only SL/OW
-      can use it)
-    type: Fix
-  - message: Battle Buddy system would track stale state if your partner found a new
-      buddy
-    type: Fix
-  - message: Marine Orders (move/hold/focus) only if you have leadership>=1 or assigned
-      SL (duration is based on leadership)
-    type: Tweak
-  - message: Additional localization support (overwatch.ftl) for the OW consoles
-    type: Code
-  id: 209
-  time: '2026-06-06T16:10:11.0000000+00:00'
-  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1233
-- author: toot521
-  changes:
-  - message: Added Imperial Armed Space Forces (IASF) Survivors
-    type: Add
-  - message: Added IASF Surv spawns to Hybrisa Metropolitan and Raijin Hydroelectric
-    type: Add
-  id: 210
-  time: '2026-06-06T16:13:00.0000000+00:00'
-  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1214
-- author: Piticzu
-  changes:
-  - message: Crusher charge now plays a windup sound during the 0.6s delay before
-      charging.
-    type: Add
-  - message: Fixed crusher charge phasing through walls when aimed at the seam between
-      two tiles.
-    type: Fix
-  - message: Fixed crusher charge not hitting or flinging marines at range.
-    type: Fix
-  - message: Fixed crusher charge not damaging doors on impact.
-    type: Fix
-  - message: Crusher charge now plows through props (closets, lockers, racks, barrels,
-      filing cabinets, floodlights, disposal units, generators, platforms, hospital
-      dividers).
-    type: Tweak
-  - message: Doors, shutters, and non-loadout vendors now take structural damage from
-      crusher charge.
-    type: Tweak
-  - message: Crusher charge rewritten to use direct physics impulse instead of ThrownItemSystem,
-      matching the xeno leap pattern.
-    type: Code
-  id: 211
-  time: '2026-06-06T18:34:24.0000000+00:00'
-  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1223
-- author: RomiGur
-  changes:
   - message: Added localization key lookup (rank-{ID}) for rank names in examine text
     type: Code
-  id: 212
+  id: 217
   time: '2026-06-06T22:16:17.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1238
 - author: KriegersMustDie
   changes:
   - message: Stamps.
     type: Add
-  id: 213
+  id: 218
   time: '2026-06-06T22:55:40.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1239
 - author: TheHellFireo
@@ -2626,16 +2596,46 @@
     type: Tweak
   - message: Shrapnel removal damage cannot break bones or cause internal bleeding.
     type: Fix
-  id: 214
+  id: 219
   time: '2026-06-07T00:09:50.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1240
 - author: toot521
   changes:
   - message: CLF Survs can now actually only spawn on distress signal
     type: Fix
-  id: 215
+  id: 220
   time: '2026-06-07T09:21:53.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1243
+- author: RomiGur
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B \u0434\u0435\u0431\
+      \u0430\u0433 \u0434\u0432\u0435\u0440\u0438, \u0447\u0442\u043E \u043D\u0435\
+      \ \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u044D\u043B\u0435\u043A\u0442\u0440\
+      \u0438\u0447\u0435\u0441\u0442\u0432\u0430 \u0434\u043B\u044F \u0440\u0430\u0431\
+      \u043E\u0442\u044B."
+    type: Admin
+  id: 221
+  time: '2026-06-07T15:35:01.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/210
+- author: RomiGur
+  changes:
+  - message: "\u0423\u0434\u0430\u043B\u0435\u043D\u044B \u0444\u0438\u0433\u0443\u0440\
+      \u043A\u0438 \u0438\u0433\u0440\u043E\u043A\u043E\u0432 \u0441 \u0420\u041C\u0421"
+    type: Remove
+  id: 222
+  time: '2026-06-07T15:35:14.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/215
+- author: RomiGur
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u043A\u0440\u0430\
+      \u0448 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u043F\u0440\u0438 \u043F\u043E\
+      \u043F\u044B\u0442\u043A\u0435 \u0434\u043E\u0441\u0442\u0430\u0442\u044C \u0442\
+      \u043E\u043F\u043B\u0438\u0432\u043D\u0443\u044E \u044F\u0447\u0435\u0439\u043A\
+      \u0443 \u0438\u0437 \u0440\u0435\u0430\u043A\u0442\u043E\u0440\u0430"
+    type: Fix
+  id: 223
+  time: '2026-06-07T15:35:31.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/216
 - author: TheHellFireo
   changes:
   - message: Refresh z-level viewers when mapping and Z mapping networks change, so
@@ -2710,7 +2710,7 @@
   - message: Queen eye now stays leashed near weeds, can expand weeds while the queen
       is in ovipositor mode, and ovipositor cost is reduced from 700 to 500 plasma.
     type: Fix
-  id: 216
+  id: 224
   time: '2026-06-07T16:13:58.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1246
 - author: JaSeNeSaJ
@@ -2721,7 +2721,7 @@
     type: Remove
   - message: Cleaned formatting on gamemodes.yml
     type: Tweak
-  id: 217
+  id: 225
   time: '2026-06-07T21:19:19.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/991
 - author: maertayn
@@ -2734,7 +2734,7 @@
   - message: Opfor/Govfor have faction colored TacMap icons per role (gets rid of
       the synth/smiley icons!)
     type: Add
-  id: 218
+  id: 226
   time: '2026-06-08T00:38:32.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1250
 - author: potatoed6
@@ -2745,14 +2745,14 @@
     type: Tweak
   - message: CO icon is a bit cooler now
     type: Tweak
-  id: 219
+  id: 227
   time: '2026-06-08T00:39:15.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1216
 - author: Kadeo64
   changes:
   - message: Removed chances and sorokyne from insurgency map rotation.
     type: Remove
-  id: 220
+  id: 228
   time: '2026-06-08T00:41:46.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1253
 - author: troytroy400
@@ -2764,7 +2764,7 @@
   - message: Sheperds Pride and Stable Garrison temporarily removed from Distress
       Signal.
     type: Tweak
-  id: 221
+  id: 229
   time: '2026-06-08T06:52:34.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1257
 - author: 400Ferrets
@@ -2772,14 +2772,14 @@
   - message: Port Neroid grass is now semi-weedable, instead of unweedable. (Clusters,
       Gardener weeds only)
     type: Fix
-  id: 222
+  id: 230
   time: '2026-06-08T11:37:08.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1261
 - author: deepdarkdepths
   changes:
   - message: Added the Despoiler, a new Tier 3 xeno.
     type: Add
-  id: 223
+  id: 231
   time: '2026-06-08T12:16:45.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1256
 - author: TheHellFireo
@@ -2798,7 +2798,7 @@
     type: Add
   - message: Restored timestamps in the new admin logs panel.
     type: Fix
-  id: 224
+  id: 232
   time: '2026-06-08T12:29:49.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1262
 Name: CMU
