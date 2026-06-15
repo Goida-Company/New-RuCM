@@ -3261,14 +3261,14 @@
   - message: The scout cloak now no longer requires scout armor to be used but is
       also SLIGHTLY (0.5) more visible.
     type: Fix
-  id: 254
+  id: 265
   time: '2026-06-12T11:19:00.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1300
 - author: basementoWasntAvailable
   changes:
   - message: '? and !  emote into "looks surprised" or "looks confused" again'
     type: Add
-  id: 255
+  id: 266
   time: '2026-06-12T17:18:21.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1301
 - author: troytroy400
@@ -3278,7 +3278,7 @@
   - message: Removed badblood and tribals threat from rotation until they can be built
       out more.
     type: Remove
-  id: 256
+  id: 267
   time: '2026-06-12T18:45:58.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1302
 - author: KeiKiyomi
@@ -3340,14 +3340,14 @@
     type: Add
   - message: Added Command Arrests in UCMJ Arrest Procedures
     type: Add
-  id: 257
+  id: 268
   time: '2026-06-12T19:34:34.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1284
 - author: toot521
   changes:
   - message: CLF surv AR-10 spawn doesnt have wrong ammo anymore
     type: Fix
-  id: 258
+  id: 269
   time: '2026-06-12T19:40:02.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1303
 - author: troytroy400
@@ -3356,7 +3356,7 @@
     type: Tweak
   - message: Updated the charter to fully outlaw combat synths.
     type: Tweak
-  id: 259
+  id: 270
   time: '2026-06-12T19:58:34.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1304
 - author: troytroy400
@@ -3370,14 +3370,14 @@
     type: Remove
   - message: Atmos Scanner/Radio Jammer resprited.
     type: Tweak
-  id: 260
+  id: 271
   time: '2026-06-13T19:23:32.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1309
 - author: thoughtlessuser
   changes:
   - message: GOVFOR. requisitions is now a viable supply chain!
     type: Tweak
-  id: 261
+  id: 272
   time: '2026-06-13T19:43:28.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1220
 - author: JaSeNeSaJ
@@ -3416,28 +3416,28 @@
     type: Fix
   - message: Replaced Comm & Sensor tower entities
     type: Fix
-  id: 262
+  id: 273
   time: '2026-06-13T21:18:09.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1308
 - author: johnnny34y
   changes:
   - message: Added weapon specialist kits for HAZOPS
     type: Add
-  id: 263
+  id: 274
   time: '2026-06-13T21:20:42.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1305
 - author: JaSeNeSaJ
   changes:
   - message: Changed research lab access
     type: Fix
-  id: 264
+  id: 275
   time: '2026-06-14T06:24:39.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1313
 - author: troytroy400
   changes:
   - message: Removed upstream figurines.
     type: Remove
-  id: 265
+  id: 276
   time: '2026-06-14T06:29:20.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1314
 - author: maertayn
@@ -3463,7 +3463,7 @@
   - message: Crusher charge now ignores low impassable objects (like indestructible
       computers)
     type: Fix
-  id: 266
+  id: 277
   time: '2026-06-14T06:29:43.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1311
 Name: CMU
