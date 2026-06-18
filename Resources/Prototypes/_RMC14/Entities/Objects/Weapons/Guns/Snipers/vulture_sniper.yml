@@ -34,8 +34,13 @@
     baseFireRate: 0.25
   - type: RMCWeaponAccuracy
     accuracyMultiplier: 1.35
+  - type: WieldableSpeedModifiers
+    base: 0.3
+    light: 0.395
+    medium: 0.425
+    heavy: 0.453
   - type: WieldDelay
-    baseDelay: 1.5
+    baseDelay: 6
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -234,8 +239,8 @@
     deleteOnCollide: false
     damage:
       types:
-        Piercing: 1000
-        Blunt: 50
+        Piercing: 550
+        Blunt: 25
         Structural: 1800
     soundHit:
       path: /Audio/_RMC14/Bullets/bullet_vulture_impact.ogg

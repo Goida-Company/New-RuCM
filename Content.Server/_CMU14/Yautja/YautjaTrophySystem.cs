@@ -1,5 +1,5 @@
 using Content.Server.Administration.Logs;
-using Content.Shared._CMU14.Medical.BodyPart.Events;
+using Content.Shared._CMU14.Medical.Human.Damage.Events;
 using Content.Shared._CMU14.Yautja;
 using Content.Shared._RMC14.Medical.Unrevivable;
 using Content.Shared._RMC14.Xenonids;
@@ -102,12 +102,17 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         if (!_mobState.IsDead(targetUid, mobState))
             return;
 
-        AddButcherVerb(user, targetUid, verbs);
+        var isBadBlood = HasComp<YautjaBadBloodComponent>(user);
+        var humanTarget = IsHumanTrophyTarget(targetUid);
+        var badBloodHumanRestricted = isBadBlood && humanTarget && !HasComp<UnrevivableComponent>(targetUid);
 
-        if (CanHarvest(user, targetUid, YautjaTrophyKind.HumanSkull))
+        if (!badBloodHumanRestricted)
+            AddButcherVerb(user, targetUid, verbs);
+
+        if (!badBloodHumanRestricted && CanHarvest(user, targetUid, YautjaTrophyKind.HumanSkull))
             AddHarvestVerb(user, targetUid, YautjaTrophyKind.HumanSkull, verbs);
 
-        if (IsHumanTrophyTarget(targetUid))
+        if (humanTarget)
         {
             AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanLeftArmBone, verbs);
             AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanRightArmBone, verbs);
@@ -117,7 +122,9 @@ public sealed partial class YautjaTrophySystem : EntitySystem
             AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanRightLegBone, verbs);
             AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanLeftFootBone, verbs);
             AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanRightFootBone, verbs);
-            AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanRibcage, verbs);
+
+            if (!badBloodHumanRestricted)
+                AddHumanBoneVerb(user, targetUid, YautjaTrophyKind.HumanRibcage, verbs);
         }
         else if (IsXenoTrophyTarget(targetUid))
         {

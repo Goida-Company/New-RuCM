@@ -1,8 +1,8 @@
 - type: entity
-  abstract: true
   save: false
   parent: RMCBaseMobSpeciesOrganic
   id: AU14MobWorkingJoe
+  categories: [ HideSpawnMenu ]
   name: Urist McJoe
   suffix: AU14, Base
   components:
@@ -107,6 +107,8 @@
     damage:
       types:
         Blunt: 60
+  - type: Bloodstream
+    bloodReagent: RMCSynthBlood
   - type: Synth
     generation: "rmc-species-synth-generation-first"
     critThreshold: 299

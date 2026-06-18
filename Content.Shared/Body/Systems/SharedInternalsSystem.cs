@@ -1,3 +1,4 @@
+using Content.Shared._CMU14.Medical.Human.Components;
 using Content.Shared._RMC14.Xenonids;
 using Content.Shared.Alert;
 using Content.Shared.Atmos.Components;
@@ -29,6 +30,7 @@ public abstract partial class SharedInternalsSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+
         SubscribeLocalEvent<InternalsComponent, GetVerbsEvent<InteractionVerb>>(OnGetInteractionVerbs);
 
         SubscribeLocalEvent<InternalsComponent, ComponentStartup>(OnInternalsStartup);
@@ -50,7 +52,9 @@ public abstract partial class SharedInternalsSystem : EntitySystem
             return;
 
         if (!AreInternalsWorking(ent) && ent.Comp.BreathTools.Count == 0)
+        {
             return;
+        }
 
         var user = args.User;
 
@@ -83,7 +87,9 @@ public abstract partial class SharedInternalsSystem : EntitySystem
         ToggleMode mode = ToggleMode.Toggle)
     {
         if (!Resolve(target, ref internals, logMissing: false))
+        {
             return false;
+        }
 
         // Check if a mask is present.
         if (internals.BreathTools.Count == 0)
@@ -114,7 +120,9 @@ public abstract partial class SharedInternalsSystem : EntitySystem
         if (TryComp(internals.GasTankEntity, out GasTankComponent? gas))
         {
             if (mode == ToggleMode.On)
+            {
                 return false;
+            }
 
             return _gasTank.DisconnectFromInternals((internals.GasTankEntity.Value, gas), user);
         }
@@ -123,7 +131,9 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
         // If the intent was to disable internals there’s nothing left to do
         if (mode == ToggleMode.Off)
+        {
             return false;
+        }
 
         return _gasTank.ConnectToInternals(tank.Value, user: user);
     }
@@ -163,12 +173,22 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
     private void OnInternalsStartup(Entity<InternalsComponent> ent, ref ComponentStartup args)
     {
-        _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, GetSeverity(ent));
+        ShowInternalsAlert(ent, GetSeverity(ent));
+
+        // CMU14 start
+        var ev = new InternalsGasTankChangedEvent(ent.Owner, ent.Comp.GasTankEntity);
+        RaiseLocalEvent(ent.Owner, ref ev);
+        // CMU14 end
     }
 
     private void OnInternalsShutdown(Entity<InternalsComponent> ent, ref ComponentShutdown args)
     {
-        _alerts.ClearAlert(ent, ent.Comp.InternalsAlert);
+        ClearInternalsAlert(ent);
+
+        // CMU14 start
+        var ev = new InternalsGasTankChangedEvent(ent.Owner, null);
+        RaiseLocalEvent(ent.Owner, ref ev);
+        // CMU14 end
     }
 
     public void ConnectBreathTool(Entity<InternalsComponent> ent, EntityUid toolEntity)
@@ -183,7 +203,8 @@ public abstract partial class SharedInternalsSystem : EntitySystem
         }
 
         Dirty(ent);
-        _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, GetSeverity(ent));
+        ShowInternalsAlert(ent, GetSeverity(ent));
+
     }
 
     public void DisconnectBreathTool(Entity<InternalsComponent> ent, EntityUid toolEntity, bool forced = false)
@@ -204,7 +225,8 @@ public abstract partial class SharedInternalsSystem : EntitySystem
             DisconnectTank(ent, forced: forced);
         }
 
-        _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, GetSeverity(ent));
+        ShowInternalsAlert(ent, GetSeverity(ent));
+
     }
 
     public void DisconnectTank(Entity<InternalsComponent> ent, bool forced = false)
@@ -214,7 +236,12 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
         ent.Comp.GasTankEntity = null;
         Dirty(ent);
-        _alerts.ShowAlert(ent.Owner, ent.Comp.InternalsAlert, GetSeverity(ent.Comp));
+        ShowInternalsAlert(ent, GetSeverity(ent.Comp));
+
+        // CMU14 start
+        var ev = new InternalsGasTankChangedEvent(ent.Owner, null);
+        RaiseLocalEvent(ent.Owner, ref ev);
+        // CMU14 end
     }
 
     public bool TryConnectTank(Entity<InternalsComponent> ent, EntityUid tankEntity)
@@ -227,7 +254,12 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
         ent.Comp.GasTankEntity = tankEntity;
         Dirty(ent);
-        _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, GetSeverity(ent));
+        ShowInternalsAlert(ent, GetSeverity(ent));
+
+        // CMU14 start
+        var ev = new InternalsGasTankChangedEvent(ent.Owner, tankEntity);
+        RaiseLocalEvent(ent.Owner, ref ev);
+        // CMU14 end
         return true;
     }
 
@@ -258,6 +290,24 @@ public abstract partial class SharedInternalsSystem : EntitySystem
 
         return 1;
     }
+
+    // CMU14 start
+    protected void ShowInternalsAlert(Entity<InternalsComponent> ent, short severity)
+    {
+        if (HasComp<HumanMedicalComponent>(ent.Owner))
+        {
+            _alerts.ClearAlert(ent, ent.Comp.InternalsAlert);
+            return;
+        }
+
+        _alerts.ShowAlert(ent, ent.Comp.InternalsAlert, severity);
+    }
+
+    protected void ClearInternalsAlert(Entity<InternalsComponent> ent)
+    {
+        _alerts.ClearAlert(ent, ent.Comp.InternalsAlert);
+    }
+    // CMU14 end
 
     public Entity<GasTankComponent>? FindBestGasTank(
         Entity<HandsComponent?, InventoryComponent?, ContainerManagerComponent?> user)
@@ -295,3 +345,8 @@ public abstract partial class SharedInternalsSystem : EntitySystem
         return null;
     }
 }
+
+// CMU14 start
+[ByRefEvent]
+public readonly record struct InternalsGasTankChangedEvent(EntityUid Body, EntityUid? Tank);
+// CMU14 end

@@ -320,12 +320,8 @@
         amount: 60
       - id: CMOintment10
         amount: 60
-      - id: CMUPlainTraumaDressing10
+      - id: CMTraumaKit10
         amount: 40
-      - id: CMUCoagulantPowder
-        amount: 30
-      - id: CMUBurnGel
-        amount: 30
       - id: CMBurnKit10
         amount: 30
       - id: CMTraumaKit10
@@ -838,6 +834,17 @@
       - id: AU14PouchIFAKFill
       - id: RMCPouchMagazinePistol
       - id: RMCPouchPistol
+    - name: Record Keeping
+      takeAll: CMRecordKeeping
+      entries:
+      - id: RMCBoxRegulationTapesFull
+      - id: RMCUniversalRecorder
+      - id: CMHandLabeler
+      - id: RMCDigitalClock
+    - name: Inmate Restraining Gear
+      entries:
+      - id: AU14ClothingOuterStraitjacket
+        amount: 5 # TODO: bandaid - remove after mappers have placed this
 
 - type: entity
   parent: ColMarTechCargo
@@ -927,6 +934,8 @@
         amount: 2
       - id: RMCBoxClaymoreMineFilled
         amount: 3
+      - id: AU14BoxClaymoreMineIncendiaryFilled
+        amount: 1
       - id: AU14PacketGrenadeTearGasFilled
         amount: 3 #police get extra teargas
       - id: AU14PacketGrenadeTearGasFilledAirburst

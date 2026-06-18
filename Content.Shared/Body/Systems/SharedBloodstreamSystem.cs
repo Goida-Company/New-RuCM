@@ -1,6 +1,10 @@
 using Content.Shared._RMC14.Damage;
 using Content.Shared._RMC14.Medical.Stasis;
 using Content.Shared._RMC14.Medical.Wounds;
+// CMU14
+using Content.Shared._CMU14.Medical.Human.Components;
+// CMU14
+using Content.Shared._CMU14.Medical.Presentation;
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
 using Content.Shared.Body.Events;
@@ -402,7 +406,12 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
                 tempSolution.AddSolution(temp, _prototypeManager);
             }
 
-            _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
+            // CMU14 begin - present biological blood loss as CM13/RMC-style decals instead of generic puddles.
+            var spillEv = new CMUBloodSpillAttemptEvent(ent.Owner, tempSolution, false);
+            RaiseLocalEvent(ent.Owner, ref spillEv);
+            if (!spillEv.Handled)
+                _puddle.TrySpillAt(ent.Owner, tempSolution, out _, sound: false);
+            // CMU14 end
 
             tempSolution.RemoveAllSolution();
         }
@@ -420,8 +429,25 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp, logMissing: false))
             return false;
 
-        ent.Comp.BleedAmount += amount;
-        ent.Comp.BleedAmount = Math.Clamp(ent.Comp.BleedAmount, 0, ent.Comp.MaxBleedAmount);
+        // CMU14
+        if (amount > 0f && HasComp<HumanMedicalComponent>(ent.Owner))
+            return false;
+        // CMU14
+
+        return TrySetBleedAmount(ent, ent.Comp.BleedAmount + amount);
+    }
+
+    // CMU14
+    public bool TrySetBleedAmount(Entity<BloodstreamComponent?> ent, float amount)
+    {
+        if (!Resolve(ent, ref ent.Comp, logMissing: false))
+            return false;
+
+        var clamped = Math.Clamp(amount, 0, ent.Comp.MaxBleedAmount);
+        if (MathF.Abs(ent.Comp.BleedAmount - clamped) < 0.001f)
+            return true;
+
+        ent.Comp.BleedAmount = clamped;
 
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BleedAmount));
 
@@ -435,6 +461,7 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
 
         return true;
     }
+    // CMU14
 
     /// <summary>
     /// Spill all bloodstream solutions into a puddle.
@@ -468,7 +495,12 @@ public abstract partial class SharedBloodstreamSystem : EntitySystem
             SolutionContainer.RemoveAllSolution(ent.Comp.TemporarySolution.Value);
         }
 
-        _puddle.TrySpillAt(ent, tempSol, out _);
+        // CMU14 begin - present biological blood loss as CM13/RMC-style decals instead of generic puddles.
+        var spillEv = new CMUBloodSpillAttemptEvent(ent.Owner, tempSol, true);
+        RaiseLocalEvent(ent.Owner, ref spillEv);
+        if (!spillEv.Handled)
+            _puddle.TrySpillAt(ent, tempSol, out _);
+        // CMU14 end
     }
 
     /// <summary>

@@ -3,6 +3,7 @@ using System.Numerics;
 using System.Threading;
 using Content.Client.Verbs;
 using Content.Shared.Examine;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Input;
 using Content.Shared.Interaction.Events;
@@ -158,7 +159,23 @@ namespace Content.Client.Examine
             // since there's probably one open already if it's coming in from the server.
             var entity = GetEntity(ev.EntityUid);
 
-            OpenTooltip(player.Value, entity, ev.CenterAtCursor, ev.OpenAtOldTooltip, ev.KnowTarget);
+            // CMU14 start
+            // Stale examine responses can arrive after the target is gone or after a zero NetEntity
+            // response. Dropping them avoids verb range checks against EntityUid 0.
+            if (!Exists(entity))
+            {
+                CloseTooltip();
+                return;
+            }
+            // CMU14 end
+
+            OpenTooltip(
+                player.Value,
+                entity,
+                ev.CenterAtCursor,
+                ev.OpenAtOldTooltip,
+                ev.KnowTarget,
+                ev.DisplayName);
             UpdateTooltipInfo(player.Value, entity, ev.Message, ev.Verbs, getVerbs: false);
         }
 
@@ -173,7 +190,7 @@ namespace Content.Client.Examine
         ///     not fill it with information. This is done when the server sends examine info/verbs,
         ///     or immediately if it's entirely clientside.
         /// </summary>
-        public void OpenTooltip(EntityUid player, EntityUid target, bool centeredOnCursor=true, bool openAtOldTooltip=true, bool knowTarget = true)
+        public void OpenTooltip(EntityUid player, EntityUid target, bool centeredOnCursor=true, bool openAtOldTooltip=true, bool knowTarget = true, string? displayName = null)
         {
             // Close any examine tooltip that might already be opened
             // Before we do that, save its position. We'll prioritize opening any new popups there if
@@ -238,7 +255,7 @@ namespace Content.Client.Examine
 
             if (knowTarget)
             {
-                var itemName = FormattedMessage.EscapeText(Identity.Name(target, EntityManager, player));
+                var itemName = FormattedMessage.EscapeText(displayName ?? Identity.Name(target, EntityManager, player).Name);
                 var labelMessage = FormattedMessage.FromMarkupPermissive($"[bold]{itemName}[/bold]");
                 var label = new RichTextLabel();
                 label.SetMessage(labelMessage);
@@ -404,13 +421,17 @@ namespace Content.Client.Examine
 
             FormattedMessage message;
 
-            OpenTooltip(playerEnt.Value, entity, centeredOnCursor, false);
+            var waitsForRecognizedIdentity = !IsClientSide(entity) && HasComp<HumanoidAppearanceComponent>(entity);
+            OpenTooltip(playerEnt.Value, entity, centeredOnCursor, false, knowTarget: !waitsForRecognizedIdentity);
 
             // Always update tooltip info from client first.
             // If we get it wrong, server will correct us later anyway.
             // This will usually be correct (barring server-only components, which generally only adds, not replaces text)
-            message = GetExamineText(entity, playerEnt);
-            UpdateTooltipInfo(playerEnt.Value, entity, message);
+            if (!waitsForRecognizedIdentity)
+            {
+                message = GetExamineText(entity, playerEnt);
+                UpdateTooltipInfo(playerEnt.Value, entity, message);
+            }
 
             if (!IsClientSide(entity))
             {

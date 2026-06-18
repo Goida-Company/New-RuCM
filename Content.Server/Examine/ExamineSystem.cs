@@ -1,6 +1,8 @@
 using System.Linq;
 using Content.Server.Verbs;
+using Content.Server._CMU14.Acquaintance;
 using Content.Shared.Examine;
+using Content.Shared.Humanoid;
 using Content.Shared.Verbs;
 using JetBrains.Annotations;
 using Robust.Shared.Player;
@@ -12,6 +14,7 @@ namespace Content.Server.Examine
     public sealed partial class ExamineSystem : ExamineSystemShared
     {
         [Dependency] private VerbSystem _verbSystem = default!;
+        [Dependency] private AcquaintanceSystem _acquaintance = default!;
 
         private readonly FormattedMessage _entityNotFoundMessage = new();
         private readonly FormattedMessage _entityOutOfRangeMessage = new();
@@ -36,8 +39,11 @@ namespace Content.Server.Examine
             if (getVerbs)
                 verbs = _verbSystem.GetLocalVerbs(target, player, typeof(ExamineVerb));
 
+            var displayName = HasComp<HumanoidAppearanceComponent>(target)
+                ? _acquaintance.GetPerceivedFaceName(player, target)
+                : null;
             var ev = new ExamineSystemMessages.ExamineInfoResponseMessage(
-                GetNetEntity(target), 0, message, verbs?.ToList(), centerAtCursor
+                GetNetEntity(target), 0, message, verbs?.ToList(), centerAtCursor, displayName: displayName
             );
 
             RaiseNetworkEvent(ev, session.Channel);
@@ -70,8 +76,11 @@ namespace Content.Server.Examine
                 verbs = _verbSystem.GetLocalVerbs(entity, playerEnt, typeof(ExamineVerb));
 
             var text = GetExamineText(entity, player.AttachedEntity);
+            var displayName = HasComp<HumanoidAppearanceComponent>(entity)
+                ? _acquaintance.GetPerceivedFaceName(playerEnt, entity)
+                : null;
             RaiseNetworkEvent(new ExamineSystemMessages.ExamineInfoResponseMessage(
-                request.NetEntity, request.Id, text, verbs?.ToList()), channel);
+                request.NetEntity, request.Id, text, verbs?.ToList(), displayName: displayName), channel);
         }
     }
 }

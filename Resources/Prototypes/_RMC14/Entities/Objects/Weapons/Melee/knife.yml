@@ -14,6 +14,10 @@
     blacklist:
       components:
       - Xeno
+  - type: DamageOtherBlacklist
+    blacklist:
+      tags:
+      - Tree
 
 - type: entity
   parent: [ RMCBaseMeleeWeapon, BaseKnife, RMCAttachableBase ]
@@ -290,11 +294,11 @@
   - type: MeleeWeapon
     damage:
       types:
-        Slash: 47
+        Slash: 44
   - type: DamageOtherOnHit
     damage:
       types:
-        Slash: 27
+        Slash: 23
   - type: DamageImpactProfile
     melee:
       contact: Slash
@@ -318,14 +322,6 @@
       path: /Audio/Items/crowbar.ogg
   - type: CMSurgeryTool
   - type: CMBoneSaw
-  - type: CMUImprovisedSurgeryTool
-    delayMultiplier: 2.1
-    mishapChance: 0.18
-    mishapDamageType: Slash
-    mishapDamageAmount: 5
-    failurePenalties:
-      retractor: 2
-      bone_saw: 1
   - type: DeleteOnExplosion
   # RuMC edit
   - type: EmbeddableProjectile

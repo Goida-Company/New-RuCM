@@ -32,7 +32,7 @@
       - CMSurgicalLine
       - CMBoneSaw
       - CMSynthGraft
-      #TODO FixoVein
+      - CMUFixOVein
   - type: FixedItemSizeStorage
   - type: Tag
     tags:
@@ -70,6 +70,7 @@
     - id: CMBoneGel
     - id: CMSurgicalLine
     - id: CMSynthGraft
+    - id: CMUFixOVein
 
 - type: entity
   parent: CMSurgicalCase

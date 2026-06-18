@@ -652,10 +652,10 @@ binds:
   key: Space
   mod1: Shift
   mod2: Control
-- function: CMUOpenMedicalCraftingMenu
+- function: CMUToggleSurgeryMode
   type: State
   key: C
-  mod1: Alt
+  mod1: Control
 - function: CMUniqueAction
   type: State
   key: Space

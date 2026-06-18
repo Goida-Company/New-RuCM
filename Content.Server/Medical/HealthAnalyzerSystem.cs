@@ -188,9 +188,17 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         if (!_uiSystem.HasUi(healthAnalyzer, HealthAnalyzerUiKey.Key))
             return;
 
-        if (!HasComp<DamageableComponent>(target))
-            return;
+        _uiSystem.ServerSendUiMessage(
+            healthAnalyzer,
+            HealthAnalyzerUiKey.Key,
+            BuildScannedUserMessage(healthAnalyzer, target, scanMode));
+    }
 
+    public HealthAnalyzerScannedUserMessage BuildScannedUserMessage(
+        EntityUid healthAnalyzer,
+        EntityUid target,
+        bool? scanMode)
+    {
         var bodyTemperature = float.NaN;
 
         if (TryComp<TemperatureComponent>(target, out var temp))
@@ -211,13 +219,36 @@ public sealed partial class HealthAnalyzerSystem : EntitySystem
         if (TryComp<UnrevivableComponent>(target, out var unrevivableComp) && unrevivableComp.Analyzable)
             unrevivable = true;
 
-        _uiSystem.ServerSendUiMessage(healthAnalyzer, HealthAnalyzerUiKey.Key, new HealthAnalyzerScannedUserMessage(
+        return new HealthAnalyzerScannedUserMessage(
             GetNetEntity(target),
             bodyTemperature,
             bloodAmount,
             scanMode,
             bleeding,
-            unrevivable
-        ));
+            unrevivable,
+            BuildDamageReadout(healthAnalyzer, target));
+    }
+
+    private HealthAnalyzerDamageReadout BuildDamageReadout(EntityUid healthAnalyzer, EntityUid target)
+    {
+        var readout = new HealthAnalyzerDamageReadout();
+
+        if (TryComp<DamageableComponent>(target, out var damageable))
+        {
+            readout.Total = damageable.TotalDamage;
+            foreach (var (group, amount) in damageable.DamagePerGroup)
+            {
+                readout.DamagePerGroup[group] = amount;
+            }
+
+            foreach (var (type, amount) in damageable.Damage.DamageDict)
+            {
+                readout.DamagePerType[type] = amount;
+            }
+        }
+
+        var ev = new HealthAnalyzerBuildReadoutEvent(healthAnalyzer, target, readout);
+        RaiseLocalEvent(target, ref ev);
+        return ev.Damage;
     }
 }

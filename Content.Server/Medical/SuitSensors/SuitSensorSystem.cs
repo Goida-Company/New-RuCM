@@ -5,6 +5,8 @@ using Content.Server.Emp;
 using Content.Server.Medical.CrewMonitoring;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
+using Content.Shared._CMU14.Medical.Human.Components;
+using Content.Shared._CMU14.Medical.Human.Diagnostics;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Clothing;
 using Content.Shared.Damage;
@@ -14,6 +16,7 @@ using Content.Shared.Examine;
 using Content.Shared.GameTicking;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.MedicalScanner;
 using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -395,9 +398,7 @@ public sealed partial class SuitSensorSystem : EntitySystem
             isAlive = !_mobStateSystem.IsDead(sensor.User.Value, mobState);
 
         // get mob total damage
-        var totalDamage = 0;
-        if (TryComp<DamageableComponent>(sensor.User.Value, out var damageable))
-            totalDamage = damageable.TotalDamage.Int();
+        var totalDamage = GetMedicalTotalDamage(sensor.User.Value);
 
         // Get mob total damage crit threshold
         int? totalDamageThreshold = null;
@@ -444,6 +445,35 @@ public sealed partial class SuitSensorSystem : EntitySystem
         }
 
         return status;
+    }
+
+    private int GetMedicalTotalDamage(EntityUid user)
+    {
+        if (TryComp<HumanMedicalComponent>(user, out var medical))
+        {
+            var readout = new HealthAnalyzerDamageReadout();
+            if (TryComp<DamageableComponent>(user, out var damageable))
+            {
+                readout.Total = damageable.TotalDamage;
+                foreach (var (group, amount) in damageable.DamagePerGroup)
+                {
+                    readout.DamagePerGroup[group] = amount;
+                }
+
+                foreach (var (type, amount) in damageable.Damage.DamageDict)
+                {
+                    readout.DamagePerType[type] = amount;
+                }
+            }
+
+            HumanMedicalScannerBuiSystem.BuildHealthAnalyzerDamageReadout(medical, readout);
+            return readout.Total.Int();
+        }
+
+        if (TryComp<DamageableComponent>(user, out var legacyDamageable))
+            return legacyDamageable.TotalDamage.Int();
+
+        return 0;
     }
 
     /// <summary>
