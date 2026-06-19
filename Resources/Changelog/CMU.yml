@@ -3893,7 +3893,7 @@
   changes:
   - message: British Accent (V0.5!)
     type: Add
-  id: 289
+  id: 304
   time: '2026-06-17T02:22:29.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1338
 - author: KriegersMustDie
@@ -3904,7 +3904,7 @@
     type: Tweak
   - message: ICSC Ambassador stamp name
     type: Fix
-  id: 290
+  id: 305
   time: '2026-06-17T20:19:06.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1349
 - author: TheHellFireo
@@ -4245,7 +4245,7 @@
   - message: Optimized repeated treatment, bleeding, surgery, scanner, and pain updates
       to reduce repeated work during mass-casualty combat.
     type: Code
-  id: 291
+  id: 306
   time: '2026-06-17T21:10:58.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1354
 - author: Kadeo64
@@ -4253,7 +4253,7 @@
   - message: The Weyland-Yutani bioweapons laptops have now been encrypted properly,
       and will now only seem to be generic research laptops.
     type: Tweak
-  id: 292
+  id: 307
   time: '2026-06-17T22:01:31.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1346
 - author: 400Ferrets
@@ -4266,7 +4266,7 @@
     type: Add
   - message: Sorokyne walls will eat things less!
     type: Add
-  id: 293
+  id: 308
   time: '2026-06-17T22:03:58.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1342
 - author: HolySSSS
@@ -4281,7 +4281,7 @@
   - message: the regulation tape box is now a small item allowing you to store it
       in a satchel.
     type: Tweak
-  id: 294
+  id: 309
   time: '2026-06-17T22:05:18.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1348
 - author: HotdogMan52
@@ -4293,7 +4293,7 @@
   - message: Tear gas smoke now uses the new ChemicalIrritant system instead of the
       xeno neurotoxin system.
     type: Tweak
-  id: 295
+  id: 310
   time: '2026-06-17T22:16:17.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1355
 - author: wray-git
@@ -4327,14 +4327,14 @@
   - message: Subscribed `BlockingComponent` to `IsUnholsterableEvent` so blocking
       items (shields) are recognised by the F-key quick-equip system
     type: Code
-  id: 296
+  id: 311
   time: '2026-06-17T22:52:29.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1352
 - author: jok989372-lgtm
   changes:
   - message: Added hazmat for working joe.
     type: Add
-  id: 297
+  id: 312
   time: '2026-06-17T22:54:24.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1350
 - author: maertayn
@@ -4358,7 +4358,7 @@
   - message: TacMap blips - yes the icon is still small but at least not mini - will
       be fixed
     type: Tweak
-  id: 298
+  id: 313
   time: '2026-06-17T23:35:26.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1356
 - author: Piticzu
@@ -4379,7 +4379,7 @@
     type: Tweak
   - message: Replaced legacy voiceline audio files with new variants.
     type: Remove
-  id: 299
+  id: 314
   time: '2026-06-17T23:40:27.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1341
 - author: troytroy400
@@ -4390,7 +4390,7 @@
     type: Remove
   - message: LTB cannon nerfed.
     type: Tweak
-  id: 300
+  id: 315
   time: '2026-06-18T00:20:11.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1357
 Name: CMU
