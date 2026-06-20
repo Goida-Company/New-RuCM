@@ -4393,5 +4393,331 @@
   id: 315
   time: '2026-06-18T00:20:11.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1357
+- author: flex5hybrid
+  changes:
+  - message: "\u0434\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0441\u0438\u0441\
+      \u0442\u0435\u043C\u0430 \u0437\u043D\u0430\u043A\u043E\u043C\u0441\u0442\u0432"
+    type: Add
+  id: 316
+  time: '2026-06-18T19:43:56.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/258
+- author: HubaBub
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D \u0442\u044F\u0436\u0451\
+      \u043B\u044B\u0439 \u0448\u043B\u0435\u043C \u0421\u041F\u041D."
+    type: Add
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u044B \u0441\u043F\u0440\u0430\
+      \u0439\u0442\u044B \u0440\u044E\u043A\u0437\u0430\u043A\u043E\u0432 \u0421\u041F\
+      \u041D."
+    type: Tweak
+  id: 317
+  time: '2026-06-18T19:44:33.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/257
+- author: jok989372-lgtm
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0432\u0435\u0441\u0435\u043B\
+      \u044C\u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430!"
+    type: Map
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0434\u043B\u044F\
+      \ \u0430\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\
+      \u043E\u0432!"
+    type: Admin
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0432 \u043A\
+      \u043E\u0434\u0435 \u0434\u043B\u044F \u043A\u043E\u043D\u0442\u0440\u0438\u0431\
+      \u044C\u044E\u0442\u043E\u0440\u043E\u0432!"
+    type: Code
+  id: 318
+  time: '2026-06-18T19:45:05.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/254
+- author: Arcticular1
+  changes:
+  - message: Added 2x M240 Flamer (800$) to ASRS
+    type: Add
+  - message: Added 4x UT Fuel (200$) to ASRS
+    type: Add
+  - message: Added 2x UT Fuel 2x BGEL Fuel mixed crate (350$) to ASRS
+    type: Add
+  - message: Added 4x BGEL Fuel (500$) to ASRS
+    type: Add
+  - message: Removed M240-T from asrs.
+    type: Remove
+  id: 319
+  time: '2026-06-19T03:40:55.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1361
+- author: sunzu432
+  changes:
+  - message: 'Hope''s Retreat: A second gate to the southern entry point of the Octanis
+      Complex, allowing the security post to control access both ways.'
+    type: Add
+  - message: 'Hope''s Retreat: Vehicle lift placed inside the Fort Beauregard Vehicle
+      Pool.'
+    type: Add
+  - message: 'Hope''s Retreat: Additional flanking routes along the central "Smuggler''s
+      Tunnel" to prevent that choke from stalling gameplay.'
+    type: Add
+  - message: 'Hope''s Retreat: The central wall should look a lot more natural, as
+      well as now having invisible walls to prevent it from being passable by armored
+      vehicles, as well as more visual language to convey that it is not intended
+      to be passable terrain to new players.'
+    type: Tweak
+  - message: 'Hope''s Retreat: The Octanis Complex''s southern gatehouse is now outdoors,
+      allowing CAS and mortars to support Marine efforts to breach the first set of
+      blast doors on the map''s south.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Substantially widened and expanded the size of the
+      cave network, making map choke points less difficult to contest for Marines.'
+    type: Tweak
+  - message: 'Hope''s Retreat: The location of the Vehicle Pool in Fort Beauregard
+      has been moved.'
+    type: Tweak
+  - message: Fixes some roof areas.
+    type: Fix
+  id: 320
+  time: '2026-06-19T05:01:53.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1370
+- author: maertayn
+  changes:
+  - message: Fixed being able to use MarineOrders without cooldown as promoted SL
+    type: Fix
+  - message: RMCShellShotgunHDSG was not able to be put in storage like other shells
+      (pouches/vests etc.)
+    type: Fix
+  id: 321
+  time: '2026-06-19T05:41:17.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1380
+- author: maertayn
+  changes:
+  - message: Multi Auth
+    type: Add
+  id: 322
+  time: '2026-06-19T06:27:19.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1379
+- author: troytroy400
+  changes:
+  - message: Port Neroid renamed to Port Nereid
+    type: Tweak
+  - message: New lobby screen art provided by ak105intow
+    type: Add
+  id: 323
+  time: '2026-06-19T08:48:36.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1381
+- author: jok989372-lgtm
+  changes:
+  - message: Fixed startergear of hazmat working joe/
+    type: Fix
+  id: 324
+  time: '2026-06-19T09:58:07.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1368
+- author: Arcticular1
+  changes:
+  - message: Predators now have a 35% flame resist.
+    type: Tweak
+  id: 325
+  time: '2026-06-19T10:02:27.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1347
+- author: 400Ferrets
+  changes:
+  - message: Port Neroid carp no longer die to barotrauma round-start
+    type: Add
+  - message: Port Neroid LZs can no longer be assaulted from rooftops
+    type: Add
+  - message: Port Neroid now has dropship computers
+    type: Add
+  - message: Port Neroid can now spawn monkeys if the gamemode permits it
+    type: Add
+  - message: Port Neroid can no longer be (trivially) escaped by going over the map
+      boundary fog
+    type: Add
+  - message: Port Neroid now has a revised mob presence
+    type: Add
+  - message: Port Neroid habitation medical stairs no longer a tripping hazard
+    type: Add
+  - message: Port Neroid now has salvage
+    type: Add
+  - message: Port Neroid now has mostly fixed APCs
+    type: Add
+  - message: Port Neroid benches are no longer in the walls and improperly rotated
+    type: Add
+  id: 326
+  time: '2026-06-19T10:19:31.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1378
+- author: HotdogMan52
+  changes:
+  - message: CN20 Nerve Gas which respects gas masks
+    type: Add
+  - message: Dylovene neutralizes CN20 in system so injecting Dylovene helps purge
+      your system from CN20 quicker
+    type: Add
+  - message: Changed chemical irritant gases' interaction with gas mask filters
+    type: Tweak
+  - message: Chemical irritant gases respect nested and devoured peeople now
+    type: Fix
+  id: 309
+  time: '2026-06-19T18:07:53.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1371
+- author: sunzu432
+  changes:
+  - message: 'Hope''s Retreat: Second floor for the central Hope''s Retreat Dormitory,
+      allowing a commanding view of the colony.'
+    type: Add
+  - message: 'Hope''s Retreat: Second floor Octanis Complex hospital.'
+    type: Add
+  - message: 'Hope''s Retreat: Miscellaneous decorations.'
+    type: Add
+  - message: 'Hope''s Retreat: The commissary and kitchen have had some small changes
+      to the layout and interior content to hopefully encourage player interaction
+      with their respective staff.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Small tweaks to increase the visual readability of
+      some buttons around the map.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Moved Colony Fall threat spawns.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Fort Beauregard Vehicle Pool now has the correct overhead
+      crane asset.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Clarified description of unopenable podlocks near the
+      starport to be more informative.'
+    type: Tweak
+  - message: 'Hope''s Retreat: Xenos should no longer be able to jump over the central
+      wall near the starport.'
+    type: Fix
+  - message: 'Hope''s Retreat: Wey-Yu guards should now spawn in the correct place.'
+    type: Fix
+  - message: 'Hope''s Retreat: Experimental Sensor Tower is now the correct entity
+      and not from upstream.'
+    type: Fix
+  id: 310
+  time: '2026-06-19T18:10:09.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1387
+- author: wray-git
+  changes:
+  - message: Added the M-19 "Treadnailer" assault boots, a special issue piece of
+      kit fitted with tungsten-carbide spike plates in the sole. Destroys xeno resin
+      on contact, and if you happen to walk over anyone who's in no shape to get out
+      of the way, they're gonna have a bad time. Slowdown 20%. Available from RTO(lead)
+      lockers, HAZOPs get 3 from their cargo vendor under "Special Issue Equipment"
+    type: Add
+  - message: UZI can now be stored in bags, belts, pockets, and backpack slot
+    type: Add
+  - message: Changed HAZOPs' cargo vendor section from "Special Issue Firearms" to
+      "Special Issue Equipment"
+    type: Tweak
+  - message: Increased UZI RoF to 7.5
+    type: Tweak
+  - message: "Improved UZI accuracy slightly \U0001F90F"
+    type: Tweak
+  - message: Added SpikeBootsComponent, a marker component that sits on the boots
+      item and does nothing exciting on its own
+    type: Code
+  - message: Added SpikeBootsWearerComponent, slapped onto whoever equips the boots,
+      keeps track of what tile they last stepped on and who they recently stomped
+      so we don't spam damage every tick
+    type: Code
+  - message: Added SpikeBootsSystem, the thing that actually does stuff, runs a tile-change
+      check each update and handles resin destruction, passable mob damage, cooldowns,
+      sounds and screenshake
+    type: Code
+  - message: Added spikedboots.rsi to _AU14/Clothing/Shoes with the full icon/equipped/filled
+      state set
+    type: Code
+  id: 311
+  time: '2026-06-19T18:10:35.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1360
+- author: JaSeNeSaJ
+  changes:
+  - message: 'Sheperds'': 2 Working Joe job slots'
+    type: Add
+  - message: 'Sheperds'': Botany & Assistant Quarters to Research Labs'
+    type: Add
+  - message: 'Sheperds'': Chem setup to Research Labs'
+    type: Add
+  - message: 'Sheperds'': Colony hospital layout'
+    type: Tweak
+  - message: 'Sheperds'': Various stairwell improvements'
+    type: Tweak
+  id: 312
+  time: '2026-06-19T19:03:32.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1362
+- author: HotdogMan52
+  changes:
+  - message: added four M19-NL Tear Gas nades into SecTech vendors
+    type: Add
+  - message: added four gas mask and eight filters
+    type: Add
+  id: 313
+  time: '2026-06-20T01:24:20.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1388
+- author: wray-git
+  changes:
+  - message: M-19 Treadnailers now only destroys weeds and weed nodes
+    type: Fix
+  - message: M-19 Treadnailers are only active when the wearer is standing
+    type: Fix
+  id: 314
+  time: '2026-06-20T01:31:30.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1389
+- author: maertayn
+  changes:
+  - message: Bumped round end to 5 minutes
+    type: Tweak
+  - message: Added some internet slang to chatsan
+    type: Tweak
+  - message: Pamphlets can give marine orders if leadership becomes >= 1
+    type: Fix
+  - message: Fixes Bush not loading platoons & vendors
+    type: Fix
+  id: 315
+  time: '2026-06-20T04:35:54.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1391
+- author: Arcticular1
+  changes:
+  - message: x1 Type 88 Marksman rifle (20p)
+    type: Add
+  - message: x2 Type 88 Magazines (8p)
+    type: Add
+  - message: x1 LC9 incinerator (10p)
+    type: Add
+  - message: x2 LC9 flamer tanks (5p)
+    type: Add
+  - message: x5 6B80 armored vests (5p)
+    type: Add
+  - message: x2 K12 ceramic armor (15p)
+    type: Add
+  - message: x2 k12 ceramic helmets (10p)
+    type: Add
+  - message: x5 Radio jammer (10p)
+    type: Add
+  - message: 5 coif masks to CLF recruitment crate.
+    type: Add
+  - message: replaced roundstart MK1s with MAR-30
+    type: Tweak
+  - message: k12 ceramic armor now gets a 36% slowdown
+    type: Tweak
+  - message: Huge IED from 3 > 1
+    type: Tweak
+  - message: '- Bomb vest from 2 > 1'
+    type: Tweak
+  - message: Replaced CLF leader's armband with a leader specific one.
+    type: Tweak
+  - message: CLF Cell leader gets a CLF Colonist ID instead (no more throwing ID away)
+    type: Tweak
+  - message: Roundstart rangefinders replaced with civilian binos
+    type: Tweak
+  id: 316
+  time: '2026-06-20T11:19:31.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1394
 Name: CMU
 Order: -1
