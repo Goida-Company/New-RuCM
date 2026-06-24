@@ -120,12 +120,16 @@ public sealed partial class AuThirdPartySystem : EntitySystem
             }
             _sawmill.Debug($"[AuThirdPartySystem] Found valid dropship destination: {chosenDestination}");
             var deserializationOpts = DeserializationOptions.Default with { InitializeMaps = true };
-            if (!_mapLoader.TryLoadMap(party.dropshippath, out var dropshipMap, out var grids, deserializationOpts))
+            // RuMC edit start
+            var dropshipMapSystem = _entityManager.System<SharedMapSystem>();
+            dropshipMapSystem.CreateMap(out var dropshipMapId);
+            if (!_mapLoader.TryLoadGrid(dropshipMapId, party.dropshippath, out var dropshipGrid, deserializationOpts))
+            // RuMC edit end
             {
                 _sawmill.Error($"[AuThirdPartySystem] Failed to load dropship map: {party.dropshippath}");
                 return false;
             }
-            mainGridUid = grids.FirstOrDefault();
+            mainGridUid = dropshipGrid!.Value.Owner; // RuMC edit
             if (mainGridUid == EntityUid.Invalid)
             {
                 _sawmill.Error($"[AuThirdPartySystem] No grids found in dropship map: {party.dropshippath}");
