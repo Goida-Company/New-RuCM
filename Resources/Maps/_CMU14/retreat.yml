@@ -4,8 +4,8 @@ meta:
   engineVersion: v277.0.0
   forkId: ""
   forkVersion: ""
-  time: 06/22/2026 21:35:12
-  entityCount: 39044
+  time: 06/27/2026 16:07:51
+  entityCount: 39026
 maps:
 - 1
 grids:
@@ -1085,7 +1085,7 @@ entities:
           version: 7
         7,-2:
           ind: 7,-2
-          tiles: mwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAwIAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAF4AAAAAAABeAAAAAAAAtgAAAAAAALYAAAAAAAC2AAAAAAAAtgAAAAAAAAIAAAAAAABiAAAAAAAAYgAAAAAAAGIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAABeAAAAAAAAXgAAAAAAAAIAAAAAAAC2AAAAAAAAtgAAAAAAALYAAAAAAAACAAAAAAAAYgAAAAAAAGIAAAAAAABiAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAXgAAAAAAAF4AAAAAAAACAAAAAAAAtgAAAAAAALYAAAAAAAC2AAAAAAAAAgAAAAAAAGIAAAAAAABiAAAAAAAAYgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC2AAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAYgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC9AAAAAAAAvQAAAAAAAAIAAAAAAAA/AAAAAAAAGgAAAAAAAEEAAAAAAAACAAAAAAAAPwAAAAAAAEAAAAAAAABBAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAvQAAAAAAAL0AAAAAAAACAAAAAAAAQgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAQwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAL0AAAAAAAC9AAAAAAAAAgAAAAAAAE0AAAAAAABOAAAAAAAATwAAAAAAAAIAAAAAAABCAAAAAAAAGgAAAAAAAEMAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC9AAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAQgAAAAAAABoAAAAAAABDAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAGgAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABBAAAAAAAAAgAAAAAAAEIAAAAAAAAaAAAAAAAAQwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAAEMAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAABDAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAATgAAAAAAAE4AAAAAAABOAAAAAAAATgAAAAAAAE4AAAAAAABPAAAAAAAAAgAAAAAAAE0AAAAAAABOAAAAAAAATwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAA==
+          tiles: mwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAwIAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAADAgAAAAAAAwIAAAAAAAMCAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAF4AAAAAAABeAAAAAAAAtgAAAAAAALYAAAAAAAC2AAAAAAAAtgAAAAAAAAIAAAAAAABiAAAAAAAAYgAAAAAAAGIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAABeAAAAAAAAXgAAAAAAAAIAAAAAAAC2AAAAAAAAtgAAAAAAALYAAAAAAAACAAAAAAAAYgAAAAAAAGIAAAAAAABiAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAXgAAAAAAAF4AAAAAAAACAAAAAAAAtgAAAAAAALYAAAAAAAC2AAAAAAAAAgAAAAAAAGIAAAAAAABiAAAAAAAAYgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC2AAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAYgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC9AAAAAAAAvQAAAAAAAAIAAAAAAAA/AAAAAAAAGgAAAAAAAEEAAAAAAAACAAAAAAAAPwAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAvQAAAAAAAL0AAAAAAAACAAAAAAAAQgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAABDAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAL0AAAAAAAC9AAAAAAAAAgAAAAAAAE0AAAAAAABOAAAAAAAATwAAAAAAAAIAAAAAAABCAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAQwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAC9AAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAQgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAAEMAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAGgAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABBAAAAAAAAAgAAAAAAAEIAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAABDAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAQwAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAABoAAAAAAAAaAAAAAAAAGgAAAAAAAEMAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAATgAAAAAAAE4AAAAAAABOAAAAAAAATgAAAAAAAE4AAAAAAABPAAAAAAAAAgAAAAAAAE0AAAAAAABOAAAAAAAATwAAAAAAAE4AAAAAAABPAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAA==
           version: 7
         -8,-1:
           ind: -8,-1
@@ -4181,12 +4181,13 @@ entities:
             0: 4915
           30,-6:
             0: 4371
-            1: 32
-            2: 8704
+            7: 32
+            8: 512
+            1: 8192
           30,-5:
             0: 13073
             2: 2
-            4: 32
+            1: 32
           -21,-3:
             0: 65534
           -21,-2:
@@ -4494,7 +4495,7 @@ entities:
             0: 65518
           26,-4:
             0: 13104
-            7: 2176
+            8: 2176
           26,-3:
             0: 52983
           26,-2:
@@ -5102,7 +5103,7 @@ entities:
           17,7:
             0: 61420
           18,4:
-            8: 16
+            7: 16
             0: 33634
           18,5:
             0: 56797
@@ -6170,7 +6171,7 @@ entities:
             0: 13119
             2: 34816
           -19,16:
-            8: 2
+            7: 2
             4: 544
             0: 52428
           -18,16:
@@ -7124,7 +7125,7 @@ entities:
           - 0
           - 0
         - volume: 2500
-          temperature: 75.31249
+          temperature: 100.27304
           moles:
           - 0
           - 0
@@ -7139,7 +7140,7 @@ entities:
           - 0
           - 0
         - volume: 2500
-          temperature: 100.27304
+          temperature: 75.31249
           moles:
           - 0
           - 0
@@ -92889,7 +92890,7 @@ entities:
         -12,-10: CMUAreaRetreatOutofBounds
         -12,-11: CMUAreaRetreatOutofBounds
         -12,-12: CMUAreaRetreatOutofBounds
-        -12,-13: CMUAreaRetreatOCCavernCentral
+        -12,-13: CMUAreaRetreatOCUnregisteredTunnel
         -13,-5: CMUAreaRetreatOutofBounds
         -13,-4: CMUAreaRetreatOutofBounds
         -18,-3: CMUAreaRetreatOutofBounds
@@ -92958,67 +92959,67 @@ entities:
         -16,-7: CMUAreaRetreatOutofBounds
         -11,-11: CMUAreaRetreatOutofBounds
         -11,-12: CMUAreaRetreatOutofBounds
-        -11,-13: CMUAreaRetreatOCCavernCentral
-        -11,-14: CMUAreaRetreatOCCavernCentral
+        -11,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-14: CMUAreaRetreatOCUnregisteredTunnel
         -10,-11: CMUAreaRetreatOutofBounds
         -10,-12: CMUAreaRetreatOutofBounds
         -10,-13: CMUAreaRetreatOutofBounds
-        -10,-14: CMUAreaRetreatOCCavernCentral
+        -10,-14: CMUAreaRetreatOCUnregisteredTunnel
         -9,-11: CMUAreaRetreatOutofBounds
         -9,-12: CMUAreaRetreatOutofBounds
         -9,-13: CMUAreaRetreatOutofBounds
         -9,-14: CMUAreaRetreatOutofBounds
         -8,-11: CMUAreaRetreatOutofBounds
-        -8,-12: CMUAreaRetreatOCCavernCentral
-        -8,-13: CMUAreaRetreatOCCavernCentral
-        -8,-14: CMUAreaRetreatOCCavernCentral
-        -10,-15: CMUAreaRetreatOCCavernCentral
-        -10,-16: CMUAreaRetreatOCCavernCentral
+        -8,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-14: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-16: CMUAreaRetreatOCUnregisteredTunnel
         -9,-15: CMUAreaRetreatOutofBounds
-        -9,-16: CMUAreaRetreatOCCavernCentral
-        -8,-15: CMUAreaRetreatOCCavernCentral
-        -8,-16: CMUAreaRetreatOCCavernCentral
-        -7,-15: CMUAreaRetreatOCCavernCentral
-        -7,-16: CMUAreaRetreatOCCavernCentral
-        -6,-15: CMUAreaRetreatOCCavernCentral
-        -6,-16: CMUAreaRetreatOCCavernCentral
-        -5,-15: CMUAreaRetreatOCCavernCentral
-        -5,-16: CMUAreaRetreatOCCavernCentral
-        -4,-15: CMUAreaRetreatOCCavernCentral
+        -9,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-15: CMUAreaRetreatOCUnregisteredTunnel
         -4,-16: CMUAreaRetreatOutofBounds
         -3,-16: CMUAreaRetreatOutofBounds
         -2,-15: CMUAreaRetreatOutofBounds
         -2,-16: CMUAreaRetreatOutofBounds
         -1,-15: CMUAreaRetreatOutofBounds
         -1,-16: CMUAreaRetreatOutofBounds
-        0,-15: CMUAreaRetreatOCCavernCentral
-        -3,-15: CMUAreaRetreatOCCavernCentral
-        1,-15: CMUAreaRetreatOCCavernCentral
+        0,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-15: CMUAreaRetreatOCUnregisteredTunnel
+        1,-15: CMUAreaRetreatOCUnregisteredTunnel
         1,-16: CMUAreaRetreatOutofBounds
-        2,-15: CMUAreaRetreatOCCavernCentral
+        2,-15: CMUAreaRetreatOCUnregisteredTunnel
         0,-16: CMUAreaRetreatOutofBounds
-        3,-15: CMUAreaRetreatOCCavernCentral
-        2,-16: CMUAreaRetreatOCCavernCentral
-        4,-15: CMUAreaRetreatOCCavernCentral
-        4,-16: CMUAreaRetreatOCCavernCentral
-        3,-16: CMUAreaRetreatOCCavernCentral
-        -8,-17: CMUAreaRetreatOCCavernCentral
-        -8,-18: CMUAreaRetreatOCCavernCentral
-        -8,-19: CMUAreaRetreatOCCavernCentral
-        -7,-17: CMUAreaRetreatOCCavernCentral
-        -7,-18: CMUAreaRetreatOCCavernCentral
-        -7,-19: CMUAreaRetreatOCCavernCentral
-        -6,-17: CMUAreaRetreatOCCavernCentral
-        -6,-18: CMUAreaRetreatOCCavernCentral
-        -6,-19: CMUAreaRetreatOCCavernCentral
-        -5,-17: CMUAreaRetreatOCCavernCentral
-        -5,-18: CMUAreaRetreatOCCavernCentral
-        -5,-19: CMUAreaRetreatOCCavernCentral
+        3,-15: CMUAreaRetreatOCUnregisteredTunnel
+        2,-16: CMUAreaRetreatOCUnregisteredTunnel
+        4,-15: CMUAreaRetreatOCUnregisteredTunnel
+        4,-16: CMUAreaRetreatOCUnregisteredTunnel
+        3,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-19: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-19: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-19: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-19: CMUAreaRetreatOCUnregisteredTunnel
         -4,-17: CMUAreaRetreatOutofBounds
-        -4,-18: CMUAreaRetreatOCCavernCentral
-        -4,-19: CMUAreaRetreatOCCavernCentral
+        -4,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-19: CMUAreaRetreatOCUnregisteredTunnel
         -3,-18: CMUAreaRetreatOutofBounds
-        -3,-19: CMUAreaRetreatOCCavernCentral
+        -3,-19: CMUAreaRetreatOCUnregisteredTunnel
         -2,-17: CMUAreaRetreatOutofBounds
         -3,-17: CMUAreaRetreatOutofBounds
         -2,-19: CMUAreaRetreatOutofBounds
@@ -93029,35 +93030,35 @@ entities:
         -1,-18: CMUAreaRetreatOutofBounds
         0,-18: CMUAreaRetreatOutofBounds
         0,-19: CMUAreaRetreatOutofBounds
-        -7,-20: CMUAreaRetreatOCCavernCentral
-        -6,-20: CMUAreaRetreatOCCavernCentral
-        -4,-20: CMUAreaRetreatOCCavernCentral
-        -3,-20: CMUAreaRetreatOCCavernCentral
+        -7,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-20: CMUAreaRetreatOCUnregisteredTunnel
         -2,-20: CMUAreaRetreatOutofBounds
         -1,-20: CMUAreaRetreatOutofBounds
         0,-20: CMUAreaRetreatOutofBounds
-        1,-20: CMUAreaRetreatOCCavernCentral
-        2,-20: CMUAreaRetreatOCCavernCentral
-        3,-20: CMUAreaRetreatOCCavernCentral
-        -5,-20: CMUAreaRetreatOCCavernCentral
-        2,-21: CMUAreaRetreatOCCavernCentral
-        1,-21: CMUAreaRetreatOCCavernCentral
-        0,-21: CMUAreaRetreatOCCavernCentral
+        1,-20: CMUAreaRetreatOCUnregisteredTunnel
+        2,-20: CMUAreaRetreatOCUnregisteredTunnel
+        3,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-20: CMUAreaRetreatOCUnregisteredTunnel
+        2,-21: CMUAreaRetreatOCUnregisteredTunnel
+        1,-21: CMUAreaRetreatOCUnregisteredTunnel
+        0,-21: CMUAreaRetreatOCUnregisteredTunnel
         -1,-21: CMUAreaRetreatOutofBounds
-        -2,-21: CMUAreaRetreatOCCavernCentral
-        -3,-21: CMUAreaRetreatOCCavernCentral
-        -4,-21: CMUAreaRetreatOCCavernCentral
-        -5,-21: CMUAreaRetreatOCCavernCentral
-        -4,-22: CMUAreaRetreatOCCavernCentral
-        -3,-22: CMUAreaRetreatOCCavernCentral
-        -2,-22: CMUAreaRetreatOCCavernCentral
-        -1,-22: CMUAreaRetreatOCCavernCentral
-        0,-22: CMUAreaRetreatOCCavernCentral
-        1,-22: CMUAreaRetreatOCCavernCentral
-        0,-23: CMUAreaRetreatOCCavernCentral
-        -1,-23: CMUAreaRetreatOCCavernCentral
-        -3,-23: CMUAreaRetreatOCCavernCentral
-        -2,-23: CMUAreaRetreatOCCavernCentral
+        -2,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-22: CMUAreaRetreatOCUnregisteredTunnel
+        0,-22: CMUAreaRetreatOCUnregisteredTunnel
+        1,-22: CMUAreaRetreatOCUnregisteredTunnel
+        0,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-23: CMUAreaRetreatOCUnregisteredTunnel
         -8,-6: CMUAreaRetreatOutofBounds
         -8,-7: CMUAreaRetreatOutofBounds
         -8,-8: CMUAreaRetreatOutofBounds
@@ -93068,136 +93069,136 @@ entities:
         -7,-8: CMUAreaRetreatOutofBounds
         -7,-9: CMUAreaRetreatOutofBounds
         -7,-10: CMUAreaRetreatOutofBounds
-        -7,-11: CMUAreaRetreatOCCavernCentral
-        -7,-12: CMUAreaRetreatOCCavernCentral
-        -7,-13: CMUAreaRetreatOCCavernCentral
-        -7,-14: CMUAreaRetreatOCCavernCentral
+        -7,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-14: CMUAreaRetreatOCUnregisteredTunnel
         -6,-6: CMUAreaRetreatOutofBounds
         -6,-7: CMUAreaRetreatOutofBounds
         -6,-8: CMUAreaRetreatOutofBounds
         -6,-10: CMUAreaRetreatOutofBounds
         -6,-9: CMUAreaRetreatOutofBounds
-        -6,-12: CMUAreaRetreatOCCavernCentral
-        -6,-13: CMUAreaRetreatOCCavernCentral
-        -6,-11: CMUAreaRetreatOCCavernCentral
+        -6,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-11: CMUAreaRetreatOCUnregisteredTunnel
         -5,-6: CMUAreaRetreatOutofBounds
         -5,-7: CMUAreaRetreatOutofBounds
         -5,-8: CMUAreaRetreatOutofBounds
         -5,-9: CMUAreaRetreatOutofBounds
-        -6,-14: CMUAreaRetreatOCCavernCentral
-        -5,-11: CMUAreaRetreatOCCavernCentral
-        -5,-10: CMUAreaRetreatOCCavernCentral
-        -5,-12: CMUAreaRetreatOCCavernCentral
-        -5,-13: CMUAreaRetreatOCCavernCentral
-        -5,-14: CMUAreaRetreatOCCavernCentral
+        -6,-14: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-10: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-14: CMUAreaRetreatOCUnregisteredTunnel
         -4,-6: CMUAreaRetreatOCStarportExteriorSouth
         -4,-7: CMUAreaRetreatOCStarportExteriorSouth
-        -4,-8: CMUAreaRetreatOCCavernCentral
-        -4,-9: CMUAreaRetreatOCCavernCentral
-        -4,-10: CMUAreaRetreatOCCavernCentral
-        -4,-11: CMUAreaRetreatOCCavernCentral
-        -4,-12: CMUAreaRetreatOCCavernCentral
-        -4,-13: CMUAreaRetreatOCCavernCentral
-        -4,-14: CMUAreaRetreatOCCavernCentral
+        -4,-8: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-9: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-10: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-14: CMUAreaRetreatOCUnregisteredTunnel
         -3,-6: CMUAreaRetreatOCStarportExteriorSouth
         -3,-7: CMUAreaRetreatOCStarportExteriorSouth
-        -3,-8: CMUAreaRetreatOCCavernCentral
-        -3,-9: CMUAreaRetreatOCCavernCentral
-        -3,-10: CMUAreaRetreatOCCavernCentral
-        -3,-11: CMUAreaRetreatOCCavernCentral
-        -3,-12: CMUAreaRetreatOCCavernCentral
-        -3,-13: CMUAreaRetreatOCCavernCentral
-        -3,-14: CMUAreaRetreatOCCavernCentral
+        -3,-8: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-9: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-10: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-14: CMUAreaRetreatOCUnregisteredTunnel
         -2,-6: CMUAreaRetreatOCStarportExteriorSouth
         -2,-7: CMUAreaRetreatOCStarportExteriorSouth
-        -2,-8: CMUAreaRetreatOCCavernCentral
-        -2,-9: CMUAreaRetreatOCCavernCentral
-        -2,-10: CMUAreaRetreatOCCavernCentral
-        -2,-11: CMUAreaRetreatOCCavernCentral
-        -2,-12: CMUAreaRetreatOCCavernCentral
-        -2,-13: CMUAreaRetreatOCCavernCentral
-        -2,-14: CMUAreaRetreatOCCavernCentral
+        -2,-8: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-9: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-10: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-14: CMUAreaRetreatOCUnregisteredTunnel
         -1,-6: CMUAreaRetreatOCStarportExteriorSouth
         -1,-7: CMUAreaRetreatOCStarportExteriorSouth
         -1,-8: CMUAreaRetreatOCStarportExteriorSouth
-        -1,-9: CMUAreaRetreatOCCavernCentral
-        -1,-10: CMUAreaRetreatOCCavernCentral
-        -1,-11: CMUAreaRetreatOCCavernCentral
-        -1,-12: CMUAreaRetreatOCCavernCentral
-        -1,-13: CMUAreaRetreatOCCavernCentral
-        -1,-14: CMUAreaRetreatOCCavernCentral
+        -1,-9: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-10: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-11: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-12: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-13: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-14: CMUAreaRetreatOCUnregisteredTunnel
         0,-6: CMUAreaRetreatOCStarportExteriorSouth
         0,-7: CMUAreaRetreatOCStarportExteriorSouth
-        0,-8: CMUAreaRetreatOCCavernCentral
-        0,-9: CMUAreaRetreatOCCavernCentral
-        0,-10: CMUAreaRetreatOCCavernCentral
-        0,-11: CMUAreaRetreatOCCavernCentral
-        0,-12: CMUAreaRetreatOCCavernCentral
-        0,-13: CMUAreaRetreatOCCavernCentral
-        0,-14: CMUAreaRetreatOCCavernCentral
+        0,-8: CMUAreaRetreatOCUnregisteredTunnel
+        0,-9: CMUAreaRetreatOCUnregisteredTunnel
+        0,-10: CMUAreaRetreatOCUnregisteredTunnel
+        0,-11: CMUAreaRetreatOCUnregisteredTunnel
+        0,-12: CMUAreaRetreatOCUnregisteredTunnel
+        0,-13: CMUAreaRetreatOCUnregisteredTunnel
+        0,-14: CMUAreaRetreatOCUnregisteredTunnel
         1,-6: CMUAreaRetreatOCStarportExteriorSouth
         1,-7: CMUAreaRetreatOCStarportExteriorSouth
-        1,-8: CMUAreaRetreatOCCavernCentral
-        1,-9: CMUAreaRetreatOCCavernCentral
-        1,-10: CMUAreaRetreatOCCavernCentral
-        1,-11: CMUAreaRetreatOCCavernCentral
-        1,-12: CMUAreaRetreatOCCavernCentral
-        1,-13: CMUAreaRetreatOCCavernCentral
-        1,-14: CMUAreaRetreatOCCavernCentral
+        1,-8: CMUAreaRetreatOCUnregisteredTunnel
+        1,-9: CMUAreaRetreatOCUnregisteredTunnel
+        1,-10: CMUAreaRetreatOCUnregisteredTunnel
+        1,-11: CMUAreaRetreatOCUnregisteredTunnel
+        1,-12: CMUAreaRetreatOCUnregisteredTunnel
+        1,-13: CMUAreaRetreatOCUnregisteredTunnel
+        1,-14: CMUAreaRetreatOCUnregisteredTunnel
         2,-6: CMUAreaRetreatOutofBounds
         2,-7: CMUAreaRetreatOutofBounds
         2,-8: CMUAreaRetreatOutofBounds
         2,-9: CMUAreaRetreatOutofBounds
-        2,-10: CMUAreaRetreatOCCavernCentral
-        2,-11: CMUAreaRetreatOCCavernCentral
-        2,-12: CMUAreaRetreatOCCavernCentral
-        2,-13: CMUAreaRetreatOCCavernCentral
-        2,-14: CMUAreaRetreatOCCavernCentral
+        2,-10: CMUAreaRetreatOCUnregisteredTunnel
+        2,-11: CMUAreaRetreatOCUnregisteredTunnel
+        2,-12: CMUAreaRetreatOCUnregisteredTunnel
+        2,-13: CMUAreaRetreatOCUnregisteredTunnel
+        2,-14: CMUAreaRetreatOCUnregisteredTunnel
         3,-7: CMUAreaRetreatOutofBounds
         3,-6: CMUAreaRetreatOutofBounds
         3,-9: CMUAreaRetreatOutofBounds
         3,-8: CMUAreaRetreatOutofBounds
-        3,-10: CMUAreaRetreatOCCavernCentral
-        3,-11: CMUAreaRetreatOCCavernCentral
-        3,-12: CMUAreaRetreatOCCavernCentral
-        3,-13: CMUAreaRetreatOCCavernCentral
-        3,-14: CMUAreaRetreatOCCavernCentral
+        3,-10: CMUAreaRetreatOCUnregisteredTunnel
+        3,-11: CMUAreaRetreatOCUnregisteredTunnel
+        3,-12: CMUAreaRetreatOCUnregisteredTunnel
+        3,-13: CMUAreaRetreatOCUnregisteredTunnel
+        3,-14: CMUAreaRetreatOCUnregisteredTunnel
         4,-6: CMUAreaRetreatOutofBounds
         4,-7: CMUAreaRetreatOutofBounds
         4,-8: CMUAreaRetreatOutofBounds
         4,-9: CMUAreaRetreatOutofBounds
-        4,-10: CMUAreaRetreatOCCavernCentral
-        4,-11: CMUAreaRetreatOCCavernCentral
-        4,-12: CMUAreaRetreatOCCavernCentral
-        4,-13: CMUAreaRetreatOCCavernCentral
-        4,-14: CMUAreaRetreatOCCavernCentral
+        4,-10: CMUAreaRetreatOCUnregisteredTunnel
+        4,-11: CMUAreaRetreatOCUnregisteredTunnel
+        4,-12: CMUAreaRetreatOCUnregisteredTunnel
+        4,-13: CMUAreaRetreatOCUnregisteredTunnel
+        4,-14: CMUAreaRetreatOCUnregisteredTunnel
         5,-6: CMUAreaRetreatOutofBounds
         5,-7: CMUAreaRetreatOutofBounds
         5,-8: CMUAreaRetreatOutofBounds
         5,-9: CMUAreaRetreatOutofBounds
-        5,-10: CMUAreaRetreatOCCavernCentral
-        5,-11: CMUAreaRetreatOCCavernCentral
-        5,-12: CMUAreaRetreatOCCavernCentral
-        5,-13: CMUAreaRetreatOCCavernCentral
-        5,-14: CMUAreaRetreatOCCavernCentral
+        5,-10: CMUAreaRetreatOCUnregisteredTunnel
+        5,-11: CMUAreaRetreatOCUnregisteredTunnel
+        5,-12: CMUAreaRetreatOCUnregisteredTunnel
+        5,-13: CMUAreaRetreatOCUnregisteredTunnel
+        5,-14: CMUAreaRetreatOCUnregisteredTunnel
         6,-6: CMUAreaRetreatOutofBounds
         6,-7: CMUAreaRetreatOutofBounds
         6,-8: CMUAreaRetreatOutofBounds
         6,-9: CMUAreaRetreatOutofBounds
-        6,-10: CMUAreaRetreatOCCavernCentral
-        6,-11: CMUAreaRetreatOCCavernCentral
-        6,-12: CMUAreaRetreatOCCavernCentral
-        6,-13: CMUAreaRetreatOCCavernCentral
-        6,-14: CMUAreaRetreatOCCavernCentral
+        6,-10: CMUAreaRetreatOCUnregisteredTunnel
+        6,-11: CMUAreaRetreatOCUnregisteredTunnel
+        6,-12: CMUAreaRetreatOCUnregisteredTunnel
+        6,-13: CMUAreaRetreatOCUnregisteredTunnel
+        6,-14: CMUAreaRetreatOCUnregisteredTunnel
         7,-6: CMUAreaRetreatOutofBounds
         7,-7: CMUAreaRetreatOutofBounds
         7,-8: CMUAreaRetreatOutofBounds
         7,-9: CMUAreaRetreatOutofBounds
-        7,-10: CMUAreaRetreatOCCavernCentral
-        7,-11: CMUAreaRetreatOCCavernCentral
-        7,-12: CMUAreaRetreatOCCavernCentral
-        7,-13: CMUAreaRetreatOCCavernCentral
-        7,-14: CMUAreaRetreatOCCavernCentral
+        7,-10: CMUAreaRetreatOCUnregisteredTunnel
+        7,-11: CMUAreaRetreatOCUnregisteredTunnel
+        7,-12: CMUAreaRetreatOCUnregisteredTunnel
+        7,-13: CMUAreaRetreatOCUnregisteredTunnel
+        7,-14: CMUAreaRetreatOCUnregisteredTunnel
         2,-5: CMUAreaRetreatOutofBounds
         3,-5: CMUAreaRetreatOutofBounds
         4,-5: CMUAreaRetreatOutofBounds
@@ -93209,14 +93210,14 @@ entities:
         8,-7: CMUAreaRetreatOutofBounds
         8,-9: CMUAreaRetreatOutofBounds
         8,-10: CMUAreaRetreatOutofBounds
-        8,-11: CMUAreaRetreatOCCavernCentral
+        8,-11: CMUAreaRetreatOCUnregisteredTunnel
         9,-5: CMUAreaRetreatOutofBounds
         9,-6: CMUAreaRetreatOutofBounds
         8,-8: CMUAreaRetreatOutofBounds
         9,-8: CMUAreaRetreatOutofBounds
         9,-9: CMUAreaRetreatOutofBounds
         9,-10: CMUAreaRetreatOutofBounds
-        9,-11: CMUAreaRetreatOCCavernCentral
+        9,-11: CMUAreaRetreatOCUnregisteredTunnel
         10,-5: CMUAreaRetreatOutofBounds
         9,-7: CMUAreaRetreatOutofBounds
         10,-7: CMUAreaRetreatOutofBounds
@@ -93224,21 +93225,21 @@ entities:
         10,-9: CMUAreaRetreatOutofBounds
         10,-10: CMUAreaRetreatOutofBounds
         10,-6: CMUAreaRetreatOutofBounds
-        10,-11: CMUAreaRetreatOCCavernCentral
+        10,-11: CMUAreaRetreatOCUnregisteredTunnel
         11,-5: CMUAreaRetreatOutofBounds
         11,-6: CMUAreaRetreatOutofBounds
         11,-7: CMUAreaRetreatOutofBounds
         11,-8: CMUAreaRetreatOutofBounds
         11,-9: CMUAreaRetreatOutofBounds
         11,-10: CMUAreaRetreatOutofBounds
-        11,-11: CMUAreaRetreatOCCavernCentral
+        11,-11: CMUAreaRetreatOCUnregisteredTunnel
         12,-5: CMUAreaRetreatOutofBounds
         12,-6: CMUAreaRetreatOutofBounds
         12,-7: CMUAreaRetreatOutofBounds
         12,-8: CMUAreaRetreatOutofBounds
         12,-9: CMUAreaRetreatOutofBounds
         12,-10: CMUAreaRetreatOutofBounds
-        12,-11: CMUAreaRetreatOCCavernCentral
+        12,-11: CMUAreaRetreatOCUnregisteredTunnel
         13,-5: CMUAreaRetreatOutofBounds
         13,-8: CMUAreaRetreatOutofBounds
         13,-7: CMUAreaRetreatOutofBounds
@@ -93249,22 +93250,22 @@ entities:
         14,-9: CMUAreaRetreatOutofBounds
         14,-10: CMUAreaRetreatOutofBounds
         14,-11: CMUAreaRetreatOutofBounds
-        14,-12: CMUAreaRetreatOCCavernCentral
-        14,-13: CMUAreaRetreatOCCavernCentral
+        14,-12: CMUAreaRetreatOCUnregisteredTunnel
+        14,-13: CMUAreaRetreatOCUnregisteredTunnel
         15,-9: CMUAreaRetreatOutofBounds
         15,-10: CMUAreaRetreatOutofBounds
         15,-11: CMUAreaRetreatOutofBounds
-        15,-12: CMUAreaRetreatOCCavernCentral
+        15,-12: CMUAreaRetreatOCUnregisteredTunnel
         16,-9: CMUAreaRetreatOutofBounds
-        15,-13: CMUAreaRetreatOCCavernCentral
+        15,-13: CMUAreaRetreatOCUnregisteredTunnel
         16,-10: CMUAreaRetreatOutofBounds
         16,-11: CMUAreaRetreatOutofBounds
         16,-12: CMUAreaRetreatOutofBounds
-        16,-13: CMUAreaRetreatOCCavernCentral
+        16,-13: CMUAreaRetreatOCUnregisteredTunnel
         17,-9: CMUAreaRetreatOutofBounds
         17,-11: CMUAreaRetreatOutofBounds
         17,-12: CMUAreaRetreatOutofBounds
-        17,-13: CMUAreaRetreatOCCavernCentral
+        17,-13: CMUAreaRetreatOCUnregisteredTunnel
         18,-9: CMUAreaRetreatOutofBounds
         18,-10: CMUAreaRetreatOutofBounds
         18,-11: CMUAreaRetreatOutofBounds
@@ -93392,20 +93393,20 @@ entities:
         -13,-27: CMUAreaRetreatOCCavernNorth
         -13,-28: CMUAreaRetreatOCCavernNorth
         -12,-20: CMUAreaRetreatOutofBounds
-        -12,-22: CMUAreaRetreatOCCavernNorth
-        -12,-21: CMUAreaRetreatOCCavernNorth
-        -12,-23: CMUAreaRetreatOCCavernNorth
+        -12,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -12,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -12,-23: CMUAreaRetreatOCUnregisteredTunnel
         -12,-24: CMUAreaRetreatOCCavernNorth
         -12,-25: CMUAreaRetreatOCCavernNorth
         -12,-26: CMUAreaRetreatOCCavernNorth
         -12,-28: CMUAreaRetreatOCCavernNorth
         -12,-27: CMUAreaRetreatOCCavernNorth
         -11,-20: CMUAreaRetreatOutofBounds
-        -11,-21: CMUAreaRetreatOCCavernNorth
-        -11,-23: CMUAreaRetreatOCCavernNorth
-        -11,-24: CMUAreaRetreatOCCavernNorth
+        -11,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-24: CMUAreaRetreatOCUnregisteredTunnel
         -11,-25: CMUAreaRetreatOCCavernNorth
-        -11,-22: CMUAreaRetreatOCCavernNorth
+        -11,-22: CMUAreaRetreatOCUnregisteredTunnel
         -11,-26: CMUAreaRetreatOCCavernNorth
         -11,-27: CMUAreaRetreatOCCavernNorth
         -11,-28: CMUAreaRetreatOCCavernCentral
@@ -97316,16 +97317,16 @@ entities:
         124,-14: CMUAreaRetreatOutofBounds
         124,-15: CMUAreaRetreatOutofBounds
         121,-11: CMUAreaRetreatOutofBounds
-        123,-16: CMUAreaRetreatOutofBounds
-        123,-17: CMUAreaRetreatOutofBounds
-        123,-18: CMUAreaRetreatOutofBounds
-        123,-19: CMUAreaRetreatOutofBounds
-        123,-20: CMUAreaRetreatOutofBounds
-        123,-21: CMUAreaRetreatOutofBounds
-        123,-22: CMUAreaRetreatOutofBounds
-        123,-23: CMUAreaRetreatOutofBounds
-        123,-24: CMUAreaRetreatOutofBounds
-        123,-25: CMUAreaRetreatOutofBounds
+        123,-16: CMUAreaRetreatHRSecurityPrepRoom
+        123,-17: CMUAreaRetreatHRSecurityPrepRoom
+        123,-18: CMUAreaRetreatHRSecurityPrepRoom
+        123,-19: CMUAreaRetreatHRSecurityPrepRoom
+        123,-20: CMUAreaRetreatHRSecurityPrepRoom
+        123,-21: CMUAreaRetreatHRSecurityPrepRoom
+        123,-22: CMUAreaRetreatHRSecurityPrepRoom
+        123,-23: CMUAreaRetreatHRSecurityPrepRoom
+        123,-24: CMUAreaRetreatHRSecurityPrepRoom
+        123,-25: CMUAreaRetreatHRSecurityPrepRoom
         123,-26: CMUAreaRetreatOutofBounds
         123,-27: CMUAreaRetreatOutofBounds
         123,-28: CMUAreaRetreatOutofBounds
@@ -97338,16 +97339,16 @@ entities:
         123,-35: CMUAreaRetreatOutofBounds
         123,-36: CMUAreaRetreatOutofBounds
         123,-37: CMUAreaRetreatOutofBounds
-        124,-16: CMUAreaRetreatOutofBounds
-        124,-17: CMUAreaRetreatOutofBounds
-        124,-18: CMUAreaRetreatOutofBounds
-        124,-19: CMUAreaRetreatOutofBounds
-        124,-20: CMUAreaRetreatOutofBounds
-        124,-21: CMUAreaRetreatOutofBounds
-        124,-22: CMUAreaRetreatOutofBounds
-        124,-23: CMUAreaRetreatOutofBounds
-        124,-24: CMUAreaRetreatOutofBounds
-        124,-25: CMUAreaRetreatOutofBounds
+        124,-16: CMUAreaRetreatHRSecurityPrepRoom
+        124,-17: CMUAreaRetreatHRSecurityPrepRoom
+        124,-18: CMUAreaRetreatHRSecurityPrepRoom
+        124,-19: CMUAreaRetreatHRSecurityPrepRoom
+        124,-20: CMUAreaRetreatHRSecurityPrepRoom
+        124,-21: CMUAreaRetreatHRSecurityPrepRoom
+        124,-22: CMUAreaRetreatHRSecurityPrepRoom
+        124,-23: CMUAreaRetreatHRSecurityPrepRoom
+        124,-24: CMUAreaRetreatHRSecurityPrepRoom
+        124,-25: CMUAreaRetreatHRSecurityPrepRoom
         124,-26: CMUAreaRetreatOutofBounds
         124,-27: CMUAreaRetreatOutofBounds
         124,-28: CMUAreaRetreatOutofBounds
@@ -105538,113 +105539,113 @@ entities:
         9,-50: CMUAreaRetreatOCAdminPanicRoom
         9,-51: CMUAreaRetreatOCAdminPanicRoom
         9,-52: CMUAreaRetreatOCAdminPanicRoom
-        9,-14: CMUAreaRetreatOCCavernCentral
-        9,-15: CMUAreaRetreatOCCavernCentral
-        9,-16: CMUAreaRetreatOCCavernCentral
-        10,-14: CMUAreaRetreatOCCavernCentral
-        10,-15: CMUAreaRetreatOCCavernCentral
-        10,-16: CMUAreaRetreatOCCavernCentral
-        11,-14: CMUAreaRetreatOCCavernCentral
-        11,-15: CMUAreaRetreatOCCavernCentral
-        11,-16: CMUAreaRetreatOCCavernCentral
-        12,-15: CMUAreaRetreatOCCavernCentral
-        12,-16: CMUAreaRetreatOCCavernCentral
-        12,-14: CMUAreaRetreatOCCavernCentral
-        10,-13: CMUAreaRetreatOCCavernCentral
-        11,-13: CMUAreaRetreatOCCavernCentral
-        12,-13: CMUAreaRetreatOCCavernCentral
-        14,-15: CMUAreaRetreatOCCavernCentral
-        14,-16: CMUAreaRetreatOCCavernCentral
-        13,-15: CMUAreaRetreatOCCavernCentral
-        13,-16: CMUAreaRetreatOCCavernCentral
-        13,-17: CMUAreaRetreatOCCavernCentral
-        12,-17: CMUAreaRetreatOCCavernCentral
-        11,-17: CMUAreaRetreatOCCavernCentral
-        14,-17: CMUAreaRetreatOCCavernCentral
-        15,-17: CMUAreaRetreatOCCavernCentral
-        15,-18: CMUAreaRetreatOCCavernCentral
-        16,-17: CMUAreaRetreatOCCavernCentral
-        16,-18: CMUAreaRetreatOCCavernCentral
-        17,-17: CMUAreaRetreatOCCavernCentral
-        17,-18: CMUAreaRetreatOCCavernCentral
-        18,-17: CMUAreaRetreatOCCavernCentral
-        18,-18: CMUAreaRetreatOCCavernCentral
-        19,-17: CMUAreaRetreatOCCavernCentral
-        19,-18: CMUAreaRetreatOCCavernCentral
-        20,-17: CMUAreaRetreatOCCavernCentral
-        20,-18: CMUAreaRetreatOCCavernCentral
-        21,-17: CMUAreaRetreatOCCavernCentral
-        21,-18: CMUAreaRetreatOCCavernCentral
-        8,-16: CMUAreaRetreatOCCavernCentral
-        8,-17: CMUAreaRetreatOCCavernCentral
-        7,-16: CMUAreaRetreatOCCavernCentral
-        7,-17: CMUAreaRetreatOCCavernCentral
-        6,-16: CMUAreaRetreatOCCavernCentral
-        6,-17: CMUAreaRetreatOCCavernCentral
-        5,-16: CMUAreaRetreatOCCavernCentral
-        5,-17: CMUAreaRetreatOCCavernCentral
-        4,-17: CMUAreaRetreatOCCavernCentral
-        4,-18: CMUAreaRetreatOCCavernCentral
-        4,-19: CMUAreaRetreatOCCavernCentral
-        5,-18: CMUAreaRetreatOCCavernCentral
-        6,-18: CMUAreaRetreatOCCavernCentral
-        6,-19: CMUAreaRetreatOCCavernCentral
-        7,-18: CMUAreaRetreatOCCavernCentral
-        7,-19: CMUAreaRetreatOCCavernCentral
-        5,-19: CMUAreaRetreatOCCavernCentral
-        6,-20: CMUAreaRetreatOCCavernCentral
-        3,-18: CMUAreaRetreatOCCavernCentral
-        3,-19: CMUAreaRetreatOCCavernCentral
-        2,-18: CMUAreaRetreatOCCavernCentral
-        2,-19: CMUAreaRetreatOCCavernCentral
-        1,-18: CMUAreaRetreatOCCavernCentral
-        1,-19: CMUAreaRetreatOCCavernCentral
-        4,-20: CMUAreaRetreatOCCavernCentral
-        4,-21: CMUAreaRetreatOCCavernCentral
-        3,-21: CMUAreaRetreatOCCavernCentral
-        3,-22: CMUAreaRetreatOCCavernCentral
-        2,-22: CMUAreaRetreatOCCavernCentral
-        1,-23: CMUAreaRetreatOCCavernCentral
-        1,-24: CMUAreaRetreatOCCavernCentral
-        1,-25: CMUAreaRetreatOCCavernCentral
-        1,-26: CMUAreaRetreatOCCavernCentral
-        2,-23: CMUAreaRetreatOCCavernCentral
-        2,-24: CMUAreaRetreatOCCavernCentral
-        2,-25: CMUAreaRetreatOCCavernCentral
-        2,-26: CMUAreaRetreatOCCavernCentral
-        3,-24: CMUAreaRetreatOCCavernCentral
-        3,-25: CMUAreaRetreatOCCavernCentral
-        0,-24: CMUAreaRetreatOCCavernCentral
-        0,-25: CMUAreaRetreatOCCavernCentral
-        -1,-24: CMUAreaRetreatOCCavernCentral
-        -1,-25: CMUAreaRetreatOCCavernCentral
-        -2,-24: CMUAreaRetreatOCCavernCentral
-        -2,-25: CMUAreaRetreatOCCavernCentral
-        -3,-24: CMUAreaRetreatOCCavernCentral
-        -3,-25: CMUAreaRetreatOCCavernCentral
-        -3,-26: CMUAreaRetreatOCCavernCentral
-        -2,-26: CMUAreaRetreatOCCavernCentral
-        -1,-26: CMUAreaRetreatOCCavernCentral
-        0,-26: CMUAreaRetreatOCCavernCentral
-        -4,-23: CMUAreaRetreatOCCavernCentral
-        -4,-24: CMUAreaRetreatOCCavernCentral
-        -5,-23: CMUAreaRetreatOCCavernCentral
-        -5,-22: CMUAreaRetreatOCCavernCentral
-        -6,-22: CMUAreaRetreatOCCavernCentral
-        -6,-21: CMUAreaRetreatOCCavernCentral
-        -7,-21: CMUAreaRetreatOCCavernCentral
-        -8,-21: CMUAreaRetreatOCCavernNorth
-        -8,-20: CMUAreaRetreatOCCavernCentral
-        -9,-20: CMUAreaRetreatOCCavernCentral
-        -9,-19: CMUAreaRetreatOCCavernCentral
-        -9,-18: CMUAreaRetreatOCCavernCentral
-        -9,-17: CMUAreaRetreatOCCavernCentral
-        -10,-17: CMUAreaRetreatOCCavernCentral
-        -11,-17: CMUAreaRetreatOCCavernCentral
-        -11,-16: CMUAreaRetreatOCCavernCentral
-        -11,-15: CMUAreaRetreatOCCavernCentral
-        -12,-15: CMUAreaRetreatOCCavernCentral
-        -12,-14: CMUAreaRetreatOCCavernCentral
+        9,-14: CMUAreaRetreatOCUnregisteredTunnel
+        9,-15: CMUAreaRetreatOCUnregisteredTunnel
+        9,-16: CMUAreaRetreatOCUnregisteredTunnel
+        10,-14: CMUAreaRetreatOCUnregisteredTunnel
+        10,-15: CMUAreaRetreatOCUnregisteredTunnel
+        10,-16: CMUAreaRetreatOCUnregisteredTunnel
+        11,-14: CMUAreaRetreatOCUnregisteredTunnel
+        11,-15: CMUAreaRetreatOCUnregisteredTunnel
+        11,-16: CMUAreaRetreatOCUnregisteredTunnel
+        12,-15: CMUAreaRetreatOCUnregisteredTunnel
+        12,-16: CMUAreaRetreatOCUnregisteredTunnel
+        12,-14: CMUAreaRetreatOCUnregisteredTunnel
+        10,-13: CMUAreaRetreatOCUnregisteredTunnel
+        11,-13: CMUAreaRetreatOCUnregisteredTunnel
+        12,-13: CMUAreaRetreatOCUnregisteredTunnel
+        14,-15: CMUAreaRetreatOCUnregisteredTunnel
+        14,-16: CMUAreaRetreatOCUnregisteredTunnel
+        13,-15: CMUAreaRetreatOCUnregisteredTunnel
+        13,-16: CMUAreaRetreatOCUnregisteredTunnel
+        13,-17: CMUAreaRetreatOCUnregisteredTunnel
+        12,-17: CMUAreaRetreatOCUnregisteredTunnel
+        11,-17: CMUAreaRetreatOCUnregisteredTunnel
+        14,-17: CMUAreaRetreatOCUnregisteredTunnel
+        15,-17: CMUAreaRetreatOCUnregisteredTunnel
+        15,-18: CMUAreaRetreatOCUnregisteredTunnel
+        16,-17: CMUAreaRetreatOCUnregisteredTunnel
+        16,-18: CMUAreaRetreatOCUnregisteredTunnel
+        17,-17: CMUAreaRetreatOCUnregisteredTunnel
+        17,-18: CMUAreaRetreatOCUnregisteredTunnel
+        18,-17: CMUAreaRetreatOCUnregisteredTunnel
+        18,-18: CMUAreaRetreatOCUnregisteredTunnel
+        19,-17: CMUAreaRetreatOCUnregisteredTunnel
+        19,-18: CMUAreaRetreatOCUnregisteredTunnel
+        20,-17: CMUAreaRetreatOCUnregisteredTunnel
+        20,-18: CMUAreaRetreatOCUnregisteredTunnel
+        21,-17: CMUAreaRetreatOCUnregisteredTunnel
+        21,-18: CMUAreaRetreatOCUnregisteredTunnel
+        8,-16: CMUAreaRetreatOCUnregisteredTunnel
+        8,-17: CMUAreaRetreatOCUnregisteredTunnel
+        7,-16: CMUAreaRetreatOCUnregisteredTunnel
+        7,-17: CMUAreaRetreatOCUnregisteredTunnel
+        6,-16: CMUAreaRetreatOCUnregisteredTunnel
+        6,-17: CMUAreaRetreatOCUnregisteredTunnel
+        5,-16: CMUAreaRetreatOCUnregisteredTunnel
+        5,-17: CMUAreaRetreatOCUnregisteredTunnel
+        4,-17: CMUAreaRetreatOCUnregisteredTunnel
+        4,-18: CMUAreaRetreatOCUnregisteredTunnel
+        4,-19: CMUAreaRetreatOCUnregisteredTunnel
+        5,-18: CMUAreaRetreatOCUnregisteredTunnel
+        6,-18: CMUAreaRetreatOCUnregisteredTunnel
+        6,-19: CMUAreaRetreatOCUnregisteredTunnel
+        7,-18: CMUAreaRetreatOCUnregisteredTunnel
+        7,-19: CMUAreaRetreatOCUnregisteredTunnel
+        5,-19: CMUAreaRetreatOCUnregisteredTunnel
+        6,-20: CMUAreaRetreatOCUnregisteredTunnel
+        3,-18: CMUAreaRetreatOCUnregisteredTunnel
+        3,-19: CMUAreaRetreatOCUnregisteredTunnel
+        2,-18: CMUAreaRetreatOCUnregisteredTunnel
+        2,-19: CMUAreaRetreatOCUnregisteredTunnel
+        1,-18: CMUAreaRetreatOCUnregisteredTunnel
+        1,-19: CMUAreaRetreatOCUnregisteredTunnel
+        4,-20: CMUAreaRetreatOCUnregisteredTunnel
+        4,-21: CMUAreaRetreatOCUnregisteredTunnel
+        3,-21: CMUAreaRetreatOCUnregisteredTunnel
+        3,-22: CMUAreaRetreatOCUnregisteredTunnel
+        2,-22: CMUAreaRetreatOCUnregisteredTunnel
+        1,-23: CMUAreaRetreatOCUnregisteredTunnel
+        1,-24: CMUAreaRetreatOCUnregisteredTunnel
+        1,-25: CMUAreaRetreatOCUnregisteredTunnel
+        1,-26: CMUAreaRetreatOCUnregisteredTunnel
+        2,-23: CMUAreaRetreatOCUnregisteredTunnel
+        2,-24: CMUAreaRetreatOCUnregisteredTunnel
+        2,-25: CMUAreaRetreatOCUnregisteredTunnel
+        2,-26: CMUAreaRetreatOCUnregisteredTunnel
+        3,-24: CMUAreaRetreatOCUnregisteredTunnel
+        3,-25: CMUAreaRetreatOCUnregisteredTunnel
+        0,-24: CMUAreaRetreatOCUnregisteredTunnel
+        0,-25: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-25: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-25: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-25: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-26: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-26: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-26: CMUAreaRetreatOCUnregisteredTunnel
+        0,-26: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-20: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-19: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-18: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-17: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -11,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -12,-15: CMUAreaRetreatOCUnregisteredTunnel
+        -12,-14: CMUAreaRetreatOCUnregisteredTunnel
         -13,-14: CMUAreaRetreatOutofBounds
         -18,-11: CMUAreaRetreatOCCavernCentral
         -18,-12: CMUAreaRetreatOCCavernCentral
@@ -105674,17 +105675,17 @@ entities:
         -19,-14: CMUAreaRetreatOCCavernCentral
         -20,-13: CMUAreaRetreatOCCavernCentral
         -20,-14: CMUAreaRetreatOCCavernCentral
-        -3,-27: CMUAreaRetreatOCCavernCentral
-        -3,-28: CMUAreaRetreatOCCavernCentral
-        -3,-29: CMUAreaRetreatOCCavernCentral
-        -2,-27: CMUAreaRetreatOCCavernCentral
-        -2,-28: CMUAreaRetreatOCCavernCentral
-        -2,-29: CMUAreaRetreatOCCavernCentral
-        -1,-27: CMUAreaRetreatOCCavernCentral
-        -1,-28: CMUAreaRetreatOCCavernCentral
-        -1,-29: CMUAreaRetreatOCCavernCentral
-        -2,-30: CMUAreaRetreatOCCavernCentral
-        -3,-30: CMUAreaRetreatOCCavernCentral
+        -3,-27: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-28: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-29: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-27: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-28: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-29: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-27: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-28: CMUAreaRetreatOCUnregisteredTunnel
+        -1,-29: CMUAreaRetreatOCUnregisteredTunnel
+        -2,-30: CMUAreaRetreatOCUnregisteredTunnel
+        -3,-30: CMUAreaRetreatOCUnregisteredTunnel
         -3,-31: CMUAreaRetreatOCCavernCentral
         -2,-31: CMUAreaRetreatOCCavernCentral
         -3,-32: CMUAreaRetreatOCCavernCentral
@@ -113251,32 +113252,32 @@ entities:
         23,-14: CMUAreaRetreatOutofBounds
         22,-14: CMUAreaRetreatOutofBounds
         21,-14: CMUAreaRetreatOutofBounds
-        20,-14: CMUAreaRetreatOCCavernCentral
-        19,-14: CMUAreaRetreatOCCavernCentral
-        18,-14: CMUAreaRetreatOCCavernCentral
-        17,-14: CMUAreaRetreatOCCavernCentral
-        16,-14: CMUAreaRetreatOCCavernCentral
-        15,-14: CMUAreaRetreatOCCavernCentral
-        14,-14: CMUAreaRetreatOCCavernCentral
-        13,-12: CMUAreaRetreatOCCavernCentral
-        13,-13: CMUAreaRetreatOCCavernCentral
-        13,-14: CMUAreaRetreatOCCavernCentral
-        15,-15: CMUAreaRetreatOCCavernCentral
-        15,-16: CMUAreaRetreatOCCavernCentral
-        16,-15: CMUAreaRetreatOCCavernCentral
-        16,-16: CMUAreaRetreatOCCavernCentral
-        17,-15: CMUAreaRetreatOCCavernCentral
-        17,-16: CMUAreaRetreatOCCavernCentral
-        18,-16: CMUAreaRetreatOCCavernCentral
-        19,-15: CMUAreaRetreatOCCavernCentral
-        19,-16: CMUAreaRetreatOCCavernCentral
-        20,-15: CMUAreaRetreatOCCavernCentral
-        20,-16: CMUAreaRetreatOCCavernCentral
-        21,-15: CMUAreaRetreatOCCavernCentral
-        21,-16: CMUAreaRetreatOCCavernCentral
+        20,-14: CMUAreaRetreatOCUnregisteredTunnel
+        19,-14: CMUAreaRetreatOCUnregisteredTunnel
+        18,-14: CMUAreaRetreatOCUnregisteredTunnel
+        17,-14: CMUAreaRetreatOCUnregisteredTunnel
+        16,-14: CMUAreaRetreatOCUnregisteredTunnel
+        15,-14: CMUAreaRetreatOCUnregisteredTunnel
+        14,-14: CMUAreaRetreatOCUnregisteredTunnel
+        13,-12: CMUAreaRetreatOCUnregisteredTunnel
+        13,-13: CMUAreaRetreatOCUnregisteredTunnel
+        13,-14: CMUAreaRetreatOCUnregisteredTunnel
+        15,-15: CMUAreaRetreatOCUnregisteredTunnel
+        15,-16: CMUAreaRetreatOCUnregisteredTunnel
+        16,-15: CMUAreaRetreatOCUnregisteredTunnel
+        16,-16: CMUAreaRetreatOCUnregisteredTunnel
+        17,-15: CMUAreaRetreatOCUnregisteredTunnel
+        17,-16: CMUAreaRetreatOCUnregisteredTunnel
+        18,-16: CMUAreaRetreatOCUnregisteredTunnel
+        19,-15: CMUAreaRetreatOCUnregisteredTunnel
+        19,-16: CMUAreaRetreatOCUnregisteredTunnel
+        20,-15: CMUAreaRetreatOCUnregisteredTunnel
+        20,-16: CMUAreaRetreatOCUnregisteredTunnel
+        21,-15: CMUAreaRetreatOCUnregisteredTunnel
+        21,-16: CMUAreaRetreatOCUnregisteredTunnel
         22,-15: CMUAreaRetreatHRExteriorWest
         22,-16: CMUAreaRetreatHRExteriorWest
-        18,-15: CMUAreaRetreatOCCavernCentral
+        18,-15: CMUAreaRetreatOCUnregisteredTunnel
         23,-15: CMUAreaRetreatHRExteriorWest
         23,-11: CMUAreaRetreatOutofBounds
         27,-3: CMUAreaRetreatOutofBounds
@@ -113329,25 +113330,25 @@ entities:
         35,3: CMUAreaRetreatOutofBounds
         35,4: CMUAreaRetreatOutofBounds
         36,4: CMUAreaRetreatOutofBounds
-        8,-12: CMUAreaRetreatOCCavernCentral
-        8,-13: CMUAreaRetreatOCCavernCentral
-        9,-12: CMUAreaRetreatOCCavernCentral
-        9,-13: CMUAreaRetreatOCCavernCentral
-        10,-12: CMUAreaRetreatOCCavernCentral
-        11,-12: CMUAreaRetreatOCCavernCentral
-        12,-12: CMUAreaRetreatOCCavernCentral
-        8,-14: CMUAreaRetreatOCCavernCentral
-        7,-15: CMUAreaRetreatOCCavernCentral
-        6,-15: CMUAreaRetreatOCCavernCentral
-        5,-15: CMUAreaRetreatOCCavernCentral
-        8,-15: CMUAreaRetreatOCCavernCentral
-        3,-17: CMUAreaRetreatOCCavernCentral
-        2,-17: CMUAreaRetreatOCCavernCentral
+        8,-12: CMUAreaRetreatOCUnregisteredTunnel
+        8,-13: CMUAreaRetreatOCUnregisteredTunnel
+        9,-12: CMUAreaRetreatOCUnregisteredTunnel
+        9,-13: CMUAreaRetreatOCUnregisteredTunnel
+        10,-12: CMUAreaRetreatOCUnregisteredTunnel
+        11,-12: CMUAreaRetreatOCUnregisteredTunnel
+        12,-12: CMUAreaRetreatOCUnregisteredTunnel
+        8,-14: CMUAreaRetreatOCUnregisteredTunnel
+        7,-15: CMUAreaRetreatOCUnregisteredTunnel
+        6,-15: CMUAreaRetreatOCUnregisteredTunnel
+        5,-15: CMUAreaRetreatOCUnregisteredTunnel
+        8,-15: CMUAreaRetreatOCUnregisteredTunnel
+        3,-17: CMUAreaRetreatOCUnregisteredTunnel
+        2,-17: CMUAreaRetreatOCUnregisteredTunnel
         1,-17: CMUAreaRetreatOutofBounds
-        5,-20: CMUAreaRetreatOCCavernCentral
-        5,-21: CMUAreaRetreatOCCavernCentral
-        5,-22: CMUAreaRetreatOCCavernCentral
-        6,-21: CMUAreaRetreatOCCavernCentral
+        5,-20: CMUAreaRetreatOCUnregisteredTunnel
+        5,-21: CMUAreaRetreatOCUnregisteredTunnel
+        5,-22: CMUAreaRetreatOCUnregisteredTunnel
+        6,-21: CMUAreaRetreatOCUnregisteredTunnel
         6,-22: CMUAreaRetreatOutofBounds
         6,-23: CMUAreaRetreatOutofBounds
         7,-21: CMUAreaRetreatOutofBounds
@@ -113453,15 +113454,15 @@ entities:
         8,-19: CMUAreaRetreatOutofBounds
         8,-20: CMUAreaRetreatOutofBounds
         7,-20: CMUAreaRetreatOutofBounds
-        8,-18: CMUAreaRetreatOCCavernCentral
+        8,-18: CMUAreaRetreatOCUnregisteredTunnel
         9,-18: CMUAreaRetreatOutofBounds
         10,-18: CMUAreaRetreatOutofBounds
         11,-18: CMUAreaRetreatOutofBounds
         12,-18: CMUAreaRetreatOutofBounds
         13,-18: CMUAreaRetreatOutofBounds
         14,-18: CMUAreaRetreatOutofBounds
-        10,-17: CMUAreaRetreatOCCavernCentral
-        9,-17: CMUAreaRetreatOCCavernCentral
+        10,-17: CMUAreaRetreatOCUnregisteredTunnel
+        9,-17: CMUAreaRetreatOCUnregisteredTunnel
         27,-18: CMUAreaRetreatOutofBounds
         29,-18: CMUAreaRetreatOutofBounds
         29,-19: CMUAreaRetreatOutofBounds
@@ -113525,11 +113526,11 @@ entities:
         5,-26: CMUAreaRetreatOutofBounds
         4,-25: CMUAreaRetreatOutofBounds
         4,-26: CMUAreaRetreatOutofBounds
-        4,-22: CMUAreaRetreatOCCavernCentral
-        4,-23: CMUAreaRetreatOCCavernCentral
-        4,-24: CMUAreaRetreatOCCavernCentral
-        5,-23: CMUAreaRetreatOCCavernCentral
-        5,-24: CMUAreaRetreatOCCavernCentral
+        4,-22: CMUAreaRetreatOCUnregisteredTunnel
+        4,-23: CMUAreaRetreatOCUnregisteredTunnel
+        4,-24: CMUAreaRetreatOCUnregisteredTunnel
+        5,-23: CMUAreaRetreatOCUnregisteredTunnel
+        5,-24: CMUAreaRetreatOCUnregisteredTunnel
         6,-24: CMUAreaRetreatOutofBounds
         7,-24: CMUAreaRetreatOutofBounds
         8,-24: CMUAreaRetreatOutofBounds
@@ -113553,7 +113554,7 @@ entities:
         26,-24: CMUAreaRetreatOutofBounds
         27,-24: CMUAreaRetreatOutofBounds
         28,-24: CMUAreaRetreatOutofBounds
-        3,-23: CMUAreaRetreatOCCavernCentral
+        3,-23: CMUAreaRetreatOCUnregisteredTunnel
         3,-26: CMUAreaRetreatOutofBounds
         3,-27: CMUAreaRetreatOutofBounds
         3,-28: CMUAreaRetreatOutofBounds
@@ -113837,27 +113838,27 @@ entities:
         -14,-17: CMUAreaRetreatOutofBounds
         -13,-16: CMUAreaRetreatOutofBounds
         -13,-17: CMUAreaRetreatOutofBounds
-        -12,-16: CMUAreaRetreatOCCavernCentral
-        -12,-17: CMUAreaRetreatOCCavernCentral
+        -12,-16: CMUAreaRetreatOCUnregisteredTunnel
+        -12,-17: CMUAreaRetreatOCUnregisteredTunnel
         -13,-15: CMUAreaRetreatOutofBounds
         -12,-18: CMUAreaRetreatOutofBounds
         -12,-19: CMUAreaRetreatOutofBounds
-        -11,-18: CMUAreaRetreatOCCavernCentral
+        -11,-18: CMUAreaRetreatOCUnregisteredTunnel
         -11,-19: CMUAreaRetreatOutofBounds
-        -10,-18: CMUAreaRetreatOCCavernCentral
+        -10,-18: CMUAreaRetreatOCUnregisteredTunnel
         -10,-19: CMUAreaRetreatOutofBounds
         -10,-20: CMUAreaRetreatOutofBounds
-        -10,-21: CMUAreaRetreatOCCavernNorth
-        -10,-23: CMUAreaRetreatOCCavernNorth
-        -10,-24: CMUAreaRetreatOCCavernNorth
-        -10,-25: CMUAreaRetreatOCCavernNorth
+        -10,-21: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -10,-25: CMUAreaRetreatOCUnregisteredTunnel
         -10,-26: CMUAreaRetreatOutofBounds
         -10,-27: CMUAreaRetreatOCCavernCentral
         -10,-28: CMUAreaRetreatOCCavernCentral
         -10,-29: CMUAreaRetreatOCCavernCentral
         -10,-30: CMUAreaRetreatOCCavernCentral
         -11,-29: CMUAreaRetreatOCCavernCentral
-        -10,-22: CMUAreaRetreatOCCavernNorth
+        -10,-22: CMUAreaRetreatOCUnregisteredTunnel
         -11,-30: CMUAreaRetreatOCCavernCentral
         -12,-29: CMUAreaRetreatOCCavernCentral
         -12,-30: CMUAreaRetreatOCCavernCentral
@@ -113875,21 +113876,21 @@ entities:
         -15,-29: CMUAreaRetreatOutofBounds
         -15,-30: CMUAreaRetreatOutofBounds
         -15,-28: CMUAreaRetreatOutofBounds
-        -4,-25: CMUAreaRetreatOCCavernCentral
-        -4,-26: CMUAreaRetreatOCCavernCentral
-        -4,-27: CMUAreaRetreatOCCavernCentral
-        -4,-28: CMUAreaRetreatOCCavernCentral
-        -4,-29: CMUAreaRetreatOCCavernCentral
+        -4,-25: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-26: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-27: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-28: CMUAreaRetreatOCUnregisteredTunnel
+        -4,-29: CMUAreaRetreatOCUnregisteredTunnel
         -4,-30: CMUAreaRetreatOCCavernCentral
         -5,-25: CMUAreaRetreatOutofBounds
         -5,-26: CMUAreaRetreatOutofBounds
-        -5,-27: CMUAreaRetreatOCCavernCentral
-        -5,-28: CMUAreaRetreatOCCavernCentral
+        -5,-27: CMUAreaRetreatOCUnregisteredTunnel
+        -5,-28: CMUAreaRetreatOCUnregisteredTunnel
         -5,-30: CMUAreaRetreatOCCavernCentral
         -6,-25: CMUAreaRetreatOutofBounds
         -6,-26: CMUAreaRetreatOutofBounds
         -6,-27: CMUAreaRetreatOutofBounds
-        -5,-29: CMUAreaRetreatOCCavernCentral
+        -5,-29: CMUAreaRetreatOCUnregisteredTunnel
         -6,-29: CMUAreaRetreatOutofBounds
         -6,-28: CMUAreaRetreatOutofBounds
         -6,-30: CMUAreaRetreatOCCavernCentral
@@ -113919,19 +113920,19 @@ entities:
         -7,-32: CMUAreaRetreatOCCavernCentral
         -6,-32: CMUAreaRetreatOCCavernCentral
         -7,-33: CMUAreaRetreatOCCavernCentral
-        -5,-24: CMUAreaRetreatOCCavernCentral
-        -6,-24: CMUAreaRetreatOCCavernCentral
-        -7,-24: CMUAreaRetreatOCCavernCentral
-        -8,-24: CMUAreaRetreatOCCavernNorth
-        -9,-24: CMUAreaRetreatOCCavernNorth
-        -9,-22: CMUAreaRetreatOCCavernNorth
-        -9,-23: CMUAreaRetreatOCCavernNorth
-        -8,-23: CMUAreaRetreatOCCavernNorth
-        -7,-22: CMUAreaRetreatOCCavernCentral
-        -7,-23: CMUAreaRetreatOCCavernCentral
-        -8,-22: CMUAreaRetreatOCCavernNorth
-        -6,-23: CMUAreaRetreatOCCavernCentral
-        -9,-21: CMUAreaRetreatOCCavernNorth
+        -5,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-24: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -7,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -8,-22: CMUAreaRetreatOCUnregisteredTunnel
+        -6,-23: CMUAreaRetreatOCUnregisteredTunnel
+        -9,-21: CMUAreaRetreatOCUnregisteredTunnel
         -9,-38: CMUAreaRetreatOCCavernNorth
         -8,-38: CMUAreaRetreatOCCavernNorth
         -7,-38: CMUAreaRetreatOutofBounds
@@ -125899,7 +125900,6 @@ entities:
     - type: Transform
       pos: 6.5,-38.5
       parent: 1
-    - type: TacticalMapUser
 - proto: AU14AICoreSubstrateMUTHUR
   entities:
   - uid: 58776
@@ -126024,6 +126024,8 @@ entities:
     - type: Transform
       pos: 119.5,31.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
 - proto: AU14ContainerHyperdyneLeft
   entities:
   - uid: 54770
@@ -126305,6 +126307,18 @@ entities:
     - type: Transform
       pos: -21.483345,-11.536224
       parent: 1
+- proto: AU14NSPAequipmentvendor
+  entities:
+  - uid: 86
+    components:
+    - type: Transform
+      pos: 123.5,-16.5
+      parent: 1
+  - uid: 445
+    components:
+    - type: Transform
+      pos: 121.5,-21.5
+      parent: 1
 - proto: AU14ObjectiveItemBlackboxRecorder
   entities:
   - uid: 9732
@@ -126392,7 +126406,7 @@ entities:
     - type: Transform
       pos: 14.5,-44.5
       parent: 1
-- proto: ScenarioClfCivilianColonistSpawnMarker
+- proto: AU14SpawnPointCivilianColonist
   entities:
   - uid: 12
     components:
@@ -126968,7 +126982,7 @@ entities:
     - type: Transform
       pos: 76.5,-53.5
       parent: 1
-- proto: scenarioclfsafehousespawnmarker
+- proto: AU14SpawnPointCLFCellLeader
   entities:
   - uid: 3264
     components:
@@ -128359,6 +128373,10 @@ entities:
       rot: 3.141592653589793 rad
       pos: -69.5,21.5
       parent: 1
+    - type: AccessReader
+      access:
+      - - AU14AccessGovforCommand
+      - - AU14AccessGovforPilot
   - uid: 10122
     components:
     - type: Transform
@@ -130409,38 +130427,38 @@ entities:
       parent: 1
 - proto: CMBeltSecurityMarshalFilled
   entities:
-  - uid: 83
+  - uid: 524
     components:
     - type: Transform
-      parent: 52273
+      parent: 478
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 86
+  - uid: 604
     components:
     - type: Transform
-      parent: 52274
+      parent: 603
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 445
+  - uid: 3094
     components:
     - type: Transform
-      parent: 52275
+      parent: 3087
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 576
+  - uid: 5660
     components:
     - type: Transform
-      parent: 52365
+      parent: 5659
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 601
+  - uid: 5700
     components:
     - type: Transform
-      parent: 52366
+      parent: 5699
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -130538,7 +130556,7 @@ entities:
       pos: 78.5,48.5
       parent: 1
     - type: RequisitionsElevator
-      nextChasmCheck: 0.0125933
+      nextChasmCheck: 0.3297241
 - proto: CMCargoElevatorGovfor
   entities:
   - uid: 63864
@@ -130547,7 +130565,7 @@ entities:
       pos: -87.5,86.5
       parent: 1
     - type: RequisitionsElevator
-      nextChasmCheck: 0.0125933
+      nextChasmCheck: 0.3297241
 - proto: CMCarpetPrison
   entities:
   - uid: 48863
@@ -136832,6 +136850,11 @@ entities:
       parent: 1
 - proto: CMHandLabeler
   entities:
+  - uid: 3841
+    components:
+    - type: Transform
+      pos: 121.51219,-20.49175
+      parent: 1
   - uid: 5971
     components:
     - type: Transform
@@ -137122,70 +137145,70 @@ entities:
       pos: 108.5,0.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 61442
     components:
     - type: Transform
       pos: -26.5,-46.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 63285
     components:
     - type: Transform
       pos: -26.5,-45.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 68547
     components:
     - type: Transform
       pos: -103.5,46.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 68553
     components:
     - type: Transform
       pos: -97.5,46.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 68554
     components:
     - type: Transform
       pos: -97.5,42.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 68555
     components:
     - type: Transform
       pos: -103.5,42.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 70041
     components:
     - type: Transform
       pos: -96.5,49.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 70042
     components:
     - type: Transform
       pos: -96.5,51.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
   - uid: 71409
     components:
     - type: Transform
       pos: -103.5,38.5
       parent: 1
     - type: IVDrip
-      transferAt: -89531.5662976
+      transferAt: -90485.3572892
 - proto: CMJanitorialCart
   entities:
   - uid: 7400
@@ -137534,6 +137557,111 @@ entities:
           ent: null
 - proto: CMLockerPolice
   entities:
+  - uid: 478
+    components:
+    - type: Transform
+      pos: 123.5,-21.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 575
+          - 569
+          - 524
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 603
+    components:
+    - type: Transform
+      pos: 123.5,-22.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 604
+          - 1171
+          - 1377
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 3087
+    components:
+    - type: Transform
+      pos: 123.5,-19.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 3094
+          - 3093
+          - 3100
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 5659
+    components:
+    - type: Transform
+      pos: 123.5,-20.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 5661
+          - 5660
+          - 5662
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
+  - uid: 5699
+    components:
+    - type: Transform
+      pos: 123.5,-18.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          showEnts: False
+          occludes: True
+          ents:
+          - 5700
+          - 5702
+          - 5703
+        paper_label: !type:ContainerSlot
+          showEnts: False
+          occludes: True
+          ent: null
   - uid: 9476
     components:
     - type: MetaData
@@ -137719,211 +137847,6 @@ entities:
           - 10023
           - 10024
           - 10029
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 52273
-    components:
-    - type: MetaData
-      name: security officer's locker
-    - type: Transform
-      pos: 121.5,-19.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyBrig
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 75.31249
-        moles:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 83
-          - 84
-          - 85
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 52274
-    components:
-    - type: MetaData
-      name: security officer's locker
-    - type: Transform
-      pos: 121.5,-18.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyBrig
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 93.465614
-        moles:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 444
-          - 443
-          - 86
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 52275
-    components:
-    - type: MetaData
-      name: security officer's locker
-    - type: Transform
-      pos: 121.5,-20.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyBrig
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 75.31249
-        moles:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 445
-          - 524
-          - 569
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 52365
-    components:
-    - type: MetaData
-      name: security officer's locker
-    - type: Transform
-      pos: 121.5,-21.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyBrig
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 75.31249
-        moles:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 575
-          - 576
-          - 577
-        paper_label: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-  - uid: 52366
-    components:
-    - type: MetaData
-      name: security officer's locker
-    - type: Transform
-      pos: 121.5,-22.5
-      parent: 1
-    - type: AccessReader
-      access:
-      - - CMAccessColonyBrig
-    - type: EntityStorage
-      air:
-        volume: 200
-        immutable: False
-        temperature: 98.0039
-        moles:
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-        - 0
-    - type: ContainerContainer
-      containers:
-        entity_storage: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 604
-          - 601
-          - 603
         paper_label: !type:ContainerSlot
           showEnts: False
           occludes: True
@@ -138365,7 +138288,7 @@ entities:
       pos: -109.5,40.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68359
     components:
     - type: Transform
@@ -138373,7 +138296,7 @@ entities:
       pos: -108.5,40.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68360
     components:
     - type: Transform
@@ -138381,7 +138304,7 @@ entities:
       pos: -107.5,40.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68361
     components:
     - type: Transform
@@ -138389,7 +138312,7 @@ entities:
       pos: -106.5,40.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68362
     components:
     - type: Transform
@@ -138397,35 +138320,35 @@ entities:
       pos: -105.5,40.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68369
     components:
     - type: Transform
       pos: -109.5,43.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68370
     components:
     - type: Transform
       pos: -108.5,43.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68371
     components:
     - type: Transform
       pos: -107.5,43.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68372
     components:
     - type: Transform
       pos: -105.5,43.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68375
     components:
     - type: Transform
@@ -138433,7 +138356,7 @@ entities:
       pos: -109.5,44.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68376
     components:
     - type: Transform
@@ -138441,7 +138364,7 @@ entities:
       pos: -108.5,44.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68377
     components:
     - type: Transform
@@ -138449,7 +138372,7 @@ entities:
       pos: -107.5,44.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68378
     components:
     - type: Transform
@@ -138457,28 +138380,28 @@ entities:
       pos: -105.5,44.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68385
     components:
     - type: Transform
       pos: -109.5,47.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68386
     components:
     - type: Transform
       pos: -108.5,47.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
   - uid: 68387
     components:
     - type: Transform
       pos: -107.5,47.5
       parent: 1
     - type: Morgue
-      accumulatedFrameTime: 9.8919525
+      accumulatedFrameTime: 3.688323
 - proto: CMMultitool
   entities:
   - uid: 55682
@@ -140324,18 +140247,18 @@ entities:
   - uid: 66635
     components:
     - type: Transform
-      pos: -91.5,37.12833
+      pos: -91.5,37.07167
       parent: 1
     - type: Physics
-      sleepTime: 221.86362
+      sleepTime: 60.33513
     - type: EmitSoundOnCollide
   - uid: 66636
     components:
     - type: Transform
-      pos: -91.5,37.12833
+      pos: -91.5,37.07167
       parent: 1
     - type: Physics
-      sleepTime: 221.86362
+      sleepTime: 60.33513
     - type: EmitSoundOnCollide
 - proto: CMPosterNoSmoking
   entities:
@@ -140676,11 +140599,6 @@ entities:
       parent: 1
 - proto: CMRack
   entities:
-  - uid: 59
-    components:
-    - type: Transform
-      pos: 119.5,-23.5
-      parent: 1
   - uid: 1211
     components:
     - type: Transform
@@ -141838,6 +141756,39 @@ entities:
       parent: 1
 - proto: CMRailing
   entities:
+  - uid: 59
+    components:
+    - type: Transform
+      pos: -56.5,24.5
+      parent: 1
+  - uid: 85
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -54.5,21.5
+      parent: 1
+  - uid: 444
+    components:
+    - type: Transform
+      pos: -55.5,24.5
+      parent: 1
+  - uid: 465
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -54.5,19.5
+      parent: 1
+  - uid: 576
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -54.5,20.5
+      parent: 1
+  - uid: 601
+    components:
+    - type: Transform
+      pos: -57.5,24.5
+      parent: 1
   - uid: 747
     components:
     - type: Transform
@@ -141953,101 +141904,48 @@ entities:
     - type: Transform
       pos: -18.5,-63.5
       parent: 1
-  - uid: 5659
+  - uid: 3836
     components:
     - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -60.5,23.5
+      rot: 3.141592653589793 rad
+      pos: -58.5,18.5
       parent: 1
-  - uid: 5660
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -60.5,20.5
-      parent: 1
-  - uid: 5661
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -54.5,20.5
-      parent: 1
-  - uid: 5662
+  - uid: 3842
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -54.5,22.5
       parent: 1
-  - uid: 5663
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -60.5,22.5
-      parent: 1
-  - uid: 5670
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -54.5,19.5
-      parent: 1
-  - uid: 5671
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -60.5,19.5
-      parent: 1
-  - uid: 5672
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -54.5,21.5
-      parent: 1
-  - uid: 5673
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -60.5,21.5
-      parent: 1
-  - uid: 5697
-    components:
-    - type: Transform
-      pos: -55.5,24.5
-      parent: 1
-  - uid: 5698
-    components:
-    - type: Transform
-      pos: -56.5,24.5
-      parent: 1
-  - uid: 5699
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -55.5,18.5
-      parent: 1
-  - uid: 5700
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -56.5,18.5
-      parent: 1
-  - uid: 5702
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -57.5,18.5
-      parent: 1
-  - uid: 5703
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -59.5,18.5
-      parent: 1
-  - uid: 5706
+  - uid: 3847
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -54.5,23.5
       parent: 1
-  - uid: 5707
+  - uid: 3848
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -56.5,18.5
+      parent: 1
+  - uid: 3853
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -57.5,18.5
+      parent: 1
+  - uid: 3854
+    components:
+    - type: Transform
+      pos: -58.5,24.5
+      parent: 1
+  - uid: 3871
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -55.5,18.5
+      parent: 1
+  - uid: 5697
     components:
     - type: Transform
       pos: -59.5,24.5
@@ -142055,18 +141953,8 @@ entities:
   - uid: 5708
     components:
     - type: Transform
-      pos: -58.5,24.5
-      parent: 1
-  - uid: 5709
-    components:
-    - type: Transform
-      pos: -57.5,24.5
-      parent: 1
-  - uid: 5712
-    components:
-    - type: Transform
       rot: 3.141592653589793 rad
-      pos: -58.5,18.5
+      pos: -59.5,18.5
       parent: 1
   - uid: 47959
     components:
@@ -147191,6 +147079,18 @@ entities:
     - type: InsideEntityStorage
 - proto: CMUHybrisaExtinguisherCabinetFilled
   entities:
+  - uid: 443
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 118.5,-19.5
+      parent: 1
+  - uid: 577
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 120.5,-17.5
+      parent: 1
   - uid: 1156
     components:
     - type: Transform
@@ -147225,12 +147125,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 113.5,-24.5
-      parent: 1
-  - uid: 1171
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 122.5,-18.5
       parent: 1
   - uid: 1172
     components:
@@ -158820,11 +158714,19 @@ entities:
       parent: 1
 - proto: CMVendorSec
   entities:
-  - uid: 71494
+  - uid: 463
     components:
     - type: Transform
-      pos: 121.5,-23.5
+      pos: 121.5,-19.5
       parent: 1
+  - uid: 3859
+    components:
+    - type: Transform
+      pos: 122.5,-16.5
+      parent: 1
+    - type: AccessReader
+      access:
+      - - CMAccessColonyBrig
 - proto: CMVendorSeeds
   entities:
   - uid: 72077
@@ -173721,7 +173623,7 @@ entities:
         - 0
         - 0
         - 0
-- proto: scenariocultistcfthreatleaderspawnmarker
+- proto: cultistcfthreatleaderspawnmarker
   entities:
   - uid: 6404
     components:
@@ -173729,7 +173631,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -0.5,-111.5
       parent: 1
-- proto: scenariocultistcfthreatmemberspawnmarker
+- proto: cultistcfthreatmemberspawnmarker
   entities:
   - uid: 6272
     components:
@@ -174076,38 +173978,10 @@ entities:
     - type: Transform
       pos: -66.473785,53.3449
       parent: 1
-  - uid: 85
+  - uid: 575
     components:
     - type: Transform
-      parent: 52273
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 443
-    components:
-    - type: Transform
-      parent: 52274
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 569
-    components:
-    - type: Transform
-      parent: 52275
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 577
-    components:
-    - type: Transform
-      parent: 52365
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 604
-    components:
-    - type: Transform
-      parent: 52366
+      parent: 478
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -174116,6 +173990,34 @@ entities:
     - type: Transform
       pos: -66.473785,53.81272
       parent: 1
+  - uid: 1377
+    components:
+    - type: Transform
+      parent: 603
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 3093
+    components:
+    - type: Transform
+      parent: 3087
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 5662
+    components:
+    - type: Transform
+      parent: 5659
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+  - uid: 5703
+    components:
+    - type: Transform
+      parent: 5699
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
   - uid: 9593
     components:
     - type: Transform
@@ -176560,6 +176462,17 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 74.5,-60.5
       parent: 1
+- proto: RMCActionOpenTacticalMapMarine
+  entities:
+  - uid: 5712
+    paused: true
+    components:
+    - type: Transform
+      parent: 58742
+    - type: Action
+      originalIconColor: '#FFFFFFFF'
+      container: 58742
+      attachedEntity: 58742
 - proto: RMCAIConsoleInterface
   entities:
   - uid: 58749
@@ -178675,38 +178588,38 @@ entities:
       parent: 1
 - proto: RMCBoxZiptie
   entities:
-  - uid: 84
+  - uid: 569
     components:
     - type: Transform
-      parent: 52273
+      parent: 478
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 444
+  - uid: 1171
     components:
     - type: Transform
-      parent: 52274
+      parent: 603
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 524
+  - uid: 3100
     components:
     - type: Transform
-      parent: 52275
+      parent: 3087
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 575
+  - uid: 5661
     components:
     - type: Transform
-      parent: 52365
+      parent: 5659
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-  - uid: 603
+  - uid: 5702
     components:
     - type: Transform
-      parent: 52366
+      parent: 5699
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
@@ -181681,7 +181594,7 @@ entities:
       pos: -29.5,-46.5
       parent: 1
     - type: Door
-      secondsUntilStateChange: -26344.084
+      secondsUntilStateChange: -27297.875
       state: Closing
   - uid: 9768
     components:
@@ -182990,31 +182903,61 @@ entities:
     - type: Transform
       pos: 36.5,-19.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
   - uid: 54156
     components:
     - type: Transform
       pos: 37.5,-19.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
   - uid: 54157
     components:
     - type: Transform
       pos: 38.5,-19.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
   - uid: 54158
     components:
     - type: Transform
       pos: 36.5,-26.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
   - uid: 54159
     components:
     - type: Transform
       pos: 37.5,-26.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
   - uid: 54160
     components:
     - type: Transform
       pos: 38.5,-26.5
       parent: 1
+    - type: ActiveTacticalMapTracked
+      color: '#FFFFFFFF'
+      icon:
+        sprite: /Textures/_RMC14/Interface/map_blips.rsi
+        state: generator
 - proto: RMCGeneratorFusionColonyNoMapIcon
   entities:
   - uid: 60690
@@ -184362,6 +184305,12 @@ entities:
       parent: 1
 - proto: RMCLightFixtureBlueDoubleOffset
   entities:
+  - uid: 83
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 123.5,-16.5
+      parent: 1
   - uid: 96
     components:
     - type: Transform
@@ -185786,6 +185735,17 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -65.5,92.5
       parent: 1
+  - uid: 3086
+    components:
+    - type: Transform
+      pos: 121.5,-23.5
+      parent: 1
+  - uid: 3865
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 123.5,-23.5
+      parent: 1
   - uid: 5619
     components:
     - type: Transform
@@ -186943,18 +186903,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 119.5,-20.5
-      parent: 1
-  - uid: 9390
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 121.5,-23.5
-      parent: 1
-  - uid: 9391
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 121.5,-16.5
       parent: 1
   - uid: 9392
     components:
@@ -191706,13 +191654,6 @@ entities:
     components:
     - type: Transform
       pos: -75.38662,55.38635
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 1377
-    components:
-    - type: Transform
-      pos: 119.57127,-23.445162
       parent: 1
 - proto: RMCPacketGrenadeIncendiaryFilled
   entities:
@@ -200515,6 +200456,21 @@ entities:
     - type: Transform
       pos: 107.5,-27.5
       parent: 1
+  - uid: 84
+    components:
+    - type: Transform
+      pos: 121.5,-20.5
+      parent: 1
+  - uid: 3101
+    components:
+    - type: Transform
+      pos: 120.5,-16.5
+      parent: 1
+  - uid: 3835
+    components:
+    - type: Transform
+      pos: 121.5,-16.5
+      parent: 1
   - uid: 51459
     components:
     - type: Transform
@@ -200589,16 +200545,6 @@ entities:
     components:
     - type: Transform
       pos: 119.5,-16.5
-      parent: 1
-  - uid: 52087
-    components:
-    - type: Transform
-      pos: 120.5,-16.5
-      parent: 1
-  - uid: 52088
-    components:
-    - type: Transform
-      pos: 121.5,-16.5
       parent: 1
   - uid: 52179
     components:
@@ -211883,6 +211829,66 @@ entities:
       parent: 1
 - proto: RMCWallStrataHull
   entities:
+  - uid: 3860
+    components:
+    - type: Transform
+      pos: 124.5,-16.5
+      parent: 1
+  - uid: 3866
+    components:
+    - type: Transform
+      pos: 124.5,-15.5
+      parent: 1
+  - uid: 3872
+    components:
+    - type: Transform
+      pos: 123.5,-15.5
+      parent: 1
+  - uid: 5663
+    components:
+    - type: Transform
+      pos: 124.5,-23.5
+      parent: 1
+  - uid: 5670
+    components:
+    - type: Transform
+      pos: 124.5,-24.5
+      parent: 1
+  - uid: 5671
+    components:
+    - type: Transform
+      pos: 124.5,-22.5
+      parent: 1
+  - uid: 5672
+    components:
+    - type: Transform
+      pos: 123.5,-24.5
+      parent: 1
+  - uid: 5673
+    components:
+    - type: Transform
+      pos: 124.5,-21.5
+      parent: 1
+  - uid: 5698
+    components:
+    - type: Transform
+      pos: 124.5,-20.5
+      parent: 1
+  - uid: 5706
+    components:
+    - type: Transform
+      pos: 124.5,-19.5
+      parent: 1
+  - uid: 5707
+    components:
+    - type: Transform
+      pos: 124.5,-18.5
+      parent: 1
+  - uid: 5709
+    components:
+    - type: Transform
+      pos: 124.5,-17.5
+      parent: 1
   - uid: 10681
     components:
     - type: Transform
@@ -212313,41 +212319,6 @@ entities:
     - type: Transform
       pos: 122.5,-15.5
       parent: 1
-  - uid: 52011
-    components:
-    - type: Transform
-      pos: 122.5,-16.5
-      parent: 1
-  - uid: 52012
-    components:
-    - type: Transform
-      pos: 122.5,-17.5
-      parent: 1
-  - uid: 52013
-    components:
-    - type: Transform
-      pos: 122.5,-18.5
-      parent: 1
-  - uid: 52015
-    components:
-    - type: Transform
-      pos: 122.5,-19.5
-      parent: 1
-  - uid: 52016
-    components:
-    - type: Transform
-      pos: 122.5,-20.5
-      parent: 1
-  - uid: 52017
-    components:
-    - type: Transform
-      pos: 122.5,-21.5
-      parent: 1
-  - uid: 52018
-    components:
-    - type: Transform
-      pos: 122.5,-22.5
-      parent: 1
   - uid: 52030
     components:
     - type: Transform
@@ -212357,11 +212328,6 @@ entities:
     components:
     - type: Transform
       pos: 121.5,-24.5
-      parent: 1
-  - uid: 52108
-    components:
-    - type: Transform
-      pos: 122.5,-23.5
       parent: 1
   - uid: 52109
     components:
@@ -216120,16 +216086,6 @@ entities:
     - type: Transform
       pos: 115.5,2.5
       parent: 1
-  - uid: 3086
-    components:
-    - type: Transform
-      pos: 123.5,-17.5
-      parent: 1
-  - uid: 3087
-    components:
-    - type: Transform
-      pos: 124.5,-17.5
-      parent: 1
   - uid: 3088
     components:
     - type: Transform
@@ -216145,16 +216101,6 @@ entities:
     - type: Transform
       pos: 127.5,-17.5
       parent: 1
-  - uid: 3093
-    components:
-    - type: Transform
-      pos: 123.5,-16.5
-      parent: 1
-  - uid: 3094
-    components:
-    - type: Transform
-      pos: 124.5,-16.5
-      parent: 1
   - uid: 3095
     components:
     - type: Transform
@@ -216169,16 +216115,6 @@ entities:
     components:
     - type: Transform
       pos: 127.5,-16.5
-      parent: 1
-  - uid: 3100
-    components:
-    - type: Transform
-      pos: 123.5,-15.5
-      parent: 1
-  - uid: 3101
-    components:
-    - type: Transform
-      pos: 124.5,-15.5
       parent: 1
   - uid: 3102
     components:
@@ -219390,16 +219326,6 @@ entities:
     - type: Transform
       pos: 127.5,-25.5
       parent: 1
-  - uid: 3835
-    components:
-    - type: Transform
-      pos: 123.5,-24.5
-      parent: 1
-  - uid: 3836
-    components:
-    - type: Transform
-      pos: 124.5,-24.5
-      parent: 1
   - uid: 3837
     components:
     - type: Transform
@@ -219414,16 +219340,6 @@ entities:
     components:
     - type: Transform
       pos: 127.5,-24.5
-      parent: 1
-  - uid: 3841
-    components:
-    - type: Transform
-      pos: 123.5,-23.5
-      parent: 1
-  - uid: 3842
-    components:
-    - type: Transform
-      pos: 124.5,-23.5
       parent: 1
   - uid: 3843
     components:
@@ -219440,16 +219356,6 @@ entities:
     - type: Transform
       pos: 127.5,-23.5
       parent: 1
-  - uid: 3847
-    components:
-    - type: Transform
-      pos: 123.5,-22.5
-      parent: 1
-  - uid: 3848
-    components:
-    - type: Transform
-      pos: 124.5,-22.5
-      parent: 1
   - uid: 3849
     components:
     - type: Transform
@@ -219464,16 +219370,6 @@ entities:
     components:
     - type: Transform
       pos: 127.5,-22.5
-      parent: 1
-  - uid: 3853
-    components:
-    - type: Transform
-      pos: 123.5,-21.5
-      parent: 1
-  - uid: 3854
-    components:
-    - type: Transform
-      pos: 124.5,-21.5
       parent: 1
   - uid: 3855
     components:
@@ -219490,16 +219386,6 @@ entities:
     - type: Transform
       pos: 127.5,-21.5
       parent: 1
-  - uid: 3859
-    components:
-    - type: Transform
-      pos: 123.5,-20.5
-      parent: 1
-  - uid: 3860
-    components:
-    - type: Transform
-      pos: 124.5,-20.5
-      parent: 1
   - uid: 3861
     components:
     - type: Transform
@@ -219515,16 +219401,6 @@ entities:
     - type: Transform
       pos: 127.5,-20.5
       parent: 1
-  - uid: 3865
-    components:
-    - type: Transform
-      pos: 123.5,-19.5
-      parent: 1
-  - uid: 3866
-    components:
-    - type: Transform
-      pos: 124.5,-19.5
-      parent: 1
   - uid: 3867
     components:
     - type: Transform
@@ -219539,16 +219415,6 @@ entities:
     components:
     - type: Transform
       pos: 127.5,-19.5
-      parent: 1
-  - uid: 3871
-    components:
-    - type: Transform
-      pos: 123.5,-18.5
-      parent: 1
-  - uid: 3872
-    components:
-    - type: Transform
-      pos: 124.5,-18.5
       parent: 1
   - uid: 3873
     components:
@@ -329852,21 +329718,6 @@ entities:
     - type: InsideEntityStorage
 - proto: RMCWeaponTaser
   entities:
-  - uid: 463
-    components:
-    - type: Transform
-      pos: 119.55041,-23.655369
-      parent: 1
-  - uid: 465
-    components:
-    - type: Transform
-      pos: 119.55041,-23.325144
-      parent: 1
-  - uid: 478
-    components:
-    - type: Transform
-      pos: 119.55041,-23.490255
-      parent: 1
   - uid: 9652
     components:
     - type: Transform
@@ -331739,7 +331590,7 @@ entities:
       rot: 3.141592653589793 rad
       pos: -56.5,57.5
       parent: 1
-- proto: scenariothirdpartyentityspawnmarker
+- proto: thirdpartyentityspawnmarker
   entities:
   - uid: 628
     components:
@@ -331761,7 +331612,7 @@ entities:
     - type: Transform
       pos: 33.5,-1.5
       parent: 1
-- proto: scenariothirdpartyleaderspawnmarker
+- proto: thirdpartyleaderspawnmarker
   entities:
   - uid: 630
     components:
@@ -331773,7 +331624,7 @@ entities:
     - type: Transform
       pos: 38.5,2.5
       parent: 1
-- proto: scenariothirdpartymemberspawnmarker
+- proto: thirdpartymemberspawnmarker
   entities:
   - uid: 624
     components:
@@ -331820,7 +331671,7 @@ entities:
     - type: Transform
       pos: 36.5,-1.5
       parent: 1
-- proto: scenariothreatentityspawnmarker
+- proto: threatentityspawnmarker
   entities:
   - uid: 423
     components:
@@ -331844,7 +331695,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 101.5,-132.5
       parent: 1
-- proto: scenariothreatleaderspawnmarker
+- proto: threatleaderspawnmarker
   entities:
   - uid: 425
     components:
@@ -331857,7 +331708,7 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 99.5,-132.5
       parent: 1
-- proto: scenariothreatmemberspawnmarker
+- proto: threatmemberspawnmarker
   entities:
   - uid: 426
     components:
@@ -332092,7 +331943,7 @@ entities:
   - uid: 7606
     components:
     - type: Transform
-      pos: -26.5,73.5
+      pos: -35.5,73.5
       parent: 1
 - proto: VMarkerGovforClothing
   entities:
@@ -332320,7 +332171,7 @@ entities:
   - uid: 7577
     components:
     - type: Transform
-      pos: -35.5,73.5
+      pos: -26.5,73.5
       parent: 1
 - proto: VMarkerGovforWeapons
   entities:
@@ -332380,7 +332231,7 @@ entities:
     - type: Transform
       pos: -1.5,-70.5
       parent: 1
-- proto: scenarioxenocfthreatentityspawnmarker
+- proto: xenocfthreatentityspawnmarker
   entities:
   - uid: 430
     components:
@@ -332392,14 +332243,14 @@ entities:
     - type: Transform
       pos: -90.5,-124.5
       parent: 1
-- proto: scenarioxenocfthreatleaderspawnmarker
+- proto: xenocfthreatleaderspawnmarker
   entities:
   - uid: 433
     components:
     - type: Transform
       pos: -92.5,-122.5
       parent: 1
-- proto: scenarioxenocfthreatmemberspawnmarker
+- proto: xenocfthreatmemberspawnmarker
   entities:
   - uid: 436
     components:
