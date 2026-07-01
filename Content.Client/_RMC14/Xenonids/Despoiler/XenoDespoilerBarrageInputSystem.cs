@@ -16,6 +16,7 @@ public sealed partial class XenoDespoilerBarrageInputSystem : EntitySystem
     [Dependency] private IEyeManager _eye = default!;
     [Dependency] private IInputManager _input = default!;
     [Dependency] private MapSystem _map = default!;
+    [Dependency] private IMapManager _mapManager = default!; // RuMC edit
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private TransformSystem _transform = default!;
 
@@ -78,7 +79,7 @@ public sealed partial class XenoDespoilerBarrageInputSystem : EntitySystem
         var mousePos = _eye.PixelToMap(_input.MouseScreenPosition);
 
         EntityUid grid;
-        if (_map.TryFindGridAt(mousePos, out var gridUid, out _))
+        if (_mapManager.TryFindGridAt(mousePos, out var gridUid, out _)) // RuMC edit
             grid = gridUid;
         else if (_map.TryGetMap(mousePos.MapId, out var map))
             grid = map.Value;

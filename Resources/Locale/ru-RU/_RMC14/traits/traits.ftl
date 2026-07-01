@@ -1,33 +1,63 @@
 rmc-trait-category-inconveniences = Особенности
+
+rmc-trait-group-other-speech = Другие речевые черты
+
 rmc-trait-russian-accent = Русский акцент
-  .desc = Вы родом из Российского сектора
+    .desc = Вы родом из русского сектора
+
 rmc-trait-french-accent = Французский акцент
-  .desc = Вы родом из Французкого сектора
+    .desc = Вы родом из французкого сектора
+
 rmc-trait-mobster-accent = Акцент гангстера
-  .desc = Ньехх, Хто, Дазабей. Ньехх, хлеп, видишь?
+    .desc = Эй, мабой, я иду сюда.
+
 rmc-trait-spanish-accent = Испанский акцент
-  .desc = Вы родом из Испанского Сектора
+    .desc = Вы родом из испанского сектора.
+
 rmc-trait-scottish-accent = Шотландский акцент
-  .desc = Для тех, кто происходит из горного клана.
+    .desc = Для тех, кто происходит из горного клана.
 
-# Missing entries synced from en-US
+# Языки
+rmc-trait-group-languages = Языки
 
-rmc-trait-russian-accent-name = Русский акцент
+rmc-trait-spanish-language-name = Испанский язык
+rmc-trait-spanish-language-desc = Вы знаете испанский.
 
-rmc-trait-russian-accent-desc = Ты родом из космоса, Россия.
+rmc-trait-french-language-name = Французский язык
+rmc-trait-french-language-desc = Вы знаете французский.
 
-rmc-trait-french-accent-name = Французский акцент
+rmc-trait-japanese-language-name = Японский язык
+rmc-trait-japanese-language-desc = Вы знаете японский.
 
-rmc-trait-french-accent-desc = Ты родом из космоса, Франция.
+rmc-trait-chinese-language-name = Китайский язык
+rmc-trait-chinese-language-desc = Вы знаете китайский.
 
-rmc-trait-mobster-accent-name = Гангстерский акцент
+rmc-trait-russian-language-name = Русский язык
+rmc-trait-russian-language-desc = Вы знаете русский.
 
-rmc-trait-mobster-accent-desc = эй, gabagool fugeddaboutit, я иду сюда
+rmc-trait-german-language-name = Немецкий язык
+rmc-trait-german-language-desc = Вы знаете немецкий.
 
-rmc-trait-spanish-accent-name = Испанский акцент
+rmc-trait-swedish-language-name = Шведский язык
+rmc-trait-swedish-language-desc = Вы знаете шведский.
 
-rmc-trait-spanish-accent-desc = Ты родом из космической Испании
 
-rmc-trait-scottish-accent-name = шотландский акцент
 
-rmc-trait-scottish-accent-desc = Для людей, пришедших из клана Хилан.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

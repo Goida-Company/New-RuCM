@@ -68,6 +68,7 @@ namespace Content.Shared.Interaction
         [Dependency] private RotateToFaceSystem _rotateToFaceSystem = default!;
         [Dependency] private SharedContainerSystem _containerSystem = default!;
         [Dependency] private SharedMapSystem _map = default!;
+        [Dependency] private IMapManager _mapManager = default!; // RuMC edit
         [Dependency] private SharedPhysicsSystem _broadphase = default!;
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private SharedVerbSystem _verbSystem = default!;
@@ -937,7 +938,7 @@ namespace Content.Shared.Interaction
                     ignoreAnchored = angleDelta < wallMount.Arc / 2 || Math.Tau - angleDelta < wallMount.Arc / 2;
                 }
 
-                if (ignoreAnchored && _map.TryFindGridAt(targetCoords, out var gridUid, out var grid))
+                if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid)) // RuMC edit
                 {
                     ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
                     _predicateLookupResults.Clear();
