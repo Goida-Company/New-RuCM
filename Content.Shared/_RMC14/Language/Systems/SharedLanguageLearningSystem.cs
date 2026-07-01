@@ -9,11 +9,9 @@ namespace Content.Shared._RMC14.Language.Systems;
 
 public abstract partial class SharedLanguageLearningSystem : EntitySystem
 {
-    [Dependency] protected readonly SharedLanguageSystem _language = default!;
-    [Dependency] protected readonly IPrototypeManager _prototypeManager = default!;
-    [Dependency] protected readonly IRobustRandom _random = default!;
-
-    protected static readonly Regex WordRegex = new(@"\b[\p{L}']+\b", RegexOptions.Compiled); // RuMC edit
+    [Dependency] protected SharedLanguageSystem _language = default!;
+    [Dependency] protected IPrototypeManager _prototypeManager = default!;
+    [Dependency] protected IRobustRandom _random = default!;
 
     public string ProcessMessageForListener(EntityUid listener, string message, ProtoId<LanguagePrototype> language)
     {
@@ -215,7 +213,7 @@ public abstract partial class SharedLanguageLearningSystem : EntitySystem
         return totalWeight > 0 ? totalComprehension / totalWeight : 0f;
     }
 
-    private static readonly Regex WordRegex = new(@"\b[a-zA-Z']+\b");
+    protected static readonly Regex WordRegex = new(@"\b[\p{L}']+\b", RegexOptions.Compiled); // RuMC edit
 
     public float GetComprehensionLevel(EntityUid entity, ProtoId<LanguagePrototype> language)
     {
