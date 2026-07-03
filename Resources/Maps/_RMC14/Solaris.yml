@@ -194527,13 +194527,6 @@ entities:
       parent: 1
     - type: Fixtures
       fixtures: {}
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 26971
-    components:
-    - type: Transform
-      pos: 101.59375,-38.71875
-      parent: 1
 - proto: RMCGrenadeMolotov
   entities:
   - uid: 26972

@@ -13483,13 +13483,6 @@ entities:
     - type: Transform
       pos: 64.38522,-69.34135
       parent: 2
-- proto: BoxFlashbang
-  entities:
-  - uid: 19251
-    components:
-    - type: Transform
-      pos: 60.50701,-57.15892
-      parent: 2
 - proto: BoxFolderBase
   entities:
   - uid: 15225
@@ -58127,18 +58120,6 @@ entities:
     - type: Transform
       pos: 29.41741,-78.40642
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 5587
-    components:
-    - type: Transform
-      pos: -52.339993,-38.381466
-      parent: 2
-  - uid: 6155
-    components:
-    - type: Transform
-      pos: 7.508855,-50.43101
-      parent: 2
 - proto: FlashlightLantern
   entities:
   - uid: 5595
@@ -83589,18 +83570,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 55.5085,-56.088474
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 2223
-    components:
-    - type: Transform
-      pos: 69.513466,-51.10884
-      parent: 2
-  - uid: 15343
-    components:
-    - type: Transform
-      pos: 71.46581,-42.150627
-      parent: 2
 - proto: Lantern
   entities:
   - uid: 5675
@@ -86448,18 +86417,6 @@ entities:
     components:
     - type: Transform
       pos: -22.499308,-16.520548
-      parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 3006
-    components:
-    - type: Transform
-      pos: 58.5,-55.5
-      parent: 2
-  - uid: 18789
-    components:
-    - type: Transform
-      pos: 62.5,-35.5
       parent: 2
 - proto: PortableGeneratorJrPacman
   entities:
@@ -94405,23 +94362,6 @@ entities:
       rot: -0.6108652381980153 rad
       pos: -3.5512772,-24.750254
       parent: 2
-- proto: SciFlash
-  entities:
-  - uid: 17886
-    components:
-    - type: Transform
-      parent: 17884
-    - type: LimitedCharges
-      maxCharges: 1
-    - type: Physics
-      canCollide: False
-  - uid: 17947
-    components:
-    - type: Transform
-      pos: 33.300842,-15.297032
-      parent: 2
-    - type: LimitedCharges
-      maxCharges: 1
 - proto: Screen
   entities:
   - uid: 4349

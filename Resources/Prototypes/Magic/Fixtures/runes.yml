@@ -135,17 +135,3 @@
       intensitySlope: 5
       maxIntensity: 4
 
-- type: entity
-  parent: ActivateRune
-  id: FlashRune
-  name: "flash rune"
-  components:
-    - type: FlashOnTrigger
-    - type: DeleteOnTrigger
-
-- type: entity
-  parent: CollideTimerRune
-  id: FlashRuneTimer
-  name: "flash timed rune"
-  components:
-    - type: FlashOnTrigger

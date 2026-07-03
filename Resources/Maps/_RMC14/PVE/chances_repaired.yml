@@ -55833,18 +55833,6 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: CMFlash
-  entities:
-  - uid: 2594
-    components:
-    - type: Transform
-      pos: -0.5,17.53125
-      parent: 1
-  - uid: 2595
-    components:
-    - type: Transform
-      pos: 3.5,11.5
-      parent: 1
 - proto: CMFloorShallowWaterEntity
   entities:
   - uid: 2596
@@ -90082,18 +90070,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -49.5,-43.5
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 9899
-    components:
-    - type: Transform
-      pos: -4.6,3.7
-      parent: 1
-  - uid: 9900
-    components:
-    - type: Transform
-      pos: -4.3,6.65
       parent: 1
 - proto: RMCParasiteProp
   entities:

@@ -59422,28 +59422,6 @@ entities:
     - type: Transform
       pos: -21.5,-26.5
       parent: 1
-- proto: CMFlash
-  entities:
-  - uid: 5736
-    components:
-    - type: Transform
-      pos: 69.5,116.5
-      parent: 1
-  - uid: 5737
-    components:
-    - type: Transform
-      pos: -118.49347,107.494156
-      parent: 1
-  - uid: 5738
-    components:
-    - type: Transform
-      pos: -108.53682,116.7027
-      parent: 1
-  - uid: 5739
-    components:
-    - type: Transform
-      pos: -28.5,106.5
-      parent: 1
 - proto: CMFolderBlack
   entities:
   - uid: 5088
@@ -176936,23 +176914,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 35.95,97.5
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 25208
-    components:
-    - type: Transform
-      pos: -112.673035,114.72988
-      parent: 1
-  - uid: 25209
-    components:
-    - type: Transform
-      pos: -112.360535,114.88629
-      parent: 1
-  - uid: 25210
-    components:
-    - type: Transform
-      pos: -112.516785,114.57347
       parent: 1
 - proto: RMCPhotocopier
   entities:

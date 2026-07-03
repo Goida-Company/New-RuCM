@@ -402,7 +402,13 @@ internal sealed partial class ChatManager : IChatManager
         var speechStyleClass = _entityManager.GetComponentOrNull<RMCSpeechBubbleSpecificStyleComponent>(source)?.SpeechStyleClass;
         var repeatCheckSender = !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source);
         // CMU14
-        var customWrappedMessage = AddGhostFollowButton(wrappedMessage, source, client);
+        var ghostFollowEntity = NetEntity.Invalid;
+        var customWrappedMessage = wrappedMessage;
+        if (TryCreateGhostFollowButton(wrappedMessage, source, client, out var wrappedWithFollowButton, out var followEntity))
+        {
+            customWrappedMessage = wrappedWithFollowButton;
+            ghostFollowEntity = followEntity;
+        }
 
         var msg = new ChatMessage(
             channel,
@@ -418,7 +424,8 @@ internal sealed partial class ChatManager : IChatManager
             useEmoteSpeechBubble,
             speechStyleClass: speechStyleClass,
             repeatCheckSender: repeatCheckSender,
-            languageIcon: languageIcon
+            languageIcon: languageIcon,
+            ghostFollowEntity: ghostFollowEntity
         );
 
         _netManager.ServerSendMessage(new MsgChatMessage() { Message = msg }, client);
@@ -462,8 +469,27 @@ internal sealed partial class ChatManager : IChatManager
         var repeatCheckSender = !_entityManager.HasComponent<ChatRepeatIgnoreSenderComponent>(source);
         foreach (var client in clients)
         {
-            var customWrappedMessage = AddGhostFollowButton(wrappedMessage, source, client);
-            var msg = new ChatMessage(channel, message, customWrappedMessage, netSource, user?.Key, hideChat, colorOverride, audioPath, audioVolume, speechStyleClass: speechStyleClass, repeatCheckSender: repeatCheckSender);
+            var ghostFollowEntity = NetEntity.Invalid;
+            var customWrappedMessage = wrappedMessage;
+            if (TryCreateGhostFollowButton(wrappedMessage, source, client, out var wrappedWithFollowButton, out var followEntity))
+            {
+                customWrappedMessage = wrappedWithFollowButton;
+                ghostFollowEntity = followEntity;
+            }
+
+            var msg = new ChatMessage(
+                channel,
+                message,
+                customWrappedMessage,
+                netSource,
+                user?.Key,
+                hideChat,
+                colorOverride,
+                audioPath,
+                audioVolume,
+                speechStyleClass: speechStyleClass,
+                repeatCheckSender: repeatCheckSender,
+                ghostFollowEntity: ghostFollowEntity);
             _netManager.ServerSendMessage(new MsgChatMessage { Message = msg }, client);
         }
         // CMU14

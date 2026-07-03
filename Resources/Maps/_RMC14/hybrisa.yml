@@ -137428,38 +137428,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -51.5,-154.5
       parent: 1
-- proto: PortableFlasher
-  entities:
-  - uid: 12413
-    components:
-    - type: Transform
-      anchored: False
-      pos: -101.5,-124.5
-      parent: 1
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 12414
-    components:
-    - type: Transform
-      anchored: False
-      pos: -101.5,-123.5
-      parent: 1
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 12415
-    components:
-    - type: Transform
-      anchored: False
-      pos: -101.5,-122.5
-      parent: 1
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
 - proto: PowerCellRecharger
   entities:
   - uid: 12416
@@ -181555,18 +181523,6 @@ entities:
     - type: Transform
       pos: -188.5,-145.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 19703
-    components:
-    - type: Transform
-      pos: -97.13602,-122.513054
-      parent: 1
-  - uid: 19704
-    components:
-    - type: Transform
-      pos: -97.28185,-122.71444
-      parent: 1
 - proto: RMCGrenadeMolotov
   entities:
   - uid: 16234
@@ -201110,41 +201066,6 @@ entities:
     components:
     - type: Transform
       pos: -112.5,-33.5
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 16268
-    components:
-    - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -97.27914,-124.458664
-      parent: 1
-  - uid: 16269
-    components:
-    - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -97.57601,-124.614914
-      parent: 1
-  - uid: 16270
-    components:
-    - type: Transform
-      rot: -6.283185307179586 rad
-      pos: -97.68539,-124.427414
-      parent: 1
-  - uid: 22957
-    components:
-    - type: Transform
-      pos: -97.63602,-122.27
-      parent: 1
-  - uid: 22958
-    components:
-    - type: Transform
-      pos: -97.58046,-122.53388
-      parent: 1
-  - uid: 22959
-    components:
-    - type: Transform
-      pos: -97.32352,-122.21444
       parent: 1
 - proto: RMCPacketGrenadeSmokeFilled
   entities:

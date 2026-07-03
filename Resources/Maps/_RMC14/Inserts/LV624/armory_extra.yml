@@ -376,18 +376,6 @@ entities:
     - type: Transform
       pos: 2.5,1.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 67
-    components:
-    - type: Transform
-      pos: 2.5,4.5
-      parent: 1
-  - uid: 68
-    components:
-    - type: Transform
-      pos: 2.5,4.5
-      parent: 1
 - proto: RMCMagazinePistolMK45
   entities:
   - uid: 64

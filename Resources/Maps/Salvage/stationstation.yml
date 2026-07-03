@@ -2009,18 +2009,6 @@ entities:
     - type: Transform
       pos: -3.5,-8.5
       parent: 179
-- proto: SciFlash
-  entities:
-  - uid: 675
-    components:
-    - type: Transform
-      pos: 11.26269,21.655153
-      parent: 179
-  - uid: 676
-    components:
-    - type: Transform
-      pos: 11.48144,21.561403
-      parent: 179
 - proto: SeismicCharge
   entities:
   - uid: 618

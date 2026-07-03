@@ -101544,14 +101544,6 @@ entities:
     - type: Transform
       pos: 48.5,-4.5
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 29418
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 26.680504,4.6081753
-      parent: 2
 - proto: FlashlightLantern
   entities:
   - uid: 6771
@@ -146203,13 +146195,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 37.67961,-27.640583
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 4025
-    components:
-    - type: Transform
-      pos: 30.88469,-24.14328
-      parent: 2
 - proto: Lantern
   entities:
   - uid: 11658
@@ -151723,13 +151708,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 13.537764,72.5392
-      parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 3526
-    components:
-    - type: Transform
-      pos: 53.5,-18.5
       parent: 2
 - proto: PortableGeneratorJrPacman
   entities:

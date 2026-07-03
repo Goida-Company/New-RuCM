@@ -462,7 +462,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: RMCPacketGrenadeFlashBang
     - id: RMCWeaponTaser # TODO RMC14 4 tear gas grenades
 
 - type: entity
@@ -1144,7 +1143,6 @@
   - type: StorageFill
     contents:
     # M40 CCDP Greande #RMC14 TODO
-    - id: RMCGrenadeFlashBang
     - id: RMCLaserDesignator
     - id: RMCArmorM3General
     - id: CMArmorHelmetM11CGeneral

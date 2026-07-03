@@ -30789,13 +30789,6 @@ entities:
     - type: Transform
       pos: 2.5092506,-13.285645
       parent: 2
-- proto: BoxFlashbang
-  entities:
-  - uid: 11933
-    components:
-    - type: Transform
-      pos: -46.510376,-3.3572736
-      parent: 2
 - proto: BoxFolderBlack
   entities:
   - uid: 6937
@@ -116448,13 +116441,6 @@ entities:
     - type: Transform
       pos: 28.348837,11.900307
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 11635
-    components:
-    - type: Transform
-      pos: -32.517487,1.9459085
-      parent: 2
 - proto: Lantern
   entities:
   - uid: 1259
@@ -121142,13 +121128,6 @@ entities:
     components:
     - type: Transform
       pos: -45.514957,10.417316
-      parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 12657
-    components:
-    - type: Transform
-      pos: -39.5,3.5
       parent: 2
 - proto: PortableGeneratorJrPacman
   entities:

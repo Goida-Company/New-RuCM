@@ -113,7 +113,6 @@
   - SignalTrigger
   - VoiceTrigger
   - TimerTrigger
-  - FlashPayload
   - ExplosivePayload
   - ChemicalPayload
 
@@ -183,7 +182,6 @@
   - PowerCageSmall
   - PowerCageMedium
   - MagazineGrenadeEmpty
-  - GrenadeFlash
   - GrenadeBlast
   - ShuttleGunSvalinnMachineGunCircuitboard
   - ShuttleGunPerforatorCircuitboard

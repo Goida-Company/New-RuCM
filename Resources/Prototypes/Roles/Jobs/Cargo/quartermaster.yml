@@ -43,7 +43,6 @@
     pocket1: AppraisalTool
   storage:
     back:
-    - Flash
 
 - type: chameleonOutfit
   id: QuartermasterChameleonOutfit

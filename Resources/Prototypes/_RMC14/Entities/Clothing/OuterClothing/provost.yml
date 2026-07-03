@@ -39,7 +39,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
     - id: RMCHandcuffs
 
 - type: entity

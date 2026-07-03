@@ -3896,13 +3896,6 @@ entities:
     - type: Transform
       pos: 3.3807511,21.495659
       parent: 1
-- proto: GrenadeFlashBang
-  entities:
-  - uid: 740
-    components:
-    - type: Transform
-      pos: 3.6916847,5.505288
-      parent: 1
 - proto: Grille
   entities:
   - uid: 471

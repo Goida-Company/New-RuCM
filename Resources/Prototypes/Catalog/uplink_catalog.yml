@@ -258,16 +258,6 @@
   - UplinkExplosives
 
 - type: listing
-  id: UplinkExplosiveGrenadeFlash
-  name: uplink-flash-grenade-name
-  description: uplink-flash-grenade-desc
-  productEntity: GrenadeFlashBang
-  cost:
-    Telecrystal: 1
-  categories:
-  - UplinkExplosives
-
-- type: listing
   id: UplinkSmokeGrenade
   name: uplink-smoke-grenade-name
   description: uplink-smoke-grenade-desc
@@ -863,7 +853,6 @@
   id: UplinkUltrabrightLantern
   name: uplink-ultrabright-lantern-name
   description: uplink-ultrabright-lantern-desc
-  productEntity: LanternFlash
   discountCategory: usualDiscounts
   discountDownTo:
     Telecrystal: 1

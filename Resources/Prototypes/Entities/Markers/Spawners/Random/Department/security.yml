@@ -16,7 +16,6 @@
         - BoxHandcuff
       rareChance: 0.05
       prototypes:
-        - Flash
         - Handcuffs
         - Zipties
         - FlashlightSeclite
@@ -38,17 +37,14 @@
       rarePrototypes:
         - ClothingEyesGlassesSunglasses
         - BoxHandcuff
-        - BoxFlashbang
         - TearGasGrenade
         - WeaponDisabler
         - Stunbaton
       rareChance: 0.05
       prototypes:
-        - Flash
         - Handcuffs
         - Zipties
         - FlashlightSeclite
-        - GrenadeFlashBang
         - SecurityWhistle
         - Tourniquet
       chance: 0.85

@@ -68,7 +68,6 @@
     belt: BoxFolderClipboard
   storage:
     back:
-    - Flash
 
 - type: chameleonOutfit
   id: HeadOfPersonnelChameleonOutfit

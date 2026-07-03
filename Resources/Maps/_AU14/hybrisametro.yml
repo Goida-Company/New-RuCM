@@ -142180,15 +142180,6 @@ entities:
     - type: Transform
       pos: -59.547504,-39.62861
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 163
-    components:
-    - type: Transform
-      parent: 153
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCGrenadeMolotov
   entities:
   - uid: 12010

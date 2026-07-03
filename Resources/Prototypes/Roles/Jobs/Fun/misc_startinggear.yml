@@ -87,7 +87,6 @@
   storage:
     back:
     - BoxSurvivalSecurity
-    - Flash
     - MagazinePistol
 
 - type: startingGear

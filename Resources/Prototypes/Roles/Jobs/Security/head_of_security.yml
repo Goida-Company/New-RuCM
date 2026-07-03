@@ -49,7 +49,6 @@
     pocket1: WeaponPistolMk58
   storage:
     back:
-    - Flash
     - MagazinePistol
 
 - type: chameleonOutfit

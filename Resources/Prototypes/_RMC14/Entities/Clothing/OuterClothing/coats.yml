@@ -648,7 +648,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
     - id: RMCHandcuffs
 
 
@@ -692,7 +691,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
     - id: RMCHandcuffs
 
 - type: entity
@@ -702,7 +700,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
     - id: RMCHandcuffs
 
 - type: entity
@@ -712,7 +709,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
     - id: RMCHandcuffs
 
 # Synthetic Utility Vest

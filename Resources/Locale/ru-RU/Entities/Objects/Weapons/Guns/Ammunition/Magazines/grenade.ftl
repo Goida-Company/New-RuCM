@@ -6,7 +6,6 @@ ent-MagazineGrenadeFrag-name = осколочный гранатный патр�
 
 ent-MagazineGrenadeEMP-name = патрон для ЭМИ-гранаты
 
-ent-MagazineGrenadeFlash-name = патрон для светошумовой гранаты
 
 ent-MagazineGrenadeBlast-name = патрон для взрывной гранаты
 

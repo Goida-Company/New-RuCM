@@ -16,7 +16,5 @@ ent-ExplosionTimedRune-name = руна с таймером взрыва
 
 ent-ExplosionActivateRune-name = руна, активирующая взрыв
 
-ent-FlashRune-name = вспышка руны
 
-ent-FlashRuneTimer-name = флэш-руна с таймером
 

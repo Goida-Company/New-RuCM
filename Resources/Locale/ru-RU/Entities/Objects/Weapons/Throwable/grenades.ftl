@@ -1,8 +1,6 @@
 ent-ExGrenade-name = взрывная граната
 ent-ExGrenade-desc = Граната, создающая небольшой, но разрушительный взрыв.
 
-ent-GrenadeFlashBang-name = светошумовая граната
-ent-GrenadeFlashBang-desc = Ээээээээээээээ.
 
 ent-SyndieMiniBomb-name = мини-бомба синдиката
 ent-SyndieMiniBomb-desc = Взрывчатка, изготовленная синдикатом и используемая для сдерживания разрушений и создания хаоса.

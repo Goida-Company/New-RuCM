@@ -4,7 +4,6 @@ ent-AdminInstantEffectEMP-name = мгновенный эффект
 
 ent-AdminInstantEffectBluespace-name = мгновенный эффект
 
-ent-AdminInstantEffectFlash-name = мгновенный эффект
 
 ent-AdminInstantEffectSmoke3-name = мгновенный эффект
 

@@ -90172,23 +90172,6 @@ entities:
     - type: Transform
       pos: 9.5,-11.5
       parent: 8364
-- proto: Flash
-  entities:
-  - uid: 5085
-    components:
-    - type: Transform
-      pos: 8.323544,43.33329
-      parent: 8364
-  - uid: 5604
-    components:
-    - type: Transform
-      pos: -5.590146,-5.5357327
-      parent: 8364
-  - uid: 16300
-    components:
-    - type: Transform
-      pos: -10.669638,-34.384842
-      parent: 8364
 - proto: FlashlightLantern
   entities:
   - uid: 11756
@@ -130736,13 +130719,6 @@ entities:
     - type: Transform
       pos: 6.4951487,-21.071056
       parent: 8364
-- proto: LampInterrogator
-  entities:
-  - uid: 8793
-    components:
-    - type: Transform
-      pos: -16.527569,34.915558
-      parent: 8364
 - proto: LandMineExplosive
   entities:
   - uid: 9698
@@ -134775,33 +134751,6 @@ entities:
     components:
     - type: Transform
       pos: -21.53196,-58.55052
-      parent: 8364
-- proto: PortableFlasher
-  entities:
-  - uid: 7631
-    components:
-    - type: Transform
-      anchored: False
-      pos: -13.5,40.5
-      parent: 8364
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 7703
-    components:
-    - type: Transform
-      anchored: False
-      pos: -14.5,40.5
-      parent: 8364
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 19946
-    components:
-    - type: Transform
-      pos: -10.5,44.5
       parent: 8364
 - proto: PortableGeneratorJrPacman
   entities:

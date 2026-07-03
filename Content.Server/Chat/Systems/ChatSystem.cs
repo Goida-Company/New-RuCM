@@ -22,6 +22,7 @@ using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared._RMC14.Language.Systems;
 using Content.Shared._RMC14.Stun;
 using Content.Shared._RMC14.Xenonids;
+using Content.Shared._AU14.Marines.Orders;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -254,6 +255,12 @@ public sealed partial class ChatSystem : SharedChatSystem
             // prevent radios and remove prefix.
             checkRadioPrefix = false;
             message = message[1..];
+        }
+
+        if (desiredType == InGameICChatType.Speak && HasComp<AU14SilenceOrderComponent>(source))
+        {
+            desiredType = InGameICChatType.Whisper;
+            checkRadioPrefix = false;
         }
 
         bool shouldCapitalize = (desiredType != InGameICChatType.Emote);

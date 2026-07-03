@@ -27473,13 +27473,6 @@ entities:
     - type: Transform
       pos: -21.5,-6.5
       parent: 1668
-- proto: Flash
-  entities:
-  - uid: 3423
-    components:
-    - type: Transform
-      pos: -22.837252,13.706506
-      parent: 1668
 - proto: FlashlightSeclite
   entities:
   - uid: 6756
@@ -39948,28 +39941,6 @@ entities:
     components:
     - type: Transform
       pos: -5.5,26.5
-      parent: 1668
-- proto: GrenadeFlashBang
-  entities:
-  - uid: 2615
-    components:
-    - type: Transform
-      pos: 14.708689,30.81574
-      parent: 1668
-  - uid: 2616
-    components:
-    - type: Transform
-      pos: 14.708689,30.81574
-      parent: 1668
-  - uid: 2617
-    components:
-    - type: Transform
-      pos: 14.708689,30.81574
-      parent: 1668
-  - uid: 2618
-    components:
-    - type: Transform
-      pos: 14.708689,30.81574
       parent: 1668
 - proto: GrenadeIncendiary
   entities:

@@ -11229,38 +11229,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: GrenadeFlash
-  entities:
-  - uid: 2083
-    components:
-    - type: Transform
-      parent: 2078
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2084
-    components:
-    - type: Transform
-      parent: 2078
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-- proto: GrenadeFlashBang
-  entities:
-  - uid: 2196
-    components:
-    - type: Transform
-      parent: 2176
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 2199
-    components:
-    - type: Transform
-      parent: 2176
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: GrenadeFrag
   entities:
   - uid: 2081
@@ -12028,13 +11996,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,-1.5
-      parent: 2709
-- proto: MagazineGrenadeFlash
-  entities:
-  - uid: 2770
-    components:
-    - type: Transform
-      pos: 2.425,-1.425
       parent: 2709
 - proto: MagazineGrenadeFrag
   entities:

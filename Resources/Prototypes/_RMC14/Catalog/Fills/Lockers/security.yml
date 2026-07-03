@@ -37,8 +37,6 @@
         amount: 3
       - id: CMMaskGas
         amount: 3
-      - id: RMCPacketGrenadeFlashBang
-        amount: 1
 
 - type: entity
   id: RMCArmoryLockerRedM890Filled

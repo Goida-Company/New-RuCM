@@ -121172,18 +121172,6 @@ entities:
     - type: Transform
       pos: 193.5,-135.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 10853
-    components:
-    - type: Transform
-      pos: 174.5,-115.5
-      parent: 1
-  - uid: 10854
-    components:
-    - type: Transform
-      pos: 174.5,-115.5
-      parent: 1
 - proto: RMCGrenadeIncendiary
   entities:
   - uid: 10855

@@ -197,7 +197,6 @@
     - state: spell_default
   - type: Spellbook
     spellActions:
-      ActionFlashRune: null
       ActionExplosionRune: null
       ActionIgniteRune: null
       ActionStunRune: null

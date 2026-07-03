@@ -33,10 +33,22 @@ internal sealed class PlaytimeApi : IPostInjectInit
 
         _statusHost.AddHandler(PlaytimeHandler);
 
-        _cfg.OnValueChanged(CCCVars.PlaytimeApiToken, v => _secret = v, true);
-        _cfg.OnValueChanged(CCCVars.PlaytimeApiAllowedIP, v => _allowedIP = v, true);
+        if (EnsureCVarRegistered(CCCVars.PlaytimeApiToken))
+            _cfg.OnValueChanged(CCCVars.PlaytimeApiToken, v => _secret = v, true);
+
+        if (EnsureCVarRegistered(CCCVars.PlaytimeApiAllowedIP))
+            _cfg.OnValueChanged(CCCVars.PlaytimeApiAllowedIP, v => _allowedIP = v, true);
 
         _log.Info("Playtime API initialized");
+    }
+
+    private bool EnsureCVarRegistered<T>(CVarDef<T> cvar) where T : notnull
+    {
+        if (_cfg.IsCVarRegistered(cvar.Name))
+            return true;
+
+        _cfg.RegisterCVar(cvar.Name, cvar.DefaultValue, cvar.Flags);
+        return _cfg.IsCVarRegistered(cvar.Name);
     }
 
     // FIX #1: нормальное сравнение IP через IPAddress, поддержка нескольких адресов через запятую

@@ -1,8 +1,4 @@
-ent-ClusterBang-name = кластерный взрыв
-ent-ClusterBang-desc = Можно использовать только со светошумовыми гранатами. Взрывается несколько раз.
 
-ent-ClusterBangFull-name = КластерБанг
-ent-ClusterBangFull-desc = Запускает три светошумовые гранаты после истечения таймера.
 
 ent-ClusterGrenade-name = кассетная граната
 ent-ClusterGrenade-desc = Зачем использовать одну гранату, если можно использовать сразу три!

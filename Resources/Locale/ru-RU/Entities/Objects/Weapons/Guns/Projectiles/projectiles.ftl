@@ -79,8 +79,6 @@ ent-BulletGrenadeBaton-desc = Если ты это видишь, ты, веро�
 ent-BulletGrenadeBlast-name = взрывная граната
 ent-BulletGrenadeBlast-desc = Если ты это видишь, ты, вероятно, мертв!
 
-ent-BulletGrenadeFlash-name = светошумовая граната
-ent-BulletGrenadeFlash-desc = Если ты это видишь, ты, вероятно, мертв!
 
 ent-BulletGrenadeFrag-name = осколочная граната
 ent-BulletGrenadeFrag-desc = Если ты это видишь, ты, вероятно, мертв!

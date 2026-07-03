@@ -203,9 +203,6 @@
     children:
     - id: SpaceCash100
       weight: 45
-    - id: FlashPayload
-      amount: !type:RangeNumberSelector
-        range: 1, 2
     - id: ChemicalPayload
       amount: !type:RangeNumberSelector
         range: 1, 2

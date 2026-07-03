@@ -1,3 +1,4 @@
+using Robust.Shared;
 using Robust.Shared.Configuration;
 
 namespace Content.Shared.Corvax.CCCVars;
@@ -7,7 +8,7 @@ namespace Content.Shared.Corvax.CCCVars;
 /// </summary>
 [CVarDefs]
 // ReSharper disable once InconsistentNaming
-public sealed class CCCVars
+public sealed class CCCVars : CVars
 {
     /// <summary>
     /// Deny any VPN connections.

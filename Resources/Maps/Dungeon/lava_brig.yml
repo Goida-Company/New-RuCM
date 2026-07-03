@@ -7385,13 +7385,6 @@ entities:
     - type: Transform
       pos: 10.645364,44.67479
       parent: 588
-- proto: ClusterBangFull
-  entities:
-  - uid: 599
-    components:
-    - type: Transform
-      pos: 33.484257,28.42918
-      parent: 588
 - proto: ComputerAlert
   entities:
   - uid: 999
@@ -8050,13 +8043,6 @@ entities:
     components:
     - type: Transform
       pos: 8.5,44.5
-      parent: 588
-- proto: Flash
-  entities:
-  - uid: 1209
-    components:
-    - type: Transform
-      pos: 10.726851,19.047483
       parent: 588
 - proto: FlashlightSeclite
   entities:
@@ -9265,13 +9251,6 @@ entities:
     components:
     - type: Transform
       pos: 22.519993,28.594225
-      parent: 588
-- proto: PortableFlasher
-  entities:
-  - uid: 1234
-    components:
-    - type: Transform
-      pos: 32.5,25.5
       parent: 588
 - proto: PortableGeneratorPacman
   entities:

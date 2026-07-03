@@ -30,7 +30,7 @@ ClothingEyesGlassesBeer: ClothingEyesHudBeer
 
 # 2023-08-01
 lantern: Lantern
-lanternextrabright: LanternFlash
+lanternextrabright: null
 
 # 2023-08-04
 BoxMagazineLightRifleHighVelocity: BoxMagazineLightRifle
@@ -1256,7 +1256,7 @@ RMCVendorBundleXOShotgun: WeaponShotgunM890
 RMCArmorHelmetM12Dust: CMArmorHelmetM12
 
 # 2025-05-20
-GrenadeFlashBang: RMCGrenadeFlashBang
+GrenadeFlashBang: null
 
 # 2025-05-21
 CMVendorWalkman: CMVendorCassettes

@@ -63,14 +63,6 @@
     proto: GrenadeEMP
 
 - type: entity
-  id: MagazineGrenadeFlash
-  name: flash grenade cartridge
-  parent: BaseMagazineGrenade
-  components:
-  - type: BallisticAmmoProvider
-    proto: GrenadeFlash
-
-- type: entity
   id: MagazineGrenadeBlast
   name: blast grenade cartridge
   parent: BaseMagazineGrenade

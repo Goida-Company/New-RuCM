@@ -751,13 +751,6 @@ entities:
     - type: Transform
       pos: -4.485277,-4.2071934
       parent: 6
-- proto: LanternFlash
-  entities:
-  - uid: 202
-    components:
-    - type: Transform
-      pos: 0.46771288,2.5183086
-      parent: 6
 - proto: MaterialWoodPlank
   entities:
   - uid: 157

@@ -44210,13 +44210,6 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: CMFlash
-  entities:
-  - uid: 1409
-    components:
-    - type: Transform
-      pos: 177.5,143.5
-      parent: 1
 - proto: CMFloorShallowWaterEntity
   entities:
   - uid: 1410
@@ -117127,18 +117120,6 @@ entities:
     components:
     - type: Transform
       pos: 208.5,119.5
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 14880
-    components:
-    - type: Transform
-      pos: 165.64478,154.36482
-      parent: 1
-  - uid: 14881
-    components:
-    - type: Transform
-      pos: 165.40833,154.62837
       parent: 1
 - proto: RMCPersonalDesktop
   entities:

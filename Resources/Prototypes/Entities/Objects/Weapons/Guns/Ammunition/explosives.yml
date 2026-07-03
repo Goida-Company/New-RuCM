@@ -90,23 +90,6 @@
     suffix: false
 
 - type: entity
-  id: GrenadeFlash
-  name: flash grenade
-  parent: BaseGrenade
-  components:
-  - type: CartridgeAmmo
-    proto: BulletGrenadeFlash
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Ammunition/Explosives/explosives.rsi
-    layers:
-    - state: flash
-      map: ["enum.AmmoVisualLayers.Base"]
-  - type: Appearance
-  - type: SpentAmmoVisuals
-    state: flash
-    suffix: false
-
-- type: entity
   id: GrenadeFrag
   name: frag grenade
   parent: BaseGrenade

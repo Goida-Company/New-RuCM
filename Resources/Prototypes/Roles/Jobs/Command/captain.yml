@@ -44,7 +44,6 @@
     ears: ClothingHeadsetAltCommand
   storage:
     back:
-    - Flash
     # - StationCharter
 
 - type: chameleonOutfit

@@ -32,9 +32,6 @@
         amount: 3
       - id: Stunbaton
         amount: 3
-      - id: BoxFlashbang
-      - id: Flash
-        amount: 3
 #      - Pepperspray
 #      - GrenadeTeargas
 
@@ -101,8 +98,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: BoxFlashbang
-      amount: 1
     - id: BoxStinger
       amount: 1
     - id: BoxTearGas

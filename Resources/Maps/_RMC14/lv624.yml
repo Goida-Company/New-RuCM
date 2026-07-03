@@ -48170,13 +48170,6 @@ entities:
     - type: Transform
       pos: 36.671673,32.654728
       parent: 1
-- proto: CMFlash
-  entities:
-  - uid: 1041
-    components:
-    - type: Transform
-      pos: 21.5,-81.5
-      parent: 1
 - proto: CMFloorShallowWaterEntity
   entities:
   - uid: 1042
@@ -151137,13 +151130,6 @@ entities:
     components:
     - type: Transform
       pos: 37.43624,36.462616
-      parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 20950
-    components:
-    - type: Transform
-      pos: 21.71875,-81.4375
       parent: 1
 - proto: RMCGrenadeIncendiary
   entities:

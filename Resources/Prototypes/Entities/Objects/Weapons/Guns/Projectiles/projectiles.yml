@@ -880,25 +880,6 @@
     maxIntensity: 10
 
 - type: entity
-  id: BulletGrenadeFlash
-  name: flash grenade
-  parent: BaseBulletTrigger
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Projectiles/projectiles2.rsi
-    layers:
-      - state: grenade
-  - type: FlashOnTrigger
-    range: 7
-  - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
-  - type: ActiveTimerTrigger
-    timeRemaining: 0.3
-  - type: DeleteOnTrigger
-
-# This is supposed to spawn shrapnel and stuff so uhh... TODO?
-- type: entity
   id: BulletGrenadeFrag
   name: frag grenade
   parent: BaseBulletTrigger

@@ -36,7 +36,6 @@
     ears: ClothingHeadsetRD
   storage:
     back:
-    - Flash
 
 - type: chameleonOutfit
   id: ResearchDirectorChameleonOutfit

@@ -2898,13 +2898,6 @@ entities:
     - type: Transform
       pos: 7.4596567,67.45146
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 2241
-    components:
-    - type: Transform
-      pos: 14.559327,44.496063
-      parent: 2
 - proto: FoodCannabisButter
   entities:
   - uid: 2328

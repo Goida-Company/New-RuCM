@@ -323,7 +323,6 @@
   - type: StorageFill
     contents:
     - id: RMCWeaponTaser
-    - id: CMFlash
     - id: CMStunbaton
     - id: RMCHandcuffs
     - id: RMCHandcuffs
@@ -338,7 +337,6 @@
   - type: StorageFill
     contents:
     - id: RMCWeaponTaser
-    - id: CMFlash
     - id: CMStunbaton
     - id: RMCHandcuffs
     - id: RMCHandcuffs
@@ -355,7 +353,6 @@
   - type: StorageFill
     contents:
     - id: RMCWeaponTaser
-    - id: CMFlash
     - id: CMStunbaton
     - id: RMCHandcuffs
 #    - id: Pepperspray # TODO RMC14
@@ -369,14 +366,13 @@
   - type: StorageFill
     contents:
     - id: RMCWeaponTaser
-    - id: CMFlash
     - id: CMStunbaton
 #    - id: Pepperspray # TODO RMC14
 #    - id: ForensicScanner # TODO RMC14 cm clue scanner
     - id: RMCHandcuffs
       amount: 2
-    - id: RMCGrenadeFlashBang
-
+    - id: CMClipboard # CMU change
+    - id: RMCUniversalRecorder #CMU Change
 - type: entity
   parent: RMCBeltHolsterNailgun
   id: RMCBeltHolsterNailgunFill

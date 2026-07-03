@@ -87116,13 +87116,6 @@ entities:
     - type: Transform
       pos: 46.5,99.5
       parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 7819
-    components:
-    - type: Transform
-      pos: 143.5,96.5
-      parent: 1
 - proto: RMCPersonalDesktop
   entities:
   - uid: 7822

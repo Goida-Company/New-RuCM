@@ -12009,18 +12009,6 @@ entities:
     - type: Transform
       pos: 32.455227,27.041605
       parent: 2
-- proto: BoxFlashbang
-  entities:
-  - uid: 6340
-    components:
-    - type: Transform
-      pos: 36.349575,28.40067
-      parent: 2
-  - uid: 8689
-    components:
-    - type: Transform
-      pos: 32.47085,27.36973
-      parent: 2
 - proto: BoxFolderBlack
   entities:
   - uid: 12101
@@ -47170,13 +47158,6 @@ entities:
     - type: Transform
       pos: 9.5,-40.5
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 4987
-    components:
-    - type: Transform
-      pos: 30.4376,48.510555
-      parent: 2
 - proto: FlashlightLantern
   entities:
   - uid: 5714
@@ -68603,15 +68584,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 9.328161,-42.06295
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 13567
-    components:
-    - type: Transform
-      pos: 40.512142,35.84228
-      parent: 2
-    - type: Physics
-      canCollide: True
 - proto: LargeBeaker
   entities:
   - uid: 5323
@@ -70339,18 +70311,6 @@ entities:
     - type: Transform
       pos: -3.4634295,-18.46823
       parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 8412
-    components:
-    - type: Transform
-      anchored: False
-      pos: 31.5,26.5
-      parent: 2
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 801

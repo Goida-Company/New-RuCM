@@ -11937,18 +11937,6 @@ entities:
     - type: Transform
       pos: -16.470272,37.470127
       parent: 23
-- proto: CMFlash
-  entities:
-  - uid: 930
-    components:
-    - type: Transform
-      pos: -8.527021,15.840973
-      parent: 23
-  - uid: 931
-    components:
-    - type: Transform
-      pos: -8.511396,15.481598
-      parent: 23
 - proto: CMFolderBlue
   entities:
   - uid: 768

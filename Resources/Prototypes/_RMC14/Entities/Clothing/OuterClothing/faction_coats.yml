@@ -120,8 +120,6 @@
   components:
   - type: StorageFill
     contents:
-    - id: CMFlash
-      amount: 1
     - id: RMCTelescopicBaton
       amount: 1
     - id: RMCHandcuffs

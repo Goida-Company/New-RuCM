@@ -8,7 +8,6 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
-      - id: Flash
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -34,7 +33,6 @@
       - id: FlashlightSeclite
       - id: WeaponDisabler
       - id: ClothingBeltSecurityFilled
-      - id: Flash
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHandsGlovesCombat
       - id: ClothingShoesBootsJack
@@ -65,8 +63,6 @@
       - id: ClothingHeadHelmetBasic
       - id: ClothingOuterArmorBasic
       - id: ClothingBeltSecurityFilled
-      - id: Flash
-        prob: 0.5
       - id: ClothingEyesGlassesSecurity
       - id: ClothingHeadsetSecurity
       - id: ClothingHandsGlovesColorBlack

@@ -482,18 +482,6 @@ entities:
     - type: Transform
       pos: 15.443135,-6.513584
       parent: 1
-- proto: CMFlash
-  entities:
-  - uid: 349
-    components:
-    - type: Transform
-      pos: 13.5,3.5
-      parent: 1
-  - uid: 419
-    components:
-    - type: Transform
-      pos: 14.5,-12.5
-      parent: 1
 - proto: CMFolderBlack
   entities:
   - uid: 372
@@ -1595,13 +1583,6 @@ entities:
     - type: Transform
       pos: 11.5,-16.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 358
-    components:
-    - type: Transform
-      pos: 7.5,-1.5
-      parent: 1
 - proto: RMCJumpsuitRiotControl
   entities:
   - uid: 454
@@ -2016,13 +1997,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 446
-    components:
-    - type: Transform
-      pos: 8.5,-13.5
-      parent: 1
 - proto: RMCPhotocopier
   entities:
   - uid: 173

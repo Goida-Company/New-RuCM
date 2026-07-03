@@ -48521,14 +48521,6 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: CMFlash
-  entities:
-  - uid: 1176
-    components:
-    - type: Transform
-      rot: -6.283185307179586 rad
-      pos: 123.46668,64.60275
-      parent: 1
 - proto: CMFloorDeepWaterEntity
   entities:
   - uid: 1177

@@ -2201,18 +2201,6 @@ entities:
     - type: Transform
       pos: 2.5,9.5
       parent: 656
-- proto: Flash
-  entities:
-  - uid: 593
-    components:
-    - type: Transform
-      pos: -0.24443519,7.4266205
-      parent: 656
-  - uid: 594
-    components:
-    - type: Transform
-      pos: 0.026397824,7.655787
-      parent: 656
 - proto: FlippoLighter
   entities:
   - uid: 221

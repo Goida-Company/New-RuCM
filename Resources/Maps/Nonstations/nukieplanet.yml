@@ -10771,18 +10771,6 @@ entities:
       parent: 104
     - type: PointLight
       radius: 175.75
-- proto: GrenadeFlashBang
-  entities:
-  - uid: 2309
-    components:
-    - type: Transform
-      pos: 11.399388,-16.363453
-      parent: 104
-  - uid: 2310
-    components:
-    - type: Transform
-      pos: 11.571263,-16.363453
-      parent: 104
 - proto: Grille
   entities:
   - uid: 95

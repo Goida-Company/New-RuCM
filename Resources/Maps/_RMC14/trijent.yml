@@ -72372,13 +72372,6 @@ entities:
       parent: 1
     - type: ExpendableLight
       stateExpiryTime: 600
-- proto: CMFlash
-  entities:
-  - uid: 1575
-    components:
-    - type: Transform
-      pos: 133.5,-73.5
-      parent: 1
 - proto: CMFolderBlack
   entities:
   - uid: 1576
@@ -112988,23 +112981,6 @@ entities:
     components:
     - type: Transform
       pos: 49.5,-212.5
-      parent: 1
-- proto: PortableFlasher
-  entities:
-  - uid: 8707
-    components:
-    - type: Transform
-      pos: 61.5,-147.5
-      parent: 1
-  - uid: 8708
-    components:
-    - type: Transform
-      pos: 61.5,-149.5
-      parent: 1
-  - uid: 8709
-    components:
-    - type: Transform
-      pos: 61.5,-148.5
       parent: 1
 - proto: PuddleVomit
   entities:
@@ -156802,13 +156778,6 @@ entities:
     components:
     - type: Transform
       pos: 116.5,-36.5
-      parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 15722
-    components:
-    - type: Transform
-      pos: 57.5,-140.5
       parent: 1
 - proto: RMCGrenadeIncendiary
   entities:

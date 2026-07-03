@@ -30500,13 +30500,6 @@ entities:
     - type: Transform
       pos: 31.541664,2.1613898
       parent: 13329
-- proto: BoxFlashbang
-  entities:
-  - uid: 10688
-    components:
-    - type: Transform
-      pos: 19.610106,15.633911
-      parent: 13329
 - proto: BoxFolderBlack
   entities:
   - uid: 52
@@ -115620,38 +115613,6 @@ entities:
     - type: Transform
       pos: 77.5,47.5
       parent: 13329
-- proto: Flash
-  entities:
-  - uid: 4568
-    components:
-    - type: Transform
-      pos: -21.440784,39.480217
-      parent: 13329
-  - uid: 4612
-    components:
-    - type: Transform
-      pos: -37.495537,45.401833
-      parent: 13329
-  - uid: 10150
-    components:
-    - type: Transform
-      pos: 27.50318,19.856941
-      parent: 13329
-  - uid: 31493
-    components:
-    - type: Transform
-      pos: 68.47122,57.57736
-      parent: 13329
-  - uid: 35596
-    components:
-    - type: Transform
-      pos: 128.55579,48.487343
-      parent: 13329
-  - uid: 35632
-    components:
-    - type: Transform
-      pos: 105.53474,46.55583
-      parent: 13329
 - proto: FlashlightLantern
   entities:
   - uid: 2607
@@ -164407,13 +164368,6 @@ entities:
     - type: Transform
       pos: 123.55489,3.5750852
       parent: 13329
-- proto: LampInterrogator
-  entities:
-  - uid: 18604
-    components:
-    - type: Transform
-      pos: 16.491692,21.953949
-      parent: 13329
 - proto: Lantern
   entities:
   - uid: 6634
@@ -169501,38 +169455,6 @@ entities:
     - type: Transform
       pos: -6.4625926,40.623413
       parent: 13329
-- proto: PortableFlasher
-  entities:
-  - uid: 9471
-    components:
-    - type: Transform
-      anchored: False
-      pos: 14.5,9.5
-      parent: 13329
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 9472
-    components:
-    - type: Transform
-      anchored: False
-      pos: 14.5,10.5
-      parent: 13329
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 10657
-    components:
-    - type: Transform
-      anchored: False
-      pos: 14.5,11.5
-      parent: 13329
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
 - proto: PortableGeneratorJrPacman
   entities:
   - uid: 10145

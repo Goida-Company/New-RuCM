@@ -23,8 +23,6 @@ ent-CMPacketGrenadeFragFilled = {ent-CMPacketGrenadeFrag}
     .desc = {ent-CMPacketGrenadeFrag.desc}
     .suffix = Заполнен
 
-ent-RMCPacketGrenadeFlashBang = коробка светошумовых гранат
-    .desc = Содержит несколько светошумовых гранат.
 
 ent-RMCPacketGrenadeSmoke = коробка дымовых гранат HSDP
     .desc = Содержит три дымовые гранаты HSDP.

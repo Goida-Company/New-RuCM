@@ -151930,36 +151930,6 @@ entities:
     - type: Transform
       pos: 44.5,-85.5
       parent: 1
-- proto: CMFlash
-  entities:
-  - uid: 87808
-    components:
-    - type: Transform
-      parent: 87806
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87813
-    components:
-    - type: Transform
-      parent: 87811
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87819
-    components:
-    - type: Transform
-      parent: 87816
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87825
-    components:
-    - type: Transform
-      parent: 87821
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: CMFolderYellow
   entities:
   - uid: 88203
@@ -565270,36 +565240,6 @@ entities:
     - type: Transform
       pos: 38.5,-89.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 87809
-    components:
-    - type: Transform
-      parent: 87806
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87814
-    components:
-    - type: Transform
-      parent: 87811
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87818
-    components:
-    - type: Transform
-      parent: 87816
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 87824
-    components:
-    - type: Transform
-      parent: 87821
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
 - proto: RMCGrilleElectrified
   entities:
   - uid: 83673

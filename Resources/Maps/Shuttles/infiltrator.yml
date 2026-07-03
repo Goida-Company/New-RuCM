@@ -799,13 +799,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: InsideEntityStorage
-- proto: BoxFlashbang
-  entities:
-  - uid: 42
-    components:
-    - type: Transform
-      pos: 0.49331844,-13.366474
-      parent: 1
 - proto: BoxFolderNuclearCodes
   entities:
   - uid: 510

@@ -58,7 +58,6 @@
 - type: latheRecipePack
   id: SecurityWeaponsStatic
   recipes:
-  - Flash
   - Stunbaton
   - CombatKnife
   - RiotShield
@@ -93,7 +92,6 @@
   - ExplosivePayload
   - GrenadeBlast
   - GrenadeEMP
-  - GrenadeFlash
   - MagazineGrenadeEmpty
 
 # Shared between secfab and emagged protolathe

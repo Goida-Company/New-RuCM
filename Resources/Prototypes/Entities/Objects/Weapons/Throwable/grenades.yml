@@ -61,51 +61,6 @@
     beepInterval: 2 # 2 beeps total (at 0 and 2)
 
 - type: entity
-  name: flashbang
-  description: Eeeeeeeeeeeeeeeeeeeeee.
-  parent: [ GrenadeBase, BaseSecurityContraband ]
-  id: GrenadeFlashBang
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Grenades/flashbang.rsi
-  - type: FlashOnTrigger
-    range: 7
-  - type: SoundOnTrigger
-    sound:
-      path: "/Audio/Effects/flash_bang.ogg"
-  - type: DeleteOnTrigger
-  - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
-  - type: Appearance
-  - type: TimerTriggerVisuals
-    primingSound:
-      path: /Audio/Effects/countdown.ogg
-  - type: GuideHelp
-    guides:
-    - Security
-    - Antagonists
-  - type: Tag
-    tags:
-    - HandGrenade
-    - GrenadeFlashBang
-
-- type: entity
-  id: GrenadeFlashEffect
-  categories: [ HideSpawnMenu ]
-  components:
-    - type: PointLight
-      enabled: true
-      radius: 5
-      energy: 8
-      netsync: false
-    - type: LightFade
-      duration: 0.5
-    - type: TimedDespawn
-      lifetime: 0.5
-
-#The explosive values for these are pretty god damn mediocre, but SS14's explosion system is hard to understand - this is a good enough approximation of how it was in SS13.
-#Ideally, there should be a weak radius around the bomb outside of its gibbing / spacing range capable of dealing fair damage to players / structures.
-- type: entity
   name: syndicate minibomb
   description: A syndicate-manufactured explosive used to stow destruction and cause chaos.
   parent: [GrenadeBase, BaseSyndicateContraband]
@@ -515,8 +470,6 @@
   - type: Sprite
     sprite: Objects/Weapons/Grenades/grenade.rsi
   - type: DeleteOnTrigger
-  - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
   - type: SoundOnTrigger
     sound:
       path: /Audio/Effects/Emotes/parp1.ogg

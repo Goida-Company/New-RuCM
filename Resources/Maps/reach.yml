@@ -7924,13 +7924,6 @@ entities:
     - type: Transform
       pos: 23.5,-2.5
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 935
-    components:
-    - type: Transform
-      pos: 10.759085,-8.620478
-      parent: 2
 - proto: FlashlightLantern
   entities:
   - uid: 1104

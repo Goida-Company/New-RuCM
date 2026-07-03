@@ -747,7 +747,6 @@
     amount: 6
     whitelist:
       components:
-      - Flash
 
 - type: cargoBounty
   id: BountyRing

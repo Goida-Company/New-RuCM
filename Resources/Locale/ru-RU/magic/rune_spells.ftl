@@ -1,5 +1,3 @@
-ent-ActionFlashRune-name = Флэш-руна
-ent-ActionFlashRune-desc = Вызывает руну, которая мигает при использовании.
 
 ent-ActionExplosionRune-name = Взрывная руна
 ent-ActionExplosionRune-desc = Вызывает руну, которая взрывается при использовании.

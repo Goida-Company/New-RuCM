@@ -82111,18 +82111,6 @@ entities:
     - type: Transform
       pos: -21.5,-17.5
       parent: 2
-- proto: Flash
-  entities:
-  - uid: 22312
-    components:
-    - type: Transform
-      pos: -62.63784,-3.7257838
-      parent: 2
-  - uid: 23306
-    components:
-    - type: Transform
-      pos: -112.761406,-29.411583
-      parent: 2
 - proto: FlashlightLantern
   entities:
   - uid: 22903
@@ -126596,13 +126584,6 @@ entities:
     - type: Transform
       pos: -78.463585,-33.22606
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 7075
-    components:
-    - type: Transform
-      pos: -87.50247,-32.3712
-      parent: 2
 - proto: Lantern
   entities:
   - uid: 22393
@@ -130356,28 +130337,6 @@ entities:
     components:
     - type: Transform
       pos: -107.48633,-20.615337
-      parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 2394
-    components:
-    - type: Transform
-      pos: -78.5,-27.5
-      parent: 2
-  - uid: 17790
-    components:
-    - type: Transform
-      anchored: False
-      pos: -89.5,-20.5
-      parent: 2
-    - type: TriggerOnProximity
-      enabled: False
-    - type: Physics
-      bodyType: Dynamic
-  - uid: 19632
-    components:
-    - type: Transform
-      pos: -84.5,-20.5
       parent: 2
 - proto: PortableGeneratorJrPacman
   entities:

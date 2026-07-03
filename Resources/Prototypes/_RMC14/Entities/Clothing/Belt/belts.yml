@@ -2502,13 +2502,11 @@
       - RMCShellShotgunHDSG
       - RMCMagazineRevolver
       - Donut
-      - RMCGrenadeFlashBang
       - Radio
       - Binoculars
       - CommandTablet
       components:
       - Handcuff
-      - Flash
       - FlashOnTrigger
       - Stunbaton
       - ForensicScanner

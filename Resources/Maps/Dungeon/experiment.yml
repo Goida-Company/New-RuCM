@@ -6810,13 +6810,6 @@ entities:
     - type: Transform
       pos: 14.51857,28.524914
       parent: 1653
-- proto: FlashPayload
-  entities:
-  - uid: 1105
-    components:
-    - type: Transform
-      pos: 6.6041045,15.74082
-      parent: 1653
 - proto: Floodlight
   entities:
   - uid: 664

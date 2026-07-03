@@ -32,7 +32,6 @@
     belt: ClothingBeltHolsterFilled
   storage:
     back:
-    - Flash
     - ForensicPad
     - ForensicScanner
 

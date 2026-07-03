@@ -15422,18 +15422,6 @@ entities:
     - type: Transform
       pos: 0.5552447,-53.26765
       parent: 30
-- proto: BoxFlashbang
-  entities:
-  - uid: 2002
-    components:
-    - type: Transform
-      pos: -39.603897,53.49992
-      parent: 30
-  - uid: 2110
-    components:
-    - type: Transform
-      pos: -28.454596,60.628906
-      parent: 30
 - proto: BoxFolderBlack
   entities:
   - uid: 5050
@@ -66109,13 +66097,6 @@ entities:
     - type: Transform
       pos: -34.5,-21.5
       parent: 30
-- proto: Flash
-  entities:
-  - uid: 8346
-    components:
-    - type: Transform
-      pos: 12.288418,22.985573
-      parent: 30
 - proto: FlashlightLantern
   entities:
   - uid: 1634
@@ -103103,13 +103084,6 @@ entities:
     - type: Transform
       pos: -28.479252,15.714678
       parent: 30
-- proto: LampInterrogator
-  entities:
-  - uid: 1773
-    components:
-    - type: Transform
-      pos: -27.415504,43.902733
-      parent: 30
 - proto: Lantern
   entities:
   - uid: 17958
@@ -106536,18 +106510,6 @@ entities:
     components:
     - type: Transform
       pos: -60.5,57.5
-      parent: 30
-- proto: PortableFlasher
-  entities:
-  - uid: 2719
-    components:
-    - type: Transform
-      pos: -40.5,51.5
-      parent: 30
-  - uid: 2720
-    components:
-    - type: Transform
-      pos: -39.5,51.5
       parent: 30
 - proto: PortableGeneratorJrPacman
   entities:

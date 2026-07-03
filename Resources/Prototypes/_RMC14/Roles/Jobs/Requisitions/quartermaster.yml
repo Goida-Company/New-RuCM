@@ -64,7 +64,6 @@
     gloves: CMHandsInsulated
     id: CMIDCardQuartermaster
     ears: CMHeadsetQM
-    pocket1: CMFlash
     pocket2: RMCPouchGeneralLarge
   inhand:
   - CMStampApproved

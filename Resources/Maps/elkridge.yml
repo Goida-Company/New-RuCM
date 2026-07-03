@@ -89331,13 +89331,6 @@ entities:
     - type: Transform
       pos: 0.46948135,19.865473
       parent: 2
-- proto: LampInterrogator
-  entities:
-  - uid: 2162
-    components:
-    - type: Transform
-      pos: -4.490166,-35.230995
-      parent: 2
 - proto: LargeBeaker
   entities:
   - uid: 8820
@@ -92469,13 +92462,6 @@ entities:
     components:
     - type: Transform
       pos: 38.28721,25.680704
-      parent: 2
-- proto: PortableFlasher
-  entities:
-  - uid: 15004
-    components:
-    - type: Transform
-      pos: 2.5,-29.5
       parent: 2
 - proto: PortableGeneratorJrPacman
   entities:
@@ -98851,13 +98837,6 @@ entities:
     components:
     - type: Transform
       pos: -8.518723,57.69675
-      parent: 2
-- proto: SciFlash
-  entities:
-  - uid: 11178
-    components:
-    - type: Transform
-      pos: -13.190674,13.584721
       parent: 2
 - proto: ScrapCamera
   entities:

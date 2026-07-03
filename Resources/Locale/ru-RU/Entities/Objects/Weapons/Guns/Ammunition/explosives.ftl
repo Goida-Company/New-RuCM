@@ -10,7 +10,6 @@ ent-GrenadeBaton-name = дубинка граната
 
 ent-GrenadeBlast-name = взрывная граната
 
-ent-GrenadeFlash-name = светошумовая граната
 
 ent-GrenadeFrag-name = осколочная граната
 

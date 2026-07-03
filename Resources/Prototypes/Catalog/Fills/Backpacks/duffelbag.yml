@@ -119,8 +119,6 @@
         amount: 2
       - id: GrenadeBlast
         amount: 2
-      - id: GrenadeFlash
-        amount: 2
       - id: GrenadeFrag
         amount: 2
 

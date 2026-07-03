@@ -22,11 +22,9 @@
       - RMCShellShotgunHDSG
       - RMCMagazineRevolver
       - Donut
-      - RMCGrenadeFlashBang
       - Radio
       components:
       - Handcuff
-      - Flash
       - FlashOnTrigger
       - Stunbaton
       - ForensicScanner

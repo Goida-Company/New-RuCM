@@ -38,33 +38,6 @@
     - RMCGrenadeM40
 
 - type: entity
-  name: flashbang
-  description: Excellent for stopping groups of Rioters. Don't expect sunglasses to protect you...
-  parent: CMGrenadeBase
-  id: RMCGrenadeFlashBang
-  components:
-  - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Grenades/flashbang.rsi
-  - type: SoundOnTrigger
-    sound:
-      path: "/Audio/Effects/flash_bang.ogg"
-  - type: DeleteOnTrigger
-  - type: SpawnOnTrigger
-    proto: GrenadeFlashEffect
-  - type: Appearance
-  - type: TimerTriggerVisuals
-    primingSound:
-      path: /Audio/Effects/countdown.ogg
-  - type: Tag
-    tags:
-    - RMCGrenadeRiot
-    - Grenade
-    - RMCGrenadeFlashBang
-  - type: RequiresSkill
-    skills:
-      RMCSkillPolice: 1
-
-- type: entity
   parent:
   - CMGrenadeBase
   - RMCM40DPTags
@@ -568,9 +541,6 @@
 
 - type: Tag
   id: RMCGrenadeRiot
-
-- type: Tag
-  id: RMCGrenadeFlashBang
 
 - type: Tag
   id: RMCGrenadeIED

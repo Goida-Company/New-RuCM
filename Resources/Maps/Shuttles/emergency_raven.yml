@@ -1960,13 +1960,6 @@ entities:
     - type: Transform
       pos: 17.506413,-9.3250265
       parent: 1
-- proto: BoxFlashbang
-  entities:
-  - uid: 2145
-    components:
-    - type: Transform
-      pos: 16.89938,14.641928
-      parent: 1
 - proto: BoxFolderBlue
   entities:
   - uid: 2224

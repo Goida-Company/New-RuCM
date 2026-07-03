@@ -101250,23 +101250,6 @@ entities:
     - type: Transform
       pos: 245.5,121.5
       parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 7841
-    components:
-    - type: Transform
-      pos: 143.5,96.5
-      parent: 1
-  - uid: 7842
-    components:
-    - type: Transform
-      pos: 143.5,96.5
-      parent: 1
-  - uid: 7843
-    components:
-    - type: Transform
-      pos: 170.68968,108.59319
-      parent: 1
 - proto: RMCPersonalDesktop
   entities:
   - uid: 7844

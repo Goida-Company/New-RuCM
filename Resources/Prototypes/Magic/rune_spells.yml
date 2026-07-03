@@ -11,18 +11,6 @@
 
 - type: entity
   parent: BaseRuneAction
-  id: ActionFlashRune
-  name: Flash Rune
-  description: Summons a rune that flashes if used.
-  components:
-  - type: Action
-    useDelay: 10
-  - type: InstantAction
-    event: !type:InstantSpawnSpellEvent
-      prototype: FlashRune
-
-- type: entity
-  parent: BaseRuneAction
   id: ActionExplosionRune
   name: Explosion Rune
   description: Summons a rune that explodes if used.

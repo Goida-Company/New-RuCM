@@ -169119,18 +169119,6 @@ entities:
     - type: Transform
       pos: -216.5,-137.5
       parent: 1
-- proto: RMCGrenadeFlashBang
-  entities:
-  - uid: 17985
-    components:
-    - type: Transform
-      pos: -97.13602,-122.513054
-      parent: 1
-  - uid: 17986
-    components:
-    - type: Transform
-      pos: -97.28185,-122.71444
-      parent: 1
 - proto: RMCGrenadeMolotov
   entities:
   - uid: 16869
@@ -186119,44 +186107,6 @@ entities:
     components:
     - type: Transform
       pos: -159.5,-93.5
-      parent: 1
-- proto: RMCPacketGrenadeFlashBang
-  entities:
-  - uid: 16903
-    components:
-    - type: Transform
-      parent: 16902
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 16904
-    components:
-    - type: Transform
-      parent: 16902
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 16905
-    components:
-    - type: Transform
-      parent: 16902
-    - type: Physics
-      canCollide: False
-    - type: InsideEntityStorage
-  - uid: 20446
-    components:
-    - type: Transform
-      pos: -97.63602,-122.27
-      parent: 1
-  - uid: 20447
-    components:
-    - type: Transform
-      pos: -97.58046,-122.53388
-      parent: 1
-  - uid: 20448
-    components:
-    - type: Transform
-      pos: -97.32352,-122.21444
       parent: 1
 - proto: RMCPacketGrenadeSmokeFilled
   entities:

@@ -286,8 +286,6 @@
         amount: 4
     - name: Assembly Components
       entries:
-      - id: CMFlash
-        amount: 4
       - id: RMCPowerCellHigh
         amount: 4
       - id: RMCPowerCell
