@@ -10,7 +10,7 @@
 
 - type: rmcConstruction
   id: AU14MakeShiftZipties
-  name: makeshift zipties
+  name: rmc-construction-zipties-makeshift # RuMC edit
   prototype: AU14MakeShiftZipties
   doAfterTime: 3
   materialCost: 5

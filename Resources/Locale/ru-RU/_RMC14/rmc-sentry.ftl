@@ -64,12 +64,12 @@ health-examinable-sentry-Shock-75 = [color=crimson]{CAPITALIZE(SUBJECT($target))
 rmc-sentry-not-emergency = {CAPITALIZE($deployer)} можно активировать только в чрезвычайной ситуации.
 rmc-sentry-deploy = Вы развернули {$spawned}
 
-rmc-sentry-disassembled-with-wrench = Его можно разобрать с помощью [color=cyan]wrench[/color].
+rmc-sentry-disassembled-with-wrench = Это можно разобрать с помощью [color=cyan]гаечного ключа[/color].
 
 rmc-sentry-faction-set-with-multitool = Используйте [color=cyan]мультитул[/color], чтобы назначить или очистить фракцию.
-rmc-sentry-faction-dialog-title = Конфигурация караула
+rmc-sentry-faction-dialog-title = Конфигурация турели
 rmc-sentry-faction-assign = Назначить моей фракции
-rmc-sentry-faction-clear = Четкое назначение фракций
+rmc-sentry-faction-clear = Очистить назначение фракции
 rmc-sentry-faction-assigned = {CAPITALIZE($sentry)} теперь принадлежит вашей фракции.
-rmc-sentry-faction-cleared = Назначение фракции {CAPITALIZE($sentry)} очищено — он не будет стрелять, пока не будет переназначен.
+rmc-sentry-faction-cleared = Назначение фракции {CAPITALIZE($sentry)} очищено — не будет стрелять, пока не будет переназначено.
 rmc-sentry-no-faction-set = {CAPITALIZE($sentry)} не назначена фракция — сначала используйте [color=cyan]мультитул[/color], чтобы настроить ее.

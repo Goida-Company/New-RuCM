@@ -224,6 +224,9 @@
     },
     {
       "name": "paper_stamp-wizard"
+    },
+    {
+      "name": "paper_stamp-circle"
     }
   ]
 }

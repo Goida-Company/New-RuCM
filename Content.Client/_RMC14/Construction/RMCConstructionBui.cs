@@ -30,7 +30,7 @@ public sealed partial class RMCConstructionBui : BoundUserInterface
         base.Open();
 
         _window = this.CreateWindow<RMCConstructionWindow>();
-        _window.Title = $"Construction using the {EntMan.GetComponent<MetaDataComponent>(Owner).EntityName}";
+        _window.Title = Loc.GetString("rmc-construction-window-title", ("name", EntMan.GetComponent<MetaDataComponent>(Owner).EntityName)); // RuMC edit
 
         if (!EntMan.TryGetComponent(Owner, out RMCConstructionItemComponent? constructionItem))
             return;
@@ -69,10 +69,10 @@ public sealed partial class RMCConstructionBui : BoundUserInterface
             return;
         }
 
-        var nameString = Loc.GetString("rmc-construction-list", ("name", build.Name));
+        var nameString = Loc.GetString("rmc-construction-list", ("name", Loc.GetString(build.Name))); // RuMC edit
 
         if (build.MaterialCost != null)
-            nameString = Loc.GetString("rmc-construction-entry", ("name", build.Name), ("amount", build.MaterialCost), ("material", Owner));
+            nameString = Loc.GetString("rmc-construction-entry", ("name", Loc.GetString(build.Name)), ("amount", build.MaterialCost), ("material", Owner)); // RuMC edit
 
         var control = new RMCBuildChoiceControl();
         control.Set(nameString);
@@ -116,7 +116,7 @@ public sealed partial class RMCConstructionBui : BoundUserInterface
             return;
 
         var control = new RMCBuildChoiceControl();
-        control.Set(build.Name);
+        control.Set(Loc.GetString(build.Name)); // RuMC edit
 
         control.Button.OnPressed += _ =>
         {
@@ -146,6 +146,6 @@ public sealed partial class RMCConstructionBui : BoundUserInterface
             return;
 
         if (EntMan.TryGetComponent(Owner, out StackComponent? stack))
-            _window.MaterialLabel.Text = $"Amount Left: {stack.Count}";
+            _window.MaterialLabel.Text = Loc.GetString("rmc-construction-amount-left", ("count", stack.Count)); // RuMC edit
     }
 }

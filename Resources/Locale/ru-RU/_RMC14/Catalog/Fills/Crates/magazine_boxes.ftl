@@ -1,31 +1,92 @@
-ent-RMCCrateBoxMagazinePistolM13Drum = Ящик магазинов (M13, 12x барабанных)
-ent-RMCCrateBoxMagazinePistolM13Ext = Ящик магазинов (M13, 14x удлиненных)
-ent-RMCCrateBoxMagazinePistolM13 = Ящик магазинов (M13, 22x обычных)
-ent-RMCCrateBoxMagazineBreaching = Боеприпасы XM51 (2x магазина) (1x малая коробка штурмовых патронов)
-ent-RMCCrateBoxMagazineSentryFireSmoke = Боеприпасы турели ОН 60-FP (x2)
-ent-RMCCrateBoxMagazineSentryFireBlue = Боеприпасы турели ОН 55-FA (x2)
-ent-RMCCrateBoxMagazineSentryFire = Боеприпасы турели ОН 42-FM (x2)
-ent-RMCCrateBoxMagazineSentryShotgun = Боеприпасы турели ОН 12-G (x2)
-ent-RMCCrateBoxMagazineSentry = Боеприпасы турели ОН 571-C (x2)
-ent-RMCCrateBoxMagazineRevolverM44Marksman = Ящик обойм (Снайперский M44, 16x)
-ent-RMCCrateBoxMagazineM44Revolver = Ящик обойм (M44, 16x)
-ent-RMCCrateBoxMagazineM54CE2 = Ящик магазинов M54CE2 HAR (2x коробки с патронами HAR)
-ent-RMCCrateBoxMagazineSmartPistol = Ящик магазинов (SU-6, 16x)
-ent-RMCCrateMagazineNapthalUT = Топливо M34 UT-Нафталин (4x)
-ent-RMCCrateMagazineSmartGun = Ящик барабанов для ML66A (2x)
-ent-RMCCrateBatterySmartGun = Ящик батарей для ML66A (4x)
-ent-RMCCrateBoxMagazinePistolMK80 = Ящик магазинов (MK80, 16x)
-ent-RMCCrateBoxMagazinePistolM77AP = Ящик магазинов (M77 БП, 16x)
-ent-RMCCrateBoxMagazinePistolM1984AP = Ящик магазинов (M1984, 16x БП)
-ent-RMCCrateBoxMagazinePistolM1984 = Ящик магазинов (M1984, 16x обычных)
-ent-RMCCrateBoxMagazineSMGM63Ext = Ящик магазинов (M63, 12x обычных)
-ent-RMCCrateBoxMagazineSMGM63AP = Ящик магазинов (M63, 12x БП)
-ent-RMCCrateBoxMagazineSMGM63 = Ящик магазинов (M63, 12x обычных)
-ent-RMCCrateBoxMagazineRifleM4SPRExt = Ящик магазинов (M4SPR, 12x удлиненных)
-ent-RMCCrateBoxMagazineRifleM4SPRAP = Ящик магазинов (M4SPR, 16x БП)
-ent-RMCCrateBoxMagazineRifleM4SPR = Ящик магазинов (M4SPR, 16x обычных)
-ent-RMCCrateMagazineRifleM54CE2HT = Ящик магазинов M54CE2 HAR (2x коробки с патронами HAR HT)
-ent-RMCCrateMagazineRifleM54CE2 = Ящик магазинов M54CE2 HAR (2x коробки с патронами HAR)
-ent-RMCCrateBoxMagazineRifleM54CExt = Ящик магазинов (M54C, 8x удлиненных)
-ent-RMCCrateBoxMagazineRifleM54CAP = Ящик магазинов (M54C, 10x БП)
-ent-RMCCrateBoxMagazineRifleM54C = Ящик магазинов (M54C, 10x обычных)
+ent-RMCCrateBoxMagazinePistolM13Drum = ящик магазинов (M13, 12x барабанных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazinePistolM13Ext = ящик магазинов (M13, 14x удлинённых)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazinePistolM13 = ящик магазинов (M13, 22x обычных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineBreaching = ящик боеприпасов XM51 (2x магазина) (1x малая коробка штурмовых патронов)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSentryFireSmoke = ящик боеприпасов турели ОН 60-FP (x2)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSentryFireBlue = ящик боеприпасов турели ОН 55-FA (x2)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSentryFire = ящик боеприпасов турели ОН 42-FM (x2)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSentryShotgun = ящик боеприпасов турели ОН 12-G (x2)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSentry = ящик боеприпасов турели ОН 571-C (x2)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRevolverM44Marksman = ящик спидлоадеров (Снайперский M44, 16x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineM44Revolver = ящик спидлоадеров (M44, 16x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineM54CE2 = ящик магазинов M54CE2 (2x коробчатых магазина)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSmartPistol = ящик магазинов (SU-6, 16x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateMagazineNapthalUT = ящик топлива M34 UT-Нафталин (4x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateMagazineSmartGun = ящик барабанов для ML66A (2x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBatterySmartGun = ящик батарей для ML66A (4x)
+    .desc = Ящик со снаряжением.
+
+ent-RMCCrateBoxMagazinePistolMK80 = ящик магазинов (MK80, 16x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazinePistolM77AP = ящик магазинов (M77 ББ, 16x)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazinePistolM1984AP = ящик магазинов (M1984, 16x ББ)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazinePistolM1984 = ящик магазинов (M1984, 16x обычных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSMGM63Ext = ящик магазинов (M63, 12x обычных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSMGM63AP = ящик магазинов (M63, 12x ББ)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineSMGM63 = ящик магазинов (M63, 12x обычных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM4SPRExt = ящик магазинов (M4SPR, 12x удлинённых)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM4SPRAP = ящик магазинов (M4SPR, 16x ББ)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM4SPR = ящик магазинов (M4SPR, 16x обычных)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateMagazineRifleM54CE2HT = ящик магазинов M54CE2 (2x коробчатых магазина СБ)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateMagazineRifleM54CE2 = ящик магазинов M54CE2 (2x коробчатых магазина)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM54CExt = ящик магазинов (M54C, 8x удлинённых)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM54CAP = ящик магазинов (M54C, 10x ББ)
+    .desc = Ящик с боеприпасами.
+
+ent-RMCCrateBoxMagazineRifleM54C = ящик магазинов (M54C, 10x обычных)
+    .desc = Ящик с боеприпасами.

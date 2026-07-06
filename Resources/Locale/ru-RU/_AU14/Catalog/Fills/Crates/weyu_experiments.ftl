@@ -1,8 +1,19 @@
-ent-AU14CrateSecureWeYuXenoEggs-name = защищённый ящик We-Yu
-ent-AU14CrateSecureWeYuXenoEggs-desc = Защищённый ящик с эмблемой We-Yu.
-ent-AU14CrateSecureWeYuMindBreaker-name = защищённый ящик We-Yu
-ent-AU14CrateSecureWeYuMindBreaker-desc = Защищённый ящик с эмблемой We-Yu.
-ent-AU14CrateSecureWeYuDrug-name = защищённый ящик We-Yu
-ent-AU14CrateSecureWeYuDrug-desc = Защищённый ящик с эмблемой We-Yu.
-ent-AU14CrateSecureWeYuMMI-name = защищённый ящик We-Yu
-ent-AU14CrateSecureWeYuMMI-desc = Защищённый ящик с эмблемой We-Yu.
+ent-AU14CrateSecureWeYuXenoEggs = защищённый ящик Ве-Ю
+    .desc = Защищённый ящик с эмблемой Ве-Ю. Внутри странные яйца.
+    .suffix = Эксперимент, Яйца
+
+ent-AU14CrateSecureWeYuMindBreaker = защищённый ящик Ве-Ю
+    .desc = Защищённый ящик с эмблемой Ве-Ю. Внутри пробирки с красной жидкостью.
+    .suffix = Эксперимент, Разрушитель разумв
+
+ent-AU14CrateSecureWeYuDrug = защищённый ящик Ве-Ю
+    .desc = Защищённый ящик с эмблемой Ве-Ю. Внутри таблетницы.
+    .suffix = Эксперимент, Демон скорости
+
+ent-AU14CrateSecureWeYuMMI = защищённый ящик Ве-Ю
+    .desc = Защищённый ящик с эмблемой Ве-Ю. Внутри странный аппарат и имплантер.
+    .suffix = Эксперимент, Мозговой интерфейс
+
+ent-AU14CrateSecureWeYuClottedSyringes = защищённый ящик Ве-Ю
+    .desc = Защищённый ящик с эмблемой Ве-Ю. Внутри шприцы с мутной жижей.
+    .suffix = Эксперимент, Абоминация

@@ -5,6 +5,7 @@ au14-loadout-group-synth-pouches-right = Подсумки синтетика (п
 au14-loadout-group-gloves = Перчатки
 au14-loadout-group-synth-suit-special = Костюм (Особый)
 au14-loadout-group-synth-equipment = Снаряжение синтетика
+rucm-loadout-group-synth-reset-keys = Ключи сброса
 AU14JobGOVFORAuxSupportSynth-loadout = Экипировка вспомогательного синтетика ГОВФОР
 au14-loadout-group-civilian-footwear = Гражданская обувь
 au14-loadout-group-civilian-jumpsuit = Гражданские комбинезоны
@@ -21,6 +22,7 @@ au14-loadout-group-military-hats = Военные головные уборы
 au14-loadout-group-military-jumpsuit = Военная полевая форма
 au14-loadout-group-military-patches = Военные нашивки
 au14-loadout-group-role-clf-id = Поддельные удостоверения
+
 
 au14-loadout-group-commander-sidearm-belt = Ремень для пистолета
 

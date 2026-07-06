@@ -14,13 +14,13 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCDonutBoxBuild
-  name: donut box
+  name: rmc-construction-donut-box # RuMC edit
   prototype: RMCBoxDonutEmpty
 
 # pizza boxes
 - type: rmcConstruction
   id: RMCPizzaBoxList
-  name: pizza boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-pizza-boxes # RuMC edit
   prototype: RMCBoxPizza
   listed:
   - RMCPizzaBoxBuild
@@ -29,19 +29,19 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCPizzaBoxBuild
-  name: pizza box
+  name: rmc-construction-pizza-box # RuMC edit
   prototype: RMCBoxPizza
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCPizzaGalaxyBoxBuild
-  name: Pizza Galaxy pizza box
+  name: rmc-construction-pizza-box-galaxy # RuMC edit
   prototype: RMCBoxPizzaGalaxy
 
 # folders
 - type: rmcConstruction
   id: RMCFolderList
-  name: folders (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-folders # RuMC edit
   prototype: CMFolderBase
   listed:
   - RMCFolderBlueEmptyBuild
@@ -53,37 +53,37 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCFolderBlueEmptyBuild
-  name: blue folder
+  name: rmc-construction-folder-blue # RuMC edit
   prototype: CMFolderBlueEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCFolderBlackEmptyBuild
-  name: black folder
+  name: rmc-construction-folder-black # RuMC edit
   prototype: CMFolderBlackEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCFolderRedEmptyBuild
-  name: red folder
+  name: rmc-construction-folder-red # RuMC edit
   prototype: CMFolderRedEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCFolderWhiteEmptyBuild
-  name: white folder
+  name: rmc-construction-folder-white # RuMC edit
   prototype: CMFolderWhiteEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCFolderYellowEmptyBuild
-  name: yellow folder
+  name: rmc-construction-folder-yellow # RuMC edit
   prototype: CMFolderYellowEmpty
 
 # empty ammunition boxes
 - type: rmcConstruction
   id: RMCEmptyAmmoBoxesList
-  name: ammunition boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-ammo-boxes # RuMC edit
   prototype: RMCBoxBulletsBase
   listed:
   - RMCBoxBulletsRifleEmptyBuild
@@ -116,162 +116,163 @@
 - type: rmcConstruction #10x24mm
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsRifleEmptyBuild
-  name: rifle ammunition box (10×24mm)
+  name: rmc-construction-ammo-box-rifle-10x24 # RuMC edit
   prototype: RMCBoxBulletsRifleEmpty
 
 - type: rmcConstruction #10x24mm AP
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsRifleAPEmptyBuild
-  name: rifle ammunition box (10×24mm AP)
+  name: rmc-construction-ammo-box-rifle-10x24-ap # RuMC edit
   prototype: RMCBoxBulletsRifleAPEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleSLREmptyBuild
-  name: rifle ammunition box (7×43mm)
+  name: rmc-construction-ammo-box-rifle-7x43 # RuMC edit
   prototype: CMUBoxBulletsRifleSLREmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleSLRAPEmptyBuild
-  name: rifle ammunition box (7×43mm AP)
+  name: rmc-construction-ammo-box-rifle-7x43-ap # RuMC edit
   prototype: CMUBoxBulletsRifleSLRAPEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleL23EmptyBuild
-  name: rifle ammunition box (8.88×51mm)
+  name: rmc-construction-ammo-box-rifle-8x51 # RuMC edit
   prototype: CMUBoxBulletsRifleL23Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleL23APEmptyBuild
-  name: rifle ammunition box (8.88×51mm AP)
+  name: rmc-construction-ammo-box-rifle-8x51-ap # RuMC edit
   prototype: CMUBoxBulletsRifleL23APEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleType71EmptyBuild
-  name: rifle ammunition box (5.45×39mm)
+  name: rmc-construction-ammo-box-rifle-5x39 # RuMC edit
   prototype: CMUBoxBulletsRifleType71Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleType71APEmptyBuild
-  name: rifle ammunition box (5.45×39mm AP)
+  name: rmc-construction-ammo-box-rifle-5x39-ap # RuMC edit
   prototype: CMUBoxBulletsRifleType71APEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleAG80EmptyBuild
-  name: rifle ammunition box (9.7×16mm)
+  name: rmc-construction-ammo-box-rifle-9x16 # RuMC edit
   prototype: CMUBoxBulletsRifleAG80Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleAG80APEmptyBuild
-  name: rifle ammunition box (9.7×16mm AP)
-  prototype: CMUBoxBulletsRifleAG80APEmpty  
-  
+  name: rmc-construction-ammo-box-rifle-9x16-ap # RuMC edit
+  prototype: CMUBoxBulletsRifleAG80APEmpty
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifle556x45MMEmptyBuild
-  name: rifle ammunition box (5.56×45mm)
+  name: rmc-construction-ammo-box-rifle-5x45 # RuMC edit
   prototype: CMUBoxBulletsRifle556x45MMEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsRifleMAREmptyBuild
-  name: rifle ammunition box (7.62×39mm)
+  name: rmc-construction-ammo-box-rifle-7x39 # RuMC edit
   prototype: CMUBoxBulletsRifleMAREmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsSMGEmptyBuild
-  name: SMG ammunition box (10×20mm)
+  name: rmc-construction-ammo-box-smg-10x20 # RuMC edit
   prototype: RMCBoxBulletsSMGEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsSMGAPEmptyBuild
-  name: SMG ammunition box (10×20mm AP)
+  name: rmc-construction-ammo-box-smg-10x20-ap # RuMC edit
   prototype: RMCBoxBulletsSMGAPEmpty
- 
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsSMGP90EmptyBuild
-  name: SMG ammunition box (5.7×28mm)
+  name: rmc-construction-ammo-box-smg-5x28 # RuMC edit
   prototype: CMUBoxBulletsSMGP90Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsSMGP90APEmptyBuild
-  name: SMG ammunition box (5.7×28mm AP)
-  prototype: CMUBoxBulletsSMGP90APEmpty  
-  
+  name: rmc-construction-ammo-box-smg-5x28-ap # RuMC edit
+  prototype: CMUBoxBulletsSMGP90APEmpty
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsSMGType19EmptyBuild
-  name: SMG ammunition box (7.62×25mm)
+  name: rmc-construction-ammo-box-smg-7x25 # RuMC edit
   prototype: CMUBoxBulletsSMGType19Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsSMG9MMEmptyBuild
-  name: SMG ammunition box (9×19mm)
+  name: rmc-construction-ammo-box-smg-9x19 # RuMC edit
   prototype: CMUBoxBulletsSMG9MMEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsPistolEmptyBuild
-  name: pistol ammunition box (10×20mm-APC)
+  name: rmc-construction-ammo-box-pistol-10x20 # RuMC edit
   prototype: RMCBoxBulletsPistolEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxBulletsPistolAPEmptyBuild
-  name: pistol ammunition box (10×20mm-APC (AP))
+  name: rmc-construction-ammo-box-pistol-10x20-ap # RuMC edit
   prototype: RMCBoxBulletsPistolAPEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistol9MMEmptyBuild
-  name: pistol ammunition box (9×19mm Parabellum)
+  name: rmc-construction-ammo-box-pistol-9x19 # RuMC edit
   prototype: CMUBoxBulletsPistol9MMEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistol9MMAPEmptyBuild
-  name: pistol ammunition box (9×19mm AP)
+  name: rmc-construction-ammo-box-pistol-9x19-ap # RuMC edit
   prototype: CMUBoxBulletsPistol9MMAPEmpty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistol9MMSHEmptyBuild
-  name: pistol ammunition box (9×19mm Squash-Head)
+  name: rmc-construction-ammo-box-pistol-9x19-sh # RuMC edit
   prototype: CMUBoxBulletsPistol9MMSHEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistolType73EmptyBuild
-  name: pistol ammunition box (7.62×25mm)
+  name: rmc-construction-ammo-box-pistol-7x25 # RuMC edit
   prototype: CMUBoxBulletsPistolType73Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistol45EmptyBuild
-  name: pistol ammunition box (.45)
+  name: rmc-construction-ammo-box-pistol-45 # RuMC edit
   prototype: CMUBoxBulletsPistol45Empty
-  
+
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: CMUBoxBulletsPistol50EmptyBuild
-  name: pistol ammunition box (.50)
+  name: rmc-construction-ammo-box-pistol-50 # RuMC edit
   prototype: CMUBoxBulletsPistol50Empty
+
 # empty rifle magazine boxes
 - type: rmcConstruction
   id: RMCEmptyRifleMagazineBoxesList
-  name: rifle magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-magazine-boxes-rifle # RuMC edit
   prototype: RMCBoxMagazineRifleBase
   listed:
   - RMCBoxMagazineRifleM54CEmptyBuild
@@ -290,67 +291,67 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CEmptyBuild
-  name: M54C magazine box
+  name: rmc-construction-magazine-box-m54c # RuMC edit
   prototype: RMCBoxMagazineRifleM54CEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CAPEmptyBuild
-  name: M54C magazine box (AP)
+  name: rmc-construction-magazine-box-m54c-ap # RuMC edit
   prototype: RMCBoxMagazineRifleM54CAPEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM54CExtEmptyBuild
-  name: M54C magazine box (Ext)
+  name: rmc-construction-magazine-box-m54c-ext # RuMC edit
   prototype: RMCBoxMagazineRifleM54CExtEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPREmptyBuild
-  name: M4SPR magazine box
+  name: rmc-construction-magazine-box-m4spr # RuMC edit
   prototype: RMCBoxMagazineRifleM4SPREmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPRAPEmptyBuild
-  name: M4SPR magazine box (AP)
+  name: rmc-construction-magazine-box-m4spr-ap # RuMC edit
   prototype: RMCBoxMagazineRifleM4SPRAPEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM4SPRExtEmptyBuild
-  name: M4SPR magazine box (Ext)
+  name: rmc-construction-magazine-box-m4spr-ext # RuMC edit
   prototype: RMCBoxMagazineRifleM4SPRExtEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxBullets458EmptyBuild
-  name: .458 SOCOM bullet bundle box
+  name: rmc-construction-ammo-box-458-socom # RuMC edit
   prototype: RMCBoxBullets458Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleM16EmptyBuild
-  name: M16 magazine box
+  name: rmc-construction-magazine-box-m16 # RuMC edit
   prototype: RMCBoxMagazineRifleM16Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleSSG45EmptyBuild
-  name: SSG45 magazine box
+  name: rmc-construction-magazine-box-ssg45 # RuMC edit
   prototype: RMCBoxMagazineRifleSSG45Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRifleSSG45APEmptyBuild
-  name: SSG45 magazine box (AP)
+  name: rmc-construction-magazine-box-ssg45-ap # RuMC edit
   prototype: RMCBoxMagazineRifleSSG45APEmpty
 
 # empty smg magazine boxes
 - type: rmcConstruction
   id: RMCEmptySMGMagazineBoxesList
-  name: SMG magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-magazine-boxes-smg # RuMC edit
   prototype: RMCBoxMagazineSMGBase
   listed:
   - RMCBoxMagazineSMGM63EmptyBuild
@@ -362,31 +363,31 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63EmptyBuild
-  name: M63 magazine box
+  name: rmc-construction-magazine-box-m63 # RuMC edit
   prototype: RMCBoxMagazineSMGM63Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63APEmptyBuild
-  name: M63 magazine box (AP)
+  name: rmc-construction-magazine-box-m63-ap # RuMC edit
   prototype: RMCBoxMagazineSMGM63APEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGM63ExtEmptyBuild
-  name: M63 magazine box (Ext)
+  name: rmc-construction-magazine-box-m63-ext # RuMC edit
   prototype: RMCBoxMagazineSMGM63ExtEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineSMGNailgunEmptyBuild
-  name: nailgun magazine box
+  name: rmc-construction-magazine-box-nailgun # RuMC edit
   prototype: RMCBoxMagazineSMGNailgunEmpty
 
 # empty pistol magazine boxes
 - type: rmcConstruction
   id: RMCEmptyPistolMagazineBoxesList
-  name: pistol magazine boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-magazine-boxes-pistol # RuMC edit
   prototype: RMCBoxMagazinePistolBase
   listed:
   - RMCBoxMagazinePistolM1984EmptyBuild
@@ -412,92 +413,92 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM1984EmptyBuild
-  name: M1984 magazine box
+  name: rmc-construction-magazine-box-m1984 # RuMC edit
   prototype: RMCBoxMagazinePistolM1984Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM1984APEmptyBuild
-  name: M1984 magazine box (AP)
+  name: rmc-construction-magazine-box-m1984-ap # RuMC edit
   prototype: RMCBoxMagazinePistolM1984APEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolMK80EmptyBuild
-  name: MK80 magazine box
+  name: rmc-construction-magazine-box-mk80 # RuMC edit
   prototype: RMCBoxMagazinePistolMK80Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: AU14BoxMagazinePistolL165A1EmptyBuild
-  name: L165A1 magazine box
+  name: rmc-construction-magazine-box-l165a1 # RuMC edit
   prototype: AU14BoxMagazinePistolL165A1Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
 
   id: RMCBoxMagazinePistolSU6EmptyBuild
-  name: SU-6 magazine box
+  name: rmc-construction-magazine-box-su6 # RuMC edit
   prototype: RMCBoxMagazinePistolSU6Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM77APEmptyBuild
-  name: M77 magazine box (AP)
+  name: rmc-construction-magazine-box-m77-ap # RuMC edit
   prototype: RMCBoxMagazinePistolM77APEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRevolverM44EmptyBuild
-  name: M44 speedloader box
+  name: rmc-construction-speedloader-box-m44 # RuMC edit
   prototype: RMCBoxMagazineRevolverM44Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazineRevolverM44MarksmanEmptyBuild
-  name: M44 speedloader box (Marksman)
+  name: rmc-construction-speedloader-box-m44-marksman # RuMC edit
   prototype: RMCBoxMagazineRevolverM44MarksmanEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13EmptyBuild
-  name: M13 magazine box
+  name: rmc-construction-magazine-box-m13 # RuMC edit
   prototype: RMCBoxMagazinePistolM13Empty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13ExtEmptyBuild
-  name: M13 magazine box (Ext)
+  name: rmc-construction-magazine-box-m13-ext # RuMC edit
   prototype: RMCBoxMagazinePistolM13ExtEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13DrumEmptyBuild
-  name: M13 magazine box (Drum)
+  name: rmc-construction-magazine-box-m13-drum # RuMC edit
   prototype: RMCBoxMagazinePistolM13DrumEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13APEmptyBuild
-  name: M13 magazine box (AP)
+  name: rmc-construction-magazine-box-m13-ap # RuMC edit
   prototype: RMCBoxMagazinePistolM13APEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13ExtAPEmptyBuild
-  name: M13 magazine box (Ext AP)
+  name: rmc-construction-magazine-box-m13-ext-ap # RuMC edit
   prototype: RMCBoxMagazinePistolM13ExtAPEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePistolM13DrumAPEmptyBuild
-  name: M13 magazine box (Drum AP)
+  name: rmc-construction-magazine-box-m13-drum-ap # RuMC edit
   prototype: RMCBoxMagazinePistolM13DrumAPEmpty
 
 # empty shotgun shell boxes
 - type: rmcConstruction
   id: RMCEmptyShotgunShellBoxesList
-  name: shotgun shell boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-shell-boxes-shotgun # RuMC edit
   prototype: RMCBoxMagazineShellBase
   listed:
   - RMCBoxShellsBuckshotEmptyBuild
@@ -512,49 +513,49 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsBuckshotEmptyBuild
-  name: buckshot shell box
+  name: rmc-construction-shell-box-buckshot # RuMC edit
   prototype: RMCBoxShellsBuckshotEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsSlugsEmptyBuild
-  name: slug shell box
+  name: rmc-construction-shell-box-slug # RuMC edit
   prototype: RMCBoxShellsSlugsEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsFlechetteEmptyBuild
-  name: flechette shell box
+  name: rmc-construction-shell-box-flechette # RuMC edit
   prototype: RMCBoxShellsFlechetteEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsBreachingEmptyBuild
-  name: breaching shell box
+  name: rmc-construction-shell-box-breaching # RuMC edit
   prototype: RMCBoxShellsBreachingEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsBeanbagEmptyBuild
-  name: beanbag shell box
+  name: rmc-construction-shell-box-beanbag # RuMC edit
   prototype: RMCBoxShellsBeanbagEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsIncendiaryEmptyBuild
-  name: incendiary shell box
+  name: rmc-construction-shell-box-incendiary # RuMC edit
   prototype: RMCBoxShellsIncendiaryEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxShellsIncendiaryBuckshotEmptyBuild
-  name: incendiary buckshot shell box
+  name: rmc-construction-shell-box-incendiary-buckshot # RuMC edit
   prototype: RMCBoxShellsIncendiaryBuckshotEmpty
 
 # empty supply boxes
 - type: rmcConstruction
   id: RMCEmptySupplyBoxesList
-  name: supply boxes (1 cardboard) # cost named manually since lists won't name costs otherwise
+  name: rmc-construction-supply-boxes # RuMC edit
   prototype: RMCBoxMagazineSupplyBase
   listed:
   - RMCBoxPackFlareEmptyBuild
@@ -569,35 +570,35 @@
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxPackFlareEmptyBuild
-  name: M94 flare packs box
+  name: rmc-construction-supply-box-flare-m94 # RuMC edit
   prototype: RMCBoxPackFlareEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxPackFlareCASEmptyBuild
-  name: M89-S flare packs box
+  name: rmc-construction-supply-box-flare-m89s # RuMC edit
   prototype: RMCBoxPackFlareCASEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxFlamerTankEmptyBuild
-  name: UT-Napthal fuel tanks box
+  name: rmc-construction-supply-box-flamer-tank # RuMC edit
   prototype: RMCBoxFlamerTankEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxFlashlightsEmptyBuild
-  name: flashlights box
+  name: rmc-construction-supply-box-flashlights # RuMC edit
   prototype: RMCBoxFlashlightsEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMREEmptyBuild
-  name: MREs box
+  name: rmc-construction-supply-box-mre # RuMC edit
   prototype: RMCBoxMREEmpty
 
 - type: rmcConstruction
   parent: RMCCardboardBuildBase
   id: RMCBoxMagazinePowerCellsHighBuild
-  name: high-capacity power cells box
+  name: rmc-construction-supply-box-power-cells-high # RuMC edit
   prototype: RMCBoxMagazinePowerCellsHigh

@@ -23,7 +23,7 @@ public sealed partial class RMCConstructionPrototype : IPrototype, IInheritingPr
 
     [AlwaysPushInheritance]
     [DataField(required: true)]
-    public string Name { get; set; } = default!;
+    public LocId Name { get; set; } = default!; // RuMC edit
 
     [DataField]
     public bool IsDivider = false;

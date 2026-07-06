@@ -121,8 +121,8 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RuMCCartridgeHMG12.7x108mm
-    proto: RuMCCartridgeHMG12.7x108mm
+      - RuMCCartridgeHMG127x108mm
+    proto: RuMCCartridgeHMG127x108mm
     capacity: 110
     deleteWhenEmpty: false
   - type: Sprite
@@ -148,8 +148,8 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - RuMCCartridgeHMG12.7x108mmTracer
-    proto: RuMCCartridgeHMG12.7x108mmTracer
+      - RuMCCartridgeHMG127x108mmTracer
+    proto: RuMCCartridgeHMG127x108mmTracer
     capacity: 110
     deleteWhenEmpty: false
 
@@ -157,7 +157,7 @@
 
 - type: entity
   parent: CMBaseCartridgeRifle
-  id: RuMCCartridgeHMG12.7x108mm
+  id: RuMCCartridgeHMG127x108mm
   name: 12.7x108mm
   components:
   - type: Sprite
@@ -166,27 +166,27 @@
     - state: base
       map: ["enum.AmmoVisualLayers.Base"]
   - type: CartridgeAmmo
-    proto: RuMCBulletHMG12.7x108mm
+    proto: RuMCBulletHMG127x108mm
   - type: Tag
     tags:
-    - RuMCCartridgeHMG12.7x108mm
+    - RuMCCartridgeHMG127x108mm
 
 - type: entity
-  parent: RuMCCartridgeHMG12.7x108mm
-  id: RuMCCartridgeHMG12.7x108mmTracer
+  parent: RuMCCartridgeHMG127x108mm
+  id: RuMCCartridgeHMG127x108mmTracer
   name: 12.7x108mm Tracer
   components:
   - type: CartridgeAmmo
-    proto: RuMCBulletHMG12.7x108mmTracer
+    proto: RuMCBulletHMG127x108mmTracer
   - type: Tag
     tags:
-    - RuMCCartridgeHMG12.7x108mmTracer
+    - RuMCCartridgeHMG127x108mmTracer
 
 # Projectiles
 
 - type: entity
   parent: CMBulletBase
-  id: RuMCBulletHMG12.7x108mm
+  id: RuMCBulletHMG127x108mm
   name: bullet (12.7x108mm)
   categories: [ HideSpawnMenu ]
   components:
@@ -225,8 +225,8 @@
       slowTime: 2
 
 - type: entity
-  parent: RuMCBulletHMG12.7x108mm
-  id: RuMCBulletHMG12.7x108mmTracer
+  parent: RuMCBulletHMG127x108mm
+  id: RuMCBulletHMG127x108mmTracer
   name: bullet (12.7x108mm Tracer)
   categories: [ HideSpawnMenu ]
   components:
@@ -247,7 +247,7 @@
   id: RuMCMachineGunUTES-C
 
 - type: Tag
-  id: RuMCCartridgeHMG12.7x108mm
+  id: RuMCCartridgeHMG127x108mm
 
 - type: Tag
-  id: RuMCCartridgeHMG12.7x108mmTracer
+  id: RuMCCartridgeHMG127x108mmTracer

@@ -10,7 +10,7 @@
 # Plastic Crate
 - type: rmcConstruction
   id: RMCCratePlasticBuild
-  name: plastic crate
+  name: rmc-construction-crate-plastic # RuMC edit
   prototype: RMCCratePlasticBuildable
   noRotate: true
   doAfterTime: 2
@@ -20,7 +20,7 @@
 - type: rmcConstruction
   parent: RMCPlasticItemBase
   id: RMCAshtrayBuild
-  name: plastic ashtray
+  name: rmc-construction-ashtray-plastic # RuMC edit
   prototype: RMCAshtray
   materialCost: 2
 
@@ -29,7 +29,7 @@
 - type: rmcConstruction
   parent: RMCPlasticItemBase
   id: RMCForkPlasticBuild
-  name: plastic fork
+  name: rmc-construction-fork-plastic # RuMC edit
   prototype: RMCForkPlastic
   materialCost: 1
 
@@ -37,7 +37,7 @@
 - type: rmcConstruction
   parent: RMCPlasticItemBase
   id: RMCSpoonPlasticBuild
-  name: plastic spoon
+  name: rmc-construction-spoon-plastic # RuMC edit
   prototype: RMCSpoonPlastic
   materialCost: 1
 
@@ -45,6 +45,6 @@
 - type: rmcConstruction
   parent: RMCPlasticItemBase
   id: RMCKitchenKnifePlasticBuild
-  name: plastic knife
+  name: rmc-construction-knife-plastic # RuMC edit
   prototype: RMCKitchenKnifePlastic
   materialCost: 1

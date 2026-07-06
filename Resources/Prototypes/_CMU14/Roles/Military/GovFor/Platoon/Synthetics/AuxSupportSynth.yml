@@ -202,8 +202,8 @@
   - HelmetGarbsRMC
   - SmokablesRMC
   - ForceStampApprovedAU14
-  - ForceSynthResetKeyAU14
   - SynthAccesoriesSpecialAU14
+  - SynthResetKeysRuMC
 
 - type: job
   parent: AU14JobAuxSupportSynthBase

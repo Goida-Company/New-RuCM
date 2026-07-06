@@ -134,6 +134,14 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.060
+    # RuMC edit start
+    - conditions:
+        activeOnly: true
+        whitelist:
+          tags:
+          - AU14WeaponRifleKramerLSW
+      fireDelayFlat: 0.0568
+    # RuMC edit end
 
 - type: entity
   parent: RMCUnderAttachmentBase

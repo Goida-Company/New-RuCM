@@ -1,4 +1,8 @@
-ent-AU14CrateCivilianClothingRandom-name = излишки гражданской одежды (x15)
-ent-AU14CrateCivilianClothingRandom-desc = Содержит случайный набор предметов гражданской одежды, откуда они взялись?
-ent-AU14CrateWorkTools-name = Ящик с рабочими инструментами
-ent-AU14CrateWorkTools-desc = Содержит несколько пожарных топоров и кирок для тяжёлых работ.
+ent-AU14CrateCivilianClothingRandom = ящик излишков гражданской одежды (x15)
+    .desc = Содержит случайный набор предметов гражданской одежды.
+
+ent-AU14CrateWorkTools = ящик с рабочими инструментами
+    .desc = Содержит несколько пожарных топоров и кирок для тяжёлых работ.
+
+ent-CMUCrateLivestockWeYu = ящик с подопытным
+    .desc = Ящик, содержащий подопытное животное.

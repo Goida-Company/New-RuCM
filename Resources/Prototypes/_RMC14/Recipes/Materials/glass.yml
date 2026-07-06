@@ -1,7 +1,7 @@
 # directional window
 - type: rmcConstruction
   id: RMCWindowDirectionalBuild
-  name: directional window
+  name: rmc-construction-window-directional # RuMC edit
   prototype: CMWindowDirectional
   doAfterTime: 2
   doAfterTimeMin: 1

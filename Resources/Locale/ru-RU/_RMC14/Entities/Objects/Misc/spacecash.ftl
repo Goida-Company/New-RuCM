@@ -1,19 +1,27 @@
 ent-RMCSpaceCash1 = однодолларовая купюра
-    .desc = Одна однодолларовая купюра, отчеканенная казначейством ООН. На ней изображена давно забытая фигура ушедшей эпохи, лидер, чьё наследие теперь мало что значит для галактического населения.
+    .desc = Купюра выпущенная казначейством ООН. Принимается почти везде.
 
-ent-RMCSpaceCash10 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash = стопка долларовых купюр
+    .desc = Купюры выпущенные казначейством ООН. Принимаются почти везде.
 
-ent-RMCSpaceCash20 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash10 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash50 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash20 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash100 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash50 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash200 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash100 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash500 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash200 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash1000 = { ent-RMCSpaceCash1 }
+ent-RMCSpaceCash500 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
 
-ent-RMCSpaceCash = доллары
-    .desc = Десять стодолларовых купюр, отпечатанных казначейством Объединённых Наций. Каждая украшена лицом давно забытого дипломата с некогда могущественной планеты.
+ent-RMCSpaceCash1000 = {ent-RMCSpaceCash}
+    .desc = {ent-RMCSpaceCash.desc}
+

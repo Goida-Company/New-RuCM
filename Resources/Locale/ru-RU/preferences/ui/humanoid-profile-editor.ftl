@@ -28,9 +28,9 @@ humanoid-profile-editor-preferred-squad-label = Предпочитаемый о�
 humanoid-profile-editor-preferred-armor-label = Предпочитаемая броня:
 humanoid-profile-editor-enable-playtime-perks = Включить бонусы за время игры:
 humanoid-profile-editor-xeno-prefix = Префикс ксено:
-humanoid-profile-editor-xeno-prefix-tooltip = 2 буквы, или 3, если у вас 124 часа в ксено-ролях. Постфикс нельзя использовать с 3-буквенным префиксом.
+humanoid-profile-editor-xeno-prefix-tooltip = До 3 букв. Постфикс нельзя использовать с 3-буквенным префиксом.
 humanoid-profile-editor-xeno-postfix = Постфикс ксено:
-humanoid-profile-editor-xeno-postfix-tooltip = 1 буква, если у вас 24 часа в ксено-ролях. 2 буквы или 1 буква и 1 цифра, если у вас 300 часов в ксено-ролях. Постфикс нельзя использовать с 3-буквенным префиксом.
+humanoid-profile-editor-xeno-postfix-tooltip = До 2 букв, или 1 буква и 1 цифра во втором слоте. Постфикс нельзя использовать с 3-буквенным префиксом.
 humanoid-profile-editor-enable = Включить
 humanoid-profile-editor-eyes-label = Цвет глаз:
 

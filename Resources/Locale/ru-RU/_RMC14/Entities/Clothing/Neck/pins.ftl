@@ -1,42 +1,41 @@
-ent-RMCPridePinBase = значок гордости
-  .desc = Абстрактная булавка гордости.
+ent-RMCPridePinBase = модный значок
+    .desc = Абстрактный модный значок.
 
-ent-RMCClothingNeckLGBTPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckLGBTPin = радужный значок
+    .desc = Радуйся жизни!
 
-ent-RMCClothingNeckAromanticPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckAromanticPin = модный значок
+    .desc = Радуйся жизни!
 
-ent-RMCClothingNeckAsexualPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckAsexualPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckBisexualPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckBisexualPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckGayPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckGayPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckIntersexPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckIntersexPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckLesbianPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckLesbianPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckNonBinaryPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckNonBinaryPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckPansexualPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckPansexualPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckOmnisexualPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckOmnisexualPin = {ent-RMCClothingNeckAromanticPin}
+    .desc = {ent-RMCClothingNeckAromanticPin.desc}
 
-ent-RMCClothingNeckTransPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckTransPin = значок трансформера
+    .desc = Машинки, общий сбор!
 
-ent-RMCClothingNeckAutismPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
+ent-RMCClothingNeckAutismPin = значок аутизма
+    .desc = Значок солидарности с больными аутизмом.
 
-ent-RMCClothingNeckGoldAutismPin = приколоть
-  .desc = Будьте никем, совершайте преступления.
-
+ent-RMCClothingNeckGoldAutismPin = золотой значок аутизма
+    .desc = {ent-RMCClothingNeckAutismPin.desc}

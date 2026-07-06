@@ -1,2 +1,12 @@
 ent-BarbedWireBase = колючая проволока
-  .desc = Тип металлической ограждающей проволоки с острыми краями или шипами, расположенными через промежутки вдоль нитей. Короче, прикосновение к ней очень болезненно. Размещается на баррикадах, чтобы нежелательные гости не пробивались безболезненно.
+    .desc = Тип металлической проволоки с острыми краями, расположенными вдоль нитей.
+
+ent-BarbedWire1 = {ent-BarbedWireBase}
+    .desc = {ent-BarbedWireBase.desc}
+    .suffix = 1
+
+ent-BarbedWire10 = {ent-BarbedWireBase}
+    .desc = {ent-BarbedWireBase.desc}
+
+ent-BarbedWire15 = {ent-BarbedWireBase}
+    .desc = {ent-BarbedWireBase.desc}

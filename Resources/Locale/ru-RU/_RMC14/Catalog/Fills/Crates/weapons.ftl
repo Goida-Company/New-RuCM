@@ -1,10 +1,29 @@
-ent-RMCCrateM85A1 = Ящик гранатомётов M85A1 (x2)
-ent-RMCCrateXM51 = Ящик штурмовых дробовиков XM51 (x2)
-ent-RMCCrateMOU53 = Ящик дробовиков MOU-53 (x2)
-ent-RMCCrateM34 = Ящик огнемётов M34 (2x M34, 2x топливных ранца Broiler-T)
-ent-RMCCrateSU6 = Ящик умных пистолетов SU-6 (x2)
-ent-RMCCrateSmartGunSet = Комплект системы умного оружия ML66A
-ent-RMCCrateXM88 = Ящик тяжёлых винтовок XM88 (x2)
-ent-RMCCrateMK80 = Ящик ручных пушек MK80 (x2)
-ent-RMCCrateM54CE2 = Ящик M54CE2 HAR (2x HAR, 2x коробки с патронами HAR)
-ent-RMCCrateM54CMK1 = Ящик винтовок M54C MK1 (2x МК1, 2x магазина)
+ent-RMCCrateM85A1 = ящик гранатомётов M85A1 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateXM51 = ящик штурмовых дробовиков XM51 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateMOU53 = ящик дробовиков MOU-53 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateM34 = ящик огнемётов M34 (2x M34, 2x топливных ранца Бройлер-T)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateSU6 = ящик умных пистолетов SU-6 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateSmartGunSet = ящик системы умного оружия ML66A
+    .desc = Ящик с оружием.
+
+ent-RMCCrateXM88 = ящик тяжёлых винтовок XM88 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateMK80 = ящик пистолетов MK80 (x2)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateM54CE2 = ящик M54CE2 (2x коробчатых магазина, 2x коробчатых магазина СБ)
+    .desc = Ящик с оружием.
+
+ent-RMCCrateM54CMK1 = ящик винтовок M54C MK1 (2x МК1, 2x магазина)
+    .desc = Ящик с оружием.

@@ -46,3 +46,12 @@
     - type: Narcolepsy
       timeBetweenIncidents: 3600, 4600
       durationOfIncident: 3, 9
+
+# RuMC edit
+- type: trait
+  id: Pacifist
+  name: trait-pacifist-name
+  description: trait-pacifist-desc
+  category: Quirks
+  components:
+  - type: Pacified

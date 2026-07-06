@@ -1,30 +1,42 @@
-ent-CMFaxHighCom = Факс высшего командования морпехов
-  .desc = Лучший и единственный друг связного.
-
-ent-CMFaxWY = We-Ya факс
-  .desc = Лучший и единственный друг связного.
-
-ent-CMFaxCMB = факс-аппарат бюро колониальных маршалов
-  .desc = Лучший и единственный друг связного.
-
 ent-CMFax = факс
-  .desc = Лучший и единственный друг связного.
+    .desc = Лучший друг связного.
 
-ent-CMFaxProvost = факс
-  .desc = Лучший и единственный друг связного.
+ent-CMFaxHighCom = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = ВыК
 
-ent-CMFaxPress = факс
-  .desc = Лучший и единственный друг связного.
+ent-CMFaxWY = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Ве-Ю
 
-ent-CMFaxSPP = факс
-  .desc = Лучший и единственный друг связного.
+ent-CMFaxCMB = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = БКМ
 
-ent-CMFaxTSE = факс
-  .desc = Лучший и единственный друг связного.
+ent-CMFaxProvost = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Провосты
 
-ent-RMCFaxLiaison = факс
-  .desc = Лучший и единственный друг связного.
+ent-CMFaxPress = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Пресса
 
-ent-RMCFaxColony = факс
-  .desc = Это мало кому поможет.
+ent-CMFaxSPP = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = СПН
 
+ent-CMFaxTSE = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = ИТМ
+
+ent-RMCFaxLiaison = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Связной
+
+ent-RMCFaxColony = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Колония
+
+ent-CMFaxColonyAdmin = {ent-CMFax}
+    .desc = {ent-CMFax.desc}
+    .suffix = Админ колонии

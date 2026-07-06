@@ -1,6 +1,6 @@
 - type: rmcConstruction
   id: RMCGrilleBuild
-  name: grille
+  name: rmc-construction-grille # RuMC edit
   prototype: RMCGrille
   noRotate: true
   doAfterTime: 2
@@ -10,7 +10,7 @@
 
 - type: rmcConstruction
   id: RMCFenceBuild
-  name: fence
+  name: rmc-construction-fence # RuMC edit
   prototype: CMFence
   noRotate: true
   doAfterTime: 2
@@ -20,7 +20,7 @@
 
 - type: rmcConstruction
   id: CMU14MultiZLadderBuild
-  name: multi-z ladder
+  name: rmc-construction-ladder-multi-z # RuMC edit
   prototype: CMUDeployableZLevelLadder
   noRotate: true
   doAfterTime: 10

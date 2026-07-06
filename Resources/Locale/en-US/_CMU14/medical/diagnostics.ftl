@@ -164,6 +164,7 @@ cmu-medical-scanner-fracture-severity-compound    = compound
 cmu-medical-scanner-fracture-severity-comminuted  = comminuted
 
 cmu-medical-scanner-organ-stage-healthy  = Healthy
+cmu-medical-scanner-organ-stage-bruised  = Bruised
 cmu-medical-scanner-organ-stage-damaged  = Damaged
 cmu-medical-scanner-organ-stage-failing  = Failing
 cmu-medical-scanner-organ-stage-dead     = Dead

@@ -163,7 +163,11 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
                     {
                         comp.Budget = 0;
                         comp.EmbargoActive = false;
-                        AnnounceStatus($"Trade embargo by {comp.FactionName} has ended due to insufficient funds.", comp.FactionName);
+                        // RuMC edit start
+                        AnnounceStatus(
+                            Loc.GetString("ambassador-console-trade-embargo-ended-funds", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                            comp.FactionName);
+                        // RuMC edit end
                     }
                 }
             }
@@ -178,7 +182,11 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
                     {
                         comp.Budget = 0;
                         comp.TradePactActive = false;
-                        AnnounceStatus($"Trade pact by {comp.FactionName} has ended due to insufficient funds.", comp.FactionName);
+                        // RuMC edit start
+                        AnnounceStatus(
+                            Loc.GetString("ambassador-console-trade-pact-ended-funds", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                            comp.FactionName);
+                        // RuMC edit end
                     }
                 }
             }
@@ -193,7 +201,11 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
                     {
                         comp.Budget = 0;
                         comp.CommsJamActive = false;
-                        AnnounceStatus($"Communications jamming by {comp.FactionName} has ended due to insufficient funds.", comp.FactionName);
+                        // RuMC edit start
+                        AnnounceStatus(
+                            Loc.GetString("ambassador-console-comms-jam-ended-funds", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                            comp.FactionName);
+                        // RuMC edit end
                     }
                 }
             }
@@ -234,9 +246,22 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
 
     private void AnnounceStatus(string message, string? factionName = null)
     {
-        var sender = factionName != null ? $"{factionName} Embassy" : "Ambassador Console";
+        // RuMC edit start
+        var displayName = factionName != null ? GetLocalizedFactionName(factionName) : null;
+        var sender = displayName != null
+            ? Loc.GetString("ambassador-console-sender", ("faction", displayName))
+            : Loc.GetString("ambassador-console-sender-default");
+        // RuMC edit end
         _chat.DispatchGlobalAnnouncement(message, sender, playSound: true, announcementSound: MarineAnnouncementSound);
     }
+
+    // RuMC edit start
+    private string GetLocalizedFactionName(string factionName)
+    {
+    var key = $"ambassador-console-faction-{factionName.ToLower().Replace(" ", "-")}";
+    return Loc.TryGetString(key, out var localized) ? localized : factionName;
+    }
+    // RuMC edit start
 
     public void UpdateSignalModifier()
     {
@@ -383,7 +408,7 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
         if (!_proto.TryIndex(partyProto.PartySpawn, out var spawnProto)) return;
         if (!_thirdParty.SpawnThirdParty(partyProto, spawnProto, false))
         {
-            _popup.PopupEntity("Unable to dispatch support at this time.", uid, msg.Actor);
+            _popup.PopupEntity(Loc.GetString("ambassador-console-dispatch-failed"), uid, msg.Actor); // RuMC edit
             return;
         }
 
@@ -399,11 +424,19 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
         {
             comp.EmbargoTimer = 0f;
             comp.TradePactActive = false;
-            AnnounceStatus($"A trade embargo has been activated by {comp.FactionName}. Submission point payouts are reduced by 20%.", comp.FactionName);
+            // RuMC edit start
+            AnnounceStatus(
+                Loc.GetString("ambassador-console-trade-embargo-activated", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+            // RuMC edit end
         }
         else
         {
-            AnnounceStatus($"The trade embargo by {comp.FactionName} has been lifted.", comp.FactionName);
+            // RuMC edit start
+            AnnounceStatus(
+                Loc.GetString("ambassador-console-trade-embargo-lifted", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+            // RuMC edit end
         }
         UpdateAllFactionUi(comp);
     }
@@ -415,11 +448,19 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
         {
             comp.TradePactTimer = 0f;
             comp.EmbargoActive = false;
-            AnnounceStatus($"A trade pact has been activated by {comp.FactionName}. Submission point payouts are increased by 20%.", comp.FactionName);
+            AnnounceStatus(
+                 // RuMC edit start
+                Loc.GetString("ambassador-console-trade-pact-activated", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+                 // RuMC edit end
         }
         else
         {
-            AnnounceStatus($"The trade pact by {comp.FactionName} has ended.", comp.FactionName);
+            // RuMC edit start
+            AnnounceStatus(
+                Loc.GetString("ambassador-console-trade-pact-ended", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+            // RuMC edit end
         }
         UpdateAllFactionUi(comp);
     }
@@ -453,7 +494,7 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
         if (string.IsNullOrWhiteSpace(msg.Message)) return;
         if (comp.Budget < comp.BroadcastCost) return;
         comp.Budget -= comp.BroadcastCost;
-        var sender = $"{comp.FactionName} Embassy";
+        var sender = Loc.GetString("ambassador-console-sender", ("faction", comp.FactionName)); // RuMC edit
         _chat.DispatchGlobalAnnouncement(msg.Message, sender, playSound: true, announcementSound: MarineAnnouncementSound);
         _radio.SendRadioMessage(uid, msg.Message, "colonyAlert", uid);
         UpdateAllFactionUi(comp);
@@ -465,11 +506,19 @@ public sealed partial class AmbassadorConsoleSystem : EntitySystem
         if (comp.CommsJamActive)
         {
             comp.CommsJamTimer = 0f;
-            AnnounceStatus($"Planeside communications have been jammed by {comp.FactionName}. All radio transmissions are blocked.", comp.FactionName);
+             // RuMC edit start
+            AnnounceStatus(
+                Loc.GetString("ambassador-console-comms-jammed", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+             // RuMC edit end
         }
         else
         {
-            AnnounceStatus($"Communications jamming by {comp.FactionName} has been disabled. Radio transmissions are restored.", comp.FactionName);
+            // RuMC edit start
+            AnnounceStatus(
+                Loc.GetString("ambassador-console-comms-restored", ("faction", GetLocalizedFactionName(comp.FactionName))),
+                comp.FactionName);
+            // RuMC edit end
         }
         UpdateAllFactionUi(comp);
     }

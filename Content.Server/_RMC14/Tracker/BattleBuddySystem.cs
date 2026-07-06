@@ -68,7 +68,7 @@ namespace Content.Server._RMC14.Tracker
 
             var verb = new Verb
             {
-                Text = Loc.GetString("Invite as buddy"),
+                Text = Loc.GetString("battle-buddy-invite-verb"), // RuMC edit
                 Icon = new SpriteSpecifier.Rsi(new ResPath("_RMC14/Effects/emotes.rsi"), "emote_highfive"),
                 Impact = LogImpact.Low,
                 Act = () => SendBuddyRequest(user, target)
@@ -83,12 +83,12 @@ namespace Content.Server._RMC14.Tracker
             _sawmill.Debug("SendBuddyRequest: requester={0} -> target={1}", requester, target);
             var options = new List<DialogOption>
             {
-                new DialogOption(Loc.GetString("Accept"), new BattleBuddyAcceptEvent(GetNetEntity(requester), GetNetEntity(target))),
-                new DialogOption(Loc.GetString("Decline"), new BattleBuddyDeclineEvent(GetNetEntity(requester), GetNetEntity(target)))
+                new DialogOption(Loc.GetString("battle-buddy-accept"), new BattleBuddyAcceptEvent(GetNetEntity(requester), GetNetEntity(target))), // RuMC edit
+                new DialogOption(Loc.GetString("battle-buddy-decline"), new BattleBuddyDeclineEvent(GetNetEntity(requester), GetNetEntity(target))) // RuMC edit
             };
 
-            var title = Loc.GetString("Battle Buddy Invitation");
-            var message = Loc.GetString($"{Name(requester)} has invited you to be their battle buddy.");
+            var title = Loc.GetString("battle-buddy-invite-title"); // RuMC edit
+            var message = Loc.GetString("battle-buddy-invite-message", ("name", Name(requester))); // RuMC edit
 
             _dialog.OpenOptions(target, target, title, options, message);
             _sawmill.Info("Sent battle buddy request from {0} -> {1}", requester, target);

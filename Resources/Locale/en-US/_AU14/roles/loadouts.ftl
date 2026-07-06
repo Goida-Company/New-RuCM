@@ -6,6 +6,7 @@ au14-loadout-group-gloves = Gloves
 au14-loadout-group-synth-suit-special = Suit (Special)
 au14-loadout-group-synth-equipment = Synthetic Equipment
 AU14JobGOVFORAuxSupportSynth-loadout = GOVFOR Support Synth loadout
+rucm-loadout-group-synth-reset-keys = Synthetic Reset Keys
 
 au14-loadout-group-commander-sidearm-belt = Sidearm Belt
 
