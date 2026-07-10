@@ -157,6 +157,8 @@ namespace Content.Client.Examine
             // opening at the old tooltip rather than the cursor/another entity,
             // since there's probably one open already if it's coming in from the server.
             var entity = GetEntity(ev.EntityUid);
+            if (!Exists(entity) || !HasComp<TransformComponent>(entity))
+                return;
 
             // CMU14 start
             // Stale examine responses can arrive after the target is gone or after a zero NetEntity

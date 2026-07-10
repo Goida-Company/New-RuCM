@@ -78,6 +78,9 @@ tickrate = 25
 bindto = "::,0.0.0.0"
 max_connections = 500
 log_late_msg = false
+max_connections = 1024
+sendbuffersize = 1048576
+receivebuffersize = 1048576
 
 [physics]
 grid_splitting = false

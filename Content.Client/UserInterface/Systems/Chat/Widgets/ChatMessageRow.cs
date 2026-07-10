@@ -69,7 +69,7 @@ public sealed partial class ChatMessageRow : PanelContainer
 
         if (message.GhostFollowEntity.Valid)
         {
-            var followButton = CreateFollowButton(message, metrics);
+            var followButton = CreateFollowButton(message, metrics, textColor);
             row.AddChild(followButton);
         }
 
@@ -95,22 +95,27 @@ public sealed partial class ChatMessageRow : PanelContainer
         row.AddChild(_repeatBadge);
     }
 
-    private Button CreateFollowButton(ChatMessage message, RowMetrics metrics)
+    private Button CreateFollowButton(ChatMessage message, RowMetrics metrics, Color textColor)
     {
         var followButtonSize = new Vector2(metrics.FollowButtonSize, metrics.FollowButtonSize);
+        var followButtonColor = textColor.WithAlpha(1f);
         var followButton = new Button
         {
             Text = Loc.GetString("cmu-chat-manager-follow-button"),
             ToolTip = Loc.GetString("cmu-chat-manager-follow-button-tooltip"),
             MinSize = followButtonSize,
             MaxSize = followButtonSize,
-            Margin = new Thickness(2, -1, 2, 0),
+            Margin = new Thickness(2, 5, 2, 0),
+            ModulateSelfOverride = followButtonColor,
             VerticalAlignment = VAlignment.Top,
             StyleClasses = { StyleNano.StyleClassChatGhostFollowButton }
         };
 
         followButton.Label.HorizontalExpand = true;
+        followButton.Label.HorizontalAlignment = HAlignment.Center;
+        followButton.Label.VerticalAlignment = VAlignment.Center;
         followButton.Label.Align = Label.AlignMode.Center;
+        followButton.Label.FontColorOverride = followButtonColor;
         followButton.OnPressed += _ => _consoleHost.ExecuteCommand($"{CMUGhostFollowCommand.CommandName} {message.GhostFollowEntity}");
         return followButton;
     }
@@ -141,14 +146,14 @@ public sealed partial class ChatMessageRow : PanelContainer
     private static RowMetrics GetMetrics(int? fontSize)
     {
         if (fontSize == null)
-            return new RowMetrics(2, 4, 0, 1.06f, 42, 58, 25, 18);
+            return new RowMetrics(2, 4, 0, 1.06f, 42, 58, 25, 16);
 
         return fontSize.Value switch
         {
-            <= 9 => new RowMetrics(1, 3, 0, 1.0f, 34, 46, 20, 16),
-            <= 11 => new RowMetrics(1, 3, 0, 1.02f, 38, 52, 22, 17),
-            <= 13 => new RowMetrics(2, 4, 0, 1.04f, 40, 56, 24, 18),
-            _ => new RowMetrics(2, 4, 0, 1.06f, 42, 58, 25, 20)
+            <= 9 => new RowMetrics(1, 3, 0, 1.0f, 34, 46, 20, 14),
+            <= 11 => new RowMetrics(1, 3, 0, 1.02f, 38, 52, 22, 15),
+            <= 13 => new RowMetrics(2, 4, 0, 1.04f, 40, 56, 24, 16),
+            _ => new RowMetrics(2, 4, 0, 1.06f, 42, 58, 25, 18)
         };
     }
 

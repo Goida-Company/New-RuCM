@@ -1,7 +1,9 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Content.Server._RMC14.Language.Systems;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Marines;
+using Content.Shared._RMC14.Language.Prototypes;
 using Content.Shared.Corvax.CCCVars;
 using Content.Shared.Corvax.TTS;
 using Content.Shared.GameTicking;
@@ -31,6 +33,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly IRobustRandom _rng = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly LanguageSystem _language = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -106,6 +109,13 @@ public sealed partial class TTSSystem : EntitySystem
             voiceId == null ||
             args.Channel != null)
             return;
+
+        if (!_prototypeManager.TryIndex(args.Language, out LanguagePrototype? languageProto) ||
+            !languageProto.NeedsSpeech)
+        {
+            return;
+        }
+
         var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
         RaiseLocalEvent(uid, voiceEv);
         voiceId = voiceEv.VoiceId;
@@ -115,14 +125,24 @@ public sealed partial class TTSSystem : EntitySystem
         // Обработка шепота
         if (args.ObfuscatedMessage != null)
         {
-            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, protoVoice.Speaker);
+            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, protoVoice.Speaker, args.Language);
             return;
         }
 
-        HandleSay(uid, args.Message, protoVoice.Speaker, component.Faction);
+        HandleSay(uid, args.Message, protoVoice.Speaker, component.Faction, args.Language);
     }
 
-    private async void HandleSay(EntityUid uid, string message, string speaker, HearingFaction faction)
+    private bool CanReceiveLanguageTts(EntityUid speaker, EntityUid listener, ProtoId<LanguagePrototype> language)
+    {
+        return listener == speaker || _language.CanUnderstand(listener, language);
+    }
+
+    private async void HandleSay(
+        EntityUid uid,
+        string message,
+        string speaker,
+        HearingFaction faction,
+        ProtoId<LanguagePrototype> language)
     {
         var soundData = await GenerateTTS(message, speaker);
         if (soundData is null) return;
@@ -141,13 +161,21 @@ public sealed partial class TTSSystem : EntitySystem
             if (listenerTts.Faction != faction)
                 continue;
 
+            if (!CanReceiveLanguageTts(uid, listener, language))
+                continue;
+
             RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), session);
         }
 
         SendGhostTTS(uid, new PlayTTSEvent(soundData), ChatSystem.VoiceRange);
     }
 
-    private async void HandleWhisper(EntityUid uid, string message, string obfMessage, string speaker)
+    private async void HandleWhisper(
+        EntityUid uid,
+        string message,
+        string obfMessage,
+        string speaker,
+        ProtoId<LanguagePrototype> language)
     {
         var fullSoundData = await GenerateTTS(message, speaker, true);
         if (fullSoundData is null) return;
@@ -165,7 +193,11 @@ public sealed partial class TTSSystem : EntitySystem
         foreach (var session in receptions)
         {
             if (!session.AttachedEntity.HasValue) continue;
-            var xform = xformQuery.GetComponent(session.AttachedEntity.Value);
+            var listener = session.AttachedEntity.Value;
+            if (!CanReceiveLanguageTts(uid, listener, language))
+                continue;
+
+            var xform = xformQuery.GetComponent(listener);
             var distance = (sourcePos - _xforms.GetWorldPosition(xform, xformQuery)).Length();
             if (distance > ChatSystem.VoiceRange * ChatSystem.VoiceRange)
                 continue;
@@ -313,6 +345,9 @@ public sealed partial class TTSSystem : EntitySystem
         var speaker = ev.MessageSource;
 
         if (!speaker.IsValid() || !TryComp<TTSComponent>(speaker, out var tts) || tts.VoicePrototypeId == null)
+            return;
+
+        if (!CanReceiveLanguageTts(speaker, receiver, ev.Language))
             return;
 
         if (!_prototypeManager.TryIndex<TTSVoicePrototype>(tts.VoicePrototypeId, out var protoVoice))

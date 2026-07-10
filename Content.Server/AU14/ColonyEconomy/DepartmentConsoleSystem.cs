@@ -538,7 +538,7 @@ public sealed partial class DepartmentConsoleSystem : EntitySystem
             if (!_idCard.TryFindIdCard(playerUid, out var idCard))
                 continue;
 
-            if (comp.Members.Contains(idCard.Owner))
+            if (IsDepartmentAnnouncementRecipient(comp, idCard.Owner, idCard.Comp))
                 filter.AddPlayer(session);
         }
 
@@ -546,6 +546,27 @@ public sealed partial class DepartmentConsoleSystem : EntitySystem
             ("department", Loc.GetString(comp.DepartmentName)));
         var announcementSound = new SoundPathSpecifier("/Audio/Announcements/announce.ogg");
         _chatSystem.DispatchFilteredAnnouncement(filter, msg.Message, uid, sender, true, announcementSound);
+    }
+
+    private static bool IsDepartmentAnnouncementRecipient(
+        DepartmentConsoleComponent comp,
+        EntityUid idCardUid,
+        IdCardComponent idCard)
+    {
+        if (comp.Members.Contains(idCardUid))
+            return true;
+
+        if (comp.DepartmentId is not { } departmentId)
+            return false;
+
+        var departments = idCard.JobDepartments;
+        for (var i = 0; i < departments.Count; i++)
+        {
+            if (departments[i] == departmentId)
+                return true;
+        }
+
+        return false;
     }
 
     /// <summary>

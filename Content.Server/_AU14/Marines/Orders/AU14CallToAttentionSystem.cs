@@ -1,6 +1,8 @@
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
 using Content.Shared._AU14.Marines.Orders;
+using Content.Shared._CMU14.Round.Roles;
+using Content.Shared._RMC14.Roles;
 using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat.Prototypes;
@@ -9,6 +11,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -26,8 +29,9 @@ public sealed partial class AU14CallToAttentionSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private RotateToFaceSystem _rotateToFace = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private AU14SilenceOrderSystem _silence = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private readonly HashSet<Entity<HumanoidAppearanceComponent>> _receivers = new();
     private readonly List<EntityUid> _visibleTargets = new();
@@ -72,11 +76,13 @@ public sealed partial class AU14CallToAttentionSystem : EntitySystem
         var noticeMsg = Loc.GetString("au14-call-to-attention-notice");
         var emote = ent.Comp.Emote;
         var maxDelay = ent.Comp.ResponseStagger;
-        var whisperExpiresAt = _timing.CurTime + ent.Comp.WhisperDuration;
 
         _visibleTargets.Clear();
         foreach (var receiver in _receivers)
         {
+            if (receiver.Owner == ent.Owner)
+                continue;
+
             if (_mobState.IsDead(receiver))
                 continue;
 
@@ -87,10 +93,12 @@ public sealed partial class AU14CallToAttentionSystem : EntitySystem
             _visibleTargets.Add(target);
         }
 
+        _visibleTargets.RemoveAll(uid => !IsValidTarget(uid));
+
         var attentionFocus = GetAttentionFocus(ent.Owner, _visibleTargets);
         foreach (var target in _visibleTargets)
         {
-            ApplyWhisperEffect(target, whisperExpiresAt);
+            ApplyWhisperEffect(target, ent.Comp.WhisperDuration);
 
             var delay = maxDelay <= TimeSpan.Zero
                 ? TimeSpan.Zero
@@ -118,15 +126,8 @@ public sealed partial class AU14CallToAttentionSystem : EntitySystem
         }
     }
 
-    private void ApplyWhisperEffect(EntityUid target, TimeSpan expiresAt)
-    {
-        if (HasComp<AU14CallToAttentionWhisperImmuneComponent>(target))
-            return;
-
-        var silence = EnsureComp<AU14SilenceOrderComponent>(target);
-        if (silence.ExpiresAt < expiresAt)
-            silence.ExpiresAt = expiresAt;
-    }
+    private void ApplyWhisperEffect(EntityUid target, TimeSpan duration)
+        => _silence.ApplySilenceFor(target, duration);
 
     private void SnapToAttention(EntityUid target, EntityUid attentionFocus, ProtoId<EmotePrototype> emote, string noticeMsg)
     {
@@ -194,5 +195,16 @@ public sealed partial class AU14CallToAttentionSystem : EntitySystem
             return;
 
         _rotateToFace.TryFaceCoordinates(target, focusCoords.Position);
+    }
+
+    private bool IsValidTarget(EntityUid target)
+    {
+        if (HasComp<AU14CallToAttentionImmuneComponent>(target))
+            return false;
+
+        return TryComp<OriginalRoleComponent>(target, out var orig)
+            && orig.Job is { } jobId
+            && _proto.TryIndex(jobId, out JobPrototype? proto)
+            && (proto.RoundSide == RoundJobSide.Govfor || proto.RoundSide == RoundJobSide.Opfor);
     }
 }

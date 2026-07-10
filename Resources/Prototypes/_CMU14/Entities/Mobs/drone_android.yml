@@ -9,6 +9,12 @@
     nameDataset: CMUNamesDroneAndroid
     maxNameLength: 24
     followCloseRange: 1
+  - type: RemoveComponents
+    components:
+    - type: WorkingJoeVoice
+    - type: IntrinsicRadioReceiver
+    - type: IntrinsicRadioTransmitter
+    - type: ActiveRadio
   - type: Inventory
     templateId: cmuDroneAndroid
   - type: HumanoidAppearance
@@ -16,6 +22,9 @@
     hideLayersOnEquip:
     - UndergarmentTop
     - HeadTop
+  - type: Body
+    prototype: CMUDroneAndroidBody
+    requiredLegs: 2
   - type: Synth
     canUseGuns: true
     removeComponents: CMUDroneAndroidRemoveComponents
@@ -26,6 +35,7 @@
     selfRepairTime: 9999
     hideGeneration: true
     useHumanHealthIcons: true
+    hideXenoSynthIcon: true
   - type: MeleeWeapon
     damage:
       types:

@@ -35,7 +35,7 @@
   name: au14-preset-insurgency-title # RuMC edit
   showInVote: true
   description: au14-preset-insurgency-description # RuMC edit
-  minPlayers: 40
+  minPlayers: 35
   requiresGovforVote: true
   supportedPlanets:
     - AUPlanetShepherdsPride
@@ -43,8 +43,8 @@
     - CMUPlanetLament
     - AUPlanetStableGarrison
     #- AUPlanetLV747
-    - AUPlanetSorokyne
-    - AuPlanetChances
+    #- AUPlanetSorokyne
+    #- AuPlanetChances
     - CMUPlanetHopesRetreat
   rules:
   - AuVoteRule
@@ -63,14 +63,14 @@
   supportedPlanets:
 #  - AUPlanetLV747
 #  - AUPlanetShepherdsPride
-  - AUPlanetSorokyne
-  - AUPlanetCorsatStation
+#  - AUPlanetSorokyne
+#  - AUPlanetCorsatStation
   - AUPlanetTrijent
 #  - AuPlanetFiorina
-  - AuPlanetKutjevo
+#  - AuPlanetKutjevo
   - AuPlanetShivasSnowball
   - AUPlanetLV327
-  - AuPlanetChances
+#  - AuPlanetChances
   - CMUPlanetHopesRetreat
   rules:
   - AuVoteRule
@@ -84,16 +84,15 @@
   - colonyfall
   name: au14-preset-colonyfall-title # RuMC edit
   showInVote: true
-  minPlayers: 0
   maxPlayers: 60
   description: au14-preset-colonyfall-description # RuMC edit
   supportedPlanets:
     - AUPlanetShepherdsPride
-    - AUPlanetLV327
+#    - AUPlanetLV327
     - AUPlanetStableGarrison
     - CMUPlanetLament
-    - AUPlanetSorokyne
-    - AuPlanetChances
+#    - AUPlanetSorokyne
+#    - AuPlanetChances
     - CMUPlanetHopesRetreat
   rules:
   - AuVoteRule

@@ -6,7 +6,7 @@
     - RMCSynthResetKey
 
 - type: loadout
-  id: SynthResetKeyProdigyAU14
+  id: SynthResetKeyProdigyRMC
   cost: 0
   storage:
     back:

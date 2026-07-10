@@ -144,11 +144,12 @@ namespace Content.Server.GameTicking
 
         private void OnTickerJoinLobbyEvent(Content.Shared.GameTicking.TickerJoinLobbyEvent ev, EntitySessionEventArgs args) // RuMC edit
         {
-            if (CurrentPreset?.RespawnEnabled != true || _auobjectivesystem.iswinactive)
+            if (CurrentPreset?.RespawnEnabled != true || _auobjectivesystem.IsWinActive)
             {
                 _chatManager.DispatchServerMessage(args.SenderSession, "Respawn is disabled in this gamemode");
                 return;
             }
+
             // Send the requesting player to the lobby
             PlayerJoinLobby(args.SenderSession);
         }
