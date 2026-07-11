@@ -5674,66 +5674,6 @@
   id: 404
   time: '2026-07-01T12:34:37.0000000+00:00'
   url: https://github.com/flex5hybrid/RussianCM/pull/294
-- author: HubaBuba
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043D\u044B RPG-36\
-      \ \u0438 RPO-Pchela \u0434\u043B\u044F \u0421\u041F\u041D."
-    type: Add
-  - message: "\u041D\u0430\u0431\u043E\u0440 DP-72, \u0432 \u0441\u043E\u0441\u0442\
-      \u0430\u0432\u0435 \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u0440\u0430\
-      \u0437\u0433\u0440\u0443\u0437\u043A\u0430 \u043F\u043E\u0434 \u0431\u0443\u0431\
-      \u043D\u044B \u043F\u0443\u043B\u0435\u043C\u0451\u0442\u0430."
-    type: Add
-  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D DP-72, \u0435\
-      \u0433\u043E \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\
-      \u043D\u043E\u0441\u0442\u044C \u0442\u0435\u043F\u0435\u0440\u044C \u0432\u044B\
-      \u0448\u0435, \u0431\u043E\u043B\u0435\u0435 \u043D\u0435 \u043C\u0430\u0433\
-      \u043D\u0438\u0442\u0438\u0442\u0441\u044F \u043A \u0431\u0440\u043E\u043D\u0435\
-      ."
-    type: Fix
-  id: 405
-  time: '2026-07-06T12:50:37.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/301
-- author: jok989372-lgtm
-  changes:
-  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0425\u041F \u043E\
-      \u0445\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043D\u0434\u0440\u043E\u0438\
-      \u0434\u0430\u043C."
-    type: Tweak
-  id: 406
-  time: '2026-07-06T12:51:52.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/306
-- author: Releks76
-  changes:
-  - message: "\u0412\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0432\
-      \u044B\u0431\u043E\u0440\u0430 \u043A\u043B\u044E\u0447\u0430 \u0441\u0431\u0440\
-      \u043E\u0441\u0430 \u0441\u0438\u043D\u0442\u0435\u0442\u0438\u043A\u0430\u043C\
-      \ (We-Yu, Prodidgy, Hyperdyne)."
-    type: Add
-  id: 407
-  time: '2026-07-06T12:52:31.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/307
-- author: RomiGur
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0447\u0435\u0440\
-      \u0442\u0430 \u043F\u0430\u0446\u0438\u0444\u0438\u0441\u0442\u0430 \u0441 \u0432\
-      \u0430\u043D\u0438\u043B\u044C\u043D\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\
-      \u0438 \u0438\u0433\u0440\u044B."
-    type: Add
-  id: 408
-  time: '2026-07-06T12:52:47.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/308
-- author: RomiGur
-  changes:
-  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u0441\u043A\
-      \u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\u043D\u043E\u0441\u0442\
-      \u044C \u043F\u0443\u043B\u0435\u043C\u0451\u0442\u0430 Kramer \u0441 \u0440\
-      \u0430\u0437\u0432\u0451\u0440\u043D\u0443\u0442\u044B\u043C\u0438 \u0441\u043E\
-      \u0448\u043A\u0430\u043C\u0438"
-    type: Fix
-  id: 409
-  time: '2026-07-06T12:53:02.0000000+00:00'
-  url: https://github.com/flex5hybrid/RussianCM/pull/309
 - author: Vencallium
   changes:
   - message: 5 larvas -> 3 larvas round start
@@ -5742,7 +5682,7 @@
     type: Tweak
   - message: Acid mine ability range going from 13 tiles -> 9 tiles
     type: Tweak
-  id: 385
+  id: 405
   time: '2026-07-02T09:34:07.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1498
 - author: MarshesAndMeadows
@@ -5760,7 +5700,7 @@
     type: Remove
   - message: Removed the old Charge from charger
     type: Remove
-  id: 386
+  id: 406
   time: '2026-07-02T09:34:18.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1203
 - author: TheHellFireo
@@ -5771,7 +5711,7 @@
     type: Add
   - message: Mops can clean blood and footprint decals from the clicked tile.
     type: Fix
-  id: 387
+  id: 407
   time: '2026-07-03T05:05:52.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1515
 - author: TheHellFireo
@@ -5781,7 +5721,7 @@
   - message: Localized blood and burn damage overlays to the injured body part instead
       of the whole body.
     type: Fix
-  id: 388
+  id: 408
   time: '2026-07-03T05:06:04.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1514
 - author: TheHellFireo
@@ -5795,21 +5735,21 @@
   - message: Prosthetic limbs require a welder to fix brute and cable coils to fix
       burns.
     type: Tweak
-  id: 389
+  id: 409
   time: '2026-07-03T06:09:00.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1516
 - author: MarshesAndMeadows
   changes:
   - message: Updated charger indicators
     type: Tweak
-  id: 390
+  id: 410
   time: '2026-07-03T15:26:24.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1517
 - author: TheHellFireo
   changes:
   - message: Puts round start larva back to 5
     type: Tweak
-  id: 391
+  id: 411
   time: '2026-07-03T15:47:56.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1518
 - author: TheHellFireo
@@ -5825,7 +5765,7 @@
     type: Tweak
   - message: Improved runechat wrapping, centering, cutoff handling, and emote presentation.
     type: Fix
-  id: 392
+  id: 412
   time: '2026-07-03T16:43:16.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1519
 - author: OmerF-afk
@@ -5841,7 +5781,7 @@
   - message: Adds the required stuff to ponchos so they can be used in regular clothing
       now.
     type: Add
-  id: 393
+  id: 413
   time: '2026-07-04T11:27:37.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1522
 - author: OverusedMeme
@@ -5849,7 +5789,7 @@
   - message: Colonist Loadouts now have a larger variety of choices for jumpsuits,
       jackets, hats and glasses to choose from.
     type: Add
-  id: 394
+  id: 414
   time: '2026-07-04T11:42:19.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1521
 - author: TheHellFireo
@@ -5909,7 +5849,7 @@
     type: Fix
   - message: Added assorted performance fixes.
     type: Fix
-  id: 395
+  id: 415
   time: '2026-07-04T12:44:44.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1524
 - author: maertayn
@@ -5917,7 +5857,7 @@
   - message: Vehicle Crewman added to Auxiliary for OW to spectate & VC missing comms
       frequency*
     type: Fix
-  id: 396
+  id: 416
   time: '2026-07-04T19:31:46.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1529
 - author: OverusedMeme
@@ -5931,7 +5871,7 @@
   - message: The filled M276 medical belt as an option for ERO's (The Filled Life
       Saver Bag Exists)
     type: Remove
-  id: 397
+  id: 417
   time: '2026-07-04T20:50:56.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1523
 - author: HolySSSS
@@ -5939,14 +5879,14 @@
   - message: Walls and doors are now impossible to break with small bludgeoning items
       and fists.
     type: Tweak
-  id: 398
+  id: 418
   time: '2026-07-04T20:55:22.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1526
 - author: maertayn
   changes:
   - message: Fixed objectives & intel
     type: Fix
-  id: 399
+  id: 419
   time: '2026-07-04T20:56:21.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1513
 - author: murdocstarsim
@@ -5958,7 +5898,7 @@
     type: Add
   - message: General Rules, Roleplay Rules and High Roleplay Rules have been updated
     type: Admin
-  id: 400
+  id: 420
   time: '2026-07-05T01:55:29.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1532
 - author: maertayn
@@ -5968,7 +5908,7 @@
     type: Add
   - message: Reorganised skills, ranks, chevrons, Id Cards
     type: Code
-  id: 401
+  id: 421
   time: '2026-07-05T01:55:48.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1508
 - author: TheHellFireo
@@ -5996,7 +5936,7 @@
   - message: Synths no longer receive organic oxygen damage in crit and can self-reattach
       limbs through synth surgery.
     type: Fix
-  id: 402
+  id: 422
   time: '2026-07-05T07:16:12.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1535
 - author: TheHellFireo
@@ -6065,7 +6005,7 @@
     type: Tweak
   - message: Changed tacmap vehicle occupancy text away from white for readability.
     type: Tweak
-  id: 403
+  id: 423
   time: '2026-07-05T16:53:22.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1539
 - author: TheHellFireo
@@ -6079,14 +6019,14 @@
     type: Add
   - message: AG80 gets falloff and its burst mode is fixed
     type: Fix
-  id: 404
+  id: 424
   time: '2026-07-05T18:21:01.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1540
 - author: murdocstarsim
   changes:
   - message: SOP Rewrite finalisation
     type: Add
-  id: 405
+  id: 425
   time: '2026-07-05T21:45:28.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1538
 - author: maertayn
@@ -6116,28 +6056,88 @@
   - message: CMP can request ammunition for their revolver, from reqs. under Specialist
       Ammo
     type: Add
-  id: 406
+  id: 426
   time: '2026-07-06T00:29:24.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1543
 - author: maertayn
   changes:
   - message: Insurgency min pop from 40 to 35 required
     type: Tweak
-  id: 407
+  id: 427
   time: '2026-07-06T11:05:59.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1546
+- author: HubaBuba
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043D\u044B RPG-36\
+      \ \u0438 RPO-Pchela \u0434\u043B\u044F \u0421\u041F\u041D."
+    type: Add
+  - message: "\u041D\u0430\u0431\u043E\u0440 DP-72, \u0432 \u0441\u043E\u0441\u0442\
+      \u0430\u0432\u0435 \u043A\u043E\u0442\u043E\u0440\u043E\u0433\u043E \u0440\u0430\
+      \u0437\u0433\u0440\u0443\u0437\u043A\u0430 \u043F\u043E\u0434 \u0431\u0443\u0431\
+      \u043D\u044B \u043F\u0443\u043B\u0435\u043C\u0451\u0442\u0430."
+    type: Add
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D DP-72, \u0435\
+      \u0433\u043E \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\
+      \u043D\u043E\u0441\u0442\u044C \u0442\u0435\u043F\u0435\u0440\u044C \u0432\u044B\
+      \u0448\u0435, \u0431\u043E\u043B\u0435\u0435 \u043D\u0435 \u043C\u0430\u0433\
+      \u043D\u0438\u0442\u0438\u0442\u0441\u044F \u043A \u0431\u0440\u043E\u043D\u0435\
+      ."
+    type: Fix
+  id: 428
+  time: '2026-07-06T12:50:37.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/301
+- author: jok989372-lgtm
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0425\u041F \u043E\
+      \u0445\u0440\u0430\u043D\u043D\u044B\u0439 \u0430\u043D\u0434\u0440\u043E\u0438\
+      \u0434\u0430\u043C."
+    type: Tweak
+  id: 429
+  time: '2026-07-06T12:51:52.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/306
+- author: Releks76
+  changes:
+  - message: "\u0412\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C \u0432\
+      \u044B\u0431\u043E\u0440\u0430 \u043A\u043B\u044E\u0447\u0430 \u0441\u0431\u0440\
+      \u043E\u0441\u0430 \u0441\u0438\u043D\u0442\u0435\u0442\u0438\u043A\u0430\u043C\
+      \ (We-Yu, Prodidgy, Hyperdyne)."
+    type: Add
+  id: 430
+  time: '2026-07-06T12:52:31.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/307
+- author: RomiGur
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0447\u0435\u0440\
+      \u0442\u0430 \u043F\u0430\u0446\u0438\u0444\u0438\u0441\u0442\u0430 \u0441 \u0432\
+      \u0430\u043D\u0438\u043B\u044C\u043D\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\
+      \u0438 \u0438\u0433\u0440\u044B."
+    type: Add
+  id: 431
+  time: '2026-07-06T12:52:47.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/308
+- author: RomiGur
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0430 \u0441\u043A\
+      \u043E\u0440\u043E\u0441\u0442\u0440\u0435\u043B\u044C\u043D\u043E\u0441\u0442\
+      \u044C \u043F\u0443\u043B\u0435\u043C\u0451\u0442\u0430 Kramer \u0441 \u0440\
+      \u0430\u0437\u0432\u0451\u0440\u043D\u0443\u0442\u044B\u043C\u0438 \u0441\u043E\
+      \u0448\u043A\u0430\u043C\u0438"
+    type: Fix
+  id: 432
+  time: '2026-07-06T12:53:02.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/309
 - author: Tyzemol
   changes:
   - message: Xenos can now say "admin" again.
     type: Fix
-  id: 408
+  id: 433
   time: '2026-07-07T10:17:32.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1549
 - author: murdocstarsim
   changes:
   - message: "SOP rewrite for real this time. \U0001F91E"
     type: Add
-  id: 409
+  id: 434
   time: '2026-07-07T10:17:46.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1547
 - author: TheHellFireo
@@ -6154,7 +6154,7 @@
     type: Fix
   - message: Removed vendor debug spam.
     type: Tweak
-  id: 410
+  id: 435
   time: '2026-07-07T13:42:14.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1553
 - author: TheHellFireo
@@ -6175,14 +6175,14 @@
     type: Fix
   - message: greenos can now speak english and hive.
     type: Fix
-  id: 411
+  id: 436
   time: '2026-07-07T13:48:10.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1552
 - author: jok989372-lgtm
   changes:
   - message: Three new surgical webbings were added for the GOVFOR synthetic.
     type: Add
-  id: 412
+  id: 437
   time: '2026-07-08T03:16:01.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1551
 - author: maertayn
@@ -6197,7 +6197,7 @@
   - message: Tanks can no longer be damaged by xenos with insufficient claw length,
       requires sharp+ (prae/warrior/lurker/bull/wendigo & stronger tiers)
     type: Tweak
-  id: 413
+  id: 438
   time: '2026-07-08T04:57:47.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1560
 - author: Vencallium
@@ -6208,7 +6208,7 @@
     type: Remove
   - message: Sorokyne & Chances from insurgency
     type: Remove
-  id: 414
+  id: 439
   time: '2026-07-08T13:21:59.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1550
 - author: Vencallium
@@ -6224,7 +6224,7 @@
   - message: Cursed zombies now use melee weapons, scream on death, and have randomized
       civilian or faction-matched military clothing.
     type: Tweak
-  id: 415
+  id: 440
   time: '2026-07-09T00:53:58.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1537
 - author: Vencallium
@@ -6232,7 +6232,7 @@
   - message: Fixed the zombie summoner prototype registration crash that prevented
       the server from starting
     type: Fix
-  id: 416
+  id: 441
   time: '2026-07-09T01:31:10.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1563
 - author: Vencallium
@@ -6248,7 +6248,7 @@
     type: Tweak
   - message: Spawned cursed are no longer available as ghost roles.
     type: Fix
-  id: 417
+  id: 442
   time: '2026-07-09T05:28:22.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1565
 - author: Crime481
@@ -6256,7 +6256,7 @@
   - message: Added job icons for the Logistics Officer, Chief Medical Officer, and
       the Chief of Military Police.
     type: Add
-  id: 418
+  id: 443
   time: '2026-07-09T06:00:15.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1564
 Name: CMU
