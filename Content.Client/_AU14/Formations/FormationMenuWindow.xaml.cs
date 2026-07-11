@@ -41,27 +41,27 @@ public sealed partial class FormationMenuWindow : DefaultWindow
         // Status label
         if (state.IsInPlanningMode)
         {
-            StatusLabel.Text = "Placement active - click tiles to drop squad markers.";
+            StatusLabel.Text = Loc.GetString("formation-status-planning");
             StatusLabel.FontColorOverride = Color.Yellow;
         }
         else if (hasMembers)
         {
-            StatusLabel.Text = $"Formation active - {state.SlottedCount} member(s) in formation.";
+            StatusLabel.Text = Loc.GetString("formation-status-active", ("count", state.SlottedCount));
             StatusLabel.FontColorOverride = Color.LimeGreen;
         }
         else if (hasOpenSlots)
         {
-            StatusLabel.Text = $"{state.ActiveDotCount} open slot(s) - waiting for soldiers to report in.";
+            StatusLabel.Text = Loc.GetString("formation-status-open-slots", ("count", state.ActiveDotCount));
             StatusLabel.FontColorOverride = Color.Cyan;
         }
         else if (hasPending)
         {
-            StatusLabel.Text = "Markers staged. Hit Activate when ready.";
+            StatusLabel.Text = Loc.GetString("formation-status-staged");
             StatusLabel.FontColorOverride = Color.Orange;
         }
         else
         {
-            StatusLabel.Text = "No active formation. Start with Step 1.";
+            StatusLabel.Text = Loc.GetString("formation-status-start");
             StatusLabel.FontColorOverride = Color.White;
         }
 
@@ -69,40 +69,52 @@ public sealed partial class FormationMenuWindow : DefaultWindow
         PendingDotsList.DisposeAllChildren();
         foreach (var dot in state.PendingDots)
         {
-            var typeStr = dot.IsLeaderDot ? "[Leader]" : "[Squad]";
+            var typeStr = Loc.GetString(dot.IsLeaderDot ? "formation-dot-type-leader" : "formation-dot-type-squad");
             var label = new Label
             {
-                Text = $"  {typeStr} ({dot.TileX}, {dot.TileY}) facing {dot.Facing}",
+                Text = Loc.GetString("formation-pending-dot",
+                    ("type", typeStr),
+                    ("x", dot.TileX),
+                    ("y", dot.TileY),
+                    ("facing", dot.Facing)),
                 FontColorOverride = dot.IsLeaderDot ? Color.Gold : Color.Cyan,
             };
             PendingDotsList.AddChild(label);
         }
         if (!hasPending)
-            PendingDotsList.AddChild(new Label { Text = "  (none staged)", FontColorOverride = Color.DimGray });
+            PendingDotsList.AddChild(new Label { Text = Loc.GetString("formation-none-staged"), FontColorOverride = Color.DimGray });
 
         // Counts footer
-        ActiveDotsLabel.Text = $"Open slots: {state.ActiveDotCount}  |  Members: {state.SlottedCount}";
+        ActiveDotsLabel.Text = Loc.GetString("formation-counts", ("slots", state.ActiveDotCount), ("members", state.SlottedCount));
 
         // Dot lifetime toggle + warning
         DotLifetimeToggleButton.Text = state.ExtendedDotLifetime
-            ? "Dot lifetime: Extended (15 min)  [ACTIVE]"
-            : "Dot lifetime: Standard (2 min)";
+            ? Loc.GetString("formation-dot-lifetime-extended")
+            : Loc.GetString("formation-dot-lifetime-standard");
         LifetimeWarningBox.Visible = state.ExtendedDotLifetime;
 
         // Halt / March (formation starts frozen)
-        HaltMarchButton.Text = state.FormationFrozen ? "March Formation" : "Halt Formation";
+        HaltMarchButton.Text = state.FormationFrozen ? Loc.GetString("formation-march") : Loc.GetString("formation-halt");
 
         // Follow mode (active one is disabled so you can't re-click it)
-        ModeHoldButton.Text  = state.FollowMode == FormationFollowMode.Hold  ? "[Active] Hold"  : "Hold";
-        ModeChaseButton.Text = state.FollowMode == FormationFollowMode.Chase ? "[Active] Chase" : "Chase";
+        ModeHoldButton.Text = state.FollowMode == FormationFollowMode.Hold
+            ? Loc.GetString("formation-hold-active")
+            : Loc.GetString("formation-hold");
+        ModeChaseButton.Text = state.FollowMode == FormationFollowMode.Chase
+            ? Loc.GetString("formation-chase-active")
+            : Loc.GetString("formation-chase");
         ModeHoldButton.Disabled  = !hasMembers || state.FollowMode == FormationFollowMode.Hold;
         ModeChaseButton.Disabled = !hasMembers || state.FollowMode == FormationFollowMode.Chase;
 
         // Collision toggle
-        CollisionToggleButton.Text = state.CollisionsDisabled ? "Collisions: Off" : "Collisions: On";
+        CollisionToggleButton.Text = state.CollisionsDisabled
+            ? Loc.GetString("formation-collisions-off")
+            : Loc.GetString("formation-collisions-on");
 
         // Debug button
-        DebugToggleButton.Text = state.DebugShowSlots ? "Hide Slot Positions" : "Show Slot Positions";
+        DebugToggleButton.Text = state.DebugShowSlots
+            ? Loc.GetString("formation-hide-slots")
+            : Loc.GetString("formation-show-slots");
 
         // Enabled states
         ConfirmButton.Disabled = !hasPending;

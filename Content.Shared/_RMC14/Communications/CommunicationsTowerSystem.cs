@@ -82,12 +82,13 @@ public sealed partial class CommunicationsTowerSystem : EntitySystem
     {
         using (args.PushGroup(nameof(CommunicationsTowerComponent)))
         {
-            var msg = $"[color=cyan]If placed {(int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes} minutes into the round, a hive cluster will turn into a hive pylon when its weeds take over this![/color]";
+            var msg = Loc.GetString("rmc-comms-tower-examine-hive-pylon", // RuMC edit
+                ("minutes", (int) _hiveBoon.CommunicationTowerXenoTakeoverTime.TotalMinutes)); // RuMC edit
             args.PushMarkup(msg);
             if (ent.Comp.State != CommunicationsTowerState.Broken)
                 return;
 
-            args.PushMarkup("[color=red]It is damaged and needs a welder for repairs![/color]");
+            args.PushMarkup(Loc.GetString("rmc-comms-tower-examine-damaged")); // RuMC edit
         }
     }
 

@@ -1,0 +1,14 @@
+au14-cash-vendor-credit = Счёт:
+au14-cash-vendor-scan-id = Сканировать ID
+au14-cash-vendor-return-change = Вернуть сдачу
+au14-cash-vendor-dept-budget = Бюджет отдела:
+au14-cash-vendor-search = Поиск...
+au14-cash-vendor-footer = Вставьте наличные, затем выберите товар.
+au14-cash-vendor-prices-incl-tax = Цены с учётом налога
+au14-cash-vendor-sales-tax = Налог с продаж: {$percent}%
+au14-cash-vendor-no-sales-tax = Без налога с продаж
+au14-cash-vendor-clear-dept = Сбросить отдел
+au14-cash-vendor-buy = Купить
+au14-cash-vendor-no-items = Нет доступных товаров.
+au14-cash-vendor-no-id = Карта ID не найдена.
+au14-cash-vendor-no-dept = Отдел для этой карты ID не найден.

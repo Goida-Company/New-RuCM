@@ -1,3 +1,7 @@
 ent-CMSink = раковина
-ent-CMSinkEmpty = раковина
-  .desc = Раковина, используемая для мытья рук и лица.
+    .desc = Используется для мытья рук и лица.
+    .suffix = Вода
+
+ent-CMSinkEmpty = {ent-CMSink}
+    .desc = {ent-CMSink.desc}
+    .suffix = Пустая

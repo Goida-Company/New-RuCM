@@ -71,10 +71,12 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: au14-job-name-civiliancmbdeputy
-    description: You have been sent by the Colonial Administration to investigate unspecified occurrences on this planet. Investigate the area under the orders of your marshal and ensure that the laws of Sol extend far beyond the Solar System.
+    # RuMC edit start
+    name: ent-CMBInvestigationPartyJobDeputyShotgun-name
+    description: ghost-role-information-CMBInvestigationPartyJobDeputyShotgun-description
+    # RuMC edit end
     reregister: false
     job: AU14JobInvestigationCMBDeputyShotgun
     raffle:
       settings: short
-    rules: You have been sent by the Colonial Administration to investigate unspecified occurrences on this planet. Investigate the area under the orders of your marshal and ensure that the laws of Sol extend far beyond the Solar System.
+    rules: ghost-role-information-CMBInvestigationPartyJobDeputyShotgun-description # RuMC edit

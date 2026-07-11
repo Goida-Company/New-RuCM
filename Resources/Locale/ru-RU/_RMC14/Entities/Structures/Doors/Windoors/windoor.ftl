@@ -1,5 +1,11 @@
-ent-CMWindoorSecure = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoor = раздвижное окно
+    .desc = Оно открывается, закрывается, и вы можете видеть сквозь него!
 
-ent-CMWindoor = стеклянная дверь
+ent-CMWindoorSecure = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное
+
+
+
+
 

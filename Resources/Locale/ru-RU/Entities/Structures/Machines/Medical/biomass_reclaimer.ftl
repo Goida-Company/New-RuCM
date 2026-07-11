@@ -1,3 +1,3 @@
-ent-BiomassReclaimer-name = рекуператор биомассы
-ent-BiomassReclaimer-desc = Восстанавливает биомассу из трупов. Ужасно.
+ent-BiomassReclaimer = переработчик биомассы
+    .desc = Получает биомассу из трупов. Ужасно.
 

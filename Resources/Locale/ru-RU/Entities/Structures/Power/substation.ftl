@@ -1,18 +1,21 @@
-ent-BaseSubstation-name = подстанция
-ent-BaseSubstation-desc = Уменьшает напряжение подаваемой в него электроэнергии.
+ent-BaseSubstation = подстанция
+    .desc = Уменьшает напряжение подаваемой в него электроэнергии.
 
-ent-BaseSubstationWall-name = настенная подстанция
-ent-BaseSubstationWall-desc = Подстанция, предназначенная для компактных шаттлов и помещений.
+ent-BaseSubstationWall = настенная подстанция
+    .desc = Подстанция, предназначенная для компактных шаттлов.
 
-ent-BaseSubstationWallFrame-name = каркас подстанции настенного монтажа
-ent-BaseSubstationWallFrame-desc = Каркас подстанции для строительства.
+ent-BaseSubstationWallFrame = каркас настенной подстанции
+    .desc = Каркас подстанции для строительства.
 
-ent-SubstationBasic-name = подстанция
-ent-SubstationBasic-desc = Уменьшает напряжение подаваемой в него электроэнергии.
+ent-SubstationBasic = подстанция
+    .desc = Уменьшает напряжение подаваемой в него электроэнергии.
+    .suffix = Базовая
 
-ent-SubstationBasicEmpty-name = подстанция
-ent-SubstationBasicEmpty-desc = Уменьшает напряжение подаваемой в него электроэнергии.
+ent-SubstationBasicEmpty = {ent-SubstationBasic}
+    .desc = {ent-SubstationBasic.desc}
+    .suffix = Пустая
 
-ent-SubstationWallBasic-name = настенная подстанция
-ent-SubstationWallBasic-desc = Подстанция, предназначенная для компактных шаттлов и помещений.
+ent-SubstationWallBasic = настенная подстанция
+    .desc = Подстанция, предназначенная для компактных шаттлов.
+    .suffix = Базовая
 

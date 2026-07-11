@@ -1,6 +1,6 @@
-ent-KitchenMicrowave-name = микроволновая печь
-ent-KitchenMicrowave-desc = Это волшебство.
+ent-KitchenMicrowave = микроволновая печь
+    .desc = Это волшебство.
 
-ent-SyndicateMicrowave-name = Донк Ко. микроволновая печь
-ent-SyndicateMicrowave-desc = Он настолько продвинут, что готовит пончики всего за 2,5 секунды!
+ent-SyndicateMicrowave = микроволновая печь Донк Ко.
+    .desc = Она настолько продвинутая, что готовит пончики всего за 2,5 секунды!
 

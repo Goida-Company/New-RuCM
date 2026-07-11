@@ -1,30 +1,38 @@
-ent-TelecomServer-name = телекоммуникационный сервер
-ent-TelecomServer-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServer = телекоммуникационный сервер
+    .desc = Обеспечивает радиосвязь.
 
-ent-TelecomServerFilled-name = телекоммуникационный сервер
-ent-TelecomServerFilled-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilled = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Все
 
-ent-TelecomServerFilledCommon-name = телекоммуникационный сервер
-ent-TelecomServerFilledCommon-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledCommon = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Общий
 
-ent-TelecomServerFilledCargo-name = телекоммуникационный сервер
-ent-TelecomServerFilledCargo-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledCargo = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Снабжение
 
-ent-TelecomServerFilledEngineering-name = телекоммуникационный сервер
-ent-TelecomServerFilledEngineering-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledEngineering = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Инженерный
 
-ent-TelecomServerFilledMedical-name = телекоммуникационный сервер
-ent-TelecomServerFilledMedical-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledMedical = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Медицинский
 
-ent-TelecomServerFilledScience-name = телекоммуникационный сервер
-ent-TelecomServerFilledScience-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledScience = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Научный
 
-ent-TelecomServerFilledSecurity-name = телекоммуникационный сервер
-ent-TelecomServerFilledSecurity-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledSecurity = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = СБ
 
-ent-TelecomServerFilledService-name = телекоммуникационный сервер
-ent-TelecomServerFilledService-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
+ent-TelecomServerFilledService = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Сервисный
 
-ent-TelecomServerFilledCommand-name = телекоммуникационный сервер
-ent-TelecomServerFilledCommand-desc = Когда он включен и заполнен ключами шифрования, он позволяет общаться через радиогарнитуру.
-
+ent-TelecomServerFilledCommand = {ent-TelecomServer}
+    .desc = {ent-TelecomServer.desc}
+    .suffix = Командование

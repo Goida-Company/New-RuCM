@@ -848,7 +848,6 @@
       - id: AU14HeadHelmetRMC
       - id: AU14HeadHelmetRMCBallistic
       - id: AU14HeadBeretRMCLead
-        name: Sergeant Beret
       - id: AU14JunglePatrolCap
       - id: AU14DesertPatrolCap
     - name: Uniforms
@@ -865,7 +864,6 @@
     - name: Spare Equipment
       entries:
       - id: AU14HeadBeretRMCLead
-        name: Sergeant Beret
         amount: 2
 
 - type: entity
@@ -1070,12 +1068,9 @@
       choices: { CMUCTToolStorage: 1 }
       entries:
       - id: AU14BeltUtilityCombatRMCFilled
-        name: royal marine combat toolbelt rig (filled)
         recommended: true
       - id: AU14PouchToolsFilledComtech
-        name: tactical tools pouch (filled)
       - id: AU14BeltUtilityFilled
-        name: M276 pattern toolbelt rig (filled)
     - name: Engineering Storage Bag
       choices: { CMUPouchesCTBag: 1 }
       entries:

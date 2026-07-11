@@ -1,12 +1,14 @@
-ent-PortableScrubber-name = портативный скребок
-ent-PortableScrubber-desc = Он очищает, портативно!
+ent-PortableScrubber = портативный скрубер
+    .desc = Он втягивает газы вокруг.
 
-ent-SpaceHeater-name = обогреватель
-ent-SpaceHeater-desc = Устройство с технологией bluespace, которое изменяет местную температуру. Обычно его называют «космическим обогревателем».
+ent-SpaceHeater = термостат
+    .desc = Устройство с технологией блюспейс, которое изменяет местную температуру.
 
-ent-SpaceHeaterAnchored-name = обогреватель
-ent-SpaceHeaterAnchored-desc = Устройство с технологией bluespace, которое изменяет местную температуру. Обычно его называют «космическим обогревателем».
+ent-SpaceHeaterAnchored = {ent-SpaceHeater}
+    .desc = {ent-SpaceHeater.desc}
+    .suffix = Прикручен
 
-ent-SpaceHeaterEnabled-name = обогреватель
-ent-SpaceHeaterEnabled-desc = Устройство с технологией bluespace, которое изменяет местную температуру. Обычно его называют «космическим обогревателем».
+ent-SpaceHeaterEnabled = термостат
+    .desc = Устройство с технологией блюспейс, которое изменяет местную температуру. Обычно его называют «космическим обогревателем».
+    .suffix = Включён
 

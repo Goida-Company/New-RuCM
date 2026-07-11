@@ -7,5 +7,6 @@ ent-CMBloodPackFull = {ent-CMBloodPack}
     .suffix = Полный
 
 
-ent-CMIV = Капельница
-  .desc = Позволяет переливать кровь.
+ent-CMIV = капельница
+    .desc = Позволяет переливать кровь.
+    .suffix = Пустая

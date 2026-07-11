@@ -1,4 +1,7 @@
-ent-AU14CorporateASRSConsole = консоль корпоративного снабжения
-    .desc = Терминал управления корпоративным снабжением Вейланд-Ютани. Заказы, размещённые здесь, облагаются текущей ставкой налога с продаж.
-ent-AU14CorporateASRSElevator = корпоративный грузовой подъёмник
-    .desc = Корпоративный грузовой подъёмник Вейланд-Ютани. Доставляет заказы, размещённые через систему корпоративного снабжения.
+ent-AU14CorporateASRSConsole = {ent-CMASRSConsole} (Ве-Ю)
+    .desc = {ent-CMASRSConsole.desc}
+    .suffix = Ве-Ю, Карго
+
+ent-AU14CorporateASRSElevator = {ent-CMCargoElevator} (Ве-Ю)
+    .desc = {ent-CMCargoElevator.desc}
+    .suffix = Ве-Ю, Карго

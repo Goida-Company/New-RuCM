@@ -1,3 +1,3 @@
-ent-CargoTelepad-name = грузовой телепад
-ent-CargoTelepad-desc = Лучите пиццу и закопайте.
+ent-CargoTelepad = грузовой телепад
+    .desc = Закажите пиццу и получите её моментально.
 

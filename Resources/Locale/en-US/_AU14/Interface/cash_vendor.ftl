@@ -1,0 +1,14 @@
+au14-cash-vendor-credit = Credit:
+au14-cash-vendor-scan-id = Scan ID
+au14-cash-vendor-return-change = Return Change
+au14-cash-vendor-dept-budget = Dept Budget:
+au14-cash-vendor-search = Search...
+au14-cash-vendor-footer = Insert cash, then select item.
+au14-cash-vendor-prices-incl-tax = Prices incl. tax
+au14-cash-vendor-sales-tax = Sales Tax: { $percent }%
+au14-cash-vendor-no-sales-tax = No sales tax
+au14-cash-vendor-clear-dept = Clear Dept
+au14-cash-vendor-buy = Buy
+au14-cash-vendor-no-items = No items available.
+au14-cash-vendor-no-id = No ID card found.
+au14-cash-vendor-no-dept = No department found for this ID card.

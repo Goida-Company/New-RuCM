@@ -331,6 +331,11 @@ namespace Content.Client.Construction
                     _sprite.LayerSetVisible((ghost.Value, sprite), ghostLayerIndex, true);
                 }
 
+                // AU14: also copy the target's sprite SCALE. Copying only the RSI states rendered scaled
+                // entities (e.g. the 64x64 support beams drawn at 0.5) as their full-size art, so the placed
+                // ghost covered 4 tiles while the built entity covers 1.
+                _sprite.SetScale((ghost.Value, sprite), targetSprite.Scale);
+
                 Del(dummy);
             }
             else

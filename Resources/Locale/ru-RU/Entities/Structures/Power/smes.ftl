@@ -1,15 +1,17 @@
-ent-BaseSMES-name = МСП
-ent-BaseSMES-desc = Сверхпроводящий магнитный накопитель энергии (СМЕС) большой емкости.
+ent-BaseSMES = СМНЭ
+    .desc = Сверхпроводящий магнитный накопитель энергии большой емкости.
 
-ent-SMESAdvanced-name = продвинутый МСП
-ent-SMESAdvanced-desc = Сверхпроводящий магнитный накопитель энергии (SMES) еще большей мощности.
+ent-SMESBasic = СМНЭ
+    .desc = Сверхпроводящий магнитный накопитель энергии большой емкости.
 
-ent-SMESBasic-name = МСП
-ent-SMESBasic-desc = Сверхпроводящий магнитный накопитель энергии (СМЕС) большой емкости.
+ent-SMESBasicEmpty = {ent-SMESBasic}
+    .desc = {ent-SMESBasic.desc}
+    .suffix = Пустой
 
-ent-SMESBasicEmpty-name = МСП
-ent-SMESBasicEmpty-desc = Сверхпроводящий магнитный накопитель энергии (СМЕС) большой емкости.
+ent-SMESAdvanced = продвинутый СМНЭ
+    .desc = Сверхпроводящий магнитный накопитель энергии ещё большей мощности.
 
-ent-SMESAdvancedEmpty-name = продвинутый МСП
-ent-SMESAdvancedEmpty-desc = Сверхпроводящий магнитный накопитель энергии (SMES) еще большей мощности.
+ent-SMESAdvancedEmpty = {ent-SMESAdvanced}
+    .desc = {ent-SMESAdvanced.desc}
+    .suffix = Пустой
 

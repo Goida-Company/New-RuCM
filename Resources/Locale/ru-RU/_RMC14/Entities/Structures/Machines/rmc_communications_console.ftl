@@ -1,36 +1,51 @@
 ent-RMCLifeboatConsole = консоль спасательной шлюпки
-  .desc = Компьютер управления спасательной шлюпкой.
+    .desc = Компьютер управления спасательной шлюпкой.
 
 ent-RMCEscapePodController = контроллер спасательной капсулы
-  .desc = Компьютер управления шаттлом.
+    .desc = Компьютер управления шаттлом.
 
-ent-RMCTacticalMapTable = таблица карт
-  .desc = Таблица, отображающая карту текущего местоположения операции.
+ent-RMCEscapePodControllerLiaison = {ent-RMCEscapePodController}
+    .desc = {ent-RMCEscapePodController.desc}
+    .suffix = Связной
 
 ent-RMCOverwatchConsole = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отряду.
+    .desc = Современная техника для отдачи приказов отряду.
 
-ent-RMCWarshipControlConsole = консоль управления алмайера
-  .desc = Используется для управления кораблем и связанными с ним функциями.
+ent-RMCOverwatchConsoleRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Поворачиваемая
 
-ent-RMCGroundsideOperationsConsole = наземный пульт управления
-  .desc = Это можно использовать для различных важных функций.
+ent-RMCOverwatchConsoleRotatingPowered = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Поворачиваемая, Запитана
 
-ent-RMCOverwatchConsoleRotating = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отряду.
+ent-RMCWarshipControlConsole = консоль управления боевым кораблём
+    .desc = Используется для управления кораблем и связанными с ним функциями.
 
-ent-RMCOverwatchConsoleRotatingPowered = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отряду.
+ent-RMCGroundsideOperationsConsole = консоль управления наземными операциями
+    .desc = Это можно использовать для различных важных функций.
+ent-RMCGroundsideOperationsConsoleGovfor = {ent-RMCGroundsideOperationsConsole}
+    .desc = {ent-RMCGroundsideOperationsConsole}
+    .suffix = ГОВФОР
+ent-RMCGroundsideOperationsConsoleOpfor = {ent-RMCGroundsideOperationsConsole}
+    .desc = {ent-RMCGroundsideOperationsConsole}
+    .suffix = ОПФОР
 
-ent-RMCTacticalMapTableLarge = таблица карт
-  .desc = Таблица, отображающая карту текущего местоположения операции.
 
-ent-RMCTacticalMapTableLargeRotated = таблица карт
-  .desc = Таблица, отображающая карту текущего местоположения операции.
-
-ent-RMCTacticalMapTableLargeSquare = таблица карт
-  .desc = Таблица, отображающая карту текущего местоположения операции.
-
-ent-RMCEscapePodControllerLiaison = контроллер спасательной капсулы
-  .desc = Компьютер управления шаттлом.
-
+ent-RMCTacticalMapTable = стол-карта
+    .desc = Используется для управления операцией, не выходя из штаба.
+ent-RMCTacticalMapTableLarge = {ent-RMCTacticalMapTable}
+    .desc = {ent-RMCTacticalMapTable.desc}
+    .suffix = Большой
+ent-RMCTacticalMapTableLargeRotated = {ent-RMCTacticalMapTable}
+    .desc = {ent-RMCTacticalMapTable.desc}
+    .suffix = Большой, Повернут
+ent-RMCTacticalMapTableLargeSquare = {ent-RMCTacticalMapTable}
+    .desc = {ent-RMCTacticalMapTable.desc}
+    .suffix = Большой, Квадратный
+ent-RMCTacticalMapTableGovfor = {ent-RMCTacticalMapTable}
+    .desc = {ent-RMCTacticalMapTable.desc}
+    .suffix = ГОВФОР
+ent-RMCTacticalMapTableLargeGovfor = {ent-RMCTacticalMapTable}
+    .desc = {ent-RMCTacticalMapTable.desc}
+    .suffix = ГОВФОР, Большой

@@ -1,21 +1,28 @@
-ent-CMWindoorSecureBrig = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecureBrig = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Бриг
 
-ent-CMWindoorSecurerRequisitions = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecurerRequisitions = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Карго
 
-ent-CMWindoorSecureMedical = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecureMedical = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Медицинское
 
-ent-CMWindoorSecureEngineering = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecureEngineering = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Инженерное
 
-ent-CMWindoorSecureCommand = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecureCommand = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Командование
 
-ent-RMCWindoorSecureTSEPABrig = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-RMCWindoorSecureTSEPABrig = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, ПДСН
 
-ent-CMWindoorSecureBrigPowered = безопасное окно
-  .desc = Он открывается, закрывается, и вы можете видеть сквозь него! 
+ent-CMWindoorSecureBrigPowered = {ent-CMWindoor}
+    .desc = {ent-CMWindoor.desc}
+    .suffix = Безопасное, Бриг, Запитано
 

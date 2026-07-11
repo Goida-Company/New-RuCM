@@ -1,4 +1,6 @@
-ent-CMBarricadePlasteelDoor = складная пластальная баррикада
-
 ent-RMCBarricadePlasteel = пластальная баррикада
+    .desc = Баррикада из пластали военного образца.
+
+ent-CMBarricadePlasteelDoor = складная пластальная баррикада
+    .desc = Баррикада из пластали военного образца. Эта служит дверью.
 

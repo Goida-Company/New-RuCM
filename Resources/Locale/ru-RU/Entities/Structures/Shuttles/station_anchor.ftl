@@ -1,12 +1,17 @@
-ent-StationAnchorBase-name = якорь станции
-ent-StationAnchorBase-desc = Предотвращает перемещение станций.
+ent-StationAnchorBase = станционный якорь
+    .desc = Предотвращает смещение станции.
+    .suffix = Включён
 
-ent-StationAnchorIndestructible-name = якорь станции
-ent-StationAnchorIndestructible-desc = Предотвращает перемещение станций.
+ent-StationAnchorIndestructible = {ent-StationAnchorBase}
+    .desc = {ent-StationAnchorBase.desc}
+    .suffix = Неразрушимый, Запитан
 
-ent-StationAnchor-name = якорь станции
-ent-StationAnchor-desc = Предотвращает перемещение станций.
+ent-StationAnchor = {ent-StationAnchorBase}
+    .desc = {ent-StationAnchorBase.desc}
+    .suffix = Включён
 
-ent-StationAnchorOff-name = якорь станции
-ent-StationAnchorOff-desc = Предотвращает перемещение станций.
+ent-StationAnchorOff = {ent-StationAnchor}
+    .desc = {ent-StationAnchor.desc}
+    .suffix = Выключен
+
 

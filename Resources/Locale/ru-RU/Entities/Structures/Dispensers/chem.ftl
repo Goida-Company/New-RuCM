@@ -1,6 +1,9 @@
-ent-ChemDispenserEmpty-name = химический дозатор
-ent-ChemDispenserEmpty-desc = Дозатор химикатов промышленного класса.
+ent-ChemDispenser = раздатчик химикатов
+    .desc = Дозатор химикатов промышленного класса.
+    .suffix = Заполненный
 
-ent-ChemDispenser-name = steal-target-groups-chem-dispenser
-ent-ChemDispenser-desc = Дозатор химикатов промышленного класса.
+ent-ChemDispenserEmpty = {ent-ChemDispenser}
+    .desc = {ent-ChemDispenser.desc}
+    .suffix = Пустой
+
 

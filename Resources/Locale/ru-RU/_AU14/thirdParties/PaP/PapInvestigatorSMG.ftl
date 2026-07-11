@@ -1,1 +1,1 @@
-ent-AU14JobPaPThirdpartyInvestigatorSMG = Следователь НВП СПН (ПП)
+ent-AU14JobPaPThirdpartyInvestigatorSMG = Следователь НВМ СПН (ПП)

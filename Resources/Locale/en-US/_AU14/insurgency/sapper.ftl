@@ -33,6 +33,25 @@ insfor-sapper-audio-location-unknown = unknown location
 insfor-sapper-audio-radio-alert = {$name} audio trap has been triggered. Location: {$location}.
 
 # Sapper's Workbench.
+insfor-sapper-workbench-title = Sapper's Workbench
+insfor-sapper-workbench-tab-gunsmithing = Gunsmithing
+insfor-sapper-workbench-tab-fabrication = Fabrication
+insfor-sapper-workbench-no-weapon-loaded = No weapon loaded
+insfor-sapper-workbench-attachment-slots = Attachment Slots
+insfor-sapper-workbench-load-weapon-slots = Load a weapon to show its slots.
+insfor-sapper-workbench-buffs-debuffs = Buffs / Debuffs
+insfor-sapper-workbench-no-modifiers = No attachment modifiers applied.
+insfor-sapper-workbench-slot-row = { $slot }: { $attachment }
+insfor-sapper-workbench-slot-empty = empty
+insfor-sapper-workbench-add-attachment = +Add
+insfor-sapper-workbench-remove-attachment = -Remove
+insfor-sapper-workbench-materials = Materials
+insfor-sapper-workbench-no-materials-loaded = No materials loaded
+insfor-sapper-workbench-eject = Eject
+insfor-sapper-workbench-loose-help = Loose Ingredients Help
+insfor-sapper-workbench-loose-help-desc = These must lie loose on or next to the bench to be consumed:
+insfor-sapper-workbench-craft = Craft
+insfor-sapper-workbench-no-materials = No materials
 insfor-sapper-workbench-deployed = You unfold the workbench and lock its legs down.
 insfor-sapper-workbench-need-materials = The bench is missing materials or loose ingredients (place ingredient items on or next to it).
 insfor-sapper-workbench-crafted = You build {$item}.

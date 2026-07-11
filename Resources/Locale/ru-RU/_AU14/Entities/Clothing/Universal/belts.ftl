@@ -49,3 +49,22 @@ ent-AU14BeltUtilityGeneralBlackCLFSurvPipeBomb = { ent-AU14BeltUtilityGeneralBla
 
 ent-AU14BeltMarineBlack = разгрузка для боеприпасов M276
     .desc = M276 — стандартное снаряжение. Состоит из модульного пояса с различными клипсами. Это стандартный вариант, предназначенный для массовой переноски боеприпасов.
+
+ent-AU14BeltMedical = {ent-CMBeltMedical}
+    .desc = {ent-CMBeltMedical.desc}
+ent-AU14BeltMedicalFilled = {ent-CMBeltMedical}
+    .desc = {ent-CMBeltMedical.desc}
+    .suffix = Заполнен
+
+ent-AU14BeltMedicBagFilled = { ent-CMBeltMedicBag }
+    .desc = { ent-CMBeltMedicBag.desc }
+    .suffix = AU14, Заполнена, Колонист
+ent-AU14BeltMedicBagSupportSynth = { ent-CMBeltMedicBag }
+    .desc = { ent-CMBeltMedicBag.desc }
+    .suffix = Заполнена, Синт поддержки
+ent-AU14BeltMedicBagSupportSynthRMC = { ent-AU14BeltMedicBagSupportSynth }
+    .desc = { ent-AU14BeltMedicBagSupportSynth.desc }
+    .suffix = Заполнена, Синт поддержки, КМП
+ent-AU14BeltMedicBagSupportSynthBlack = { ent-AU14BeltMedicBagSupportSynth }
+    .desc = { ent-AU14BeltMedicBagSupportSynth.desc }
+    .suffix = Заполнена, Синт поддержки, Чёрная

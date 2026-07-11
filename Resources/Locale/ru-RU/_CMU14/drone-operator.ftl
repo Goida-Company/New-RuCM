@@ -1,0 +1,124 @@
+cmu-job-name-govfordroneoperator = Оператор дрона
+cmu-job-description-govfordroneoperator = Дистанционно управляй боевым дроном-андроидом.
+cmu-job-prefix-govfordroneoperator = ОДР
+
+cmu-species-name-drone-android = Дрон-андроид
+cmu-species-drone-android-generation = дрон-андроид
+
+cmu-drone-operator-required = Вы не обучены управлять дроном-андроидом.
+cmu-drone-assembly-finish = Вы заканчиваете сборку {$drone}.
+cmu-drone-assembly-existing = Вы можете обслуживать только одного дрона-андроида одновременно.
+cmu-drone-frame-must-place = Положите корпус дрона перед сборкой.
+cmu-drone-frame-open-tool-required = Используйте отвёртку, чтобы открыть порты конечностей корпуса дрона.
+cmu-drone-frame-open-start = Вы начинаете открывать порты конечностей на {$frame}.
+cmu-drone-frame-open-finish = Вы открываете порты конечностей на {$frame}.
+cmu-drone-frame-ports-closed = Откройте порты конечностей перед установкой деталей дрона.
+cmu-drone-frame-part-invalid = Эта деталь не подходит к данному корпусу дрона.
+cmu-drone-frame-part-occupied = Слот {$part} уже занят.
+cmu-drone-frame-part-must-hold = Вам нужно держать {$part} для установки.
+cmu-drone-frame-part-install-start = Вы начинаете устанавливать {$part} в {$frame}.
+cmu-drone-frame-part-install-finish = Вы устанавливаете {$part} в {$frame}.
+cmu-drone-frame-clamp-tool-required = Используйте гаечный ключ, чтобы зажать {$part} в корпусе.
+cmu-drone-frame-part-clamp-start = Вы начинаете зажимать {$part} в {$frame}.
+cmu-drone-frame-part-clamp-finish = Вы зажимаете {$part} в {$frame}.
+cmu-drone-frame-weld-tool-required = Используйте сварочный аппарат, чтобы приварить {$part} к корпусу.
+cmu-drone-frame-part-weld-start = Вы начинаете приваривать {$part} к {$frame}.
+cmu-drone-frame-part-weld-finish = Вы привариваете {$part} к {$frame}.
+cmu-drone-frame-missing-parts = Установите оставшиеся детали дрона перед закреплением корпуса.
+cmu-drone-frame-ready-key = Используйте синт-ключ для активации готового корпуса дрона.
+cmu-drone-frame-incomplete = Корпус дрона всё ещё требует установки, зажима и сварки всех деталей.
+cmu-drone-frame-activate-start = Вы вставляете cинт-ключ и запускаете последовательность активации на {$frame}.
+
+cmu-drone-frame-part-head = голова
+cmu-drone-frame-part-left-arm = левая рука
+cmu-drone-frame-part-right-arm = правая рука
+cmu-drone-frame-part-left-leg = левая нога
+cmu-drone-frame-part-right-leg = правая нога
+cmu-drone-frame-part-unknown = деталь
+
+cmu-drone-link-invalid = Это не действительный дрон-андроид.
+cmu-drone-link-bound = Дрон уже привязан к другому оператору.
+cmu-drone-tablet-bound = Планшет уже привязан к другому оператору.
+cmu-drone-link-finish = Вы связываете планшет с {$drone}.
+cmu-drone-tablet-must-carry = Вы должны держать планшет при себе для управления дроном.
+cmu-drone-tablet-no-link = Планшет не связан с дроном-андроидом.
+cmu-drone-rename-verb = Переименовать дрона
+cmu-drone-rename-title = Переименовать дрона
+cmu-drone-rename-prompt = Введите однословное имя дрона (максимум {$max} символов).
+cmu-drone-rename-invalid = Имя дрона должно быть одним словом и не превышать {$max} символов.
+cmu-drone-rename-success = Обозначение дрона обновлено на {$drone}.
+
+cmu-drone-control-no-mind = Вы не можете установить сеанс управления прямо сейчас.
+cmu-drone-control-already-visiting = Вы уже проецируете управление в другое место.
+cmu-drone-control-drone-busy = Дрон уже управляется.
+cmu-drone-control-drone-dead = Дрон слишком повреждён для управления.
+cmu-drone-control-operator-disabled = Вы слишком недееспособны для управления дроном.
+cmu-drone-control-out-of-range = Дрон находится вне зоны управления планшета.
+cmu-drone-control-start = Вы передаёте управление {$drone}.
+cmu-drone-control-leash-warning = ВНИМАНИЕ: вы находитесь в {$remaining}м от потери дальности управления дроном.
+cmu-drone-follow-no-link = У вас нет связанного дрона-андроида.
+cmu-drone-follow-drone-dead = Связанный дрон-андроид слишком повреждён для выполнения команд.
+cmu-drone-follow-out-of-range = Дрон находится вне зоны команд планшета.
+cmu-drone-follow-already = {$drone} уже следует за вами.
+cmu-drone-follow-not-following = {$drone} не следует за вами.
+cmu-drone-follow-start = {$drone} начинает следовать за вами.
+cmu-drone-follow-stop = {$drone} прекращает следовать за вами.
+
+cmu-drone-control-ended-manual = Вы завершаете сеанс управления дроном.
+cmu-drone-control-ended-tablet-removed = Сеанс управления дроном завершается, так как планшет покидает ваше владение.
+cmu-drone-control-ended-tablet-lost = Сеанс управления дроном завершается из-за потери связи с планшетом.
+cmu-drone-control-ended-drone-disabled = Сеанс управления дроном завершается, так как дрон выведен из строя.
+cmu-drone-control-ended-drone-lost = Сеанс управления дроном завершается из-за потери дрона.
+cmu-drone-control-ended-operator-moved = Сеанс управления дроном завершается, так как ваше тело потревожено.
+cmu-drone-control-ended-operator-disabled = Сеанс управления дроном завершается, так как ваше тело выведено из строя.
+cmu-drone-control-ended-link-lost = Сеанс управления дроном завершается из-за потери связи.
+cmu-drone-control-ended-leash = Сеанс управления дроном завершается, так как дрон покидает зону планшета.
+
+cmu-drone-self-repair-blocked = Корпус дрона не может самовосстанавливаться.
+cmu-drone-module-tool-required = Вам нужен подходящий инструмент в другой руке для установки {$module}.
+cmu-drone-module-install-start = Вы начинаете устанавливать {$module} в {$drone}.
+cmu-drone-module-install-finish = Вы устанавливаете {$module} в {$drone}.
+cmu-drone-module-remove-start = Вы начинаете извлекать {$module} из {$drone}.
+cmu-drone-module-remove-finish = Вы извлекаете {$module} из {$drone}.
+
+ent-CMUActionDroneEndControl = Вернуть управление
+    .desc = Завершить сеанс управления дроном и вернуться в своё тело.
+
+ent-CMUActionDroneFollow = Следовать за мной
+    .desc = Приказать связанному дрону-андроиду следовать за вами.
+
+ent-CMUActionDroneStopFollow = Стоять на месте
+    .desc = Приказать связанному дрону-андроиду прекратить следовать за вами.
+
+cmu-name-drone-android-1 = Апекс
+cmu-name-drone-android-2 = Аргус
+cmu-name-drone-android-3 = Атлас
+cmu-name-drone-android-4 = Аксиом
+cmu-name-drone-android-5 = Бишоп
+cmu-name-drone-android-6 = Болт
+cmu-name-drone-android-7 = Сайфер
+cmu-name-drone-android-8 = Кобальт
+cmu-name-drone-android-9 = Коппер
+cmu-name-drone-android-10 = Дельта
+cmu-name-drone-android-11 = Динамо
+cmu-name-drone-android-12 = Эхо
+cmu-name-drone-android-13 = Эмбер
+cmu-name-drone-android-14 = Флинт
+cmu-name-drone-android-15 = Фордж
+cmu-name-drone-android-16 = Хеликс
+cmu-name-drone-android-17 = Ион
+cmu-name-drone-android-18 = Юнона
+cmu-name-drone-android-19 = Кило
+cmu-name-drone-android-20 = Леджер
+cmu-name-drone-android-21 = Люмен
+cmu-name-drone-android-22 = Меридиан
+cmu-name-drone-android-23 = Нексус
+cmu-name-drone-android-24 = Оникс
+cmu-name-drone-android-25 = Оракул
+cmu-name-drone-android-26 = Пульс
+cmu-name-drone-android-27 = Кварц
+cmu-name-drone-android-28 = Радар
+cmu-name-drone-android-29 = Реле
+cmu-name-drone-android-30 = Сейбл
+cmu-name-drone-android-31 = Слейт
+cmu-name-drone-android-32 = Вектор

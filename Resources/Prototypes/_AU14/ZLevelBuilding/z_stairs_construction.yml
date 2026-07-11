@@ -45,8 +45,8 @@
 
 - type: construction
   id: AU14ZStairUp
-  name: z-level stairs (up)
-  description: A staircase leading up one z-level, with a standing platform laid on the level above and a support beam here.
+  name: au14-construction-z-stairs-up
+  description: au14-construction-z-stairs-up-desc
   graph: AU14ZStairUpGraph
   startNode: start
   targetNode: stair
@@ -63,8 +63,8 @@
 
 - type: construction
   id: AU14ZStairDown
-  name: z-level stairs (down)
-  description: A staircase leading down one z-level, with a support beam reflected on the level below.
+  name: au14-construction-z-stairs-down
+  description: au14-construction-z-stairs-down-desc
   graph: AU14ZStairDownGraph
   startNode: start
   targetNode: stair

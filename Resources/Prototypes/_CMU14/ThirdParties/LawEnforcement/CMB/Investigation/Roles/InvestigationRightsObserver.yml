@@ -74,13 +74,15 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: au14-job-name-civilianrightsobserver
-    description: au14-job-description-investigationrightsobserver
+    # RuMC edit start
+    name: ent-CMBInvestigationPartyJobRightsObserver-name
+    description: ghost-role-information-ent-CMBInvestigationPartyJobRightsObserver-description
+    # RuMC edit end
     reregister: false
     job: AU14JobInvestigationCMBRightsObserver
     raffle:
       settings: short
-    rules: au14-job-description-investigationrightsobserver
+    rules: ghost-role-information-ent-CMBInvestigationPartyJobRightsObserver-description # RuMC edit
 
 - type: playTimeTracker
   id: AU14JobInvestigationCMBRightsObserver

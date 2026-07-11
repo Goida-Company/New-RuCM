@@ -110,7 +110,10 @@ public sealed class BuildPlaceOverlay : Overlay
         var lines = new List<string>
         {
             Loc.GetString(_mode.IsAdmin ? "saved-build-controls-mode-admin" : "saved-build-controls-mode-player"),
-            Loc.GetString("saved-build-controls-gridalign", ("state", _mode.GridAligned ? "ON" : "off")),
+            Loc.GetString("saved-build-controls-gridalign",
+                ("state", Loc.GetString(_mode.GridAligned
+                    ? "saved-build-controls-state-on"
+                    : "saved-build-controls-state-off"))),
             Loc.GetString("saved-build-controls-rotate", ("key", rotateKey)),
             Loc.GetString("saved-build-controls-place"),
             Loc.GetString("saved-build-controls-cancel"),

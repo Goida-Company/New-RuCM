@@ -30,11 +30,15 @@ public sealed partial class AU14CashVendorWindow : FancyWindow
         InsertedCashLabel.Text = $"${state.InsertedCash:F0}";
         ReturnChangeBtn.Disabled = state.InsertedCash <= 0;
         TaxFooterLabel.Text = state.SalesTaxPercent > 0
-            ? $"Sales Tax: {state.SalesTaxPercent:F0}%"
-            : "No sales tax";
+            ? Loc.GetString("au14-cash-vendor-sales-tax", ("percent", (int)state.SalesTaxPercent)) // RuMC edit
+            : Loc.GetString("au14-cash-vendor-no-sales-tax"); // RuMC edit
 
         ScanIdBtn.Visible = state.AllowDepartmentBudget;
-        ScanIdBtn.Text = state.HasDepartmentMode ? "Clear Dept" : "Scan ID";
+        // RuMC edit start
+        ScanIdBtn.Text = state.HasDepartmentMode
+            ? Loc.GetString("au14-cash-vendor-clear-dept")
+            : Loc.GetString("au14-cash-vendor-scan-id");
+        // RuMC edit end
 
         DeptBudgetRow.Visible = state.HasDepartmentMode;
         if (state.HasDepartmentMode)
@@ -99,7 +103,7 @@ public sealed partial class AU14CashVendorWindow : FancyWindow
                 ? _lastState.DepartmentBudget >= item.EffectivePrice
                 : _lastState.InsertedCash >= item.EffectivePrice;
 
-            var buyBtn = new Button { Text = "Buy", MinWidth = 50 };
+            var buyBtn = new Button { Text = Loc.GetString("au14-cash-vendor-buy"), MinWidth = 50 }; // RuMC edit
             var idxCopy = item.Index;
             buyBtn.Disabled = !canAfford;
             buyBtn.OnPressed += _ => OnBuyPressed?.Invoke(idxCopy);
@@ -111,6 +115,6 @@ public sealed partial class AU14CashVendorWindow : FancyWindow
         }
 
         if (ItemList.ChildCount == 0)
-            ItemList.AddChild(new Label { Text = "No items available." });
+            ItemList.AddChild(new Label { Text = Loc.GetString("au14-cash-vendor-no-items") }); // RuMC edit
     }
 }

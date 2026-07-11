@@ -27,8 +27,10 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: VAIPO Mercenary
-    description: You have been dispatched to the colony by Vanguard's Arrow because of contract with local UA Ambassador. Assist the Ambassador with what you can.
+    # RuMC edit start
+    name: ghost-role-information-AU14VAIMercenary-name
+    description: AU14VAIMercenary-description
+    # RuMC edit end
     job: AU14VAIMercenary
     raffle:
       settings: short

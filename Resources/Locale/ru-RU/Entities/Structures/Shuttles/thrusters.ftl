@@ -1,24 +1,28 @@
-ent-BaseThruster-name = двигатель
-ent-BaseThruster-desc = Двигатель, позволяющий шаттлу двигаться.
+ent-BaseThruster = двигатель
+    .desc = Двигатель, позволяющий шаттлу двигаться.
 
-ent-Thruster-name = двигатель
-ent-Thruster-desc = Двигатель, позволяющий шаттлу двигаться.
+ent-RustedThruster = ржавый двигатель
+    .desc = Неремонтопригодный двигатель, вышедший из строя из-за износа. Полезен только для списания.
 
-ent-Gyroscope-name = гироскоп
-ent-Gyroscope-desc = Увеличивает потенциальный угловой поворот шаттла.
+ent-Thruster = двигатель
+    .desc = Двигатель, позволяющий шаттлу двигаться.
 
-ent-RustedThruster-name = ржавое подруливающее устройство
-ent-RustedThruster-desc = Неремонтопригодное подруливающее устройство, вышедшее из строя из-за износа. Полезно только для списания.
+ent-ThrusterUnanchored = {ent-Thruster}
+    .desc = {ent-Thruster.desc}
+    .suffix = Не закреплён
 
-ent-ThrusterUnanchored-name = двигатель
-ent-ThrusterUnanchored-desc = Двигатель, позволяющий шаттлу двигаться.
+ent-DebugThruster = чудо двигатель
+    .desc = {ent-Thruster.desc}
+    .suffix = DEBUG
 
-ent-DebugThruster-name = двигатель
-ent-DebugThruster-desc = Двигатель, позволяющий шаттлу двигаться.
+ent-Gyroscope = гироскоп
+    .desc = Увеличивает потенциальный угловой поворот шаттла.
 
-ent-GyroscopeUnanchored-name = гироскоп
-ent-GyroscopeUnanchored-desc = Увеличивает потенциальный угловой поворот шаттла.
+ent-GyroscopeUnanchored = {ent-Gyroscope}
+    .desc = {ent-Gyroscope.desc}
+    .suffix = Не закреплён
 
-ent-DebugGyroscope-name = двигатель
-ent-DebugGyroscope-desc = Двигатель, позволяющий шаттлу двигаться.
+ent-DebugGyroscope = чудо гироскоп
+    .desc = {ent-Gyroscope.desc}
+    .suffix = DEBUG
 

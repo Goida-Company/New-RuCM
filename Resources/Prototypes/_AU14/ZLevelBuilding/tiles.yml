@@ -115,8 +115,8 @@
 # --- Construction recipes (shown in the "Tiles" spawnlist, "Flooring" category) ---
 - type: construction
   id: AU14TilePlating
-  name: plating
-  description: Lay down metal plating. Can be placed over open space to build floors in the air.
+  name: au14-construction-tile-plating
+  description: au14-construction-tile-plating-desc
   graph: AU14TilePlatingGraph
   startNode: start
   targetNode: tile
@@ -133,8 +133,8 @@
 
 - type: construction
   id: AU14TileSteel
-  name: steel floor
-  description: Lay down a steel floor tile. Can be placed over open space to build floors in the air.
+  name: au14-construction-tile-steel
+  description: au14-construction-tile-steel-desc
   graph: AU14TileSteelGraph
   startNode: start
   targetNode: tile
@@ -151,8 +151,8 @@
 
 - type: construction
   id: AU14TileDirt
-  name: dirt
-  description: Lay down a patch of dirt. Can be placed over open space to build floors in the air.
+  name: au14-construction-tile-dirt
+  description: au14-construction-tile-dirt-desc
   graph: AU14TileDirtGraph
   startNode: start
   targetNode: tile

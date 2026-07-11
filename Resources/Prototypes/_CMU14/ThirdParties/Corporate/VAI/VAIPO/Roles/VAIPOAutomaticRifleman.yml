@@ -25,8 +25,10 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: VAIPO Machinegunner
-    description: You have been dispatched to the colony by Vanguard's Arrow because of contract with local UA Ambassador. Assist the Ambassador with what you can.
+    # RuMC edit start
+    name: ghost-role-information-AU14VAIMachinegunner-name
+    description: ghost-role-information-AU14VAIMachinegunner-description
+    # RuMC edit end
     job: AU14VAIMachinegunner
     raffle:
       settings: short

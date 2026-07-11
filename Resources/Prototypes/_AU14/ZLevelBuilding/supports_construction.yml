@@ -16,7 +16,9 @@
       completed:
       - !type:SnapToGrid
       steps:
-      - material: WoodPlank
+      # CM wood planks (RMCPlankWood1 sheets), NOT the vanilla SS14 WoodPlank stack - CM maps/vendors only
+      # hand out the RMC wood, so a WoodPlank cost was unbuildable in practice.
+      - material: RMCWood
         amount: 8
         doAfter: 3
   - node: beam
@@ -24,8 +26,8 @@
 
 - type: construction
   id: AU14SupportBeamWood
-  name: wooden support beam
-  description: A wooden support beam. Place it below an upper-level floor to hold it up - cheap, but only spans a short distance.
+  name: au14-construction-support-beam-wood
+  description: au14-construction-support-beam-wood-desc
   graph: AU14SupportBeamWoodGraph
   startNode: start
   targetNode: beam
@@ -35,8 +37,9 @@
   canRotate: false
   isCM: true
   spawnlist: ZLevel
-  # No explicit icon: derive it from the 1-tile target entity so the menu cell + placement ghost show the
-  # minimized single-tile beam (an explicit full-size icon state ignored the entity's 0.5 sprite scale).
+  # NOTE: this fork's ConstructionPrototype has no "icon" field - the menu derives the recipe icon from the
+  # target entity's sprite. The 1-tile beam entity (AU14NavalisSupportBeamBrown1Tile) already carries the
+  # half-scale sprite, so the menu icon renders as a single tile without an override here.
   conditions:
   - !type:TileNotBlocked
   # Mappers can forbid vertical building on a map with ZBuildableMap { enabled: false } (e.g. the UNS Almayer).
@@ -61,8 +64,8 @@
 
 - type: construction
   id: AU14SupportBeamMetal
-  name: metal support beam
-  description: A steel support beam. Place it below an upper-level floor to hold it up - a solid, all-round span.
+  name: au14-construction-support-beam-metal
+  description: au14-construction-support-beam-metal-desc
   graph: AU14SupportBeamMetalGraph
   startNode: start
   targetNode: beam
@@ -72,6 +75,7 @@
   canRotate: false
   isCM: true
   spawnlist: ZLevel
+  # No icon override (see the wood beam note above): the menu icon comes from the target entity's sprite.
   conditions:
   - !type:TileNotBlocked
   # Mappers can forbid vertical building on a map with ZBuildableMap { enabled: false } (e.g. the UNS Almayer).
@@ -96,8 +100,8 @@
 
 - type: construction
   id: AU14SupportBeamPlasteel
-  name: plasteel support beam
-  description: A plasteel support beam. Place it below an upper-level floor to hold it up - expensive, but spans the widest platform.
+  name: au14-construction-support-beam-plasteel
+  description: au14-construction-support-beam-plasteel-desc
   graph: AU14SupportBeamPlasteelGraph
   startNode: start
   targetNode: beam
@@ -107,6 +111,7 @@
   canRotate: false
   isCM: true
   spawnlist: ZLevel
+  # No icon override (see the wood beam note above): the menu icon comes from the target entity's sprite.
   conditions:
   - !type:TileNotBlocked
   # Mappers can forbid vertical building on a map with ZBuildableMap { enabled: false } (e.g. the UNS Almayer).

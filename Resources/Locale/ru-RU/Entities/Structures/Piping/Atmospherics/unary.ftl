@@ -1,38 +1,41 @@
-ent-GasVentPump-name = вентиляционное отверстие
-ent-GasVentPump-desc = К нему прикреплен клапан и насос.
+ent-GasVentPump = газовый насос
+    .desc = К нему прикреплен клапан и насос.
 
-ent-GasPassiveVent-name = пассивное вентиляционное отверстие
-ent-GasPassiveVent-desc = Это открытая вентиляция.
+ent-GasPassiveVent = пассивная вентиляци
+    .desc = Это открытая вентиляция.
 
-ent-GasVentScrubber-name = очиститель воздуха
-ent-GasVentScrubber-desc = К нему прикреплен клапан и насос.
+ent-GasVentScrubber = скрубер
+    .desc = К нему прикреплен клапан и насос.
 
-ent-GasOutletInjector-name = воздушный инжектор
-ent-GasOutletInjector-desc = К нему прикреплен клапан и насос.
+ent-GasOutletInjector = газовый инжектор
+    .desc = К нему прикреплен клапан и насос.
 
-ent-BaseGasThermoMachine-name = термомашина
+ent-BaseGasThermoMachine = термомашина
 
-ent-GasThermoMachineFreezer-name = морозильник
-ent-GasThermoMachineFreezer-desc = Охлаждает газ в присоединенных трубах.
+ent-GasThermoMachineFreezer = морозильник
+    .desc = Охлаждает газ в трубах.
 
-ent-GasThermoMachineHeater-name = обогреватель
-ent-GasThermoMachineHeater-desc = Нагревает газ в подключенных трубах.
+ent-GasThermoMachineFreezerEnabled = {ent-GasThermoMachineFreezer}
+    .desc = {ent-GasThermoMachineFreezer.desc}
+    .suffix = Включён
 
-ent-GasThermoMachineHellfireFreezer-name = адский огонь морозильник
-ent-GasThermoMachineHellfireFreezer-desc = Усовершенствованная машина, охлаждающая газ в соединенных трубах. Имеет побочный эффект охлаждения окружающей среды. Холодно как ад!
+ent-GasThermoMachineHeater = нагреватель
+    .desc = Нагревает газ в трубах.
 
-ent-GasThermoMachineHellfireHeater-name = обогреватель адского огня
-ent-GasThermoMachineHellfireHeater-desc = Усовершенствованная машина, нагревающая газ в соединенных трубах. Имеет побочный эффект утечки тепла в окружающую среду. Горячо как ад!
+ent-GasThermoMachineHeaterEnabled = {ent-GasThermoMachineHeater}
+    .desc = {ent-GasThermoMachineHeater.desc}
+    .suffix = Включён
 
-ent-BaseGasCondenser-name = конденсатор
-ent-BaseGasCondenser-desc = Конденсирует газы в жидкости. Теперь нам просто нужна сантехника.
+ent-GasThermoMachineHellfireFreezer = адский морозильник
+    .desc = Усовершенствованная машина, охлаждающая газ в трубах. Имеет побочный эффект охлаждения окружающей среды. Холодно как ад!
 
-ent-GasUnaryBase-name = газовая труба
-ent-GasUnaryBase-desc = Держит газ.
+ent-GasThermoMachineHellfireHeater = адский нагреватель
+    .desc = Усовершенствованная машина, нагревающая газ в трубах. Имеет побочный эффект утечки тепла в окружающую среду. Горячо как ад!
 
-ent-GasThermoMachineFreezerEnabled-name = морозильник
-ent-GasThermoMachineFreezerEnabled-desc = Охлаждает газ в присоединенных трубах.
+ent-BaseGasCondenser = конденсатор
+    .desc = Конденсирует газы в жидкости.
 
-ent-GasThermoMachineHeaterEnabled-name = обогреватель
-ent-GasThermoMachineHeaterEnabled-desc = Нагревает газ в подключенных трубах.
+ent-GasUnaryBase = газовая труба
+    .desc = Держит газ.
+
 

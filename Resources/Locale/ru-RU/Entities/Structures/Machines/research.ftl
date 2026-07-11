@@ -1,5 +1,6 @@
-ent-ResearchAndDevelopmentServer-name = сервер исследований и разработок
-ent-ResearchAndDevelopmentServer-desc = Содержит коллективные знания ученых станции. Уничтожение его отправит их обратно в каменный век. Ты же не хочешь этого?
+ent-ResearchAndDevelopmentServer = сервер исследований
+    .desc = Содержит коллективные знания учёных станции. Уничтожение его отправит их обратно в каменный век. Ты же не хочешь этого?
 
-ent-BaseResearchAndDevelopmentPointSource-name = базовый точечный источник исследований и разработок
+ent-BaseResearchAndDevelopmentPointSource = базовый добытчик исследований
+    .desc = Постепенно добывает очки для сервера исследований.
 

@@ -70,7 +70,7 @@ public sealed partial class AU14CashVendorSystem : EntitySystem
 
         if (!_idCard.TryFindIdCard(mob, out var idCard))
         {
-            _popup.PopupCursor("No ID card found.", mob, PopupType.SmallCaution);
+            _popup.PopupCursor(Loc.GetString("au14-cash-vendor-no-id"), mob, PopupType.SmallCaution); // RuMC edit
             return;
         }
 
@@ -85,7 +85,7 @@ public sealed partial class AU14CashVendorSystem : EntitySystem
             return;
         }
 
-        _popup.PopupCursor("No department found for this ID card.", mob, PopupType.SmallCaution);
+        _popup.PopupCursor(Loc.GetString("au14-cash-vendor-no-dept"), mob, PopupType.SmallCaution); // RuMC edit
     }
 
     private void OnBuy(EntityUid uid, AU14CashVendorComponent comp, AU14CashVendorBuyBuiMsg msg)

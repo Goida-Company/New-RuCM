@@ -1,35 +1,41 @@
-ent-RMCOverwatchConsoleSPP = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
+ent-RMCOverwatchConsoleSPP = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = СПН
+ent-RMCOverwatchConsoleSPPRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = СПН, Поворачиваемая
 
-ent-RMCOverwatchConsoleSPPRotating = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
+ent-RMCOverwatchConsoleAdmin = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Админ
+ent-RMCOverwatchConsoleAdminRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Админ, Поворачиваемая
 
-ent-RMCOverwatchConsoleAdmin = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
+ent-RMCOverwatchConsoleWeYa = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Ве-Ю
+ent-RMCOverwatchConsoleWeYaRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = Ве-Ю, Поворачиваемая
 
-ent-RMCOverwatchConsoleAdminRotating = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
+ent-RMCOverwatchConsoleRCM = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = КорМП
+ent-RMCOverwatchConsoleRCMRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = КорМП, Поворачиваемая
 
-ent-RMCOverwatchConsoleWeYa = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
+ent-RMCOverwatchConsoleGovfor = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = ГОВФОР
+ent-RMCOverwatchConsoleGovforRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = ГОВФОР, Поворачиваемая
 
-ent-RMCOverwatchConsoleWeYaRotating = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
-
-ent-RMCOverwatchConsoleRCM = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
-
-ent-RMCOverwatchConsoleRCMRotating = консоль наблюдения
-  .desc = {ent-RMCOverwatchConsoleRCM.desc}
-
-ent-RMCOverwatchConsoleGovfor = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
-
-ent-RMCOverwatchConsoleGovforRotating = { ent-RMCOverwatchConsoleGovfor }
-  .desc = { ent-RMCOverwatchConsoleGovfor.desc }
-
-ent-RMCOverwatchConsoleOpfor = консоль наблюдения
-  .desc = Современная техника для отдачи приказов отрядам.
-
-ent-RMCOverwatchConsoleOpforRotating = { ent-RMCOverwatchConsoleOpfor }
-  .desc = { ent-RMCOverwatchConsoleOpfor.desc }
+ent-RMCOverwatchConsoleOpfor = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = ОПФОР
+ent-RMCOverwatchConsoleOpforRotating = {ent-RMCOverwatchConsole}
+    .desc = {ent-RMCOverwatchConsole.desc}
+    .suffix = ОПФОР, Поворачиваемая

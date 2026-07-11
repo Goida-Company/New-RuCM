@@ -1,32 +1,33 @@
 ent-AU14IDCardBaseCivilianNoIFF = ID-карта
-    .desc = Кусочек компрессированного стекловолокна. Используется для идентификации.
-
-ent-AU14IDCardColonyColonist = ID-карта колониста
-    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
 
 ent-AU14IDCardCLFCellLeader = ID-карта лидера ячейки КОФ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardCLFCivilian = ID-карта колониста
+ent-AU14IDCardCLFCivilian = ID-карта партизана
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
     .suffix = КОФ
 
-ent-AU14IDCardFoodServiceWorker = ID-карта работника общепита
+ent-AU14IDCardCLFPhysician = ID-карта врача КОФ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyShopkeep = ID-карта продавца
+ent-AU14IDCardCLFGeneralPractitioner = ID-карта терапевта КОФ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyJournalist = ID-карта журналиста
+ent-AU14IDCardCLFPharmacist = ID-карта фармацевта КОФ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyJournalistIndependent = ID-карта независимого журналиста
+ent-AU14IDCardCLFSurgeon = ID-карта хирурга КОФ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyJournalistFreePress = ID-карта журналиста свободной прессы
-    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+ent-AU14IDCardCorporateSpy = ID-карта Ласалле БиоНационал
+    .desc = Корпоративный идентификационный значок с брендингом Ласалле БиоНационал. Предоставляет доступ к объектам Вейланд-Ютани.
+    .suffix = Шпион
 
 ent-AU14IDCardCivilianScientist = ID-карта учёного
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyWorkingJoe = ID-карта Рабочего Джо
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
 ent-AU14IDCardColonySynthetic = ID-карта синтетика колониальных операций
@@ -68,6 +69,15 @@ ent-AU14IDCardColonyHeadOfService = ID-карта главы сервисног�
 ent-AU14IDCardColonyPhysician = ID-карта врача
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
+ent-AU14IDCardColonySurgeon = ID-карта хирурга
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyGeneralPractitioner = ID-карта терапевта
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyPharmacist = ID-карта фармацевта
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
 ent-AU14IDCardColonyHeadPhysician = ID-карта главного врача
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
@@ -86,10 +96,25 @@ ent-AU14IDCardColonyEmergencyResponseOfficerParamedic = ID-карта парам
 ent-AU14IDCardColonyEmergencyResponseOfficerFirefighter = ID-карта пожарного
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyCMBDeputy = ID-карта заместителя БКМ
+ent-AU14IDCardColonyColonist = ID-карта колониста
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyCMBMarshal = ID-карта маршала БКМ
+ent-AU14IDCardFoodServiceWorker = ID-карта работника общепита
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyShopkeep = ID-карта продавца
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyJournalist = ID-карта журналиста
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyJournalistIndependent = ID-карта независимого журналиста
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyJournalistFreePress = ID-карта журналиста свободной прессы
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyJournalistPhotojournalist = ID-карта фотожурналиста
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
 ent-AU14IDCardColonyUSASFRecruiter = ID-карта вербовщика ССО США
@@ -104,24 +129,26 @@ ent-AU14IDCardColonyUSASFRecruiterUSArmy = ID-карта вербовщика а
 ent-AU14IDCardColonyUSASFRecruiterCCAF = ID-карта вербовщика ККВС
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardCivilianKellandWarden = ID-карта надзирателя
+ent-AU14IDCardColonyCMBMarshal = ID-карта маршала БКМ
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardColonyCMBDeputy = ID-карта заместителя БКМ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
 ent-AU14IDCardcivilianCWPSranger = ID-карта рейнджера СЗДК
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardciviliannspaConstable = ID-карта констебля ПДСН
+ent-AU14IDCardColonyNSPAInspector = ID-карта инспектора ПДСН
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardCivilianNSPAConstable = ID-карта констебля ПДСН
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
 ent-AU14IDCardcivilianPaPOfficer = ID-карта офицера НВМ
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
-ent-AU14IDCardColonyWorkingJoe = ID-карта Рабочего Джо
+ent-AU14IDCardCivilianKellandWarden = ID-карта надзирателя
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
-
-ent-AU14IDCardCorporateSpy = ID-карта Ласалле БиоНационал
-    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
-    .suffix = Шпион
 
 ent-AU14IDCardCivilianColonyPilot = ID-карта коммерческого пилота
     .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}

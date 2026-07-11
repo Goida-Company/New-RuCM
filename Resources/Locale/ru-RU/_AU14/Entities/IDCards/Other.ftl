@@ -1,4 +1,5 @@
-ent-AU14IDCardMobBoss-name = ID-карта дона мафии
-ent-AU14IDCardMobBoss-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardMobGoon-name = ID-карта солдата мафии
-ent-AU14IDCardMobGoon-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+ent-AU14IDCardMobBoss = ID-карта дона мафии
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+
+ent-AU14IDCardMobGoon = ID-карта солдата мафии
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}

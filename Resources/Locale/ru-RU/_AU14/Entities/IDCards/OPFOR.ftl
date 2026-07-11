@@ -1,30 +1,71 @@
-ent-AU14IDCardopforPlatCo-name = ID-карта командира взвода
-ent-AU14IDCardopforPlatCo-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforPlatOp-name = ID-карта офицера оперативного управления взвода
-ent-AU14IDCardopforPlatOp-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforDSPilot-name = ID-карта пилота дропшипа
-ent-AU14IDCardopforDSPilot-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforDCC-name = ID-карта бортмеханика дропшипа
-ent-AU14IDCardopforDCC-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforSecSergeant-name = ID-карта сержанта взвода
-ent-AU14IDCardopforSecSergeant-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforSquadSergeant-name = ID-карта командира отделения
-ent-AU14IDCardopforSquadSergeant-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforSquadRifleman-name = ID-карта стрелка отделения
-ent-AU14IDCardopforSquadRifleman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardopforSquadAutomaticRifleman-name = ID-карта командира отделения
-ent-AU14IDCardopforSquadAutomaticRifleman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14JobIDCardopforPlatoonCorpsman-name = ID-карта санитара взвода
-ent-AU14JobIDCardopforPlatoonCorpsman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14JobIDCardopforRadioTelephoneOperator-name = ID-карта радиотелефониста
-ent-AU14JobIDCardopforRadioTelephoneOperator-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardOPFORAuxSupportSynth-name = ID-карта синтетика поддержки
-ent-AU14IDCardOPFORAuxSupportSynth-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardOPFORCT-name = ID-карта боевого техника
-ent-AU14IDCardOPFORCT-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardOPFORAdvisor-name = ID-карта советника
-ent-AU14IDCardOPFORAdvisor-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardOPFORDoctor-name = ID-карта врача
-ent-AU14IDCardOPFORDoctor-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardOPFORWorkingJoe-name = ID-карта Рабочего Джо
-ent-AU14IDCardOPFORWorkingJoe-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+ent-AU14IDCardopforPlatCo = ID-карта командира взвода
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforPlatOp = ID-карта младшего офицера
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforDSPilot = ID-карта пилота штурмовика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforDCC = ID-карта командира экипажа штурмовика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforSecSergeant = ID-карта старшего сержанта
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforSquadSergeant = ID-карта командира отделения
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforSquadRifleman = ID-карта стрелка
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardopforSquadAutomaticRifleman = ID-карта пулемётчика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14JobIDCardopforPlatoonCorpsman = ID-карта санитара взвода
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14JobIDCardopforRadioTelephoneOperator = ID-карта командира огневой группы
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORAuxSupportSynth = ID-карта синтетика поддержки
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14JobIDCardOPFORAuxTech = ID-карта техника поддержки
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORCT = ID-карта боевого техника
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORVehicleCrewman = ID-карта члена экипажа техники
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORAdvisor = ID-карта советника
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORDoctor = ID-карта врача
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORWorkingJoe = ID-карта Рабочего Джо
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР
+
+ent-AU14IDCardOPFORWeaponsSpecialist = ID-карта специалиста по вооружению
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ОПФОР

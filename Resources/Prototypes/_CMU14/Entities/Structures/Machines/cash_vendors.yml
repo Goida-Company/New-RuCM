@@ -103,17 +103,18 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+      # RuMC edit - comm name
     - id: RMCDrinkCoffee
-      name: Coffee
+      # name: Coffee
       price: 2
     - id: RMCDrinkCoffeeGrind
-      name: Coffee (Ground)
+      # name: Coffee (Ground)
       price: 2
     - id: RMCDrinkTea
-      name: Tea
+      # name: Tea
       price: 2
     - id: RMCDrinkHotCocoa
-      name: Hot Cocoa
+      # name: Hot Cocoa
       price: 3
 
 # Soft drinks machine — mirrors CMVendorCola
@@ -133,47 +134,48 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: CMDrinkCanBobdaClassic
-      name: Bobda Classic
+      # name: Bobda Classic
       price: 2
     - id: CMDrinkCanBobdaCherry
-      name: Bobda Cherry
+      # name: Bobda Cherry
       price: 2
     - id: CMDrinkCanBobdaLime
-      name: Bobda Lime
+      # name: Bobda Lime
       price: 2
     - id: CMDrinkCanBobdaGrape
-      name: Bobda Grape
+      # name: Bobda Grape
       price: 2
     - id: CMDrinkCanBobdaBlue
-      name: Bobda Blue
+      # name: Bobda Blue
       price: 2
     - id: CMDrinkCanBobdaPeach
-      name: Bobda Peach
+      # name: Bobda Peach
       price: 2
     - id: CMDrinkCanBobdaCranberry
-      name: Bobda Cranberry
+      # name: Bobda Cranberry
       price: 2
     - id: CMDrinkCanBobdaVanilla
-      name: Bobda Vanilla
+      # name: Bobda Vanilla
       price: 2
     - id: CMDrinkCanBobdaPineapple
-      name: Bobda Pineapple
+      # name: Bobda Pineapple
       price: 2
     - id: CMDrinkCanBobdaClassicDiet
-      name: Diet Bobda Classic
+      # name: Diet Bobda Classic
       price: 2
     - id: CMDrinkCanCola
-      name: Space Cola
+      # name: Space Cola
       price: 2
     - id: CMDrinkCanSoda
-      name: Soda
+      # name: Soda
       price: 2
     - id: CMDrinkCanTonic
-      name: Tonic Water
+      # name: Tonic Water
       price: 2
     - id: CMDrinkCanFruitBeer
-      name: Fruit Beer (NA)
+      # name: Fruit Beer (NA)
       price: 2
 
 # Snack machine — mirrors CMVendorSnack
@@ -193,35 +195,36 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: RMCFoodSnackCheeseburgerPackaged
-      name: Cheeseburger (Packaged)
+      # name: Cheeseburger (Packaged)
       price: 5
     - id: RMCFoodSnackBurritoPackaged
-      name: Burrito (Packaged)
+      # name: Burrito (Packaged)
       price: 5
     - id: RMCFoodSnackHotdogPackaged
-      name: Hotdog (Packaged)
+      # name: Hotdog (Packaged)
       price: 5
     - id: RMCFoodSnackKeplarCrisps
-      name: Keplar Crisps
+      # name: Keplar Crisps
       price: 3
     - id: RMCFoodSnackKeplarFlamehotCrisps
-      name: Keplar Flamehot Crisps
+      # name: Keplar Flamehot Crisps
       price: 3
     - id: RMCFoodSnackChipsPepper
-      name: Pepper Chips
+      # name: Pepper Chips
       price: 3
     - id: RMCFoodSnackEATBar
-      name: EAT Bar
+      # name: EAT Bar
       price: 4
     - id: RMCFoodSnackBoonie
-      name: Boonie Bar
+      # name: Boonie Bar
       price: 4
     - id: RMCFoodSnackCHUNK
-      name: CHUNK Bar
+      # name: CHUNK Bar
       price: 3
     - id: RMCFoodSnackBarcaridine
-      name: Barcaridine Bar
+      # name: Barcaridine Bar
       price: 4
 
 # Prepared meals vendor — mirrors ColMarTechFood
@@ -239,41 +242,42 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: CMMRE
-      name: Meal Ready to Eat
+      # name: Meal Ready to Eat
       price: 8
     - id: CMMarinePreparedMealChicken
-      name: Prepared Meal (Chicken)
+      # name: Prepared Meal (Chicken)
       price: 12
     - id: CMMarinePreparedMealCornbread
-      name: Prepared Meal (Cornbread)
+      # name: Prepared Meal (Cornbread)
       price: 12
     - id: CMMarinePreparedMealPasta
-      name: Prepared Meal (Pasta)
+      # name: Prepared Meal (Pasta)
       price: 12
     - id: CMMarinePreparedMealPizza
-      name: Prepared Meal (Pizza)
+      # name: Prepared Meal (Pizza)
       price: 12
     - id: CMMarinePreparedMealPork
-      name: Prepared Meal (Pork)
+      # name: Prepared Meal (Pork)
       price: 12
     - id: CMMarinePreparedMealTofu
-      name: Prepared Meal (Tofu)
+      # name: Prepared Meal (Tofu)
       price: 12
     - id: CMMarineProteinBar
-      name: Protein Bar
+      # name: Protein Bar
       price: 4
     - id: CMCanteen
-      name: Canteen
+      # name: Canteen
       price: 10
     - id: CMMetalFlask
-      name: Metal Flask (empty)
+      # name: Metal Flask (empty)
       price: 8
     - id: CMMarineFlask
-      name: Marine Flask
+      # name: Marine Flask
       price: 12
     - id: CMWEYAFlask
-      name: We-Ya Flask
+      # name: We-Ya Flask
       price: 15
 
 # Kitchenware vendor — mirrors CMVendorDinnerware
@@ -293,62 +297,63 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: RMCFork
-      name: Fork
+      # name: Fork
       price: 1
     - id: RMCSpoon
-      name: Spoon
+      # name: Spoon
       price: 1
     - id: RMCKitchenKnife
-      name: Kitchen Knife
+      # name: Kitchen Knife
       price: 2
     - id: RMCKitchenKnifeChef
-      name: Chef's Knife
+      # name: Chef's Knife
       price: 5
     - id: RMCRollingPin
-      name: Rolling Pin
+      # name: Rolling Pin
       price: 3
     - id: PairedChopsticks
-      name: Chopsticks
+      # name: Chopsticks
       price: 1
     - id: DrinkShaker
-      name: Cocktail Shaker
+      # name: Cocktail Shaker
       price: 8
     - id: DrinkGlass
-      name: Drinking Glass
+      # name: Drinking Glass
       price: 2
     - id: DrinkMug
-      name: Mug
+      # name: Mug
       price: 3
     - id: DrinkMugMetal
-      name: Metal Mug
+      # name: Metal Mug
       price: 4
     - id: FoodPlate
-      name: Plate
+      # name: Plate
       price: 2
     - id: FoodPlateSmall
-      name: Small Plate
+      # name: Small Plate
       price: 2
     - id: FoodBowlBig
-      name: Bowl
+      # name: Bowl
       price: 3
     - id: Pitcher
-      name: Pitcher
+      # name: Pitcher
       price: 5
     - id: CMBeaker
-      name: Beaker (60u)
+      # name: Beaker (60u)
       price: 5
     - id: CMBeakerLarge
-      name: Beaker, Large (120u)
+      # name: Beaker, Large (120u)
       price: 8
     - id: ClothingOuterApronChef
-      name: Chef's Apron
+      # name: Chef's Apron
       price: 10
     - id: RMCCondimentSmallSalt
-      name: Salt Shaker
+      # name: Salt Shaker
       price: 3
     - id: RMCCondimentSmallPepper
-      name: Pepper Shaker
+      # name: Pepper Shaker
       price: 3
 
 # Games & Recreation vendor
@@ -368,50 +373,51 @@
   - type: AU14CashVendor
     percentToColony: 0.6
     items:
+    # RuMC edit - comm name
     - id: RMCCassettePlayer
-      name: Cassette Player
+      # name: Cassette Player
       price: 25
     - id: RMCPouchCassette
-      name: Cassette Pouch
+      # name: Cassette Pouch
       price: 10
     - id: RMCCassetteTapeWigWoo1
-      name: Cassette (Wig Woo)
+      # name: Cassette (Wig Woo)
       price: 5
     - id: RMCCassetteTapeMendax
-      name: Cassette (Mendax)
+      # name: Cassette (Mendax)
       price: 5
     - id: RMCCassetteTapeNighty
-      name: Cassette (Nighty)
+      # name: Cassette (Nighty)
       price: 5
     - id: RMCCassetteTapeGoodShowOldChap
-      name: Cassette (Good Show Old Chap)
+      # name: Cassette (Good Show Old Chap)
       price: 5
     - id: RMCCassetteTapeRedQwesta
-      name: Cassette (Red Qwesta)
+      # name: Cassette (Red Qwesta)
       price: 5
     - id: RMCCassetteTapeBolgarich
-      name: Cassette (Bolgarich)
+      # name: Cassette (Bolgarich)
       price: 5
     - id: RMCCassetteTapeQwertyquerty
-      name: Cassette (Qwertyquerty)
+      # name: Cassette (Qwertyquerty)
       price: 5
     - id: RMCCassetteTapePigeonBeans
-      name: Cassette (Pigeon Beans)
+      # name: Cassette (Pigeon Beans)
       price: 5
     - id: RMCCassetteTapeCustom
-      name: Cassette (Blank)
+      # name: Cassette (Blank)
       price: 4
     - id: RMCPlayingCardDeck
-      name: Playing Card Deck
+      # name: Playing Card Deck
       price: 8
     - id: d20Dice
-      name: d20 Dice
+      # name: d20 Dice
       price: 6
     - id: CMPaper
-      name: Paper
+      # name: Paper
       price: 1
     - id: CMPen
-      name: Pen
+      # name: Pen
       price: 1
 
 # Cigarette machine
@@ -431,32 +437,33 @@
   - type: AU14CashVendor
     percentToColony: 0.6
     items:
+    # RuMC edit - comm name
     - id: RMCCigarettePackLuckySloths
-      name: Lucky Sloths
+      # name: Lucky Sloths
       price: 5
     - id: AU14CigarettePackBalajj
-      name: Balajj
+      # name: Balajj
       price: 5
     - id: RMCCigarettePackWeYaGold
-      name: We-Ya Gold
+      # name: We-Ya Gold
       price: 8
     - id: RMCCigarettePackExecutiveSelect
-      name: Executive Select
+      # name: Executive Select
       price: 12
     - id: RMCCigarCase
-      name: Cigar Case
+      # name: Cigar Case
       price: 20
     - id: RMCTarbackTube
-      name: Tarback Tube
+      # name: Tarback Tube
       price: 5
     - id: RMCMatchboxFull
-      name: Matchbox
+      # name: Matchbox
       price: 2
     - id: RMCLighter
-      name: Lighter
+      # name: Lighter
       price: 5
     - id: RMCZippoGold
-      name: Gold Zippo
+      # name: Gold Zippo
       price: 30
 
 # Tool storage machine
@@ -476,29 +483,30 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: RMCFlashlight
-      name: Flashlight
+      # name: Flashlight
       price: 5
     - id: CMWelder
-      name: Welding Tool
+      # name: Welding Tool
       price: 20
     - id: CMWelderSmall
-      name: Welding Tool (Small)
+      # name: Welding Tool (Small)
       price: 12
     - id: CMCrowbar
-      name: Crowbar
+      # name: Crowbar
       price: 8
     - id: CMScrewdriver
-      name: Screwdriver
+      # name: Screwdriver
       price: 5
     - id: CMWirecutter
-      name: Wirecutters
+      # name: Wirecutters
       price: 6
     - id: CMWrench
-      name: Wrench
+      # name: Wrench
       price: 5
     - id: RMCLightReplacer
-      name: Light Replacer
+      # name: Light Replacer
       price: 8
 
 # General medical supplies — mirrors AU14GeneralMedicalVendor field supplies + autoinjectors
@@ -517,66 +525,67 @@
       shader: unshaded
   - type: AU14CashVendor
     allowDepartmentBudget: true
+    # RuMC edit - comm name
     items:
     - id: CMBurnKit10
-      name: Burn Kit
+      # name: Burn Kit
       price: 12
     - id: CMTraumaKit10
-      name: Trauma Kit
+      # name: Trauma Kit
       price: 12
     - id: CMOintment10
-      name: Ointment
+      # name: Ointment
       price: 10
     - id: AU14HemostaticGauzePacket
-      name: Hemostatic Gauze
+      # name: Hemostatic Gauze
       price: 10
     - id: AU14Tourniquet
-      name: Tourniquet
+      # name: Tourniquet
       price: 12
     - id: CMUSplintItem
-      name: Splint
+      # name: Splint
       price: 8
     - id: CMHealthAnalyzer
-      name: Health Analyzer
+      # name: Health Analyzer
       price: 30
     - id: AU14CMDefibrillator
-      name: Defibrillator
+      # name: Defibrillator
       price: 60
     - id: CMSyringe
-      name: Syringe
+      # name: Syringe
       price: 5
     - id: CMEpinephrineAutoInjector
-      name: Epinephrine Autoinjector
+      # name: Epinephrine Autoinjector
       price: 18
     - id: AU14NaloxoneAutoInjector
-      name: Naloxone Autoinjector
+      # name: Naloxone Autoinjector
       price: 18
     - id: CMInaprovalineAutoInjector
-      name: Inaprovaline Autoinjector
+      # name: Inaprovaline Autoinjector
       price: 15
     - id: CMDexalinPlusAutoInjector
-      name: Dexalin Plus Autoinjector
+      # name: Dexalin Plus Autoinjector
       price: 18
     - id: CMTricordrazineAutoInjector
-      name: Tricordrazine Autoinjector
+      # name: Tricordrazine Autoinjector
       price: 15
     - id: CMBicaridineAutoInjector
-      name: Bicaridine Autoinjector
+      # name: Bicaridine Autoinjector
       price: 18
     - id: CMKelotaneAutoInjector
-      name: Kelotane Autoinjector
+      # name: Kelotane Autoinjector
       price: 18
     - id: AU14ParacetamolAutoInjector
-      name: Paracetamol Autoinjector
+      # name: Paracetamol Autoinjector
       price: 15
     - id: AU14TramadolAutoInjector
-      name: Tramadol Autoinjector
+      # name: Tramadol Autoinjector
       price: 20
     - id: AU14OxycodoneAutoInjector
-      name: Oxycodone Autoinjector
+      # name: Oxycodone Autoinjector
       price: 22
     - id: RMCIronAutoInjector
-      name: Iron Autoinjector
+      # name: Iron Autoinjector
       price: 12
 
 # Pharmacy vendor — mirrors AU14GeneralMedicalVendor pill bottles + CMVendorChemistry
@@ -596,86 +605,87 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: CMPillCanisterBicaridine
-      name: Bicaridine Pills
+      # name: Bicaridine Pills
       price: 20
     - id: CMPillCanisterDexalin
-      name: Dexalin Pills
+      # name: Dexalin Pills
       price: 18
     - id: CMPillCanisterDylovene
-      name: Dylovene Pills
+      # name: Dylovene Pills
       price: 18
     - id: CMPillCanisterInaprovaline
-      name: Inaprovaline Pills
+      # name: Inaprovaline Pills
       price: 16
     - id: CMPillCanisterKelotane
-      name: Kelotane Pills
+      # name: Kelotane Pills
       price: 18
     - id: CMPillCanisterTricordrazine
-      name: Tricordrazine Pills
+      # name: Tricordrazine Pills
       price: 16
     - id: RMCPillCanisterIron
-      name: Iron Pills
+      # name: Iron Pills
       price: 12
     - id: AU14PillCanisterParacetamol
-      name: Paracetamol Pills
+      # name: Paracetamol Pills
       price: 15
     - id: AU14PillCanisterTramadol
-      name: Tramadol Pills
+      # name: Tramadol Pills
       price: 20
     - id: AU14PillCanisterOxycodone
-      name: Oxycodone Pills
+      # name: Oxycodone Pills
       price: 25
     - id: AU14PillCanisterLeporazine
-      name: Leporazine Pills
+      # name: Leporazine Pills
       price: 20
     - id: AU14PillCanisterImidazoline
-      name: Imidazoline Pills
+      # name: Imidazoline Pills
       price: 18
     - id: AU14PillCanisterCryoxadone
-      name: Cryoxadone Pills
+      # name: Cryoxadone Pills
       price: 30
     - id: AU14PillCanisterHepatocytin
-      name: Hepatocytin Pills
+      # name: Hepatocytin Pills
       price: 22
     - id: AU14PillCanisterNephronate
-      name: Nephronate Pills
+      # name: Nephronate Pills
       price: 22
     - id: AU14PillCanisterPulmovine
-      name: Pulmovine Pills
+      # name: Pulmovine Pills
       price: 22
     - id: CMBottleBicaridine
-      name: Bicaridine Bottle
+      # name: Bicaridine Bottle
       price: 22
     - id: CMBottleDylovene
-      name: Dylovene Bottle
+      # name: Dylovene Bottle
       price: 20
     - id: CMBottleDexalin
-      name: Dexalin Bottle
+      # name: Dexalin Bottle
       price: 20
     - id: CMBottleInaprovaline
-      name: Inaprovaline Bottle
+      # name: Inaprovaline Bottle
       price: 18
     - id: CMBottleKelotane
-      name: Kelotane Bottle
+      # name: Kelotane Bottle
       price: 20
     - id: RMCVial
-      name: Vial
+      # name: Vial
       price: 4
     - id: CMSyringe
-      name: Syringe
+      # name: Syringe
       price: 5
     - id: CMBeaker
-      name: Beaker (60u)
+      # name: Beaker (60u)
       price: 6
     - id: CMBeakerLarge
-      name: Beaker, Large (120u)
+      # name: Beaker, Large (120u)
       price: 10
     - id: RMCDropper
-      name: Dropper
+      # name: Dropper
       price: 4
     - id: RMCBoxPillCanister
-      name: Empty Pill Canister Box
+      # name: Empty Pill Canister Box
       price: 8
 
 # Surgical supplies vendor
@@ -695,47 +705,48 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: CMSurgicalLine
-      name: Surgical Line
+      # name: Surgical Line
       price: 25
     - id: CMSynthGraft
-      name: Synth-Graft
+      # name: Synth-Graft
       price: 25
     - id: CMUCastItem
-      name: Cast
+      # name: Cast
       price: 15
     - id: CMUSplintItem
-      name: Splint
+      # name: Splint
       price: 8
     - id: CMStasisBagFolded
-      name: Stasis Bag
+      # name: Stasis Bag
       price: 40
     - id: CMPortableSurgicalBedSpawnFolded
-      name: Portable Surgical Bed
+      # name: Portable Surgical Bed
       price: 50
     - id: CMRollerBedSpawnFolded
-      name: Roller Bed
+      # name: Roller Bed
       price: 20
     - id: AU14CMDefibrillator
-      name: Defibrillator
+      # name: Defibrillator
       price: 60
     - id: CMHealthAnalyzer
-      name: Health Analyzer
+      # name: Health Analyzer
       price: 30
     - id: CMHyposprayFilledTricord
-      name: Hypospray (Tricord)
+      # name: Hypospray (Tricord)
       price: 35
     - id: RMCBoxBodyBag
-      name: Body Bag Box
+      # name: Body Bag Box
       price: 15
     - id: RMCBoxSterileMask
-      name: Sterile Mask Box
+      # name: Sterile Mask Box
       price: 8
     - id: RMCBoxLatexGloves
-      name: Latex Glove Box
+      # name: Latex Glove Box
       price: 8
     - id: CMSyringe
-      name: Syringe
+      # name: Syringe
       price: 5
 
 # Law enforcement vendor
@@ -755,32 +766,33 @@
   - type: AU14CashVendor
     allowDepartmentBudget: true
     items:
+    # RuMC edit - comm name
     - id: RMCHandcuffs
-      name: Handcuffs
+      # name: Handcuffs
       price: 12
     - id: RMCZipties
-      name: Zip Ties
+      # name: Zip Ties
       price: 5
     - id: RMCBoxZiptie
-      name: Zip Tie Box
+      # name: Zip Tie Box
       price: 20
     - id: CMStunbaton
-      name: Stun Baton
+      # name: Stun Baton
       price: 40
     - id: CMGlassesSecurity
-      name: Security HUD
+      # name: Security HUD
       price: 18
     - id: RMCUniversalRecorder
-      name: Universal Recorder
+      # name: Universal Recorder
       price: 25
     - id: RMCBoxRegulationTapes
-      name: Regulation Tapes
+      # name: Regulation Tapes
       price: 10
     - id: AU14GuidebookLawMarine
-      name: Marine Law Guidebook
+      # name: Marine Law Guidebook
       price: 5
     - id: AU14GuidebookSOP
-      name: SOP Guidebook
+      # name: SOP Guidebook
       price: 5
 
 # Corporate snack machine — sells food for cash
@@ -798,18 +810,19 @@
   - type: AU14CashVendor
     percentToColony: 0.6
     items:
+    # RuMC edit - comm name
     - id: RMCFoodSnackBarcaridine
-      name: Barcaridine Bar
+      # name: Barcaridine Bar
       price: 4
     - id: RMCFoodSnackKeplarCrisps
-      name: Keplar Crisps
+      # name: Keplar Crisps
       price: 3
     - id: RMCFoodSnackBoonie
-      name: Boonie Bar
+      # name: Boonie Bar
       price: 4
     - id: RMCFoodSnackCHUNK
-      name: CHUNK Bar
+      # name: CHUNK Bar
       price: 3
     - id: CMMRE
-      name: MRE (Mil-Spec)
+      # name: MRE (Mil-Spec)
       price: 8

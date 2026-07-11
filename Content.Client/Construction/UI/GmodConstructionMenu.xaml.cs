@@ -224,6 +224,7 @@ public sealed partial class GmodConstructionMenu : DefaultWindow, IConstructionM
         Modernize(ConstructionItemsEditorButton);
         Modernize(TilesEditorButton);
         Modernize(LatheEditorButton);
+        Modernize(ZLevelTogglesButton);
         Modernize(InsforEditorButton);
         Modernize(BuildButton, toggle: true);
         Modernize(FavoriteButton);
@@ -450,6 +451,12 @@ public sealed partial class GmodConstructionMenu : DefaultWindow, IConstructionM
             IoCManager.Resolve<IEntitySystemManager>()
                 .GetEntitySystem<_AU14.Construction.CustomConstruction.CustomConstructionEditorClientSystem>()
                 .OpenLatheEditor();
+
+        // Admin Tools -> Z-Level Toggles (allow/deny z-level building per map, persisted across rounds).
+        ZLevelTogglesButton.OnPressed += _ =>
+            IoCManager.Resolve<IEntitySystemManager>()
+                .GetEntitySystem<_AU14.Construction.CustomConstruction.CustomConstructionEditorClientSystem>()
+                .OpenZLevelToggles();
 
         // INSFOR → the faction editor. A server console command, so the server does all
         // authorization (host flag) and a server without the INSFOR feature simply reports an

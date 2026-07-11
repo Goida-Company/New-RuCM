@@ -1,4 +1,4 @@
-ent-AU14JobPaPThirdpartySeniorInvestigator = Урист Ц.М. МакНВП
+ent-AU14JobPaPThirdpartySeniorInvestigator = Урист Ц.М. МакНВМ
 
-ent-AU14IDCardPAPThirdpartySeniorInvestigator = ID-карта старшего следователя НВП СПН
-  .desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+ent-AU14IDCardPAPThirdpartySeniorInvestigator = ID-карта старшего следователя НВМ СПН
+  .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}

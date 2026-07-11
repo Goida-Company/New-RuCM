@@ -31,7 +31,7 @@ ent-AU14CrateBoxABR40Magazines = ящик магазинов ABR-40 (x6 мага
 ent-AU14CrateBoxHuntingRifleCrate = ящик охотничьей винтовки с прицелом (1x охотничья винтовка Басира, x4 магазина Басира)
     .desc = {ent-RMCCrateBase.desc}
 
-ent-AU14CrateBoxSkeetShootingCrate = ящик двустволки (1x M357 Rival, x2 коробки с флешеттами)
+ent-AU14CrateBoxSkeetShootingCrate = ящик двустволки (1x M357 "Соперник", x2 коробки с флешеттами)
     .desc = {ent-RMCCrateBase.desc}
 
 ent-AU14CrateBoxD18 = ящик пистолета D18 (x1 кейс с пистолетом D18, x4 магазина D18)

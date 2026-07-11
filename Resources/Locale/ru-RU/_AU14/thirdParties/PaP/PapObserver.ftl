@@ -1,4 +1,4 @@
-ent-AU14JobPAPThirdpartyObserver = Наблюдатель НВП СПН
+ent-AU14JobPAPThirdpartyObserver = Наблюдатель НВМ СПН
 
-ent-AU14IDCardPAPThirdpartyObserver = ID-карта наблюдателя НВП СПН
-  .desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+ent-AU14IDCardPAPThirdpartyObserver = ID-карта наблюдателя НВМ СПН
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}

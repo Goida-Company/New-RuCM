@@ -1,14 +1,18 @@
-ent-PowerCellRecharger-name = зарядное устройство для ячеек
+ent-PowerCellRecharger = зарядник для батареек
+    .desc = Зарядное устройство специально для батареек.
 
-ent-PowerCageRecharger-name = зарядное устройство для клетки
+ent-PowerCageRecharger = зарядник для энергоячеек
+    .desc = Зарядное устройство специально для энергоячеек.
 
-ent-WeaponCapacitorRecharger-name = зарядное устройство
+ent-WeaponCapacitorRecharger = зарядник энергооружия
+    .desc = Устройство для зарядки энергооружия.
 
-ent-TurboItemRecharger-name = турбо зарядное устройство
-ent-TurboItemRecharger-desc = Разогнанное зарядное устройство с глобальным портом.
+ent-TurboItemRecharger = турбозарядник
+    .desc = Улучшенное зарядное устройство.
 
-ent-WallWeaponCapacitorRecharger-name = настенное зарядное устройство
+ent-WallWeaponCapacitorRecharger = настенный зарядник энергооружия
+    .desc = Устройство для зарядки энергооружия. Теперь на стене.
 
-ent-BorgCharger-name = Киборг-заправочная станция
-ent-BorgCharger-desc = Стационарное зарядное устройство для различных роботов и киборгов. На удивление просторный.
+ent-BorgCharger = зарядная стнация боргов
+    .desc = Стационарное зарядное устройство для различных боргов.
 

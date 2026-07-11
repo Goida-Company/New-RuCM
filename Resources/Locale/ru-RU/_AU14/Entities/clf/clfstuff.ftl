@@ -26,10 +26,10 @@ ent-AU14TattooInkCartridge = картридж с краской
     .desc = Маленький картридж с тёмной краской для использования с тату машинкой.
     .suffix = КОФ
 
-ent-AU14CMJumpsuitColonistCLF = форма колониста
-    .desc = Стильный серо-зелёный комбинезон — стандартная форма для колонистов.
+ent-AU14CMJumpsuitColonistCLF = {ent-CMJumpsuitColonist}
+    .desc = {ent-CMJumpsuitColonist.desc}
     .suffix = КОФ
 
-ent-AU14RMCJumpsuitCivilianCLF = серая рабочая форма
-    .desc = Стильный серый комбинезон, популярный среди контрактников ООН на фронтире.
+ent-AU14RMCJumpsuitCivilianCLF = {ent-RMCJumpsuitCivilian}
+    .desc = {ent-RMCJumpsuitCivilian.desc}
     .suffix = КОФ

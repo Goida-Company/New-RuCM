@@ -1,42 +1,111 @@
-ent-AU14IDCardGOVFORPlatCo-name = ID-карта командира взвода
-ent-AU14IDCardGOVFORPlatCo-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORPlatOp-name = ID-карта офицера оперативного управления взвода
-ent-AU14IDCardGOVFORPlatOp-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORDSPilot-name = ID-карта пилота дропшипа
-ent-AU14IDCardGOVFORDSPilot-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORDCC-name = ID-карта бортмеханика дропшипа
-ent-AU14IDCardGOVFORDCC-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSecSergeant-name = ID-карта сержанта взвода
-ent-AU14IDCardSecSergeant-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadSergeant-name = ID-карта командира отделения
-ent-AU14IDCardSquadSergeant-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadRifleman-name = ID-карта стрелка
-ent-AU14IDCardSquadRifleman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadAutomaticRifleman-name = ID-карта автоматчика
-ent-AU14IDCardSquadAutomaticRifleman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14JobIDCardGOVFORPlatoonCorpsman-name = ID-карта санитара взвода
-ent-AU14JobIDCardGOVFORPlatoonCorpsman-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14JobIDCardGOVFORRadioTelephoneOperator-name = ID-карта радиотелефониста
-ent-AU14JobIDCardGOVFORRadioTelephoneOperator-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynth-name = ID-карта синтетика поддержки
-ent-AU14IDCardGOVFORAuxSupportSynth-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynthEngineering-name = ID-карта инженерного синтетика поддержки
-ent-AU14IDCardGOVFORAuxSupportSynthEngineering-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynthMedical-name = ID-карта медицинского синтетика поддержки
-ent-AU14IDCardGOVFORAuxSupportSynthMedical-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynthSecurity-name = ID-карта синтетика военной полиции
-ent-AU14IDCardGOVFORAuxSupportSynthSecurity-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynthCommand-name = ID-карта синтетика-советника командования
-ent-AU14IDCardGOVFORAuxSupportSynthCommand-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORAuxSupportSynthIntel-name = ID-карта разведывательного синтетика поддержки
-ent-AU14IDCardGOVFORAuxSupportSynthIntel-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadCombatTech-name = ID-карта боевого техника
-ent-AU14IDCardSquadCombatTech-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadAdvisor-name = ID-карта советника
-ent-AU14IDCardSquadAdvisor-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORDoctor-name = ID-карта врача
-ent-AU14IDCardGOVFORDoctor-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardSquadK9HandlerGOVFOR-name = ID-карта кинолога
-ent-AU14IDCardSquadK9HandlerGOVFOR-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
-ent-AU14IDCardGOVFORWorkingJoe-name = ID-карта Рабочего Джо
-ent-AU14IDCardGOVFORWorkingJoe-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+ent-AU14IDCardGOVFORPlatCo = ID-карта командира взвода
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORPlatOp = ID-карта младшего офицера
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDSPilot = ID-карта пилота штурмовика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDCC = ID-карта командира экипажа штурмовика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSecSergeant = ID-карта старшего сержанта
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadSergeant = ID-карта командира отделения
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadRifleman = ID-карта стрелка
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardWeaponsSpecialist = ID-карта специалиста по вооружению
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadAutomaticRifleman = ID-карта пулемётчика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14JobIDCardGOVFORPlatoonCorpsman = ID-карта санитара госпиталя
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14JobIDCardGOVFORRadioTelephoneOperator = ID-карта командира огневой группы
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14JobIDCardGOVFORAuxTech = ID-карта техника поддержки
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORVehicleCrewman = ID-карта члена экипажа техники
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynth = ID-карта синтетика поддержки
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynthEngineering = ID-карта инженерного синтетика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynthMedical = ID-карта медицинского синтетика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynthSecurity = ID-карта синтетика военной полиции
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynthCommand = ID-карта синтетика-советника командования
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORAuxSupportSynthIntel = ID-карта разведывательного синтетика
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadCombatTech = ID-карта боевого техника
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadAdvisor = ID-карта советника
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDoctor = ID-карта врача
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDoctorPharmacist = ID-карта фармацевта
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDoctorSurgeon = ID-карта хирурга
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORDoctorMortician = ID-карта патологоанатома
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORMilitaryPoliceMan = ID-карта военного полицейского
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardSquadK9HandlerGOVFOR = ID-карта кинолога
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР
+
+ent-AU14IDCardGOVFORWorkingJoe = ID-карта Рабочего Джо
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
+    .suffix = ГОВФОР

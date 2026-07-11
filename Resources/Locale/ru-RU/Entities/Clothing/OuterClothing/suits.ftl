@@ -1,39 +1,39 @@
-ent-ClothingOuterSuitBomb-name = бомбовый костюм
-ent-ClothingOuterSuitBomb-desc = Тяжелый костюм, предназначенный для того, чтобы выдерживать давление, создаваемое бомбой, и любые осколки, которые может образовать бомба.
+ent-ClothingOuterSuitBomb = костюм сапёра
+    .desc = Тяжелый костюм, предназначенный для того, чтобы взрывы.
 
-ent-ClothingOuterSuitJanitorBomb-name = костюм для уборки бомбы
-ent-ClothingOuterSuitJanitorBomb-desc = Тяжелый бронежилет, предназначенный для выдерживания взрывов, возникающих в результате реакций между химическими веществами.
+ent-ClothingOuterSuitJanitorBomb = костюм сапёра-уборщика
+    .desc = Тяжелый бронежилет, предназначенный для защиты от взрывов, возникающих в результате реакций между химическими веществами.
 
-ent-ClothingOuterSuitFire-name = пожарный костюм
-ent-ClothingOuterSuitFire-desc = Костюм, который помогает защититься от опасных температур.
+ent-ClothingOuterSuitFire = пожарный костюм
+    .desc = Костюм, который помогает защититься от опасных температур.
 
-ent-ClothingOuterSuitAtmosFire-name = пожарный костюм атмос
-ent-ClothingOuterSuitAtmosFire-desc = Дорогой пожарный костюм, который защитит даже от самых смертоносных пожаров на станции. Предназначен для защиты, даже если владелец подожжен.
+ent-ClothingOuterSuitAtmosFire = пожарный костюм атмосферного техника
+    .desc = Дорогой пожарный костюм, который защитит даже от самых смертоносных пожаров на станции. Предназначен для защиты, даже если владелец подожжён.
 
-ent-ClothingOuterSuitRad-name = радиационный костюм
-ent-ClothingOuterSuitRad-desc = Костюм, защищающий от радиации. На этикетке написано: «Сделано из свинца. Пожалуйста, не расходуйте изоляцию».
+ent-ClothingOuterSuitRad = антирадиационный костюм
+    .desc = Костюм, защищающий от радиации. На этикетке написано: «Сделано из свинца».
 
-ent-ClothingOuterSuitSpaceNinja-name = костюм космического ниндзя
-ent-ClothingOuterSuitSpaceNinja-desc = Этот черный технологически продвинутый, кибернетически улучшенный костюм дает множество способностей, таких как невидимость или телепортация.
+ent-ClothingOuterSuitSpaceNinja = костюм космического ниндзи
+    .desc = Этот чёрный технологически продвинутый костюм дает множество способностей, таких как невидимость или телепортация.
 
-ent-ClothingOuterSuitChicken-name = куриный костюм
-ent-ClothingOuterSuitChicken-desc = Бок-бок-бок!
+ent-ClothingOuterSuitChicken = костюм петуха
+    .desc = Ко-ко-ко!
 
-ent-ClothingOuterSuitShrineMaiden-name = наряд жрицы
-ent-ClothingOuterSuitShrineMaiden-desc = Вызывает желание пойти разобраться с каким-нибудь надоедливым ёкаем.
+ent-ClothingOuterSuitShrineMaiden = наряд жрицы
+    .desc = Вызывает желание пойти разобраться с каким-нибудь надоедливым духом.
 
-ent-ClothingOuterSuitWitchRobes-name = одежда ведьмы
-ent-ClothingOuterSuitWitchRobes-desc = Магия – это сила заклинаний, ZE!
+ent-ClothingOuterSuitWitchRobes = одежда ведьмы
+    .desc = Магия – это сила заклинаний!
 
-ent-ClothingOuterSuitMonkey-name = костюм обезьяны
-ent-ClothingOuterSuitMonkey-desc = Костюм, похожий на примата.
+ent-ClothingOuterSuitMonkey = костюм обезьяны
+    .desc = Костюм, похожий на примата.
 
-ent-ClothingOuterSuitIan-name = Иэн костюм
-ent-ClothingOuterSuitIan-desc = Кто хороший мальчик?
+ent-ClothingOuterSuitIan = костюм Иана
+    .desc = Кто хороший мальчик?
 
-ent-ClothingOuterSuitCarp-name = карповый костюм
-ent-ClothingOuterSuitCarp-desc = Специальный костюм, в котором вы будете похожи на космического карпа, если у вас плохое зрение.
+ent-ClothingOuterSuitCarp = костюм карпа
+    .desc = Специальный костюм, в котором вы будете похожи на космического карпа, если у вас плохое зрение.
 
-ent-ClothingOuterHardsuitCarp-name = карповый костюм
-ent-ClothingOuterHardsuitCarp-desc = Специальный костюм, в котором вы будете похожи на космического карпа, если у вас плохое зрение.
+ent-ClothingOuterHardsuitCarp = костюм карпа
+    .desc = Специальный костюм, в котором вы будете похожи на космического карпа, если у вас плохое зрение.
 

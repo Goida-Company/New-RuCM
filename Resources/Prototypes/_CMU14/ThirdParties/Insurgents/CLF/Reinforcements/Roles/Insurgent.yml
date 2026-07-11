@@ -88,8 +88,8 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: Insurgent Reinforcements
-    description: You have been sent from a neighboring insurgent cell to aid the uprising in this area. Report to the local cell leader for orders.
+    name: au14-ghost-role-insurgent-reinforcements-name # RuMC edit
+    description: au14-ghost-role-insurgent-reinforcements-description # RuMC edit
     job: AU14JobCLFGuerillaReinforcement
     raffle:
       settings: short

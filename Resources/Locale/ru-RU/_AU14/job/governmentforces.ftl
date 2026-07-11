@@ -84,6 +84,11 @@ au14-job-name-govforAuxTech = Техник
 au14-job-description-govforAuxTech = Управляй снабжением, поддерживай корабль в рабочем состоянии и чистоте. Обеспечивай свою фракцию корабельной логистикой и инженерной поддержкой.
 au14-job-prefix-govforAuxTech = ТПОД
 
+AU14JobVehicleCrewmanBaseAbstract = Член экипажа техники
+au14-job-name-vehiclecrewman = Член экипажа техники
+au14-job-description-vehiclecrewman = Управляй бронетехникой для поддержки своей фракции.
+au14-job-prefix-vehiclecrewman = ЧЭТ
+
 au14-job-prefix-AU14JobGOVFORPlatCoUPP = КМВЗ
 au14-job-prefix-AU14JobGOVFORPlatoonCorpsmanUPP = САН
 au14-job-prefix-AU14JobGOVFORDCCUPP = БМХ
