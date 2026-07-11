@@ -339,6 +339,23 @@ public sealed partial class CMAutomatedVendorBui : BoundUserInterface
                 uiEntry.Amount.Modulate = disabled ? Color.Red : Color.White;
                 uiEntry.Panel.Button.Disabled = disabled;
 
+                // Stock line: how many are left to buy at all (an infinity symbol when the entry has no
+                // stock cap) and, when the section limits per-player takes, how many this player may still
+                // take individually.
+                var stockText = entry.Amount is { } stockLeft
+                    ? Loc.GetString("rmc-vending-stock-remaining", ("count", stockLeft))
+                    : Loc.GetString("rmc-vending-stock-infinite");
+
+                if (section.Choices is { } personalCap)
+                {
+                    var takenByYou = user?.Choices.GetValueOrDefault(personalCap.Id) ?? 0;
+                    var youLeft = System.Math.Max(0, personalCap.Amount - takenByYou);
+                    stockText += " " + Loc.GetString("rmc-vending-stock-personal", ("count", youLeft));
+                }
+
+                uiEntry.Stock.Text = stockText;
+                uiEntry.Stock.Modulate = disabled ? Color.Red : Color.White;
+
                 if (!string.IsNullOrWhiteSpace(uiEntry.Amount.Text))
                     anyAmount = true;
             }

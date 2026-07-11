@@ -64,6 +64,13 @@ public sealed partial class MiscTab : Control
         Control.AddOptionCheckBox(CCVars.ChatEnableFancyBubbles, FancySpeechBubblesCheckBox);
         Control.AddOptionCheckBox(CCVars.ChatFancyNameBackground, FancyNameBackgroundsCheckBox);
         Control.AddOptionCheckBox(CCVars.StaticStorageUI, StaticStorageUI);
+        // CMU14
+        var constructionModeEntries = new List<OptionDropDownCVar<bool>.ValueOption>
+        {
+            new(true, Loc.GetString("cmu-ui-options-construction-mode-improved")),
+            new(false, Loc.GetString("cmu-ui-options-construction-mode-default")),
+        };
+        Control.AddOptionDropDown(CCVars.ConstructionMenuImproved, DropDownConstructionMode, constructionModeEntries);
 
         Control.AddOptionCheckBox(RMCCVars.RMCAutoPunctuate, RMCAutoPunctuate);
         Control.AddOptionCheckBox(RMCCVars.RMCAutoEjectMagazines, RMCAutoEjectMagazines);

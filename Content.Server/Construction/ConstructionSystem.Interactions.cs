@@ -2,6 +2,7 @@ using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Construction.Components;
 using Content.Server.Temperature.Components;
+using Content.Shared._AU14.Construction.Steps;
 using Content.Shared.Construction;
 using Content.Shared.Construction.Components;
 using Content.Shared.Construction.EntitySystems;
@@ -320,6 +321,12 @@ namespace Content.Server.Construction
 
                         insert = stack;
                     }
+
+                    // AU14: a custom "tool" step (EntityId with Consume:false) only requires the entity to be
+                    // present - it must NOT be consumed. This mirrors the in-hand build path. We validated the
+                    // entity above; just leave it untouched and signal the step handled.
+                    if (insertStep is EntityIdConstructionGraphStep { Consume: false })
+                        return HandleResult.True;
 
                     // Container-storage handling.
                     if (!string.IsNullOrEmpty(insertStep.Store))

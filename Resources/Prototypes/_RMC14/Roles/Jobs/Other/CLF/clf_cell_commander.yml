@@ -43,6 +43,7 @@
       defaultLanguage: Japanese
     - type: JobPrefix
       prefix: rmc-job-prefix-clf-cell-commander
+    - type: AU14FormationLeader
     - type: SquadLeader
       icon:
         sprite: _RMC14/Interface/cm_job_icons.rsi

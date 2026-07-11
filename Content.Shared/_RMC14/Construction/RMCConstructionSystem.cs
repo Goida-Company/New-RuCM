@@ -46,6 +46,30 @@ public sealed partial class RMCConstructionSystem : EntitySystem
 
     private static readonly EntProtoId Blocker = "RMCDropshipDoorBlocker";
 
+    // AU14: construction-skill economy. Every point of construction skill shaves 10% off material costs
+    // (basic materials only: metal, plasteel, wood, and both rod types) and adds 10% build speed.
+    // These three values are the only knobs.
+    private const float AU14MaterialDiscountPerSkill = 0.10f;
+    private const float AU14SpeedBonusPerSkill = 0.10f;
+    private static readonly HashSet<string> AU14DiscountedStacks = new()
+    {
+        "CMSteel", "CMPlasteel", "RMCWood", "CMRodMetal", "CMRodPlasteel",
+    };
+
+    // AU14: the discounted material cost for this builder, floored at 1 so nothing is ever free.
+    private int AU14ApplySkillDiscount(EntityUid user, StackComponent stack, int cost)
+    {
+        if (!AU14DiscountedStacks.Contains(stack.StackTypeId))
+            return cost;
+
+        var level = _skills.GetSkill(user, "RMCSkillConstruction");
+        if (level <= 0)
+            return cost;
+
+        var multiplier = MathF.Max(0.1f, 1f - AU14MaterialDiscountPerSkill * level);
+        return Math.Max(1, (int) MathF.Ceiling(cost * multiplier));
+    }
+
     private readonly List<EntityCoordinates> _toCreate = new();
 
     private EntityQuery<DoorComponent> _doorQuery;
@@ -153,6 +177,7 @@ public sealed partial class RMCConstructionSystem : EntitySystem
         {
             var totalAmount = amount / proto.Amount;
             var cost = (amount == proto.Amount) ? materialCost : totalAmount * materialCost;
+            cost = AU14ApplySkillDiscount(user, stack, cost); // AU14: skill discount on basic materials.
 
             if (stack.Count < cost)
             {
@@ -173,6 +198,12 @@ public sealed partial class RMCConstructionSystem : EntitySystem
 
         var skillMultiplier = _skills.HasSkill(user, proto.DelaySkill, 2) ? 1 : 2;
         var delay = proto.DoAfterTime * skillMultiplier;
+
+        // AU14: +10% build speed per construction skill point.
+        var au14ConstructionLevel = _skills.GetSkill(user, "RMCSkillConstruction");
+        if (au14ConstructionLevel > 0)
+            delay /= 1.0 + AU14SpeedBonusPerSkill * au14ConstructionLevel;
+
         var doAfterTime = Math.Max(delay.TotalSeconds, proto.DoAfterTimeMin.TotalSeconds);
 
         var doAfter = new DoAfterArgs(EntityManager, user, TimeSpan.FromSeconds(doAfterTime), ev, ent, ent)
@@ -240,7 +271,9 @@ public sealed partial class RMCConstructionSystem : EntitySystem
 
         if (TryComp<StackComponent>(ent.Owner, out var stack))
         {
-            if (!_stack.Use(ent.Owner, cost ?? 1, stack))
+            // AU14: the same skill discount that was quoted at the start of the build.
+            var au14Cost = AU14ApplySkillDiscount(args.User, stack, cost ?? 1);
+            if (!_stack.Use(ent.Owner, au14Cost, stack))
             {
                 var message = Loc.GetString("rmc-construction-more-material", ("material", ent.Owner), ("object", entry.Name));
                 _popup.PopupEntity(message, args.User, args.User, PopupType.SmallCaution);

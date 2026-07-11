@@ -161,6 +161,7 @@
     components:
     - type: RMCSpeechBubbleSpecificStyle
       speechStyleClass: commanderSpeech
+    - type: AU14FormationLeader
 
 - type: roleLoadout
   id: JobAU14JobGOVFORSectionSergeant

@@ -64,6 +64,10 @@ namespace Content.Server.Database
         public DbSet<RMCPlayerActionOrder> RMCPlayerActionOrder { get; set; } = default!;
         public DbSet<RMCChatBans> RMCPlayerChatBans { get; set; } = default!;
 
+        // AU14 INSFOR faction featureset
+        public DbSet<AU14FactionDefinition> AU14FactionDefinitions { get; set; } = default!;
+        // AU14 building overhaul: admin-generated construction-menu entries (see AU14ConstructionModel.cs)
+        public DbSet<AU14CustomConstructionEntry> AU14CustomConstructionEntries { get; set; } = default!;
         // CMU14
         public DbSet<CMURoundOutcome> CMURoundOutcomes { get; set; } = default!;
 

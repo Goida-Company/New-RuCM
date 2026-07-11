@@ -1,0 +1,5 @@
+﻿# Auto-managed by the AU14 in-game Lathe Editor (Admin Tools > Lathe Editor).
+# Referenced by CMAutolathe's staticPacks. Do not hand-edit the recipe list; use the in-game editor.
+- type: latheRecipePack
+  id: AU14AutolatheRecipes
+  recipes: []

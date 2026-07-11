@@ -95,6 +95,11 @@
   hidden: false
   setPreference: true
   basePlaytimeTracker: true
+  # commanderSpeech is applied via AU14JobPlatCoBase roundComponents; only the GOVFOR platco leads formations.
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: AU14FormationLeader
 
 - type: job
   parent: AU14JobPlatCoBase

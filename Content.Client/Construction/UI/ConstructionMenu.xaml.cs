@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Numerics;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
@@ -31,6 +32,35 @@ namespace Content.Client.Construction.UI
 
         ScrollContainer RecipesGridScrollContainer { get; }
         GridContainer RecipesGrid { get; }
+
+        /// <summary>
+        /// If true, the presenter populates <see cref="GroupedRecipesContainer"/> with per-category
+        /// sections (header + sub-grid) instead of the flat <see cref="RecipesGrid"/>.
+        /// </summary>
+        bool UseGroupedView { get; }
+
+        /// <summary>
+        /// Vertical container the presenter fills with grouped category sections when
+        /// <see cref="UseGroupedView"/> is true.
+        /// </summary>
+        BoxContainer GroupedRecipesContainer { get; }
+
+        /// <summary>
+        /// If true, the construction menu closes as soon as a build/placement begins.
+        /// </summary>
+        bool CloseOnConstruct { get; }
+
+        /// <summary>
+        /// The spawnlist (top-level tree group) currently selected. Empty string means "no spawnlist
+        /// filter" (show everything). Menus without spawnlist support return empty.
+        /// </summary>
+        string SelectedSpawnlist { get; }
+
+        /// <summary>
+        /// Provides the menu with the distinct spawnlists discovered among recipes, so it can build
+        /// its left-tree entries. No-op for menus without spawnlist support.
+        /// </summary>
+        void SetSpawnlists(IReadOnlyList<string> spawnlists);
 
         event EventHandler<(string search, string catagory)> PopulateRecipes;
         event EventHandler<ConstructionMenu.ConstructionMenuListData?> RecipeSelected;
@@ -67,6 +97,16 @@ namespace Content.Client.Construction.UI
         }
 
         public string[] Categories { get; set; } = Array.Empty<string>();
+
+        // The classic menu uses the flat grid/list, never grouped, and stays open while building.
+        private readonly BoxContainer _stubGroupedContainer = new();
+        public bool UseGroupedView => false;
+        public BoxContainer GroupedRecipesContainer => _stubGroupedContainer;
+        public bool CloseOnConstruct => false;
+
+        // The classic menu has no spawnlist tree; it always shows everything.
+        public string SelectedSpawnlist => string.Empty;
+        public void SetSpawnlists(IReadOnlyList<string> spawnlists) { }
 
         public bool EraseButtonPressed
         {
