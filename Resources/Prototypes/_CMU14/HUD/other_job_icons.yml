@@ -32,3 +32,10 @@
   icon:
     sprite: _AU14/Interface/job_icons.rsi
     state: sec_android
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: AU14JobIconThirdPartyTankCrewman
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: hudsquad_tc

@@ -33,6 +33,7 @@ public sealed partial class MentorManager : IPostInjectInit
     [Dependency] private UserDbDataManager _userDb = default!;
 
     private const string RateLimitKey = "MentorHelp";
+    private static readonly ProtoId<JobPrototype> MentorJob = "AU14JobGOVFORadvisor";
     private readonly HashSet<ICommonSession> _activeMentors = new();
     private readonly Dictionary<NetUserId, bool> _mentors = new();
     private readonly Dictionary<NetUserId, (TimeSpan Timestamp, bool Typing)> _typingUpdateTimestamps = new();

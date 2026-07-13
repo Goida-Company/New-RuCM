@@ -4,7 +4,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Radio.Components;
 using Content.Shared._CMU14.Yautja;
-// RMC14
 using Content.Server._RMC14.Language.Systems;
 using Content.Shared._RMC14.Chat;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -161,7 +160,7 @@ public sealed partial class RadioSystem : EntitySystem
             speech = _chat.GetSpeechVerb(messageSource, message);
 
         var content = escapeMarkup
-            ? FormattedMessage.EscapeText(message)
+            ? _chat.ResolveBoldSentinels(FormattedMessage.EscapeText(message))
             : message;
 
         // RMC14
@@ -248,7 +247,7 @@ public sealed partial class RadioSystem : EntitySystem
                     ("verb", verb),
                     ("channel", $"\\[{channel.LocalizedName}\\]"),
                     ("name", FormattedMessage.EscapeText(actualName)),
-                    ("message", escapeMarkup ? FormattedMessage.EscapeText(actualMessage) : actualMessage));
+                    ("message", escapeMarkup ? _chat.ResolveBoldSentinels(FormattedMessage.EscapeText(actualMessage)) : actualMessage));
             }
 
             var chat = new ChatMessage(

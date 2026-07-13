@@ -233,6 +233,7 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         SubscribeLocalEvent<RoundEndMessageEvent>(OnRoundEndMessage);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
         SubscribeLocalEvent<DropshipLandedOnPlanetEvent>(OnDropshipLandedOnPlanet);
+        SubscribeLocalEvent<DropshipHijackDeclinedEvent>(OnDropshipHijackDeclined);
         SubscribeLocalEvent<DropshipHijackStartEvent>(OnDropshipHijackStart);
         SubscribeLocalEvent<DropshipHijackLandedEvent>(OnDropshipHijackLanded);
 
@@ -846,6 +847,13 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             _config.SetCVar(RMCCVars.CMMarinesPerXeno, value);
             break;
         }
+    }
+
+    private void OnDropshipHijackDeclined(ref DropshipHijackDeclinedEvent ev)
+    {
+        ev.Handled = TryEndActiveDistressRound(
+            DistressSignalRuleResult.MinorXenoVictory,
+            "cmu-distress-signal-minorxenovictory-no-hijack");
     }
 
     private void OnDropshipHijackStart(ref DropshipHijackStartEvent ev)
@@ -2029,6 +2037,8 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
         if (!_queenBuildingBoostEnabled)
             return;
 
+        if (!HasComp<XenoEvolutionGranterComponent>(ent))
+            return;
 
         var query = QueryActiveRules();
         while (query.MoveNext(out var uid, out _, out var comp, out var gameRule))
@@ -2036,15 +2046,10 @@ public sealed partial class CMDistressSignalRuleSystem : GameRuleSystem<CMDistre
             if (!GameTicker.IsGameRuleAdded(uid, gameRule))
                 continue;
 
-
-
-            var withinBoostPeriod = comp.StartTime == null ||
-                                (Timing.CurTime - comp.StartTime < _queenBoostDuration);
-
+            var withinBoostPeriod = comp.StartTime == null || (Timing.CurTime - comp.StartTime < _queenBoostDuration);
             if (withinBoostPeriod)
-            {
                 GiveQueenBoost(ent.Owner);
-            }
+
             break;
         }
     }

@@ -2,5 +2,6 @@
 
 public enum WebbingVisualLayers
 {
-    Base
+    Base,
+    Outer,
 }

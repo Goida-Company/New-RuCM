@@ -114,7 +114,7 @@ namespace Content.Server.Decals
 
             while (enumerator.MoveNext(out var tile))
             {
-                var tilePos = (Vector2) tile.Value.GridIndices;
+                var tilePos = (Vector2)tile.Value.GridIndices;
                 var chunkIndices = GetChunkIndices(tilePos);
 
                 if (!oldChunkCollection.TryGetValue(chunkIndices, out var oldChunk))
@@ -284,7 +284,7 @@ namespace Content.Server.Decals
         {
             var id = GetNetEntity(uid);
             chunk.LastModified = _timing.CurTick;
-            if(!_dirtyChunks.ContainsKey(id))
+            if (!_dirtyChunks.ContainsKey(id))
                 _dirtyChunks[id] = new HashSet<Vector2i>();
             _dirtyChunks[id].Add(chunkIndices);
         }
@@ -586,7 +586,7 @@ namespace Content.Server.Decals
             }
 
             if (updatedDecals.Count != 0 || staleChunks.Count != 0)
-                RaiseNetworkEvent(new DecalChunkUpdateEvent{Data = updatedDecals, RemovedChunks = staleChunks}, session);
+                RaiseNetworkEvent(new DecalChunkUpdateEvent { Data = updatedDecals, RemovedChunks = staleChunks }, session);
 
             ReturnToPool(updatedChunks);
             ReturnToPool(staleChunks);
@@ -612,5 +612,62 @@ namespace Content.Server.Decals
         }
 
         #endregion
+
+        private readonly List<Vector2i> _emptyChunks = new();
+        private readonly List<uint> _toRemove = new();
+        public (int Removed, int Skipped) RemoveDecals(EntityUid gridId, IReadOnlySet<string>? ids = null, bool cleanableOnly = true, DecalGridComponent? comp = null)
+        {
+            if (!Resolve(gridId, ref comp)) return (0, 0);
+            _emptyChunks.Clear();
+            var chunkCollection = comp.ChunkCollection.ChunkCollection;
+            int removed = 0, skipped = 0;
+            if (ids == null && !cleanableOnly)
+            {
+                foreach (var (chunkOrigin, chunk) in chunkCollection)
+                {
+                    if (chunk.Decals.Count == 0) continue;
+                    removed += chunk.Decals.Count;
+                    chunk.Decals.Clear();
+                    DirtyChunk(gridId, chunkOrigin, chunk);
+                }
+
+                comp.DecalIndex.Clear();
+                chunkCollection.Clear();
+                return (removed, 0);
+            }
+
+            foreach (var (chunkOrigin, chunk) in chunkCollection)
+            {
+                _toRemove.Clear();
+                foreach (var (decalId, decal) in chunk.Decals)
+                {
+                    if (ids != null && !ids.Contains(decal.Id)) continue;
+                    if (cleanableOnly && !decal.Cleanable)
+                    {
+                        skipped++;
+                        continue;
+                    }
+
+                    _toRemove.Add(decalId);
+                }
+
+                if (_toRemove.Count == 0) continue;
+                foreach (var decalId in _toRemove)
+                {
+                    chunk.Decals.Remove(decalId);
+                    comp.DecalIndex.Remove(decalId);
+                }
+
+                removed += _toRemove.Count;
+                DirtyChunk(gridId, chunkOrigin, chunk);
+                if (chunk.Decals.Count == 0)
+                    _emptyChunks.Add(chunkOrigin);
+            }
+
+            foreach (var chunkOrigin in _emptyChunks)
+                chunkCollection.Remove(chunkOrigin);
+
+            return (removed, skipped);
+        }
     }
 }

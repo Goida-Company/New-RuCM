@@ -4015,8 +4015,7 @@
       moving, with movement checks around 0.75 tile accumulated movement and a 1.25
       second pulse cooldown.
     type: Add
-  - message: "Fracture names changed. The old top tier was \u201CComminuted\u201D\
-      ; it is now \u201CShattered\u201D."
+  - message: Fracture top tier naming is now Shattered everywhere.
     type: Tweak
   - message: Fracture tiers are now Hairline, Simple, Compound, and Shattered.
     type: Tweak
@@ -4043,7 +4042,7 @@
       bone recovery over about 5 minutes.
     type: Tweak
   - message: 'Old fracture movement penalties used direct speed multipliers: Hairline
-      0.95, Simple 0.85, Compound 0.70, Comminuted 0.40.'
+      0.95, Simple 0.85, Compound 0.70, Shattered 0.40.'
     type: Tweak
   - message: New movement penalties use lighter slowdown points instead of harsh direct
       multipliers. Broken regions add 0.65 slowdown points, splinted/eschar regions
@@ -6259,5 +6258,367 @@
   id: 443
   time: '2026-07-09T06:00:15.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1564
+- author: troytroy400
+  changes:
+  - message: Dropship equipment and munitions can now be made in the fabricator. We're
+      gonna test this out and see how greatly it effects balance, prices will most
+      likely need to be increased.
+    type: Tweak
+  - message: Synths, Working Joes and combat roles can no-longer take the prosthetic
+      limb traits.
+    type: Tweak
+  - message: Comtech given more utilities as point purchases and general QOL options.
+      Deployable ladder is now given to them for free in their essential equipment
+      alongside normal welding goggles.
+    type: Tweak
+  - message: JO properly renamed to SO.
+    type: Fix
+  - message: Corpsmen now get an advanced helmet visor that cannot be used by other
+      squad roles.
+    type: Fix
+  id: 444
+  time: '2026-07-10T05:48:42.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1567
+- author: ver0098
+  changes:
+  - message: a viable Pyrospec for UPP has been added, HAZOPS pyrospec now gets X-Gel
+      and B-Gel, with a reduced fire rate. We-Yu pyrospec now gets the flammenwerfer-3
+    type: Add
+  - message: 'Reverted PR #1427'
+    type: Remove
+  - message: you can now buy pyrospec ammunition at ASRS
+    type: Add
+  - message: M240A2 fuel tank size increased from 150 to 300 (since it says its a
+      copy of the Flammenwerfer-3)
+    type: Tweak
+  - message: M240A2 and Flammenwerfer-3 has intergrated mag harness now.
+    type: Tweak
+  id: 445
+  time: '2026-07-10T17:19:35.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1556
+- author: OverusedMeme
+  changes:
+  - message: one syringe to colony medical staff
+    type: Add
+  - message: The unintended extra health analyzer, suture line, synth graft from filled
+      colony life saver bags
+    type: Remove
+  id: 446
+  time: '2026-07-10T20:01:29.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1570
+- author: TheHellFireo
+  changes:
+  - message: Added hands, feet, and the groin as fully supported medical targets for
+      damage, treatment, fractures, severance, scanning, surgery, and prosthetics.
+    type: Add
+  - message: Added expanded body-zone targeting for arms/hands, legs/feet, and chest/groin.
+    type: Add
+  - message: Added wound classifications with distinct cuts, bruises, burns, internal
+      bleeding, and stump wounds.
+    type: Add
+  - message: Wounds now develop descriptive stages such as clots, scabs, healing burns,
+      scars, and carbonised tissue as their damage changes.
+    type: Add
+  - message: Added embedded shrapnel from fragmenting projectiles, xeno spikes, bone
+      spikes, and sufficiently powerful explosions.
+    type: Add
+  - message: Moving while upright with embedded shrapnel can now inflict additional
+      piercing damage and pain. Staying prone or buckled prevents these movement pulses.
+    type: Add
+  - message: Splints and casts now show their remaining uses when examined.
+    type: Add
+  - message: Added locational armor coverage. Only armor covering the struck body
+      region now contributes protection.
+    type: Add
+  - message: Detailed armor examination now lists which regions the armor covers.
+    type: Add
+  - message: Added Sleen, a powerful experimental painkiller with toxic and disorienting
+      overdose effects.
+    type: Add
+  - message: Added Soporific, a sedative painkiller that causes drowsiness and can
+      induce sleep at surgical doses.
+    type: Add
+  - message: Added chemistry recipes for Sleen and Soporific.
+    type: Add
+  - message: Added functional anesthesia through connected internals.
+    type: Add
+  - message: Added an optional CMU setting to perform surgery directly through tool
+      use without opening the surgery interface.
+    type: Add
+  - message: Added the Fix-O-Vein surgical tool for repairing internal bleeding.
+    type: Add
+  - message: Fix-O-Veins are now stocked in medical vendors, surgical trays and cases,
+      and can be produced at the medilathe.
+    type: Add
+  - message: Surgical sites now expose their incision depth, access state, bleeding
+      state, and current procedure through examination.
+    type: Add
+  - message: Added persistent patient-owned surgery sessions, allowing another qualified
+      surgeon to seamlessly continue an operation.
+    type: Add
+  - message: Surgery interfaces and examination now identify the surgeon who performed
+      the most recent step.
+    type: Add
+  - message: Brain damage can now cause blurred vision and disorientation events such
+      as dropping held items, falling over, or becoming dazed.
+    type: Add
+  - message: Eye damage now causes progressively worsening vision impairment and eventual
+      blindness.
+    type: Add
+  - message: Damaged lungs can now cause escalating asphyxiation and bouts of coughing
+      up blood.
+    type: Add
+  - message: Heart damage now causes progressive circulatory consequences and can
+      prevent successful defibrillation.
+    type: Add
+  - message: Liver and kidney damage now cause progressive toxin buildup and reduced
+      metabolic function.
+    type: Add
+  - message: Stomach damage now causes persistent nausea and vomiting.
+    type: Add
+  - message: Missing vital organs now retain their associated medical consequences
+      until a replacement organ is installed.
+    type: Add
+  - message: Moving with an unstabilized serious fracture can now worsen internal
+      bleeding or damage nearby organs.
+    type: Add
+  - message: Added blood, xeno blood, and oil stains to items and worn clothing.
+    type: Add
+  - message: Weapons and tools can become stained when they inflict brute damage;
+      robotic limbs produce black oil instead of blood.
+    type: Add
+  - message: Xeno acid-blood splashes can stain exposed equipment green.
+    type: Add
+  - message: Blood and oil reagent spills can stain directly targeted items and exposed
+      clothing.
+    type: Add
+  - message: Blood puddles can stain equipped footwear
+    type: Add
+  - message: Stained items now display blood-stained or oil-stained examination text.
+    type: Add
+  - message: Water, soap, space cleaner, cleaning puddles, rags, and forensic-cleaning
+      tools can remove visual item stains.
+    type: Add
+  - message: Renamed the highest fracture tier from Comminuted to Shattered throughout
+      the medical system.
+    type: Tweak
+  - message: Wound treatment now prioritizes the selected body part before searching
+      for another valid injury.
+    type: Tweak
+  - message: Added an optional targeted-healing setting that prevents bandages and
+      medical kits from automatically moving to another body part.
+    type: Tweak
+  - message: Automatic wound searching now adds a short delay instead of instantly
+      jumping between unrelated body regions.
+    type: Tweak
+  - message: Repeated wound treatments now proceed through the treatment loop instead
+      of consuming every remaining use at once.
+    type: Tweak
+  - message: Field-treatment times and required supplies now scale with the wound's
+      actual severity.
+    type: Tweak
+  - message: Surgical lines and synth grafts now repair up to 10 damage and respect
+      both regional damage and wound-derived healing caps.
+    type: Tweak
+  - message: Field treatment can no longer immediately restore severely damaged regions
+      beyond their allowed wound-recovery cap.
+    type: Tweak
+  - message: Paracetamol, Tramadol, and Oxycodone now metabolize through the revised
+      pain-suppression system and have clearer overdose and critical-overdose consequences.
+    type: Tweak
+  - message: Surgery on a conscious patient can be interrupted by severe uncontrolled
+      pain.
+    type: Tweak
+  - message: Merely being buckled to a bed or operating table no longer counts as
+      pain control; use anesthesia, unconsciousness, or sufficient painkillers.
+    type: Tweak
+  - message: Disconnecting anesthesia internals now clears anesthesia-induced sleep
+      instead of leaving the patient permanently sedated.
+    type: Tweak
+  - message: Internal bleeding surgery now uses the Fix-O-Vein rather than ordinary
+      hemostats.
+    type: Tweak
+  - message: Closing an incision over uncontrolled surgical bleeding now converts
+      it into internal bleeding.
+    type: Tweak
+  - message: Brain and eye repair now require their vessels to be clamped before repair.
+    type: Tweak
+  - message: Defibrillation now causes a small amount of cardiac trauma and fails
+      when the heart is already too damaged.
+    type: Tweak
+  - message: Stasis now suspends relevant missing-organ and organ-failure damage while
+      the patient cannot metabolize.
+    type: Tweak
+  - message: A melee strike against an incised and retracted chest can shatter exposed
+      ribs, opening a dangerous alternative to sawing the ribcage.
+    type: Tweak
+  - message: Surgery now permits only one active step on a patient at a time, while
+      preserving the operation for handoff between surgeons.
+    type: Tweak
+  - message: Medical scanners now present focused state, damage, blood, heart, missing-organ,
+      and organ-damage information.
+    type: Tweak
+  - message: 'Item stains use a single-stain model: a later blood, xeno blood, or
+      oil stain replaces the previous stain.'
+    type: Tweak
+  - message: Removed trauma governors, their armor integration, their scanner interface,
+      and stabilizer bypass vials.
+    type: Remove
+  - message: Removed ears as a separately tracked damageable organ and surgery target.
+    type: Remove
+  - message: Fixed wound treatment losing or changing its selected body part during
+      repeated applications.
+    type: Fix
+  - message: Fixed wound treatment incorrectly continuing when the selected body part
+      had no eligible wounds.
+    type: Fix
+  - message: Fixed stale and overlapping surgery actions allowing procedures to desynchronize
+      or complete against the wrong session.
+    type: Fix
+  - message: Fixed surgery handoffs incorrectly attributing an entire operation to
+      its first surgeon.
+    type: Fix
+  - message: Fixed surgery pain interruptions completing without appropriate patient
+      feedback.
+    type: Fix
+  - message: Fixed anesthesia state failing to update promptly when internals were
+      connected, changed, or removed.
+    type: Fix
+  - message: Fixed client startup failures involving the medical scheduler.
+    type: Fix
+  - message: Fixed malformed tactical-map settings failing to escape or recover deterministically.
+    type: Fix
+  - message: Fixed medical displays and overlays refreshing from stale or incomplete
+      state.
+    type: Fix
+  - message: Reorganized CMU medical code into clearer anatomy, injury, diagnosis,
+      presentation, treatment, and surgery domains.
+    type: Code
+  - message: Rebuilt medical runtime state around indexed anatomy, centralized change
+      events, snapshots, and scheduled processing.
+    type: Code
+  - message: Reduced repeated medical processing for healthy bodies and mass-casualty
+      situations.
+    type: Code
+  - message: Reduced unnecessary medical networking and UI refreshes while retaining
+      detailed scanner and examination data.
+    type: Code
+  id: 447
+  time: '2026-07-11T16:10:36.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1572
+- author: Crime481
+  changes:
+  - message: Added HUD and menu icons for the Vehicle Crewman role.
+    type: Add
+  - message: Fixed GOVFOR Vehicle Crewman having it's tactical map icon exceeding
+      the background borders.
+    type: Fix
+  id: 448
+  time: '2026-07-11T16:56:38.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1571
+- author: TheHellFireo
+  changes:
+  - message: Allows the queen to not hijack the dropship and end the round as a minor
+      xeno victory.
+    type: Add
+  id: 449
+  time: '2026-07-11T21:48:14.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1575
+- author: TheHellFireo
+  changes:
+  - message: Allow armed SHARP mines to collide with and detonate from bullets or
+      xeno spit.
+    type: Fix
+  - message: Make SHARP darts inherit the operator's IFF so they pass through friendlies.
+    type: Fix
+  id: 450
+  time: '2026-07-11T21:48:27.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1577
+- author: TheHellFireo
+  changes:
+  - message: Medical Hud resets after no injuries left
+    type: Add
+  id: 451
+  time: '2026-07-11T21:48:29.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1576
+- author: TheHellFireo
+  changes:
+  - message: Govfor can seize the CLF's intel console to end the round and win.
+    type: Add
+  id: 452
+  time: '2026-07-11T21:49:19.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1578
+- author: maertayn
+  changes:
+  - message: All animals in the WeYu experimental crate can 'nurture' a chestburster
+    type: Tweak
+  - message: Imaginary Friend custom advisor appearance & name
+    type: Fix
+  - message: Imaginary Friend has hands to interact with the world (do consider you're
+      still a ghost and use it only to help a mentee)
+    type: Add
+  - message: Ghosts being unable to enter vehicles because there's too many occupants
+    type: Fix
+  - message: Insurgency's Govfor objectives no longer state CLF there's activity (first-contact)
+    type: Tweak
+  - message: '''nukedecals'' performance command for admins to use, explicit decals
+      or just delete all of them server-wide (if this stabilizes lag we''ll know where
+      the memory leak is)'
+    type: Add
+  - message: Vehicle Crewman rank progression E2-E4 - 5h/24h
+    type: Tweak
+  - message: Military Synths get access to the HM & MD vendors
+    type: Tweak
+  id: 453
+  time: '2026-07-11T23:32:52.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1579
+- author: NileDeveloper
+  changes:
+  - message: individual boldening of words and sentences
+    type: Add
+  - message: double chat bubbles using normal speech instead of rune and making it
+      similar to rune with one single speech bubble whisper with radio chatter
+    type: Remove
+  - message: individual italic of words and sentences
+    type: Add
+  - message: individual italic  AND boldening of words and sentences
+    type: Add
+  id: 454
+  time: '2026-07-12T00:35:06.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1574
+- author: troytroy400
+  changes:
+  - message: All faction weapons now have their own magazine/ammo boxes.
+    type: Add
+  - message: Removed a duplicate 9x19mm ammo box.
+    type: Remove
+  - message: Large magazine pouches have been moved to requisitions.
+    type: Tweak
+  - message: Advisor characters now must be 25 instead of 21.
+    type: Fix
+  - message: IO characters now only have to be 25 in-line with all other junior officers,
+      not 30.
+    type: Fix
+  id: 455
+  time: '2026-07-12T06:51:25.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1582
+- author: troytroy400
+  changes:
+  - message: Removed scream button from hotbar. Scream is now only available through
+      the emote wheel.
+    type: Remove
+  - message: Your ghost sprite will now use the sprite you died / ghosted as
+    type: Add
+  - message: Adds the marine all-weather coat, a new outerwear item. Available in
+      the USCMC command vendor.
+    type: Add
+  - message: Added Space Grunts, a TTRPG, to the rec-vend.
+    type: Add
+  - message: Different color options for the nightvision visor (can be set in the
+      accessibility options menu)
+    type: Add
+  id: 456
+  time: '2026-07-12T09:24:51.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1584
 Name: CMU
 Order: -1

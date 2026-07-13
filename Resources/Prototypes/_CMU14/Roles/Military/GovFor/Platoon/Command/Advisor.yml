@@ -46,7 +46,7 @@
   - !type:OverallPlaytimeRequirement
     time: 3600
   - !type:AgeRequirement
-    requiredAge: 21
+    requiredAge: 25
   - !type:TraitsRequirement
     inverted: true
     traits:

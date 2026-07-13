@@ -15,6 +15,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Client.Humanoid;
 
+// RMC partial to expose
 public sealed partial class HumanoidAppearanceSystem : SharedHumanoidAppearanceSystem
 {
     [Dependency] private IPrototypeManager _prototypeManager = default!;
