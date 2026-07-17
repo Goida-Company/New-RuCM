@@ -41,7 +41,7 @@
 - type: entity
   parent: AU14BaseMobSpeciesOrganicMisc
   id: AU14JobForeignMobGoon
-  name: Mob Goon (Criminal)
+  name: au14-ghost-name-foreign-mob-goon # RuMC edit
   components:
   - type: GhostTakeoverAvailable
   - type: GhostRoleApplySpecial
@@ -49,13 +49,15 @@
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: Mob Boss (Criminal)
-    description: You and your Boss have been evicted from your old territory and lost everything. But old habits die hard, move into rival territory and begin anew.
+    # RuMC edit start
+    name: au14-ghost-name-foreign-mob-goon
+    description: au14-ghost-description-foreign-mob-goon
+    # RuMC edit end
     reregister: false
     job: AU14JobForeignMobGoonJob
     raffle:
       settings: short
-    rules: You do not know what is going on in the colony.
+    rules: au14-ghost-rules-foreign-mob # RuMC edit
 
 - type: startingGear
   id: AU14GearForeignMobGoonGear

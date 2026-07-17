@@ -81,6 +81,17 @@ namespace Content.Client.Lobby.UI
         private bool _exporting;
         private bool _imaging;
 
+        // Static tab indices within TabContainer. Kept in one place since SetTabTitle/SetTabVisible
+        // and the preview logic all need to agree on where each tab lives. The flavortext tab is
+        // appended dynamically at the end (TabContainer.ChildCount - 1) and isn't listed here.
+        private const int RegulationAppearanceTabIndex = 1;
+        private const int InsurgencyTabIndex = 2;
+        private const int ColonyFallTabIndex = 3;
+        private const int DistressSignalTabIndex = 4;
+        private const int TraitsTabIndex = 5;
+        private const int MarkingsTabIndex = 6;
+        private const int NamedItemsTabIndex = 7;
+
         /// <summary>
         /// If we're attempting to save.
         /// </summary>
@@ -219,6 +230,8 @@ namespace Content.Client.Lobby.UI
             #region Appearance
 
             TabContainer.SetTabTitle(0, Loc.GetString("humanoid-profile-editor-appearance-tab"));
+            TabContainer.SetTabTitle(RegulationAppearanceTabIndex, Loc.GetString("humanoid-profile-editor-regulation-appearance-tab"));
+            TabContainer.OnTabChanged += _ => ReloadPreview(false);
 
             #region Sex
 
@@ -419,6 +432,113 @@ namespace Content.Client.Lobby.UI
 
             #endregion Hair
 
+            #region RegulationAppearance
+
+            RegulationHairStylePicker.MarkingWhitelist = HairStyles.RegulationHairStyles.Select(s => s.Id).ToHashSet();
+            RegulationHairStylePicker.DropdownColors = HairStyles.RegulationHairColors;
+            RegulationFacialHairPicker.MarkingWhitelist = HairStyles.RegulationFacialHairStyles.Select(s => s.Id).ToHashSet();
+            RegulationFacialHairPicker.DropdownColors = HairStyles.RegulationHairColors;
+
+            RegulationAppearanceInfo.SetMarkup(Loc.GetString("humanoid-profile-editor-regulation-appearance-info"));
+
+            RegulationHairStylePicker.OnMarkingSelect += newStyle =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationHairStyleName(newStyle.id));
+                ReloadPreview();
+            };
+
+            RegulationHairStylePicker.OnColorChanged += newColor =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationHairColor(newColor.marking.MarkingColors[0]));
+                ReloadPreview();
+            };
+
+            RegulationFacialHairPicker.OnMarkingSelect += newStyle =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationFacialHairStyleName(newStyle.id));
+                ReloadPreview();
+            };
+
+            RegulationFacialHairPicker.OnColorChanged += newColor =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationFacialHairColor(newColor.marking.MarkingColors[0]));
+                ReloadPreview();
+            };
+
+            RegulationHairStylePicker.OnSlotRemove += _ =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationHairStyleName(HairStyles.DefaultHairStyle));
+                UpdateRegulationHairPickers();
+                ReloadPreview();
+            };
+
+            RegulationFacialHairPicker.OnSlotRemove += _ =>
+            {
+                if (Profile is null)
+                    return;
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationFacialHairStyleName(HairStyles.DefaultFacialHairStyle));
+                UpdateRegulationHairPickers();
+                ReloadPreview();
+            };
+
+            RegulationHairStylePicker.OnSlotAdd += delegate ()
+            {
+                if (Profile is null)
+                    return;
+
+                var species = Profile.Species;
+                var hair = HairStyles.RegulationHairStyles
+                    .Select(s => s.Id)
+                    .FirstOrDefault(id => _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.Hair, species).ContainsKey(id));
+
+                if (string.IsNullOrEmpty(hair))
+                    return;
+
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationHairStyleName(hair));
+
+                UpdateRegulationHairPickers();
+                ReloadPreview();
+            };
+
+            RegulationFacialHairPicker.OnSlotAdd += delegate ()
+            {
+                if (Profile is null)
+                    return;
+
+                var species = Profile.Species;
+                var hair = HairStyles.RegulationFacialHairStyles
+                    .Select(s => s.Id)
+                    .FirstOrDefault(id => _markingManager.MarkingsByCategoryAndSpecies(MarkingCategories.FacialHair, species).ContainsKey(id));
+
+                if (string.IsNullOrEmpty(hair))
+                    return;
+
+                Profile = Profile.WithCharacterAppearance(
+                    Profile.Appearance.WithRegulationFacialHairStyleName(hair));
+
+                UpdateRegulationHairPickers();
+                ReloadPreview();
+            };
+
+            #endregion RegulationAppearance
+
             #region SpawnPriority
 
             foreach (var value in Enum.GetValues<SpawnPriorityPreference>())
@@ -526,9 +646,9 @@ namespace Content.Client.Lobby.UI
 
             #region Jobs
 
-            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-insurgency-tab"));
-            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-colony-fall-tab"));
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-distress-signal-tab"));
+            TabContainer.SetTabTitle(InsurgencyTabIndex, Loc.GetString("humanoid-profile-editor-insurgency-tab"));
+            TabContainer.SetTabTitle(ColonyFallTabIndex, Loc.GetString("humanoid-profile-editor-colony-fall-tab"));
+            TabContainer.SetTabTitle(DistressSignalTabIndex, Loc.GetString("humanoid-profile-editor-distress-signal-tab"));
             SetupGamemodeTabTitles();
 
             PreferenceUnavailableButton.AddItem(
@@ -558,7 +678,7 @@ namespace Content.Client.Lobby.UI
 
             #region Markings
 
-            TabContainer.SetTabTitle(5, Loc.GetString("humanoid-profile-editor-markings-tab"));
+            TabContainer.SetTabTitle(MarkingsTabIndex, Loc.GetString("humanoid-profile-editor-markings-tab"));
 
             Markings.OnMarkingAdded += OnMarkingChange;
             Markings.OnMarkingRemoved += OnMarkingChange;
@@ -609,8 +729,8 @@ namespace Content.Client.Lobby.UI
             }
 
             var namedItems = UserInterfaceManager.GetUIController<NamedItemsUIController>();
-            TabContainer.SetTabTitle(6, Loc.GetString("rmc-ui-named-items"));
-            TabContainer.SetTabVisible(6, namedItems.Available);
+            TabContainer.SetTabTitle(NamedItemsTabIndex, Loc.GetString("rmc-ui-named-items"));
+            TabContainer.SetTabVisible(NamedItemsTabIndex, namedItems.Available);
             NamedItems.PrimaryGun.OnTextChanged += args => SetItemName(RMCNamedItemType.PrimaryGun, args.Text);
             NamedItems.Sidearm.OnTextChanged += args => SetItemName(RMCNamedItemType.Sidearm, args.Text);
             NamedItems.Helmet.OnTextChanged += args => SetItemName(RMCNamedItemType.Helmet, args.Text);
@@ -713,7 +833,7 @@ namespace Content.Client.Lobby.UI
             TraitsList.DisposeAllChildren();
 
             var traits = _prototypeManager.EnumeratePrototypes<TraitPrototype>().OrderBy(t => Loc.GetString(t.Name)).ToList();
-            TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-traits-tab"));
+            TabContainer.SetTabTitle(TraitsTabIndex, Loc.GetString("humanoid-profile-editor-traits-tab"));
 
             if (traits.Count < 1)
             {
@@ -1019,7 +1139,7 @@ namespace Content.Client.Lobby.UI
 
         public void RefreshRMC(SharedRMCPatronTier? tier)
         {
-            TabContainer.SetTabVisible(6, tier is { NamedItems: true });
+            TabContainer.SetTabVisible(NamedItemsTabIndex, tier is { NamedItems: true });
         }
 
         /// <summary>
@@ -1041,9 +1161,23 @@ namespace Content.Client.Lobby.UI
 
             var previewEntry = GetCurrentPreviewJob();
             var previewJob = JobOverride ?? previewEntry?.Job;
-            PreviewDummy = _controller.LoadProfileEntity(Profile, previewJob, ShowClothes.Pressed);
+
+            // While on the Regulation Appearance tab, preview the regulation hair/facial hair
+            // selections instead of the normal ones, so the player can compare both looks.
+            var previewProfile = Profile;
+            if (TabContainer.CurrentTab == RegulationAppearanceTabIndex)
+            {
+                previewProfile = previewProfile.WithCharacterAppearance(
+                    previewProfile.Appearance
+                        .WithHairStyleName(previewProfile.Appearance.RegulationHairStyleId)
+                        .WithHairColor(previewProfile.Appearance.RegulationHairColor)
+                        .WithFacialHairStyleName(previewProfile.Appearance.RegulationFacialHairStyleId)
+                        .WithFacialHairColor(previewProfile.Appearance.RegulationFacialHairColor));
+            }
+
+            PreviewDummy = _controller.LoadProfileEntity(previewProfile, previewJob, ShowClothes.Pressed);
             SpriteView.SetEntity(PreviewDummy);
-            _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, Profile.Name);
+            _entManager.System<MetaDataSystem>().SetEntityName(PreviewDummy, previewProfile.Name);
             UpdatePreviewJobLabel(previewEntry);
 
             // Check and set the dirty flag to enable the save/reset buttons as appropriate.
@@ -1211,6 +1345,7 @@ namespace Content.Client.Lobby.UI
             UpdateMarkings();
             UpdateTTSVoicesControls(); // Corvax-TTS
             UpdateHairPickers();
+            UpdateRegulationHairPickers();
             UpdateCMarkingsHair();
             UpdateCMarkingsFacialHair();
             UpdateNamedItems();
@@ -1646,17 +1781,23 @@ namespace Content.Client.Lobby.UI
             var id = job.ID;
             var name = job.LocalizedName;
 
+            if (id is "AU14JobGOVFORVehicleCommander")
+                return ("flight", Loc.GetString("humanoid-profile-editor-segment-flight"));
+
+            if (ContainsAny(id, name, "MilitaryDoctor"))
+                return ("support", Loc.GetString("humanoid-profile-editor-segment-support"));
+
             if (job.MarineAuthorityLevel > 0
                     || ContainsAny(id, name, "PlatCo", "Adjutant", "PlatOp", "Commander", "Command", "Advisor"))
                 return ("command", Loc.GetString("humanoid-profile-editor-segment-command"));
 
-            if (ContainsAny(id, name, "Pilot", "Dropship", "Crew Chief", "DCC"))
+            if (ContainsAny(id, name, "Pilot", "Dropship", "Crew Chief", "DCC", "VehicleCrewman"))
                 return ("flight", Loc.GetString("humanoid-profile-editor-segment-flight"));
 
             if (ContainsAny(id, name, "Officer", "Chief")) // after Crew Chief
                 return ("officer", Loc.GetString("humanoid-profile-editor-segment-officer"));
 
-            if (ContainsAny(id, name, "Doctor", "AuxTech", "Police", "VehicleCrewman", "Synth", "Working Joe", "Auxiliary"))
+            if (ContainsAny(id, name, "Doctor", "AuxTech", "Police", "Synth", "Working Joe", "Auxiliary", "DroneOperator", "Nurse", "EngineeringTech"))
                 return ("support", Loc.GetString("humanoid-profile-editor-segment-support"));
 
             if (ContainsAny(id, name, "Leader", "Sergeant", "RadioTelephone"))
@@ -2495,6 +2636,30 @@ namespace Content.Client.Lobby.UI
                 Profile.Species,
                 1);
             FacialHairPicker.UpdateData(
+                facialHairMarking,
+                Profile.Species,
+                1);
+        }
+
+        private void UpdateRegulationHairPickers()
+        {
+            if (Profile == null)
+            {
+                return;
+            }
+            var hairMarking = Profile.Appearance.RegulationHairStyleId == HairStyles.DefaultHairStyle
+                ? new List<Marking>()
+                : new() { new(Profile.Appearance.RegulationHairStyleId, new List<Color>() { Profile.Appearance.RegulationHairColor }) };
+
+            var facialHairMarking = Profile.Appearance.RegulationFacialHairStyleId == HairStyles.DefaultFacialHairStyle
+                ? new List<Marking>()
+                : new() { new(Profile.Appearance.RegulationFacialHairStyleId, new List<Color>() { Profile.Appearance.RegulationFacialHairColor }) };
+
+            RegulationHairStylePicker.UpdateData(
+                hairMarking,
+                Profile.Species,
+                1);
+            RegulationFacialHairPicker.UpdateData(
                 facialHairMarking,
                 Profile.Species,
                 1);

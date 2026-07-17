@@ -107,6 +107,7 @@ ui-options-vp-low-res = Low-resolution viewport
 ui-options-parallax-low-quality = Low-quality Parallax (background)
 ui-options-ambient-occlusion = Show Ambient Occlusion
 ui-options-zlevel-blur = Z-level blur:
+ui-options-faint-look-up-opacity = Faint Look Up opacity:
 ui-options-fps-counter = Show FPS counter
 ui-options-vp-width = Viewport width:
 ui-options-hud-layout = HUD layout:
@@ -356,6 +357,7 @@ cmd-options-help = Usage: options [tab]
 
 ## Accessibility menu
 
+ui-options-accessability-header-cmu = CMU
 ui-options-accessability-header-visuals = Visuals
 ui-options-accessability-header-content = Content
 
@@ -371,6 +373,9 @@ ui-options-crt-ui-color-purple = Purple
 ui-options-crt-ui-color-example = Preview text
 ui-options-reduced-motion = Reduce motion of visual effects
 ui-options-screen-shake-intensity = Screen shake intensity
+ui-options-explosion-screen-shake-enabled = Screen shake from nearby explosions
+ui-options-explosion-screen-shake-ignore-far = Ignore explosions more than 25 tiles away
+ui-options-firearm-screen-shake-enabled = Screen shake from firing weapons
 
 ui-options-chat-window-opacity = Chat window opacity
 ui-options-speech-bubble-text-opacity = Speech bubble text opacity

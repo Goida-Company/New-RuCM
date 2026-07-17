@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Shuttles;
+using Content.Shared._AU14.ZLevelBuilding;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -244,6 +245,12 @@ public sealed partial class ShuttleSystem
             return false;
         }
 
+        if (HasComp<ZCollapseCompromisedComponent>(shuttleUid))
+        {
+            reason = Loc.GetString("au14-dropship-collapse-compromised");
+            return false;
+        }
+
         var ev = new ConsoleFTLAttemptEvent(shuttleUid, false, string.Empty);
         RaiseLocalEvent(shuttleUid, ref ev, true);
 
@@ -343,6 +350,13 @@ public sealed partial class ShuttleSystem
     {
         component = null;
 
+        if (HasComp<ZCollapseCompromisedComponent>(uid))
+        {
+            Log.Warning($"Blocked FTL setup for structurally compromised shuttle {ToPrettyString(uid)}.");
+            _console.RefreshShuttleConsoles(uid);
+            return false;
+        }
+
         if (HasComp<FTLComponent>(uid))
         {
             Log.Warning($"Tried queuing {ToPrettyString(uid)} which already has {nameof(FTLComponent)}?");
@@ -373,6 +387,15 @@ public sealed partial class ShuttleSystem
     {
         var uid = entity.Owner;
         var comp = entity.Comp1;
+
+        if (HasComp<ZCollapseCompromisedComponent>(uid))
+        {
+            Log.Warning($"Aborted FTL startup for structurally compromised shuttle {ToPrettyString(uid)}.");
+            RemCompDeferred<FTLComponent>(uid);
+            _console.RefreshShuttleConsoles(uid);
+            return;
+        }
+
         var xform = _xformQuery.GetComponent(entity);
         DoTheDinosaur(xform);
 

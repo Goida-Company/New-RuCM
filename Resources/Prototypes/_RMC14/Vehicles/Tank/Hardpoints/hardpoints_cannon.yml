@@ -29,7 +29,7 @@
   - type: GunIgnoreContainerOwnerCollision
   - type: ShootAtFixedPoint
   - type: Gun
-    fireRate: 0.0625
+    fireRate: 0.0525
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
@@ -41,10 +41,10 @@
   - type: BallisticAmmoProvider
     cycleable: false
     proto: VehicleCartridgeLTBCannon
-    capacity: 4
+    capacity: 1
   - type: VehicleHardpointAmmo
-    magazineSize: 4
-    maxStoredMagazines: 3
+    magazineSize: 1
+    maxStoredMagazines: 1
   - type: GunFireArc
     arc: 120
   - type: RefillableByBulletBox
@@ -175,7 +175,7 @@
   - type: GunUseGunOrigin
   - type: GunIgnoreContainerOwnerCollision
   - type: Gun
-    fireRate: 1
+    fireRate: 1.2
     projectileSpeed: 50
     selectedMode: FullAuto
     availableModes:

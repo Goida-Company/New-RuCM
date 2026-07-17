@@ -77,7 +77,7 @@ humanoid-profile-editor-job-priority-high-button = Высокий
 humanoid-profile-editor-job-priority-medium-button = Средний
 humanoid-profile-editor-job-priority-low-button = Низкий
 humanoid-profile-editor-job-priority-never-button = Никогда
-humanoid-profile-editor-naming-rules-warning = Внимание: оскорбительные или LRP имена/описания персонажа приведут к санкциям от администраторов. Ознакомьтесь с \[Правилами\] для подробностей.
+humanoid-profile-editor-naming-rules-warning = Внимание: оскорбительные или ЛРП имена/описания персонажа приведут к санкциям от администраторов. Ознакомьтесь с \[Правилами\] для подробностей.
 humanoid-profile-editor-markings-tab = Метки
 humanoid-profile-editor-flavortext-tab = Описание
 
@@ -100,12 +100,14 @@ humanoid-profile-editor-preference-armor-carrier = Разгрузочная
 humanoid-profile-editor-preference-armor-skull = С черепом
 humanoid-profile-editor-preference-armor-smooth = Гладкая
 
-humanoid-profile-editor-government-forces-label = Силы правительства / { $segmentTitle }
+humanoid-profile-editor-government-forces-label = Силы правительства / {$segmentTitle}
 
 humanoid-profile-editor-segment-command = Командование
 humanoid-profile-editor-segment-flight = Авиация
 humanoid-profile-editor-segment-support = Поддержка
 humanoid-profile-editor-segment-line = Линейная пехота
+humanoid-profile-editor-segment-officer = Офицеры
+humanoid-profile-editor-segment-leader = Сержантский состав
 
 humanoid-profile-editor-threat-marker-suffix =  (Маркер)
 humanoid-profile-editor-threat-xeno = Ксеноморфы
@@ -114,4 +116,4 @@ humanoid-profile-editor-threat-cultist = Культисты
 humanoid-profile-editor-threat-wendigo = Вендиго
 humanoid-profile-editor-threat-abomination = Мерзости
 humanoid-profile-editor-threat-tribal = Дикари
-# Missing entries synced from en-US
+

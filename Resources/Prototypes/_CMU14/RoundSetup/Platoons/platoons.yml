@@ -16,6 +16,7 @@
 - type: platoon
   id: USCM
   name: US Colonial Marines
+  nameLocKey: lore-primer-platoon-uscm # RuMC edit
   lorePrimer: AU14PrimerPlatoonUSCM
   Allegiance: UA
   reqlist: USCMCargoCatalog
@@ -33,6 +34,7 @@
 - type: platoon
   id: LACN
   name: LACN Landing Forces
+  nameLocKey: lore-primer-platoon-lacn # RuMC edit
   lorePrimer: AU14PrimerPlatoonLACN
   Allegiance: UA
   reqlist: LACNCargoCatalog
@@ -49,6 +51,7 @@
   id: UPP
   language: russian
   name: UPP Naval Infantry
+  nameLocKey: lore-primer-platoon-upp # RuMC edit
   lorePrimer: AU14PrimerPlatoonUPP
   Allegiance: UPP
   reqlist: UPPCargoCatalog
@@ -76,6 +79,7 @@
 - type: platoon
   id: WEYU
   name: WY PMC
+  nameLocKey: lore-primer-platoon-weyu # RuMC edit
   lorePrimer: AU14PrimerPlatoonWEYU
   reqlist: WEYUCargoCatalog
   vendorSet: WEYU
@@ -105,6 +109,7 @@
 - type: platoon
   id: CMBCIU
   name: CMB Crisis Intervention
+  nameLocKey: lore-primer-platoon-cmbciu # RuMC edit
   lorePrimer: AU14PrimerPlatoonCMBCIU
   Allegiance: UA
   reqlist: CMBCIUCargoCatalog
@@ -134,6 +139,7 @@
 - type: platoon
   id: HAZOPS
   name: USCM Hazardous Operations Unit
+  nameLocKey: lore-primer-platoon-hazops # RuMC edit
   lorePrimer: AU14PrimerPlatoonHAZOPS
   Allegiance: UA
   reqlist: HAZOPSCargoCatalog
@@ -151,6 +157,7 @@
 - type: platoon
   id: ProdigySF
   name: Prodigy Security Forces
+  nameLocKey: lore-primer-platoon-prodigy-sf # RuMC edit
   lorePrimer: AU14PrimerPlatoonProdigySF
   reqlist: ProdigyCargoCatalog
   vendorSet: ProdigySF
@@ -168,6 +175,7 @@
 - type: platoon
   id: VAIPO
   name: VAI Primary Operations
+  nameLocKey: lore-primer-platoon-vaipo # RuMC edit
   lorePrimer: AU14PrimerPlatoonVAIPO
   reqlist: VAIPOCargoCatalog
   vendorSet: VAIPO
@@ -184,6 +192,7 @@
 - type: platoon
   id: RMC
   name: TWE Royal Marine Commandos
+  nameLocKey: lore-primer-platoon-rmc # RuMC edit
   lorePrimer: AU14PrimerPlatoonRMC
   Allegiance: TWE
   reqlist: RMCCargoCatalog

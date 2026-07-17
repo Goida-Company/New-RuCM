@@ -86,6 +86,8 @@ admin-notes-fallback-admin-name = [System]
 admin-remarks-command-description = Opens the admin remarks page
 admin-remarks-command-error = Admin remarks have been disabled
 admin-remarks-title = Admin remarks
+admin-remarks-fade-note = [italic]These notes will fade with time.[/italic]
+admin-remarks-history-note = [italic]Notes are used to track history or pattern of behavior.[/italic]
 
 # Misc
 system-user = [System]

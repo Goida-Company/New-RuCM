@@ -1,0 +1,104 @@
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLaw
+  name: Колониальный гражданский кодекс
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLaw.xml"
+  priority: 3
+  children:
+  - AU14CCLawGeneral
+  - AU14CCLawCorporate
+  - AU14CCLawProcedures
+  - AU14CCLawMilitary
+  - AU14CCLawCriminalCode
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawGeneral
+  name: Общие положения
+  priority: 1
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLawGeneral.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawCorporate
+  name: Корпоративная и фронтирная юрисдикция
+  priority: 2
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLawCorporate.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawProcedures
+  name: Гражданские предписания и процедуры задержания
+  priority: 3
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLawProcedures.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawMilitary
+  name: Военное присутствие
+  priority: 4
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLawMilitary.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawCriminalCode
+  name: Уголовный кодекс
+  priority: 5
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/AU14CCLawCriminalCode.xml"
+  children:
+  - AU14CCLawOptionalCharges
+  - AU14CCLawMinorCrimes
+  - AU14CCLawArmsControl
+  - AU14CCLawMajorCrimes
+  - AU14CCLawCapitalCrimes
+  - AU14CCLawPrecautionary
+  - AU14CCLawEmergency
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawOptionalCharges
+  name: Дополнительные обвинения
+  priority: 1
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawOptionalCharges.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawMinorCrimes
+  name: Незначительные преступления
+  priority: 2
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawMinorCrimes.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawArmsControl
+  name: Контроль вооружения и законодательство об оружии
+  priority: 3
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawArmsControl.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawMajorCrimes
+  name: Тяжкие преступления
+  priority: 4
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawMajorCrimes.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawCapitalCrimes
+  name: Преступления, караемые смертной казнью
+  priority: 5
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawCapitalCrimes.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawPrecautionary
+  name: Превентивное заключение
+  priority: 6
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawPrecautionary.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CCLawEmergency
+  name: Чрезвычайные административные полномочия
+  priority: 7
+  text: "/ServerInfo/Guidebook/_AU14/CCLaw/Crimes/AU14CCLawEmergency.xml"

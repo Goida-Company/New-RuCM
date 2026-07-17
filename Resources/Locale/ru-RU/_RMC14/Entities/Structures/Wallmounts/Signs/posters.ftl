@@ -86,8 +86,8 @@ ent-CMPosterF100 = Ф-100
 ent-CMPosterMissJanuary = пинап «Мисс Январь»
     .desc = На этом плакате изображена Роксана Страски.
 
-ent-CMPosterSilicon = ВЫ ВСЕГДА ЗНАЕТЕ КРЕМНИЙ.
-    .desc = ВЫ ВСЕГДА ЗНАЕТЕ КРЕМНИЙ.
+ent-CMPosterSilicon = ВЫ ВСЕГДА УЗНАЕТЕ РАБОЧЕГО ДЖО.
+    .desc = Плакат с изображением синтетика первого поколения.
 
 ent-CMPosterElectro = Электро Голдс
     .desc = Электро Голдс — с любовью скрученный для ВАШЕГО удовольствия.
@@ -98,11 +98,11 @@ ent-CMPosterElectroCyan = {ent-CMPosterElectro}
 ent-CMPosterElectroMan = {ent-CMPosterElectro}
     .desc = {ent-CMPosterElectro.desc}
 
-ent-CMPosterSilicon2 = Кремний
-    .desc = Привет, Силикоиды!
+ent-CMPosterSilicon2 = Синтетик
+    .desc = Привет, синтеты!
 
 ent-CMPosterPathos = Трекер движения Пафос
-    .desc = Это реклама гражданского трекера движения, менее надежного, чем М314, но примерно вдвое меньшего веса.
+    .desc = Это реклама гражданского трекера движения.
 
 ent-CMPostEat = ЖРАТЬ
     .desc = Это не столько плакат, сколько реклама батончиков.

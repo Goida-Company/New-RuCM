@@ -2,6 +2,44 @@
         xmlns:graphics="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client">
     <BoxContainer Orientation="Vertical"
             HorizontalExpand="True">
+        <PanelContainer HorizontalExpand="True"
+                Margin="5 5 5 10">
+            <PanelContainer.PanelOverride>
+                <graphics:StyleBoxFlat BackgroundColor="#1A1A1A"/>
+            </PanelContainer.PanelOverride>
+            <BoxContainer Orientation="Vertical"
+                    HorizontalExpand="True"
+                    Margin="8">
+                <Label Text="{Loc 'humanoid-profile-editor-reference-voice-title'}"
+                        StyleClasses="LabelHeading"/>
+                <Label Text="{Loc 'humanoid-profile-editor-reference-voice-description'}"
+                        Margin="0 2 0 6"/>
+                <Label Text="{Loc 'humanoid-profile-editor-reference-voice-consent'}"
+                        Margin="0 0 0 6"/>
+                <Label Name="ReferenceAccessLabel"
+                        Margin="0 0 0 6"/>
+                <BoxContainer Orientation="Horizontal"
+                        HorizontalExpand="True">
+                    <LineEdit Name="ReferenceSpeakerName"
+                            MinWidth="260"
+                            PlaceHolder="{Loc 'humanoid-profile-editor-reference-voice-name-placeholder'}"/>
+                    <Button Name="SelectReferenceButton"
+                            Text="{Loc 'humanoid-profile-editor-reference-voice-select-file'}"
+                            Margin="6 0 0 0"/>
+                    <Label Name="ReferenceFileLabel"
+                            Text="{Loc 'humanoid-profile-editor-reference-voice-no-file'}"
+                            HorizontalExpand="True"
+                            VerticalAlignment="Center"
+                            Margin="6 0"/>
+                    <Button Name="UploadReferenceButton"
+                            Text="{Loc 'humanoid-profile-editor-reference-voice-create'}"
+                            Disabled="True"/>
+                </BoxContainer>
+                <Label Name="ReferenceStatusLabel"
+                        Margin="0 5 0 0"/>
+            </BoxContainer>
+        </PanelContainer>
+
         <BoxContainer Orientation="Horizontal"
                 HorizontalExpand="True"
                 Margin="5">

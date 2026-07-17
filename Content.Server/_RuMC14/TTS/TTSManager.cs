@@ -1,12 +1,15 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Shared.Corvax.CCCVars;
+using Content.Shared.Corvax.TTS;
 using Prometheus;
 using Robust.Shared.Configuration;
 
@@ -66,6 +69,9 @@ public sealed class TTSManager
     {
         WantedCount.Inc();
 
+        if (!TryGetApiToken(out var apiToken))
+            return null;
+
         var cacheKey = GenerateCacheKey(speaker, text);
 
         lock (_cacheLock)
@@ -87,9 +93,9 @@ public sealed class TTSManager
             ["ext"] = "wav"
         };
 
-        if (!Uri.TryCreate(_apiUrl, UriKind.Absolute, out var baseUri))
+        if (!Uri.TryCreate(_apiUrl, UriKind.Absolute, out var baseUri) || !IsSecureApiUri(baseUri))
         {
-            _sawmill.Error($"Invalid TTS API URL: '{_apiUrl}'");
+            _sawmill.Error($"Invalid or insecure TTS API URL: '{_apiUrl}'");
             return null;
         }
 
@@ -109,9 +115,9 @@ public sealed class TTSManager
             var timeout = _cfg.GetCVar(CCCVars.TTSApiTimeout);
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
             using var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
-            request.Headers.Authorization = new("Bearer", _apiToken);
+            request.Headers.Authorization = new("Bearer", apiToken);
 
-            var response = await _httpClient.SendAsync(request, cts.Token);
+            using var response = await _httpClient.SendAsync(request, cts.Token);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -175,6 +181,148 @@ public sealed class TTSManager
         }
     }
 
+    /// <summary>
+    /// Creates an NTTS speaker from a WAV reference recording.
+    /// </summary>
+    public async Task<bool> AddSpeaker(string speakerName, byte[] audio)
+    {
+        if (!TryGetApiToken(out var apiToken))
+            return false;
+
+        if (!TryGetSpeakersUri(out var speakersUri))
+            return false;
+
+        var startTime = DateTime.UtcNow;
+
+        try
+        {
+            var timeout = _cfg.GetCVar(CCCVars.TTSReferenceVoiceApiTimeout);
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+            using var content = new MultipartFormDataContent();
+            using var audioContent = new ByteArrayContent(audio);
+            audioContent.Headers.ContentType = new MediaTypeHeaderValue("audio/wav");
+            content.Add(audioContent, "audio", $"{speakerName}.wav");
+            content.Add(new StringContent(speakerName), "speaker_name");
+
+            using var request = new HttpRequestMessage(HttpMethod.Post, speakersUri)
+            {
+                Content = content,
+            };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiToken);
+
+            using var response = await _httpClient.SendAsync(request, cts.Token);
+            if (!response.IsSuccessStatusCode)
+            {
+                _sawmill.Error($"TTS speaker API error: {response.StatusCode}");
+                RequestTimings.WithLabels("SpeakerError").Observe((DateTime.UtcNow - startTime).TotalSeconds);
+                return false;
+            }
+
+            _sawmill.Info($"Created TTS speaker '{speakerName}' from a reference recording");
+            RequestTimings.WithLabels("SpeakerSuccess").Observe((DateTime.UtcNow - startTime).TotalSeconds);
+            return true;
+        }
+        catch (TaskCanceledException)
+        {
+            _sawmill.Error($"TTS speaker upload timed out for '{speakerName}'");
+            RequestTimings.WithLabels("SpeakerTimeout").Observe((DateTime.UtcNow - startTime).TotalSeconds);
+            return false;
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"TTS speaker upload failed for '{speakerName}'\n{e}");
+            RequestTimings.WithLabels("SpeakerError").Observe((DateTime.UtcNow - startTime).TotalSeconds);
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Gets the custom speakers currently stored by NTTS.
+    /// </summary>
+    public async Task<HashSet<string>?> GetCustomSpeakers()
+    {
+        if (!TryGetApiToken(out var apiToken) || !TryGetSpeakersUri(out var speakersUri))
+            return null;
+
+        try
+        {
+            var timeout = _cfg.GetCVar(CCCVars.TTSReferenceVoiceApiTimeout);
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+            using var request = new HttpRequestMessage(HttpMethod.Get, speakersUri);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiToken);
+            using var response = await _httpClient.SendAsync(request, cts.Token);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _sawmill.Error($"TTS speaker catalog API error: {response.StatusCode}");
+                return null;
+            }
+
+            await using var stream = await response.Content.ReadAsStreamAsync(cts.Token);
+            using var document = await JsonDocument.ParseAsync(stream, cancellationToken: cts.Token);
+            if (!document.RootElement.TryGetProperty("custom_voices", out var voices) ||
+                voices.ValueKind != JsonValueKind.Array)
+            {
+                _sawmill.Error("TTS speaker catalog response does not contain a custom_voices array");
+                return null;
+            }
+
+            var result = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var voice in voices.EnumerateArray())
+                AddSpeakerNames(voice, result);
+
+            return result;
+        }
+        catch (TaskCanceledException)
+        {
+            _sawmill.Error("TTS speaker catalog request timed out");
+            return null;
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"TTS speaker catalog request failed\n{e}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Deletes a custom speaker from NTTS.
+    /// </summary>
+    public async Task<bool> DeleteSpeaker(string speakerName)
+    {
+        if (!TryGetApiToken(out var apiToken) || !TryGetSpeakersUri(out var speakersUri))
+            return false;
+
+        var deleteUri = new Uri($"{speakersUri.AbsoluteUri.TrimEnd('/')}/{Uri.EscapeDataString(speakerName)}");
+        try
+        {
+            var timeout = _cfg.GetCVar(CCCVars.TTSReferenceVoiceApiTimeout);
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(timeout));
+            using var request = new HttpRequestMessage(HttpMethod.Delete, deleteUri);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", apiToken);
+            using var response = await _httpClient.SendAsync(request, cts.Token);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _sawmill.Error($"TTS speaker delete API error for '{speakerName}': {response.StatusCode}");
+                return false;
+            }
+
+            _sawmill.Info($"Deleted TTS speaker '{speakerName}'");
+            return true;
+        }
+        catch (TaskCanceledException)
+        {
+            _sawmill.Error($"TTS speaker deletion timed out for '{speakerName}'");
+            return false;
+        }
+        catch (Exception e)
+        {
+            _sawmill.Error($"TTS speaker deletion failed for '{speakerName}'\n{e}");
+            return false;
+        }
+    }
+
     public void ResetCache()
     {
         lock (_cacheLock)
@@ -184,11 +332,87 @@ public sealed class TTSManager
         }
     }
 
+    private bool TryGetApiToken(out string apiToken)
+    {
+        apiToken = _apiToken.Trim();
+
+        if (string.IsNullOrEmpty(apiToken))
+        {
+            _sawmill.Error("TTS API token is empty");
+            return false;
+        }
+
+        if (apiToken.Contains('\r') || apiToken.Contains('\n') || apiToken.Contains('\0'))
+        {
+            _sawmill.Error("TTS API token contains an invalid new-line or NUL character");
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool TryGetSpeakersUri(out Uri speakersUri)
+    {
+        speakersUri = default!;
+        if (!Uri.TryCreate(_apiUrl, UriKind.Absolute, out var baseUri) || !IsSecureApiUri(baseUri))
+        {
+            _sawmill.Error($"Invalid or insecure TTS API URL: '{_apiUrl}'");
+            return false;
+        }
+
+        speakersUri = new UriBuilder(baseUri)
+        {
+            Path = $"{baseUri.AbsolutePath.TrimEnd('/')}/speakers",
+            Query = string.Empty,
+        }.Uri;
+        return true;
+    }
+
+    private static bool IsSecureApiUri(Uri uri)
+    {
+        return uri.Scheme == Uri.UriSchemeHttps || uri.Scheme == Uri.UriSchemeHttp && uri.IsLoopback;
+    }
+
+    private static void AddSpeakerNames(JsonElement voice, HashSet<string> result)
+    {
+        if (voice.ValueKind == JsonValueKind.String)
+        {
+            AddSpeakerName(voice.GetString(), result);
+            return;
+        }
+
+        if (voice.ValueKind != JsonValueKind.Object)
+            return;
+
+        if (voice.TryGetProperty("speakers", out var speakers) && speakers.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var speaker in speakers.EnumerateArray())
+            {
+                if (speaker.ValueKind == JsonValueKind.String)
+                    AddSpeakerName(speaker.GetString(), result);
+            }
+
+            return;
+        }
+
+        foreach (var propertyName in new[] { "speaker", "speaker_name", "name", "id", "voice_name" })
+        {
+            if (voice.TryGetProperty(propertyName, out var property) && property.ValueKind == JsonValueKind.String)
+                AddSpeakerName(property.GetString(), result);
+        }
+    }
+
+    private static void AddSpeakerName(string? speakerName, HashSet<string> result)
+    {
+        if (speakerName is { } name && CustomTTSVoice.IsValidSpeakerName(name))
+            result.Add(name);
+    }
+
     private string GenerateCacheKey(string speaker, string text)
     {
         var key = $"{speaker}/{text}";
         byte[] keyData = Encoding.UTF8.GetBytes(key);
-        var sha256 = System.Security.Cryptography.SHA256.Create();
+        using var sha256 = System.Security.Cryptography.SHA256.Create();
         var bytes = sha256.ComputeHash(keyData);
         return Convert.ToHexString(bytes);
     }

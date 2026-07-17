@@ -174,6 +174,18 @@
                     </ScrollContainer>
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical">
+                    <ScrollContainer VerticalExpand="True">
+                        <BoxContainer Orientation="Vertical">
+                            <RichTextLabel Name="RegulationAppearanceInfo" HorizontalExpand="True" Margin="10 10 10 0" />
+                            <!-- Hair -->
+                            <BoxContainer Margin="10" Orientation="Horizontal">
+                                <humanoid:SingleMarkingPicker Name="RegulationHairStylePicker" Category="Hair" />
+                                <humanoid:SingleMarkingPicker Name="RegulationFacialHairPicker" Category="FacialHair" />
+                            </BoxContainer>
+                        </BoxContainer>
+                    </ScrollContainer>
+                </BoxContainer>
+                <BoxContainer Orientation="Vertical">
                     <TabContainer Name="InsurgencyTabs" VerticalExpand="True" StyleClasses="CrtTabContainer">
                         <BoxContainer Orientation="Vertical">
                             <ScrollContainer VerticalExpand="True">

@@ -66,7 +66,9 @@ public sealed partial class LinkAccountManager : IPostInjectInit
             ghostColor = new Robust.Shared.Maths.Color(sysColor.R, sysColor.G, sysColor.B, sysColor.A);
         }
 
-        _connected[player.UserId] = new SharedRMCPatronFull(sharedTier, linked, ghostColor, lobbyMessage, shoutouts);
+        var connected = new SharedRMCPatronFull(sharedTier, linked, ghostColor, lobbyMessage, shoutouts);
+        _connected[player.UserId] = connected;
+        PatronUpdated?.Invoke((player.UserId, connected));
     }
 
     private void FinishLoad(ICommonSession player)

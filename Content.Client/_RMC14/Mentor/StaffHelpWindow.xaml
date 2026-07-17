@@ -1,19 +1,19 @@
 <controls:StaffHelpWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Mentor"
-    Title="Admin and Mentor Help">
+    Title="{Loc 'rmc-staff-help-window-title'}">
     <PanelContainer StyleClasses="CrtPanel" HorizontalExpand="True" VerticalExpand="True">
         <BoxContainer Orientation="Vertical" Margin="8" SeparationOverride="8">
             <PanelContainer StyleClasses="CrtInsetPanel" HorizontalExpand="True">
                 <BoxContainer Orientation="Vertical" Margin="8 6" SeparationOverride="5">
-                    <RichTextLabel Text="For reporting issues with another player to an admin, or asking about the rules" />
-                    <Button Name="AdminHelpButton" Access="Public" Text="Admin Help" />
+                    <RichTextLabel Text="{Loc 'rmc-staff-help-admin-description'}" />
+                    <Button Name="AdminHelpButton" Access="Public" Text="{Loc 'rmc-staff-help-admin-button'}" />
                 </BoxContainer>
             </PanelContainer>
             <PanelContainer StyleClasses="CrtInsetPanel" HorizontalExpand="True">
                 <BoxContainer Orientation="Vertical" Margin="8 6" SeparationOverride="5">
-                    <RichTextLabel Text="For asking questions about the game" />
-                    <Button Name="MentorHelpButton" Access="Public" Text="Mentor Help" />
+                    <RichTextLabel Text="{Loc 'rmc-staff-help-mentor-description'}" />
+                    <Button Name="MentorHelpButton" Access="Public" Text="{Loc 'rmc-staff-help-mentor-button'}" />
                 </BoxContainer>
             </PanelContainer>
         </BoxContainer>

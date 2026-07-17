@@ -6620,5 +6620,464 @@
   id: 456
   time: '2026-07-12T09:24:51.0000000+00:00'
   url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1584
+- author: troytroy400
+  changes:
+  - message: USCM gear is now camo conforming!
+    type: Add
+  - message: Added a "Pin scream to hotbar" option under Settings > CMU to let players
+      opt back into having the scream emote pinned to their hotbar. 1984 has been
+      removed (for now).
+    type: Add
+  - message: Wired HelmetAccessory, OuterClothingAccessory and UniformAccessory rendering
+      into ItemCamouflageVisualizerSystem so helmet garb, armor components and ponchos
+      properly re-texture on camo change.
+    type: Code
+  id: 457
+  time: '2026-07-12T12:37:50.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1585
+- author: TheHellFireo
+  changes:
+  - message: Distress Signal now announces one minute before round start whether any
+      round-start survivors are scheduled to spawn and how many.
+    type: Add
+  id: 458
+  time: '2026-07-12T13:00:05.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1586
+- author: TheHellFireo
+  changes:
+  - message: Added W buttons to xeno chat messages that let xenonids watch the sender.
+    type: Add
+  id: 459
+  time: '2026-07-12T13:23:51.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1587
+- author: TheHellFireo
+  changes:
+  - message: Added pre-round balance feedback prompts for specialist weapons, xenonids,
+      and current map/mode combinations.
+    type: Add
+  - message: Added a `ratingstats` dashboard for viewing aggregated community balance
+      feedback.
+    type: Add
+  id: 460
+  time: '2026-07-12T14:09:24.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1589
+- author: TheHellFireo
+  changes:
+  - message: Fixed high decal counts causing severe server lag.
+    type: Fix
+  id: 461
+  time: '2026-07-12T14:17:37.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1590
+- author: troytroy400
+  changes:
+  - message: Michael Bay has been conscripted to work on CMU. Explosions and firearms
+      now have screenshake. Both can be disabled/tweaked in accessibility settings.
+    type: Add
+  id: 462
+  time: '2026-07-12T15:42:26.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1592
+- author: Sniperzero112
+  changes:
+  - message: Knuckledusters built into WY PMC Gloves
+    type: Add
+  - message: SGO Medical HUD Element
+    type: Tweak
+  id: 463
+  time: '2026-07-12T15:47:32.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1593
+- author: troytroy400
+  changes:
+  - message: LOOC renamed to LHelp
+    type: Tweak
+  - message: LOOC has been renamed to LHELP. Rule changes now dictate LHelp (formerly
+      LOOC) can only be used for requesting/giving help. This is being done to combat
+      OOCfesting issues and hopefully leave the immersion unhampered.
+    type: Admin
+  id: 464
+  time: '2026-07-12T15:48:33.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1583
+- author: NileDeveloper
+  changes:
+  - message: Bug-161 Runechat does not sanitize markup from input
+    type: Fix
+  id: 465
+  time: '2026-07-12T19:06:30.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1594
+- author: troytroy400
+  changes:
+  - message: Gas Masks have been moved to their own section in the equipment vendor
+      and have a new item, the gas mask bag.
+    type: Add
+  - message: WPDP is now available for all factions in requisitions.
+    type: Add
+  - message: IFAKs are now logically stocked.
+    type: Tweak
+  - message: Adds missing medical equipment to equipment vendors.
+    type: Fix
+  id: 466
+  time: '2026-07-12T19:11:02.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1597
+- author: ScorchFollower
+  changes:
+  - message: Re-sprited Drone Operator's drone to be more aligned with CM's art style.
+    type: Tweak
+  id: 467
+  time: '2026-07-12T21:31:25.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1599
+- author: NileDeveloper
+  changes:
+  - message: Bug 180, issue with set words turning into te format for the hexcolor
+    type: Fix
+  id: 468
+  time: '2026-07-13T02:11:07.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1601
+- author: troytroy400
+  changes:
+  - message: Added the M34E1 Armored Engineering Vehicle. An alternative selection
+      to the APC, it is unarmed but incredibly good at clearing enemy fortifications.
+    type: Add
+  - message: Removed duplicate vehicle entries from the lift console.
+    type: Remove
+  - message: UPP vehicles in the lift console now use lore accurate names.
+    type: Fix
+  id: 469
+  time: '2026-07-13T10:09:30.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1603
+- author: murdocstarsim
+  changes:
+  - message: Provost Offices come to deliver new SOP, UCMJ and Small Highroleplay
+      rule changes.
+    type: Add
+  - message: Provost Marshals have removed the line mentioning ALL military must abide
+      by SOP & UCMJ. Now only the command must abide by it (MP's can still get you!)
+      - By Twinkle.
+    type: Admin
+  - message: Provost Marshals have changed the High Roleplay Rules line mentioning
+      Command, Medical, Logistics, etc are not to deploy, to they must follow deployment
+      regulations and ensure their department is staffed before engaging in deployment.
+    type: Admin
+  - message: CMP was pretty annoyed seeing LO's deploy, now. LO, CMP & CMO are now
+      specifically stated they are to remain on the ship at all times.
+    type: Tweak
+  - message: APOLLO has noted a spelling error, 06 changed to O6 in Command regulations.
+    type: Tweak
+  - message: 'High Command have now removed the command section that stated: "All
+      Officers have the right to deploy to the frontline" because not all of you do.'
+    type: Remove
+  - message: IOs have been getting up to some dubious behaviour, and so, high command
+      has removed command staff withdrawing when a member of command has become permanently
+      deceased, meaning a dead IO won't prevent deployment of other officers.
+    type: Remove
+  - message: Provost enforcers have expanded upon our SOP's for an easier reading
+      process. All deployments are now in their own section.
+    type: Add
+  - message: Provost Marshals have heard the complaints; appeals take far too long
+      in insurgency. Appeals are now split between Military and Civilian. Military
+      appeals are the same process, vocal, recorded CMP, Adjutant & Commander Only.
+      Civilians are written and can be handled by any member of the command staff.
+    type: Tweak
+  - message: Provost enforcers continue to work on making our SOP's easier to read...
+      Vehicle regulations now have their own section to de-clutter the "Equipment
+      & Personnel" guidebook entry.
+    type: Add
+  - message: Our IO's haven't been dubious enough and need to get up to some more
+      mischief. High command has added that IOs now have a clause exempting them from
+      needing to stay near other marines; this is due to their covert nature, often
+      requiring them to be alone.
+    type: Tweak
+  - message: High command is tired of seeing privates being selected as squad leaders
+      over corporals. Squad leader status, when needing to be transferred, should
+      now be transferred to the highest-ranking member in that squad.
+    type: Add
+  - message: CMP has gotten annoyed, and in fear of his wrath, high command has renamed
+      DASO to DAS, disrespecting a superior, no longer just officers.
+    type: Tweak
+  - message: Provost enforcers work even more diligently. SOP section now has text
+      links to the new sections.
+    type: Add
+  - message: High command is tired of poor privates being unable to understand orders
+      on the radio because they don't speak the same language. Use of language has
+      been updated to include all military traffic on radio frequencies, to use the
+      unit's primary language
+    type: Tweak
+  id: 470
+  time: '2026-07-13T21:30:00.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1566
+- author: IMGXKILLER
+  changes:
+  - message: The Geneva Conventions of 12th August 2106
+    type: Add
+  - message: WICH
+    type: Remove
+  id: 471
+  time: '2026-07-13T22:23:53.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1598
+- author: HolySSSS
+  changes:
+  - message: Simple alcohol brewing expansion for the low price of suspense of disbelief.
+    type: Add
+  - message: Removed the black goo requirement in several alcohol recipes.
+    type: Remove
+  - message: Ingredients Vendor (a.k.a Galley Auxilliary) now includes 14 grapes and
+      14 berries.
+    type: Add
+  id: 472
+  time: '2026-07-14T00:21:05.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1606
+- author: maertayn
+  changes:
+  - message: big brother is watching your mentor helps
+    type: Admin
+  id: 473
+  time: '2026-07-14T04:04:42.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1607
+- author: troytroy400
+  changes:
+  - message: The LTB cannon is back on the menu for the tank. It has been heavily
+      nerfed in terms of damage/fire rate and must now have each round loaded one
+      at a time after firing.
+    type: Add
+  - message: The tank autocannon has been given a slight firerate buff to make it
+      a more viable option.
+    type: Tweak
+  - message: the retractable ladder now has its own unique sprite made by scorchfollower.
+    type: Tweak
+  id: 474
+  time: '2026-07-14T04:28:37.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1608
+- author: troytroy400
+  changes:
+  - message: Added the GOVFOR Vehicle Commander job.
+    type: Add
+  - message: Added the GOVFOR Radio Traffic Operator job.
+    type: Add
+  - message: Added the GOVFOR Nurse job.
+    type: Add
+  - message: Added the GOVFOR Engineering Technician job.
+    type: Add
+  - message: Added an Engineering Staff vendor for Engineering Officer and Engineering
+      Technician.
+    type: Add
+  - message: Added a super PACAM generator + required fuel to the USS Bush along with
+      the new Engineering Staff vendor.
+    type: Add
+  - message: Combat Technician's rank set to E1 -> E2 at 10h.
+    type: Tweak
+  - message: Automatic Rifleman's rank set to E1 -> E2 at 10h.
+    type: Tweak
+  - message: Corpsman's rank set to E2.
+    type: Tweak
+  - message: Platoon Commander's rank set to O4 -> O5 at 50h.
+    type: Tweak
+  - message: Vehicle Crewman's rank set to E4 -> E5 at 10h.
+    type: Tweak
+  - message: Military Policeman's rank set to E4 -> E5 at 10h -> E6 at 24h.
+    type: Tweak
+  - message: Technician renamed to Logistics Technician.
+    type: Tweak
+  - message: Drone Operator's rank set to E5 -> E6 at 10h.
+    type: Tweak
+  - message: DCC's rank set to E5 -> E6 at 10h.
+    type: Tweak
+  - message: Advisor's rank set to E6 -> E7 at 10h -> E8 at 20h -> E8E at 30h -> E9
+      at 40h -> E9E at 50h.
+    type: Tweak
+  - message: Renamed "Technician" to "Logistics Technician".
+    type: Tweak
+  - message: Gave GOVFOR medical officer pharmacist as an alternate loadout ID option.
+    type: Tweak
+  - message: Renamed "Doctor" to "Medical Officer".
+    type: Tweak
+  - message: Reworked Engineering Officer and Logistics Officer starting gear to be
+      uniform with the LTs/ETs.
+    type: Tweak
+  - message: Fixed the K92 Maintenance Jack and gave it the vehicle servicing tool
+      quality.
+    type: Fix
+  id: 475
+  time: '2026-07-14T08:06:11.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1611
+- author: troytroy400
+  changes:
+  - message: Added dirt mound barricades that can be thrown up with just a dirt filled
+      entrenching tool on any tile.
+    type: Add
+  - message: Added the bangalore demolition charge. A much more powerful (and mostly
+      silent) C4 charge that arms itself when placed on the ground and detonates a
+      short time later. Available in CT vendors.
+    type: Add
+  - message: Requisitions now has a small amount of every material available, along
+      with a large supply of the new HESCO kits.
+    type: Add
+  - message: CT point purchase prices have been lowered to account for new content
+      they can take.
+    type: Tweak
+  - message: CTs now get a free full size shovel in their kit.
+    type: Tweak
+  - message: HESCOs have build states now and can be assembled using a HESCO kit,
+      which can be found in req or in CT vendors.
+    type: Tweak
+  - message: Full size shovels now have a 10% less time doafter buff for all actions
+      involving a shovel.
+    type: Tweak
+  id: 476
+  time: '2026-07-14T12:10:54.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1614
+- author: MACMAN2003
+  changes:
+  - message: Weyland-Yutani security forces can now build better barricades alongside
+      building better worlds.
+    type: Tweak
+  id: 477
+  time: '2026-07-14T14:08:11.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1609
+- author: JaSeNeSaJ
+  changes:
+  - message: 'Sheperds'': Deeper river'
+    type: Add
+  - message: 'Sheperds'': 2nd specimen chamber'
+    type: Add
+  - message: 'Sheperds'': Phoron & Pill bottles boxes'
+    type: Add
+  - message: Water overlay that causes Asphyxiation damage to non-xenos/synths/carp
+    type: Add
+  - message: Strata platform style multi-z stairs
+    type: Add
+  id: 478
+  time: '2026-07-14T20:10:32.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1615
+- author: Crime481
+  changes:
+  - message: Port Nereid has had a mix-up for the consoles used for the body scanners.
+      Engineering staff has resolved that issue, now the body scanners are usable.
+    type: Fix
+  - message: Port Nereid had operating tables in places of autodoc pods due to budget
+      issues, the issue has been resolved. Now, the autodocs are usable.
+    type: Fix
+  - message: In the military medbay closet room on Hope's Retreat after a routine
+      inventory check, the stack of plasteel has been swapped for a stack of glass,
+      as intended. Now, you can dump all three stacks of materials in that closet
+      room into your local medilathe.
+    type: Tweak
+  - message: Fixed the gas mask pouch being stuck in closed state while empty.
+    type: Fix
+  id: 479
+  time: '2026-07-14T20:11:06.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1613
+- author: KriegersMustDie
+  changes:
+  - message: CMO stamp.
+    type: Add
+  - message: Ambassadors get more stuff and cheaper stuff.
+    type: Tweak
+  - message: Officers no longer throw their all **important** stamps on the floor
+      of the Bush.
+    type: Fix
+  id: 480
+  time: '2026-07-14T20:34:27.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1617
+- author: TheHellFireo
+  changes:
+  - message: Hands and feet can now be selected for fracture, internal bleeding, and
+      eschar surgeries.
+    type: Fix
+  - message: Weapons with two-point slings now use normal throwing physics.
+    type: Fix
+  - message: Fully repaired synthetics now return to an alive state after defibrillation
+      instead of remaining critical.
+    type: Fix
+  id: 481
+  time: '2026-07-15T00:04:52.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1619
+- author: murdocstarsim
+  changes:
+  - message: APOLLO has noted errors with new SOP's not appearing in the guidebook;
+      the issue has been fixed, and now deployments and vehicles should appear in
+      the guidebook under SOP.
+    type: Fix
+  id: 482
+  time: '2026-07-15T03:08:20.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1621
+- author: JaSeNeSaJ
+  changes:
+  - message: 'Sheperds'': Prevent water theft via shuttle'
+    type: Fix
+  id: 483
+  time: '2026-07-15T04:12:50.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1623
+- author: troytroy400
+  changes:
+  - message: Humans now gasp when they have asphyxiation damage.
+    type: Add
+  - message: Added all variants of the UPP van (armed, transport, logistics, MP and
+      medical) to the vehicle lift console.
+    type: Add
+  - message: Duplicate VTOL entries removed.
+    type: Fix
+  - message: Multiple vehicles have had their names updated to be in-line with the
+      lore.
+    type: Fix
+  - message: Welding fuel containers now explode with the proper explosion effects
+      and hurt a decent bit more.
+    type: Fix
+  id: 484
+  time: '2026-07-15T04:14:06.0000000+00:00'
+  url: https://github.com/AU-14/ColonialMarinesUniverse/pull/1625
+- author: TheMaiji
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0432\u0435\u0441\u0435\u043B\
+      \u044C\u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430!"
+    type: Map
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0434\u043B\u044F\
+      \ \u0430\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\
+      \u043E\u0432!"
+    type: Admin
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0432 \u043A\
+      \u043E\u0434\u0435 \u0434\u043B\u044F \u043A\u043E\u043D\u0442\u0440\u0438\u0431\
+      \u044C\u044E\u0442\u043E\u0440\u043E\u0432!"
+    type: Code
+  id: 485
+  time: '2026-07-15T13:38:40.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/322
+- author: TheMaiji
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\u0441\
+      \u0435\u043B\u044C\u0435!"
+    type: Add
+  - message: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E \u0432\u0435\u0441\u0435\u043B\
+      \u044C\u0435!"
+    type: Remove
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u043E \u0432\u0435\u0441\u0435\
+      \u043B\u044C\u0435!"
+    type: Tweak
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043E \u0432\u0435\
+      \u0441\u0435\u043B\u044C\u0435!"
+    type: Fix
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043A\u0430\u0440\u0442\
+      \u0430!"
+    type: Map
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0434\u043B\u044F\
+      \ \u0430\u0434\u043C\u0438\u043D\u0438\u0441\u0442\u0440\u0430\u0442\u043E\u0440\
+      \u043E\u0432!"
+    type: Admin
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u0435 \u0432 \u043A\
+      \u043E\u0434\u0435 \u0434\u043B\u044F \u043A\u043E\u043D\u0442\u0440\u0438\u0431\
+      \u044C\u044E\u0442\u043E\u0440\u043E\u0432!"
+    type: Code
+  id: 486
+  time: '2026-07-15T14:25:51.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/323
 Name: CMU
 Order: -1

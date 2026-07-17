@@ -1,4 +1,4 @@
-- type: guideEntry
+﻿- type: guideEntry
   parent: RMC
   id: RMCOverview
   name: Обзор правил
@@ -20,14 +20,14 @@
 - type: guideEntry
   parent: RMC
   id: AU14RulesGeneral
-  name: Общие правила
+  name: Основные правила
   priority: 2
   text: "/ServerInfo/Guidebook/_AU14/Rules/AU14GeneralRules.xml"
 
 - type: guideEntry
   parent: RMC
   id: AU14RulesRoleplay
-  name: Правила отыгрыша
+  name: Правила ролевой игры
   priority: 3
   text: "/ServerInfo/Guidebook/_AU14/Rules/AU14RoleplayRules.xml"
   children:
@@ -63,27 +63,27 @@
 - type: guideEntry
   parent: RMC
   id: AU14GamemodeRulesForceOnForce
-  name: Правила режима Силы против сил
+  name: Правила режима «Силы против сил»
   priority: 7
   text: "/ServerInfo/Guidebook/_AU14/Rules/Gamemodes/AU14GamemodeRulesForceOnForce.xml"
 
 - type: guideEntry
   parent: RMC
   id: AU14GamemodeRulesDistressSignal
-  name: Правила режима Сигнал бедствия
+  name: Правила режима «Сигнал бедствия»
   priority: 8
   text: "/ServerInfo/Guidebook/_AU14/Rules/Gamemodes/AU14GamemodeRulesDistressSignal.xml"
 
 - type: guideEntry
   parent: RMC
   id: AU14GamemodeRulesColonyFall
-  name: Правила режима Падение колонии
+  name: Правила режима «Падение колонии»
   priority: 9
   text: "/ServerInfo/Guidebook/_AU14/Rules/Gamemodes/AU14GamemodeRulesColonyFall.xml"
 
 - type: guideEntry
   parent: RMC
   id: AU14GamemodeRulesPrometheus
-  name: Правила режима Прометей
+  name: Правила режима «Прометей»
   priority: 10
   text: "/ServerInfo/Guidebook/_AU14/Rules/Gamemodes/AU14GamemodeRulesPrometheus.xml"

@@ -630,6 +630,184 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.ToTable("blacklist", (string)null);
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CMUBalanceRatingPoll", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("cmu_balance_rating_polls_id");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("closed_at");
+
+                    b.Property<Guid?>("CreatedById")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("created_by_id");
+
+                    b.Property<string>("Metric")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("metric");
+
+                    b.Property<DateTime>("OpenedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("opened_at");
+
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.Property<string>("Target")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("target");
+
+                    b.Property<string>("TargetId")
+                        .IsRequired()
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("target_id");
+
+                    b.HasKey("Id")
+                        .HasName("PK_cmu_balance_rating_polls");
+
+                    b.HasIndex("CreatedById")
+                        .HasDatabaseName("IX_cmu_balance_rating_polls_created_by_id");
+
+                    b.HasIndex("OpenedAt")
+                        .HasDatabaseName("IX_cmu_balance_rating_polls_opened_at");
+
+                    b.HasIndex("RoundId")
+                        .HasDatabaseName("IX_cmu_balance_rating_polls_round_id");
+
+                    b.HasIndex("Target", "TargetId", "Metric")
+                        .HasDatabaseName("IX_cmu_balance_rating_polls_target_target_id_metric");
+
+                    b.ToTable("cmu_balance_rating_polls", null, t =>
+                        {
+                            t.HasCheckConstraint("CMUBalanceRatingMapMetric", "target <> 'Map' OR metric = 'Fun'");
+
+                            t.HasCheckConstraint("CMUBalanceRatingPollMetric", "metric IN ('Power', 'Fun')");
+
+                            t.HasCheckConstraint("CMUBalanceRatingPollTarget", "target IN ('Weapon', 'Xeno', 'Map')");
+
+                            t.HasCheckConstraint("CMUBalanceRatingPollTimes", "closed_at IS NULL OR closed_at >= opened_at");
+                        });
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CMUBalanceRatingResponse", b =>
+                {
+                    b.Property<long>("PollId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("poll_id");
+
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_id");
+
+                    b.Property<byte>("Rating")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("rating");
+
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("recorded_at");
+
+                    b.HasKey("PollId", "PlayerId")
+                        .HasName("PK_cmu_balance_rating_responses");
+
+                    b.HasIndex("PlayerId")
+                        .HasDatabaseName("IX_cmu_balance_rating_responses_player_id");
+
+                    b.HasIndex("RecordedAt")
+                        .HasDatabaseName("IX_cmu_balance_rating_responses_recorded_at");
+
+                    b.ToTable("cmu_balance_rating_responses", null, t =>
+                        {
+                            t.HasCheckConstraint("CMUBalanceRatingResponseValue", "rating >= 1 AND rating <= 5");
+                        });
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CMURoundOutcome", b =>
+                {
+                    b.Property<int>("RoundId")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("round_id");
+
+                    b.Property<int>("DurationSeconds")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("duration_seconds");
+
+                    b.Property<string>("GovforPlatoonId")
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("govfor_platoon_id");
+
+                    b.Property<string>("OpforPlatoonId")
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("opfor_platoon_id");
+
+                    b.Property<string>("Outcome")
+                        .IsRequired()
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("outcome");
+
+                    b.Property<string>("PlanetId")
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("planet_id");
+
+                    b.Property<int>("PlayerCount")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("player_count");
+
+                    b.Property<string>("PresetId")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("preset_id");
+
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("recorded_at");
+
+                    b.Property<string>("SelectedThreatId")
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("selected_threat_id");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasMaxLength(96)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("source");
+
+                    b.Property<string>("Winner")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("winner");
+
+                    b.HasKey("RoundId")
+                        .HasName("PK_cmu_round_outcomes");
+
+                    b.HasIndex("PresetId")
+                        .HasDatabaseName("IX_cmu_round_outcomes_preset_id");
+
+                    b.HasIndex("RecordedAt")
+                        .HasDatabaseName("IX_cmu_round_outcomes_recorded_at");
+
+                    b.HasIndex("SelectedThreatId")
+                        .HasDatabaseName("IX_cmu_round_outcomes_selected_threat_id");
+
+                    b.ToTable("cmu_round_outcomes", (string)null);
+                });
+
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.Property<int>("Id")
@@ -950,6 +1128,22 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("pref_unavailable");
 
+                    b.Property<string>("RegulationFacialHairColor")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("regulation_facial_hair_color");
+
+                    b.Property<string>("RegulationFacialHairName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("regulation_facial_hair_name");
+
+                    b.Property<string>("RegulationHairColor")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("regulation_hair_color");
+
+                    b.Property<string>("RegulationHairName")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("regulation_hair_name");
+
                     b.Property<string>("Sex")
                         .IsRequired()
                         .HasColumnType("TEXT")
@@ -1083,83 +1277,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.HasIndex("ProfileId");
 
                     b.ToTable("profile_role_loadout", (string)null);
-                });
-
-            modelBuilder.Entity("Content.Server.Database.CMURoundOutcome", b =>
-                {
-                    b.Property<int>("RoundId")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("round_id");
-
-                    b.Property<int>("DurationSeconds")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("duration_seconds");
-
-                    b.Property<string>("GovforPlatoonId")
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("govfor_platoon_id");
-
-                    b.Property<string>("OpforPlatoonId")
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("opfor_platoon_id");
-
-                    b.Property<string>("Outcome")
-                        .IsRequired()
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("outcome");
-
-                    b.Property<string>("PlanetId")
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("planet_id");
-
-                    b.Property<int>("PlayerCount")
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("player_count");
-
-                    b.Property<string>("PresetId")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("preset_id");
-
-                    b.Property<DateTime>("RecordedAt")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("recorded_at");
-
-                    b.Property<string>("SelectedThreatId")
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("selected_threat_id");
-
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasMaxLength(96)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("source");
-
-                    b.Property<string>("Winner")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("TEXT")
-                        .HasColumnName("winner");
-
-                    b.HasKey("RoundId")
-                        .HasName("PK_cmu_round_outcomes");
-
-                    b.HasIndex("PresetId")
-                        .HasDatabaseName("IX_cmu_round_outcomes_preset_id");
-
-                    b.HasIndex("RecordedAt")
-                        .HasDatabaseName("IX_cmu_round_outcomes_recorded_at");
-
-                    b.HasIndex("SelectedThreatId")
-                        .HasDatabaseName("IX_cmu_round_outcomes_selected_threat_id");
-
-                    b.ToTable("cmu_round_outcomes", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCChatBans", b =>
@@ -2271,6 +2388,61 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.CMUBalanceRatingPoll", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .HasConstraintName("FK_cmu_balance_rating_polls_player_created_by_id");
+
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithMany()
+                        .HasForeignKey("RoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_cmu_balance_rating_polls_round_round_id");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("Round");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CMUBalanceRatingResponse", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_cmu_balance_rating_responses_player_player_id");
+
+                    b.HasOne("Content.Server.Database.CMUBalanceRatingPoll", "Poll")
+                        .WithMany("Responses")
+                        .HasForeignKey("PollId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_cmu_balance_rating_responses_cmu_balance_rating_polls_poll_id");
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Poll");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CMURoundOutcome", b =>
+                {
+                    b.HasOne("Content.Server.Database.Round", "Round")
+                        .WithOne()
+                        .HasForeignKey("Content.Server.Database.CMURoundOutcome", "RoundId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_cmu_round_outcomes_round_round_id");
+
+                    b.Navigation("Round");
+                });
+
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>
                 {
                     b.HasOne("Content.Server.Database.Server", "Server")
@@ -2400,18 +2572,6 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasConstraintName("FK_profile_role_loadout_profile_profile_id");
 
                     b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Content.Server.Database.CMURoundOutcome", b =>
-                {
-                    b.HasOne("Content.Server.Database.Round", "Round")
-                        .WithOne()
-                        .HasForeignKey("Content.Server.Database.CMURoundOutcome", "RoundId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_cmu_round_outcomes_round_round_id");
-
-                    b.Navigation("Round");
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCChatBans", b =>
@@ -2934,6 +3094,11 @@ namespace Content.Server.Database.Migrations.Sqlite
                     b.Navigation("Admins");
 
                     b.Navigation("Flags");
+                });
+
+            modelBuilder.Entity("Content.Server.Database.CMUBalanceRatingPoll", b =>
+                {
+                    b.Navigation("Responses");
                 });
 
             modelBuilder.Entity("Content.Server.Database.ConnectionLog", b =>

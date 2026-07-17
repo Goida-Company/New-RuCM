@@ -28,6 +28,9 @@ au14-job-description-clfcellleader = Возглавьте своих людей 
 au14-job-prefix-clfcellleader = ЛИД
 AU14JobCLFCellLeader = Лидер ячейки КОФ
 
+AU14JobCLFSapper = Сапёр КОФ
+
+# Missing entries synced from en-US
 au14-job-name-clfguerilla-alt = Боец КОФ (сторонний)
 
 au14-ghost-role-insurgent-reinforcements-name = Подкрепление повстанцев

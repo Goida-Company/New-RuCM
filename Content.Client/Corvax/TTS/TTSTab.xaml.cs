@@ -1,6 +1,11 @@
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Content.Client.Administration.Managers;
+using Content.Client._RMC14.UserInterface;
 using Content.Shared.Corvax.TTS;
+using Content.Shared.Administration;
 using Content.Shared.Preferences;
 using Content.Shared.Humanoid;
 using Content.Client.Stylesheets;
@@ -16,6 +21,9 @@ namespace Content.Client.Corvax.TTS;
 public sealed partial class TTSTab : Control
 {
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    [Dependency] private readonly IFileDialogManager _fileDialogManager = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly IClientAdminManager _adminManager = default!;
 
     public event Action<string>? OnVoiceSelected;
     public event Action<string>? OnPreviewRequested;
@@ -25,6 +33,8 @@ public sealed partial class TTSTab : Control
     private Dictionary<string, List<TTSVoicePrototype>> _categorizedVoices = new();
     private string? _selectedVoiceId;
     private string? _selectedCategory;
+    private byte[]? _referenceAudio;
+    private bool _referenceUploadPending;
 
     private static readonly Regex CategoryRegex = new(@"^(.*?)\s*\(([^)]+)\)\s*$", RegexOptions.Compiled);
 
@@ -34,6 +44,209 @@ public sealed partial class TTSTab : Control
         IoCManager.InjectDependencies(this);
 
         SearchEdit.OnTextChanged += OnSearchChanged;
+        ReferenceSpeakerName.OnTextChanged += _ => UpdateReferenceUploadButton();
+        SelectReferenceButton.OnPressed += _ => SelectReferenceFile();
+        UploadReferenceButton.OnPressed += _ => UploadReferenceVoice();
+        var tts = _entityManager.System<TTSSystem>();
+        tts.ReferenceVoiceResultReceived += OnReferenceVoiceResult;
+        tts.ReferenceVoiceCatalogUpdated += OnReferenceVoiceCatalogUpdated;
+        tts.ReferenceVoiceAccessUpdated += OnReferenceVoiceAccessUpdated;
+        tts.ReferenceVoiceDeleteResultReceived += OnReferenceVoiceDeleteResult;
+        _adminManager.AdminStatusUpdated += OnReferenceVoiceAccessUpdated;
+        tts.RequestReferenceVoiceCatalog();
+        OnReferenceVoiceAccessUpdated();
+    }
+
+    [Obsolete("Controls should only be removed from UI tree instead of being disposed")]
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            var tts = _entityManager.System<TTSSystem>();
+            tts.ReferenceVoiceResultReceived -= OnReferenceVoiceResult;
+            tts.ReferenceVoiceCatalogUpdated -= OnReferenceVoiceCatalogUpdated;
+            tts.ReferenceVoiceAccessUpdated -= OnReferenceVoiceAccessUpdated;
+            tts.ReferenceVoiceDeleteResultReceived -= OnReferenceVoiceDeleteResult;
+            _adminManager.AdminStatusUpdated -= OnReferenceVoiceAccessUpdated;
+        }
+
+        base.Dispose(disposing);
+    }
+
+    private async void SelectReferenceFile()
+    {
+        try
+        {
+            await SelectReferenceFileAsync();
+        }
+        catch (Exception)
+        {
+            _referenceAudio = null;
+            ReferenceFileLabel.Text = Loc.GetString("humanoid-profile-editor-reference-voice-no-file");
+            SetReferenceStatus("humanoid-profile-editor-reference-voice-invalid-audio");
+            UpdateReferenceUploadButton();
+        }
+    }
+
+    private async Task SelectReferenceFileAsync()
+    {
+        await using var file = await _fileDialogManager.OpenFile(
+            new FileDialogFilters(new FileDialogFilters.Group("wav")),
+            FileAccess.Read);
+        if (file == null)
+            return;
+
+        _referenceAudio = null;
+        ReferenceFileLabel.Text = Loc.GetString("humanoid-profile-editor-reference-voice-no-file");
+        UpdateReferenceUploadButton();
+
+        if (file.CanSeek && file.Length > CustomTTSVoice.MaxAudioBytes)
+        {
+            SetReferenceStatus("humanoid-profile-editor-reference-voice-file-too-large");
+            return;
+        }
+
+        using var memory = new MemoryStream();
+        var buffer = new byte[81920];
+        while (true)
+        {
+            var read = await file.ReadAsync(buffer);
+            if (read == 0)
+                break;
+
+            if (memory.Length + read > CustomTTSVoice.MaxAudioBytes)
+            {
+                SetReferenceStatus("humanoid-profile-editor-reference-voice-file-too-large");
+                return;
+            }
+
+            memory.Write(buffer, 0, read);
+        }
+
+        var audio = memory.ToArray();
+        if (!CustomTTSVoice.IsValidWaveFile(audio))
+        {
+            SetReferenceStatus("humanoid-profile-editor-reference-voice-invalid-audio");
+            return;
+        }
+
+        _referenceAudio = audio;
+        ReferenceFileLabel.Text = Loc.GetString("humanoid-profile-editor-reference-voice-file-selected");
+        SetReferenceStatus("humanoid-profile-editor-reference-voice-ready");
+        UpdateReferenceUploadButton();
+    }
+
+    private void UploadReferenceVoice()
+    {
+        if (!_entityManager.System<TTSSystem>().CanCreateReferenceVoice)
+        {
+            SetReferenceStatus("humanoid-profile-editor-reference-voice-donor-required");
+            return;
+        }
+
+        var speakerName = ReferenceSpeakerName.Text.Trim();
+        if (_referenceAudio == null || !CustomTTSVoice.IsValidSpeakerName(speakerName))
+        {
+            SetReferenceStatus("humanoid-profile-editor-reference-voice-invalid-name");
+            return;
+        }
+
+        _referenceUploadPending = true;
+        SetReferenceStatus("humanoid-profile-editor-reference-voice-uploading");
+        UpdateReferenceUploadButton();
+        _entityManager.System<TTSSystem>().AddReferenceVoice(speakerName, _referenceAudio);
+    }
+
+    private void OnReferenceVoiceResult(AddReferenceVoiceResponse response)
+    {
+        if (!_referenceUploadPending)
+            return;
+
+        _referenceUploadPending = false;
+        UpdateReferenceUploadButton();
+
+        var statusKey = response.Result switch
+        {
+            AddReferenceVoiceResult.Success => "humanoid-profile-editor-reference-voice-success",
+            AddReferenceVoiceResult.Disabled => "humanoid-profile-editor-reference-voice-disabled",
+            AddReferenceVoiceResult.NotDonor => "humanoid-profile-editor-reference-voice-donor-required",
+            AddReferenceVoiceResult.InvalidName => "humanoid-profile-editor-reference-voice-invalid-name",
+            AddReferenceVoiceResult.InvalidAudio => "humanoid-profile-editor-reference-voice-invalid-audio",
+            AddReferenceVoiceResult.FileTooLarge => "humanoid-profile-editor-reference-voice-file-too-large",
+            AddReferenceVoiceResult.AlreadyExists => "humanoid-profile-editor-reference-voice-already-exists",
+            AddReferenceVoiceResult.RateLimited => "humanoid-profile-editor-reference-voice-rate-limited",
+            _ => "humanoid-profile-editor-reference-voice-api-error",
+        };
+        SetReferenceStatus(statusKey);
+
+        if (response.Result != AddReferenceVoiceResult.Success)
+            return;
+
+        var voiceId = CustomTTSVoice.CreateVoiceId(response.SpeakerName);
+        _selectedVoiceId = voiceId;
+        _selectedCategory = null;
+        SearchEdit.Text = string.Empty;
+        OnVoiceSelected?.Invoke(voiceId);
+        UpdateResults();
+    }
+
+    private void UpdateReferenceUploadButton()
+    {
+        var canCreate = _entityManager.System<TTSSystem>().CanCreateReferenceVoice;
+        UploadReferenceButton.Disabled = !canCreate ||
+                                         _referenceUploadPending ||
+                                         _referenceAudio == null ||
+                                         !CustomTTSVoice.IsValidSpeakerName(ReferenceSpeakerName.Text.Trim());
+        SelectReferenceButton.Disabled = !canCreate || _referenceUploadPending;
+        ReferenceSpeakerName.Editable = canCreate && !_referenceUploadPending;
+        ReferenceAccessLabel.Text = Loc.GetString(canCreate
+            ? "humanoid-profile-editor-reference-voice-donor-access"
+            : "humanoid-profile-editor-reference-voice-donor-required");
+    }
+
+    private void OnReferenceVoiceAccessUpdated()
+    {
+        UpdateReferenceUploadButton();
+        UpdateResults();
+    }
+
+    private void OnReferenceVoiceCatalogUpdated()
+    {
+        UpdateResults();
+    }
+
+    private void OnReferenceVoiceDeleteResult(DeleteReferenceVoiceResponse response)
+    {
+        var statusKey = response.Result switch
+        {
+            DeleteReferenceVoiceResult.Success => "humanoid-profile-editor-reference-voice-delete-success",
+            DeleteReferenceVoiceResult.Forbidden => "humanoid-profile-editor-reference-voice-delete-forbidden",
+            DeleteReferenceVoiceResult.NotFound => "humanoid-profile-editor-reference-voice-delete-not-found",
+            _ => "humanoid-profile-editor-reference-voice-delete-error",
+        };
+        ReferenceStatusLabel.Text = Loc.GetString(statusKey, ("speaker", response.SpeakerName));
+    }
+
+    private void ConfirmDeleteReferenceVoice(string speakerName)
+    {
+        var confirmation = new ConfirmationWindow();
+        confirmation.Setup(
+            Loc.GetString("humanoid-profile-editor-reference-voice-delete-title"),
+            Loc.GetString("humanoid-profile-editor-reference-voice-delete-confirm", ("speaker", speakerName)),
+            Loc.GetString("humanoid-profile-editor-reference-voice-delete"),
+            Loc.GetString("humanoid-profile-editor-reference-voice-delete-cancel"));
+        confirmation.AcceptButton.OnPressed += _ =>
+        {
+            _entityManager.System<TTSSystem>().DeleteReferenceVoice(speakerName);
+            confirmation.Close();
+        };
+        confirmation.DenyButton.OnPressed += _ => confirmation.Close();
+        confirmation.OpenCentered();
+    }
+
+    private void SetReferenceStatus(string localeKey)
+    {
+        ReferenceStatusLabel.Text = Loc.GetString(localeKey);
     }
 
     /// <summary>
@@ -184,9 +397,67 @@ public sealed partial class TTSTab : Control
             VoicesGrid.AddChild(container);
         }
 
+        var customVoiceCount = 0;
+        if (string.IsNullOrEmpty(_selectedCategory))
+        {
+            foreach (var customSpeaker in _entityManager.System<TTSSystem>().ReferenceVoices)
+            {
+                var voiceId = CustomTTSVoice.CreateVoiceId(customSpeaker);
+                if (!string.IsNullOrEmpty(searchText) &&
+                    !customSpeaker.Contains(searchText, StringComparison.OrdinalIgnoreCase) &&
+                    !voiceId.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    continue;
+
+                customVoiceCount++;
+                var container = new BoxContainer
+                {
+                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                    HorizontalExpand = true,
+                    VerticalAlignment = VAlignment.Center,
+                };
+
+                var selectButton = new Button
+                {
+                    Text = Loc.GetString("humanoid-profile-editor-reference-voice-display-name",
+                        ("speaker", customSpeaker)),
+                    ToolTip = voiceId,
+                    HorizontalExpand = true,
+                    StyleClasses = { StyleNano.ButtonOpenRight },
+                };
+                if (voiceId == _selectedVoiceId)
+                    selectButton.AddStyleClass(StyleBase.ButtonCaution);
+                selectButton.OnPressed += _ => OnVoiceSelected?.Invoke(voiceId);
+
+                var previewButton = new Button
+                {
+                    Text = Loc.GetString("humanoid-profile-editor-voice-play"),
+                    MinWidth = 30,
+                    ToolTip = Loc.GetString("humanoid-profile-editor-voice-tooltip-play"),
+                    StyleClasses = { StyleNano.ButtonOpenLeft },
+                };
+                previewButton.OnPressed += _ => OnPreviewRequested?.Invoke(voiceId);
+
+                container.AddChild(selectButton);
+                container.AddChild(previewButton);
+
+                if (_adminManager.HasFlag(AdminFlags.Host))
+                {
+                    var deleteButton = new Button
+                    {
+                        Text = Loc.GetString("humanoid-profile-editor-reference-voice-delete"),
+                        ToolTip = Loc.GetString("humanoid-profile-editor-reference-voice-delete-tooltip"),
+                    };
+                    deleteButton.OnPressed += _ => ConfirmDeleteReferenceVoice(customSpeaker);
+                    container.AddChild(deleteButton);
+                }
+
+                VoicesGrid.AddChild(container);
+            }
+        }
+
         ResultsLabel.Text = Loc.GetString("humanoid-profile-editor-voice-match",
-            ("filtered", _filteredVoices.Count),
-            ("all", _allVoices.Count));
+            ("filtered", _filteredVoices.Count + customVoiceCount),
+            ("all", _allVoices.Count + _entityManager.System<TTSSystem>().ReferenceVoices.Count));
     }
 
     private bool CanUseVoice(TTSVoicePrototype voice)

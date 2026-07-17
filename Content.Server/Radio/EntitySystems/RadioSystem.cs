@@ -91,7 +91,7 @@ public sealed partial class RadioSystem : EntitySystem
             return;
 
         // CMU14
-        var msg = AddGhostFollowButton(args.ChatMsg, args.MessageSource, actor.PlayerSession.Channel);
+        var msg = AddChatActionButtons(args.ChatMsg, args.MessageSource, actor.PlayerSession.Channel);
         _netMan.ServerSendMessage(msg, actor.PlayerSession.Channel);
         // CMU14
     }
@@ -318,14 +318,18 @@ public sealed partial class RadioSystem : EntitySystem
     {
         foreach (var session in Filter.Empty().AddWhereAttachedEntity(HasComp<GhostHearingComponent>).Recipients)
         {
-            _netMan.ServerSendMessage(AddGhostFollowButton(chatMsg, messageSource, session.Channel), session.Channel);
+            _netMan.ServerSendMessage(AddChatActionButtons(chatMsg, messageSource, session.Channel), session.Channel);
         }
     }
 
-    private MsgChatMessage AddGhostFollowButton(MsgChatMessage chatMsg, EntityUid messageSource, INetChannel recipient)
+    private MsgChatMessage AddChatActionButtons(MsgChatMessage chatMsg, EntityUid messageSource, INetChannel recipient)
     {
-        var wrappedMessage = _chatManager.AddGhostFollowButton(
+        var ghostWrappedMessage = _chatManager.AddGhostFollowButton(
             chatMsg.Message.WrappedMessage,
+            messageSource,
+            recipient);
+        var wrappedMessage = _chatManager.AddXenoWatchButton(
+            ghostWrappedMessage,
             messageSource,
             recipient);
 
@@ -337,7 +341,12 @@ public sealed partial class RadioSystem : EntitySystem
             Message = new ChatMessage(chatMsg.Message)
             {
                 WrappedMessage = wrappedMessage,
-                GhostFollowEntity = GetNetEntity(messageSource),
+                GhostFollowEntity = ghostWrappedMessage != chatMsg.Message.WrappedMessage
+                    ? GetNetEntity(messageSource)
+                    : NetEntity.Invalid,
+                XenoWatchEntity = wrappedMessage != ghostWrappedMessage
+                    ? GetNetEntity(messageSource)
+                    : NetEntity.Invalid,
             },
         };
     }

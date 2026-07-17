@@ -35,7 +35,9 @@ public sealed partial class CmuTab : Control
         Control.AddOptionCheckBox(CCVars.ChatGhostFollowButton, ChatGhostFollowButton);
         Control.AddOptionCheckBox(CMUMedicalCCVars.TargetedHealingEnabled, TargetedHealingCheckBox);
         Control.AddOptionCheckBox(CMUMedicalCCVars.UiLessSurgeryEnabled, UiLessSurgeryCheckBox);
+        Control.AddOptionCheckBox(CCVars.CMUScreamOnHotbarEnabled, ScreamOnHotbarCheckBox);
         Control.AddOptionPercentSlider(CMUZLevelsCVars.BlurStrength, ZLevelBlurSlider, scale: OldZLevelBlurStrength);
+        Control.AddOptionPercentSlider(CMUZLevelsCVars.FaintUpperAlpha, FaintLookUpOpacitySlider, 0.05f, 0.80f);
 
         Control.Initialize();
         UpdateCrtUiOptionsVisibility();

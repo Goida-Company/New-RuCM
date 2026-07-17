@@ -34,7 +34,7 @@
     - type: TacticalMapIcon
       icon:
         sprite: /Textures/_AU14/Interface/au14opforjobicons.rsi
-        state: weaponsspecialist
+        state: ws
     - type: CMVendorUser
       id: AU14JobOPFORWeaponsSpecialist
       points: 50

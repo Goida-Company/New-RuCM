@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // Copyright (c) 2026 wray-git
 // SPDX-License-Identifier: AGPL-3.0-only
-using Content.Client.Administration.Managers;
-using Content.Client.Players.PlayTimeTracking;
+using Content.Client._AU14.Administration;
+using Content.Shared._AU14.Administration;
 using Content.Shared._AU14.Construction.CustomConstruction;
+using Content.Client._AU14.ZLevelBuilding;
 using Content.Shared._AU14.ZLevelBuilding;
 using Content.Shared.Popups;
+using Robust.Shared.Input;
+using Robust.Shared.Input.Binding;
 
 namespace Content.Client._AU14.Construction.CustomConstruction;
 
@@ -17,23 +20,15 @@ namespace Content.Client._AU14.Construction.CustomConstruction;
 /// </summary>
 public sealed class CustomConstructionEditorClientSystem : EntitySystem
 {
-    [Dependency] private readonly IClientAdminManager _admin = default!;
-    [Dependency] private readonly JobRequirementsManager _jobRequirements = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly ToolPermissionClientSystem _toolPerms = default!;
 
     /// <summary>
-    /// Whitelist-only "role" that unlocks the editor tools for a trusted non-admin (granted with
-    /// <c>jobwhitelistadd &lt;player&gt; JModEditor</c>). Must match the server's EditorWhitelistJob.
+    /// Client-side pre-check mirroring the server gate: a Host-flagged admin OR a ckey granted this
+    /// specific tool through the Tool Permissions system (which replaced the old JModEditor job
+    /// whitelist). General admin access is intentionally NOT enough. The server always re-validates.
     /// </summary>
-    private const string EditorWhitelistJob = "JModEditor";
-
-    /// <summary>
-    /// Client-side pre-check mirroring the server gate: a Host-flagged admin OR a player holding the
-    /// <see cref="EditorWhitelistJob"/> whitelist. General admin access is intentionally NOT enough. The
-    /// server always re-validates before acting.
-    /// </summary>
-    private bool CanUseEditor() =>
-        _admin.HasFlag(Shared.Administration.AdminFlags.Host) || _jobRequirements.IsWhitelisted(EditorWhitelistJob);
+    private bool CanUseEditor(string tool) => _toolPerms.CanUse(tool);
 
     private ConstructionEditorWindow? _window;
     private EntitySelectorWindow? _selector;
@@ -41,6 +36,11 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     private LatheEditorWindow? _latheWindow;
     private RecipeChooserWindow? _chooser;
     private ZLevelTogglesWindow? _zTogglesWindow;
+    private MassEntitySelectorWindow? _massSelector;
+    private ConstructionEditorWindow? _massEditor;
+    private ZBorderSyncWindow? _zSyncWindow;
+    private bool _zSyncPickActive;
+    private bool _zSyncPickBlacklist;
 
     /// <summary>
     /// Construction recipe ids the local admin hid via the menu's "Remove Item" button THIS session. The
@@ -57,12 +57,148 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
         SubscribeNetworkEvent<OpenCustomTileEditorEvent>(OnOpenTile);
         SubscribeNetworkEvent<OpenCustomLatheEditorEvent>(OnOpenLathe);
         SubscribeNetworkEvent<OpenZLevelTogglesEvent>(OnOpenZLevelToggles);
+        SubscribeNetworkEvent<OpenMassConstructionEditorEvent>(OnOpenMassEditor);
+        SubscribeNetworkEvent<OpenZBorderSyncEvent>(OnOpenZSync);
+
+        CommandBinds.Builder
+            .Bind(EngineKeyFunctions.Use, new PointerInputCmdHandler(OnZSyncPickUse, outsidePrediction: true))
+            .Bind(EngineKeyFunctions.UseSecondary, new PointerInputCmdHandler(OnZSyncPickCancel, outsidePrediction: true))
+            .Register<CustomConstructionEditorClientSystem>();
+    }
+
+    public override void Shutdown()
+    {
+        base.Shutdown();
+        CommandBinds.Unregister<CustomConstructionEditorClientSystem>();
+    }
+
+    /// <summary>Admin Tools > Z-Sync Lists: which walls mirror across z-levels as map borders.</summary>
+    public void OpenZSyncLists()
+    {
+        if (!CanUseEditor(AU14ToolPermissions.ZSync))
+        {
+            _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
+            return;
+        }
+
+        RaiseNetworkEvent(new RequestOpenZBorderSyncEvent());
+    }
+
+    private void OnOpenZSync(OpenZBorderSyncEvent ev)
+    {
+        // The server re-sends the lists after every change; refresh the open window in place.
+        if (_zSyncWindow is { IsOpen: true })
+        {
+            _zSyncWindow.Populate(ev);
+            return;
+        }
+
+        _zSyncWindow = new ZBorderSyncWindow();
+        _zSyncWindow.OnModify += modify => RaiseNetworkEvent(modify);
+        _zSyncWindow.OnPickFromWorld += BeginZSyncPick;
+        _zSyncWindow.OnClose += () => _zSyncWindow = null;
+        _zSyncWindow.Populate(ev);
+        _zSyncWindow.OpenCentered();
+    }
+
+    private void BeginZSyncPick(bool blacklist)
+    {
+        _zSyncPickActive = true;
+        _zSyncPickBlacklist = blacklist;
+        _popup.PopupCursor(Loc.GetString("au-zsync-pick-instruction"), PopupType.Medium);
+    }
+
+    private bool OnZSyncPickUse(in PointerInputCmdHandler.PointerInputCmdArgs args)
+    {
+        if (!_zSyncPickActive || args.State != BoundKeyState.Down)
+            return false;
+
+        if (!args.EntityUid.IsValid() || !EntityManager.EntityExists(args.EntityUid))
+        {
+            _popup.PopupCursor(Loc.GetString("au-zsync-pick-no-entity"), PopupType.MediumCaution);
+            return true;
+        }
+
+        RaiseNetworkEvent(new PickZBorderSyncEntityEvent
+        {
+            Entity = GetNetEntity(args.EntityUid),
+            Blacklist = _zSyncPickBlacklist,
+        });
+        _zSyncPickActive = false;
+        return true;
+    }
+
+    private bool OnZSyncPickCancel(in PointerInputCmdHandler.PointerInputCmdArgs args)
+    {
+        if (!_zSyncPickActive || args.State != BoundKeyState.Down)
+            return false;
+
+        _zSyncPickActive = false;
+        _popup.PopupCursor(Loc.GetString("au-zsync-pick-cancelled"), PopupType.Medium);
+        return true;
+    }
+
+    /// <summary>
+    /// Admin Tools > Mass Entity Editor: pick MANY entities (with ancestor filtering, e.g. everything under
+    /// BaseWall), then fill in ONE recipe that the server applies to each of them as separate entries.
+    /// </summary>
+    public void OpenMassEditor()
+    {
+        if (!CanUseEditor(AU14ToolPermissions.Mass))
+        {
+            _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
+            return;
+        }
+
+        _massSelector?.Close();
+        _massSelector = new MassEntitySelectorWindow();
+        _massSelector.OnEntitiesSelected += ids =>
+        {
+            if (ids.Count > 0)
+                RaiseNetworkEvent(new RequestOpenMassConstructionEditorEvent { ProtoIds = ids });
+        };
+        _massSelector.OnTilesSelected += tileIds =>
+        {
+            if (tileIds.Count == 0)
+                return;
+
+            // Tiles mode: one small cost/placement form, then the server fans it out per tile.
+            var config = new MassTileConfigWindow(tileIds.Count);
+            config.OnSubmit += submit =>
+            {
+                submit.TileIds = tileIds;
+                RaiseNetworkEvent(submit);
+            };
+            config.OpenCentered();
+        };
+        _massSelector.OnClose += () => _massSelector = null;
+        _massSelector.OpenCentered();
+    }
+
+    private void OnOpenMassEditor(OpenMassConstructionEditorEvent ev)
+    {
+        _massEditor?.Close();
+        _massEditor = new ConstructionEditorWindow();
+        var protoIds = ev.ProtoIds;
+        // One editor form; on confirm the single recipe is fanned out server-side to every entity in the batch.
+        _massEditor.OnSubmit += submit => RaiseNetworkEvent(new SubmitMassConstructionEditorEvent
+        {
+            ProtoIds = protoIds,
+            Spawnlist = submit.Spawnlist,
+            Category = submit.Category,
+            Steps = submit.Steps,
+            DeconstructSteps = submit.DeconstructSteps,
+            Health = submit.Health,
+        });
+        _massEditor.OnClose += () => _massEditor = null;
+        _massEditor.Populate(ev.Editor);
+        _massEditor.OpenCentered();
     }
 
     /// <summary>Admin Tools > Z-Level Toggles: ask the server (which re-checks permission) for the map list.</summary>
     public void OpenZLevelToggles()
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.ZLevelToggles))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;
@@ -98,7 +234,7 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     /// <summary>Admin Tools > Tiles Editor: ask the server (which re-checks permission) to open the tile editor.</summary>
     public void OpenTilesEditor()
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.Tiles))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;
@@ -110,7 +246,7 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     /// <summary>Admin Tools > Lathe Editor: ask the server (which re-checks permission) to open the lathe editor.</summary>
     public void OpenLatheEditor()
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.Lathe))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;
@@ -146,7 +282,7 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     /// </summary>
     public void OpenItemsEditor()
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.Construction))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;
@@ -169,7 +305,7 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     /// </summary>
     public void RequestChangeRecipe(string targetEntityId)
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.Construction))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;
@@ -185,7 +321,7 @@ public sealed class CustomConstructionEditorClientSystem : EntitySystem
     /// </summary>
     public void HideRecipe(string constructionId)
     {
-        if (!CanUseEditor())
+        if (!CanUseEditor(AU14ToolPermissions.Construction))
         {
             _popup.PopupCursor(Loc.GetString("construction-menu-editor-not-admin"), PopupType.MediumCaution);
             return;

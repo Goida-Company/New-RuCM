@@ -526,8 +526,7 @@ namespace Content.Server.Ghost
             bool canReturn = false)
         {
             _transformSystem.TryGetMapOrGridCoordinates(targetEntity, out var spawnPosition);
-            // RMC
-            return SpawnGhost(mind, spawnPosition, canReturn, targetEntity);
+            return SpawnGhost(mind, spawnPosition, canReturn);
         }
 
         private bool IsValidSpawnPosition(EntityCoordinates? spawnPosition)
@@ -547,10 +546,8 @@ namespace Content.Server.Ghost
             return true;
         }
 
-        // RMC begin
         public EntityUid? SpawnGhost(Entity<MindComponent?> mind, EntityCoordinates? spawnPosition = null,
-            bool canReturn = false, EntityUid? appearanceSource = null)
-        // RMC end
+            bool canReturn = false)
         {
             if (!Resolve(mind, ref mind.Comp))
                 return null;
@@ -573,12 +570,6 @@ namespace Content.Server.Ghost
 
             var ghost = SpawnAtPosition(GameTicker.ObserverPrototypeName, spawnPosition.Value);
             var ghostComponent = Comp<GhostComponent>(ghost);
-
-            // RMC
-            if (appearanceSource is { } source)
-            {
-                CopyDeathAppearance(source, ghost);
-            }
 
             // Try setting the ghost entity name to either the character name or the player name.
             // If all else fails, it'll default to the default entity prototype name, "observer".
@@ -694,8 +685,7 @@ namespace Content.Server.Ghost
             if (playerEntity != null)
                 _adminLog.Add(LogType.Mind, $"{ToPrettyString(playerEntity.Value):player} ghosted{(!canReturn ? " (non-returnable)" : "")}");
 
-            // RMC
-            var ghost = SpawnGhost((mindId, mind), position, canReturn, playerEntity);
+            var ghost = SpawnGhost((mindId, mind), position, canReturn);
 
             if (ghost == null)
                 return false;

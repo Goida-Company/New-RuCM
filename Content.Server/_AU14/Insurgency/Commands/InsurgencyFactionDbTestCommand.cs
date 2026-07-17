@@ -20,8 +20,8 @@ namespace Content.Server._AU14.Insurgency.Commands;
 public sealed class InsurgencyFactionDbTestCommand : IConsoleCommand
 {
     public string Command => "insforfactiondbtest";
-    public string Description => "Saves, reads back, and deletes a test faction to verify the DB round-trip.";
-    public string Help => "Usage: insforfactiondbtest";
+    public string Description => Loc.GetString("cmd-insforfactiondbtest-desc");
+    public string Help => Loc.GetString("cmd-insforfactiondbtest-help");
 
     public async void Execute(IConsoleShell shell, string argStr, string[] args)
     {
@@ -32,28 +32,30 @@ public sealed class InsurgencyFactionDbTestCommand : IConsoleCommand
         {
             Metadata =
             {
-                Title = "DB Round-Trip Test",
-                Description = "Written by insforfactiondbtest.",
-                RoleplayText = "Delete me if I linger.",
+                Title = Loc.GetString("cmd-insforfactiondbtest-title"),
+                Description = Loc.GetString("cmd-insforfactiondbtest-description"),
+                RoleplayText = Loc.GetString("cmd-insforfactiondbtest-roleplay"),
             },
         };
 
         try
         {
             var id = await db.AddFactionAsync(def, isDefault: true);
-            shell.WriteLine($"Saved test faction with id {id}.");
+            shell.WriteLine(Loc.GetString("cmd-insforfactiondbtest-saved", ("id", id)));
 
             var loaded = await db.GetFactionAsync(id);
             shell.WriteLine(loaded == null
-                ? "ERROR: could not read the faction back."
-                : $"Read back: \"{loaded.Metadata.Title}\" (schema v{loaded.SchemaVersion}).");
+                ? Loc.GetString("cmd-insforfactiondbtest-read-error")
+                : Loc.GetString("cmd-insforfactiondbtest-read", ("title", loaded.Metadata.Title), ("version", loaded.SchemaVersion)));
 
             var deleted = await db.DeleteFactionAsync(id);
-            shell.WriteLine(deleted ? "Deleted the test faction. Round-trip OK." : "ERROR: delete reported no row.");
+            shell.WriteLine(deleted
+                ? Loc.GetString("cmd-insforfactiondbtest-deleted")
+                : Loc.GetString("cmd-insforfactiondbtest-delete-error"));
         }
         catch (Exception e)
         {
-            shell.WriteError($"DB round-trip failed: {e.Message}");
+            shell.WriteError(Loc.GetString("cmd-insforfactiondbtest-failed", ("message", e.Message)));
         }
     }
 }

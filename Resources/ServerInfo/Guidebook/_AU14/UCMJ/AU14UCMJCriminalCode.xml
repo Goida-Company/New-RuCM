@@ -1,0 +1,12 @@
+﻿<Document>
+  # Уголовный кодекс
+
+    Уголовный кодекс определяет преступления и наказания в рамках Единого кодекса военной юстиции. Ниже приведён перечень преступлений, разделённых по степени тяжести.
+
+  ## Разделы
+    - [textlink="Дополнительные преступления" link="AU14UCMJOptionalCrimes"]
+    - [textlink="Незначительные преступления" link="AU14UCMJMinorCrimes"]
+    - [textlink="Тяжкие преступления" link="AU14UCMJMajorCrimes"]
+    - [textlink="Особо тяжкие преступления" link="AU14UCMJCapitalCrimes"]
+    - [textlink="Предупредительные меры" link="AU14UCMJPrecautionaryCharges"]
+</Document>

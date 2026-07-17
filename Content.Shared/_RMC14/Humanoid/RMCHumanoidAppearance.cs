@@ -59,7 +59,7 @@ public sealed partial class RMCHumanoidAppearance : IRMCHumanoidAppearance
     ///     The initial profile and base layers to apply to this humanoid.
     /// </summary>
     [DataField]
-    public ProtoId<HumanoidProfilePrototype>? Initial { get; set; }
+    public ProtoId<HumanoidProfilePrototype>? Initial { get; private set; }
 
     /// <summary>
     ///     Skin color of this humanoid.

@@ -69,6 +69,8 @@ namespace Content.Server.Database
         // AU14 building overhaul: admin-generated construction-menu entries (see AU14ConstructionModel.cs)
         public DbSet<AU14CustomConstructionEntry> AU14CustomConstructionEntries { get; set; } = default!;
         // CMU14
+        public DbSet<CMUBalanceRatingPoll> CMUBalanceRatingPolls { get; set; } = default!;
+        public DbSet<CMUBalanceRatingResponse> CMUBalanceRatingResponses { get; set; } = default!;
         public DbSet<CMURoundOutcome> CMURoundOutcomes { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -177,6 +179,53 @@ namespace Content.Server.Database
 
             modelBuilder.Entity<Round>()
                 .HasIndex(round => round.StartDate);
+
+            modelBuilder.Entity<CMUBalanceRatingPoll>()
+                .HasOne(poll => poll.Round)
+                .WithMany()
+                .HasForeignKey(poll => poll.RoundId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CMUBalanceRatingPoll>()
+                .HasOne(poll => poll.CreatedBy)
+                .WithMany()
+                .HasForeignKey(poll => poll.CreatedById)
+                .HasPrincipalKey(player => player.UserId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<CMUBalanceRatingPoll>().ToTable(table =>
+            {
+                table.HasCheckConstraint(
+                    "CMUBalanceRatingPollTimes",
+                    "closed_at IS NULL OR closed_at >= opened_at");
+                table.HasCheckConstraint(
+                    "CMUBalanceRatingPollTarget",
+                    "target IN ('Weapon', 'Xeno', 'Map')");
+                table.HasCheckConstraint(
+                    "CMUBalanceRatingPollMetric",
+                    "metric IN ('Power', 'Fun')");
+                table.HasCheckConstraint(
+                    "CMUBalanceRatingMapMetric",
+                    "target <> 'Map' OR metric = 'Fun'");
+            });
+
+            modelBuilder.Entity<CMUBalanceRatingResponse>()
+                .HasOne(response => response.Poll)
+                .WithMany(poll => poll.Responses)
+                .HasForeignKey(response => response.PollId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CMUBalanceRatingResponse>()
+                .HasOne(response => response.Player)
+                .WithMany()
+                .HasForeignKey(response => response.PlayerId)
+                .HasPrincipalKey(player => player.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CMUBalanceRatingResponse>().ToTable(table =>
+                table.HasCheckConstraint(
+                    "CMUBalanceRatingResponseValue",
+                    "rating >= 1 AND rating <= 5"));
 
             modelBuilder.Entity<CMURoundOutcome>()
                 .HasOne(outcome => outcome.Round)
@@ -595,6 +644,10 @@ namespace Content.Server.Database
         public string HairColor { get; set; } = null!;
         public string FacialHairName { get; set; } = null!;
         public string FacialHairColor { get; set; } = null!;
+        public string? RegulationHairName { get; set; }
+        public string? RegulationHairColor { get; set; }
+        public string? RegulationFacialHairName { get; set; }
+        public string? RegulationFacialHairColor { get; set; }
         public string EyeColor { get; set; } = null!;
         public string SkinColor { get; set; } = null!;
         public int SpawnPriority { get; set; } = 0;

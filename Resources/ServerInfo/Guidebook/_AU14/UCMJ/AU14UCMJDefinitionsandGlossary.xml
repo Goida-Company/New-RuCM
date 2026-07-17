@@ -1,68 +1,68 @@
 ﻿<Document>
-  # Definitions and Glossary
+  # Определения и глоссарий
 
 
-  ## Prisoner of War (POW)
-    POWs are defined as anyone who is a members of a nation's armed forces or in a militia with all of these four distinctions:
-    - Command structure.
-    - Distinctive signs or uniform.
-    - Carrying arms openly.
-    - Following laws of war.
+  ## Военнопленный (POW)
+    Военнопленным считается лицо, входящее в вооружённые силы государства или ополчение, которое соответствует всем четырём следующим признакам:
+    - Наличие структуры командования.
+    - Наличие отличительных знаков или униформы.
+    - Открытое ношение оружия.
+    - Соблюдение законов войны.
 
-  ## Commander
-    The leader of the faction, interchangeable with the Acting Commander.
+  ## Командир
+    Руководитель фракции. Термин взаимозаменяем с понятием «Исполняющий обязанности Командира».
 
-    ## Adjutant
-May be reffered to as the XO, is the 2nd in command of the operation.
+    ## Адъютант
+Может также называться XO. Является вторым лицом в цепочке командования операции.
 
-  ## Acting Commander
-    The individual acting in place of the Commander holds full command authority and is vested with all powers of the Commander for the duration of their appointment.
+  ## Исполняющий обязанности Командира
+    Лицо, временно исполняющее обязанности Командира, обладает всей полнотой командных полномочий и всеми правами Командира на весь срок назначения.
 
-  ## Command Staff
-    Personnel holding senior leadership positions responsible for planning, oversight, and command of operations, including the Commander and subordinate officers.
+  ## Командный состав
+    Лица, занимающие старшие руководящие должности и отвечающие за планирование, контроль и командование операциями, включая Командира и подчинённых ему офицеров.
 
-  ## Delegated Command
-    The temporary transfer of authority from a superior officer to a subordinate.
+  ## Делегированное командование
+    Временная передача полномочий от старшего офицера подчинённому.
 
-  ## Area of Operations (AO)
-    The designated zone in which operations are being conducted. This is considered anywhere outside of your faction's ship/installation.
+  ## Район проведения операции (AO)
+    Обозначенная зона, в которой проводятся операции. Ею считается любая территория за пределами корабля или объекта вашей фракции.
 
-  ## Hostile Personnel
-    Any individual or group demonstrating intent or capability to inflict harm on personnel, civilians or objectives.
+  ## Враждебные лица
+    Любое лицо или группа, демонстрирующие намерение или способность причинить вред личному составу, гражданским либо целям операции.
 
-  ## Non-Combatant
-    Individuals not actively participating in hostilities, generally civilians.
+  ## Некомбатант
+    Лицо, не принимающее активного участия в боевых действиях; как правило, гражданское лицо.
 
-  ## Protected Persons
-    Civilians, medical personnel, surrendering combatants and any individual otherwise safeguarded under the laws of war.
+  ## Защищённые лица
+    Гражданские, медицинский персонал, сдавшиеся комбатанты и любые другие лица, находящиеся под защитой законов войны.
 
-  ## Lethal Force
-    Force intended or reasonably expected to cause death or serious bodily harm.
+  ## Смертоносная сила
+    Сила, предназначенная для причинения смерти или тяжкого вреда здоровью либо обоснованно способная привести к таким последствиям.
 
-  ## Non-Lethal Force
-    Force intended to incapacitate or compel compliance without causing death. Less-than-lethal weapons that still deal minor amounts of damage such as baton rounds are counted as Non-Lethal force.
+  ## Несмертельная сила
+    Сила, предназначенная для обездвиживания или принуждения к подчинению без причинения смерти. Оружие ограниченного поражения, всё же наносящее небольшой ущерб, например дубинные боеприпасы, считается несмертельным средством.
 
-  ## Secure Area
-    Any location defended by your faction that has at least one full line of fortifications or five or more posted guards.
+  ## Безопасная зона
+    Любая контролируемая вашей фракцией территория, защищённая как минимум одной сплошной линией укреплений либо пятью или более выставленными охранниками.
 
-  ## Personnel
-    All members of the applicable faction.
+  ## Личный состав
+    Все члены соответствующей фракции.
 
-  ## Auxiliary Staff/Support Crew
-    Non combat roles that provide logistical, police, medical, or engineering support.
+  ## Вспомогательный персонал и службы обеспечения
+    Небоевые роли, обеспечивающие логистическую, полицейскую, медицинскую или инженерную поддержку.
 
-  ## Flight Crew
-    Pilots and Dropship Crew Chiefs.
+  ## Лётный состав
+    Пилоты и старшины десантных кораблей.
 
-  ## Third-Party Personnel
-    Individuals or groups not affiliated with the primary factions (OPFOR/GOVFOR/CLF) involved in the operation.
+  ## Представители третьих сторон
+    Лица или группы, не принадлежащие к основным фракциям, участвующим в операции — OPFOR, GOVFOR или CLF.
 
-  ## Combat Information Center (CIC)
-    The command and control hub of a ship or installation.
+  ## Центр боевого управления (CIC)
+    Узел командования и управления кораблём или объектом.
 
-  ## Special Weapon
-    Any weapon not issued to general members of the faction, usually acquired from the special weapons vendor or ASRS.
+  ## Специальное оружие
+    Любое оружие, не выдаваемое рядовым членам фракции. Обычно оно получается из автомата специального вооружения или через ASRS.
 
-  ## Heavy Weapon
-    Any weapon thats does not fire a standard rifle, pistol, or smg round. Or uses non-standard pistol, rifle, or smg magazines, for example box magazines on an L/HMG. This includes weapons that fire High Explosive munitions like rockets or grenades. This does not include HEAP magazines.
+  ## Тяжёлое оружие
+    Любое оружие, которое не использует стандартные винтовочные, пистолетные или пистолет-пулемётные боеприпасы либо применяет нестандартные магазины для таких боеприпасов, например коробчатые магазины лёгких или тяжёлых пулемётов. К тяжёлому также относится оружие, стреляющее осколочно-фугасными боеприпасами, например ракетами или гранатами. Магазины HEAP сами по себе к тяжёлому оружию не относятся.
 </Document>

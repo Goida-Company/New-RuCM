@@ -33,6 +33,11 @@ public sealed partial class PlatoonPrototype : IPrototype
     [DataField("name", required: true)]
     public string Name { get; private set; } = string.Empty;
 
+    // RuMC edit start
+    [DataField("nameLocKey")]
+    public string? NameLocKey { get; private set; }
+    // RuMC edit end
+
     [DataField("lorePrimer")]
     public ProtoId<LorePrimerPrototype>? LorePrimer { get; private set; }
 

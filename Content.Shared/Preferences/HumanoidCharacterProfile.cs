@@ -1150,7 +1150,8 @@ namespace Content.Shared.Preferences
 
             // Corvax-TTS-Start
             prototypeManager.TryIndex<TTSVoicePrototype>(Voice, out var voice);
-            if (voice is null || !CanHaveVoice(voice, sex))
+            if (!CustomTTSVoice.TryGetSpeaker(Voice, out _) &&
+                (voice is null || !CanHaveVoice(voice, sex)))
             {
                 Voice = SharedHumanoidAppearanceSystem.DefaultSexVoice[sex];
             }

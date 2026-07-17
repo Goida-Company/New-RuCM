@@ -27,6 +27,9 @@ namespace Content.Server.Decals
 {
     public sealed partial class DecalSystem : SharedDecalSystem
     {
+        // A serialized decal is substantially larger than a uint ID, so only prefer a replacement when it is clearly smaller.
+        private const int DecalToIdSizeRatio = 8;
+
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IAdminManager _adminManager = default!;
         [Dependency] private IParallelManager _parMan = default!;
@@ -38,7 +41,8 @@ namespace Content.Server.Decals
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private TurfSystem _turf = default!;
 
-        private readonly Dictionary<NetEntity, HashSet<Vector2i>> _dirtyChunks = new();
+        private readonly Dictionary<NetEntity, Dictionary<Vector2i, DecalChunkDelta>> _dirtyChunkDeltas = new();
+        private readonly HashSet<NetEntity> _dirtyGrids = new();
         private readonly Dictionary<ICommonSession, Dictionary<NetEntity, HashSet<Vector2i>>> _previousSentChunks = new();
         private static readonly Vector2 _boundsMinExpansion = new(0.01f, 0.01f);
         private static readonly Vector2 _boundsMaxExpansion = new(1.01f, 1.01f);
@@ -132,22 +136,14 @@ namespace Content.Server.Decals
                     var newChunk = chunkCollection.GetOrNew(chunkIndices);
                     newChunk.Decals[newDecalId] = decal;
                     newComp.DecalIndex[newDecalId] = chunkIndices;
+                    DirtyDecal(ev.Grid, chunkIndices, newChunk, newDecalId, decal);
                     toRemove.Add(oldDecalId);
                 }
 
                 foreach (var oldDecalId in toRemove)
                 {
-                    oldChunk.Decals.Remove(oldDecalId);
-                    oldComp.DecalIndex.Remove(oldDecalId);
+                    RemoveDecalInternal(ev.OldGrid, oldDecalId, out _, oldComp);
                 }
-
-                DirtyChunk(ev.Grid, chunkIndices, chunkCollection.GetOrNew(chunkIndices));
-
-                if (oldChunk.Decals.Count == 0)
-                    oldChunkCollection.Remove(chunkIndices);
-
-                if (toRemove.List?.Count > 0)
-                    DirtyChunk(ev.OldGrid, chunkIndices, oldChunk);
             }
         }
 
@@ -191,13 +187,8 @@ namespace Content.Server.Decals
 
                 foreach (var decalId in toDelete)
                 {
-                    grid.DecalIndex.Remove(decalId);
-                    chunk.Decals.Remove(decalId);
+                    RemoveDecalInternal(args.Entity, decalId, out _, grid);
                 }
-
-                DirtyChunk(args.Entity, indices, chunk);
-                if (chunk.Decals.Count == 0)
-                    grid.ChunkCollection.ChunkCollection.Remove(indices);
             }
         }
 
@@ -284,9 +275,77 @@ namespace Content.Server.Decals
         {
             var id = GetNetEntity(uid);
             chunk.LastModified = _timing.CurTick;
-            if (!_dirtyChunks.ContainsKey(id))
-                _dirtyChunks[id] = new HashSet<Vector2i>();
-            _dirtyChunks[id].Add(chunkIndices);
+            _dirtyGrids.Add(id);
+        }
+
+        protected override void OnDecalRemoved(
+            EntityUid gridId,
+            uint decalId,
+            DecalGridComponent component,
+            Vector2i indices,
+            DecalChunk chunk)
+        {
+            base.OnDecalRemoved(gridId, decalId, component, indices, chunk);
+            QueueDecalRemoval(gridId, indices, chunk, decalId);
+        }
+
+        private DecalChunkDelta GetChunkDelta(EntityUid gridId, Vector2i chunkIndices)
+        {
+            var gridDeltas = _dirtyChunkDeltas.GetOrNew(GetNetEntity(gridId));
+            return gridDeltas.GetOrNew(chunkIndices);
+        }
+
+        private void DirtyDecal(
+            EntityUid gridId,
+            Vector2i chunkIndices,
+            DecalChunk chunk,
+            uint decalId,
+            Decal decal)
+        {
+            DirtyChunk(gridId, chunkIndices, chunk);
+
+            if (!PvsEnabled)
+                return;
+
+            var delta = GetChunkDelta(gridId, chunkIndices);
+            delta.RemovedDecals.Remove(decalId);
+            delta.ModifiedDecals[decalId] = decal;
+        }
+
+        private void QueueDecalRemoval(
+            EntityUid gridId,
+            Vector2i chunkIndices,
+            DecalChunk chunk,
+            uint decalId)
+        {
+            if (!PvsEnabled)
+                return;
+
+            var delta = GetChunkDelta(gridId, chunkIndices);
+            delta.ModifiedDecals.Remove(decalId);
+
+            if (delta.Cleared)
+                return;
+
+            delta.RemovedDecals.Add(decalId);
+            if ((long)delta.RemovedDecals.Count > (long)chunk.Decals.Count * DecalToIdSizeRatio)
+                QueueChunkReplacement(gridId, chunkIndices, chunk);
+        }
+
+        private void QueueChunkReplacement(EntityUid gridId, Vector2i chunkIndices, DecalChunk chunk)
+        {
+            if (!PvsEnabled)
+                return;
+
+            var delta = GetChunkDelta(gridId, chunkIndices);
+            delta.Cleared = true;
+            delta.ModifiedDecals.Clear();
+            delta.RemovedDecals.Clear();
+
+            foreach (var (decalId, decal) in chunk.Decals)
+            {
+                delta.ModifiedDecals.Add(decalId, decal);
+            }
         }
 
         public bool TryAddDecal(string id, EntityCoordinates coordinates, out uint decalId, Color? color = null, Angle? rotation = null, int zIndex = 0, bool cleanable = false)
@@ -319,7 +378,7 @@ namespace Content.Server.Decals
             var chunk = comp.ChunkCollection.ChunkCollection.GetOrNew(chunkIndices);
             chunk.Decals[decalId] = decal;
             comp.DecalIndex[decalId] = chunkIndices;
-            DirtyChunk(gridId.Value, chunkIndices, chunk);
+            DirtyDecal(gridId.Value, chunkIndices, chunk, decalId, decal);
 
             return true;
         }
@@ -403,8 +462,9 @@ namespace Content.Server.Decals
 
             var chunk = comp.ChunkCollection.ChunkCollection[indices];
             var decal = chunk.Decals[decalId];
-            chunk.Decals[decalId] = modifyDecal(decal);
-            DirtyChunk(gridId, indices, chunk);
+            var modified = modifyDecal(decal);
+            chunk.Decals[decalId] = modified;
+            DirtyDecal(gridId, indices, chunk, decalId, modified);
             return true;
         }
 
@@ -432,7 +492,7 @@ namespace Content.Server.Decals
         {
             base.Update(frameTime);
 
-            foreach (var ent in _dirtyChunks.Keys)
+            foreach (var ent in _dirtyGrids)
             {
                 if (TryGetEntity(ent, out var uid) && TryComp(uid, out DecalGridComponent? decals))
                     Dirty(uid.Value, decals);
@@ -440,27 +500,30 @@ namespace Content.Server.Decals
 
             if (!PvsEnabled)
             {
-                _dirtyChunks.Clear();
+                ClearDirtyDecals();
                 return;
             }
 
-            if (PvsEnabled)
+            _sessions.Clear();
+
+            foreach (var session in _playerManager.Sessions)
             {
-                _sessions.Clear();
+                if (session.Status != SessionStatus.InGame)
+                    continue;
 
-                foreach (var session in _playerManager.Sessions)
-                {
-                    if (session.Status != SessionStatus.InGame)
-                        continue;
-
-                    _sessions.Add(session);
-                }
-
-                if (_sessions.Count > 0)
-                    _parMan.ProcessNow(_updateJob, _sessions.Count);
+                _sessions.Add(session);
             }
 
-            _dirtyChunks.Clear();
+            if (_sessions.Count > 0)
+                _parMan.ProcessNow(_updateJob, _sessions.Count);
+
+            ClearDirtyDecals();
+        }
+
+        private void ClearDirtyDecals()
+        {
+            _dirtyChunkDeltas.Clear();
+            _dirtyGrids.Clear();
         }
 
         public void UpdatePlayer(ICommonSession player)
@@ -516,20 +579,26 @@ namespace Content.Server.Decals
                 staleChunks.Add(netGrid, elmo);
             }
 
-            var updatedChunks = _chunkViewerPool.Get();
+            var fullChunks = _chunkViewerPool.Get();
+            var deltaChunks = _chunkViewerPool.Get();
             foreach (var (netGrid, gridChunks) in chunksInRange)
             {
                 var newChunks = _chunkIndexPool.Get();
-                _dirtyChunks.TryGetValue(netGrid, out var dirtyChunks);
+                var changedChunks = _chunkIndexPool.Get();
+                _dirtyChunkDeltas.TryGetValue(netGrid, out var dirtyChunks);
 
                 if (!previouslySent.TryGetValue(netGrid, out var previousChunks))
+                {
                     newChunks.UnionWith(gridChunks);
+                }
                 else
                 {
                     foreach (var index in gridChunks)
                     {
-                        if (!previousChunks.Contains(index) || dirtyChunks != null && dirtyChunks.Contains(index))
+                        if (!previousChunks.Contains(index))
                             newChunks.Add(index);
+                        else if (dirtyChunks != null && dirtyChunks.ContainsKey(index))
+                            changedChunks.Add(index);
                     }
 
                     previousChunks.Clear();
@@ -541,11 +610,15 @@ namespace Content.Server.Decals
                 if (newChunks.Count == 0)
                     _chunkIndexPool.Return(newChunks);
                 else
-                    updatedChunks[netGrid] = newChunks;
+                    fullChunks[netGrid] = newChunks;
+
+                if (changedChunks.Count == 0)
+                    _chunkIndexPool.Return(changedChunks);
+                else
+                    deltaChunks[netGrid] = changedChunks;
             }
 
-            //send all gridChunks to client
-            SendChunkUpdates(player, updatedChunks, staleChunks);
+            SendChunkUpdates(player, fullChunks, deltaChunks, staleChunks);
         }
 
         private void ReturnToPool(Dictionary<NetEntity, HashSet<Vector2i>> chunks)
@@ -562,11 +635,12 @@ namespace Content.Server.Decals
 
         private void SendChunkUpdates(
             ICommonSession session,
-            Dictionary<NetEntity, HashSet<Vector2i>> updatedChunks,
+            Dictionary<NetEntity, HashSet<Vector2i>> fullChunks,
+            Dictionary<NetEntity, HashSet<Vector2i>> deltaChunks,
             Dictionary<NetEntity, HashSet<Vector2i>> staleChunks)
         {
-            var updatedDecals = new Dictionary<NetEntity, Dictionary<Vector2i, DecalChunk>>();
-            foreach (var (netGrid, chunks) in updatedChunks)
+            var fullDecals = new Dictionary<NetEntity, Dictionary<Vector2i, DecalChunk>>();
+            foreach (var (netGrid, chunks) in fullChunks)
             {
                 var gridId = GetEntity(netGrid);
 
@@ -582,13 +656,38 @@ namespace Content.Server.Decals
                             ? chunk
                             : new());
                 }
-                updatedDecals[netGrid] = gridChunks;
+                fullDecals[netGrid] = gridChunks;
             }
 
-            if (updatedDecals.Count != 0 || staleChunks.Count != 0)
-                RaiseNetworkEvent(new DecalChunkUpdateEvent { Data = updatedDecals, RemovedChunks = staleChunks }, session);
+            var decalDeltas = new Dictionary<NetEntity, Dictionary<Vector2i, DecalChunkDelta>>();
+            foreach (var (netGrid, chunks) in deltaChunks)
+            {
+                if (!_dirtyChunkDeltas.TryGetValue(netGrid, out var dirtyChunks))
+                    continue;
 
-            ReturnToPool(updatedChunks);
+                var gridDeltas = new Dictionary<Vector2i, DecalChunkDelta>();
+                foreach (var indices in chunks)
+                {
+                    if (dirtyChunks.TryGetValue(indices, out var delta))
+                        gridDeltas.Add(indices, delta);
+                }
+
+                if (gridDeltas.Count > 0)
+                    decalDeltas[netGrid] = gridDeltas;
+            }
+
+            if (fullDecals.Count != 0 || decalDeltas.Count != 0 || staleChunks.Count != 0)
+            {
+                RaiseNetworkEvent(new DecalChunkUpdateEvent
+                {
+                    Data = fullDecals,
+                    Deltas = decalDeltas,
+                    RemovedChunks = staleChunks,
+                }, session);
+            }
+
+            ReturnToPool(fullChunks);
+            ReturnToPool(deltaChunks);
             ReturnToPool(staleChunks);
         }
 
@@ -627,8 +726,9 @@ namespace Content.Server.Decals
                 {
                     if (chunk.Decals.Count == 0) continue;
                     removed += chunk.Decals.Count;
-                    chunk.Decals.Clear();
                     DirtyChunk(gridId, chunkOrigin, chunk);
+                    chunk.Decals.Clear();
+                    QueueChunkReplacement(gridId, chunkOrigin, chunk);
                 }
 
                 comp.DecalIndex.Clear();
@@ -652,6 +752,7 @@ namespace Content.Server.Decals
                 }
 
                 if (_toRemove.Count == 0) continue;
+                DirtyChunk(gridId, chunkOrigin, chunk);
                 foreach (var decalId in _toRemove)
                 {
                     chunk.Decals.Remove(decalId);
@@ -659,7 +760,11 @@ namespace Content.Server.Decals
                 }
 
                 removed += _toRemove.Count;
-                DirtyChunk(gridId, chunkOrigin, chunk);
+                foreach (var decalId in _toRemove)
+                {
+                    QueueDecalRemoval(gridId, chunkOrigin, chunk, decalId);
+                }
+
                 if (chunk.Decals.Count == 0)
                     _emptyChunks.Add(chunkOrigin);
             }

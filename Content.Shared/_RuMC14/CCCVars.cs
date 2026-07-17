@@ -45,6 +45,20 @@ public sealed class CCCVars : CVars
         CVarDef.Create("tts.api_timeout", 5, CVar.SERVERONLY | CVar.ARCHIVE);
 
     /// <summary>
+    /// Amount of seconds before a reference voice upload times out.
+    /// Voice creation is expected to take longer than regular synthesis.
+    /// </summary>
+    public static readonly CVarDef<int> TTSReferenceVoiceApiTimeout =
+        CVarDef.Create("tts.reference_voice_api_timeout", 60, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Restricts reference voice creation to players with an active donation.
+    /// Disabled by default until the patron integration is ready for production use.
+    /// </summary>
+    public static readonly CVarDef<bool> TTSReferenceVoiceDonorOnly =
+        CVarDef.Create("tts.reference_voice_donor_only", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Default volume setting of TTS sound
     /// </summary>
     public static readonly CVarDef<float> TTSVolume =

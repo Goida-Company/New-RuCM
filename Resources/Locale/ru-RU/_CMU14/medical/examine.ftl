@@ -163,3 +163,12 @@ cmu-medical-examine-wound-treated = { $count ->
     [1] рана обработана
    *[other] раны обработаны
 }
+
+cmu-robotic-limb-material-synthetic = синтетический
+cmu-robotic-limb-examine-state = протез
+cmu-robotic-limb-examine-brute = вмятины на обшивке
+cmu-robotic-limb-examine-burn = обгоревшая проводка
+cmu-robotic-limb-detailed-state = протез
+cmu-robotic-limb-detailed-brute = механическая травма: вмятины на обшивке
+cmu-robotic-limb-detailed-burn = термическое повреждение: обгоревшая проводка
+cmu-robotic-limb-inspect-header = Повреждения роботизированной конечности

@@ -65,9 +65,9 @@ public static class InsurgencyBuiltinFactions
         {
             Metadata = new FactionMetadata
             {
-                Title = "Colonial Liberation Front",
-                Description = "The standard CLF cell. No special doctrine, no custom arsenal.",
-                RoleplayText = "Play as a classic CLF insurgent cell.",
+                Title = Loc.GetString("insfor-builtin-clf-title"),
+                Description = Loc.GetString("insfor-builtin-clf-description"),
+                RoleplayText = Loc.GetString("insfor-builtin-clf-roleplay"),
                 StatusIcon = "CLFFaction",
             },
         };
@@ -79,7 +79,7 @@ public static class InsurgencyBuiltinFactions
         // vendor, so keep its own sections, points mode, and access untouched.
         def.CellKit.VendorDefinitions.Add(new FactionVendorDefinition
         {
-            Name = "CLF Requisitions Rack",
+            Name = Loc.GetString("insfor-builtin-clf-vendor-requisitions"),
             BaseModel = "AU14CLFObjectiveWeaponsVendor",
             UseBaseModelSections = true,
         });
@@ -97,16 +97,16 @@ public static class InsurgencyBuiltinFactions
     // Each mirrors the contents of the crate it replaces. Free (points 0) since the crates were free.
     // Contents live here as data so the faction editor can add, change, or remove any of them.
 
-    private static FactionVendorDefinition MedicalVendor() => Vendor("CLF medical cache",
-        Section("First Aid",
+    private static FactionVendorDefinition MedicalVendor() => Vendor(Loc.GetString("insfor-builtin-clf-vendor-medical"),
+        Section(Loc.GetString("insfor-builtin-clf-section-first-aid"),
             Entry("CMFirstAidKitFilled"),
             Entry("CMBurnAidKitFilled"),
             Entry("CMToxinAidKitFilled"),
             Entry("CMFirstAidO2KitFilled"),
             Entry("CMAdvFirstAidKitFilled")));
 
-    private static FactionVendorDefinition ToolVendor() => Vendor("CLF tool cache",
-        Section("Field Tools",
+    private static FactionVendorDefinition ToolVendor() => Vendor(Loc.GetString("insfor-builtin-clf-vendor-tools"),
+        Section(Loc.GetString("insfor-builtin-clf-section-field-tools"),
             Entry("AU14GunCaseRifleMar30"),
             Entry("RMCGunCasePistolZHNK72", 1),
             Entry("RMCGunCasePistolMK80", 1),
@@ -117,22 +117,22 @@ public static class InsurgencyBuiltinFactions
             Entry("AU14BeltUtilityFilled"),
             Entry("RMCBoxFlashlights")));
 
-    private static FactionVendorDefinition RecruitmentVendor() => Vendor("CLF recruitment cache",
-        Section("Recruitment",
+    private static FactionVendorDefinition RecruitmentVendor() => Vendor(Loc.GetString("insfor-builtin-clf-vendor-recruitment"),
+        Section(Loc.GetString("insfor-builtin-clf-section-recruitment"),
             Entry("AU14CLFHeadset", 5),
             Entry("RMCCLFArmband", 5),
             Entry("CMMaskCoif", 5),
             Entry("AU14TattooInkCartridge", 6),
             Entry("AU14TattooGun", 1)));
 
-    private static FactionVendorDefinition ClothingVendor() => Vendor("CLF civilian clothing rack",
-        Section("Footwear",
+    private static FactionVendorDefinition ClothingVendor() => Vendor(Loc.GetString("insfor-builtin-clf-vendor-clothing"),
+        Section(Loc.GetString("insfor-builtin-clf-section-footwear"),
             Entry("RMCShoesBlack"), Entry("RMCShoesBlue"), Entry("RMCShoesBrown"),
             Entry("RMCShoesGreen"), Entry("RMCShoesOrange"), Entry("RMCShoesPurple"),
             Entry("RMCShoesRed"), Entry("RMCShoesWhite"), Entry("RMCShoesYellow"),
             Entry("RMCBootsPMC"), Entry("RMCBootsVanBandolier"), Entry("RMCShoesLaceupBrown"),
             Entry("RMCShoesLaceup"), Entry("RMCShoesLeather")),
-        Section("Jumpsuits",
+        Section(Loc.GetString("insfor-builtin-clf-section-jumpsuits"),
             Entry("AU14CivilianWorkwearYellow"), Entry("AU14CivilianWorkwearPink"),
             Entry("AU14CivilianWorkwearBlue"), Entry("AU14CivilianWorkwearGreen"),
             Entry("CMJumpsuitLiaisonBlack"), Entry("CMJumpsuitLiaisonBlue"),
@@ -143,7 +143,7 @@ public static class InsurgencyBuiltinFactions
             Entry("RMCJumpsuitDutchBandolier"), Entry("RMCJumpsuitCivilian"),
             Entry("CMJumpsuitColonist"), Entry("CMJumpsuitTShirtWhite"),
             Entry("CMJumpsuitTShirtGray"), Entry("CMJumpsuitTShirtRed")),
-        Section("Jackets and Coats",
+        Section(Loc.GetString("insfor-builtin-clf-section-jackets"),
             Entry("RMCJacketCorporateKhaki"), Entry("RMCJacketCorporateBlack"),
             Entry("RMCJacketCorporateBlue"), Entry("RMCJacketCorporateBrown"),
             Entry("AU14CivilianJacketGrayPufferVest"), Entry("AU14CivilianJacketKhakiPufferVest"),
@@ -157,7 +157,7 @@ public static class InsurgencyBuiltinFactions
             Entry("AU14CivilianBrownTrenchCoat"), Entry("AU14CivilianGrayTrenchCoat"),
             Entry("AU14CivilianJacketBomberJacket"), Entry("AU14CivilianJacketOldCoat"),
             Entry("AU14CivilianJacketSnowSuit")),
-        Section("Headwear and Eyewear",
+        Section(Loc.GetString("insfor-builtin-clf-section-headwear"),
             Entry("AU14CivBallCapBlack"), Entry("AU14CivBallCapBlueTrucker"),
             Entry("AU14CivBallCapRedTrucker"), Entry("AU14USCMVeteranCap"),
             Entry("AU14CivFedoraTan"), Entry("AU14CivFedoraBrown"),
@@ -166,7 +166,7 @@ public static class InsurgencyBuiltinFactions
             Entry("AU14GlassesPersonalOrange"), Entry("RMCGlassesAviators"),
             Entry("RMCGlassesTriMaxYellow"), Entry("RMCGlassesTriMaxBlack"),
             Entry("RMCGlassesTriMaxBronze"), Entry("AU14GlassesBiMexOrange")),
-        Section("Bags and Gloves",
+        Section(Loc.GetString("insfor-builtin-clf-section-bags"),
             Entry("CMHandsBrown"), Entry("CMHandsLightBrown"),
             Entry("CMSatchel"), Entry("AU14SlingSatchelBlack"),
             Entry("AU14SlingSatchelBlue"), Entry("RMCBeltUtilityGeneral"),

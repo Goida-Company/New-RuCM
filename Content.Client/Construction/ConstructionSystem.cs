@@ -74,6 +74,10 @@ namespace Content.Client.Construction
             if (_recipesMetadataCache.TryGetValue(constructionProtoId, out targetProtoId))
                 return true;
 
+            if (PrototypeManager.TryIndex(constructionProtoId, out ConstructionPrototype? constructionProto) &&
+                TryCacheRecipeTarget(constructionProto, out targetProtoId))
+                return true;
+
             targetProtoId = null;
             return false;
         }
@@ -138,6 +142,41 @@ namespace Content.Client.Construction
                     _recipesMetadataCache.Add(constructionProto.ID, entityId);
                 } while (stack.Count > 0);
             }
+        }
+
+        private bool TryCacheRecipeTarget(ConstructionPrototype constructionProto, [NotNullWhen(true)] out string? targetProtoId)
+        {
+            targetProtoId = null;
+            if (_recipesMetadataCache.TryGetValue(constructionProto.ID, out targetProtoId))
+                return true;
+
+            if (!PrototypeManager.TryIndex(constructionProto.Graph, out var graphProto) ||
+                !graphProto.Nodes.TryGetValue(constructionProto.TargetNode, out var targetNode))
+                return false;
+
+            var stack = new Stack<ConstructionGraphNode>();
+            stack.Push(targetNode);
+            while (stack.Count > 0)
+            {
+                var node = stack.Pop();
+                if (node.Entity.GetId(null, null, new(EntityManager)) is { } entityId &&
+                    PrototypeManager.TryIndex(entityId, out EntityPrototype? proto))
+                {
+                    constructionProto.Name = constructionProto.SetName != null ? Loc.GetString(constructionProto.SetName) : proto.Name;
+                    constructionProto.Description = constructionProto.SetDescription != null ? Loc.GetString(constructionProto.SetDescription) : proto.Description;
+                    _recipesMetadataCache[constructionProto.ID] = entityId;
+                    targetProtoId = entityId;
+                    return true;
+                }
+
+                foreach (var edge in node.Edges)
+                {
+                    if (graphProto.Nodes.TryGetValue(edge.Target, out var next))
+                        stack.Push(next);
+                }
+            }
+
+            return false;
         }
 
         private void OnConstructionGuideReceived(ResponseConstructionGuide ev)

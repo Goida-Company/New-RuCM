@@ -89,7 +89,7 @@
   components:
   - type: SubmissionStorage
     rewards:
-      SteelOre: 100 # RuCM price-upd
+      SteelOre: 10
   - type: DisposalUnit
     whitelist:
       tags:
@@ -107,8 +107,7 @@
   components:
   - type: SubmissionStorage
     rewards:
-      # RuCM price-upd
-      AUwood: 25
+      AUwood: 20
   - type: DisposalUnit
     whitelist:
       tags:
@@ -126,8 +125,7 @@
   components:
   - type: SubmissionStorage
     rewards:
-      # RuCM price-upd
-      Vegetable: 10
+      Vegetable: 2
   - type: DisposalUnit
     whitelist:
       tags:
@@ -141,8 +139,7 @@
   components:
   - type: SubmissionStorage
     rewards:
-      # RuCM price-upd
-      Fruit: 20
+      Fruit: 2
   - type: DisposalUnit
     whitelist:
       tags:
@@ -165,7 +162,7 @@
     - type: SubmissionStorage
       isCorporate: true
       rewards:
-        SteelOre: 120
+        SteelOre: 12
     - type: DisposalUnit
       whitelist:
         tags:
@@ -186,7 +183,7 @@
     - type: SubmissionStorage
       isCorporate: true
       rewards:
-        AUwood: 40
+        AUwood: 25
     - type: DisposalUnit
       whitelist:
         tags:
@@ -207,7 +204,7 @@
     - type: SubmissionStorage
       isCorporate: true
       rewards:
-        Vegetable: 15
+        Vegetable: 3
     - type: DisposalUnit
       whitelist:
         tags:
@@ -228,7 +225,7 @@
     - type: SubmissionStorage
       isCorporate: true
       rewards:
-        Fruit: 30
+        Fruit: 3
     - type: DisposalUnit
       whitelist:
         tags:

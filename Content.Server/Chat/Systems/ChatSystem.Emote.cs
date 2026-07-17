@@ -17,24 +17,28 @@ public partial class ChatSystem
 
     private static readonly string[] RunechatPainMessages =
     [
-        "OW!!",
-        "AGH!!",
-        "ARGH!!",
-        "OUCH!!",
-        "ACK!!",
-        "OUF!",
+        // RuMC edit start
+        "rmc-runechat-pain-ow",
+        "rmc-runechat-pain-agh",
+        "rmc-runechat-pain-argh",
+        "rmc-runechat-pain-ouch",
+        "rmc-runechat-pain-ack",
+        "rmc-runechat-pain-ouf",
+        // RuMC edit end
     ];
 
     private static readonly string[] RunechatScreamMessages =
     [
-        "FUCK!!!",
-        "AGH!!!",
-        "ARGH!!!",
-        "AAAA!!!",
-        "HGH!!!",
-        "NGHHH!!!",
-        "NNHH!!!",
-        "SHIT!!!",
+        // RuMC edit start
+        "rmc-runechat-scream-fuck",
+        "rmc-runechat-scream-agh",
+        "rmc-runechat-scream-argh",
+        "rmc-runechat-scream-aaaa",
+        "rmc-runechat-scream-hgh",
+        "rmc-runechat-scream-nghhh",
+        "rmc-runechat-scream-nnhh",
+        "rmc-runechat-scream-shit",
+        // RuMC edit end
     ];
 
     private static readonly FrozenSet<string> PainEmoteIds = new[]
@@ -152,13 +156,13 @@ public partial class ChatSystem
         if (emote.ID == ScreamEmoteId)
         {
             speechStyleClass = CMURunechatStyles.Scream;
-            return _random.Pick(RunechatScreamMessages);
+            return Loc.GetString(_random.Pick(RunechatScreamMessages)); // RuMC edit
         }
 
         if (PainEmoteIds.Contains(emote.ID))
         {
             speechStyleClass = CMURunechatStyles.Pain;
-            return _random.Pick(RunechatPainMessages);
+            return Loc.GetString(_random.Pick(RunechatPainMessages)); // RuMC edit
         }
 
         speechStyleClass = null;

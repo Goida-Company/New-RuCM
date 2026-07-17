@@ -1,11 +1,15 @@
 using Content.Server._RMC14.Emote;
 using Content.Server.Actions;
 using Content.Server.Chat.Systems;
+using Content.Shared._CMU14.Vocal;
+using Content.Shared.CCVar;
 using Content.Shared.Chat.Prototypes;
 using Content.Shared.Humanoid;
 using Content.Shared.Speech;
 using Content.Shared.Speech.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -19,6 +23,7 @@ public sealed partial class VocalSystem : EntitySystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private RMCEmoteSystem _rmcEmote = default!;
+    [Dependency] private INetConfigurationManager _netConfig = default!;
 
     public override void Initialize()
     {
@@ -29,6 +34,8 @@ public sealed partial class VocalSystem : EntitySystem
         SubscribeLocalEvent<VocalComponent, SexChangedEvent>(OnSexChanged);
         SubscribeLocalEvent<VocalComponent, EmoteEvent>(OnEmote);
         SubscribeLocalEvent<VocalComponent, ScreamActionEvent>(OnScreamAction);
+        SubscribeLocalEvent<VocalComponent, PlayerAttachedEvent>(OnPlayerAttached);
+        SubscribeNetworkEvent<CMUScreamOnHotbarPreferenceMessage>(OnScreamOnHotbarPreference);
     }
 
     private void OnShutdown(EntityUid uid, VocalComponent component, ComponentShutdown args)
@@ -40,6 +47,33 @@ public sealed partial class VocalSystem : EntitySystem
         }
     }
 
+    private void OnPlayerAttached(EntityUid uid, VocalComponent component, PlayerAttachedEvent args)
+    {
+        // scream is off the hotbar by default; players can opt back in under CMU settings
+        var enabled = _netConfig.GetClientCVar(args.Player.Channel, CCVars.CMUScreamOnHotbarEnabled);
+        SetScreamOnHotbar(uid, component, enabled);
+    }
+
+    private void OnScreamOnHotbarPreference(CMUScreamOnHotbarPreferenceMessage msg, EntitySessionEventArgs args)
+    {
+        // lets the toggle take effect immediately, instead of waiting for the player's next spawn
+        if (args.SenderSession.AttachedEntity is not { } uid || !TryComp<VocalComponent>(uid, out var component))
+            return;
+
+        SetScreamOnHotbar(uid, component, msg.Enabled);
+    }
+
+    private void SetScreamOnHotbar(EntityUid uid, VocalComponent component, bool enabled)
+    {
+        if (enabled)
+        {
+            _actions.AddAction(uid, ref component.ScreamActionEntity, component.ScreamAction);
+        }
+        else if (component.ScreamActionEntity != null)
+        {
+            _actions.RemoveAction(uid, component.ScreamActionEntity);
+        }
+    }
 
     private void OnSexChanged(EntityUid uid, VocalComponent component, SexChangedEvent args)
     {
@@ -69,6 +103,7 @@ public sealed partial class VocalSystem : EntitySystem
     {
         LoadSounds(uid, component);
     }
+
     private void OnScreamAction(EntityUid uid, VocalComponent component, ScreamActionEvent args)
     {
         if (args.Handled)

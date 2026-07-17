@@ -19,6 +19,7 @@ using Content.Shared.CCVar;
 using Content.Shared.Clothing;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Humanoid;
+using Content.Shared.Humanoid.Markings;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.PDA;
 using Content.Shared.Preferences;
@@ -61,6 +62,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private PlatoonSpawnRuleSystem _platoonSpawnRuleSystem = default!;
     [Dependency] private SquadSystem _squadSystem = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
+    [Dependency] private MarkingManager _markingManager = default!;
 
     private static readonly PlatoonJobClass[] PlatoonJobClasses = Enum.GetValues<PlatoonJobClass>();
     private static readonly FrozenDictionary<PlatoonJobClass, string> PlatoonJobClassNames = PlatoonJobClasses.ToFrozenDictionary(v => v, v => v.ToString());
@@ -240,6 +242,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
                 EquipRoleName(jobEntity, loadout, loadoutProto);
 
             DoJobSpecials(job, jobEntity);
+            ApplyRegulationAppearance(jobEntity, profile);
             ApplyTeamFaction(jobEntity, team);
 
             // Use originalPrototype for access, ID, and faction
@@ -348,6 +351,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
             SetPdaAndIdCardDataWithSplitJob(entity.Value, metaDataEntity.EntityName, prototype, originalPrototype ?? prototype, station);
 
         DoJobSpecials(job, entity.Value);
+        ApplyRegulationAppearance(entity.Value, profile);
         _identity.QueueIdentityUpdate(entity.Value);
 
         string? teamCheckJobId = originalJob?.ToString();
@@ -688,6 +692,55 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
         }
 
         _roundJobProfiles.ApplyJobProfile(entity, prototype);
+    }
+
+    /// <summary>
+    /// Overrides the spawned mob's hairstyle/color and facial hair/color with the player's
+    /// Regulation Appearance selections, if the job (via <see cref="RoundJobProfileSystem"/>)
+    /// attached a <see cref="RegulationAppearanceComponent"/> to it. The player's normal civilian
+    /// selections in their saved profile are left untouched.
+    /// </summary>
+    private void ApplyRegulationAppearance(EntityUid uid, HumanoidCharacterProfile? profile)
+    {
+        if (profile == null || !HasComp<RegulationAppearanceComponent>(uid))
+            return;
+
+        if (!TryComp<HumanoidAppearanceComponent>(uid, out var humanoid))
+            return;
+
+        var appearance = profile.Appearance;
+        ApplyRegulationHairLayer(uid, humanoid, MarkingCategories.Hair, HumanoidVisualLayers.Hair,
+            appearance.RegulationHairStyleId, appearance.RegulationHairColor);
+        ApplyRegulationHairLayer(uid, humanoid, MarkingCategories.FacialHair, HumanoidVisualLayers.FacialHair,
+            appearance.RegulationFacialHairStyleId, appearance.RegulationFacialHairColor);
+
+        Dirty(uid, humanoid);
+    }
+
+    private void ApplyRegulationHairLayer(
+        EntityUid uid,
+        HumanoidAppearanceComponent humanoid,
+        MarkingCategories category,
+        HumanoidVisualLayers layer,
+        string styleId,
+        Color color)
+    {
+        humanoid.MarkingSet.RemoveCategory(category);
+
+        if (styleId == HairStyles.DefaultHairStyle.Id || styleId == HairStyles.DefaultFacialHairStyle.Id)
+            return;
+
+        if (!_markingManager.Markings.TryGetValue(styleId, out var prototype) ||
+            !_markingManager.CanBeApplied(humanoid.Species, humanoid.Sex, prototype, _prototypeManager))
+        {
+            return;
+        }
+
+        var appliedColor = _markingManager.MustMatchSkin(humanoid.Species, layer, out var alpha, _prototypeManager)
+            ? humanoid.SkinColor.WithAlpha(alpha)
+            : color;
+
+        _humanoidSystem.AddMarking(uid, styleId, appliedColor, false, false, humanoid);
     }
 
     /// <summary>

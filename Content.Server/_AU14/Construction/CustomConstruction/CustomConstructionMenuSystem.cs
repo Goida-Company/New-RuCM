@@ -47,7 +47,7 @@ namespace Content.Server._AU14.Construction.CustomConstruction;
 public sealed partial class CustomConstructionMenuSystem : EntitySystem
 {
     [Dependency] private IAdminManager _adminManager = default!;
-    [Dependency] private JobWhitelistManager _jobWhitelist = default!;
+    [Dependency] private Administration.AU14ToolPermissionSystem _toolPerms = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
@@ -62,12 +62,9 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
     /// </summary>
     public const AdminFlags RequiredFlag = AdminFlags.Host;
 
-    /// <summary>
-    /// Whitelist-only "role" that also unlocks the editor tools, so a trusted non-admin can be granted
-    /// access with <c>jobwhitelistadd &lt;player&gt; JModEditor</c> (see JModEditor.yml) instead of a Host
-    /// admin rank. Checked in addition to <see cref="RequiredFlag"/>.
-    /// </summary>
-    public static readonly ProtoId<JobPrototype> EditorWhitelistJob = "JModEditor";
+    // AU14: the old JModEditor job-whitelist gate was replaced by per-tool ckey grants (see
+    // AU14ToolPermissionSystem) because jobwhitelistadd was reachable by lower admin ranks. Trusted
+    // non-admins are now granted per tool through the Tool Permissions window or the toolperm command.
 
     private const string GeneratedSubDir = "Prototypes/_AU14/CustomConstruction/Generated";
     private const string DefaultSpawnlist = "AU14";
@@ -117,12 +114,19 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
         SubscribeNetworkEvent<RemoveCustomConstructionGroupEvent>(OnRemoveGroup);
         SubscribeNetworkEvent<HideConstructionRecipeEvent>(OnHideRecipe);
 
+        // The "Mass Entity Editor" batch tool (see the .Mass.cs partial).
+        InitializeMass();
+
         // The "Tiles" and "Lathe" sibling editors (see the .Tiles.cs / .Lathe.cs partials).
         SubscribeNetworkEvent<RequestOpenCustomTileEditorEvent>(OnRequestOpenTile);
         SubscribeNetworkEvent<SubmitCustomTileEditorEvent>(OnSubmitTile);
         SubscribeNetworkEvent<RequestOpenCustomLatheEditorEvent>(OnRequestOpenLathe);
         SubscribeNetworkEvent<SubmitCustomLatheEditorEvent>(OnSubmitLathe);
         SubscribeNetworkEvent<RemoveCustomLatheRecipeEvent>(OnRemoveLatheRecipe);
+
+        // These packs are referenced by static lathe prototypes. Keep empty fallbacks available even
+        // when Generated/ is intentionally not part of the repo and the DB has no custom recipes.
+        EnsureLathePackFallbacks();
 
         // The database is the durable store (the Docker filesystem is wiped on redeploy): put back
         // any stored entry whose generated file is gone, and hot-load its prototypes for this boot.
@@ -143,8 +147,14 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
     /// </summary>
     public bool CanEditConstructionMenu(ICommonSession session)
     {
-        return _adminManager.HasAdminFlag(session, RequiredFlag)
-            || _jobWhitelist.IsWhitelisted(session.UserId, EditorWhitelistJob);
+        return CanUseTool(session, Content.Shared._AU14.Administration.AU14ToolPermissions.Construction);
+    }
+
+    /// <summary>Per-tool gate: a Host-flagged admin, or a ckey granted this specific tool through the
+    /// Tool Permissions system (see <see cref="Administration.AU14ToolPermissionSystem"/>).</summary>
+    public bool CanUseTool(ICommonSession session, string tool)
+    {
+        return _adminManager.HasAdminFlag(session, RequiredFlag) || _toolPerms.HasGrant(session, tool);
     }
 
     // -------------------------------------------------------------------------
@@ -548,6 +558,13 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
         if (!_prototype.TryIndex<EntityPrototype>(msg.ProtoId, out var proto))
             return;
 
+        if (IsGeneratedCustomEntityId(proto.ID))
+        {
+            PopupTo(session, Loc.GetString("construction-menu-verb-invalid",
+                ("reason", "that is already a generated custom construction entity")), PopupType.MediumCaution);
+            return;
+        }
+
         var steps = msg.Steps ?? new();
         if (steps.Count == 0)
         {
@@ -591,6 +608,13 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
                 RetireEntryFile(FilePathForKey(msg.EntryKey));
 
             var yaml = BuildGeneratedYaml(proto, newKey, spawnlist, category, steps, deconstructSteps, msg.Health);
+            if (IsUnsafeGeneratedEntryYaml(yaml, out var reason))
+            {
+                Log.Error($"Refusing to write unsafe custom construction entry for {proto.ID} (key {newKey}): {reason}");
+                PopupTo(session, Loc.GetString("construction-menu-verb-invalid", ("reason", reason)), PopupType.MediumCaution);
+                return;
+            }
+
             File.WriteAllText(FilePathForKey(newKey), yaml, Encoding.UTF8);
             DbUpsert(DbKindEntries, $"{FilePrefix}{newKey}", yaml);
 
@@ -687,10 +711,57 @@ public sealed partial class CustomConstructionMenuSystem : EntitySystem
 
     /// <summary>Prefix of the generated buildable child entity id (see <see cref="BuildGeneratedYaml"/>).</summary>
     private const string ChildEntityPrefix = "AU14CustomEntity_";
+    private const string MidEntityPrefix = "AU14CustomEntityMid_";
 
     /// <summary>An entry is uniquely identified by entity + spawnlist + category.</summary>
     private string MakeEntryKey(string entityId, string spawnlist, string category) =>
         $"{Sanitize(entityId)}__{Sanitize(spawnlist)}__{Sanitize(category)}";
+
+    private static bool IsGeneratedCustomEntityId(string id)
+    {
+        return id.StartsWith(ChildEntityPrefix, StringComparison.Ordinal) ||
+               id.StartsWith(MidEntityPrefix, StringComparison.Ordinal);
+    }
+
+    private static bool IsUnsafeGeneratedEntryYaml(string yaml, out string reason)
+    {
+        reason = string.Empty;
+
+        string? currentEntity = null;
+        foreach (var raw in yaml.Split('\n'))
+        {
+            var trimmed = raw.Trim();
+            if (trimmed.StartsWith(HeaderEntity, StringComparison.Ordinal))
+            {
+                var original = trimmed[HeaderEntity.Length..].Trim();
+                if (IsGeneratedCustomEntityId(original))
+                {
+                    reason = $"generated entries cannot target generated custom entity '{original}'";
+                    return true;
+                }
+
+                continue;
+            }
+
+            if (trimmed.StartsWith("id:", StringComparison.Ordinal))
+            {
+                currentEntity = trimmed["id:".Length..].Trim();
+                continue;
+            }
+
+            if (!trimmed.StartsWith("parent:", StringComparison.Ordinal))
+                continue;
+
+            var parent = trimmed["parent:".Length..].Trim();
+            if (!IsGeneratedCustomEntityId(parent))
+                continue;
+
+            reason = $"generated entity '{currentEntity ?? "<unknown>"}' inherits from generated custom entity '{parent}'";
+            return true;
+        }
+
+        return false;
+    }
 
     private string FilePathForKey(string entryKey) => Path.Combine(_generatedDir!, $"{FilePrefix}{entryKey}.yml");
 

@@ -2,6 +2,8 @@ humanoid-profile-editor-randomize-everything-button = Randomize everything
 humanoid-profile-editor-name-label = Name:
 humanoid-profile-editor-name-random-button = Randomize
 humanoid-profile-editor-appearance-tab = Appearance
+humanoid-profile-editor-regulation-appearance-tab = Regulation Appearance
+humanoid-profile-editor-regulation-appearance-info = Set your character's appearance when playing as military and law enforcement factions.
 humanoid-profile-editor-clothing = Show clothing
 humanoid-profile-editor-clothing-show = Show
 humanoid-profile-editor-sex-label = Sex:
@@ -98,9 +100,9 @@ humanoid-profile-editor-preference-armor-smooth = Smooth
 
 humanoid-profile-editor-government-forces-label = Government Forces / { $segmentTitle }
 
-humanoid-profile-editor-segment-command = Command
-humanoid-profile-editor-segment-officer = Officer
-humanoid-profile-editor-segment-flight = Flight
+humanoid-profile-editor-segment-command = Operation Command
+humanoid-profile-editor-segment-officer = Department Command
+humanoid-profile-editor-segment-flight = Vehicle Crew
 humanoid-profile-editor-segment-support = Support
 humanoid-profile-editor-segment-leader = Infantry NCO
 humanoid-profile-editor-segment-line = Line Infantry

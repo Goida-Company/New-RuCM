@@ -51,6 +51,13 @@ public sealed class TTSSystem : EntitySystem
     private float _volume = 0.0f;
     private int _fileIdx = 0;
 
+    public event Action<AddReferenceVoiceResponse>? ReferenceVoiceResultReceived;
+    public event Action? ReferenceVoiceCatalogUpdated;
+    public event Action? ReferenceVoiceAccessUpdated;
+    public event Action<DeleteReferenceVoiceResponse>? ReferenceVoiceDeleteResultReceived;
+    public IReadOnlyList<string> ReferenceVoices { get; private set; } = Array.Empty<string>();
+    public bool CanCreateReferenceVoice { get; private set; }
+
     public override void Initialize()
     {
         if (!_contentRootAdded)
@@ -62,6 +69,10 @@ public sealed class TTSSystem : EntitySystem
         _sawmill = Logger.GetSawmill("tts");
         _cfg.OnValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged, true);
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
+        SubscribeNetworkEvent<AddReferenceVoiceResponse>(OnReferenceVoiceResult);
+        SubscribeNetworkEvent<ReferenceVoiceCatalogResponse>(OnReferenceVoiceCatalog);
+        SubscribeNetworkEvent<ReferenceVoiceAccessResponse>(OnReferenceVoiceAccess);
+        SubscribeNetworkEvent<DeleteReferenceVoiceResponse>(OnReferenceVoiceDeleteResult);
     }
 
     public override void Shutdown()
@@ -73,6 +84,43 @@ public sealed class TTSSystem : EntitySystem
     public void RequestPreviewTTS(string voiceId)
     {
         RaiseNetworkEvent(new RequestPreviewTTSEvent(voiceId));
+    }
+
+    public void AddReferenceVoice(string speakerName, byte[] audio)
+    {
+        RaiseNetworkEvent(new AddReferenceVoiceRequest(speakerName, audio));
+    }
+
+    public void RequestReferenceVoiceCatalog()
+    {
+        RaiseNetworkEvent(new ReferenceVoiceCatalogRequest());
+    }
+
+    public void DeleteReferenceVoice(string speakerName)
+    {
+        RaiseNetworkEvent(new DeleteReferenceVoiceRequest(speakerName));
+    }
+
+    private void OnReferenceVoiceResult(AddReferenceVoiceResponse response)
+    {
+        ReferenceVoiceResultReceived?.Invoke(response);
+    }
+
+    private void OnReferenceVoiceCatalog(ReferenceVoiceCatalogResponse response)
+    {
+        ReferenceVoices = response.SpeakerNames;
+        ReferenceVoiceCatalogUpdated?.Invoke();
+    }
+
+    private void OnReferenceVoiceAccess(ReferenceVoiceAccessResponse response)
+    {
+        CanCreateReferenceVoice = response.CanCreate;
+        ReferenceVoiceAccessUpdated?.Invoke();
+    }
+
+    private void OnReferenceVoiceDeleteResult(DeleteReferenceVoiceResponse response)
+    {
+        ReferenceVoiceDeleteResultReceived?.Invoke(response);
     }
 
     private void OnTtsVolumeChanged(float volume)

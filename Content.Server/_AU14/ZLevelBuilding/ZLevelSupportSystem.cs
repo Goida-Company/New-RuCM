@@ -5,7 +5,6 @@ using System.Numerics;
 using Content.Server.Chat.Managers;
 using Content.Shared._AU14.ZLevelBuilding;
 using Content.Shared._CMU14.ZLevels.Core.Components;
-using Content.Shared._RMC14.CameraShake;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Damage;
 using Content.Shared.Database;
@@ -36,7 +35,7 @@ namespace Content.Server._AU14.ZLevelBuilding;
 ///
 /// Phase 1 is intentionally NON-DESTRUCTIVE: it only computes <see cref="StructuralSupportComponent.Supported"/>
 /// (visible in ViewVariables), logs transitions, and popups newly-unsupported structures. Collapse
-/// scheduling (the 8s warning, bury/shake on lower z, despawn+debris on upper z) lands in a later phase.
+/// scheduling (the 8s warning, lower-z effects, despawn+debris on upper z) lands in a later phase.
 /// </summary>
 public sealed class ZLevelSupportSystem : EntitySystem
 {
@@ -47,7 +46,6 @@ public sealed class ZLevelSupportSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly SharedAudioSystem _audio = default!;
-    [Dependency] private readonly RMCCameraShakeSystem _shake = default!;
     [Dependency] private readonly ThrowingSystem _throwing = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
@@ -70,11 +68,6 @@ public sealed class ZLevelSupportSystem : EntitySystem
 
     /// <summary>Debris that rains onto the level below when a structure caves in.</summary>
     private const string DebrisProto = "AU14RockDebris";
-
-    // Telegraph: while structures count down to collapse, send players on their levels a periodic tremor.
-    private TimeSpan _nextTremor;
-    private static readonly TimeSpan TremorInterval = TimeSpan.FromSeconds(0.9);
-    private readonly HashSet<EntityUid> _tremorMaps = new();
 
     private static readonly Vector2i[] Cardinals =
     {
@@ -109,7 +102,6 @@ public sealed class ZLevelSupportSystem : EntitySystem
         SubscribeLocalEvent<StructuralSupportComponent, ComponentShutdown>(OnSupportShutdown);
         SubscribeLocalEvent<StructuralSupportComponent, AnchorStateChangedEvent>(OnSupportAnchorChanged);
         SubscribeLocalEvent<StructuralSupportComponent, DamageChangedEvent>(OnSupportDamaged);
-        SubscribeLocalEvent<MapRemovedEvent>(OnMapRemoved);
 
         // All of these are keyed by round-scoped uids; drop them with the round so stale entries never accumulate.
         SubscribeLocalEvent<Content.Shared.GameTicking.RoundRestartCleanupEvent>(_ =>
@@ -119,42 +111,6 @@ public sealed class ZLevelSupportSystem : EntitySystem
             _pendingUnsupported.Clear();
             _dirtyGrids.Clear();
         });
-    }
-
-    private void OnMapRemoved(MapRemovedEvent ev)
-    {
-        _lastSupportDamager.Remove(ev.Uid);
-        _nextCollapseAlert.Remove(ev.Uid);
-        _tremorMaps.Remove(ev.Uid);
-
-        _processing.Clear();
-        foreach (var grid in _dirtyGrids)
-        {
-            if (IsDeletedOrOnMap(grid, ev.Uid))
-                _processing.Add(grid);
-        }
-
-        foreach (var grid in _processing)
-            _dirtyGrids.Remove(grid);
-
-        _processing.Clear();
-        foreach (var uid in _pendingUnsupported.Keys)
-        {
-            if (IsDeletedOrOnMap(uid, ev.Uid))
-                _processing.Add(uid);
-        }
-
-        foreach (var uid in _processing)
-            _pendingUnsupported.Remove(uid);
-
-        _processing.Clear();
-
-        _toCollapse.RemoveAll(uid => IsDeletedOrOnMap(uid, ev.Uid));
-    }
-
-    private bool IsDeletedOrOnMap(EntityUid uid, EntityUid mapUid)
-    {
-        return Deleted(uid) || TryComp<TransformComponent>(uid, out var xform) && xform.MapUid == mapUid;
     }
 
     /// <summary>Records the last player to damage a support on a level, so a resulting collapse names the real culprit.</summary>
@@ -223,30 +179,6 @@ public sealed class ZLevelSupportSystem : EntitySystem
                     continue;
 
                 CollapseUnsupportedStructure(uid);
-            }
-        }
-
-        // Telegraph the impending cave-in: a small, repeating tremor for everyone on a level that has a structure
-        // counting down, so you feel it coming and have a chance to shore it up before it drops.
-        if (_pendingUnsupported.Count > 0 && _timing.CurTime >= _nextTremor)
-        {
-            _nextTremor = _timing.CurTime + TremorInterval;
-
-            _tremorMaps.Clear();
-            foreach (var uid in _pendingUnsupported.Keys)
-            {
-                if (!Deleted(uid) && Transform(uid).MapUid is { } map)
-                    _tremorMaps.Add(map);
-            }
-
-            if (_tremorMaps.Count > 0)
-            {
-                var actors = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-                while (actors.MoveNext(out var actor, out var actorXform))
-                {
-                    if (actorXform.MapUid is { } am && _tremorMaps.Contains(am))
-                        _shake.ShakeCamera(actor.Owner, 2, 1);
-                }
             }
         }
     }
@@ -510,22 +442,26 @@ public sealed class ZLevelSupportSystem : EntitySystem
         return _tag.HasTag(uid, "Wall") && !HasComp<DamageableComponent>(uid);
     }
 
-    /// <summary>Strips fixture hardness from a structure that has fallen through a collapsed floor, so it can
-    /// overlap cave rocks without generating endless physics contacts. It keeps its sprite, damage state and
-    /// interactions - it just no longer blocks or pushes.</summary>
+    /// <summary>Turns a structure that has fallen through a collapsed floor into inert rubble: every fixture's
+    /// collision layer/mask is zeroed (non-hard alone still raises contact events, so bullets would still "hit"
+    /// the fallen wall - with no collision bits projectiles pass straight through and cave rocks never grind
+    /// contacts against it). The networked ZFallenDebris marker makes the client draw it battered.</summary>
     private void MakeFallenDebrisNonHard(EntityUid uid)
     {
+        EnsureComp<ZFallenDebrisComponent>(uid);
+
         if (!TryComp<FixturesComponent>(uid, out var fixtures))
             return;
 
-        foreach (var fixture in fixtures.Fixtures.Values)
+        foreach (var (id, fixture) in fixtures.Fixtures)
         {
             _physics.SetHard(uid, fixture, false, manager: fixtures);
+            _physics.SetCollisionLayer(uid, id, fixture, 0, manager: fixtures);
+            _physics.SetCollisionMask(uid, id, fixture, 0, manager: fixtures);
         }
     }
 
-    /// <summary>A crash sound at the collapse spot plus a brief screenshake for players on that level - so a
-    /// cave-in reads as a real, physical event rather than a structure silently vanishing.</summary>
+    /// <summary>A crash sound at the collapse spot plus a brief vignette for nearby players.</summary>
     private void PlayCollapseEffects(EntityCoordinates coords, EntityUid? mapUid)
     {
         // A bad audio path must never crash the support tick.
@@ -541,14 +477,24 @@ public sealed class ZLevelSupportSystem : EntitySystem
         if (mapUid == null)
             return;
 
+        // Local effect only: one grey vignette blink for players near the collapse, not map-wide.
+        // 🔧 TUNABLE: effect radius in tiles.
+        const float effectRange = 33f;
+        var collapsePos = _transform.ToMapCoordinates(coords).Position;
+
         var query = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-        while (query.MoveNext(out var actor, out var actorXform))
+        while (query.MoveNext(out var uid, out var actor, out var actorXform))
         {
-            if (actorXform.MapUid == mapUid)
-                _shake.ShakeCamera(actor.Owner, 4, 2);
+            if (actorXform.MapUid != mapUid)
+                continue;
+
+            if ((_transform.GetWorldPosition(uid) - collapsePos).Length() > effectRange)
+                continue;
+
+            RaiseNetworkEvent(new ZCollapseVignetteEvent(), actor.PlayerSession);
         }
 
-        // Debris rains onto the level directly below, with its own thud + shake, so the cave-in reads on both
+        // Debris rains onto the level directly below, with its own thud, so the cave-in reads on both
         // levels (rubble actually lands where it would fall).
         if (TryComp<CMUZLevelMapComponent>(mapUid.Value, out var zMap) &&
             zMap.MapBelow is { } below &&
@@ -567,11 +513,17 @@ public sealed class ZLevelSupportSystem : EntitySystem
                 Log.Warning($"[zsupport] below-level collapse sfx failed: {e.Message}");
             }
 
+            // Same local radius as the level above: only players near where the debris lands feel the thud.
             var belowActors = EntityQueryEnumerator<ActorComponent, TransformComponent>();
-            while (belowActors.MoveNext(out var actor, out var actorXform))
+            while (belowActors.MoveNext(out var uid, out var actor, out var actorXform))
             {
-                if (actorXform.MapUid == below)
-                    _shake.ShakeCamera(actor.Owner, 3, 2);
+                if (actorXform.MapUid != below)
+                    continue;
+
+                if ((_transform.GetWorldPosition(uid) - worldPos).Length() > 33f)
+                    continue;
+
+                RaiseNetworkEvent(new ZCollapseVignetteEvent(), actor.PlayerSession);
             }
         }
     }

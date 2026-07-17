@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Content.Server.Administration.Managers;
 using Content.Server._RMC14.Language.Systems;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Chat.Systems;
 using Content.Shared._RMC14.Marines;
 using Content.Shared._RMC14.Language.Prototypes;
@@ -12,6 +14,7 @@ using Content.Shared.Players.RateLimiting;
 using Content.Shared.Radio;
 using Content.Shared._RMC14.Survivor;
 using Robust.Shared.Configuration;
+using Robust.Shared.Network;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
@@ -21,6 +24,8 @@ using Content.Server.Radio.Components;
 using Content.Shared.Radio.Components;
 using Content.Server.Radio;
 using Content.Shared._RMC14.Radio;
+using Content.Shared.Administration;
+using Robust.Server.Player;
 
 namespace Content.Server.Corvax.TTS;
 
@@ -34,6 +39,9 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _rng = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
+    [Dependency] private readonly LinkAccountManager _linkAccount = default!;
+    [Dependency] private readonly IAdminManager _adminManager = default!;
+    [Dependency] private readonly IPlayerManager _playerManager = default!;
 
     private readonly List<string> _sampleText =
         new()
@@ -55,13 +63,23 @@ public sealed partial class TTSSystem : EntitySystem
     private const int MaxMessageChars = 100 * 2; // same as SingleBubbleCharLimit * 2
     private static readonly TimeSpan RadioGhostTtsDedupeTime = TimeSpan.FromSeconds(2);
     private bool _isEnabled = false;
+    private bool _referenceVoiceDonorOnly;
     private EntityQuery<TelecomExemptComponent> _exemptQuery;
     private readonly Dictionary<int, TimeSpan> _radioGhostTtsSentAt = new();
     private readonly object _radioGhostTtsLock = new();
+    private static readonly TimeSpan ReferenceVoiceCooldown = TimeSpan.FromSeconds(30);
+    private readonly Dictionary<NetUserId, TimeSpan> _referenceVoiceCooldowns = new();
+    private readonly HashSet<NetUserId> _referenceVoiceUploads = new();
+    private readonly HashSet<string> _customVoices = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _referenceVoiceOperations = new(StringComparer.Ordinal);
+    private Task<bool>? _catalogLoadTask;
+    private bool _catalogLoaded;
+    private TimeSpan _nextCatalogLoadAttempt;
 
     public override void Initialize()
     {
         _cfg.OnValueChanged(CCCVars.TTSEnabled, v => _isEnabled = v, true);
+        _cfg.OnValueChanged(CCCVars.TTSReferenceVoiceDonorOnly, OnReferenceVoiceDonorOnlyChanged, true);
 
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
 
@@ -74,30 +92,292 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TTSComponent, RadioReceiveEvent>(OnIntrinsicRadioReceive);
         SubscribeLocalEvent<RMCAnnouncementMadeEvent>(OnAnnouncementMade);
         SubscribeNetworkEvent<RequestPreviewTTSEvent>(OnRequestPreviewTTS);
+        SubscribeNetworkEvent<AddReferenceVoiceRequest>(OnAddReferenceVoice);
+        SubscribeNetworkEvent<ReferenceVoiceCatalogRequest>(OnReferenceVoiceCatalogRequest);
+        SubscribeNetworkEvent<DeleteReferenceVoiceRequest>(OnDeleteReferenceVoice);
 
         RegisterRateLimits();
+        _linkAccount.PatronUpdated += OnPatronUpdated;
+        _ = EnsureReferenceVoiceCatalogLoaded();
+    }
+
+    public override void Shutdown()
+    {
+        _linkAccount.PatronUpdated -= OnPatronUpdated;
+        base.Shutdown();
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         _ttsManager.ResetCache();
+        _referenceVoiceCooldowns.Clear();
+        _referenceVoiceUploads.Clear();
+        _referenceVoiceOperations.Clear();
     }
 
     private async void OnRequestPreviewTTS(RequestPreviewTTSEvent ev, EntitySessionEventArgs args)
     {
         if (!_isEnabled ||
-            !_prototypeManager.TryIndex<TTSVoicePrototype>(ev.VoiceId, out var protoVoice))
+            !TryResolveSpeaker(ev.VoiceId, out var speaker))
             return;
 
         if (HandleRateLimit(args.SenderSession) != RateLimitStatus.Allowed)
             return;
         Logger.Debug("Вот что у нас вышло: " + ev.VoiceId);
         var previewText = _rng.Pick(_sampleText);
-        var soundData = await GenerateTTS(previewText, protoVoice.Speaker);
+        var soundData = await GenerateTTS(previewText, speaker);
         if (soundData is null)
             return;
 
         RaiseNetworkEvent(new PlayTTSEvent(soundData), Filter.SinglePlayer(args.SenderSession));
+    }
+
+    private async void OnAddReferenceVoice(AddReferenceVoiceRequest ev, EntitySessionEventArgs args)
+    {
+        var session = args.SenderSession;
+
+        if (!_isEnabled)
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.Disabled);
+            return;
+        }
+
+        if (!CanCreateReferenceVoice(session))
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.NotDonor);
+            return;
+        }
+
+        if (!CustomTTSVoice.IsValidSpeakerName(ev.SpeakerName))
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.InvalidName);
+            return;
+        }
+
+        var userId = session.UserId;
+        if (_referenceVoiceUploads.Contains(userId) ||
+            _referenceVoiceCooldowns.TryGetValue(userId, out var cooldown) && cooldown > _timing.CurTime)
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.RateLimited);
+            return;
+        }
+
+        if (ev.Audio.Length > CustomTTSVoice.MaxAudioBytes)
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.FileTooLarge);
+            return;
+        }
+
+        if (!CustomTTSVoice.IsValidWaveFile(ev.Audio))
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.InvalidAudio);
+            return;
+        }
+
+        if (!await EnsureReferenceVoiceCatalogLoaded())
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.ApiError);
+            return;
+        }
+
+        if (_customVoices.Contains(ev.SpeakerName))
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.AlreadyExists);
+            return;
+        }
+
+        if (!_referenceVoiceOperations.Add(ev.SpeakerName))
+        {
+            SendReferenceVoiceResult(session, ev.SpeakerName, AddReferenceVoiceResult.AlreadyExists);
+            return;
+        }
+
+        _referenceVoiceUploads.Add(userId);
+        _referenceVoiceCooldowns[userId] = _timing.CurTime + ReferenceVoiceCooldown;
+
+        try
+        {
+            var success = await _ttsManager.AddSpeaker(ev.SpeakerName, ev.Audio);
+            if (success)
+            {
+                _customVoices.Add(ev.SpeakerName);
+                BroadcastReferenceVoiceCatalog();
+            }
+
+            SendReferenceVoiceResult(session,
+                ev.SpeakerName,
+                success ? AddReferenceVoiceResult.Success : AddReferenceVoiceResult.ApiError);
+        }
+        finally
+        {
+            _referenceVoiceUploads.Remove(userId);
+            _referenceVoiceOperations.Remove(ev.SpeakerName);
+        }
+    }
+
+    private async void OnReferenceVoiceCatalogRequest(ReferenceVoiceCatalogRequest ev, EntitySessionEventArgs args)
+    {
+        await EnsureReferenceVoiceCatalogLoaded();
+        SendReferenceVoiceCatalog(args.SenderSession);
+        SendReferenceVoiceAccess(args.SenderSession);
+    }
+
+    private void OnPatronUpdated((NetUserId Id, Content.Shared._RMC14.LinkAccount.SharedRMCPatronFull Patron) update)
+    {
+        if (_playerManager.TryGetSessionById(update.Id, out var session))
+            SendReferenceVoiceAccess(session);
+    }
+
+    private void SendReferenceVoiceAccess(ICommonSession session)
+    {
+        RaiseNetworkEvent(new ReferenceVoiceAccessResponse(CanCreateReferenceVoice(session)), session);
+    }
+
+    private bool CanCreateReferenceVoice(ICommonSession session)
+    {
+        return !_referenceVoiceDonorOnly || _linkAccount.GetConnectedPatron(session)?.Tier != null;
+    }
+
+    private void OnReferenceVoiceDonorOnlyChanged(bool donorOnly)
+    {
+        _referenceVoiceDonorOnly = donorOnly;
+        foreach (var session in _playerManager.SessionsDict.Values)
+            SendReferenceVoiceAccess(session);
+    }
+
+    private async void OnDeleteReferenceVoice(DeleteReferenceVoiceRequest ev, EntitySessionEventArgs args)
+    {
+        var session = args.SenderSession;
+        if (!_adminManager.HasAdminFlag(session, AdminFlags.Host))
+        {
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.Forbidden);
+            return;
+        }
+
+        if (!CustomTTSVoice.IsValidSpeakerName(ev.SpeakerName))
+        {
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.InvalidName);
+            return;
+        }
+
+        if (!await EnsureReferenceVoiceCatalogLoaded())
+        {
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.ApiError);
+            return;
+        }
+
+        // Only names returned by NTTS as custom voices can be deleted. This protects built-in speakers.
+        if (!_customVoices.Contains(ev.SpeakerName))
+        {
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.NotFound);
+            return;
+        }
+
+        if (!_referenceVoiceOperations.Add(ev.SpeakerName))
+        {
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.ApiError);
+            return;
+        }
+
+        try
+        {
+            if (!await _ttsManager.DeleteSpeaker(ev.SpeakerName))
+            {
+                SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.ApiError);
+                return;
+            }
+
+            _customVoices.Remove(ev.SpeakerName);
+            _ttsManager.ResetCache();
+            BroadcastReferenceVoiceCatalog();
+            SendDeleteReferenceVoiceResult(session, ev.SpeakerName, DeleteReferenceVoiceResult.Success);
+        }
+        finally
+        {
+            _referenceVoiceOperations.Remove(ev.SpeakerName);
+        }
+    }
+
+    private Task<bool> EnsureReferenceVoiceCatalogLoaded()
+    {
+        if (_catalogLoaded)
+            return Task.FromResult(true);
+
+        if (_catalogLoadTask != null)
+            return _catalogLoadTask;
+
+        if (_timing.CurTime < _nextCatalogLoadAttempt)
+            return Task.FromResult(false);
+
+        _catalogLoadTask = LoadReferenceVoiceCatalog();
+        return _catalogLoadTask;
+    }
+
+    private async Task<bool> LoadReferenceVoiceCatalog()
+    {
+        // Ensure EnsureReferenceVoiceCatalogLoaded assigns the coalesced task before this method can clear it.
+        await Task.Yield();
+        try
+        {
+            var voices = await _ttsManager.GetCustomSpeakers();
+            if (voices == null)
+            {
+                _nextCatalogLoadAttempt = _timing.CurTime + TimeSpan.FromSeconds(30);
+                return false;
+            }
+
+            _customVoices.Clear();
+            _customVoices.UnionWith(voices);
+            _catalogLoaded = true;
+            BroadcastReferenceVoiceCatalog();
+            return true;
+        }
+        finally
+        {
+            _catalogLoadTask = null;
+        }
+    }
+
+    private void SendReferenceVoiceCatalog(ICommonSession session)
+    {
+        RaiseNetworkEvent(new ReferenceVoiceCatalogResponse(GetReferenceVoiceCatalog()), session);
+    }
+
+    private void BroadcastReferenceVoiceCatalog()
+    {
+        RaiseNetworkEvent(new ReferenceVoiceCatalogResponse(GetReferenceVoiceCatalog()));
+    }
+
+    private string[] GetReferenceVoiceCatalog()
+    {
+        return _customVoices.Order(StringComparer.OrdinalIgnoreCase).ToArray();
+    }
+
+    private void SendDeleteReferenceVoiceResult(
+        ICommonSession session,
+        string speakerName,
+        DeleteReferenceVoiceResult result)
+    {
+        RaiseNetworkEvent(new DeleteReferenceVoiceResponse(speakerName, result), session);
+    }
+
+    private void SendReferenceVoiceResult(
+        ICommonSession session,
+        string speakerName,
+        AddReferenceVoiceResult result)
+    {
+        RaiseNetworkEvent(new AddReferenceVoiceResponse(speakerName, result), session);
+    }
+
+    private bool TryResolveSpeaker(string voiceId, out string speaker)
+    {
+        if (_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var prototype))
+        {
+            speaker = prototype.Speaker;
+            return true;
+        }
+
+        return CustomTTSVoice.TryGetSpeaker(voiceId, out speaker) && _customVoices.Contains(speaker);
     }
 
     private async void OnEntitySpoke(EntityUid uid, TTSComponent component, EntitySpokeEvent args)
@@ -119,17 +399,17 @@ public sealed partial class TTSSystem : EntitySystem
         var voiceEv = new TransformSpeakerVoiceEvent(uid, voiceId);
         RaiseLocalEvent(uid, voiceEv);
         voiceId = voiceEv.VoiceId;
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
+        if (!TryResolveSpeaker(voiceId, out var speaker))
             return;
 
         // Обработка шепота
         if (args.ObfuscatedMessage != null)
         {
-            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, protoVoice.Speaker, args.Language);
+            HandleWhisper(uid, args.Message, args.ObfuscatedMessage, speaker, args.Language);
             return;
         }
 
-        HandleSay(uid, args.Message, protoVoice.Speaker, component.Faction, args.Language);
+        HandleSay(uid, args.Message, speaker, component.Faction, args.Language);
     }
 
     private bool CanReceiveLanguageTts(EntityUid speaker, EntityUid listener, ProtoId<LanguagePrototype> language)
@@ -320,9 +600,9 @@ public sealed partial class TTSSystem : EntitySystem
         if (!_isEnabled)
             return;
 
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(voiceId, out var protoVoice))
+        if (!TryResolveSpeaker(voiceId, out var speakerName))
             return;
-        var soundData = await GenerateTTS(args.RawMessage, protoVoice.Speaker);
+        var soundData = await GenerateTTS(args.RawMessage, speakerName);
         if (soundData is null)
             return;
 
@@ -350,11 +630,11 @@ public sealed partial class TTSSystem : EntitySystem
         if (!CanReceiveLanguageTts(speaker, receiver, ev.Language))
             return;
 
-        if (!_prototypeManager.TryIndex<TTSVoicePrototype>(tts.VoicePrototypeId, out var protoVoice))
+        if (!TryResolveSpeaker(tts.VoicePrototypeId, out var speakerName))
             return;
 
         var sendToGhosts = TrySendRadioTtsToGhosts(ev);
-        var sound = await GenerateTTS(ev.Message, protoVoice.Speaker);
+        var sound = await GenerateTTS(ev.Message, speakerName);
 
         if (sound == null)
             return;

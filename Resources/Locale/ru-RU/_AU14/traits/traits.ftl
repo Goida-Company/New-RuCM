@@ -82,7 +82,7 @@ au14-trait-english-language-name = Английский язык
 au14-trait-english-language-desc = Вы знаете английский.
 
 au14-trait-no-english-name = Забыть английский язык
-au14-trait-no-english-desc = Чё?
+au14-trait-no-english-desc = Что?
 
 au14-trait-sign-name = Язык жестов
 au14-trait-sign-desc = Вы знаете язык жестов.
@@ -95,3 +95,27 @@ au14-trait-slovak-language-desc = Вы знаете словацкий.
 
 au14-trait-romanian-language-name = Румынский язык
 au14-trait-romanian-language-desc = Вы знаете румынский.
+
+au14-trait-polyglot-name = Полиглот
+au14-trait-polyglot-desc = Языки даются вам легко и естественно.
+
+au14-trait-french-language-name = Французский язык
+au14-trait-french-language-desc = Вы знаете французский.
+
+au14-trait-german-language-name = Немецкий язык
+au14-trait-german-language-desc = Вы знаете немецкий.
+
+au14-trait-russian-language-name = Русский язык
+au14-trait-russian-language-desc = Вы знаете русский.
+
+au14-trait-japanese-language-name = Японский язык
+au14-trait-japanese-language-desc = Вы знаете японский.
+
+au14-trait-mandarin-language-name = Мандаринский язык
+au14-trait-mandarin-language-desc = Вы знаете мандаринский.
+
+au14-trait-spanish-language-name = Испанский язык
+au14-trait-spanish-language-desc = Вы знаете испанский.
+
+au14-trait-binary-language-name = Двоичный язык
+au14-trait-binary-language-desc = Вы знаете двоичный язык.

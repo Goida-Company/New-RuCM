@@ -84,6 +84,29 @@ au14-job-name-govforAuxTech = Техник
 au14-job-description-govforAuxTech = Управляй снабжением, поддерживай корабль в рабочем состоянии и чистоте. Обеспечивай свою фракцию корабельной логистикой и инженерной поддержкой.
 au14-job-prefix-govforAuxTech = ТПОД
 
+au14-job-name-govforadjutant = Офицер-адъютант
+au14-job-description-govforadjutant = Управляй административными делами подразделения и обеспечивай бесперебойную работу цепочки командования.
+au14-job-prefix-govforadjutant = АД
+
+au14-job-name-govforengineering = Инженерный офицер
+au14-job-description-govforengineering = Поддерживай строения и оборудование подразделения в рабочем состоянии.
+au14-job-prefix-govforengineering = ИО
+
+au14-job-name-govforintel = Офицер разведки
+au14-job-description-govforintel = Помогай командиру с разведывательными данными.
+au14-job-prefix-govforintel = ОР
+
+au14-job-name-govforlogistics = Офицер логистики
+au14-job-description-govforlogistics = Контролируй бюджет и командуй техниками поддержки, чтобы обеспечить снабжение подразделению.
+au14-job-prefix-govforlogistics = ОЛ
+
+au14-job-name-govformo = Старший медицинский офицер
+au14-job-description-govformo = Руководи медицинским персоналом подразделения.
+au14-job-prefix-govformo = СМО
+
+au14-job-name-govforpolicechief = Начальник военной полиции
+au14-job-description-govforpolicechief = Руководи военными полицейскими. Поддерживай дисциплину и порядок в подразделении.
+au14-job-prefix-govforpolicechief = НВП
 AU14JobVehicleCrewmanBaseAbstract = Член экипажа техники
 au14-job-name-vehiclecrewman = Член экипажа техники
 au14-job-description-vehiclecrewman = Управляй бронетехникой для поддержки своей фракции.

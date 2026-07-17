@@ -553,14 +553,14 @@ public sealed partial class StaffHelpUIController : UIController, IOnSystemChang
             return;
 
         _mentorWindow.ClaimButton.Visible = _mentorWindow.SelectedPlayer != default;
-        _mentorWindow.ClaimButton.Text = "Claim";
+        _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-window-claim-button"); // RuMC edit
 
         _claims.TryGetValue(destination, out var claims);
         if (claims != null &&
             _player.LocalSession != null &&
             claims.Contains(_player.LocalSession.Name))
         {
-            _mentorWindow.ClaimButton.Text = "Unclaim";
+            _mentorWindow.ClaimButton.Text = Loc.GetString("rmc-mentor-window-unclaim-button"); // RuMC edit
         }
 
         if (_mentorWindow.SelectedPlayer != destination)
@@ -572,7 +572,10 @@ public sealed partial class StaffHelpUIController : UIController, IOnSystemChang
             return;
         }
 
-        _mentorWindow.ClaimIndicator.Text = $"Claimed by {string.Join(", ", claims)}";
+        // RuMC edit start
+        _mentorWindow.ClaimIndicator.Text = Loc.GetString("rmc-mentor-window-claimed-by",
+            ("mentors", string.Join(", ", claims)));
+        // RuMC edit end
     }
 
     private void UpdatePlayerButton(NetUserId player)
