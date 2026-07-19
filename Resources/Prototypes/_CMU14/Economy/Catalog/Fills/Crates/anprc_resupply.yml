@@ -1,0 +1,43 @@
+- type: entity
+  parent: RMCCrateBase
+  id: ANPRCFillCardResupplyCrateGOVFOR
+  name: ящик карт ключей COMSEC (GOVFOR)
+  components:
+  - type: StorageFill
+    contents:
+    - id: ANPRCFillCardGOVFOR
+      amount: 3
+
+- type: entity
+  parent: RMCCrateBase
+  id: ANPRCFillCardResupplyCrateOPFOR
+  name: ящик карт ключей COMSEC (OPFOR)
+  components:
+  - type: StorageFill
+    contents:
+    - id: ANPRCFillCardOPFOR
+      amount: 3
+
+- type: entity
+  parent: RMCCrateBase
+  id: ANPRCRadioResupplyCrateGOVFOR
+  name: ящик снабжения AN/PRC-117G (GOVFOR)
+  components:
+  - type: StorageFill
+    contents:
+    - id: ANPRC117GRadioFilled
+      amount: 1
+    - id: ANPRCMastAntenna
+      amount: 1
+
+- type: entity
+  parent: RMCCrateBase
+  id: ANPRCRadioResupplyCrateOPFOR
+  name: ящик снабжения AN/PRC-117G (OPFOR)
+  components:
+  - type: StorageFill
+    contents:
+    - id: ANPRC117GRadioOPFORFilled
+      amount: 1
+    - id: ANPRCMastAntenna
+      amount: 1

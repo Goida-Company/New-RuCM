@@ -45,3 +45,7 @@
 - type: accessLevel  # RuCM edit
   id: AU14AccessOpforSquadWeaponsSpecialist
   name: Opfor Weapons Specialist
+
+- type: accessLevel
+  id: AU14AccessOpforVehicleCrew
+  name: Opfor Vehicle Crew

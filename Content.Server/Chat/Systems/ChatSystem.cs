@@ -269,7 +269,16 @@ public sealed partial class ChatSystem : SharedChatSystem
         bool shouldCapitalizeTheWordI = (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
             || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en");
 
-        message = SanitizeInGameICMessage(source, message, out var emoteStr, shouldCapitalize, shouldPunctuate, shouldCapitalizeTheWordI);
+        var isRadioMessage = checkRadioPrefix && TryProccessRadioMessage(source, message, out var radioText, out _) && !string.IsNullOrWhiteSpace(radioText);
+
+        message = SanitizeInGameICMessage(
+            source,
+            message,
+            out var emoteStr,
+            shouldCapitalize,
+            shouldPunctuate,
+            shouldCapitalizeTheWordI,
+            skipEmoteShorthands: isRadioMessage);
 
         // Was there an emote in the message? If so, send it.
         if (player != null && emoteStr != message && emoteStr != null)
@@ -777,7 +786,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     }
 
     // ReSharper disable once InconsistentNaming
-    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true)
+    private string SanitizeInGameICMessage(EntityUid source, string message, out string? emoteStr, bool capitalize = true, bool punctuate = false, bool capitalizeTheWordI = true, bool skipEmoteShorthands = false)
     {
         var newMessage = SanitizeMessageReplaceWords(source, message.Trim());
 
@@ -791,7 +800,10 @@ public sealed partial class ChatSystem : SharedChatSystem
             newMessage = SanitizeMessagePeriod(newMessage);
 
         // For auto-punctuation such as 'Lol.'
-        _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        if (!skipEmoteShorthands)
+            _sanitizer.TrySanitizeEmoteShorthands(newMessage, source, out newMessage, out emoteStr);
+        else
+            emoteStr = null;
 
         return prefix + newMessage;
     }

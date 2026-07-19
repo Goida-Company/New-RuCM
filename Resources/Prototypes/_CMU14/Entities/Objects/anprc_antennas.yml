@@ -1,0 +1,43 @@
+- type: entity
+  abstract: true
+  id: ANPRCAntennaBase
+  name: антенна AN/PRC-117G
+  parent: BaseItem
+  components:
+  - type: Item
+    size: Small
+
+- type: entity
+  parent: ANPRCAntennaBase
+  id: ANPRCWhipAntenna
+  name: штыревая антенна AN/PRC-117G
+  description: >-
+    Гибкая стальная ленточно-штыревая антенна — штатное оснащение ранцевых радиостанций.
+    Огибает кустарник и дверные проёмы, не ломаясь.
+  components:
+  - type: Sprite
+    sprite: _AU14/Objects/Radio/anprc117g.rsi
+    state: antenna_w
+  - type: ANPRCAntenna
+    label: ШТЫРЬ
+    fullRange: 30
+    partialRange: 45
+    requiresStationary: false
+
+- type: entity
+  parent: ANPRCAntennaBase
+  id: ANPRCMastAntenna
+  name: мачтовая антенна AN/PRC-117G
+  description: >-
+    Складная мачтовая антенна с высоким коэффициентом усиления. Предназначена
+    для установки над командным пунктом или узлом ретрансляции, а не для переноски в патруле.
+  components:
+  - type: Sprite
+    sprite: _AU14/Objects/Radio/anprc117g.rsi
+    state: antenna_m
+  - type: ANPRCAntenna
+    label: МАЧТА
+    fullRange: 55
+    partialRange: 80
+    requiresStationary: true
+    movingRangeMultiplier: 0.5

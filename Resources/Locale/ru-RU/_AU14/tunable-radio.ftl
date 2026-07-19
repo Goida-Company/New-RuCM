@@ -1,0 +1,13 @@
+tunable-radio-window-title = Настройка частоты
+tunable-radio-verb-tune = Настроить частоту
+tunable-radio-set-button = ЗАДАТЬ
+tunable-radio-input-placeholder = например, 30.500
+tunable-radio-current-freq = Текущая: { $freq } МГц
+tunable-radio-range-note = Диапазон: { $min }–{ $max } МГц
+tunable-radio-freq-set = Установлена частота { $freq } МГц.
+tunable-radio-invalid-freq = Неверная частота. Введите число, например 30500 или 30.500.
+tunable-radio-off = Частота не задана. Щёлкните гарнитуру правой кнопкой и выберите «Настроить частоту». Передача через :x.
+tunable-radio-verb-reset = Вернуть стандартную частоту
+tunable-radio-reset = Гарнитура возвращена на { $freq } МГц.
+tunable-radio-verb-clear = Очистить частоту
+tunable-radio-cleared = Частота гарнитуры очищена.

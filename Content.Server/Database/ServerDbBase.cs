@@ -30,6 +30,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
+using Content.Shared.AU14.util;
 
 namespace Content.Server.Database
 {
@@ -241,6 +242,9 @@ namespace Content.Server.Database
             ProtoId<OriginPrototype>? origin = profile.Origin is { } originId
                 ? new ProtoId<OriginPrototype>(originId)
                 : (ProtoId<OriginPrototype>?)null;
+            ProtoId<PlatoonPrototype>? platoon = profile.Platoon is { } platoonId
+                ? new ProtoId<PlatoonPrototype>(platoonId)
+                : (ProtoId<PlatoonPrototype>?)null;
             var threatPreferences = ConvertThreatPreferences(profile.ThreatPreference);
             var gamemodeJobPriorities = ConvertGamemodeJobPriorities(profile.GamemodeJobPriorities);
             var gamemodeAntagPreferences = ConvertGamemodeAntagPreferences(profile.GamemodeAntagPreferences);
@@ -339,6 +343,7 @@ namespace Content.Server.Database
                 profile.XenoPostfix,
                 allegiance,
                 origin,
+                platoon,
                 threatPreferences,
                 gamemodeJobPriorities,
                 gamemodeAntagPreferences,
@@ -614,6 +619,7 @@ namespace Content.Server.Database
             profile.XenoPostfix = humanoid.XenoPostfix;
             profile.Allegiance = humanoid.Allegiance?.Id;
             profile.Origin = humanoid.Origin?.Id;
+            profile.Platoon = humanoid.Platoon?.Id;
             profile.ThreatPreference = humanoid.ThreatPreferences.Count == 0
                 ? null
                 : JsonSerializer.Serialize(humanoid.ThreatPreferences.Select(t => t.Id).OrderBy(id => id));
@@ -3189,6 +3195,38 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
                 .Entity;
 
             order.Actions = new List<string>(actions);
+
+            await db.DbContext.SaveChangesAsync();
+        }
+
+        public async Task<HashSet<string>> GetLarvaPoolOptOuts(Guid player)
+        {
+            await using var db = await GetDb();
+            return await db.DbContext.RMCLarvaPoolOptOuts
+                .Where(o => o.PlayerId == player)
+                .Select(o => o.HiveId)
+                .ToHashSetAsync();
+        }
+
+        public async Task SetLarvaPoolOptIn(Guid player, string hiveId, bool optedIn)
+        {
+            await using var db = await GetDb();
+            var optOut = await db.DbContext.RMCLarvaPoolOptOuts
+                .FirstOrDefaultAsync(o => o.PlayerId == player && o.HiveId == hiveId);
+
+            if (optedIn)
+            {
+                if (optOut != null)
+                    db.DbContext.RMCLarvaPoolOptOuts.Remove(optOut);
+            }
+            else if (optOut == null)
+            {
+                db.DbContext.RMCLarvaPoolOptOuts.Add(new RMCLarvaPoolOptOut
+                {
+                    PlayerId = player,
+                    HiveId = hiveId,
+                });
+            }
 
             await db.DbContext.SaveChangesAsync();
         }

@@ -4,7 +4,6 @@ using Content.IntegrationTests.Pair;
 using Content.Server.Mind;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._RMC14.Xenonids.Hive;
-using Content.Shared._RMC14.Xenonids.JoinXeno;
 using Content.Shared._RMC14.Xenonids.Parasite;
 using Content.Shared.Ghost;
 using Content.Shared.Mind;
@@ -182,7 +181,6 @@ public sealed class XenoParasiteLarvaClaimTest
 
         await server.WaitPost(() =>
         {
-            entMan.EventBus.RaiseLocalEvent(ghost, new JoinLarvaQueueEvent(entMan.GetNetEntity(hive)));
             drone = entMan.SpawnEntity("CMXenoDrone", map.GridCoords.Offset(new Vector2(3, 0)));
             hiveSystem.SetHive(drone, hive);
         });

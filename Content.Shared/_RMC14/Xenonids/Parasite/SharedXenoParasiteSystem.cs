@@ -1257,7 +1257,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
 
-        // Let the accepted infector claim this specific larva before hive assignment wakes the general larva queue.
+        // Let the accepted infector claim this specific larva before hive assignment wakes the general larva pool.
         LarvaLinked(victim, spawned);
 
         if (HasComp<XenoComponent>(spawned))

@@ -16,6 +16,8 @@ namespace Content.Shared._RMC14.Xenonids.JoinXeno;
 
 public sealed partial class JoinXenoSystem : EntitySystem
 {
+    private static readonly TimeSpan PoolUiRefreshInterval = TimeSpan.FromSeconds(1);
+
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedXenoHiveSystem _hive = default!;
     [Dependency] private INetManager _net = default!;
@@ -30,7 +32,7 @@ public sealed partial class JoinXenoSystem : EntitySystem
 
     private TimeSpan _burrowedLarvaDeathTime;
     private TimeSpan _burrowedLarvaDeathIgnoreTime;
-    private TimeSpan _larvaQueueRoundstartDelay;
+    private TimeSpan _nextPoolUiRefresh;
 
     public override void Initialize()
     {
@@ -39,11 +41,6 @@ public sealed partial class JoinXenoSystem : EntitySystem
         SubscribeLocalEvent<JoinXenoComponent, MapInitEvent>(OnJoinXenoMapInit);
         SubscribeLocalEvent<JoinXenoComponent, JoinXenoActionEvent>(OnJoinXenoAction);
         SubscribeLocalEvent<JoinXenoComponent, JoinXenoBurrowedLarvaEvent>(OnJoinXenoBurrowedLarva);
-
-        Subs.BuiEvents<JoinXenoComponent>(JoinXenoUIKey.Key, subs =>
-        {
-            subs.Event<JoinXenoHiveChoiceBuiMsg>(OnJoinXenoHiveChoice);
-        });
 
         if (_net.IsClient)
         {
@@ -59,13 +56,28 @@ public sealed partial class JoinXenoSystem : EntitySystem
 
         Subs.CVar(_config, RMCCVars.RMCLateJoinsBurrowedLarvaDeathTime, v => _burrowedLarvaDeathTime = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes, v => _burrowedLarvaDeathIgnoreTime = TimeSpan.FromMinutes(v), true);
-        Subs.CVar(_config, RMCCVars.RMCLarvaQueueRoundstartDelaySeconds, v => _larvaQueueRoundstartDelay = TimeSpan.FromSeconds(v), true);
     }
 
     private void OnRoundRestartCleanup(RoundRestartCleanupEvent ev)
     {
         ClientBurrowedLarva = 0;
+        _nextPoolUiRefresh = default;
         SendLarvaStatus(null);
+    }
+
+    public override void Update(float frameTime)
+    {
+        if (_net.IsClient || _timing.CurTime < _nextPoolUiRefresh)
+            return;
+
+        _nextPoolUiRefresh = _timing.CurTime + PoolUiRefreshInterval;
+
+        var query = EntityQueryEnumerator<JoinXenoComponent, ActorComponent>();
+        while (query.MoveNext(out var uid, out _, out var actor))
+        {
+            if (_ui.IsUiOpen(uid, JoinXenoUIKey.Key, uid))
+                UpdateJoinXenoUi(uid, actor.PlayerSession.UserId);
+        }
     }
 
     private void OnJoinXenoMapInit(Entity<JoinXenoComponent> ent, ref MapInitEvent args)
@@ -85,79 +97,41 @@ public sealed partial class JoinXenoSystem : EntitySystem
             !TryComp(user, out ActorComponent? actor))
             return;
 
-        if (!HasComp<JoinXenoCooldownIgnoreComponent>(user))
-        {
-            var remaining = _larvaQueueRoundstartDelay - _gameTicker.RoundDuration();
-            if (remaining > TimeSpan.Zero)
-            {
-                _popup.PopupEntity(
-                    Loc.GetString("rmc-xeno-larva-queue-round-delay", ("seconds", (int) Math.Ceiling(remaining.TotalSeconds))),
-                    user,
-                    user,
-                    PopupType.MediumCaution);
-                return;
-            }
-        }
-
         UpdateJoinXenoUi(ent, actor.PlayerSession.UserId);
         _ui.TryOpenUi(ent.Owner, JoinXenoUIKey.Key, user);
     }
 
-    private void OnJoinXenoHiveChoice(Entity<JoinXenoComponent> ent, ref JoinXenoHiveChoiceBuiMsg args)
-    {
-        if (_net.IsClient)
-            return;
-
-        if (args.Actor != ent.Owner ||
-            !TryComp(ent, out ActorComponent? actor) ||
-            !HasComp<GhostComponent>(ent))
-        {
-            _ui.CloseUi(ent.Owner, JoinXenoUIKey.Key);
-            return;
-        }
-
-        var ev = new JoinLarvaQueueEvent(args.Hive);
-        RaiseLocalEvent(ent.Owner, ev, true);
-
-        if (!TryComp(ent, out actor) ||
-            !HasComp<GhostComponent>(ent))
-        {
-            _ui.CloseUi(ent.Owner, JoinXenoUIKey.Key);
-            return;
-        }
-
-        UpdateJoinXenoUi(ent, actor.PlayerSession.UserId);
-    }
-
     private void UpdateJoinXenoUi(EntityUid user, NetUserId userId)
     {
-        var queueStatus = new GetLarvaQueueStatusEvent(userId);
-        RaiseLocalEvent(queueStatus);
+        var poolStatus = new GetLarvaPoolStatusEvent(userId);
+        RaiseLocalEvent(poolStatus);
 
         var entries = new List<JoinXenoHiveEntry>();
         var hives = EntityQueryEnumerator<HiveComponent, MetaDataComponent>();
         while (hives.MoveNext(out var hiveId, out _, out var metaData))
         {
-            var status = JoinXenoQueueStatus.NotQueued;
+            var status = LarvaPoolStatus.Ineligible;
             var position = 0;
-            if (queueStatus.Queues.TryGetValue(hiveId, out var queueUserStatus))
+            var reason = LarvaPoolIneligibilityReason.PreferenceDataLoading;
+            var preferenceLoaded = false;
+            var optedIn = false;
+            if (poolStatus.Pools.TryGetValue(hiveId, out var poolUserStatus))
             {
-                if (queueUserStatus.Position is { } queuePosition)
-                {
-                    status = JoinXenoQueueStatus.Queued;
-                    position = queuePosition;
-                }
-                else
-                {
-                    status = JoinXenoQueueStatus.Waiting;
-                }
+                status = poolUserStatus.Status;
+                position = poolUserStatus.Position;
+                reason = poolUserStatus.IneligibilityReason;
+                preferenceLoaded = poolUserStatus.PreferenceLoaded;
+                optedIn = poolUserStatus.OptedIn;
             }
 
             entries.Add(new JoinXenoHiveEntry(
                 GetNetEntity(hiveId),
                 Name(hiveId, metaData),
                 status,
-                position));
+                position,
+                reason,
+                preferenceLoaded,
+                optedIn));
         }
 
         entries.Sort((a, b) => string.Compare(a.HiveName, b.HiveName, StringComparison.Ordinal));
@@ -236,6 +210,7 @@ public sealed partial class JoinXenoSystem : EntitySystem
         while (query.MoveNext(out var comp))
         {
             if (!TryComp(comp.Hive, out HiveComponent? hive) ||
+                HasLarvaPoolCandidates(comp.Hive) ||
                 !_hive.JoinBurrowedLarva((comp.Hive, hive), args.SenderSession))
             {
                 continue;
@@ -262,7 +237,8 @@ public sealed partial class JoinXenoSystem : EntitySystem
             if (!TryComp(comp.Hive, out HiveComponent? hive))
                 continue;
 
-            var statusEv = new BurrowedLarvaStatusEvent(hive.BurrowedLarva);
+            var availableLarva = HasLarvaPoolCandidates(comp.Hive) ? 0 : hive.BurrowedLarva;
+            var statusEv = new BurrowedLarvaStatusEvent(availableLarva);
             if (to != null)
             {
                 RaiseNetworkEvent(statusEv, to);
@@ -274,6 +250,13 @@ public sealed partial class JoinXenoSystem : EntitySystem
                     _rmcGameTicker.PlayerGameStatuses.GetValueOrDefault(s.UserId) != PlayerGameStatus.JoinedGame);
             RaiseNetworkEvent(statusEv, filter);
         }
+    }
+
+    private bool HasLarvaPoolCandidates(EntityUid hive)
+    {
+        var ev = new GetLarvaPoolCandidateCountEvent(hive);
+        RaiseLocalEvent(ev);
+        return ev.Count > 0;
     }
 
     public void RequestBurrowedLarvaStatus()

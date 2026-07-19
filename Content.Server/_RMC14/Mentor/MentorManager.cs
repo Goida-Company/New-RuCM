@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
@@ -58,20 +59,20 @@ public sealed partial class MentorManager : IPostInjectInit
 
     private sealed class WebhookPayload
     {
-        public string? Username { get; set; }
-        public List<WebhookEmbed>? Embeds { get; set; }
+        [JsonPropertyName("username")] public string? Username { get; set; }
+        [JsonPropertyName("embeds")] public List<WebhookEmbed>? Embeds { get; set; } = new();
     }
 
     private sealed class WebhookEmbed
     {
-        public string? Description { get; set; }
-        public int? Color { get; set; }
-        public WebhookEmbedFooter? Footer { get; set; }
+        [JsonPropertyName("description")] public string? Description { get; set; }
+        [JsonPropertyName("color")] public int? Color { get; set; }
+        [JsonPropertyName("footer")] public WebhookEmbedFooter? Footer { get; set; }
     }
 
     private sealed class WebhookEmbedFooter
     {
-        public string? Text { get; set; }
+        [JsonPropertyName("text")] public string? Text { get; set; }
     }
 
     private async Task LoadData(ICommonSession player, CancellationToken cancel)
@@ -602,7 +603,10 @@ public sealed partial class MentorManager : IPostInjectInit
         {
             var response = await _httpClient.PostAsync(_mentorHelpWebhookUrl, content);
             if (!response.IsSuccessStatusCode)
-                _log.RootSawmill.Error($"MentorHelp webhook failed: {response.StatusCode}");
+            {
+                var body = await response.Content.ReadAsStringAsync();
+                _log.RootSawmill.Error($"MentorHelp webhook failed: {(int)response.StatusCode} {response.StatusCode}\n{body}");
+            }
         }
         catch (Exception e)
         {

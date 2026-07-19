@@ -143,18 +143,11 @@ public sealed class VehicleSupplyLoadoutTest
             var entries = console!.Vehicles.ToDictionary(v => v.Vehicle.Id);
             Assert.That(entries.Keys, Is.SupersetOf(new[]
             {
-                "VehicleHumvee",
-                "VehicleHumveeMedical",
-                "VehicleHumveeTransport",
-                "VehicleAPC",
-                "VehicleAPCMed",
-                "VehicleAPCCommand",
-                "VehicleSPPAPC",
-                "VehicleTank",
-                "VehicleSPPTank",
-                "VehicleBlackfoot",
-                "VehicleBlackfootRecon",
-                "VehicleBlackfootTransport",
+                "VehicleHumvee", "VehicleHumveeMedical", "VehicleHumveeTransport",
+                "VehicleAPC", "VehicleAPCMed", "VehicleAPCCommand", "VehicleSPPAPC", "VehicleAev",
+                "VehicleTank", "VehicleSPPTank",
+                "VehicleSPPVan", "VehicleSPPVanArmed", "VehicleSPPVanMedical", "VehicleSPPVanPrisoner", "VehicleSPPVanLogistics",
+                // "VehicleBlackfoot", "VehicleBlackfootTransport", "VehicleBlackfootRecon"
             }));
             Assert.That(entries.Keys, Does.Not.Contain("VehicleBlackfootDoorGunVariant"));
 
@@ -170,17 +163,17 @@ public sealed class VehicleSupplyLoadoutTest
             AssertHardpoints(entries, "VehicleTank", TankHardpoints);
             AssertHardpoints(entries, "VehicleSPPTank", SppTankHardpoints);
 
-            AssertHardpoints(entries, "VehicleBlackfoot", BlackfootBaseHardpoints);
-            AssertHardpoints(entries, "VehicleBlackfootRecon", BlackfootReconHardpoints);
-            AssertHardpoints(entries, "VehicleBlackfootTransport", BlackfootBaseHardpoints);
+            // AssertHardpoints(entries, "VehicleBlackfoot", BlackfootBaseHardpoints);
+            // AssertHardpoints(entries, "VehicleBlackfootRecon", BlackfootReconHardpoints);
+            // AssertHardpoints(entries, "VehicleBlackfootTransport", BlackfootBaseHardpoints);
 
             AssertEntryGroup(entries, "VehicleHumvee", "vehicle-support");
             AssertEntryGroup(entries, "VehicleHumveeMedical", "vehicle-support");
             AssertEntryGroup(entries, "VehicleHumveeTransport", "vehicle-support");
             AssertEntryGroup(entries, "VehicleSPPAPC", "vehicle-apc");
-            AssertEntryGroup(entries, "VehicleBlackfoot", "vehicle-support");
-            AssertEntryGroup(entries, "VehicleBlackfootRecon", "vehicle-support");
-            AssertEntryGroup(entries, "VehicleBlackfootTransport", "vehicle-support");
+            // AssertEntryGroup(entries, "VehicleBlackfoot", "vehicle-support");
+            // AssertEntryGroup(entries, "VehicleBlackfootRecon", "vehicle-support");
+            // AssertEntryGroup(entries, "VehicleBlackfootTransport", "vehicle-support");
             AssertEntryGroup(entries, "VehicleAPC", "vehicle-apc");
             AssertEntryGroup(entries, "VehicleAPCMed", "vehicle-apc");
             AssertEntryGroup(entries, "VehicleAPCCommand", "vehicle-apc");
@@ -189,7 +182,7 @@ public sealed class VehicleSupplyLoadoutTest
 
             Assert.That(TankHardpoints, Does.Not.Contain("VehicleTankLTBCannon"));
             Assert.That(SppTankHardpoints, Does.Not.Contain("VehicleSPPTankRailgun"));
-            Assert.That(BlackfootReconHardpoints, Does.Not.Contain("VehicleBlackfootDoorGun"));
+            // Assert.That(BlackfootReconHardpoints, Does.Not.Contain("VehicleBlackfootDoorGun"));
         });
 
         await pair.CleanReturnAsync();
@@ -379,6 +372,7 @@ public sealed class VehicleSupplyLoadoutTest
     }
 
     [Test]
+    [Ignore("Blackfoot commented out from vehicle_supply.yml (PR1625)")]
     public async Task BlackfootBundleSpawnsPackedSupportObjects()
     {
         await using var pair = await PoolManager.GetServerClient();

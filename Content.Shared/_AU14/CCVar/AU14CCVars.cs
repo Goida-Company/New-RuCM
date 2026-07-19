@@ -25,4 +25,8 @@ public sealed partial class AU14CCVars : CVars
 
     public static readonly CVarDef<string> SeparatedHudStatusSide =
         CVarDef.Create("au14.separated_hud_status_side", "right", CVar.CLIENTONLY | CVar.ARCHIVE);
+
+    // master switch for the AU14 comms overhaul, off = stock radio behavior
+    public static readonly CVarDef<bool> NewCommsSystem =
+        CVarDef.Create("au14.new_comms_system", false, CVar.SERVERONLY);
 }

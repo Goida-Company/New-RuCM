@@ -27,6 +27,7 @@
   roundProfiles:
   - AU14RoundJobProfileMilitaryBase
   roundComponents:
+  - type: ANPRCRadioUser
   - type: Skills
     preset: AU14SkillPresetPlatoonAuxiliarySupportSynth
   - type: JobPrefix
@@ -117,6 +118,8 @@
     - CMUProstheticLeftArm
     - CMUProstheticRightArm
     - CMUProstheticLeftLeg
+    - SlowRunner
+    - Anemic
     - CMUProstheticRightLeg
   ranks:
     RMCRankSyntheticColonist: []

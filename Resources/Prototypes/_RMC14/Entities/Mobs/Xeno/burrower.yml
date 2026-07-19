@@ -74,6 +74,7 @@
     selfEffect: CMEffectSelfStomp
     shortRange: 0
     range: 4
+    stompsThroughBarricades: true
     plasmaCost: 100
     paralyzeTime: 2
     slowBigInsteadOfStun: true

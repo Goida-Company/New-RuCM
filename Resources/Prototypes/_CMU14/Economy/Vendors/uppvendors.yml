@@ -248,7 +248,7 @@
       - id: CMEntrenchingTool
         recommended: true
         amount: 30
-      - id: RMCShovel
+      - id: AU14ToolShovel
         amount: 10
       - id: RMCCombatUtilityKnifeA
         recommended: true
@@ -731,6 +731,10 @@
       - id: RMCPackFlareCAS
     - name: Spare Equipment
       entries:
+      - id: ANPRC117GRadioOPFORFilled
+        amount: 2
+      - id: ANPRCMastAntenna
+        amount: 1
       - id: RMCExplosiveBreachingCharge
         amount: 4
       - id: RMCBinoculars
@@ -773,6 +777,7 @@
       takeAll: CMUAREssentialEquipment
       entries:
       - id: AU14ArmorSmartGunDesertCombatHarnessUPP
+      - id: RMCScabbardMacheteSGFilled
 
     - name: Firearm System
       choices: { CMUPlatoonMG: 1 }

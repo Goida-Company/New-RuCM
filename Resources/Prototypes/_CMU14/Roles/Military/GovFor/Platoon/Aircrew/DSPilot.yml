@@ -25,6 +25,10 @@
   roundProfiles:
   - AU14RoundJobProfileMilitaryBase
   roundComponents:
+  - type: AU14CallsignRole
+    suffix: PAPA
+    commandElement: true
+    category: AIR
   - type: Skills
     preset: AU14SkillPresetPlatoonDP
   - type: JobPrefix
@@ -99,6 +103,9 @@
     - NonResuscitable
     - Epilepsy
     - NoEnglish
+    - SlowRunner
+    - Anemic
+    - Asthmatic
   ranks:
     RMCRankCivilian: []
   chevrons:

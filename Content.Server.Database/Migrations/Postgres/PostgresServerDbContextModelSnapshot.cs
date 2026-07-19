@@ -1169,6 +1169,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("origin");
 
+                    b.Property<string>("Platoon")
+                        .HasColumnType("text")
+                        .HasColumnName("platoon");
+
                     b.Property<bool>("PlaytimePerks")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("boolean")
@@ -1502,6 +1506,22 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasName("PK_rmc_discord_accounts");
 
                     b.ToTable("rmc_discord_accounts", (string)null);
+                });
+
+            modelBuilder.Entity("Content.Server.Database.RMCLarvaPoolOptOut", b =>
+                {
+                    b.Property<Guid>("PlayerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("player_id");
+
+                    b.Property<string>("HiveId")
+                        .HasColumnType("text")
+                        .HasColumnName("hive_id");
+
+                    b.HasKey("PlayerId", "HiveId")
+                        .HasName("PK_rmc_larva_pool_opt_out");
+
+                    b.ToTable("rmc_larva_pool_opt_out", (string)null);
                 });
 
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
@@ -2781,6 +2801,19 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("Round");
                 });
 
+            modelBuilder.Entity("Content.Server.Database.RMCLarvaPoolOptOut", b =>
+                {
+                    b.HasOne("Content.Server.Database.Player", "Player")
+                        .WithMany("LarvaPoolOptOuts")
+                        .HasForeignKey("PlayerId")
+                        .HasPrincipalKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_rmc_larva_pool_opt_out_player_player_id");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Content.Server.Database.RMCLinkedAccount", b =>
                 {
                     b.HasOne("Content.Server.Database.RMCDiscordAccount", "Discord")
@@ -3250,6 +3283,8 @@ namespace Content.Server.Database.Migrations.Postgres
                     b.Navigation("CommendationsReceived");
 
                     b.Navigation("JobWhitelists");
+
+                    b.Navigation("LarvaPoolOptOuts");
 
                     b.Navigation("LinkedAccount");
 

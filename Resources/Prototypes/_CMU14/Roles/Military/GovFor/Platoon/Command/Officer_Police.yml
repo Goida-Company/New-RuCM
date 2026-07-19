@@ -26,6 +26,10 @@
   roundProfiles:
   - AU14RoundJobProfileMilitaryBase
   roundComponents:
+  - type: AU14CallsignRole
+    suffix: OPS
+    commandElement: true
+    category: MP
   - type: Skills
     preset: AU14SkillPresetOfficerMP
   - type: JobPrefix
@@ -68,6 +72,9 @@
     - NonResuscitable
     - Epilepsy
     - NoEnglish
+    - SlowRunner
+    - Anemic
+    - Asthmatic
   ranks:
     RMCRankCivilian: []
   chevrons:

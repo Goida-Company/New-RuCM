@@ -22,7 +22,7 @@
 - type: radioChannel
   id: MarineCommand
   name: chat-radio-marine-command
-  keycode: "r" #v in cm13
+  keycode: "¯" #v in cm13
   frequency: 1481
   color: "#5b96d4"
   longRange: true

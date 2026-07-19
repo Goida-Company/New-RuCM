@@ -1,5 +1,5 @@
 # Apparel, medic, aircrew, command, smartgun, section-leader, weapons, special-weapons,
-# equipment (universal), RTO (universal), aircrew-weapons (universal), CT (universal)
+# equipment (universal), RTO (universal), aircrew-weapons (universal), CT (universal), Crewman (universal)
 - type: entity
   parent: ColMarTechBase
   id: AU14USCMclothingequipmentvendor
@@ -255,7 +255,7 @@
       - id: RMCPouchMedical
       - id: RMCPouchSyringeFill
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints
+        name: first-aid pouch (gauze, ointment)
       - id: RMCPouchFirstAidPills
         name: first-aid pouch (pills)
     - name: Medical Storage
@@ -614,6 +614,10 @@
       - id: RMCPackFlareCAS
     - name: Spare Equipment
       entries:
+      - id: ANPRC117GRadioFilled
+        amount: 2
+      - id: ANPRCMastAntenna
+        amount: 1
       - id: RMCExplosiveBreachingCharge
         amount: 4
       - id: RMCBinoculars
@@ -866,7 +870,7 @@
       - id: CMEntrenchingTool
         recommended: true
         amount: 30
-      - id: RMCShovel
+      - id: AU14ToolShovel
         amount: 10
       - id: RMCM5Bayonet
         recommended: true
@@ -992,6 +996,8 @@
       - id: AU14SpikeBoots
     - name: Spare Equipment
       entries:
+      - id: ANPRCMastAntenna
+        amount: 1
       - id: RMCExplosiveBreachingCharge
         amount: 2
       - id: RMCBinoculars
@@ -1260,7 +1266,7 @@
     - RMCVisorWelding
     - RMCWeldingGoggles
     - RMCSentryLaptop
-    - RMCShovel
+    - AU14ToolShovel
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -1279,7 +1285,7 @@
     - CMAPCElectronics
     - RMCWeldingGoggles
     - AU14MaintenanceJack
-    - RMCShovel
+    - AU14ToolShovel
 
 - type: entity
   parent: CMVendorBundleRiflemanApparel
@@ -1651,3 +1657,24 @@
       entries:
       - id: AU14FlagCarriableUA
         amount: 1
+
+- type: entity
+  parent: ColMarTechBase
+  id: AU14USCMVehicleCrewmanVendor
+  name: vehicle crewman vendor
+  description: >-
+    An automated dispenser rack, hooked up to a small storage of support gear for vehicle crew.
+    Engineered to get vehicle crewmen fight-ready in seconds after cryogenic hypersleep or scramble orders.
+    The console shows many different options available, though they are all marked as temporarily out of stock.
+
+    Vehicle crew protocol: grab the essential maintenance jack.
+  components:
+  - type: AccessReader
+    access: [[ "AU14AccessGovforVehicleCrew" ], [ "AU14AccessOpforVehicleCrew" ]]
+  - type: Sprite
+    sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
+  - type: CMAutomatedVendor
+    sections:
+    - name: Servicing Tools # placeholder
+      entries:
+      - id: AU14MaintenanceJack

@@ -240,7 +240,7 @@
         amount: 15
       - id: CMEntrenchingTool
         amount: 15
-      - id: RMCShovel
+      - id: AU14ToolShovel
         amount: 10
       - id: CMScrewdriver
         amount: 5
@@ -726,6 +726,7 @@
       takeAll: CMUAREssentialEquipment
       entries:
       - id: RMCWeaponRifleM54CE2
+      - id: RMCScabbardMacheteSGFilled
       - id: CMBeltMarine
       - id: RMCAttachmentS5RedDotSight
       - id: RMCAttachmentExtendedCompensator

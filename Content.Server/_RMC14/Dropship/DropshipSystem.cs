@@ -56,10 +56,10 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using ThirdPartyDropshipAutoReturnComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipAutoReturnComponent ;
-using ThirdPartyDropshipDeactivatedConsoleComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipDeactivatedConsoleComponent ;
-using ThirdPartyDropshipReturnDestinationComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipReturnDestinationComponent ;
-using ThirdPartyDropshipReturnedComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipReturnedComponent ;
+using ThirdPartyDropshipAutoReturnComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipAutoReturnComponent;
+using ThirdPartyDropshipDeactivatedConsoleComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipDeactivatedConsoleComponent;
+using ThirdPartyDropshipReturnDestinationComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipReturnDestinationComponent;
+using ThirdPartyDropshipReturnedComponent = Content.Server._CMU14.Ops.ThirdParty.ThirdPartyDropshipReturnedComponent;
 
 namespace Content.Server._RMC14.Dropship;
 
@@ -103,6 +103,7 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
 
     private EntityUid _dropshipId;
     private bool _hijack;
+    private bool _dropshipReusable;
 
     private const float DepartureLocationSearchRange = 12;
     private const string ThirdPartyAutoReturnAnnouncement = "Automatic return to deep space in 2 minutes.";
@@ -144,6 +145,7 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
         Subs.CVar(_config, RMCCVars.RMCLandingZonePrimaryAutoMinutes, v => _lzPrimaryAutoDelay = TimeSpan.FromMinutes(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipFlyByTimeSeconds, v => _flyByTime = TimeSpan.FromSeconds(v), true);
         Subs.CVar(_config, RMCCVars.RMCDropshipHijackTravelTimeSeconds, v => _hijackTravelTime = TimeSpan.FromSeconds(v), true);
+        Subs.CVar(_config, RMCCVars.ThirdPartyDropshipReusable, v => _dropshipReusable = v, true);
     }
 
     private void OnFTLStarted(Entity<DropshipComponent> ent, ref FTLStartedEvent args)
@@ -426,8 +428,8 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
 
     private void DisableReturnedThirdPartyDropship(EntityUid dropship, ThirdPartyDropshipReturnDestinationComponent returnDestination)
     {
-        if (returnDestination.Shuttle != dropship)
-            return;
+        if (returnDestination.Shuttle != dropship) return;
+        if (_dropshipReusable) { RefreshUI(); return; }
 
         EnsureComp<ThirdPartyDropshipReturnedComponent>(dropship);
         EnsureComp<PreventFTLComponent>(dropship);
@@ -643,7 +645,7 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
         {
             if (hijack)
             {
-                hyperspaceTime = (float) _hijackTravelTime.TotalSeconds;
+                hyperspaceTime = (float)_hijackTravelTime.TotalSeconds;
             }
             else
             {
@@ -652,7 +654,7 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
                 var flyBy = dropship.Destination == destination;
                 if (flyBy)
                 {
-                    hyperspaceTime = (float) _flyByTime.TotalSeconds;
+                    hyperspaceTime = (float)_flyByTime.TotalSeconds;
                     if (hasSkill)
                         hyperspaceTime *= computer.Comp.SkillFlyByMultiplier;
                 }

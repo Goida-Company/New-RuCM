@@ -244,7 +244,7 @@
   - type: ParalyzeOnPullAttemptImmune
   - type: InfectOnPullAttemptImmune
   - type: GhostTakeoverAvailable
-  - type: LarvaQueueable
+  - type: LarvaPoolAvailable
   - type: GhostRole
     makeSentient: true
     allowSpeech: true

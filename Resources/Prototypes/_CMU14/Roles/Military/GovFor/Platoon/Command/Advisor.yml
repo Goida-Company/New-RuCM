@@ -25,7 +25,12 @@
   roundProfiles:
   - AU14RoundJobProfileMilitaryBase
   roundComponents:
+  - type: AU14CallsignRole
+    suffix: OPS
+    commandElement: true
   - type: SeeNewPlayers
+  - type: ANPRCRadioUser
+  - type: ANPRCCryptoAuthority
   - type: Skills
     preset: AU14SkillPresetPlatoonAdvisor
   - type: RMCSpeechBubbleSpecificStyle
@@ -52,6 +57,8 @@
     traits:
     - Epilepsy
     - NoEnglish
+    - SlowRunner
+    - Anemic
   ranks:
     RMCRankCivilian: []
   chevrons:
@@ -128,6 +135,9 @@
     belt: AU14BeltPostelPistolM48A5NoSuper
     back: AU14SatchelMarineAdvisorMilitary # removed by ImaginaryFriend
     pocket1: AU14StampSEA # removed by ImaginaryFriend
+  storage:
+    back:
+    - ANPRCFillCardGOVFOR
 
 - type: startingGear
   id: AU14GearOPFORadvisor
@@ -136,6 +146,9 @@
     ears: AU14HeadsetOpforCommand
     belt: AU14BeltPostelPistolM48A5NoSuper
     back: AU14SatchelMarineAdvisorMilitary
+  storage:
+    back:
+    - ANPRCFillCardOPFOR
 
 - type: roleLoadout
   id: JobAU14JobGOVFORadvisor

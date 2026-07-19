@@ -206,7 +206,7 @@
         amount: 15
       - id: CMEntrenchingTool
         amount: 15
-      - id: RMCShovel
+      - id: AU14ToolShovel
         amount: 10
       - id: CMScrewdriver
         amount: 5
@@ -710,6 +710,7 @@
       entries:
       - id: AU14WeaponRifleKramerLSW
       - id: AU14LACNAmmoBackpack
+      - id: RMCScabbardMacheteSGFilled
       - id: CMBeltMarine
       - id: RMCPouchMagazineLarge
     - name: Munitions

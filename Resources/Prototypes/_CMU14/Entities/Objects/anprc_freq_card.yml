@@ -1,0 +1,43 @@
+- type: entity
+  parent: CMPaperWritten
+  id: ANPRCFreqCard
+  name: карточка распределения частот AN/PRC-117G
+  description: Ламинированная карточка с инструкциями по организации связи, которую можно закрепить на предплечье. Ламинация уже знавала лучшие времена.
+  components:
+  - type: Item
+    size: Small
+  - type: ANPRCFreqCard
+    faction: govfor
+  # fallback text only, the server rewrites this from the round's frequency plan
+  - type: Paper
+    content: |
+      [head=2]ИНСТРУКЦИЯ ПО ОРГАНИЗАЦИИ СВЯЗИ[/head]
+      [head=3]ЧАСТОТЫ СЕТЕЙ AN/PRC-117G[/head]
+
+      [bold]Командование GOVFOR[/bold] - 2.592 МГц
+      [bold]GOVFOR Alpha[/bold]   - 2.502 МГц
+      [bold]GOVFOR Bravo[/bold]   - 1.606 МГц
+      [bold]GOVFOR Charlie[/bold] - 1.607 МГц
+      [bold]GOVFOR Intel[/bold]   - 1.605 МГц
+      [bold]GOVFOR JTAC[/bold]    - 2.598 МГц
+      [bold]GOVFOR MILP[/bold]    - 2.595 МГц
+
+      Введите частоту во вкладке «ЧАСТОТА» (с точкой или без неё: 2592 и 2.592 равнозначны), чтобы назначить сеть ячейке.
+
+      [italic]COMSEC: контролируемый документ. Уничтожить при угрозе захвата. Частоты действуют на всём театре; считайте, что противник располагает своей копией.[/italic]
+
+- type: entity
+  parent: ANPRCFreqCard
+  id: ANPRCFreqCardOPFOR
+  suffix: OPFOR
+  components:
+  - type: ANPRCFreqCard
+    faction: opfor
+
+- type: entity
+  parent: ANPRCFreqCard
+  id: ANPRCFreqCardCLF
+  suffix: CLF
+  components:
+  - type: ANPRCFreqCard
+    faction: clf

@@ -119,6 +119,7 @@
       effects:
       - !type:Oxygenating
         potency: 4
+      - !type:ClearRespiratoryStrain
 
 - type: reagent
   parent: [ CMReagentMedicine, DexalinPlus ]
@@ -134,6 +135,7 @@
       effects:
       - !type:Oxygenating
         potency: 6
+      - !type:ClearRespiratoryStrain
 
 # TODO RMC14 other effects (pain)
 # TODO RMC14 injected only
@@ -151,6 +153,7 @@
       effects:
       - !type:Electrogenetic
         potency: 2
+      - !type:CureDrugAllergyReaction
       - !type:CMUApplyPainSuppressionEffect
         accumulationSuppression: 0.15
         tierSuppression: 1
@@ -186,6 +189,7 @@
     Medicine:
       metabolismRate: 0.5
       effects:
+      - !type:Allergenic
       - !type:HealthChange
         conditions:
         - !type:MobStateCondition

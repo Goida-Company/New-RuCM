@@ -1,0 +1,39 @@
+- type: guideEntry
+  parent: RMC
+  id: AU14Comms
+  name: Справочник по связи
+  text: "/ServerInfo/Guidebook/_AU14/Comms/AU14CommsIndex.xml"
+  priority: 2
+  children:
+  - AU14CommsANPRC
+  - AU14CommsHeadsets
+  - AU14CommsVoiceProcedure
+  - AU14CommsQuickRef
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CommsANPRC
+  name: "Радиостанция AN/PRC-117G"
+  priority: 0
+  text: "/ServerInfo/Guidebook/_AU14/Comms/AU14CommsANPRC.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CommsHeadsets
+  name: Полевые гарнитуры
+  priority: 1
+  text: "/ServerInfo/Guidebook/_AU14/Comms/AU14CommsHeadsets.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CommsVoiceProcedure
+  name: Правила радиообмена
+  priority: 2
+  text: "/ServerInfo/Guidebook/_AU14/Comms/AU14CommsVoiceProcedure.xml"
+
+- type: guideEntry
+  parent: RMC
+  id: AU14CommsQuickRef
+  name: Краткая памятка по связи
+  priority: 3
+  text: "/ServerInfo/Guidebook/_AU14/Comms/AU14CommsQuickRef.xml"

@@ -170,6 +170,9 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<int> RMCDropshipHijackTravelTimeSeconds =
         CVarDef.Create("rmc.dropship_hijack_travel_time_seconds", 180, CVar.REPLICATED | CVar.SERVER);
 
+    public static readonly CVarDef<bool> ThirdPartyDropshipReusable =
+        CVarDef.Create("rmc.thirdparty_dropship_reusable", true, CVar.REPLICATED | CVar.SERVER);
+
     public static readonly CVarDef<bool> RMCEntitiesLogDelete =
         CVarDef.Create("rmc.entities_log_delete", false, CVar.SERVER | CVar.SERVERONLY);
 
@@ -269,11 +272,8 @@ public sealed partial class RMCCVars : CVars
     public static readonly CVarDef<float> RMCLateJoinsBurrowedLarvaDeathTimeIgnoreBeforeMinutes =
         CVarDef.Create("rmc.late_joins_burrowed_larva_death_time_ignore_before_minutes", 2.5f, CVar.REPLICATED | CVar.SERVER);
 
-    public static readonly CVarDef<int> RMCLarvaQueueRoundstartDelaySeconds =
-        CVarDef.Create("rmc.larva_queue_roundstart_delay_seconds", 120, CVar.REPLICATED | CVar.SERVER);
-
-    public static readonly CVarDef<int> RMCLarvaQueueWaitSeconds =
-        CVarDef.Create("rmc.larva_queue_wait_seconds", 0, CVar.REPLICATED | CVar.SERVER);
+    public static readonly CVarDef<int> RMCLarvaPoolWaitSeconds =
+        CVarDef.Create("rmc.larva_pool_wait_seconds", 300, CVar.REPLICATED | CVar.SERVER);
 
     public static readonly CVarDef<int> RMCBurrowedLarvaSacrificeTimeMinutes =
         CVarDef.Create("rmc.burrowed_larva_sacrifice_time_minutes", 15, CVar.REPLICATED | CVar.SERVER);

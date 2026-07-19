@@ -21,7 +21,7 @@ public sealed partial class XenoParasiteSystem : SharedXenoParasiteSystem
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private HTNSystem _htn = default!;
-    [Dependency] private LarvaQueueSystem _larvaQueue = default!;
+    [Dependency] private LarvaPoolSystem _larvaPool = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private DialogSystem _dialog = default!;
 
@@ -118,7 +118,7 @@ public sealed partial class XenoParasiteSystem : SharedXenoParasiteSystem
                 TryComp<VictimInfectedComponent>(victim.Value, out var declinedInfected) &&
                 declinedInfected.SpawnedLarva is { } declinedSpawned)
             {
-                _larvaQueue.TryClaimQueueable(declinedSpawned);
+                _larvaPool.RequestAssignmentFor(declinedSpawned);
             }
 
             return;

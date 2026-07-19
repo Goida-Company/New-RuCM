@@ -1,3 +1,16 @@
+# ├──[ Skills ]──────────────────────────────────────────────────────┤
+# grants AN/PRC-117G operator training, for standing up a replacement RTO
+- type: entity
+  parent: CMPamphlet
+  id: AU14PamphletRadioOperator
+  name: памятка полевого радиооператора
+  description: Памятка для быстрого освоения жизненно важных знаний. В ней описаны работа с ранцевой радиостанцией AN/PRC-117G, порядок радиообмена и обращение с COMSEC.
+  components:
+  - type: SkillPamphlet
+    addComps:
+    - type: ANPRCRadioUser
+
+# ├──[ Languages ]───────────────────────────────────────────────────┤
 - type: entity
   parent: CMPamphletLanguage
   id: AU14PamphletLanguageEnglish
