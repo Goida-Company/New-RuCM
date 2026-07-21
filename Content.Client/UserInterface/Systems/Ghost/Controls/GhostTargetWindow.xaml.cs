@@ -922,19 +922,21 @@ namespace Content.Client.UserInterface.Systems.Ghost.Controls
 
             return section switch
             {
-                GhostWarpGrouping.SectionAll => "All",
-                GhostWarpGrouping.SectionHighCommand => "HC",
-                GhostWarpGrouping.SectionCommand => "Cmd",
-                GhostWarpGrouping.SectionSquadLeads => "SL",
-                GhostWarpGrouping.SectionSpecialists => "Spec",
-                GhostWarpGrouping.SectionPilotsCrew => "Crew",
-                GhostWarpGrouping.SectionLinePersonnel => "Line",
-                GhostWarpGrouping.SectionPersonnel => "Pers",
-                GhostWarpGrouping.SectionUnknownTier => "Unk",
-                GhostWarpGrouping.SectionAbominations => "Abom",
-                GhostWarpGrouping.SectionSummoners => "Summ",
-                GhostWarpGrouping.SectionWarpPoints => "Warp",
+                // RuMC edit start
+                GhostWarpGrouping.SectionAll => Loc.GetString("ghost-target-window-subtab-compact-all"),
+                GhostWarpGrouping.SectionHighCommand => Loc.GetString("ghost-target-window-subtab-compact-high-command"),
+                GhostWarpGrouping.SectionCommand => Loc.GetString("ghost-target-window-subtab-compact-command"),
+                GhostWarpGrouping.SectionSquadLeads => Loc.GetString("ghost-target-window-subtab-compact-squad-leads"),
+                GhostWarpGrouping.SectionSpecialists => Loc.GetString("ghost-target-window-subtab-compact-specialists"),
+                GhostWarpGrouping.SectionPilotsCrew => Loc.GetString("ghost-target-window-subtab-compact-pilots-crew"),
+                GhostWarpGrouping.SectionLinePersonnel => Loc.GetString("ghost-target-window-subtab-compact-line-personnel"),
+                GhostWarpGrouping.SectionPersonnel => Loc.GetString("ghost-target-window-subtab-compact-personnel"),
+                GhostWarpGrouping.SectionUnknownTier => Loc.GetString("ghost-target-window-subtab-compact-unknown-tier"),
+                GhostWarpGrouping.SectionAbominations => Loc.GetString("ghost-target-window-subtab-compact-abominations"),
+                GhostWarpGrouping.SectionSummoners => Loc.GetString("ghost-target-window-subtab-compact-summoners"),
+                GhostWarpGrouping.SectionWarpPoints => Loc.GetString("ghost-target-window-subtab-compact-warp-points"),
                 _ => GetDisplayName(section),
+                // RuMC edit end
             };
         }
 

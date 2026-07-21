@@ -65,6 +65,7 @@ SPDX-License-Identifier: AGPL-3.0-only
                             </BoxContainer>
                         </BoxContainer>
                         <Label Text="{Loc 'gmod-construction-menu-steps'}" StyleClasses="LabelKeyText" Margin="0 0 0 2"/>
+                        <RichTextLabel Name="ConstructionSkillInfo" Visible="False" HorizontalExpand="True" Margin="0 0 0 3"/>
                         <ItemList Name="RecipeStepList" Access="Public" VerticalExpand="True" Margin="0 0 0 6"/>
                         <Button Name="BuildButton" Disabled="True" ToggleMode="True" Margin="0 0 0 4"/>
                         <Button Name="FavoriteButton" Visible="False" Margin="0 0 0 4"/>
@@ -119,6 +120,9 @@ SPDX-License-Identifier: AGPL-3.0-only
                                         HorizontalExpand="True" Margin="0 0 0 2"/>
                                 <Button Name="LatheEditorButton"
                                         Text="{Loc 'gmod-construction-menu-lathe-editor'}"
+                                        HorizontalExpand="True" Margin="0 0 0 2"/>
+                                <Button Name="SpawnlistDeleteButton"
+                                        Text="{Loc 'gmod-construction-menu-spawnlist-delete'}"
                                         HorizontalExpand="True" Margin="0 0 0 2"/>
                                 <Button Name="ZLevelTogglesButton"
                                         Text="{Loc 'gmod-construction-menu-zlevel-toggles'}"

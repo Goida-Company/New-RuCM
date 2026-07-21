@@ -1,33 +1,33 @@
-ent-ElectricGuitarInstrument-name = электрогитара
-ent-ElectricGuitarInstrument-desc = Теперь вы почувствуете себя рок-звездой!
+ent-BaseStringInstrument = {ent-BaseHandheldInstrument}
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-BassGuitarInstrument-name = бас-гитара
-ent-BassGuitarInstrument-desc = Ты чувствуешь себя действительно круто, держа это. Жаль, что ты единственный, кто так думает.
+ent-BaseStringInstrumentClothing = {ent-BaseStringInstrument}
+    .desc = {ent-BaseStringInstrument.desc}
 
-ent-RockGuitarInstrument-name = рок-гитара
-ent-RockGuitarInstrument-desc = Какой топор!
+ent-ElectricGuitarInstrument = электрогитара
+    .desc = Почувствуйте себя рок-звездой!
 
-ent-AcousticGuitarInstrument-name = акустическая гитара
-ent-AcousticGuitarInstrument-desc = В любом случае, вот Wonderwall.
+ent-BassGuitarInstrument = бас-гитара
+    .desc = Вы чувствуете себя очень крутым, держа её в руках.
 
-ent-GuitarlessFretsInstrument-name = безгитарные лады
-ent-GuitarlessFretsInstrument-desc = Кому вообще нужно тело?
+ent-RockGuitarInstrument = рок-гитара
+    .desc = Вот это топор!
 
-ent-BanjoInstrument-name = банджо
-ent-BanjoInstrument-desc = Это инструмент.
+ent-AcousticGuitarInstrument = акустическая гитара
+    .desc = Короче, сыграем "Wonderwall".
 
-ent-ViolinInstrument-name = скрипка
-ent-ViolinInstrument-desc = Любимец музыкальных виртуозов и блюграсс-групп.
+ent-GuitarlessFretsInstrument = безгитарные лады
+    .desc = Кому вообще нужен корпус?
+    .suffix = Адмемы
 
-ent-ViolaInstrument-name = альт
-ent-ViolaInstrument-desc = Как скрипка, только хуже.
+ent-BanjoInstrument = банджо
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-CelloInstrument-name = виолончель
-ent-CelloInstrument-desc = Ботаники называют эти виолончели.
+ent-ViolinInstrument = скрипка
+    .desc = Любимица музыкантов-виртуозов и блюграсс-групп.
 
-ent-BaseStringInstrument-name = элемент
-ent-BaseStringInstrument-desc = Это инструмент.
+ent-ViolaInstrument = виола
+    .desc = Как скрипка, только хуже.
 
-ent-BaseStringInstrumentClothing-name = элемент
-ent-BaseStringInstrumentClothing-desc = Это инструмент.
-
+ent-CelloInstrument = виолончель
+    .desc = Ботаны называют такие челями.

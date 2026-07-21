@@ -84,15 +84,19 @@ public sealed partial class CPRSystem : EntitySystem
         if (args.Target != null)
             RemComp<ReceivingCPRComponent>(args.Target.Value);
 
-        if (args.Cancelled ||
-            args.Handled ||
-            args.Target is not { } target ||
-            !CanCPRPopup(performer, target, false, out var damage))
+        if (args.Handled || args.Target is not { } target)
+            return;
+
+        if (args.Cancelled || !CanCPRPopup(performer, target, false, out var damage))
         {
+            var failed = new CPRAttemptFinishedEvent(performer, target, false);
+            RaiseLocalEvent(ref failed);
             return;
         }
 
         args.Handled = true;
+        var finished = new CPRAttemptFinishedEvent(performer, target, true);
+        RaiseLocalEvent(ref finished);
 
         if (TryComp(target, out CPRDummyComponent? dummy))
         {

@@ -1,12 +1,12 @@
 - type: entity
   parent: RMCMarineHelmetBase
   id: RuMCUPPNavalInfantryHeavyHelmet
-  name: Heavy helmet UPP
+  name: Maska-S
   description: The helmet for the UPP. It's called a heavy helmet, but the only difference is that the mask feels like it's made of cardboard, so there's not much difference between this and the regular version. [Head, eyes]
   components:
   - type: CMArmor
     melee: 25
-    bullet: 25
+    bullet: 30
     bio: 20
     explosionArmor: 12
     # armor_laser = 15
@@ -23,6 +23,37 @@
       visible: false
   - type: Clothing
     sprite: _RuMC14/Clothing/UPP/helmet/HeavyHelmet.rsi
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: up
+    foldedHeldPrefix: up
+
+- type: entity
+  parent: RMCMarineHelmetBase
+  id: RuMCUPPNavalInfantryHeavyHelmet2
+  name: Altyn-S
+  description: A heavy assault helmet featuring a wide, curved bulletproof polycarbonate visor. Unlike the Maska, it offers a full, unobstructed field of view, making it ideal for commanders and operators in close-quarters environments. The visor is resistant to most pistol rounds and shrapnel, but can be cracked by sustained heavy fire or blunt impacts. A symbol of elite status and modern protection.
+  components:
+  - type: CMArmor
+    melee: 25
+    bullet: 25
+    bio: 20
+    explosionArmor: 12
+    # armor_laser = 15
+    # armor_energy = 10
+    # armor_rad = 10
+    # armor_internaldamage = 20
+  - type: Sprite
+    sprite: _RuMC14/Clothing/UPP/helmet/2_HeavyHelmet.rsi
+    layers:
+    - state: icon
+      map: [ "unfoldedLayer" ]
+    - state: icon-up
+      map: ["foldedLayer"]
+      visible: false
+  - type: Clothing
+    sprite: _RuMC14/Clothing/UPP/helmet/2_HeavyHelmet.rsi
   - type: Foldable
     canFoldInsideContainer: true
   - type: FoldableClothing

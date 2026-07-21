@@ -1,11 +1,11 @@
 rank-RMCRankProvostSectorMarshal = Маршал сектора
-  .prefix = Марш. Сект.
+  .prefix = Маршал сект.
 
 rank-RMCRankProvostSeniorMarshal = Старший маршал
-  .prefix = Ст. Марш.
+  .prefix = Ст. Маршал
 
 rank-RMCRankProvostMarshal = Маршал
-  .prefix = Марш.
+  .prefix = Маршал
 
 rank-RMCRankProvostDeputyMarshal = Заместитель маршала
   .prefix = Зам. Марш.

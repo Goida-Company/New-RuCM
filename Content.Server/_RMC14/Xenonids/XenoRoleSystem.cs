@@ -98,7 +98,7 @@ public sealed partial class XenoRoleSystem : EntitySystem
     private void OnPlayerAttached(Entity<XenoComponent> xeno, ref PlayerAttachedEvent args)
     {
         RemCompDeferred<XenoDisconnectedComponent>(xeno);
-        RemCompDeferred<AbandonedXenoPoolAvailableComponent>(xeno);
+        RemCompDeferred<AbandonedXenoQueueableComponent>(xeno);
         _toUpdate.Add(xeno);
     }
 
@@ -287,6 +287,6 @@ public sealed partial class XenoRoleSystem : EntitySystem
             return;
         }
 
-        EnsureComp<AbandonedXenoPoolAvailableComponent>(uid);
+        EnsureComp<AbandonedXenoQueueableComponent>(uid);
     }
 }

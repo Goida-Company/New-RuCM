@@ -292,7 +292,7 @@ public sealed partial class FoodSystem : EntitySystem
         }
         else
         {
-            _popup.PopupClient(Loc.GetString(entity.Comp.EatMessage, ("food", entity.Owner), ("flavors", flavors)), args.User, args.User);
+            _popup.PopupEntity(Loc.GetString(entity.Comp.EatMessage, ("food", entity.Owner), ("flavors", flavors)), args.User, args.User);
 
             // log successful voluntary eating
             _adminLogger.Add(LogType.Ingestion, LogImpact.Low, $"{ToPrettyString(args.User):target} ate {ToPrettyString(entity.Owner):food}");
@@ -300,13 +300,16 @@ public sealed partial class FoodSystem : EntitySystem
 
         _audio.PlayPredicted(entity.Comp.UseSound, args.Target.Value, args.User, AudioParams.Default.WithVolume(-1f).WithVariation(0.20f));
 
+        // The event describes who consumed the food. During force-feeding args.User
+        // is the feeder, while args.Target is the actual consumer.
+        var eatenEvent = new AfterFoodEatenEvent(args.Target.Value);
+        RaiseLocalEvent(entity.Owner, ref eatenEvent);
+
         // Try to break all used utensils
         foreach (var utensil in utensils)
         {
             _utensil.TryBreak(utensil, args.User);
         }
-
-        args.Repeat = !forceFeed;
 
         if (TryComp<StackComponent>(entity, out var stack))
         {

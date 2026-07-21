@@ -152,15 +152,18 @@ public sealed class InsurgencyFactionEditorWindow : DefaultWindow
 
         // These four are free-form prose players read, so they get roomy multi-line boxes rather than a
         // single cramped line. Nudge MultilineHeight below to change how tall the boxes start.
-        var title = LabeledMultiline(Loc.GetString("insfor-editor-field-title"), meta.Title);
-        var recruited = LabeledMultiline(Loc.GetString("insfor-editor-field-recruited-message"), meta.RecruitedMessage);
-        var description = LabeledMultiline(Loc.GetString("insfor-editor-field-description"), meta.Description);
-        var roleplay = LabeledMultiline(Loc.GetString("insfor-editor-field-roleplay-style"), meta.RoleplayText);
-        // DISABLED: picking a flag for an INSFOR faction is cancelled for now - the whole flag
-        // feature (selection + import/export) proved too logically complicated. The stored value
-        // is preserved untouched on save so nothing is lost if this comes back.
-        // var flag = FlagField("Flag entity", meta.FlagEntity?.Id);
-        var icon = IconField(Loc.GetString("insfor-editor-field-status-icon"), meta.StatusIcon?.Id);
+        var title = LabeledMultiline("Title", meta.Title);
+        var recruited = LabeledMultiline("Recruited message", meta.RecruitedMessage);
+        var description = LabeledMultiline("Description", meta.Description);
+        var roleplay = LabeledMultiline("Roleplay style", meta.RoleplayText);
+        // Flag: pick any catalog entity to use as the faction flag. Its sprite shows on the leader's
+        // faction-selection rows and in the member reveal popup. This is the catalog picker only - the old
+        // live upload / import-export pipeline stays retired.
+        var flag = EntityField("Flag entity", meta.FlagEntity?.Id);
+        var icon = IconField("Status icon", meta.StatusIcon?.Id);
+        // Icon for members recruited in-round (tattooed) who have no per-job icon - without it they keep the
+        // default CLF icon. Falls back to the Status icon above when left empty.
+        var recruitIcon = IconField("Recruited-member icon (no per-job icon)", meta.RecruitStatusIcon?.Id);
         var jobIcons = JobIconListEditor(meta.JobStatusIcons);
         var dollars = LabeledLine(Loc.GetString("insfor-editor-field-dollars-rate"), def.Economy.DollarsToPointsRate.ToString(System.Globalization.CultureInfo.InvariantCulture));
 
@@ -190,12 +193,12 @@ public sealed class InsurgencyFactionEditorWindow : DefaultWindow
         var tabs = new TabContainer { HorizontalExpand = true, VerticalExpand = true, MinSize = new Vector2(0, 560) };
         var pages = new (string Title, Control[] Controls)[]
         {
-            (Loc.GetString("insfor-editor-tab-faction-info"), new Control[] { title.Control, recruited.Control, description.Control,
-                roleplay.Control, icon.Control, jobIcons.Control, isDefault, opposed.Control }),
-            (Loc.GetString("insfor-editor-tab-economy"), new Control[] { dollars.Control, submissions.Control, includeDollars }),
-            (Loc.GetString("insfor-editor-tab-cell-kit"), new Control[] { machines.Control, placeables.Control }),
-            (Loc.GetString("insfor-editor-tab-vendors"), new Control[] { vendors.Control }),
-            (Loc.GetString("insfor-editor-tab-loadouts"), new Control[] { loadouts.Control }),
+            ("Faction Info", new Control[] { title.Control, recruited.Control, description.Control,
+                roleplay.Control, flag.Control, icon.Control, recruitIcon.Control, jobIcons.Control, isDefault, opposed.Control }),
+            ("Economy", new Control[] { dollars.Control, submissions.Control, includeDollars }),
+            ("Cell Kit", new Control[] { machines.Control, placeables.Control }),
+            ("Vendors", new Control[] { vendors.Control }),
+            ("Loadouts", new Control[] { loadouts.Control }),
         };
         for (var i = 0; i < pages.Length; i++)
         {
@@ -217,9 +220,9 @@ public sealed class InsurgencyFactionEditorWindow : DefaultWindow
                 Description = description.Read(),
                 RoleplayText = roleplay.Read(),
                 RecruitedMessage = recruited.Read(),
-                // Flag selection is disabled (see above); carry the existing value through unchanged.
-                FlagEntity = meta.FlagEntity,
+                FlagEntity = ToEntProtoIdOrNull(flag.Read()),
                 StatusIcon = ToIconOrNull(icon.Read()),
+                RecruitStatusIcon = ToIconOrNull(recruitIcon.Read()),
                 JobStatusIcons = jobIcons.Read(),
                 OpposedGovforFactions = opposed.Read(),
                 // Preserve the built-in override marker so re-saving an edited built-in keeps updating the

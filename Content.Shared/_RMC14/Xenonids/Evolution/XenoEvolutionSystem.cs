@@ -724,7 +724,7 @@ public sealed partial class XenoEvolutionSystem : EntitySystem
         EnsureComp<XenoEvolutionTransferComponent>(xeno);
         var coordinates = _transform.GetMoverCoordinates(xeno);
         var newXeno = Spawn(proto, coordinates);
-        EnsureComp<LarvaPoolClaimBlockedComponent>(newXeno);
+        EnsureComp<LarvaQueueClaimBlockedComponent>(newXeno);
         EnsureComp<XenoEvolutionTransferComponent>(newXeno);
         _xenoHive.SetSameHive(xeno, newXeno);
 

@@ -7,6 +7,12 @@ using Robust.Shared.Serialization;
 namespace Content.Shared.Hands
 {
     /// <summary>
+    /// Raised directed at an entity after its active hand actually changes.
+    /// </summary>
+    [ByRefEvent]
+    public readonly record struct ActiveHandChangedEvent(string? PreviousHand, string? ActiveHand);
+
+    /// <summary>
     /// Raised directed on an entity when attempting to drop its hand items.
     /// </summary>
     public sealed class DropAttemptEvent : CancellableEntityEventArgs

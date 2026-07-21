@@ -1,15 +1,16 @@
-ent-SynthesizerInstrument-name = синтезатор
-ent-SynthesizerInstrument-desc = Это инструмент.
+ent-BaseKeyedInstrument = {ent-BaseHandheldInstrument}
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-SuperSynthesizerInstrument-name = супер синтезатор
-ent-SuperSynthesizerInstrument-desc = Взрываем гетто с помощью Touhou MIDI с 2020 года.
+ent-SynthesizerInstrument = синтезатор
+    .desc = {ent-BaseKeyedInstrument.desc}
 
-ent-AccordionInstrument-name = аккордеон
-ent-AccordionInstrument-desc = Это инструмент.
+ent-SuperSynthesizerInstrument = суперсинтезатор
+    .desc = {ent-BaseKeyedInstrument.desc}
 
-ent-KalimbaInstrument-name = Калимба
-ent-KalimbaInstrument-desc = Мощь фортепиано прямо у вас под рукой.
+ent-AccordionInstrument = аккордеон
+    .desc = {ent-BaseKeyedInstrument.desc}
 
-ent-BaseKeyedInstrument-name = элемент
-ent-BaseKeyedInstrument-desc = Это инструмент.
+ent-KalimbaInstrument = калимба
+    .desc = {ent-BaseKeyedInstrument.desc}
+
 

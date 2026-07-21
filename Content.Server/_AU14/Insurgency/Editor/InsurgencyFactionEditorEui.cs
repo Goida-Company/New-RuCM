@@ -156,6 +156,9 @@ public sealed class InsurgencyFactionEditorEui : BaseEui
     // stripping) before it is stored - identical trust model to a Custom faction payload.
     private async void HandleImportSheet(InsurgencyImportSheetMessage msg)
     {
+        if (msg.Workbook.Length == 0 || msg.Workbook.Length > InsforSpreadsheet.MaxWorkbookBytes)
+            return;
+
         FactionDefinition? parsed;
         using (var stream = new System.IO.MemoryStream(msg.Workbook))
             parsed = InsforSpreadsheet.Read(stream);
@@ -182,7 +185,9 @@ public sealed class InsurgencyFactionEditorEui : BaseEui
 
     private async void HandleSave(InsurgencyFactionSaveMessage msg)
     {
-        var def = InsurgencyFactionValidator.Sanitize(msg.Definition);
+        var def = _scope == InsurgencyEditorScope.Custom
+            ? InsurgencyFactionValidator.SanitizeCustom(msg.Definition, _prototypes)
+            : InsurgencyFactionValidator.Sanitize(msg.Definition);
 
         // The Custom editor can only author Custom factions, whatever the client claims.
         var isDefault = _scope == InsurgencyEditorScope.Default && msg.IsDefault;
@@ -213,14 +218,11 @@ public sealed class InsurgencyFactionEditorEui : BaseEui
 
     private async void HandleDelete(InsurgencyFactionDeleteMessage msg)
     {
-        // The built-in vanilla CLF is code-defined and cannot be deleted.
-        if (msg.Id == InsurgencyBuiltinFactions.VanillaClfId)
-            return;
-
         // The Custom editor cannot delete host-authored Default factions.
         if (_scope == InsurgencyEditorScope.Custom && await IsDefaultRow(msg.Id))
             return;
 
+        // Storage enforces built-in ownership, so every deletion path is protected even if another caller is added.
         await _db.DeleteFactionAsync(msg.Id);
         Refresh();
     }

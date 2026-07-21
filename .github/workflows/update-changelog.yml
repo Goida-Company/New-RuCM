@@ -20,6 +20,16 @@ on:
         required: false
         default: "CMU"
   workflow_call:
+    inputs:
+      start_date:
+        description: "Backfill date (ISO-8601), auto if empty"
+        required: false
+        type: string
+      category:
+        description: "Changelog category"
+        required: false
+        type: string
+        default: "CMU"
     outputs:
       changes_detected:
         value: ${{ jobs.update.outputs.changes_detected }}
@@ -50,7 +60,7 @@ jobs:
 
       - name: Update changelog
         run: Tools/update_changelog.py Resources/Changelog/CMU.yml
-          Resources/Changelog/Parts --category ${{ inputs.category || 'CMU' }}
+          Resources/Changelog/Parts --category ${{ inputs.category || 'CMU' }} --translate
 
       - uses: stefanzweifel/git-auto-commit-action@v7.1.0
         id: auto-commit
@@ -62,13 +72,15 @@ jobs:
     name: Discord webhook
     runs-on: ubuntu-latest
     needs: update
-    if: needs.update.outputs.changes_detected == 'true'
+    if: >
+      needs.update.outputs.changes_detected == 'true'
+      || (github.event_name == 'workflow_dispatch' && inputs.start_date != '')
     permissions:
       contents: read
     steps:
       - uses: actions/checkout@v6.0.2
         with:
-          ref: ${{ needs.update.outputs.commit_hash }}
+          ref: ${{ needs.update.outputs.commit_hash || github.sha }}
           fetch-depth: 2
 
       - name: Install dependencies
@@ -79,4 +91,5 @@ jobs:
         env:
           CHANGELOG_FILE: Resources/Changelog/CMU.yml
           CHANGELOG_PREVIOUS_REF: HEAD^
+          CHANGELOG_START_DATE: ${{ inputs.start_date || '' }}
           DISCORD_WEBHOOK_URL: ${{ secrets.CHANGELOG_DISCORD_WEBHOOK }}

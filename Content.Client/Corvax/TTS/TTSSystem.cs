@@ -50,6 +50,7 @@ public sealed class TTSSystem : EntitySystem
 
     private float _volume = 0.0f;
     private int _fileIdx = 0;
+    private readonly Dictionary<uint, (EntityUid Audio, NetEntity? Source)> _trackedPlayback = new();
 
     public event Action<AddReferenceVoiceResponse>? ReferenceVoiceResultReceived;
     public event Action? ReferenceVoiceCatalogUpdated;
@@ -79,6 +80,20 @@ public sealed class TTSSystem : EntitySystem
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(CCCVars.TTSVolume, OnTtsVolumeChanged);
+    }
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        foreach (var (playbackId, tracked) in _trackedPlayback.ToArray())
+        {
+            if (TryComp<AudioComponent>(tracked.Audio, out var audio) && (!audio.Started || audio.Playing))
+                continue;
+
+            _trackedPlayback.Remove(playbackId);
+            RaiseNetworkEvent(new TTSPlaybackFinishedEvent(playbackId, tracked.Source, true));
+        }
     }
 
     public void RequestPreviewTTS(string voiceId)
@@ -151,6 +166,7 @@ public sealed class TTSSystem : EntitySystem
             var result = _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
             if (result.HasValue)
                 result.Value.Component.Occlusion = RadioOcclusion;
+            TrackPlayback(ev, result);
             _contentRoot.RemoveFile(filePath);
             return;
         }
@@ -159,18 +175,39 @@ public sealed class TTSSystem : EntitySystem
         {
             if (!TryGetEntity(ev.SourceUid.Value, out _))
             {
+                PlaybackFailed(ev);
                 _contentRoot.RemoveFile(filePath);
                 return;
             }
             var sourceUid = GetEntity(ev.SourceUid.Value);
-            _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams);
+            TrackPlayback(ev, _audio.PlayEntity(audioResource.AudioStream, sourceUid, soundSpecifier, audioParams));
         }
         else
         {
-            _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams);
+            TrackPlayback(ev, _audio.PlayGlobal(audioResource.AudioStream, soundSpecifier, audioParams));
         }
 
         _contentRoot.RemoveFile(filePath);
+    }
+
+    private void TrackPlayback(PlayTTSEvent ev, (EntityUid Entity, AudioComponent Component)? playback)
+    {
+        if (ev.PlaybackId == 0)
+            return;
+
+        if (playback is not { } audio)
+        {
+            PlaybackFailed(ev);
+            return;
+        }
+
+        _trackedPlayback[ev.PlaybackId] = (audio.Entity, ev.SourceUid);
+    }
+
+    private void PlaybackFailed(PlayTTSEvent ev)
+    {
+        if (ev.PlaybackId != 0)
+            RaiseNetworkEvent(new TTSPlaybackFinishedEvent(ev.PlaybackId, ev.SourceUid, false));
     }
 
     private float AdjustVolume(bool isWhisper)

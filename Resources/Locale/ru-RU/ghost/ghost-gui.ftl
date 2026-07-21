@@ -48,12 +48,27 @@ ghost-target-window-subtab-line = Линейная пехота
 ghost-target-window-subtab-line-personnel = Линейный персонал
 ghost-target-window-subtab-personnel = Персонал
 
+ghost-target-window-subtab-compact-all = Все
+ghost-target-window-subtab-compact-high-command = ВК
+ghost-target-window-subtab-compact-command = Ком
+ghost-target-window-subtab-compact-squad-leads = КО
+ghost-target-window-subtab-compact-specialists = Спец
+ghost-target-window-subtab-compact-pilots-crew = Экип
+ghost-target-window-subtab-compact-line-personnel = Лин
+ghost-target-window-subtab-compact-personnel = Перс
+ghost-target-window-subtab-compact-unknown-tier = Неизв
+ghost-target-window-subtab-compact-abominations = Абом
+ghost-target-window-subtab-compact-summoners = Призыв
+ghost-target-window-subtab-compact-warp-points = Телепорт
+
 ghost-target-window-subtab-queen = Королева
 ghost-target-window-subtab-tier = Уровень {$tier}
 ghost-target-window-subtab-unknown-tier = Неизвестный уровень
 ghost-target-window-subtab-hunters = Охотники
 ghost-target-window-subtab-thralls = Слуги
 ghost-target-window-subtab-abominations = Абоминации
+ghost-target-window-subtab-summoners = Призыватели
+ghost-target-window-tab-cursed = Проклятые
 
 ghost-target-window-subtab-leaders = Лидеры
 ghost-target-window-subtab-members = Участники

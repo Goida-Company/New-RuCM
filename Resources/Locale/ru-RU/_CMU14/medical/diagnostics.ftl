@@ -83,7 +83,7 @@ cmu-medical-scanner-severity-severed       = Отсечено
 
 cmu-medical-scanner-chip-fracture-vague    = Перелом
 cmu-medical-scanner-chip-suppressed-suffix =  (подавл.)
-cmu-medical-scanner-chip-bleed             = ВК
+cmu-medical-scanner-chip-bleed             = ВнК
 cmu-medical-scanner-chip-bleeding          = Кровотечение
 cmu-medical-scanner-chip-splint            = Шина
 cmu-medical-scanner-chip-cast              = Гипс
@@ -160,6 +160,7 @@ cmu-medical-scanner-fracture-severity-hairline    = трещинный
 cmu-medical-scanner-fracture-severity-simple      = простой
 cmu-medical-scanner-fracture-severity-compound    = открытый
 cmu-medical-scanner-fracture-severity-comminuted  = оскольчатый
+cmu-medical-scanner-fracture-severity-shattered   = раздробленный
 
 cmu-medical-scanner-organ-stage-healthy  = Здоров
 cmu-medical-scanner-organ-stage-bruised  = Ушиблен

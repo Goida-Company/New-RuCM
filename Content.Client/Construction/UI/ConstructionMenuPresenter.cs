@@ -3,8 +3,12 @@ using System.Numerics;
 using Content.Client.Lobby;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
+using Content.Shared._AU14.Construction;
+using Content.Shared._RMC14.Marines.Skills;
 using Content.Shared._RMC14.Prototypes;
 using Content.Shared.Construction.Prototypes;
+using Content.Shared.Construction.Steps;
+using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
 using Robust.Client.GameObjects;
 using Robust.Client.Graphics;
@@ -32,6 +36,7 @@ namespace Content.Client.Construction.UI
         [Dependency] private IPlayerManager _playerManager = default!;
         [Dependency] private IClientPreferencesManager _preferencesManager = default!;
         private readonly SpriteSystem _spriteSystem;
+        private readonly SkillsSystem _skillsSystem;
 
         private readonly IConstructionMenuView _constructionView;
         private readonly EntityWhitelistSystem _whitelistSystem;
@@ -102,6 +107,7 @@ namespace Content.Client.Construction.UI
             _constructionView = view ?? new ConstructionMenu();
             _whitelistSystem = _entManager.System<EntityWhitelistSystem>();
             _spriteSystem = _entManager.System<SpriteSystem>();
+            _skillsSystem = _entManager.System<SkillsSystem>();
 
             // This is required so that if we load after the system is initialized, we can bind to it immediately
             if (_systemManager.TryGetEntitySystem<ConstructionSystem>(out var constructionSystem))
@@ -348,15 +354,9 @@ namespace Content.Client.Construction.UI
         /// </summary>
         private HashSet<string> BuildHiddenRecipeSet()
         {
-            var set = new HashSet<string>();
-
-            if (_systemManager.TryGetEntitySystem<Content.Client._AU14.Construction.CustomConstruction.CustomConstructionEditorClientSystem>(out var editor))
-                set.UnionWith(editor.HiddenRecipeIds);
-
-            foreach (var overrides in _prototypeManager.EnumeratePrototypes<Content.Shared._AU14.Construction.CustomConstruction.AU14MenuOverridesPrototype>())
-                set.UnionWith(overrides.HiddenRecipes);
-
-            return set;
+            var query = new ConstructionMenuFilterEvent(new HashSet<string>(), new HashSet<string>());
+            _constructionSystem?.QueryMenuExtensions(ref query);
+            return query.HiddenRecipes;
         }
 
         private List<ConstructionMenu.ConstructionMenuListData> GetAndSortRecipes((string, string) args)
@@ -376,6 +376,8 @@ namespace Content.Client.Construction.UI
 
             // Recipes an admin removed from the menu via "Remove Item" (works for vanilla recipes too).
             var hidden = BuildHiddenRecipeSet();
+            var filter = new ConstructionMenuFilterEvent(hidden, new HashSet<string>());
+            _constructionSystem?.QueryMenuExtensions(ref filter);
 
             foreach (var recipe in _prototypeManager.EnumerateCM<ConstructionPrototype>())
             {
@@ -399,7 +401,7 @@ namespace Content.Client.Construction.UI
                     // AU14 / "All" view (the spawnlist filter is off). The "Z-Level (Experimental)" page is a
                     // SEPARATE main category, so its spawnlists (Tiles, ZLevel) must not bleed into the All list -
                     // those constructs live only on their own page. (AU14 building overhaul - z-level separation.)
-                    else if (Content.Client._AU14.Construction.ZLevelPageSpawnlists.Contains(recipeSpawnlist))
+                    else if (filter.ExcludedSpawnlists.Contains(recipeSpawnlist))
                     {
                         continue;
                     }
@@ -544,14 +546,20 @@ namespace Content.Client.Construction.UI
                 prototype);
 
             var stepList = _constructionView.RecipeStepList;
-            GenerateStepList(prototype, stepList);
+            var skillLevel = _playerManager.LocalEntity is { } player
+                ? _skillsSystem.GetSkill(player, "RMCSkillConstruction")
+                : 0;
+            _constructionView.SetConstructionSkillInfo(skillLevel,
+                AU14ConstructionSkillSystem.GetDiscountPercent(skillLevel));
+            GenerateStepList(prototype, stepList, skillLevel);
         }
 
-        private void GenerateStepList(ConstructionPrototype prototype, ItemList stepList)
+        private void GenerateStepList(ConstructionPrototype prototype, ItemList stepList, int skillLevel)
         {
             if (_constructionSystem?.GetGuide(prototype) is not { } guide)
                 return;
 
+            var materialSteps = GetMaterialSteps(prototype);
             foreach (var entry in guide.Entries)
             {
                 // Defensive: a single malformed entry (e.g. a bad localization argument) must not throw and
@@ -559,8 +567,21 @@ namespace Content.Client.Construction.UI
                 string text;
                 try
                 {
-                    text = entry.Arguments != null
-                        ? Loc.GetString(entry.Localization, entry.Arguments)
+                    var arguments = entry.Arguments;
+                    if (entry.Localization == "construction-presenter-material-step" &&
+                        materialSteps.TryDequeue(out var materialStep) &&
+                        _prototypeManager.TryIndex(materialStep.MaterialPrototypeId, out StackPrototype? material))
+                    {
+                        var amount = AU14ConstructionSkillSystem.GetMaterialCost(
+                            materialStep.MaterialPrototypeId,
+                            materialStep.Amount,
+                            skillLevel);
+                        var materialName = Loc.GetString(material.Name, ("amount", amount));
+                        arguments = [("amount", amount), ("material", materialName)];
+                    }
+
+                    text = arguments != null
+                        ? Loc.GetString(entry.Localization, arguments)
                         : Loc.GetString(entry.Localization);
 
                     if (entry.EntryNumber is { } number)
@@ -582,6 +603,33 @@ namespace Content.Client.Construction.UI
                 var icon = entry.Icon != null ? _spriteSystem.Frame0(entry.Icon) : Texture.Transparent;
                 stepList.AddItem(text, icon, false);
             }
+        }
+
+        private Queue<MaterialConstructionGraphStep> GetMaterialSteps(ConstructionPrototype prototype)
+        {
+            var result = new Queue<MaterialConstructionGraphStep>();
+            if (!_prototypeManager.TryIndex(prototype.Graph, out ConstructionGraphPrototype? graph) ||
+                !graph.Nodes.TryGetValue(prototype.StartNode, out var node) ||
+                !graph.Nodes.TryGetValue(prototype.TargetNode, out var target) ||
+                graph.Path(prototype.StartNode, prototype.TargetNode) is not { } path)
+                return result;
+
+            var index = 0;
+            while (node != target && index < path.Length)
+            {
+                if (!node.TryGetEdge(path[index].Name, out var edge))
+                    break;
+
+                foreach (var step in edge.Steps)
+                {
+                    if (step is MaterialConstructionGraphStep material)
+                        result.Enqueue(material);
+                }
+
+                node = path[index++];
+            }
+
+            return result;
         }
 
         private void BuildButtonToggled(bool pressed)
@@ -736,6 +784,7 @@ namespace Content.Client.Construction.UI
             system.FlipConstructionPrototype += SystemFlipConstructionPrototype;
             system.CraftingAvailabilityChanged += SystemCraftingAvailabilityChanged;
             system.ConstructionGuideAvailable += SystemGuideAvailable;
+            system.ConstructionRecipesChanged += SystemRecipesChanged;
             if (_uiManager.GetActiveUIWidgetOrNull<GameTopMenuBar>() != null)
             {
                 CraftingAvailable = system.CraftingEnabled;
@@ -753,7 +802,29 @@ namespace Content.Client.Construction.UI
             system.FlipConstructionPrototype -= SystemFlipConstructionPrototype;
             system.CraftingAvailabilityChanged -= SystemCraftingAvailabilityChanged;
             system.ConstructionGuideAvailable -= SystemGuideAvailable;
+            system.ConstructionRecipesChanged -= SystemRecipesChanged;
             _constructionSystem = null;
+        }
+
+        private void SystemRecipesChanged(object? sender, EventArgs args)
+        {
+            var selectedId = _selected?.ID;
+            var favoriteIds = _favoritedRecipes.Select(recipe => (ProtoId<ConstructionPrototype>) recipe.ID).ToArray();
+            SetFavorites(favoriteIds);
+            PopulateSpawnlists();
+            PopulateCategories(_selectedCategory);
+            OnViewPopulateRecipes(_constructionView, (string.Empty, _selectedCategory));
+
+            if (selectedId != null && _prototypeManager.TryIndex(selectedId, out ConstructionPrototype? selected))
+            {
+                _selected = selected;
+                PopulateInfo(selected);
+            }
+            else
+            {
+                _selected = null;
+                _constructionView.ClearRecipeInfo();
+            }
         }
 
         private void SystemCraftingAvailabilityChanged(object? sender, CraftingAvailabilityChangedArgs e)

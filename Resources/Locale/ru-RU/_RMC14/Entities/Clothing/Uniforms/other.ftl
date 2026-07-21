@@ -1,171 +1,168 @@
-ent-RMCJumpsuitCivilianFrontier = комбинезон жителя фронтира
-  .desc = Карго-комбинезон, обеспечивающий полную свободу движений и ультрасовременный контроль температуры.
+ent-RMCJumpsuitCivilianFrontier = комбинезон первопроходца
+    .desc = Обеспечивает полную свободу движений и ультрасовременный контроль температуры.
 
-ent-RMCJumpsuitCLFSoldier = униформа КОФ
-  .desc = Стильный серо-зеленый комбинезон – стандартная вещь для колонистов.
-
-ent-RMCJumpsuitCivilianEngineerWorker = униформа инженерно-технических служб Ве-Ю
-  .desc = Пара оранжевых рабочих брюк и серая рубашка-поло с оранжевыми светоотражающими полосами.
+ent-RMCJumpsuitCivilianEngineerWorker = комбинезон инженера Ве-Ю
+    .desc = Стандартная униформа инженерно-технического персонала Вейланд-Ютани.
+ent-RMCJumpsuitCivilianEngineerWorkerAlt = {ent-RMCJumpsuitCivilianEngineerWorker}
+    .desc = {ent-RMCJumpsuitCivilianEngineerWorker.desc}
+    .suffix = Альтернативный
 
 ent-RMCJumpsuitCivilianJanitor = комбинезон дворника
-  .desc = Это официальная форма дворника колонии.
+    .desc = Это официальная форма дворника колонии.
 
 ent-RMCJumpsuitCivilianSecurity = комбинезон офицера безопасности
-  .desc = Он изготовлен из немного более прочного материала, чем стандартные комбинезоны, что обеспечивает надежную защиту.
+    .desc = Он изготовлен из прочного материала, что обеспечивает надежную защиту.
 
-ent-RMCJumpsuitKutjevoDrysuit = рабочий костюм Кутьево
-  .desc = Прочный сухой костюм рабочих в Кутьево.
+ent-RMCJumpsuitKutjevoDrysuit = рабочий костюм
+    .desc = Прочный сухой костюм рабочих в Кутьево.
 
-ent-RMCJumpsuitKutjevoJumper = джампер Кутьево
-  .desc = Прочный комбинезон рабочих в Кутьево.
+ent-RMCJumpsuitKutjevoJumper = комбинезон рабочего
+    .desc = Прочный комбинезон рабочих в Кутьево.
 
 ent-RMCJumpsuitLaborersOveralls = комбинезон рабочего
-  .desc = Комплект прочного комбинезона для выполнения работы.
+    .desc = Комплект прочного комбинезона для выполнения работы.
 
-ent-RMCJumpsuitEMT = форма фельдшера
-  .desc = Униформа фельдшера красного цвета.
+ent-RMCJumpsuitEMT = комбинезон парамедика
+    .desc = Униформа парамедика красного цвета.
 
-ent-RMCJumpsuitDoctor = униформа врача
-  .desc = Они изготовлены из специального волокна, обеспечивающего незначительную защиту от биологических опасностей.
+ent-RMCJumpsuitDoctor = комбинезон врача
+    .desc = Изготовлен из специального волокна, что обеспечивает лёгкую защиту от биоугроз.
 
-ent-RMCJumpsuitTMCC = шахтерская униформа
-  .desc = Пара желтых рабочих брюк и светло-серая рубашка-поло с красными светоотражающими полосами.
+ent-RMCJumpsuitTMCC = комбинезон шахтёра
+    .desc = Пара желтых брюк и светло-серая рубашка.
 
-ent-RMCJumpsuitDailyGrind = униформа Daily Grind
-  .desc = Пара черных брюк и белая рубашка на пуговицах с короткими рукавами;
+ent-RMCJumpsuitDailyGrind = комбинезон журналиста
+    .desc = Пара чёрных брюк и белая рубашка.
 
 ent-RMCJumpsuitPizzaGalaxy = униформа пицерии
-  .desc = Пара красных брюк и белая рубашка на пуговицах с большим логотипом Галактика пиццы на спине;
+    .desc = Пара красных брюк и белая рубашка.
 
 ent-RMCJumpsuitSanitation = санитарная униформа Ве-Ю
-  .desc = Комплект Вейланд-Ютани - санитарная одежда, пара зеленых рабочих брюк и серая рубашка-поло с зелеными светоотражающими полосами.
+    .desc = Пара зелёных рабочих брюк и серая рубашка.
 
-ent-RMCJumpsuitWeyamart = униформа Вейумарт
-  .desc = Пара темно-серых брюк и оранжевая рубашка на пуговицах;
+ent-RMCJumpsuitWeyamart = униформа Веюмарт
+    .desc = Пара тёмно-серых брюк и оранжевая рубашка.
 
-ent-RMCJumpsuitSteward = стюард коммунальные услуги
-  .desc = Стильный коричневый жилет и шорты.
+ent-RMCJumpsuitSteward = комбинезон комунальщика
+    .desc = Стильный коричневый жилет и шорты.
 
-ent-RMCJumpsuitOrange = оранжевый комбинезон
-  .desc = Это стандартная одежда заключенных.
+ent-RMCJumpsuitOrange = тюремный комбинезон
+    .desc = Это стандартная одежда заключенных.
 
-ent-RMCJumpsuitCivilianScientist = деловой комбинезон ученого
-  .desc = Он изготовлен из специального волокна, обеспечивающего незначительную защиту от биологических опасностей.
+ent-RMCJumpsuitCivilianScientist = комбинезон учёного
+    .desc = Изготовлен из специального волокна, что обеспечивает лёгкую защиту от биоугроз.
 
-ent-RMCJumpsuitCivilianVirologist = униформа вирусолога
-  .desc = Он изготовлен из специального волокна, обеспечивающего особую защиту от биологических опасностей.
+ent-RMCJumpsuitCivilianVirologist = комбинезон вирусолога
+    .desc = Изготовлен из специального волокна, что обеспечивает защиту от биоугроз.
 
-ent-RMCJumpsuitChaplain = комбинезон капеллана
-  .desc = Это черный комбинезон, который часто носят религиозные люди.
+ent-RMCJumpsuitChaplain = комбинезон священника
+    .desc = Это черный комбинезон, который часто носят религиозные люди.
 
 ent-RMCJumpsuitRedShorts = красные шорты
-  .desc = Крысиная пара красных шорт.
+    .desc = Пара красных шорт.
 
 ent-RMCJumpsuitNormCivilianBlue = синий комбинезон
-  .desc = Синий комбинезон.
+    .desc = Комбинезон, но синий.
 
-ent-RMCJumpsuitNormCivilianYellow = желтый комбинезон
-  .desc = Желтый комбинезон.
+ent-RMCJumpsuitNormCivilianYellow = жёлтый комбинезон
+    .desc = Комбинезон, но жёлтый.
+ent-RMCJumpsuitNormCivilianBlackWebbing = {ent-RMCJumpsuitNormCivilianYellow}
+    .desc = {ent-RMCJumpsuitNormCivilianYellow.desc}
+    .suffix = РПС
 
 ent-RMCJumpsuitNormCivilianGrey = серый комбинезон
-  .desc = Серый комбинезон.
+    .desc = Комбинезон, но серый.
 
 ent-RMCJumpsuitNormCivilianLightBrown = светло-коричневый комбинезон
-  .desc = Светло-коричневый комбинезон.
+    .desc = Комбинезон, но светло-коричневый.
 
 ent-RMCJumpsuitNormCivilianBrown = коричневый комбинезон
-  .desc = Коричневый комбинезон.
+    .desc = Комбинезон, но коричневый.
 
 ent-RMCJumpsuitNormCivilianWhiteAlt = белый комбинезон
-  .desc = Белый комбинезон.
+    .desc = Комбинезон, но белый.
 
-ent-RMCJumpsuitCivilianYellow = желтая униформа
-  .desc = Серая служебная униформа с желтыми подтяжками, предназначенная для корабельного экипажа.
+ent-RMCJumpsuitCivilianYellow = серый комбинезон экипажа
+    .desc = Серая служебная униформа с желтыми подтяжками.
 
-ent-RMCJumpsuitCivilianRed = красная униформа
-  .desc = Серая рабочая униформа с красными подтяжками и синими джинсами.
+ent-RMCJumpsuitCivilianRed = серый комбинезон экипажа
+    .desc = Серая рабочая униформа с красными подтяжками.
 
-ent-RMCJumpsuitCivilianBlue = синяя униформа
-  .desc = Синяя униформа с бирюзовыми подтяжками и грубыми брюками.
+ent-RMCJumpsuitCivilianBlue = серый комбинезон экипажа
+    .desc = Синяя униформа с бирюзовыми подтяжками.
 
-ent-RMCJumpsuitCivilianGreen = зеленая униформа
-  .desc = Стильный зеленый комбинезон, который обычно выдают контрактникам ООН на границе.
+ent-RMCJumpsuitCivilianGreen = зелёный рабочий комбинезон
+    .desc = Стильный зеленый комбинезон.
 
-ent-RMCJumpsuitCivilianBrown = коричневая униформа
-  .desc = Стильный коричневый комбинезон, который обычно выдают контрактникам ООН на границе.
+ent-RMCJumpsuitCivilianBrown = коричневый рабочий комбинезон
+    .desc = Стильный коричневый комбинезон, который обычно выдают контрактникам ООН на границе.
 
-ent-RMCJumpsuitCivilian = серая униформа
-  .desc = Стильный серый комбинезон, который обычно выдают контрактникам ООН на границе.
+ent-RMCJumpsuitCivilian = серый комбинезон
+    .desc = Стильный серый комбинезон, который обычно выдают контрактникам ООН на границе.
 
-ent-RMCJumpsuitFreelancer = униформа фрилансера
-  .desc = Комплект свободной униформы, идеально подходящий для неофициального наёмника.
+ent-RMCJumpsuitFreelancer = комбинезон вольного наёмника
+    .desc = Комплект свободной униформы, идеально подходящий для неофициального наёмника.
 
-ent-RMCJumpsuitMarsoc = специальная оперативная униформа
-  .desc = Черная униформа для элитного персонала КМП.
+ent-RMCJumpsuitMarsoc = комбинезон ССО КМП США
+    .desc = Тёмная униформа для элитных солдат КМП.
+ent-RMCJumpsuitMarsocWebbingBuckshot = {ent-RMCJumpsuitMarsoc}
+    .desc = {ent-RMCJumpsuitMarsoc.desc}
+    .suffix = Картечь
 
-ent-RMCJumpsuitMercenaryEngineer = униформа наёмника-инженера
-  .desc = Синий костюм с желтыми вставками, используемый инженерами.
+ent-RMCJumpsuitMercenaryEngineer = комбинезон наёмника-инженера
+    .desc = Синий костюм с желтыми вставками, используемый инженерами.
 
-ent-RMCJumpsuitMercenaryMiner = униформа наёмника-шахтера
-  .desc = Бежевый костюм с красной повязкой.
+ent-RMCJumpsuitMercenaryMiner = комбинезон наёмника-шахтера
+    .desc = Бежевый костюм с красной повязкой.
 
-ent-RMCJumpsuitMercenaryHeavy = униформа наёмника
-  .desc = Плотный бежевый костюм с красной повязкой на рукаве.
+ent-RMCJumpsuitMercenaryHeavy = комбинезон наёмника
+    .desc = Плотный бежевый костюм с красной повязкой на рукаве.
 
-ent-RMCJumpsuitDutchBandolier = охотничья одежда
-  .desc = Комплект сшитой на заказ одежды из тонких, но прочных армированных тканей.
+ent-RMCJumpsuitDutchBandolier = комбинезон охотника
+    .desc = Комплект сшитой на заказ одежды из армированных тканей.
 
-ent-RMCJumpsuitDutch = униформа голландской дюжины
-  .desc = Удобная униформа наёмников «Голландской дюжины».
+ent-RMCJumpsuitDutch = комбинезон голландской дюжины
+    .desc = Удобная униформа наёмников «Голландской дюжины».
 
-ent-RMCJumpsuitCorrespondent = корреспондентская униформа
-  .desc = Стандартная форма корреспондентов.
+ent-RMCJumpsuitCorrespondent = комбинезон корреспондента
+    .desc = Стандартная форма корреспондентов.
+ent-RMCJumpsuitCorrespondentBlack = {ent-RMCJumpsuitCorrespondent}
+    .desc = {ent-RMCJumpsuitCorrespondent.desc}
+ent-RMCJumpsuitCorrespondentOrange = {ent-RMCJumpsuitCorrespondent}
+    .desc = {ent-RMCJumpsuitCorrespondent.desc}
+ent-RMCJumpsuitCorrespondentRed = {ent-RMCJumpsuitCorrespondent}
+    .desc = {ent-RMCJumpsuitCorrespondent.desc}
 
-ent-RMCJumpsuitPizza = униформа для доставки пиццы
-  .desc = Неподходящая по размеру, слегка испачканная униформа пилота по доставке пиццы.
-
-ent-RMCJumpsuitCorrespondentBlack = корреспондентская униформа
-  .desc = Стандартная форма корреспондентов.
-
-ent-RMCJumpsuitCorrespondentOrange = корреспондентская униформа
-  .desc = Стандартная форма корреспондентов.
-
-ent-RMCJumpsuitCorrespondentRed = корреспондентская униформа
-  .desc = Стандартная форма корреспондентов.
-
-ent-RMCJumpsuitMarsocWebbingBuckshot = специальная оперативная униформа
-  .desc = Черная униформа для элитного персонала КМП.
-
-ent-RMCJumpsuitNormCivilianBlackWebbing = желтый комбинезон
-  .desc = Желтый комбинезон.
+ent-RMCJumpsuitPizza = комбинезон курьера
+    .desc = Слегка испачканная униформа курьера пиццы.
 
 ent-RMCJumpsuitEMTGreen = форма фельдшера
   .desc = Униформа фельдшера зеленого цвета.
 
 ent-RMCJumpsuitRiotControl = униформа спецназа
-  .desc = Комбинезон из кевлара сочетается с эффектной синей классической рубашкой.
+    .desc = Комбинезон из кевлара сочетается с эффектной синей классической рубашкой.
+ent-RMCJumpsuitRiotControlB92FS = {ent-RMCJumpsuitRiotControl}
+    .desc = {ent-RMCJumpsuitRiotControl.desc}
+    .suffix = Б92ФС
+ent-RMCJumpsuitRiotControlMK45 = {ent-RMCJumpsuitRiotControl}
+    .desc = {ent-RMCJumpsuitRiotControl.desc}
+    .suffix = MK-45
+ent-RMCJumpsuitRiotControlM1984 = {ent-RMCJumpsuitRiotControl}
+    .desc = {ent-RMCJumpsuitRiotControl.desc}
+    .suffix = M1984
 
-ent-RMCJumpsuitRiotControlB92FS = униформа спецназа
-  .desc = Комбинезон из кевлара сочетается с эффектной синей классической рубашкой.
-
-ent-RMCJumpsuitRiotControlMK45 = униформа спецназа
-  .desc = Комбинезон из кевлара сочетается с эффектной синей классической рубашкой.
-
-ent-RMCJumpsuitRiotControlM1984 = униформа спецназа
-  .desc = Комбинезон из кевлара сочетается с эффектной синей классической рубашкой.
-
-ent-RMCJumpsuitCivilianEngineerWorkerAlt = униформа инженерно-технических служб Ве-Ю
-  .desc = Пара синих рабочих брюк и серая рубашка-поло с желтыми светоотражающими полосами.
-
-ent-RMCJumpsuitCLFWebbing = униформа КОФ
-  .desc = Стильный серо-зеленый комбинезон.
-
-ent-RMCJumpsuitCLFWebbingMAR50 = униформа КОФ
-  .desc = Стильный серо-зеленый комбинезон.
-
-ent-RMCJumpsuitCLFWebbingBuckshot = униформа КОФ
-  .desc = Стильный серо-зеленый комбинезон.
-
-ent-RMCJumpsuitCLFWebbingSurgical = униформа КОФ
-  .desc = Стильный серо-зеленый комбинезон.
+ent-RMCJumpsuitCLFSoldier = комбинезон КОФ
+    .desc = Стильный серо-зеленый комбинезон.
+ent-RMCJumpsuitCLFWebbing = {ent-RMCJumpsuitCLFSoldier}
+    .desc = {ent-RMCJumpsuitCLFSoldier.desc}
+    .suffix = МАР-30
+ent-RMCJumpsuitCLFWebbingMAR50 = {ent-RMCJumpsuitCLFSoldier}
+    .desc = {ent-RMCJumpsuitCLFSoldier.desc}
+    .suffix = МАР-50
+ent-RMCJumpsuitCLFWebbingBuckshot = {ent-RMCJumpsuitCLFSoldier}
+    .desc = {ent-RMCJumpsuitCLFSoldier.desc}
+    .suffix = Картечь
+ent-RMCJumpsuitCLFWebbingSurgical = {ent-RMCJumpsuitCLFSoldier}
+    .desc = {ent-RMCJumpsuitCLFSoldier.desc}
+    .suffix = Хирург
 

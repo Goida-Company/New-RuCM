@@ -31,6 +31,9 @@
                                                             Text="{Loc 'ui-lobby-observe-button'}"
                                                             StyleClasses="ButtonBig"
                                                             WindowType="{x:Type lobbyUi:ObserveWarningWindow}" />
+                                        <Button Name="OnboardingButton" Access="Public"
+                                                Text="{Loc 'rmc-onboarding-lobby-button'}"
+                                                StyleClasses="ButtonBig" MinWidth="137" />
                                         <Label Name="StartTime"
                                                Access="Public"
                                                Align="Left"

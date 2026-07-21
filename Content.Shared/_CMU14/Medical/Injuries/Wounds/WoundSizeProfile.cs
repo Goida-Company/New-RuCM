@@ -9,127 +9,155 @@ public static class WoundSizeProfile
 
     private static readonly WoundStage[] CutSmallStages =
     {
-        new(20f, "ugly ripped cut"),
-        new(10f, "ripped cut"),
-        new(5f, "cut"),
-        new(2f, "healing cut"),
-        new(0f, "small scab"),
+        // RuCM edit start
+        new(20f, "cmu-wound-stage-cut-small-ugly-ripped"),
+        new(10f, "cmu-wound-stage-cut-small-ripped"),
+        new(5f,  "cmu-wound-stage-cut-small"),
+        new(2f,  "cmu-wound-stage-cut-small-healing"),
+        new(0f,  "cmu-wound-stage-scab-small"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] CutDeepStages =
     {
-        new(25f, "ugly deep ripped cut"),
-        new(20f, "deep ripped cut"),
-        new(15f, "deep cut"),
-        new(8f, "clotted cut"),
-        new(2f, "scab"),
-        new(0f, "fresh skin"),
+        // RuCM edit start
+        new(25f, "cmu-wound-stage-cut-deep-ugly-ripped"),
+        new(20f, "cmu-wound-stage-cut-deep-ripped"),
+        new(15f, "cmu-wound-stage-cut-deep"),
+        new(8f,  "cmu-wound-stage-cut-deep-clotted"),
+        new(2f,  "cmu-wound-stage-scab"),
+        new(0f,  "cmu-wound-stage-fresh-skin"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] CutFleshStages =
     {
-        new(35f, "ugly ripped flesh wound"),
-        new(30f, "ugly flesh wound"),
-        new(25f, "flesh wound"),
-        new(15f, "blood soaked clot"),
-        new(5f, "large scab"),
-        new(0f, "fresh skin"),
+        // RuCM edit start
+        new(35f, "cmu-wound-stage-cut-flesh-ugly-ripped"),
+        new(30f, "cmu-wound-stage-cut-flesh-ugly"),
+        new(25f, "cmu-wound-stage-cut-flesh"),
+        new(15f, "cmu-wound-stage-cut-flesh-clot"),
+        new(5f,  "cmu-wound-stage-scab-large"),
+        new(0f,  "cmu-wound-stage-fresh-skin"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] CutGapingStages =
     {
-        new(50f, "gaping wound"),
-        new(25f, "large blood soaked clot"),
-        new(15f, "large clot"),
-        new(5f, "small angry scar"),
-        new(0f, "small straight scar"),
+        // RuCM edit start
+        new(50f, "cmu-wound-stage-cut-gaping"),
+        new(25f, "cmu-wound-stage-cut-gaping-clot-large"),
+        new(15f, "cmu-wound-stage-cut-gaping-clot"),
+        new(5f,  "cmu-wound-stage-scar-small-angry"),
+        new(0f,  "cmu-wound-stage-scar-small-straight"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] CutGapingBigStages =
     {
-        new(60f, "big gaping wound"),
-        new(40f, "healing gaping wound"),
-        new(10f, "large angry scar"),
-        new(0f, "large straight scar"),
+        // RuCM edit start
+        new(60f, "cmu-wound-stage-cut-gaping-big"),
+        new(40f, "cmu-wound-stage-cut-gaping-big-healing"),
+        new(10f, "cmu-wound-stage-scar-large-angry"),
+        new(0f,  "cmu-wound-stage-scar-large-straight"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] CutMassiveStages =
     {
-        new(70f, "massive wound"),
-        new(50f, "massive healing wound"),
-        new(10f, "massive angry scar"),
-        new(0f, "massive jagged scar"),
+        // RuCM edit start
+        new(70f, "cmu-wound-stage-cut-massive"),
+        new(50f, "cmu-wound-stage-cut-massive-healing"),
+        new(10f, "cmu-wound-stage-scar-massive-angry"),
+        new(0f,  "cmu-wound-stage-scar-massive-jagged"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BruiseStages =
     {
-        new(80f, "monumental bruise"),
-        new(50f, "huge bruise"),
-        new(30f, "large bruise"),
-        new(20f, "moderate bruise"),
-        new(10f, "small bruise"),
-        new(5f, "tiny bruise"),
-        new(0f, "fading bruise"),
+        // RuCM edit start
+        new(80f, "cmu-wound-stage-bruise-monumental"),
+        new(50f, "cmu-wound-stage-bruise-huge"),
+        new(30f, "cmu-wound-stage-bruise-large"),
+        new(20f, "cmu-wound-stage-bruise-moderate"),
+        new(10f, "cmu-wound-stage-bruise-small"),
+        new(5f,  "cmu-wound-stage-bruise-tiny"),
+        new(0f,  "cmu-wound-stage-bruise-fading"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BurnModerateStages =
     {
-        new(10f, "ripped burn"),
-        new(5f, "moderate burn"),
-        new(2f, "healing moderate burn"),
-        new(0f, "fresh skin"),
+        // RuCM edit start
+        new(10f, "cmu-wound-stage-burn-moderate-ripped"),
+        new(5f,  "cmu-wound-stage-burn-moderate"),
+        new(2f,  "cmu-wound-stage-burn-moderate-healing"),
+        new(0f,  "cmu-wound-stage-fresh-skin"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BurnLargeStages =
     {
-        new(20f, "ripped large burn"),
-        new(15f, "large burn"),
-        new(5f, "healing large burn"),
-        new(0f, "fresh skin"),
+        // RuCM edit start
+        new(20f, "cmu-wound-stage-burn-large-ripped"),
+        new(15f, "cmu-wound-stage-burn-large"),
+        new(5f,  "cmu-wound-stage-burn-large-healing"),
+        new(0f,  "cmu-wound-stage-fresh-skin"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BurnSevereStages =
     {
-        new(35f, "ripped severe burn"),
-        new(30f, "severe burn"),
-        new(10f, "healing severe burn"),
-        new(0f, "burn scar"),
+        // RuCM edit start
+        new(35f, "cmu-wound-stage-burn-severe-ripped"),
+        new(30f, "cmu-wound-stage-burn-severe"),
+        new(10f, "cmu-wound-stage-burn-severe-healing"),
+        new(0f,  "cmu-wound-stage-burn-scar"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BurnDeepStages =
     {
-        new(45f, "ripped deep burn"),
-        new(40f, "deep burn"),
-        new(15f, "healing deep burn"),
-        new(0f, "large burn scar"),
+        // RuCM edit start
+        new(45f, "cmu-wound-stage-burn-deep-ripped"),
+        new(40f, "cmu-wound-stage-burn-deep"),
+        new(15f, "cmu-wound-stage-burn-deep-healing"),
+        new(0f,  "cmu-wound-stage-burn-scar-large"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] BurnCarbonisedStages =
     {
-        new(50f, "carbonised area"),
-        new(20f, "healing carbonised area"),
-        new(0f, "massive burn scar"),
+        // RuCM edit start
+        new(50f, "cmu-wound-stage-burn-carbonised"),
+        new(20f, "cmu-wound-stage-burn-carbonised-healing"),
+        new(0f,  "cmu-wound-stage-burn-scar-massive"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] InternalBleedingStages =
     {
-        new(0f, "bruised artery"),
+        new(0f, "cmu-wound-stage-bruised-artery"), // RuCM edit
     };
 
     private static readonly WoundStage[] LostLimbSmallStages =
     {
-        new(40f, "ripped stump"),
-        new(30f, "bloody stump"),
-        new(15f, "clotted stump"),
-        new(0f, "scarred stump"),
+        // RuCM edit start
+        new(40f, "cmu-wound-stage-stump-ripped"),
+        new(30f, "cmu-wound-stage-stump-bloody"),
+        new(15f, "cmu-wound-stage-stump-clotted"),
+        new(0f,  "cmu-wound-stage-stump-scarred"),
+        // RuCM edit end
     };
 
     private static readonly WoundStage[] LostLimbStages =
     {
-        new(65f, "ripped stump"),
-        new(50f, "bloody stump"),
-        new(25f, "clotted stump"),
-        new(0f, "scarred stump"),
+        // RuCM edit start
+        new(65f, "cmu-wound-stage-stump-ripped"),
+        new(50f, "cmu-wound-stage-stump-bloody"),
+        new(25f, "cmu-wound-stage-stump-clotted"),
+        new(0f,  "cmu-wound-stage-stump-scarred"),
+        // RuCM edit end
     };
 
     public static WoundSize FromDamage(float damage)
@@ -196,21 +224,23 @@ public static class WoundSizeProfile
 
     public static string TierName(WoundSize size) => size switch
     {
-        WoundSize.CutSmall => "small cut",
-        WoundSize.CutDeep => "deep cut",
-        WoundSize.CutFlesh => "flesh wound",
-        WoundSize.CutGaping => "gaping wound",
-        WoundSize.CutGapingBig => "big gaping wound",
-        WoundSize.CutMassive => "massive wound",
-        WoundSize.Bruise => "bruise",
-        WoundSize.BurnModerate => "moderate burn",
-        WoundSize.BurnLarge => "large burn",
-        WoundSize.BurnSevere => "severe burn",
-        WoundSize.BurnDeep => "deep burn",
-        WoundSize.BurnCarbonised => "carbonised area",
-        WoundSize.InternalBleeding => "bruised artery",
-        WoundSize.LostLimbSmall or WoundSize.LostLimb => "stump",
-        _ => "wound",
+        // RuMC edit start
+        WoundSize.CutSmall       => "cmu-wound-tier-cut-small",
+        WoundSize.CutDeep        => "cmu-wound-tier-cut-deep",
+        WoundSize.CutFlesh       => "cmu-wound-tier-cut-flesh",
+        WoundSize.CutGaping      => "cmu-wound-tier-cut-gaping",
+        WoundSize.CutGapingBig   => "cmu-wound-tier-cut-gaping-big",
+        WoundSize.CutMassive     => "cmu-wound-tier-cut-massive",
+        WoundSize.Bruise         => "cmu-wound-tier-bruise",
+        WoundSize.BurnModerate   => "cmu-wound-tier-burn-moderate",
+        WoundSize.BurnLarge      => "cmu-wound-tier-burn-large",
+        WoundSize.BurnSevere     => "cmu-wound-tier-burn-severe",
+        WoundSize.BurnDeep       => "cmu-wound-tier-burn-deep",
+        WoundSize.BurnCarbonised => "cmu-wound-tier-burn-carbonised",
+        WoundSize.InternalBleeding => "cmu-wound-tier-bruised-artery",
+        WoundSize.LostLimbSmall or WoundSize.LostLimb => "cmu-wound-tier-stump",
+        _                        => "cmu-wound-tier-generic",
+        // RuMC edit end
     };
 
     public static int SeverityRank(WoundSize size, float damage = 0f)

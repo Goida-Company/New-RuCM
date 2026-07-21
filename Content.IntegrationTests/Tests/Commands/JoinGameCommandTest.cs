@@ -13,6 +13,7 @@ using Content.Shared.Roles.Jobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests.Tests.Commands;
 
@@ -108,7 +109,7 @@ public sealed class JoinGameCommandTest
             var mind = minds.GetMind(session.AttachedEntity!.Value);
             Assert.That(entityManager.EntityExists(mind));
             Assert.That(jobs.MindTryGetJobId(mind, out var actualJob));
-            Assert.That(actualJob?.Id, Is.EqualTo(SelectedJob));
+            Assert.That(actualJob, Is.EqualTo(SelectedJob));
         });
 
         await pair.CleanReturnAsync();

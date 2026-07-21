@@ -324,12 +324,16 @@ public abstract partial class SharedHandsSystem
         if (handId == ent.Comp.ActiveHandId)
             return false;
 
+        var previousHand = ent.Comp.ActiveHandId;
+
         if (TryGetActiveItem(ent, out var oldHeld))
             RaiseLocalEvent(oldHeld.Value, new HandDeselectedEvent(ent));
 
         if (handId == null)
         {
             ent.Comp.ActiveHandId = null;
+            var changed = new ActiveHandChangedEvent(previousHand, null);
+            RaiseLocalEvent(ent.Owner, ref changed);
             return true;
         }
 
@@ -340,6 +344,8 @@ public abstract partial class SharedHandsSystem
             RaiseLocalEvent(newHeld.Value, new HandSelectedEvent(ent));
 
         Dirty(ent);
+        var ev = new ActiveHandChangedEvent(previousHand, handId);
+        RaiseLocalEvent(ent.Owner, ref ev);
         return true;
     }
 

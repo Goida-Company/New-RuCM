@@ -78,11 +78,11 @@ public abstract partial class SharedRMCChemistrySystem : EntitySystem
     {
         using (args.PushGroup(nameof(DetailedExaminableSolutionComponent)))
         {
-            args.PushText("It contains:");
+            args.PushText(Loc.GetString("rmc-detailed-solution-contains")); // RuMC edit
             if (!_solution.TryGetSolution(ent.Owner, ent.Comp.Solution, out _, out var solution) ||
                 solution.Volume <= FixedPoint2.Zero)
             {
-                args.PushText("Nothing.");
+                args.PushText(Loc.GetString("rmc-detailed-solution-nothing")); // RuMC edit
             }
             else
             {
@@ -92,23 +92,32 @@ public abstract partial class SharedRMCChemistrySystem : EntitySystem
                     if (_reagent.TryIndex(reagent.Reagent.Prototype, out var reagentProto))
                         name = reagentProto.LocalizedName;
 
-                    args.PushText($"{reagent.Quantity.Float():F2} units of {name}");
+                    // RuMC edit start
+                    args.PushText(Loc.GetString("rmc-detailed-solution-reagent",
+                        ("amount", reagent.Quantity.Float().ToString("F2")),
+                        ("name", name)));
+
                 }
 
-                args.PushText($"Total volume: {solution.Volume} / {solution.MaxVolume}.");
+                args.PushText(Loc.GetString("rmc-detailed-solution-total-volume",
+                    ("current", solution.Volume),
+                    ("max", solution.MaxVolume)));
+                // RuMC edit end
             }
 
             if (TryComp<RMCToggleableSolutionTransferComponent>(ent.Owner, out var transferComp))
             {
-                var directionText = transferComp.Direction switch
+                // RuMC edit start
+                var directionKey = transferComp.Direction switch
                 {
-                    SolutionTransferDirection.Input => "Transfer mode: Drawing",
-                    SolutionTransferDirection.Output => "Transfer mode: Dispensing",
+                    SolutionTransferDirection.Input => "rmc-detailed-solution-transfer-drawing",
+                    SolutionTransferDirection.Output => "rmc-detailed-solution-transfer-dispensing",
+                    // RuMC edit end
                     _ => string.Empty,
                 };
 
-                if (!string.IsNullOrEmpty(directionText))
-                    args.PushText(directionText);
+                if (!string.IsNullOrEmpty(directionKey))
+                    args.PushText(Loc.GetString(directionKey));
             }
         }
     }
@@ -136,7 +145,10 @@ public abstract partial class SharedRMCChemistrySystem : EntitySystem
         var dispensing = HasComp<DrainableSolutionComponent>(ent);
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = dispensing ? "Enable drawing" : "Enable dispensing",
+            // RuMC edit start
+            Text = dispensing ? Loc.GetString("rmc-detailed-solution-enable-drawing")
+                : Loc.GetString("rmc-detailed-solution-enable-dispensing"),
+            // RuMC edit end
             Act = () =>
             {
                 dispensing = HasComp<DrainableSolutionComponent>(ent);
@@ -147,7 +159,7 @@ public abstract partial class SharedRMCChemistrySystem : EntitySystem
                     refillable.Solution = ent.Comp.Solution;
                     ent.Comp.Direction = SolutionTransferDirection.Input;
                     Dirty(ent, refillable);
-                    _popup.PopupClient("Now drawing", ent, user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-detailed-solution-now-drawing"), ent, user, PopupType.Medium); // RuMC edit
                 }
                 else
                 {
@@ -156,7 +168,7 @@ public abstract partial class SharedRMCChemistrySystem : EntitySystem
                     drainable.Solution = ent.Comp.Solution;
                     ent.Comp.Direction = SolutionTransferDirection.Output;
                     Dirty(ent, drainable);
-                    _popup.PopupClient("Now dispensing", ent, user, PopupType.Medium);
+                    _popup.PopupClient(Loc.GetString("rmc-detailed-solution-now-dispensing"), ent, user, PopupType.Medium); // RuMC edit
                 }
             },
         });

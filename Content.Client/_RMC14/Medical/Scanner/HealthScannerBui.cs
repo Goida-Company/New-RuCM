@@ -797,7 +797,7 @@ public sealed partial class HealthScannerBui : BoundUserInterface
 
     private static string WoundChipText(WoundSize size, float damage)
     {
-        return WoundSizeProfile.StageName(size, damage);
+        return Loc.GetString(WoundSizeProfile.StageName(size, damage)); // RuMC edit
     }
 
     private static Color WoundDescriptorColor(WoundSize descriptor, float damage) => WoundSizeProfile.SeverityRank(descriptor, damage) switch

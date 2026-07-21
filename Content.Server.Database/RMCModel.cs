@@ -261,18 +261,6 @@ public sealed class RMCPlayerActionOrder
     public List<string> Actions { get; set; } = default!;
 }
 
-[Table("rmc_larva_pool_opt_out")]
-[PrimaryKey(nameof(PlayerId), nameof(HiveId))]
-public sealed class RMCLarvaPoolOptOut
-{
-    [ForeignKey("Player")]
-    public Guid PlayerId { get; set; }
-
-    public Player Player { get; set; } = default!;
-
-    public string HiveId { get; set; } = default!;
-}
-
 [Table("rmc_chat_bans"), Index(nameof(PlayerId)), Index(nameof(Address))]
 public sealed class RMCChatBans
 {

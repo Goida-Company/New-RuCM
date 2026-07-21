@@ -1,7 +1,9 @@
-ent-BaseHandheldInstrument-name = элемент
-ent-BaseHandheldInstrument-desc = Это инструмент.
+ent-BaseHandheldInstrument = базовый инструмент
+    .desc = Это музыкальный инструмент.
 
-ent-BasePlaceableInstrument-name = базовый инструмент
+ent-BasePlaceableInstrument = размещаемый инструмент
+    .desc = Это музыкальный инструмент.
 
-ent-BasePlaceableInstrumentRotatable-name = базовыйинструментвращающийся
+ent-BasePlaceableInstrumentRotatable = базовый вращаемый инструмент
+    .desc = Это музыкальный инструмент.
 

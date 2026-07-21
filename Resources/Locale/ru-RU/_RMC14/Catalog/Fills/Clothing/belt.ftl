@@ -147,15 +147,25 @@ ent-RMCBeltMedicalDefibAnalyzerFilled = { ent-CMBeltMedical }
 ent-CMBeltSecurityMarshalFilled = {ent-CMBeltSecurityMarshal}
     .desc = {ent-CMBeltSecurityMarshal.desc}
     .suffix = Заполнен
-
 ent-CMBeltSecurityMPFilled = {ent-CMBeltSecurityMP}
     .desc = {ent-CMBeltSecurityMP.desc}
     .suffix = Заполнен
-
 ent-CMBeltSecuritySPPFilled = {ent-CMBeltSecuritySPP}
     .desc = {ent-CMBeltSecuritySPP.desc}
     .suffix = Заполнен
-
 ent-RMCBeltSecurityWeYaFilled = {ent-RMCBeltSecurityWeYa}
     .desc = {ent-RMCBeltSecurityWeYa.desc}
     .suffix = Заполнен
+
+ent-AU14BeltHolsterPistolFilledB92FS = {ent-RMCBeltHolsterPistol}
+    .desc = {ent-RMCBeltHolsterPistol.desc}
+    .suffix = Заполнен, Б92ФС
+ent-RMCM1984BeltFilled = {ent-RMCBeltHolsterPistol}
+    .desc = {ent-RMCBeltHolsterPistol.desc}
+    .suffix = Заполнен, M1984
+ent-RMCT73BeltFilled = {ent-RMCBeltHolsterPistol}
+    .desc = {ent-RMCBeltHolsterPistol.desc}
+    .suffix = Заполнен, Тип 73
+ent-RMCMK80BeltFilled = {ent-RMCBeltHolsterPistol}
+    .desc = {ent-RMCBeltHolsterPistol.desc}
+    .suffix = Заполнен, MK80

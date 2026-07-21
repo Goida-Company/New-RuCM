@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
 using Content.Server._RMC14.Shuttles;
-using Content.Shared._AU14.ZLevelBuilding;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Station.Events;
@@ -245,9 +244,11 @@ public sealed partial class ShuttleSystem
             return false;
         }
 
-        if (HasComp<ZCollapseCompromisedComponent>(shuttleUid))
+        var safety = new ShuttleFTLSafetyEvent(shuttleUid, ShuttleFTLSafetyPhase.Request);
+        RaiseLocalEvent(shuttleUid, ref safety, true);
+        if (safety.Cancelled)
         {
-            reason = Loc.GetString("au14-dropship-collapse-compromised");
+            reason = safety.Reason;
             return false;
         }
 
@@ -350,9 +351,11 @@ public sealed partial class ShuttleSystem
     {
         component = null;
 
-        if (HasComp<ZCollapseCompromisedComponent>(uid))
+        var safety = new ShuttleFTLSafetyEvent(uid, ShuttleFTLSafetyPhase.Setup);
+        RaiseLocalEvent(uid, ref safety, true);
+        if (safety.Cancelled)
         {
-            Log.Warning($"Blocked FTL setup for structurally compromised shuttle {ToPrettyString(uid)}.");
+            Log.Warning($"Blocked FTL setup for {ToPrettyString(uid)}: {safety.Reason}");
             _console.RefreshShuttleConsoles(uid);
             return false;
         }
@@ -388,9 +391,11 @@ public sealed partial class ShuttleSystem
         var uid = entity.Owner;
         var comp = entity.Comp1;
 
-        if (HasComp<ZCollapseCompromisedComponent>(uid))
+        var safety = new ShuttleFTLSafetyEvent(uid, ShuttleFTLSafetyPhase.Startup);
+        RaiseLocalEvent(uid, ref safety, true);
+        if (safety.Cancelled)
         {
-            Log.Warning($"Aborted FTL startup for structurally compromised shuttle {ToPrettyString(uid)}.");
+            Log.Warning($"Aborted FTL startup for {ToPrettyString(uid)}: {safety.Reason}");
             RemCompDeferred<FTLComponent>(uid);
             _console.RefreshShuttleConsoles(uid);
             return;
@@ -1074,4 +1079,19 @@ public sealed partial class ShuttleSystem
         var ev = new ShuttleFlattenEvent(xform.MapUid.Value, aabbs);
         RaiseLocalEvent(ref ev);
     }
+}
+
+public enum ShuttleFTLSafetyPhase : byte
+{
+    Request,
+    Setup,
+    Startup,
+}
+
+/// <summary>Generic safety gate raised before FTL setup and again before the grid actually moves.</summary>
+[ByRefEvent]
+public record struct ShuttleFTLSafetyEvent(EntityUid Shuttle, ShuttleFTLSafetyPhase Phase)
+{
+    public bool Cancelled;
+    public string Reason = string.Empty;
 }

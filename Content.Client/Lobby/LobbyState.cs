@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Client._RMC14.LinkAccount;
+using Content.Client._RMC14.Onboarding;
 using Content.Client.Audio;
 using Content.Client.GameTicking.Managers;
 using Content.Client.LateJoin;
@@ -92,6 +93,7 @@ namespace Content.Client.Lobby
             Lobby.CharacterPreview.IgnoreAllegianceToggle.OnToggled += OnIgnoreAllegianceToggled;
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
+            Lobby.OnboardingButton.OnPressed += OnOnboardingPressed;
 
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
@@ -140,6 +142,7 @@ namespace Content.Client.Lobby
             Lobby.CharacterPreview.IgnoreAllegianceToggle.OnToggled -= OnIgnoreAllegianceToggled;
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
+            Lobby.OnboardingButton.OnPressed -= OnOnboardingPressed;
 
             // Unhook RMC14 buttons
             if (_joinGovforButton != null)
@@ -162,6 +165,11 @@ namespace Content.Client.Lobby
         {
             SetReady(false);
             Lobby?.SwitchState(LobbyGui.LobbyGuiState.CharacterSetup);
+        }
+
+        private void OnOnboardingPressed(BaseButton.ButtonEventArgs args)
+        {
+            _entityManager.System<RMCOnboardingSystem>().RequestMenu();
         }
 
         private void OnPatronPerksPressed(BaseButton.ButtonEventArgs obj)

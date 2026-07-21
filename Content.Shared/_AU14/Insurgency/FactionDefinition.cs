@@ -31,7 +31,14 @@ public sealed partial class FactionDefinition
     public const int MaxOpposedGovforFactions = 32;
     public const int MaxPlaceableEntities = 256;
     public const int MaxVendorDefinitions = 32;
+    public const int MaxVendorSections = 64;
+    public const int MaxVendorEntries = 512;
     public const int MaxRoleLoadouts = 64;
+    public const int MaxRoleLoadoutContents = 128;
+    public const int MaxVendorStock = 100_000;
+    public const int MaxVendorPoints = 1_000_000;
+    public const int MaxVendorSpawn = 100;
+    public const int MaxSubmissionRatio = 1_000_000;
 
     // Default economy conversion if a definition does not set one.
     public const float DefaultDollarsToPointsRate = 1.0f;
@@ -100,6 +107,14 @@ public sealed partial class FactionMetadata
     /// </summary>
     [DataField]
     public ProtoId<FactionIconPrototype>? StatusIcon;
+
+    /// <summary>
+    ///     Status icon given to members recruited in-round (for example tattooed by the tattoo gun) who have
+    ///     no per-job entry in <see cref="JobStatusIcons"/>. Without this such recruits keep the default CLF
+    ///     icon instead of the faction's. Falls back to <see cref="StatusIcon"/> when left empty.
+    /// </summary>
+    [DataField]
+    public ProtoId<FactionIconPrototype>? RecruitStatusIcon;
 
     /// <summary>
     ///     Per-job status icon overrides. A member whose job appears here shows that icon instead of the

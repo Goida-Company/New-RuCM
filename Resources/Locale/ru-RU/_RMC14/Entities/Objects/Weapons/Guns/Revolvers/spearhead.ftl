@@ -1,13 +1,25 @@
-ent-RMCBulletRevolver357Hollowpoint = пуля (.357) экспансивная
-ent-RMCBulletRevolver357 = пуля (.357)
-ent-RMCCartridgeRevolver357Hollowpoint = патрон (.357) экспансивный
+ent-RMCWeaponRevolverSpearhead = авторевольвер "Копьё"
+    .desc = Массивный револьвер, который носят сотрудники БКМ. Использует патроны .357 Магнум.
+ent-RMCWeaponRevolverSpearheadEmpty = {ent-RMCWeaponRevolverSpearhead}
+    .desc = {ent-RMCWeaponRevolverSpearhead.desc}
+    .suffix = Пустой
+
+ent-RMCWeaponRevolverSpearheadCustom = кастомный авторевольвер "Копьё"
+    .desc = Автоматический револьвер под патрон .357 Магнум, изготовленный на заказ.
+
+ent-RMCSpeedLoader357Hollowpoint = спидлоадер (.357 ЭКС)
+    .desc = Револьверный спидлоадер, снаряженный экспансивными патронами .357 Магнум.
+ent-RMCCartridgeRevolver357Hollowpoint = патрон (.357 ЭКС)
+    .desc = Экспансивный револьверный патрон калибра .357 Магнум.
+ent-RMCBulletRevolver357Hollowpoint = пуля (.357 ЭКС)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
+
+ent-RMCSpeedLoader357 = спидлоадер (.357)
+    .desc = Револьверный спидлоадер, снаряженный патронами .357 Магнум.
 ent-RMCCartridgeRevolver357 = патрон (.357)
-ent-RMCSpeedLoader357Hollowpoint = Спидлоадер экспансивными (.357)
-  .desc = Револьверный спидлоадер, снаряженный экспансивными патронами.
-ent-RMCSpeedLoader357 = Спидлоадер (.357)
-  .desc = Револьверный спидлоадер.
-ent-RMCBaseSpeedLoader357 = Спидлоадер (.357)
-ent-RMCWeaponRevolverSpearheadCustom = Кастомный авторевольвер "Спирхед"
-  .desc = Автоматический револьвер под патрон .357, изготовленный на заказ из темного металла с деревянной рукоятью, явно созданный для человека со вкусом.
-ent-RMCWeaponRevolverSpearhead = Авторевольвер БКМ "Спирхед"
-  .desc = Массивный револьвер, который иногда носят БКМ, а также сотрудники гражданских правоохранительных органов. Использует патроны .357 Magnum.
+    .desc = Револьверный патрон калибра .357 Магнум.
+ent-RMCBulletRevolver357 = пуля (.357)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
+
+ent-RMCBaseSpeedLoader357 = спидлоадер (.357)
+    .desc = Револьверный спидлоадер, снаряженный патронами .357 Магнум.

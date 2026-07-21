@@ -1157,6 +1157,15 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         Dirty(burst);
     }
 
+    public void SetHive(EntityUid burst, EntityUid? hive)
+    {
+        if (TryComp<VictimInfectedComponent>(burst, out var comp))
+        {
+            comp.Hive = hive;
+        }
+        DirtyEntity(burst);
+    }
+
     public void SetHive(Entity<VictimInfectedComponent> burst, EntityUid? hive)
     {
         burst.Comp.Hive = hive;
@@ -1257,7 +1266,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
         burster.BurstFrom = victim.Owner;
         Dirty(spawned, burster);
 
-        // Let the accepted infector claim this specific larva before hive assignment wakes the general larva pool.
+        // Let the accepted infector claim this specific larva before hive assignment wakes the general larva queue.
         LarvaLinked(victim, spawned);
 
         if (HasComp<XenoComponent>(spawned))

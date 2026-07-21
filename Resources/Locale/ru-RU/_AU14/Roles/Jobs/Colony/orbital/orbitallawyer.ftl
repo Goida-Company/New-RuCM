@@ -1,4 +1,5 @@
-ent-AU14IDCardOrbitalLawyer = удостоверение орбитального консула
+ent-AU14IDCardOrbitalLawyer = ID-карта орбитального консула
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
 
 ent-AU14SpawnPointOrbitalLawyer = точка возрождения орбитального консула
   .desc = Используется для начала раунда и позднего соединения.

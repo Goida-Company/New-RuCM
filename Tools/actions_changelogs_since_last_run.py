@@ -8,6 +8,7 @@ also pass CHANGELOG_PREVIOUS_REF to compare against a local git ref.
 import itertools
 import os
 import subprocess
+import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -25,6 +26,7 @@ DISCORD_WEBHOOK_URL = os.environ.get("DISCORD_WEBHOOK_URL")
 
 CHANGELOG_FILE = os.environ.get("CHANGELOG_FILE", "Resources/Changelog/CMU.yml")
 CHANGELOG_PREVIOUS_REF = os.environ.get("CHANGELOG_PREVIOUS_REF")
+CHANGELOG_START_DATE = os.environ.get("CHANGELOG_START_DATE")
 
 TYPES_TO_EMOJI = {
     "Fix": "🔧",
@@ -44,7 +46,16 @@ def main():
         print("No discord webhook URL found, skipping discord send")
         exit(1)
 
-    if DEBUG:
+    with open(CHANGELOG_FILE, "r") as f:
+        cur_changelog = yaml.safe_load(f)
+
+    if CHANGELOG_START_DATE:
+        diff = changelog_entries_since(cur_changelog, CHANGELOG_START_DATE)
+        print(
+            f"Backfill: sending {len(diff)} changelog entries since "
+            f"{CHANGELOG_START_DATE}"
+        )
+    elif DEBUG:
         # to debug this script locally, you can use
         # a separate local file as the old changelog
         last_changelog_stream = DEBUG_CHANGELOG_FILE_OLD.read_text()
@@ -55,13 +66,29 @@ def main():
         # it will get the old changelog from the GitHub API
         last_changelog_stream = get_last_changelog()
 
-    last_changelog = yaml.safe_load(last_changelog_stream)
-    with open(CHANGELOG_FILE, "r") as f:
-        cur_changelog = yaml.safe_load(f)
-
-    diff = diff_changelog(last_changelog, cur_changelog)
+    if not CHANGELOG_START_DATE:
+        last_changelog = yaml.safe_load(last_changelog_stream)
+        diff = diff_changelog(last_changelog, cur_changelog)
     message_lines = changelog_entries_to_message_lines(diff)
     send_message_lines(message_lines)
+
+
+def parse_iso_datetime(value: str) -> datetime.datetime:
+    parsed = datetime.datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=datetime.timezone.utc)
+    return parsed
+
+
+def changelog_entries_since(
+    changelog: dict[str, Any], start_date: str
+) -> list[ChangelogEntry]:
+    start = parse_iso_datetime(start_date)
+    return [
+        entry
+        for entry in changelog.get("Entries", [])
+        if parse_iso_datetime(str(entry["time"])) >= start
+    ]
 
 
 def get_most_recent_workflow(
@@ -157,9 +184,25 @@ def diff_changelog(
 ) -> Iterable[ChangelogEntry]:
     """
     Find all new entries not present in the previous publish.
+
+    Changelog IDs were historically renumbered whenever old entries were pruned,
+    so they cannot be used to compare two files. PR URLs are stable; timestamps
+    provide the same property for manually-authored entries without a URL.
     """
-    old_entry_ids = {e["id"] for e in old["Entries"]}
-    return (e for e in cur["Entries"] if e["id"] not in old_entry_ids)
+    old_entries = {changelog_entry_key(entry) for entry in old.get("Entries", [])}
+    return (
+        entry
+        for entry in cur.get("Entries", [])
+        if changelog_entry_key(entry) not in old_entries
+    )
+
+
+def changelog_entry_key(entry: ChangelogEntry) -> tuple[str, str]:
+    if url := entry.get("url"):
+        return "url", url
+    if timestamp := entry.get("time"):
+        return "time", str(timestamp)
+    return "id", str(entry.get("id"))
 
 
 def get_discord_body(content: str):
@@ -227,6 +270,10 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
 
 def send_message_lines(message_lines: list[str]):
     """Join a list of message lines into chunks that are each below Discord's message length limit, and send them."""
+    if not message_lines:
+        print("No new changelog entries to send to Discord")
+        return
+
     chunk_lines = []
     chunk_length = 0
 

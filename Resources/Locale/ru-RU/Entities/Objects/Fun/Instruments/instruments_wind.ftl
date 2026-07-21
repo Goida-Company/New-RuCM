@@ -1,27 +1,27 @@
-ent-SaxophoneInstrument-name = саксофон
-ent-SaxophoneInstrument-desc = Инструмент. Вероятно, вы могли бы превратить это в сырой джаз.
+ent-BaseWoodwindInstrument = {ent-BaseHandheldInstrument}
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-HarmonicaInstrument-name = губная гармошка
-ent-HarmonicaInstrument-desc = Это инструмент.
+ent-SaxophoneInstrument = саксофон
+    .desc = Инструмент. Вероятно, вы можете переделать его в сырой джаз.
 
-ent-ClarinetInstrument-name = кларнет
-ent-ClarinetInstrument-desc = Сквидвард тинтаклей.
+ent-HarmonicaInstrument = губная гармошка
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-FluteInstrument-name = флейта
-ent-FluteInstrument-desc = Достижение новых высот ужасающе пронзительного поведения.
+ent-ClarinetInstrument = кларнет
+    .desc = Фаворит осьминога со дна океана.
 
-ent-RecorderInstrument-name = диктофон
-ent-RecorderInstrument-desc = Выпускается в различных цветах из модного пластика!
+ent-FluteInstrument = флейта
+    .desc = Достигая новых высот ужасающей пронзительности.
 
-ent-PanFluteInstrument-name = пан-флейта
-ent-PanFluteInstrument-desc = Идеально подходит для того, чтобы заманить древних мифических существ танцевать с вами.
+ent-RecorderInstrument = блокфлейта
+    .desc = Доступна в различных цветах модного пластика!
 
-ent-OcarinaInstrument-name = окарина
-ent-OcarinaInstrument-desc = Хорошо подходит для воспроизведения колыбельных.
+ent-PanFluteInstrument = флейта Пана
+    .desc = Она же многоствольная флейта.
 
-ent-BagpipeInstrument-name = волынка
-ent-BagpipeInstrument-desc = Прекрасно сочетается с килтом.
+ent-OcarinaInstrument = окарина
+    .desc = Хороша для исполнения колыбельных.
 
-ent-BaseWoodwindInstrument-name = элемент
-ent-BaseWoodwindInstrument-desc = Это инструмент.
+ent-BagpipeInstrument = волынка
+    .desc = Прекрасно сочетается с килтом.
 

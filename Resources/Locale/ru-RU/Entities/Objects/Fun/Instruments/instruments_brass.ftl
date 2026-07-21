@@ -1,15 +1,15 @@
-ent-TrumpetInstrument-name = труба
-ent-TrumpetInstrument-desc = Любимый инструмент джазовых музыкантов и эгоистичных школьников.
+ent-BaseBrassInstrument = {ent-BaseHandheldInstrument}
+    .desc = {ent-BaseHandheldInstrument.desc}
 
-ent-TromboneInstrument-name = тромбон
-ent-TromboneInstrument-desc = Всеми любимый скользящий духовой инструмент.
+ent-TrumpetInstrument = труба
+    .desc = {ent-BaseBrassInstrument.desc}
 
-ent-FrenchHornInstrument-name = валторна
-ent-FrenchHornInstrument-desc = Тот факт, что, удерживая его, приходится приглушать его рукой, может что-то указывать на его звук.
+ent-TromboneInstrument = тромбон
+    .desc = {ent-BaseBrassInstrument.desc}
 
-ent-EuphoniumInstrument-name = эуфониум
-ent-EuphoniumInstrument-desc = Детская туба? Баритон? Что бы это ни было, это довольно крутая мешанина труб.
+ent-FrenchHornInstrument = валторна
+    .desc = {ent-BaseBrassInstrument.desc}
 
-ent-BaseBrassInstrument-name = элемент
-ent-BaseBrassInstrument-desc = Это инструмент.
+ent-EuphoniumInstrument = эуфониум
+    .desc = {ent-BaseBrassInstrument.desc}
 

@@ -1,20 +1,20 @@
 rank-RMCRankWeYaTrainee = Стажёр
   .prefix = Стаж.
 
-rank-RMCRankWeYaJuniorExecutive = Младший директор
-  .prefix = Мл. Дир.
+rank-RMCRankWeYaJuniorExecutive = Младший руководитель
+  .prefix = Мл. Рук.
 
-rank-RMCRankWeYaExecutive = Директор
-  .prefix = Дир.
+rank-RMCRankWeYaExecutive = Руководитель
+  .prefix = Рук.
 
-rank-RMCRankWeYaSeniorExecutive = Старший директор
-  .prefix = Ст. Дир.
+rank-RMCRankWeYaSeniorExecutive = Старший руководитель
+  .prefix = Ст. Рук.
 
-rank-RMCRankWeYaExecutiveSpecialist = Специалист-директор
-  .prefix = Спец-Дир.
+rank-RMCRankWeYaExecutiveSpecialist = Руководитель-специалист
+  .prefix = Рук.-Спец.
 
-rank-RMCRankWeYaExecutiveSupervisor = Руководитель-директор
-  .prefix = Рук-Дир.
+rank-RMCRankWeYaExecutiveSupervisor = Исполнительный супервайзер
+  .prefix = Исп. Суп.
 
 rank-RMCRankWeYaAssistantManager = Помощник менеджера
   .prefix = Пом. Мен.
@@ -22,13 +22,13 @@ rank-RMCRankWeYaAssistantManager = Помощник менеджера
 rank-RMCRankWeYaDivisionManager = Менеджер отдела
   .prefix = Мен. Отд.
 
-rank-RMCRankWeYaChiefExecutive = Главный директор
-  .prefix = Гл. Дир.
+rank-RMCRankWeYaChiefExecutive = Исполнительный директор
+  .prefix = Исп. Дир.
 
 rank-RMCRankWeYaDeputyDirector = Заместитель директора
   .prefix = Зам. Дир.
 
-rank-RMCRankWeYaDirector = Директор
+rank-RMCRankWeYaDirector = Директор корпорации
   .prefix = Директор
 
 rank-RMCRankWeYaLegalSpecialist = Юридический специалист

@@ -64,6 +64,14 @@ public sealed class BuildSaveWindow : DefaultWindow
         _countLabel = new Label { Margin = new Thickness(0, 6, 0, 6) };
         root.AddChild(_countLabel);
 
+        var multiZHelp = new RichTextLabel
+        {
+            HorizontalExpand = true,
+            Margin = new Thickness(0, 0, 0, 8),
+        };
+        multiZHelp.SetMessage(Loc.GetString("saved-build-window-multiz-help"), Color.FromHex("#E5C07B"));
+        root.AddChild(multiZHelp);
+
         // Mapper-mode option: also grab unanchored loose items (default is anchored structures only). Only shown
         // when the build-mode dropdown is on Mapper; for other modes it's irrelevant.
         if (mode.Mode == Content.Shared._AU14.SavedBuilds.BuildSaveMode.Mapper)
@@ -93,6 +101,21 @@ public sealed class BuildSaveWindow : DefaultWindow
             _mode.RefreshSelection();
         };
         root.AddChild(includeTiles);
+
+        // Multi-z capture is opt-in: appending a range used to reach onto the levels above and below
+        // unconditionally, which swallowed whatever happened to sit over or under the selection.
+        var includeMultiZ = new CheckBox
+        {
+            Text = Loc.GetString("saved-build-window-include-multiz"),
+            Pressed = mode.IncludeMultiZ,
+            Modulate = Color.FromHex("#E5C07B"),
+        };
+        includeMultiZ.OnToggled += args =>
+        {
+            _mode.IncludeMultiZ = args.Pressed;
+            _mode.RefreshSelection();
+        };
+        root.AddChild(includeMultiZ);
 
         // Name + save.
         _nameEdit = new LineEdit { PlaceHolder = Loc.GetString("saved-build-window-name"), HorizontalExpand = true };

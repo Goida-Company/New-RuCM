@@ -414,8 +414,11 @@ namespace Content.Server.Construction
             var afterChangeEv = new AfterConstructionChangeEntityEvent(construction.Graph, construction.Node, previousNode);
             RaiseLocalEvent(newUid, ref afterChangeEv);
 
-            // Stamp the builder for accountability + the saved-builds whitelist (no-op for non-players).
-            _playerBuilt.MarkBuilt(newUid, userUid);
+            if (userUid is { } builder)
+            {
+                var completedEv = new ConstructionCompletedEvent(newUid, builder);
+                RaiseLocalEvent(newUid, ref completedEv, broadcast: true);
+            }
 
             return newUid;
         }

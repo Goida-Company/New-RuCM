@@ -155,7 +155,7 @@ cmu-medical-detailed-bleed-moderate = умеренное
 cmu-medical-detailed-bleed-severe = сильное
 cmu-medical-detailed-bleed-arterial = артериальное
 
-cmu-medical-detailed-external-bleeding = внешнее кровотечение: { $tier }
+cmu-medical-detailed-external-bleeding = внешнее кровотечение: {$tier}
 cmu-medical-detailed-eschar = ожоговый струп: обугленная ткань
 cmu-medical-detailed-severed = ОТСЕЧЕНА
 
@@ -164,6 +164,9 @@ cmu-medical-examine-wound-treated = { $count ->
    *[other] раны обработаны
 }
 
+cmu-medical-detailed-examine-window-title = Травмы - {$target}
+cmu-medical-detailed-examine-window-heading = Отчёт о травмах
+cmu-medical-detailed-examine-window-bleeding = Кровотечение: {$tier}
 cmu-robotic-limb-material-synthetic = синтетический
 cmu-robotic-limb-examine-state = протез
 cmu-robotic-limb-examine-brute = вмятины на обшивке

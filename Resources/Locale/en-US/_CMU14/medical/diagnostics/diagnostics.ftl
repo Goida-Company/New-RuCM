@@ -135,6 +135,7 @@ cmu-medical-scanner-fracture-severity-hairline    = hairline
 cmu-medical-scanner-fracture-severity-simple      = simple
 cmu-medical-scanner-fracture-severity-compound    = compound
 cmu-medical-scanner-fracture-severity-comminuted  = comminuted
+cmu-medical-scanner-fracture-severity-shattered   = shattered
 
 cmu-medical-scanner-organ-stage-healthy  = Healthy
 cmu-medical-scanner-organ-stage-bruised  = Bruised

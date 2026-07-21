@@ -1,30 +1,32 @@
-ent-MusicalLungInstrument-name = музыкальное легкое
-ent-MusicalLungInstrument-desc = Духовные и волшебные легкие бывшего оперного певца. Хотя, если честно, голосовые связки делают свое дело.
+ent-MusicalLungInstrument = музыкальное лёгкое
+    .desc = Духовное и магическое лёгкое бывшей оперной певицы.
 
-ent-SeashellInstrument-name = ракушка
-ent-SeashellInstrument-desc = Для прокладки береговой линии.
+ent-SeashellInstrument = ракушка
+    .desc = Для создания ритма береговой линии.
 
-ent-BirdToyInstrument-name = птичий свисток
-ent-BirdToyInstrument-desc = Очаровательная свистулька в виде птички. Оно прекрасно поет.
+ent-BirdToyInstrument = птичий свист
+    .desc = Очаровательный маленький свисток в форме птички.
 
-ent-PhoneInstrument-name = красный телефон
-ent-PhoneInstrument-desc = Если что-то пойдет не так...
+ent-PhoneInstrument = красный телефон
+    .desc = Если что-то пойдёт не так...
 
-ent-PhoneInstrumentSyndicate-name = кроваво-красный телефон
-ent-PhoneInstrumentSyndicate-desc = Чтобы злые люди звонили своим друзьям.
+ent-PhoneInstrumentSyndicate = кроваво-красный телефон
+    .desc = Для злых людей, которым надо позвонить людям.
 
-ent-HelicopterInstrument-name = игрушечный вертолет
-ent-HelicopterInstrument-desc = Ch-ka-ch-ka-ch-ka-ch-ka-ch-ka-ch-ka...
+ent-HelicopterInstrument = игрушечный вертолёт
+    .desc = Ч-ка-ч-ка-ч-ка-ч-ка-ч-ка-ч-ка...
 
-ent-CannedApplauseInstrument-name = консервированные аплодисменты
-ent-CannedApplauseInstrument-desc = Кажется, кто-то уже все это израсходовал...
+ent-CannedApplauseInstrument = готовые аплодисменты
+    .desc = Похоже, кто-то уже всё израсходовал...
 
-ent-GunpetInstrument-name = пушка
-ent-GunpetInstrument-desc = Почему вам нужно это изучить? Разве это не говорит само за себя?
+ent-GunpetInstrument = писольлет
+    .desc = Зачем вам проверять его?
 
-ent-BikeHornInstrument-name = позолоченный велосипедный гудок
-ent-BikeHornInstrument-desc = Изящно украшенный велосипедный сигнал, способный издавать самые разные ноты.
+ent-BikeHornInstrument = позолоченный велосипедный клаксон
+    .desc = Изысканно украшенный велосипедный клаксон, способный издавать разнообразные звуки.
 
-ent-BananaPhoneInstrument-name = банановый телефон
-ent-BananaPhoneInstrument-desc = Прямая линия до Хонкматери. Кажется, всегда идет на голосовую почту.
+ent-BananaPhoneInstrument = бананафон
+    .desc = Прямая линия связи с Хонкоматерью.
 
+ent-BloodredCasette = плеер Синдиката
+    .desc = Злой способ насладиться любимой музыкой.

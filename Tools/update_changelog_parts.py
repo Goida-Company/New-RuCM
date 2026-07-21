@@ -129,7 +129,7 @@ def write_part(
     time: str,
     url: str,
     category: str,
-) -> None:
+) -> bool:
     part = {
         "author": author,
         "changes": changes,
@@ -140,10 +140,11 @@ def write_part(
     path = os.path.join(parts_dir, f"pr-{pr_number}.yml")
     if os.path.exists(path):
         print(f"Part for PR #{pr_number} already exists, skipping.")
-        return
+        return False
     with open(path, "w", encoding="utf-8") as f:
         yaml.safe_dump(part, f, allow_unicode=True)
     print(f"Wrote part for PR #{pr_number} by {author}")
+    return True
 
 
 def main():
@@ -161,6 +162,7 @@ def main():
     with open("Resources/Changelog/CMU.yml", "r") as f:
         current = yaml.safe_load(f)
     entries = (current or {}).get("Entries", [])
+    existing_urls = {entry.get("url") for entry in entries if entry.get("url")}
     since = (
         "2025-06-01T00:00:00Z"  # start date when changelog is empty
         if not entries
@@ -174,6 +176,10 @@ def main():
 
     written = 0
     for item in prs:
+        if item.get("html_url") in existing_urls:
+            print(f"PR #{item['number']}: already present in changelog, skipping")
+            continue
+
         pr = fetch_pr(sess, repo, item["number"])
         body = pr.get("body") or ""
         result = parse_cl_block(body, pr["user"]["login"])
@@ -182,7 +188,7 @@ def main():
             continue
         author, changes = result
         time = pr["merged_at"].replace("Z", ".0000000+00:00")
-        write_part(
+        if write_part(
             args.parts_dir,
             pr["number"],
             author,
@@ -190,8 +196,8 @@ def main():
             time,
             pr["html_url"],
             args.category,
-        )
-        written += 1
+        ):
+            written += 1
 
     print(f"Done. Wrote {written} parts from {len(prs)} PRs.")
 

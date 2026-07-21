@@ -40,4 +40,13 @@ public sealed partial class EntityPresetSystem : EntitySystem
 
         _preset.ApplyPreset(entity, comp);
     }
+
+    /// <summary>
+    /// Removes an entity's map-init preset before initialization. Useful when a caller
+    /// needs the role body but intends to provide a deterministic loadout itself.
+    /// </summary>
+    public void SuppressPreset(EntityUid entity)
+    {
+        RemComp<EquipEntityPresetComponent>(entity);
+    }
 }

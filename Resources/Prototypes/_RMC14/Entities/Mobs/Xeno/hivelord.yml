@@ -89,6 +89,29 @@
     size: Big
   - type: RMCXenoDamageVisuals
     prefix: hivelord
+  - type: DrawableSolution
+    solution: blood
+  - type: SolutionContainerManager
+    solutions:
+      blood:
+        maxVol: 600
+        reagents:
+        - ReagentId: CMUXenoBlood
+          Quantity: 200
+        - ReagentId: CMUXenoPlasmaPurple
+          Quantity: 200
+        - ReagentId: CMUXenoPlasmaPhero
+          Quantity: 200
+  - type: SolutionRegeneration
+    solution: blood
+    generated:
+      reagents:
+      - ReagentId: CMUXenoBlood
+        Quantity: 1
+      - ReagentId: CMUXenoPlasmaPurple
+        Quantity: 1
+      - ReagentId: CMUXenoPlasmaPhero
+        Quantity: 1
   - type: TacticalMapIcon
     icon:
       sprite: /Textures/_RMC14/Interface/map_blips.rsi
@@ -137,6 +160,7 @@
     - DoorXenoResinThick
     - XenoStickyResin
     - XenoFastResin
+    - XenoCollapseResin
     - XenoResinSpikes
     - HiveAcidPillarXeno
     canOrderConstruction:
@@ -191,6 +215,7 @@
     - DoorXenoResin
     - XenoStickyResin
     - XenoFastResin
+    - XenoCollapseResin
     - XenoResinSpikes
     - XenoWeedsSource
     canOrderConstruction:

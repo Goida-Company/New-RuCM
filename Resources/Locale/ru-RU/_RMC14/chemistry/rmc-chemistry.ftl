@@ -1,0 +1,10 @@
+rmc-detailed-solution-contains = Содержит:
+rmc-detailed-solution-nothing = Ничего.
+rmc-detailed-solution-reagent = {$amount} ед. {$name}
+rmc-detailed-solution-total-volume = Общий объём: {$current} / {$max}.
+rmc-detailed-solution-transfer-drawing = Режим переноса: забор
+rmc-detailed-solution-transfer-dispensing = Режим переноса: подача
+rmc-detailed-solution-now-drawing = Режим забора включён
+rmc-detailed-solution-now-dispensing = Режим подачи включён
+rmc-detailed-solution-enable-drawing = Включить забор
+rmc-detailed-solution-enable-dispensing = Включить подачу

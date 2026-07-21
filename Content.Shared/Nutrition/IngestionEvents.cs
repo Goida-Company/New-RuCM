@@ -12,6 +12,12 @@ public sealed class IngestionAttemptEvent : CancellableEntityEventArgs
 }
 
 /// <summary>
+/// Raised directed at food after a successful bite.
+/// </summary>
+[ByRefEvent]
+public readonly record struct AfterFoodEatenEvent(EntityUid User);
+
+/// <summary>
 /// Raised directed at the food after finishing eating a food before it's deleted.
 /// Cancel this if you want to do something special before a food is deleted.
 /// </summary>

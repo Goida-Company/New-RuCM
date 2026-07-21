@@ -172,6 +172,7 @@
   - type: Tag
     tags:
     - RuMCMagazineTachankaLarge
+    - RuMCMagazineTachanka
   - type: BallisticAmmoProvider
     whitelist:
       tags:
@@ -196,6 +197,7 @@
   - type: Tag
     tags:
     - RuMCMagazineTachankaLargeTracer
+    - RuMCMagazineTachanka
   - type: BallisticAmmoProvider
     whitelist:
       tags:

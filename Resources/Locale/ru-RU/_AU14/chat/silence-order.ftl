@@ -3,3 +3,7 @@ au14-silence-order-emote-action = громко прочищает горло.
 au14-silence-order-emote-pronoun-male = его
 au14-silence-order-emote-pronoun-female = её
 au14-silence-order-emote-pronoun-other = их
+au14-silence-order-callout-silence = Тишина!!
+au14-silence-order-callout-shhhh = Тссс!!
+au14-silence-order-callout-ahem = Кхм!!
+au14-silence-order-callout-lock-it-up = Заткнуться!!

@@ -1,5 +1,5 @@
 - type: job
-  parent: CMJobBase
+  parent: RMCJobRibbonBase # RuCM замена медалей на ленточки для колонистов
   id: AU14JobLEOBase
   name: au14-job-name-leo
   description: au14-job-description-leo

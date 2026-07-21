@@ -1,9 +1,5 @@
-ent-CMWebbingSurgicalBlue = хирургический разгрузочный жилет
-    .desc = Прочный разгрузочный жилет, специально разработанный для храненя набора хирургических инструментов.
-    .suffix = Заполнен, Синий
-ent-CMWebbingSurgicalGreen = {ent-CMWebbingSurgicalBlue}
-    .desc = {ent-CMWebbingSurgicalBlue.desc}
-    .suffix = Заполнен, Зелёный
+ent-CMWebbingBase = разгрузочный жилет
+    .desc = Абстрактный разгрузочный жилет.
 
 ent-CMWebbingKnives = жилет для ножей
     .desc = Жилет для ножей старого поколения, ранее использовавшийся КМП.
@@ -26,6 +22,9 @@ ent-RMCWebbingDropPouch = сбросный подсумок
 ent-CMWebbingHolster = плечевая кобура
     .desc = Кобура для пистолета с прикреплённым подсумком, позволяющая хранить вместе с ним два магазина.
 
+ent-RMCWebbingHolsterBlack = чёрная плечевая кобура
+    .desc = Кобура для пистолета с прикреплённым подсумком, позволяющая хранить вместе с ним два магазина. Эта чёрная.
+
 ent-CMWebbingBrown = коричневый разгрузочный жилет
     .desc = Поношенный коричневатый жилет из синтетического хлопка с множеством карманов, чтобы разгрузить ваши руки.
 
@@ -44,32 +43,7 @@ ent-RMCWebbingLegPouch = ножной подсумок
 ent-CMWebbing = разгрузочный жилет
     .desc = Прочная конструкция из синтетических ремней и пряжек, готовая разделить вашу ношу.
 
-ent-CMWebbingBase = разгрузочный жилет
+ent-RMCWebbingSurgicalRCM = хирургический разгрузочный жилет
+    .desc = Прочный разгрузочный жилет, специально разработанный для хранения набора хирургических инструментов. Этот принадлежит королевским морпехам.
+    .suffix = Королевский
 
-ent-RMCWebbingBuckshot = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Картечь
-
-ent-RMCWebbingShotgunSurv = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Ве-Ю
-
-ent-RMCWebbingPMC = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = ЧВК
-
-ent-RMCWebbingPMCEngineer = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Инженер ЧВК
-
-ent-RMCWebbingPMCMedic = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Медик ЧВК
-
-ent-RMCWebbingPMCGunner = {ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Смартганнер ЧВК
-
-ent-RMCWebbingPMCWhiteout = { ent-CMWebbingBlack}
-    .desc = {ent-CMWebbingBlack.desc}
-    .suffix = Зачистка ЧВК

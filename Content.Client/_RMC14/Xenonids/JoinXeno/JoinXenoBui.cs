@@ -1,3 +1,4 @@
+using System.Numerics;
 using Content.Client.Lobby.UI;
 using Content.Client.Stylesheets;
 using Content.Shared._RMC14.Xenonids.JoinXeno;
@@ -12,7 +13,7 @@ namespace Content.Client._RMC14.Xenonids.JoinXeno;
 public sealed class JoinXenoBui : BoundUserInterface
 {
     [ViewVariables]
-    private LarvaPoolWindow? _window;
+    private JoinXenoQueueWindow? _window;
 
     private readonly List<EntryState> _entries = new();
     private string _searchText = string.Empty;
@@ -46,12 +47,12 @@ public sealed class JoinXenoBui : BoundUserInterface
         UpdateVisibleEntries();
     }
 
-    private LarvaPoolWindow EnsureWindow()
+    private JoinXenoQueueWindow EnsureWindow()
     {
         if (_window is { Disposed: false })
             return _window;
 
-        _window = this.CreateWindow<LarvaPoolWindow>();
+        _window = this.CreateWindow<JoinXenoQueueWindow>();
         _window.SearchBar.OnTextChanged += OnSearchTextChanged;
         return _window;
     }
@@ -96,70 +97,43 @@ public sealed class JoinXenoBui : BoundUserInterface
             StyleClasses = { StyleNano.StyleClassCrtDimText },
         });
 
-        if (entry.Status == LarvaPoolStatus.Ineligible)
-        {
-            textBox.AddChild(new Label
-            {
-                Text = Loc.GetString(
-                    "rmc-xeno-larva-pool-ineligible-reason",
-                    ("reason", GetIneligibilityReason(entry.IneligibilityReason))),
-                ClipText = true,
-                HorizontalExpand = true,
-                StyleClasses = { StyleNano.StyleClassCrtDimText },
-            });
-        }
-
         row.AddChild(textBox);
 
-        var toggle = new Button
+        var button = new Button
         {
-            Text = entry.PreferenceLoaded
-                ? Loc.GetString(entry.OptedIn
-                    ? "rmc-xeno-larva-pool-opt-out"
-                    : "rmc-xeno-larva-pool-opt-in")
-                : Loc.GetString("rmc-xeno-larva-pool-preference-loading"),
-            Disabled = !entry.PreferenceLoaded,
-            MinWidth = 110,
+            Text = GetButtonText(entry),
+            TextAlign = Label.AlignMode.Center,
+            ClipText = false,
+            MinSize = new Vector2(132, 34),
             VerticalAlignment = Control.VAlignment.Center,
         };
-        toggle.OnPressed += _ =>
-        {
-            toggle.Disabled = true;
-            SendMessage(new SetLarvaPoolOptInBuiMsg(entry.Hive, !entry.OptedIn));
-        };
-        row.AddChild(toggle);
+
+        if (entry.Status == JoinXenoQueueStatus.NotQueued)
+            button.AddStyleClass(StyleNano.StyleClassCrtAttentionButton);
+
+        button.OnPressed += _ => SendPredictedMessage(new JoinXenoHiveChoiceBuiMsg(entry.Hive));
+        row.AddChild(button);
 
         panel.AddChild(row);
         CrtLobbyTheme.Apply(panel);
         return panel;
     }
 
+    private static string GetButtonText(JoinXenoHiveEntry entry)
+    {
+        return entry.Status == JoinXenoQueueStatus.NotQueued
+            ? Loc.GetString("rmc-xeno-larva-queue-join")
+            : Loc.GetString("rmc-xeno-larva-queue-leave");
+    }
+
     private static string GetStatusText(JoinXenoHiveEntry entry)
     {
         return entry.Status switch
         {
-            LarvaPoolStatus.Eligible => Loc.GetString("rmc-xeno-larva-pool-status-position", ("position", entry.Position)),
-            LarvaPoolStatus.Waiting => Loc.GetString("rmc-xeno-larva-pool-status-waiting", ("position", entry.Position)),
-            _ => Loc.GetString("rmc-xeno-larva-pool-status-ineligible", ("position", entry.Position)),
+            JoinXenoQueueStatus.Queued => Loc.GetString("rmc-xeno-larva-queue-status-position", ("position", entry.Position)),
+            JoinXenoQueueStatus.Waiting => Loc.GetString("rmc-xeno-larva-queue-status-waiting"),
+            _ => Loc.GetString("rmc-xeno-larva-queue-status-available"),
         };
-    }
-
-    private static string GetIneligibilityReason(LarvaPoolIneligibilityReason reason)
-    {
-        var localizationId = reason switch
-        {
-            LarvaPoolIneligibilityReason.PreferenceDataLoading => "rmc-xeno-larva-pool-reason-preference-loading",
-            LarvaPoolIneligibilityReason.CharacterProfileUnavailable => "rmc-xeno-larva-pool-reason-character-profile",
-            LarvaPoolIneligibilityReason.XenoPreferenceDisabled => "rmc-xeno-larva-pool-reason-xeno-preference",
-            LarvaPoolIneligibilityReason.RoleBanned => "rmc-xeno-larva-pool-reason-role-banned",
-            LarvaPoolIneligibilityReason.RoleRequirements => "rmc-xeno-larva-pool-reason-role-requirements",
-            LarvaPoolIneligibilityReason.RevivableBody => "rmc-xeno-larva-pool-reason-revivable",
-            LarvaPoolIneligibilityReason.StaffProtected => "rmc-xeno-larva-pool-reason-staff-protected",
-            LarvaPoolIneligibilityReason.OptedOut => "rmc-xeno-larva-pool-reason-opted-out",
-            _ => "rmc-xeno-larva-pool-reason-unknown",
-        };
-
-        return Loc.GetString(localizationId);
     }
 
     private void OnSearchTextChanged(LineEditEventArgs args)
@@ -173,7 +147,7 @@ public sealed class JoinXenoBui : BoundUserInterface
         if (_window is not { Disposed: false })
             return;
 
-        _window.CountLabel.Text = Loc.GetString("rmc-xeno-larva-pool-count", ("count", _entries.Count));
+        _window.CountLabel.Text = Loc.GetString("rmc-xeno-larva-queue-count", ("count", _entries.Count));
 
         var anyVisible = false;
         foreach (var entry in _entries)
@@ -187,8 +161,8 @@ public sealed class JoinXenoBui : BoundUserInterface
 
         _window.ContentPanel.Visible = anyVisible;
         _window.NoHivesMessage.Text = _entries.Count == 0
-            ? Loc.GetString("rmc-xeno-larva-pool-empty")
-            : Loc.GetString("rmc-xeno-larva-pool-no-results");
+            ? Loc.GetString("rmc-xeno-larva-queue-empty")
+            : Loc.GetString("rmc-xeno-larva-queue-no-results");
         _window.NoHivesMessage.Visible = !anyVisible;
     }
 

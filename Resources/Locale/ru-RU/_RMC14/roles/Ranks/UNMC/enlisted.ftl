@@ -1,8 +1,8 @@
 rank-RMCRankMajorGeneral = Генерал-майор
-  .prefix = Ген-майор
+  .prefix = Генерал-майор
 
 rank-RMCRankBrigadierGeneral = Бригадный генерал
-  .prefix = Бриг-генерал
+  .prefix = Бриг. генерал
 
 rank-RMCRankColonel = Полковник
   .prefix = Полк.

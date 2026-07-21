@@ -72,6 +72,7 @@ public sealed partial class TTSSystem : EntitySystem
     private readonly HashSet<NetUserId> _referenceVoiceUploads = new();
     private readonly HashSet<string> _customVoices = new(StringComparer.Ordinal);
     private readonly HashSet<string> _referenceVoiceOperations = new(StringComparer.Ordinal);
+    private uint _nextPlaybackId = 1;
     private Task<bool>? _catalogLoadTask;
     private bool _catalogLoaded;
     private TimeSpan _nextCatalogLoadAttempt;
@@ -388,11 +389,15 @@ public sealed partial class TTSSystem : EntitySystem
             args.Message.Length > MaxMessageChars ||
             voiceId == null ||
             args.Channel != null)
+        {
+            RaiseUnavailable(uid);
             return;
+        }
 
         if (!_prototypeManager.TryIndex(args.Language, out LanguagePrototype? languageProto) ||
             !languageProto.NeedsSpeech)
         {
+            RaiseUnavailable(uid);
             return;
         }
 
@@ -400,7 +405,10 @@ public sealed partial class TTSSystem : EntitySystem
         RaiseLocalEvent(uid, voiceEv);
         voiceId = voiceEv.VoiceId;
         if (!TryResolveSpeaker(voiceId, out var speaker))
+        {
+            RaiseUnavailable(uid);
             return;
+        }
 
         // Обработка шепота
         if (args.ObfuscatedMessage != null)
@@ -425,7 +433,17 @@ public sealed partial class TTSSystem : EntitySystem
         ProtoId<LanguagePrototype> language)
     {
         var soundData = await GenerateTTS(message, speaker);
-        if (soundData is null) return;
+        if (soundData is null)
+        {
+            RaiseUnavailable(uid);
+            return;
+        }
+
+        var playbackId = _nextPlaybackId++;
+        if (_nextPlaybackId == 0)
+            _nextPlaybackId = 1;
+
+        var delivered = new HashSet<NetUserId>();
         var recipients = Filter.Pvs(uid).Recipients;
 
         foreach (var session in recipients)
@@ -444,10 +462,20 @@ public sealed partial class TTSSystem : EntitySystem
             if (!CanReceiveLanguageTts(uid, listener, language))
                 continue;
 
-            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), session);
+            RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid), playbackId: playbackId), session);
+            delivered.Add(session.UserId);
         }
 
         SendGhostTTS(uid, new PlayTTSEvent(soundData), ChatSystem.VoiceRange);
+
+        var dispatched = new TTSUtteranceDispatchedEvent(playbackId, delivered);
+        RaiseLocalEvent(uid, ref dispatched);
+    }
+
+    private void RaiseUnavailable(EntityUid uid)
+    {
+        var unavailable = new TTSUtteranceUnavailableEvent();
+        RaiseLocalEvent(uid, ref unavailable);
     }
 
     private async void HandleWhisper(

@@ -96,9 +96,6 @@ au14-trait-slovak-language-desc = Вы знаете словацкий.
 au14-trait-romanian-language-name = Румынский язык
 au14-trait-romanian-language-desc = Вы знаете румынский.
 
-au14-trait-polyglot-name = Полиглот
-au14-trait-polyglot-desc = Языки даются вам легко и естественно.
-
 au14-trait-french-language-name = Французский язык
 au14-trait-french-language-desc = Вы знаете французский.
 
@@ -119,3 +116,9 @@ au14-trait-spanish-language-desc = Вы знаете испанский.
 
 au14-trait-binary-language-name = Двоичный язык
 au14-trait-binary-language-desc = Вы знаете двоичный язык.
+
+au14-trait-polyglot-name = Полиглот
+au14-trait-polyglot-desc = Языки даются вам легко и естественно.
+
+au14-trait-no-language-learning-name = Языковые нарушения
+au14-trait-no-language-learning-desc = Вы не способны изучать новые языки.

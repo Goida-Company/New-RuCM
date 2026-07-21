@@ -306,6 +306,15 @@ namespace Content.Server.GameTicking
             _db.AddRoundPlayers(RoundId, session.UserId);
         }
 
+        /// <summary>
+        /// Returns a player controlled by an isolated auxiliary flow, such as onboarding, to the normal lobby.
+        /// The caller is responsible for detaching and deleting its temporary character first.
+        /// </summary>
+        public void ReturnPlayerToLobby(ICommonSession session)
+        {
+            PlayerJoinLobby(session);
+        }
+
         private void ReqWindowAttentionAll()
         {
             RaiseNetworkEvent(new RequestWindowAttentionEvent());

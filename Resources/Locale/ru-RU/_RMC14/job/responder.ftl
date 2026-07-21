@@ -11,20 +11,20 @@ rmc-ghost-role-information-responder-rules = Вы — [color=red][bold]Отве�
                                              НЕ используйте консоль Overwatch для вмешательства в действия отрядов. Только для наблюдения.
                                              НЕ злоупотребляйте полномочиями этой роли. Нарушения приведут к лишению роли или более строгим мерам.
 # Ответственные от фракций
-rmc-job-name-unmc-responder = Офицер связи UNMC
-rmc-job-description-unmc-responder = "Вы представляете Региональное командование UNMC и отвечаете на факсы, адресованные Высшему командованию."
-rmc-job-name-weya-responder = Коммуникационный исполнитель We-Yu
-rmc-job-description-weya-responder = "Вы представляете специальный отдел We-Yu и отвечаете на входящие факсы."
+rmc-job-name-unmc-responder = Офицер связи КМП
+rmc-job-description-unmc-responder = "Вы представляете Региональное командование КМП и отвечаете на факсы, адресованные Высшему командованию."
+rmc-job-name-weya-responder = Коммуникационный исполнитель Ве-Ю
+rmc-job-description-weya-responder = "Вы представляете специальный отдел Ве-Ю и отвечаете на входящие факсы."
 rmc-job-name-provost-responder = Офицер связи Провоста
 rmc-job-description-provost-responder = "Вы представляете Офис маршала Провоста и отвечаете на адресованные ему факсы."
-rmc-job-name-free-press-responder = Свободная пресса
+rmc-job-name-free-press-responder = Редактор Свободной прессы
 rmc-job-description-free-press-responder = "Вы — влиятельный региональный редактор издания 'Свободная пресса'."
-rmc-job-name-clf-responder = Информационный корреспондент CLF
-rmc-job-description-clf-responder = "Вы представляете региональную ячейку CLF. Координируйте обмен информацией между ячейками."
+rmc-job-name-clf-responder = Координатор КОФ
+rmc-job-description-clf-responder = "Вы представляете региональную ячейку КОФ. Координируйте обмен информацией между ячейками."
 rmc-job-prefix-clf-responder = ИНФО
 rmc-job-name-spp-responder = Офицер связи СПН
 rmc-job-description-spp-responder = "Вы представляете Региональное командование СПН и отвечаете на адресованные ему факсы."
-rmc-job-name-tse-responder = Офицер связи TSE
-rmc-job-description-tse-responder = "Вы представляете Региональное командование TSE и отвечаете на адресованные ему факсы."
-rmc-job-name-cmb-responder = Офицер связи CMB
-rmc-job-description-cmb-responder = "Вы — диспетчер местного отделения CMB. Отвечайте на факсы соответственно ситуации."
+rmc-job-name-tse-responder = Офицер связи ИТМ
+rmc-job-description-tse-responder = "Вы представляете Региональное командование ИТМ и отвечаете на адресованные ему факсы."
+rmc-job-name-cmb-responder = Офицер связи БКМ
+rmc-job-description-cmb-responder = "Вы — диспетчер местного отделения БКМ. Отвечайте на факсы соответственно ситуации."
