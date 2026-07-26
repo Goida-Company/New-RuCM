@@ -11,6 +11,7 @@
   startingGear: RMCGearCorporateSynthetic
   icon: "RMCJobIconSynth"
   joinNotifyCrew: false
+  isSynthetic: true
   accessGroups:
   - RMCWeYaExec
   special:

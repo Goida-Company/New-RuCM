@@ -14,7 +14,7 @@ import datetime
 
 from changelog_translation import translate_changelog
 
-MAX_ENTRIES = 500
+MAX_ENTRIES = 1500
 
 HEADER_RE = r"(?::cl:|🆑) *\r?\n(.+)$"
 ENTRY_RE = r"^ *[*-]? *(\S[^\n\r]+)\r?$"

@@ -6,3 +6,14 @@ ui-lobby-observe-button = Observe
 ui-lobby-ready-up-button = Ready Up
 ui-lobby-online-players-block = Online Players
 ui-lobby-server-info-block = Server Info
+
+lobby-terminal-camera = CAM A-14
+lobby-terminal-channel = ORBITAL OPERATIONS NETWORK
+lobby-terminal-source = SOURCE // {$serverName}
+lobby-terminal-title = DEPLOYMENT TERMINAL
+lobby-terminal-status-waiting = AWAITING PERSONNEL
+lobby-terminal-status-ready = DEPLOYMENT CLEARED
+lobby-terminal-status-countdown = LAUNCH SEQUENCE ACTIVE
+lobby-terminal-status-imminent = FINAL LAUNCH CHECK
+lobby-terminal-status-paused = LAUNCH HOLD
+lobby-terminal-status-in-progress = OPERATION IN PROGRESS

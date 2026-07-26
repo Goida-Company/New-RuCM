@@ -251,7 +251,7 @@ public sealed partial class RMCOnboardingSystem : EntitySystem
         SubscribeLocalEvent<InputMoverComponent, ActiveHandChangedEvent>(OnActiveHandChanged);
         SubscribeLocalEvent<FoodComponent, AfterFoodEatenEvent>(OnFoodEaten);
         SubscribeLocalEvent<FoodComponent, AfterFullyEatenEvent>(OnFoodFullyEaten);
-        SubscribeLocalEvent<MobStateComponent, ExaminedEvent>(OnMedicalPatientExamined);
+        // SubscribeLocalEvent<MobStateComponent, ExaminedEvent>(OnMedicalPatientExamined);
         SubscribeLocalEvent<WoundTreatedEvent>(OnMedicalWoundTreated);
         SubscribeLocalEvent<CPRAttemptFinishedEvent>(OnMedicalCprFinished);
         SubscribeLocalEvent<GunComponent, EntInsertedIntoContainerMessage>(OnMagazineInserted);
@@ -639,20 +639,20 @@ public sealed partial class RMCOnboardingSystem : EntitySystem
         TryCompleteStep(session, RMCOnboardingStepKind.TakeFirstBite);
     }
 
-    private void OnMedicalPatientExamined(Entity<MobStateComponent> ent, ref ExaminedEvent args)
-    {
-        foreach (var (_, active) in _activeSessions.Snapshot())
-        {
-            if (active.MedicalPatient == ent.Owner &&
-                active.Mob == args.Examiner)
-            {
-                active.MedicalPatientExamined = true;
-                if (IsCurrentStep(active, RMCOnboardingStepKind.ExamineMedicalPatient))
-                    CompleteMedicalStep(active, RMCOnboardingStepKind.ExamineMedicalPatient);
-                return;
-            }
-        }
-    }
+    // private void OnMedicalPatientExamined(Entity<MobStateComponent> ent, ref ExaminedEvent args)
+    // {
+    //     foreach (var (_, active) in _activeSessions.Snapshot())
+    //     {
+    //         if (active.MedicalPatient == ent.Owner &&
+    //             active.Mob == args.Examiner)
+    //         {
+    //             active.MedicalPatientExamined = true;
+    //             if (IsCurrentStep(active, RMCOnboardingStepKind.ExamineMedicalPatient))
+    //                 CompleteMedicalStep(active, RMCOnboardingStepKind.ExamineMedicalPatient);
+    //             return;
+    //         }
+    //     }
+    // }
 
     private void OnMedicalWoundTreated(ref WoundTreatedEvent args)
     {

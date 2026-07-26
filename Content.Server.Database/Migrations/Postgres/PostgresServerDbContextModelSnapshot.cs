@@ -434,10 +434,14 @@ namespace Content.Server.Database.Migrations.Postgres
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                      b.Property<string>("Name")
+                          .IsRequired()
+                          .HasColumnType("text")
+                          .HasColumnName("name");
+
+                      b.Property<string>("OOCColor")
+                          .HasColumnType("text")
+                          .HasColumnName("ooc_color");
 
                     b.HasKey("Id")
                         .HasName("PK_admin_rank");
@@ -1231,6 +1235,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasColumnName("voice");
 
+                    b.Property<bool>("Synthetic")
+                        .HasColumnType("boolean")
+                        .HasColumnName("synthetic");
+
                     b.Property<string>("ThreatPreference")
                         .HasColumnType("text")
                         .HasColumnName("threat_preference");
@@ -1248,6 +1256,10 @@ namespace Content.Server.Database.Migrations.Postgres
                         .HasColumnType("text")
                         .HasDefaultValue("")
                         .HasColumnName("xeno_prefix");
+
+                    b.Property<string>("YautjaProfile")
+                        .HasColumnType("text")
+                        .HasColumnName("yautja_profile");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");

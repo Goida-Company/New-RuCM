@@ -15,6 +15,7 @@
     blacklist:
       tags:
       - Pouch
+      - Machete # RuMC edit
   - type: LimitedStorage
     limits:
     - popup: rmc-storage-limit-cant-fit

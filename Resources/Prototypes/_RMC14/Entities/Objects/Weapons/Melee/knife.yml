@@ -362,6 +362,7 @@
   - type: Tag
     tags:
     - RMCM2100Machete
+    - Machete # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Melee/M2100.rsi
     state: icon

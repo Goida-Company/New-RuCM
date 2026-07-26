@@ -1,0 +1,9 @@
+admin-player-actions-window-admin-ooc-colors = Admin group OOC colors
+au14-admin-ooc-color-title = Admin group OOC colors
+au14-admin-ooc-color-description = Set the OOC chat color for every admin in an existing group. Empty color means personal color fallback.
+au14-admin-ooc-color-loading = Loading admin groups...
+au14-admin-ooc-color-no-groups = No admin groups have been created.
+au14-admin-ooc-color-placeholder = HEX color, for example #12ABEF
+au14-admin-ooc-color-save = Save
+au14-admin-ooc-color-reset = Reset
+au14-admin-ooc-color-invalid = Invalid HEX

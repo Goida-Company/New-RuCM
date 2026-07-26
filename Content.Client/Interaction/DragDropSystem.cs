@@ -29,9 +29,9 @@ namespace Content.Client.Interaction;
 /// </summary>
 public sealed partial class DragDropSystem : SharedDragDropSystem
 {
-    private static readonly ProtoId<ShaderPrototype> ShaderDropTargetInRange = "SelectionOutlineInrange";
+    private static readonly ProtoId<ShaderPrototype> ShaderDropTargetInRange = "RMCSelectionOutlineInRange";
 
-    private static readonly ProtoId<ShaderPrototype> ShaderDropTargetOutOfRange = "SelectionOutline";
+    private static readonly ProtoId<ShaderPrototype> ShaderDropTargetOutOfRange = "RMCSelectionOutline";
 
     [Dependency] private IStateManager _stateManager = default!;
     [Dependency] private IInputManager _inputManager = default!;

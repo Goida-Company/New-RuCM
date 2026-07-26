@@ -15,6 +15,7 @@ using Content.Server.Players.RateLimiting;
 using Content.Server.Preferences.Managers;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.Chat;
+using Content.Shared._AU14.Administration;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -302,11 +303,11 @@ internal sealed partial class ChatManager : IChatManager
 
         Color? colorOverride = null;
         var wrappedMessage = Loc.GetString("chat-manager-send-ooc-wrap-message", ("playerName",player.Name), ("message", FormattedMessage.EscapeText(message)));
-        if (_adminManager.HasAdminFlag(player, AdminFlags.NameColor))
-        {
-            var prefs = _preferencesManager.GetPreferences(player.UserId);
-            colorOverride = prefs.AdminOOCColor;
-        }
+        var adminData = _adminManager.GetAdminData(player);
+        var prefs = adminData?.HasFlag(AdminFlags.NameColor) == true
+            ? _preferencesManager.GetPreferences(player.UserId)
+            : null;
+        colorOverride = AdminOOCColorResolver.Resolve(adminData, prefs);
         if (_netConfigManager.GetClientCVar(player.Channel, CCVars.ShowOocPatronColor) &&
             _linkAccount.GetConnectedPatron(player)?.Tier != null)
         {
@@ -393,7 +394,8 @@ internal sealed partial class ChatManager : IChatManager
     public void ChatMessageToOne(ChatChannel channel, string message, string wrappedMessage, EntityUid source, bool hideChat, INetChannel client, Color? colorOverride = null, bool recordReplay = false, string? audioPath = null, float audioVolume = 0, NetUserId? author = null, bool hidePopup = false,
         bool useEmoteSpeechBubble = false,
         string? languageIcon = null,
-        string? speechStyleClass = null)
+        string? speechStyleClass = null,
+        ChatDisplayMetadata? display = null)
     // RMC14
     {
         var user = author == null ? null : EnsurePlayer(author);
@@ -431,6 +433,7 @@ internal sealed partial class ChatManager : IChatManager
             useEmoteSpeechBubble,
             speechStyleClass: speechStyleClass,
             repeatCheckSender: repeatCheckSender,
+            display: display,
             languageIcon: languageIcon,
             ghostFollowEntity: ghostFollowEntity,
             xenoWatchEntity: xenoWatchEntity
@@ -457,6 +460,7 @@ internal sealed partial class ChatManager : IChatManager
                 hidePopup,
                 speechStyleClass: speechStyleClass,
                 repeatCheckSender: repeatCheckSender,
+                display: display,
                 languageIcon: languageIcon
             );
             _replay.RecordServerMessage(replayMsg);

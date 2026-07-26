@@ -1,6 +1,7 @@
 - type: job
   parent: AU14JobTARSPartyContractorBase
   id: AU14JobProdigyTARSPartySynth
+  isSynthetic: true
   roundSide: ThirdParty
   roundForce: PSC
   roundRole: ProdigyTARSPartySynth

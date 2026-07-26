@@ -1,0 +1,55 @@
+uniform highp vec4 glow_color;
+uniform highp float emission_threshold;
+uniform highp float emission_softness;
+uniform highp float emission_strength;
+uniform highp float halo_strength;
+uniform highp float halo_radius;
+uniform highp float pulse_amount;
+uniform highp float pulse_speed;
+uniform highp float color_mix;
+
+highp float emission_mask(highp vec2 uv) {
+    highp vec4 sample_color = texture2D(TEXTURE, uv);
+    highp float brightness = zGrayscale_BT601(sample_color.rgb) * sample_color.a;
+    return smoothstep(
+        emission_threshold,
+        emission_threshold + emission_softness,
+        brightness
+    );
+}
+
+void fragment() {
+    highp vec4 tex = zTexture(UV);
+    highp vec2 offset = TEXTURE_PIXEL_SIZE * halo_radius;
+    highp float core = emission_mask(UV);
+
+    // Eight taps are enough for a compact halo and keep this suitable for
+    // dozens of everyday light sources in the same view.
+    highp float nearby = 0.0;
+    nearby = max(nearby, emission_mask(UV + vec2( offset.x, 0.0)));
+    nearby = max(nearby, emission_mask(UV + vec2(-offset.x, 0.0)));
+    nearby = max(nearby, emission_mask(UV + vec2(0.0,  offset.y)));
+    nearby = max(nearby, emission_mask(UV + vec2(0.0, -offset.y)));
+    nearby = max(nearby, emission_mask(UV + vec2( offset.x,  offset.y)));
+    nearby = max(nearby, emission_mask(UV + vec2(-offset.x,  offset.y)));
+    nearby = max(nearby, emission_mask(UV + vec2( offset.x, -offset.y)));
+    nearby = max(nearby, emission_mask(UV + vec2(-offset.x, -offset.y)));
+
+    highp float halo = max(nearby - core, 0.0) * halo_strength;
+    highp float pulse = 1.0 + sin(TIME * pulse_speed) * pulse_amount;
+
+    // Preserve ordinary light-map shading on the body of the sprite.
+    highp vec3 surface = tex.rgb * lightSample;
+    highp vec3 emission_color = mix(tex.rgb, glow_color.rgb, color_mix);
+
+    // Bright pixels remain visible in darkness while the neighbouring pixels
+    // receive a restrained bloom-like aura.
+    surface += emission_color * core * emission_strength * pulse;
+    surface += glow_color.rgb * halo * emission_strength * pulse;
+
+    COLOR = vec4(surface, max(tex.a, halo * glow_color.a));
+
+    // Lighting was applied manually above so the emissive contribution is not
+    // darkened a second time by the default sprite pipeline.
+    lightSample = vec3(1.0);
+}

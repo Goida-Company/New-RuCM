@@ -10,6 +10,7 @@
   canBeAntag: false
   whitelisted: true
   whitelistParent: RMCWhitelistMedium
+  isSynthetic: true
   requirements:
   - !type:TraitsRequirement
       inverted: true

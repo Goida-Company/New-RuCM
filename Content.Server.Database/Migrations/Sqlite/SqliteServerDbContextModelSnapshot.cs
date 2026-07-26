@@ -408,10 +408,14 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("admin_rank_id");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasColumnName("name");
+                      b.Property<string>("Name")
+                          .IsRequired()
+                          .HasColumnType("TEXT")
+                          .HasColumnName("name");
+
+                      b.Property<string>("OOCColor")
+                          .HasColumnType("TEXT")
+                          .HasColumnName("ooc_color");
 
                     b.HasKey("Id")
                         .HasName("PK_admin_rank");
@@ -1176,6 +1180,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasColumnName("voice");
 
+                    b.Property<bool>("Synthetic")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("synthetic");
+
                     b.Property<string>("ThreatPreference")
                         .HasColumnType("TEXT")
                         .HasColumnName("threat_preference");
@@ -1193,6 +1201,10 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("TEXT")
                         .HasDefaultValue("")
                         .HasColumnName("xeno_prefix");
+
+                    b.Property<string>("YautjaProfile")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("yautja_profile");
 
                     b.HasKey("Id")
                         .HasName("PK_profile");

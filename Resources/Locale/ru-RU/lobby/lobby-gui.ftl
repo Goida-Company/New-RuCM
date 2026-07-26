@@ -6,3 +6,14 @@ ui-lobby-observe-button = Наблюдать
 ui-lobby-ready-up-button = Готовность
 ui-lobby-online-players-block = Текущие игроки
 ui-lobby-server-info-block = Серверная информация
+
+lobby-terminal-camera = КАМЕРА A-14
+lobby-terminal-channel = ОРБИТАЛЬНАЯ ОПЕРАЦИОННАЯ СЕТЬ
+lobby-terminal-source = ИСТОЧНИК // { $serverName }
+lobby-terminal-title = ТЕРМИНАЛ ВЫСАДКИ
+lobby-terminal-status-waiting = ОЖИДАНИЕ ЛИЧНОГО СОСТАВА
+lobby-terminal-status-ready = ДОПУСК К ВЫСАДКЕ ПОЛУЧЕН
+lobby-terminal-status-countdown = ЗАПУСКОВАЯ ПОСЛЕДОВАТЕЛЬНОСТЬ
+lobby-terminal-status-imminent = ФИНАЛЬНАЯ ПРОВЕРКА
+lobby-terminal-status-paused = ЗАПУСК ПРИОСТАНОВЛЕН
+lobby-terminal-status-in-progress = ОПЕРАЦИЯ ПРОДОЛЖАЕТСЯ

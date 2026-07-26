@@ -39,6 +39,21 @@ public sealed partial class PoweredLightVisualizerSystem : VisualizerSystem<Powe
             SpriteSystem.LayerSetVisible((uid, args.Sprite), PoweredLightLayers.Glow, state == PoweredLightState.On);
         }
 
+        if (comp.EmissiveShader is { } emissiveShader)
+        {
+            var emissiveLayer = SpriteSystem.LayerExists((uid, args.Sprite), PoweredLightLayers.Glow)
+                ? PoweredLightLayers.Glow
+                : PoweredLightLayers.Base;
+
+            if (SpriteSystem.LayerMapTryGet((uid, args.Sprite), emissiveLayer, out var layerIndex, false))
+            {
+                if (state == PoweredLightState.On)
+                    args.Sprite.LayerSetShader(layerIndex, emissiveShader.Id);
+                else
+                    args.Sprite.LayerSetShader(layerIndex, null, null);
+            }
+        }
+
         SetBlinkingAnimation(
             uid,
             state == PoweredLightState.On

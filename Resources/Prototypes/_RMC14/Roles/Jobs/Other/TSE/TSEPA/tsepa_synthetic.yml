@@ -12,6 +12,7 @@
   startingGear: RMCGearTSEPASynthetic
   icon: "RMCJobIconTSEPASynth"
   joinNotifyCrew: false
+  isSynthetic: true
   accessGroups:
   - ColonistTSEPAInspector
   - Synth

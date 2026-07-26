@@ -14,7 +14,9 @@
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/lightstick.rsi
-    state: lightstick_spoke1
+    layers:
+    - state: lightstick_spoke1
+      shader: RMCEmissiveGlowStrong
   - type: InteractionOutline
   - type: PointLight
     enabled: true
@@ -29,7 +31,9 @@
   id: RMCLightStickRedSmall
   components:
   - type: Sprite
-    state: lightstick_red_variant1
+    layers:
+    - state: lightstick_red_variant1
+      shader: RMCEmissiveGlowStrong
 
 - type: entity
   parent: RMCLightStick
@@ -37,6 +41,8 @@
   name: blue lightstick
   components:
   - type: Sprite
-    state: lightstick_blue_variant1
+    layers:
+    - state: lightstick_blue_variant1
+      shader: RMCEmissiveGlowStrong
   - type: PointLight
     color: "#2D2DE3"

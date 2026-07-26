@@ -1,0 +1,9 @@
+admin-player-actions-window-admin-ooc-colors = Цвета OOC-групп админов
+au14-admin-ooc-color-title = Цвета групп админов в OOC
+au14-admin-ooc-color-description = Назначьте цвет OOC-чата всем админам существующей группы. Пустое значение возвращает персональный цвет.
+au14-admin-ooc-color-loading = Загрузка групп админов...
+au14-admin-ooc-color-no-groups = Группы админов ещё не созданы.
+au14-admin-ooc-color-placeholder = HEX-цвет, например #12ABEF
+au14-admin-ooc-color-save = Сохранить
+au14-admin-ooc-color-reset = Сбросить
+au14-admin-ooc-color-invalid = Некорректный HEX

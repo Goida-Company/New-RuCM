@@ -7,8 +7,8 @@ namespace Content.Client.Interactable.Components
     [RegisterComponent]
     public sealed partial class InteractionOutlineComponent : Component
     {
-        private static readonly ProtoId<ShaderPrototype> ShaderInRange = "SelectionOutlineInrange";
-        private static readonly ProtoId<ShaderPrototype> ShaderOutOfRange = "SelectionOutline";
+        private static readonly ProtoId<ShaderPrototype> ShaderInRange = "RMCSelectionOutlineInRange";
+        private static readonly ProtoId<ShaderPrototype> ShaderOutOfRange = "RMCSelectionOutline";
 
         [Dependency] private IPrototypeManager _prototypeManager = default!;
         [Dependency] private IEntityManager _entMan = default!;

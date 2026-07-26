@@ -436,14 +436,18 @@ namespace Content.Server.Administration.Managers
 
             if (promoteHost)
             {
+                // Host login grants all permissions independently of the database rank, but a host can still be
+                // assigned to an admin group. Keep that group's OOC color in the live admin data.
+                var dbData = await _dbManager.GetAdminDataForAsync(session.UserId);
                 var data = new AdminData
                 {
                     Title = Loc.GetString("admin-manager-admin-data-host-title"),
                     Flags = AdminFlagsHelper.Everything,
                     Active = true,
+                    OOCColor = dbData?.AdminRank?.OOCColor,
                 };
 
-                return (data, null, true);
+                return (data, dbData?.AdminRankId, true);
             }
             else
             {
@@ -493,6 +497,7 @@ namespace Content.Server.Administration.Managers
                 {
                     Flags = flags,
                     Active = !dbData.Deadminned,
+                    OOCColor = dbData.AdminRank?.OOCColor,
                 };
 
                 if (dbData.Title != null  && _cfg.GetCVar(CCVars.AdminUseCustomNamesAdminRank))

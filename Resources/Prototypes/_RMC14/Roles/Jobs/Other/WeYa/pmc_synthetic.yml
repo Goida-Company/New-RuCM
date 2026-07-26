@@ -11,6 +11,7 @@
   startingGear: RMCGearPMCSynthetic
   icon: "RMCJobIconPMCSynthetic"
   joinNotifyCrew: false
+  isSynthetic: true
   accessGroups:
   - RMCWeYa
   spawnMenuRoleName: WEYA PMC Synthetic

@@ -1,6 +1,7 @@
 - type: job
   parent: CMJobBase
   id: AU14JobPARTSPartySynthetic
+  isSynthetic: true
   roundSide: ThirdParty
   roundForce: PSC
   roundRole: PARTSPartySynthetic

@@ -13,10 +13,6 @@ on:
         description: Pull request number(s) to merge-test and publish, separated by spaces, commas, or new lines.
         required: true
         type: string
-      use_changelog:
-        description: Update changelog using default settings? (don't overdo)
-        type: boolean
-        default: false
 permissions:
   contents: read
   issues: write
@@ -28,17 +24,8 @@ env:
   AUDIO_REPO_TOKEN: ${{ secrets.AUDIO_REPO_TOKEN }}
 
 jobs:
-  changelog:
-    uses: ./.github/workflows/update-changelog.yml
-    if: inputs.use_changelog == true
-    secrets: inherit
-    permissions:
-      contents: write
-
   prepare:
     name: Resolve PR merges
-    needs: changelog
-    if: always() && (needs.changelog.result == 'success' || needs.changelog.result == 'skipped')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -226,6 +213,8 @@ jobs:
           rsync -a --delete \
             __audio-overlay/Resources/Audio/_CMU14/Private/ \
             Resources/Audio/_CMU14/Private/
+          du -sh Resources/Audio/_CMU14/Private/
+          rm -rf __audio-overlay
 
       - uses: actions/setup-dotnet@v5.2.0
         with:
@@ -297,6 +286,9 @@ jobs:
           pattern: test-merge-release-*
           path: release
           merge-multiple: true
+
+      - name: Show package sizes
+        run: ls -lh release/
 
       - name: Publish test merge version
         run: Tools/publish_multi_request.py

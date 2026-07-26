@@ -15,7 +15,7 @@
     sprite: _RMC14/Structures/glowshroom.rsi
     layers:
     - state: glowshroomf
-      shader: unshaded
+      shader: RMCEmissiveGlowStrong
   - type: Appearance
   - type: PointLight
     enabled: true

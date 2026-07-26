@@ -77,16 +77,16 @@ rank-USArmy_Colonel = Полковник
   .prefix = Полк.
 
 rank-USArmy_BrigadierGeneral = Бригадный генерал
-  .prefix = Бриг-ген.
+  .prefix = Бриг. Ген.
 
 rank-USArmy_MajorGeneral = Генерал-майор
-  .prefix = Ген-майор
+  .prefix = Ген.-майор
 
 rank-USArmy_GeneralMajor = Генерал-майор
-  .prefix = Ген-майор
+  .prefix = Ген.-майор
 
 rank-USArmy_LieutenantGeneral = Генерал-лейтенант
-  .prefix = Ген-лейт.
+  .prefix = Ген.-лейт.
 
 rank-USArmy_General = Генерал
   .prefix = Ген.

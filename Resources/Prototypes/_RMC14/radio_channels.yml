@@ -121,16 +121,6 @@
 
 
 
-# Non Marine
-- type: radioChannel
-  id: Provost
-  name: chat-radio-provost
-  keycode: "ř"
-  frequency: 1473
-  color: "#9b0612"
-  longRange: true
-  tower: true
-
 #- type: radioChannel
 #  id: RoyalMarine
 #  name: chat-radio-royal-marine

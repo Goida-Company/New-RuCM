@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Shared._CMU14.Medical.Anatomy.BodyParts.Events;
 using Content.Shared._CMU14.Medical.Core;
@@ -8,19 +9,23 @@ using Content.Shared.Body.Part;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
+using Content.Shared.Ghost;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Traits.Assorted;
 using Content.Shared.Verbs;
+using Content.Shared._RMC14.UniformAccessories;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
@@ -69,8 +74,44 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         SubscribeLocalEvent<YautjaTrophySourceComponent, YautjaButcherDoAfterEvent>(OnButcherDoAfter);
         SubscribeLocalEvent<YautjaTrophyComponent, ExaminedEvent>(OnTrophyExamined);
         SubscribeLocalEvent<YautjaTrophyComponent, InteractUsingEvent>(OnTrophyInteractUsing);
+        SubscribeLocalEvent<YautjaTrophyComponent, UniformAccessoryInsertAttemptEvent>(OnTrophyUniformAccessoryInsertAttempt);
+        SubscribeLocalEvent<YautjaTrophyComponent, YautjaPolishTrophyDoAfterEvent>(OnPolishTrophyDoAfter);
         SubscribeLocalEvent<YautjaTrophyRecordComponent, ExaminedEvent>(OnRecordExamined);
         SubscribeLocalEvent<YautjaTrophyDisplayComponent, ExaminedEvent>(OnDisplayExamined);
+        SubscribeLocalEvent<YautjaScalpComponent, ExaminedEvent>(OnScalpExamined);
+        SubscribeLocalEvent<MobStateComponent, ExaminedEvent>(OnMobStateExamined);
+        SubscribeLocalEvent<MobStateChangedEvent>(OnAnyMobStateChanged);
+    }
+
+    private void OnMobStateExamined(Entity<MobStateComponent> ent, ref ExaminedEvent args)
+    {
+        if (!HasComp<YautjaComponent>(args.Examiner))
+            return;
+
+        args.PushMarkup(Loc.GetString(
+            "cmu-yautja-honor-worth-examine",
+            ("target", ent.Owner),
+            ("honor", YautjaHonorWorth.Get(ent.Owner, EntityManager))));
+    }
+
+    private void OnAnyMobStateChanged(MobStateChangedEvent args)
+    {
+        if (args.NewMobState != MobState.Dead ||
+            args.OldMobState >= args.NewMobState ||
+            args.Origin is not { } hunter ||
+            hunter == args.Target ||
+            Deleted(hunter) ||
+            !HasComp<YautjaComponent>(hunter))
+        {
+            return;
+        }
+
+        var honor = YautjaHonorWorth.Get(args.Target, EntityManager);
+        if (honor <= 0)
+            return;
+
+        var record = EnsureComp<YautjaTrophyRecordComponent>(hunter);
+        AddScore(hunter, honor, record);
     }
 
     private void OnGetAlternativeVerbs(Entity<MobStateComponent> target, ref GetVerbsEvent<AlternativeVerb> args)
@@ -362,7 +403,7 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         RecordTrophy(hunter, kind);
         SeverTrophyPart(target, kind);
         MakeTargetUnrevivableForTrophy(target, kind);
-        TryCompletePreyClaim(hunter, target, kind);
+        TryCompletePreyClaim(hunter, target);
 
         if (!TryStoreTrophy(hunter, trophy))
             _hands.TryPickupAnyHand(hunter, trophy);
@@ -400,6 +441,20 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         return kind is YautjaTrophyKind.HumanSkull
             or YautjaTrophyKind.HumanRibcage
             or YautjaTrophyKind.XenoSkull;
+    }
+
+    private static bool IsHumanSkeletonTrophy(YautjaTrophyKind kind)
+    {
+        return kind is YautjaTrophyKind.HumanSkull
+            or YautjaTrophyKind.HumanLeftArmBone
+            or YautjaTrophyKind.HumanRightArmBone
+            or YautjaTrophyKind.HumanLeftHandBone
+            or YautjaTrophyKind.HumanRightHandBone
+            or YautjaTrophyKind.HumanLeftLegBone
+            or YautjaTrophyKind.HumanRightLegBone
+            or YautjaTrophyKind.HumanLeftFootBone
+            or YautjaTrophyKind.HumanRightFootBone
+            or YautjaTrophyKind.HumanRibcage;
     }
 
     private EntProtoId GetTrophyPrototype(EntityUid target, YautjaTrophyKind kind, EntProtoId fallback)
@@ -567,6 +622,193 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         TryHarvestTrophy(hunter, target.Owner, YautjaTrophyKind.HumanRibcage, out _);
     }
 
+    public EntityUid SpawnRuntimeScalp(EntityUid scalpee, EntityUid hunter)
+    {
+        var scalp = Spawn("CMUYautjaScalp", Transform(hunter).Coordinates);
+        _meta.SetEntityName(scalp, Loc.GetString("cmu-yautja-scalp-name", ("name", Name(scalpee))));
+        _meta.SetEntityDescription(scalp, string.Empty);
+
+        var scalpComp = EnsureComp<YautjaScalpComponent>(scalp);
+        scalpComp.TrueDescription = BuildScalpDescription(scalpee, hunter);
+        scalpComp.HairColor = CompOrNull<HumanoidAppearanceComponent>(scalpee)?.CachedHairColor
+            ?? Color.White;
+        Dirty(scalp, scalpComp);
+        TryCompletePreyClaim(hunter, scalpee, scalp: true);
+        return scalp;
+    }
+
+    private string BuildScalpDescription(EntityUid scalpee, EntityUid hunter)
+    {
+        var pronouns = GetScalpPronouns(scalpee);
+        var biography = new List<string>();
+        var dishonorable = false;
+        var honorable = false;
+
+        if (_marks.TryGetMarkOwner(scalpee, YautjaMarkKind.Thrall, out var thrallMaster))
+        {
+            biography.Add(Loc.GetString(
+                "cmu-yautja-scalp-biography-thrall",
+                ("master", Name(thrallMaster)),
+                ("reason", _marks.GetMarkReason(scalpee, YautjaMarkKind.Thrall) ?? string.Empty)));
+            honorable = true;
+        }
+
+        if (_marks.TryGetMarkOwner(scalpee, YautjaMarkKind.Honored, out _))
+        {
+            biography.Add(Loc.GetString(
+                "cmu-yautja-scalp-biography-honored",
+                ("reason", _marks.GetMarkReason(scalpee, YautjaMarkKind.Honored) ?? string.Empty)));
+            honorable = true;
+        }
+
+        if (_marks.TryGetMarkOwner(scalpee, YautjaMarkKind.Dishonored, out _))
+        {
+            biography.Add(Loc.GetString(
+                "cmu-yautja-scalp-biography-dishonored",
+                ("reason", _marks.GetMarkReason(scalpee, YautjaMarkKind.Dishonored) ?? string.Empty)));
+            dishonorable = true;
+        }
+
+        if (_marks.TryGetMarkOwner(scalpee, YautjaMarkKind.GearCarrier, out var gearHunter))
+        {
+            biography.Add(Loc.GetString(
+                "cmu-yautja-scalp-biography-gear-carrier",
+                ("hunter", Name(gearHunter)),
+                ("them", pronouns.Them)));
+            dishonorable = true;
+        }
+
+        var (description, worth) = BuildScalpWorthDescription(scalpee, honorable, dishonorable, pronouns);
+        if (biography.Count > 0)
+            description += " " + Loc.GetString(
+                "cmu-yautja-scalp-biography-record",
+                ("name", Name(scalpee)),
+                ("biography", FormatScalpBiography(biography)));
+
+        if (_marks.TryGetMarkOwner(scalpee, YautjaMarkKind.Prey, out var preyHunter) &&
+            preyHunter == hunter)
+        {
+            description += "\n" + (worth switch
+            {
+                -1 => Loc.GetString("cmu-yautja-scalp-prey-unworthy", ("hunter", Name(hunter)), ("them", pronouns.Them)),
+                0 => Loc.GetString("cmu-yautja-scalp-prey-first", ("hunter", Name(hunter))),
+                1 => Loc.GetString("cmu-yautja-scalp-prey-success", ("hunter", Name(hunter))),
+                _ => Loc.GetString("cmu-yautja-scalp-prey-fine", ("hunter", Name(hunter))),
+            });
+        }
+
+        return description;
+    }
+
+    private void OnScalpExamined(Entity<YautjaScalpComponent> ent, ref ExaminedEvent args)
+    {
+        if (HasComp<YautjaComponent>(args.Examiner) || HasComp<GhostComponent>(args.Examiner))
+        {
+            args.PushMarkup(string.IsNullOrWhiteSpace(ent.Comp.TrueDescription)
+                ? Loc.GetString("cmu-yautja-scalp-worth-irrelevant")
+                : ent.Comp.TrueDescription);
+            return;
+        }
+
+        args.PushMarkup(Loc.GetString("cmu-yautja-scalp-non-yautja-examine"));
+    }
+
+    private (string Description, int Worth) BuildScalpWorthDescription(
+        EntityUid scalpee,
+        bool honorable,
+        bool dishonorable,
+        ScalpPronouns pronouns)
+    {
+        var lifeKills = CompOrNull<YautjaHonorWorthComponent>(scalpee)?.LifeKillsTotal ?? 0;
+        var worth = 1;
+
+        if (lifeKills <= 0)
+        {
+            if (dishonorable)
+            {
+                return (Loc.GetString("cmu-yautja-scalp-worth-shameful"), -1);
+            }
+
+            if (honorable)
+                return (Loc.GetString("cmu-yautja-scalp-worth-honorable"), worth);
+
+            return (Loc.GetString("cmu-yautja-scalp-worth-irrelevant"), 0);
+        }
+
+        if (lifeKills <= 4)
+        {
+            if (dishonorable)
+                return (Loc.GetString(
+                    "cmu-yautja-scalp-worth-dishonored",
+                    ("they", pronouns.They),
+                    ("themselves", pronouns.Themselves)), -1);
+
+            return (Loc.GetString("cmu-yautja-scalp-worth-respectable", ("their", pronouns.Their)), worth);
+        }
+
+        if (lifeKills <= 9)
+        {
+            worth = dishonorable ? worth : 2;
+            return (Loc.GetString("cmu-yautja-scalp-worth-destructive"), worth);
+        }
+
+        return (Loc.GetString("cmu-yautja-scalp-worth-worthy", ("theirCapitalized", Capitalize(pronouns.Their))), 2);
+    }
+
+    private ScalpPronouns GetScalpPronouns(EntityUid scalpee)
+    {
+        if (!TryComp(scalpee, out HumanoidAppearanceComponent? humanoid))
+            return new ScalpPronouns(
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-they"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-their"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-them"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-themselves"));
+
+        return humanoid.Gender switch
+        {
+            Gender.Male => new ScalpPronouns(
+                Loc.GetString("cmu-yautja-scalp-pronoun-male-they"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-male-their"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-male-them"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-male-themselves")),
+            Gender.Female => new ScalpPronouns(
+                Loc.GetString("cmu-yautja-scalp-pronoun-female-they"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-female-their"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-female-them"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-female-themselves")),
+            _ => new ScalpPronouns(
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-they"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-their"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-them"),
+                Loc.GetString("cmu-yautja-scalp-pronoun-neutral-themselves")),
+        };
+    }
+
+    private string FormatScalpBiography(List<string> biography)
+    {
+        return biography.Count switch
+        {
+            0 => string.Empty,
+            1 => biography[0],
+            2 => Loc.GetString("cmu-yautja-scalp-biography-two", ("first", biography[0]), ("second", biography[1])),
+            _ => Loc.GetString(
+                "cmu-yautja-scalp-biography-many",
+                ("entries", string.Join(", ", biography.Take(biography.Count - 1))),
+                ("last", biography[^1])),
+        };
+    }
+
+    private static string Capitalize(string value)
+    {
+        return string.IsNullOrEmpty(value)
+            ? value
+            : char.ToUpperInvariant(value[0]) + value[1..];
+    }
+
+    private readonly record struct ScalpPronouns(string They, string Their, string Them, string Themselves)
+    {
+    }
+
     private void SpawnButcherOutput(EntProtoId prototype, EntityCoordinates coordinates, int amount)
     {
         for (var i = 0; i < amount; i++)
@@ -621,7 +863,7 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         return true;
     }
 
-    private void TryCompletePreyClaim(EntityUid hunter, EntityUid target, YautjaTrophyKind kind)
+    private void TryCompletePreyClaim(EntityUid hunter, EntityUid target, bool scalp = false)
     {
         if (!_marks.IsMarkedBy(target, YautjaMarkKind.Prey, hunter) ||
             !_marks.TryClearMark(target, YautjaMarkKind.Prey, hunter))
@@ -630,18 +872,23 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         }
 
         _audio.PlayPvs(new SoundCollectionSpecifier("CMUYautjaRoars"), hunter);
+        _popup.PopupEntity(
+            Loc.GetString(scalp ? "cmu-yautja-prey-scalp-claim-self" : "cmu-yautja-prey-claim-self", ("target", target)),
+            hunter,
+            hunter,
+            PopupType.LargeCaution);
+
+        var broadcast = Loc.GetString(
+            scalp ? "cmu-yautja-prey-scalp-claim-broadcast" : "cmu-yautja-prey-claim-broadcast",
+            ("hunter", Name(hunter)),
+            ("target", target));
+
         var query = EntityQueryEnumerator<YautjaComponent>();
         while (query.MoveNext(out var yautja, out _))
-        {
-            _popup.PopupEntity(
-                Loc.GetString("cmu-yautja-prey-claim-complete", ("hunter", HunterDisplayName(hunter)), ("target", target), ("kind", GetVerbText(kind))),
-                yautja,
-                yautja,
-                PopupType.LargeCaution);
-        }
+            _popup.PopupEntity(broadcast, yautja, yautja, PopupType.LargeCaution);
 
         _adminLog.Add(LogType.Action, LogImpact.High,
-            $"{ToPrettyString(hunter):hunter} completed a Yautja prey claim on {ToPrettyString(target):target} with trophy {kind}");
+            $"{ToPrettyString(hunter):hunter} completed a Yautja prey claim on {ToPrettyString(target):target} with {(scalp ? "scalp" : "trophy")}");
     }
 
     private void SeverTrophyPart(EntityUid target, YautjaTrophyKind kind)
@@ -701,12 +948,16 @@ public sealed partial class YautjaTrophySystem : EntitySystem
 
     private void OnTrophyInteractUsing(Entity<YautjaTrophyComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled || !HasComp<YautjaPolishingRagComponent>(args.Used))
+        if (args.Handled ||
+            !TryComp(args.Used, out YautjaPolishingRagComponent? rag) ||
+            !IsHumanSkeletonTrophy(ent.Comp.Kind))
+        {
             return;
+        }
 
         args.Handled = true;
 
-        if (!HasComp<YautjaComponent>(args.User))
+        if (!CanUseYautjaTech(args.User))
         {
             _popup.PopupEntity(Loc.GetString("cmu-yautja-polish-denied"), args.User, args.User, PopupType.SmallCaution);
             return;
@@ -718,19 +969,73 @@ public sealed partial class YautjaTrophySystem : EntitySystem
             return;
         }
 
+        var doAfter = new DoAfterArgs(
+            EntityManager,
+            args.User,
+            rag.DoAfter,
+            new YautjaPolishTrophyDoAfterEvent(),
+            ent.Owner,
+            target: ent.Owner,
+            used: args.Used)
+        {
+            BreakOnMove = true,
+            BreakOnDamage = true,
+            NeedHand = true,
+            BreakOnHandChange = true,
+            BlockDuplicate = true,
+            CancelDuplicate = true,
+            DuplicateCondition = DuplicateConditions.SameTarget | DuplicateConditions.SameEvent,
+            DistanceThreshold = 1.5f,
+            ForceVisible = true,
+            TargetEffect = "RMCEffectXenoTelegraphRedEmpower",
+        };
+
+        _doAfter.TryStartDoAfter(doAfter);
+    }
+
+    private void OnTrophyUniformAccessoryInsertAttempt(Entity<YautjaTrophyComponent> ent, ref UniformAccessoryInsertAttemptEvent args)
+    {
+        if (!IsHumanSkeletonTrophy(ent.Comp.Kind) ||
+            CanUseYautjaTech(args.User))
+            return;
+
+        args.Cancel();
+        _popup.PopupEntity(Loc.GetString("cmu-yautja-skeleton-trophy-attach-denied"), args.User, args.User, PopupType.SmallCaution);
+    }
+
+    private void OnPolishTrophyDoAfter(Entity<YautjaTrophyComponent> ent, ref YautjaPolishTrophyDoAfterEvent args)
+    {
+        if (args.Handled || args.Cancelled)
+            return;
+
+        args.Handled = true;
+
+        if (!IsHumanSkeletonTrophy(ent.Comp.Kind) ||
+            !CanUseYautjaTech(args.User) ||
+            ent.Comp.Polished ||
+            args.Used is not { } used ||
+            !HasComp<YautjaPolishingRagComponent>(used))
+        {
+            return;
+        }
+
+        ApplyPolishedTrophy(ent, args.User);
+    }
+
+    private void ApplyPolishedTrophy(Entity<YautjaTrophyComponent> ent, EntityUid user)
+    {
         ent.Comp.Polished = true;
         Dirty(ent);
 
         var name = MetaData(ent).EntityName;
-        if (!name.StartsWith("polished ", StringComparison.OrdinalIgnoreCase))
-            _meta.SetEntityName(ent, $"polished {name}");
+        _meta.SetEntityName(ent, Loc.GetString("cmu-yautja-polished-name", ("name", name)));
 
-        var record = EnsureComp<YautjaTrophyRecordComponent>(args.User);
+        var record = EnsureComp<YautjaTrophyRecordComponent>(user);
         record.PolishedTrophies++;
-        AddScore(args.User, record, 1);
+        AddScore(user, 1, record);
 
-        _popup.PopupEntity(Loc.GetString("cmu-yautja-polish-finished", ("trophy", ent.Owner)), args.User, args.User);
-        _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(args.User):hunter} polished Yautja trophy {ToPrettyString(ent):trophy}");
+        _popup.PopupEntity(Loc.GetString("cmu-yautja-polish-finished", ("trophy", ent.Owner)), user, user);
+        _adminLog.Add(LogType.Action, LogImpact.Low, $"{ToPrettyString(user):hunter} polished Yautja trophy {ToPrettyString(ent):trophy}");
     }
 
     public void RecordRitualDuelWin(EntityUid hunter, EntityUid target)
@@ -740,7 +1045,7 @@ public sealed partial class YautjaTrophySystem : EntitySystem
 
         var record = EnsureComp<YautjaTrophyRecordComponent>(hunter);
         record.RitualDuelWins++;
-        AddScore(hunter, record, 5);
+        AddScore(hunter, 5, record);
         _adminLog.Add(LogType.Action, LogImpact.Medium,
             $"{ToPrettyString(hunter):hunter} gained Yautja ritual duel credit for defeating {ToPrettyString(target):target}");
     }
@@ -789,11 +1094,15 @@ public sealed partial class YautjaTrophySystem : EntitySystem
                 break;
         }
 
-        AddScore(hunter, record, score);
+        AddScore(hunter, score, record);
     }
 
-    private void AddScore(EntityUid hunter, YautjaTrophyRecordComponent record, int score)
+    public void AddScore(EntityUid hunter, int score, YautjaTrophyRecordComponent? record = null)
     {
+        if (Deleted(hunter) || score <= 0)
+            return;
+
+        record ??= EnsureComp<YautjaTrophyRecordComponent>(hunter);
         record.Score += score;
         var rank = GetRankName(record.Score);
         if (rank == record.RankName)
@@ -848,18 +1157,27 @@ public sealed partial class YautjaTrophySystem : EntitySystem
 
     private void OnTrophyExamined(Entity<YautjaTrophyComponent> ent, ref ExaminedEvent args)
     {
-        if (!HasComp<YautjaComponent>(args.Examiner))
+        var canUseTech = CanUseYautjaTech(args.Examiner);
+        if (HasComp<YautjaComponent>(args.Examiner))
+        {
+            var source = string.IsNullOrWhiteSpace(ent.Comp.SourceName)
+                ? Loc.GetString("cmu-yautja-trophy-source-unknown")
+                : ent.Comp.SourceName;
+
+            args.PushMarkup(Loc.GetString("cmu-yautja-trophy-examine",
+                ("source", source),
+                ("polished", Loc.GetString(ent.Comp.Polished
+                    ? "cmu-yautja-trophy-polished-yes"
+                    : "cmu-yautja-trophy-polished-no"))));
+        }
+
+        if (!canUseTech || !IsHumanSkeletonTrophy(ent.Comp.Kind))
             return;
 
-        var source = string.IsNullOrWhiteSpace(ent.Comp.SourceName)
-            ? Loc.GetString("cmu-yautja-trophy-source-unknown")
-            : ent.Comp.SourceName;
-
-        args.PushMarkup(Loc.GetString("cmu-yautja-trophy-examine",
-            ("source", source),
-            ("polished", Loc.GetString(ent.Comp.Polished
-                ? "cmu-yautja-trophy-polished-yes"
-                : "cmu-yautja-trophy-polished-no"))));
+        args.PushMarkup(Loc.GetString(ent.Comp.Polished
+                ? "cmu-yautja-skeleton-trophy-polished-examine"
+                : "cmu-yautja-skeleton-trophy-dirty-examine",
+            ("trophy", ent.Owner)));
     }
 
     private void OnDisplayExamined(Entity<YautjaTrophyDisplayComponent> ent, ref ExaminedEvent args)
@@ -966,6 +1284,12 @@ public sealed partial class YautjaTrophySystem : EntitySystem
         }
 
         return false;
+    }
+
+    private bool CanUseYautjaTech(EntityUid user)
+    {
+        return HasComp<YautjaComponent>(user) ||
+               HasComp<YautjaTechAuthorizedComponent>(user);
     }
 
     private static TimeSpan GetButcherDelay(int stage)

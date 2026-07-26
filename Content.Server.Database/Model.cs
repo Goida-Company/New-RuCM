@@ -670,10 +670,12 @@ namespace Content.Server.Database
         public string? Allegiance { get; set; }
         public string? Origin { get; set; }
         public string? Platoon { get; set; }
+        public bool Synthetic { get; set; }
         public string? ThreatPreference { get; set; }
         public string? GamemodeJobPriorities { get; set; }
         public string? GamemodeAntagPreferences { get; set; }
         public string? GamemodeThreatPreferences { get; set; }
+        [Column("yautja_profile")] public string? YautjaProfile { get; set; }
     }
 
     public class Job
@@ -912,6 +914,8 @@ namespace Content.Server.Database
     {
         public int Id { get; set; }
         public string Name { get; set; } = default!;
+        [Column("ooc_color")]
+        public string? OOCColor { get; set; }
 
         public List<Admin> Admins { get; set; } = default!;
         public List<AdminRankFlag> Flags { get; set; } = default!;

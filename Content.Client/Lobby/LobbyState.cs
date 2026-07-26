@@ -7,11 +7,13 @@ using Content.Client.LateJoin;
 using Content.Client.Lobby.UI;
 using Content.Client.Message;
 using Content.Client.Playtime;
+using Content.Client.Players.PlayTimeTracking;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.Voting;
 using Content.Shared.AU14.Allegiance;
 using Content.Shared.CCVar;
 using Content.Shared.Preferences;
+using Content.Shared.Roles;
 using Robust.Client;
 using Robust.Client.Console;
 using Robust.Client.ResourceManagement;
@@ -20,6 +22,7 @@ using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Lobby
 {
@@ -38,6 +41,8 @@ namespace Content.Client.Lobby
         // RMC14
         [Dependency] private LinkAccountManager _linkAccount = default!;
         [Dependency] private IClientPreferencesManager _preferencesManager = default!;
+        [Dependency] private IPrototypeManager _prototypeManager = default!;
+        [Dependency] private JobRequirementsManager _jobRequirements = default!;
 
         /// <summary>
         /// Whether the player wants to ignore allegiance for spawning the current character.
@@ -50,6 +55,8 @@ namespace Content.Client.Lobby
         private Robust.Client.UserInterface.Controls.Button? _joinGovforButton;
         private Robust.Client.UserInterface.Controls.Button? _joinOpforButton;
         private Robust.Client.UserInterface.Controls.Button? _joinOtherButton;
+        private LobbyTerminalMode? _terminalMode;
+        private Robust.Client.UserInterface.Controls.Button? _joinHuntButton;
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
@@ -62,6 +69,8 @@ namespace Content.Client.Lobby
             }
 
             Lobby = (LobbyGui) _userInterfaceManager.ActiveScreen;
+            _terminalMode = null;
+            Lobby.StartBootSequence();
 
             var chatController = _userInterfaceManager.GetUIController<ChatUIController>();
             _gameTicker = _entityManager.System<ClientGameTicker>();
@@ -79,13 +88,17 @@ namespace Content.Client.Lobby
             Lobby.ServerName.Text = string.IsNullOrEmpty(lobbyNameCvar)
                 ? Loc.GetString("ui-lobby-title", ("serverName", serverName))
                 : lobbyNameCvar;
+            Lobby.TerminalSource.Text = Loc.GetString(
+                "lobby-terminal-source",
+                ("serverName", string.IsNullOrWhiteSpace(serverName) ? "CMU-14" : serverName));
 
             var width = _cfg.GetCVar(CCVars.ServerLobbyRightPanelWidth);
-            Lobby.RightSide.SetWidth = width;
+            Lobby.SetRightPanelWidth(width);
 
             UpdateLobbyUi();
 
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
+            Lobby.CharacterSetupQuickButton.OnPressed += OnSetupPressed;
             Lobby.CharacterPreview.LinkAccountButtonControl.OnPressed += OnLinkAccountPressed;
             Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
             Lobby.CharacterPreview.PrevCharacterButton.OnPressed += OnPrevCharPressed;
@@ -98,20 +111,19 @@ namespace Content.Client.Lobby
             _gameTicker.InfoBlobUpdated += UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated += LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated += LobbyLateJoinStatusUpdated;
+            _jobRequirements.Updated += JobRequirementsUpdated;
 
             // RMC14: look up join buttons from the loaded XAML and wire handlers
             _joinGovforButton = Lobby.FindControl<Robust.Client.UserInterface.Controls.Button>("JoinGovforButton");
             if (_joinGovforButton != null)
             {
                 _joinGovforButton.OnPressed += OnJoinGovforPressed;
-                _joinGovforButton.AddStyleClass("OpenRight");
             }
 
             _joinOpforButton = Lobby.FindControl<Robust.Client.UserInterface.Controls.Button>("JoinOpforButton");
             if (_joinOpforButton != null)
             {
                 _joinOpforButton.OnPressed += OnJoinOpforPressed;
-                _joinOpforButton.AddStyleClass("OpenRight");
             }
 
             // 'Other' opens ghost roles UI (all ghost roles)
@@ -119,8 +131,16 @@ namespace Content.Client.Lobby
             if (_joinOtherButton != null)
             {
                 _joinOtherButton.OnPressed += OnJoinOtherPressed;
-                _joinOtherButton.AddStyleClass("OpenRight");
             }
+
+            _joinHuntButton = Lobby.FindControl<Robust.Client.UserInterface.Controls.Button>("JoinHuntButton");
+            if (_joinHuntButton != null)
+            {
+                _joinHuntButton.OnPressed += OnJoinHuntPressed;
+                _joinHuntButton.AddStyleClass("OpenRight");
+            }
+
+            UpdateLobbyUi();
         }
 
         protected override void Shutdown()
@@ -130,11 +150,13 @@ namespace Content.Client.Lobby
             _gameTicker.InfoBlobUpdated -= UpdateLobbyUi;
             _gameTicker.LobbyStatusUpdated -= LobbyStatusUpdated;
             _gameTicker.LobbyLateJoinStatusUpdated -= LobbyLateJoinStatusUpdated;
+            _jobRequirements.Updated -= JobRequirementsUpdated;
             _contentAudioSystem.LobbySoundtrackChanged -= UpdateLobbySoundtrackInfo;
 
             _voteManager.ClearPopupContainer();
 
             Lobby!.CharacterPreview.CharacterSetupButton.OnPressed -= OnSetupPressed;
+            Lobby.CharacterSetupQuickButton.OnPressed -= OnSetupPressed;
             Lobby.CharacterPreview.LinkAccountButtonControl.OnPressed -= OnLinkAccountPressed;
             Lobby.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
             Lobby.CharacterPreview.PrevCharacterButton.OnPressed -= OnPrevCharPressed;
@@ -151,6 +173,8 @@ namespace Content.Client.Lobby
                 _joinOpforButton.OnPressed -= OnJoinOpforPressed;
             if (_joinOtherButton != null)
                 _joinOtherButton.OnPressed -= OnJoinOtherPressed;
+            if (_joinHuntButton != null)
+                _joinHuntButton.OnPressed -= OnJoinHuntPressed;
 
             Lobby = null;
         }
@@ -200,6 +224,8 @@ namespace Content.Client.Lobby
 
         public override void FrameUpdate(FrameEventArgs e)
         {
+            UpdateTerminalUi();
+
             if (_gameTicker.IsGameStarted)
             {
                 Lobby!.StartTime.Text = string.Empty;
@@ -264,10 +290,10 @@ namespace Content.Client.Lobby
                 Lobby!.ObserveButton.Disabled = false;
 
                 // RMC14
-                Lobby.ReadyButton.AddStyleClass("OpenLeft");
                 if (_joinGovforButton != null) _joinGovforButton.Visible = true;
                 if (_joinOpforButton != null) _joinOpforButton.Visible = true;
                 if (_joinOtherButton != null) _joinOtherButton.Visible = true;
+                if (_joinHuntButton != null) _joinHuntButton.Visible = HasYautjaWhitelist();
             }
             else
             {
@@ -279,10 +305,10 @@ namespace Content.Client.Lobby
                 Lobby!.ObserveButton.Disabled = true;
 
                 // RMC14
-                Lobby.ReadyButton.RemoveStyleClass("OpenLeft");
                 if (_joinGovforButton != null) _joinGovforButton.Visible = false;
                 if (_joinOpforButton != null) _joinOpforButton.Visible = false;
                 if (_joinOtherButton != null) _joinOtherButton.Visible = false;
+                if (_joinHuntButton != null) _joinHuntButton.Visible = false;
             }
 
             if (_gameTicker.ServerInfoBlob != null)
@@ -309,6 +335,46 @@ namespace Content.Client.Lobby
             }
             else
                 Lobby!.PlaytimeComment.Visible = false;
+
+            UpdateTerminalUi();
+        }
+
+        private void UpdateTerminalUi()
+        {
+            if (Lobby == null)
+                return;
+
+            TimeSpan? remaining = null;
+            if (!_gameTicker.IsGameStarted)
+                remaining = _gameTicker.StartTime - _gameTiming.CurTime;
+
+            Lobby.TerminalBackground.SetLobbyState(
+                _gameTicker.IsGameStarted,
+                _gameTicker.Paused,
+                _gameTicker.AreWeReady,
+                remaining);
+
+            var mode = Lobby.TerminalBackground.Mode;
+            var accent = Lobby.TerminalBackground.AccentColor;
+            Lobby.TerminalStatus.FontColorOverride = accent;
+            Lobby.StartTime.FontColorOverride = accent;
+
+            if (_terminalMode == mode)
+                return;
+
+            _terminalMode = mode;
+
+            var statusKey = mode switch
+            {
+                LobbyTerminalMode.Ready => "lobby-terminal-status-ready",
+                LobbyTerminalMode.Countdown => "lobby-terminal-status-countdown",
+                LobbyTerminalMode.Imminent => "lobby-terminal-status-imminent",
+                LobbyTerminalMode.Paused => "lobby-terminal-status-paused",
+                LobbyTerminalMode.InProgress => "lobby-terminal-status-in-progress",
+                _ => "lobby-terminal-status-waiting",
+            };
+
+            Lobby.TerminalStatus.Text = Loc.GetString(statusKey);
         }
 
         private void UpdateLobbySoundtrackInfo(LobbySoundtrackChangedEvent ev)
@@ -342,6 +408,12 @@ namespace Content.Client.Lobby
 
         private void UpdateLobbyBackground()
         {
+            if (!Lobby!.Background.Visible)
+            {
+                Lobby.Background.Texture = null;
+                return;
+            }
+
             if (_gameTicker.LobbyBackground != null)
             {
                 Lobby!.Background.Texture = _resourceCache.GetResource<TextureResource>(_gameTicker.LobbyBackground );
@@ -377,6 +449,24 @@ namespace Content.Client.Lobby
         {
              // Open the ghost roles UI (server-driven) to display all ghost roles
              _consoleHost.RemoteExecuteCommand(null, "ghostroles");
+        }
+
+        private void OnJoinHuntPressed(BaseButton.ButtonEventArgs args)
+        {
+            new LateJoinGui("hunt").OpenCentered();
+        }
+
+        private void JobRequirementsUpdated()
+        {
+            UpdateLobbyUi();
+        }
+
+        private bool HasYautjaWhitelist()
+        {
+            if (!_prototypeManager.TryIndex<JobPrototype>("CMUYautjaHunter", out var hunter))
+                return false;
+
+            return _jobRequirements.CheckWhitelist(hunter, out _);
         }
 
         private void OnPrevCharPressed(BaseButton.ButtonEventArgs args)

@@ -1,0 +1,92 @@
+uniform highp float outline_width;
+uniform highp vec4 outline_color;
+uniform highp vec4 highlight_color;
+uniform bool outline_fullbright;
+uniform highp float light_boost;
+uniform highp float light_gamma;
+uniform highp float light_whitepoint;
+uniform highp float pulse_speed;
+uniform highp float pulse_strength;
+uniform highp float sweep_speed;
+uniform highp float sweep_width;
+uniform highp float sweep_softness;
+uniform highp float inner_glow_strength;
+
+void fragment() {
+    highp vec4 col = zTexture(UV);
+    highp vec2 ps = TEXTURE_PIXEL_SIZE;
+    highp float a;
+    highp float maxa = col.a;
+    highp float mina = col.a;
+
+    // Sample the sprite silhouette once for both its outer and inner rims.
+    // These intentionally bypass zTexture because only alpha is queried.
+    a = texture2D(TEXTURE, UV + vec2(0.0, -outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(-outline_width, -outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(0.0, outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(outline_width, -outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(-outline_width, 0.0) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(-outline_width, outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(outline_width, 0.0) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    a = texture2D(TEXTURE, UV + vec2(outline_width, outline_width) * ps).a;
+    maxa = max(a, maxa);
+    mina = min(a, mina);
+
+    highp float outer_rim = maxa - col.a;
+    highp float inner_rim = col.a - mina;
+
+    highp float pulse = 0.5 + 0.5 * sin(TIME * pulse_speed);
+    pulse = mix(1.0, pulse, pulse_strength);
+
+    // A diagonal travelling highlight reads clearly on tiny pixel-art sprites.
+    highp float sweep_position = fract((UV.x + UV.y) * 0.5 - TIME * sweep_speed);
+    highp float sweep_distance = abs(sweep_position - 0.5);
+    highp float sweep = 1.0 - smoothstep(
+        sweep_width,
+        sweep_width + sweep_softness,
+        sweep_distance
+    );
+
+    lowp vec4 animated_color = mix(outline_color, highlight_color, sweep);
+    animated_color.a *= pulse;
+
+    lowp float sampled_light = outline_fullbright
+        ? 1.0
+        : clamp(
+            (pow(zGrayscale_BT601(lightSample.rgb) * light_whitepoint, light_gamma) /
+                light_whitepoint) * light_boost,
+            0.0,
+            1.0
+        );
+
+    // The moving inner rim makes the object feel responsive without tinting its
+    // whole sprite or softening the pixel art.
+    highp vec4 surface = col;
+    highp float inner_mix = inner_rim * sweep * inner_glow_strength;
+    surface.rgb = mix(surface.rgb, highlight_color.rgb, inner_mix);
+
+    highp vec4 rim_color = animated_color * vec4(vec3(1.0), sampled_light);
+    COLOR = mix(surface, rim_color, outer_rim);
+    lightSample = vec3(1.0);
+}

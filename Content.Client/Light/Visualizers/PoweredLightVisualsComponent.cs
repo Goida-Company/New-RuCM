@@ -1,5 +1,7 @@
 using Content.Shared.Light;
+using Robust.Client.Graphics;
 using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Client.Light.Visualizers;
 
@@ -20,6 +22,14 @@ public sealed partial class PoweredLightVisualsComponent : Component
         [PoweredLightState.Broken] = "broken",
         [PoweredLightState.Burned] = "burn",
     };
+
+    /// <summary>
+    /// Optional emissive shader applied to the glow layer, or to the base layer
+    /// when a dedicated glow layer is not present. It is active only while the
+    /// light is on.
+    /// </summary>
+    [DataField]
+    public ProtoId<ShaderPrototype>? EmissiveShader;
 
     #region Blinking
 

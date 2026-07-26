@@ -94,6 +94,7 @@ namespace Content.Client.Stylesheets
         public const string StyleClassCrtPanel = "CrtPanel";
         public const string StyleClassCrtInsetPanel = "CrtInsetPanel";
         public const string StyleClassCrtQuietPanel = "CrtQuietPanel";
+        public const string StyleClassCrtEmbeddedPanel = "CrtEmbeddedPanel";
         public const string StyleClassCrtHeaderPanel = "CrtHeaderPanel";
         public const string StyleClassCrtButton = "CrtButton";
         public const string StyleClassCrtAttentionButton = "CrtAttentionButton";
@@ -858,6 +859,25 @@ namespace Content.Client.Stylesheets
                 ContentMarginRightOverride = 5,
                 ContentMarginTopOverride = 4,
                 ContentMarginBottomOverride = 4
+            };
+
+            var crtEmbeddedPanel = new CrtStyleBox
+            {
+                // The procedural lobby background remains faintly visible through these panels,
+                // making the controls read as part of the same display instead of floating cards.
+                BackgroundColor = CrtInsetBackground.WithAlpha(CrtUiEnabled ? 0.64f : 0.94f),
+                BorderColor = CrtGreenDim.WithAlpha(CrtUiEnabled ? 0.46f : 0.72f),
+                CornerColor = CrtGreen.WithAlpha(CrtUiEnabled ? 0.32f : 0.18f),
+                ScanlineColor = CrtGreen.WithAlpha(0.012f),
+                BorderThickness = new Thickness(1),
+                DrawCornerTicks = true,
+                DrawPixelation = false,
+                CornerLength = 12,
+                MaxScanlines = 2,
+                ContentMarginLeftOverride = 8,
+                ContentMarginRightOverride = 8,
+                ContentMarginTopOverride = 7,
+                ContentMarginBottomOverride = 7
             };
 
             var crtHeaderPanel = new CrtStyleBox
@@ -2674,6 +2694,10 @@ namespace Content.Client.Stylesheets
 
                 Element<PanelContainer>().Class(StyleClassCrtQuietPanel)
                     .Prop(PanelContainer.StylePropertyPanel, crtQuietPanel)
+                    .Prop(Control.StylePropertyModulateSelf, Color.White),
+
+                Element<PanelContainer>().Class(StyleClassCrtEmbeddedPanel)
+                    .Prop(PanelContainer.StylePropertyPanel, crtEmbeddedPanel)
                     .Prop(Control.StylePropertyModulateSelf, Color.White),
 
                 Element<PanelContainer>().Class(StyleClassCrtHeaderPanel)

@@ -126,6 +126,8 @@ public partial class ChatSystem
         bool forceEmote = false
         )
     {
+        emote = GetEmoteOverride(source, emote);
+
         if (!forceEmote && !AllowedToUseEmote(source, emote))
             return;
 
@@ -185,6 +187,8 @@ public partial class ChatSystem
     /// </summary>
     public void TryEmoteWithoutChat(EntityUid uid, EmotePrototype proto, bool ignoreActionBlocker = false)
     {
+        proto = GetEmoteOverride(uid, proto);
+
         if (!_actionBlocker.CanEmote(uid) && !ignoreActionBlocker)
             return;
 
@@ -242,6 +246,8 @@ public partial class ChatSystem
         if (!_wordEmoteDict.TryGetValue(actionTrimmedLower, out var emote))
             return;
 
+        emote = GetEmoteOverride(uid, emote);
+
         if (!AllowedToUseEmote(uid, emote))
             return;
 
@@ -297,6 +303,18 @@ public partial class ChatSystem
         }
 
         return true;
+    }
+
+    private EmotePrototype GetEmoteOverride(EntityUid source, EmotePrototype emote)
+    {
+        if (!TryComp<SpeechComponent>(source, out var speech) ||
+            !speech.EmoteOverrides.TryGetValue(emote.ID, out var overrideId) ||
+            !_prototypeManager.TryIndex(overrideId, out EmotePrototype? overrideEmote))
+        {
+            return emote;
+        }
+
+        return overrideEmote;
     }
 
 

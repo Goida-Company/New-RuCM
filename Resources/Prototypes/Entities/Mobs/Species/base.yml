@@ -229,6 +229,7 @@
     - AnomalyHost
   - type: MobGibbedByExplosionType
   - type: RMCCanBeFultoned
+  - type: ExaminableCharacter # AU14
 
 - type: entity
   save: false

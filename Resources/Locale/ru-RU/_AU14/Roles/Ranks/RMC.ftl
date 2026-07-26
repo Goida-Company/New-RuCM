@@ -50,16 +50,16 @@ rank-RMC_CommandantDeputy = Заместитель генерал-коменда
   .prefix = Зам. Ген-ком.
 
 rank-RMC_MajorGeneral = Генерал-майор
-  .prefix = Ген-майор
+  .prefix = Ген.-майор
 
 rank-RMC_LieutenantGeneral = Генерал-лейтенант
-  .prefix = Ген-лейт.
+  .prefix = Ген.-лейт.
 
 rank-RMC_General = Генерал
   .prefix = Ген.
 
 rank-RMC_CommandantGeneral = Генерал-комендант королевской морской пехоты
-  .prefix = Ген-ком.
+  .prefix = Ген.-ком.
 
 rank-RMC_CaptainGeneral = Генерал-капитан королевской морской пехоты
-  .prefix = Ген-кап.
+  .prefix = Ген.-кап.

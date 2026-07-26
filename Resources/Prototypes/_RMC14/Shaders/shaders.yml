@@ -57,3 +57,67 @@
     line_thickness: 0.5
     grid_color: "#4A9EFF66"
     scroll_speed: 12.0
+
+- type: shader
+  id: RMCSelectionOutline
+  kind: source
+  path: "/Textures/_RMC14/Shaders/interaction_outline.swsl"
+  params:
+    outline_color: "#FF304C70"
+    highlight_color: "#FFB36BDB"
+    light_boost: 2.0
+    light_gamma: 1.2
+    light_whitepoint: 2.0
+    pulse_speed: 2.0
+    pulse_strength: 0.18
+    sweep_speed: 0.18
+    sweep_width: 0.08
+    sweep_softness: 0.10
+    inner_glow_strength: 0.18
+
+- type: shader
+  id: RMCSelectionOutlineInRange
+  kind: source
+  path: "/Textures/_RMC14/Shaders/interaction_outline.swsl"
+  params:
+    outline_color: "#22E6A885"
+    highlight_color: "#D5FFF4F2"
+    light_boost: 2.0
+    light_gamma: 0.9
+    light_whitepoint: 1.0
+    pulse_speed: 3.5
+    pulse_strength: 0.28
+    sweep_speed: 0.42
+    sweep_width: 0.07
+    sweep_softness: 0.08
+    inner_glow_strength: 0.32
+
+- type: shader
+  id: RMCEmissiveGlow
+  kind: source
+  path: "/Textures/_RMC14/Shaders/emissive_glow.swsl"
+  params:
+    glow_color: "#FFF2D6D9"
+    emission_threshold: 0.62
+    emission_softness: 0.22
+    emission_strength: 0.72
+    halo_strength: 0.42
+    halo_radius: 1.25
+    pulse_amount: 0.025
+    pulse_speed: 1.7
+    color_mix: 0.28
+
+- type: shader
+  id: RMCEmissiveGlowStrong
+  kind: source
+  path: "/Textures/_RMC14/Shaders/emissive_glow.swsl"
+  params:
+    glow_color: "#F2FBFFFF"
+    emission_threshold: 0.48
+    emission_softness: 0.24
+    emission_strength: 1.05
+    halo_strength: 0.68
+    halo_radius: 1.65
+    pulse_amount: 0.05
+    pulse_speed: 2.1
+    color_mix: 0.22

@@ -28,6 +28,11 @@ namespace Content.Shared.Administration
         public AdminFlags Flags;
 
         /// <summary>
+        ///     The OOC color configured for the admin's group, if one is configured.
+        /// </summary>
+        public string? OOCColor;
+
+        /// <summary>
         ///     Checks whether this admin has an admin flag.
         /// </summary>
         /// <param name="flag">The flags to check. Multiple flags can be specified, they must all be held.</param>

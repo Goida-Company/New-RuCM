@@ -114,6 +114,7 @@
       - state: flashlight-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
   - type: Item
     size: Small
   - type: Construction
@@ -135,6 +136,7 @@
       - state: penlight-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
   - type: Item
     size: Tiny
   - type: Tag
@@ -169,6 +171,7 @@
       - state: lamp-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
   - type: Item
     size: Large
 
@@ -184,6 +187,7 @@
       - state: lampgreen-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
 
 - type: entity
   parent: RMCLamp
@@ -198,6 +202,7 @@
       - state: menorah-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
 
 - type: entity
   parent: RMCLamp
@@ -212,6 +217,7 @@
       - state: candelabra-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
 
 - type: entity
   parent: RMCLamp
@@ -226,6 +232,7 @@
       - state: tripod_lamp-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
   - type: PointLight
     radius: 6
 
@@ -240,6 +247,7 @@
       - state: tripod_lamp_grey-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlow
 
 - type: entity
   parent: RMCFlashlightBase
@@ -254,6 +262,7 @@
       - state: lantern-on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
   - type: PointLight
     radius: 6
     color: "#FFC458FF"

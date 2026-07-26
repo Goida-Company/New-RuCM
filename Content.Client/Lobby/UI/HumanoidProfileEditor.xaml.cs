@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using Content.Client._CMU14.Yautja.Lobby;
 using Content.Client._RMC14.NamedItems;
 using Content.Client.Corvax.TTS;
 using Content.Client.Humanoid;
@@ -11,6 +12,7 @@ using Content.Client.Players.PlayTimeTracking;
 using Content.Client.Sprite;
 using Content.Client.Stylesheets;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Shared._CMU14.Roles;
 using Content.Shared._RMC14.CCVar;
 using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.Marines.Squads;
@@ -77,6 +79,7 @@ namespace Content.Client.Lobby.UI
         private LoadoutWindow? _loadoutWindow;
 
         private TTSTab? _ttsTab; // Corvax-TTS
+        private YautjaProfileEditor? _yautjaTab;
 
         private bool _exporting;
         private bool _imaging;
@@ -554,6 +557,8 @@ namespace Content.Client.Lobby.UI
 
             #endregion SpawnPriority
 
+            RefreshSynthetic();
+
             #region ArmorPreference
 
             foreach (var value in Enum.GetValues<ArmorPreference>())
@@ -737,9 +742,39 @@ namespace Content.Client.Lobby.UI
             NamedItems.Armor.OnTextChanged += args => SetItemName(RMCNamedItemType.Armor, args.Text);
             NamedItems.Sentry.OnTextChanged += args => SetItemName(RMCNamedItemType.Sentry, args.Text);
 
+            _requirements.Updated += RefreshYautjaTab;
+            RefreshYautjaTab();
             UpdateSpeciesGuidebookIcon();
             CrtLobbyTheme.Apply(this);
             IsDirty = false;
+        }
+
+        private void RefreshYautjaTab()
+        {
+            if (!_requirements.CanCustomizeWhitelistedJob("CMUYautjaHunter"))
+            {
+                if (_yautjaTab != null)
+                {
+                    TabContainer.RemoveChild(_yautjaTab);
+                    _yautjaTab = null;
+                }
+
+                return;
+            }
+
+            if (_yautjaTab == null)
+            {
+                _yautjaTab = new YautjaProfileEditor();
+                _yautjaTab.OnProfileChanged += profile =>
+                {
+                    Profile = profile;
+                    SetDirty();
+                };
+                TabContainer.AddChild(_yautjaTab);
+                TabContainer.SetTabTitle(TabContainer.ChildCount - 1, Loc.GetString("cmu-yautja-lobby-tab"));
+            }
+
+            _yautjaTab.SetProfile(Profile);
         }
 
         /// <summary>
@@ -1357,6 +1392,7 @@ namespace Content.Client.Lobby.UI
             RefreshThreatPreferences();
 
             RefreshAntags();
+            RefreshSynthetic();
             RefreshJobs();
             RefreshLoadouts();
             RefreshSpecies();
@@ -1364,6 +1400,7 @@ namespace Content.Client.Lobby.UI
             RefreshOrigins();
             RefreshTraits();
             RefreshFlavorText();
+            RefreshYautjaTab();
             ReloadPreview();
 
             if (Profile != null)
@@ -1525,6 +1562,13 @@ namespace Content.Client.Lobby.UI
             if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
             {
                 selector.LockRequirements(reason);
+            }
+            else if (Profile != null && job.IsSynthetic != Profile.Synthetic)
+            {
+                selector.LockRequirements(FormattedMessage.FromUnformatted(
+                    Loc.GetString(job.IsSynthetic
+                        ? "humanoid-profile-editor-synthetic-locked-job"
+                        : "humanoid-profile-editor-synthetic-locked-job-non-synthetic")));
             }
             else
             {
@@ -1995,6 +2039,7 @@ namespace Content.Client.Lobby.UI
 
             _loadoutWindow?.Close();
             _loadoutWindow = null;
+            _requirements.Updated -= RefreshYautjaTab;
         }
 
         protected override void EnteredTree()
@@ -2130,6 +2175,61 @@ namespace Content.Client.Lobby.UI
         {
             Profile = Profile?.WithGamemodeThreatPreference(gamemode, new ProtoId<ThreatPrototype>(threat), pref);
             SetDirty();
+        }
+
+        /// <summary>
+        /// Refreshes the synthetic toggle. Locked (and forced to No) unless the player
+        /// holds the synthetic job whitelist.
+        /// </summary>
+        public void RefreshSynthetic()
+        {
+            SyntheticContainer.DisposeAllChildren();
+
+            var items = new[]
+            {
+                ("humanoid-profile-editor-synthetic-yes-button", 0),
+                ("humanoid-profile-editor-synthetic-no-button", 1)
+            };
+
+            var selector = new RequirementsSelector()
+            {
+                Margin = new Thickness(3f, 3f, 3f, 0f),
+            };
+
+            selector.Setup(
+                items,
+                Loc.GetString("humanoid-profile-editor-synthetic-title"),
+                250,
+                Loc.GetString("humanoid-profile-editor-synthetic-description"));
+            selector.Select(Profile?.Synthetic == true ? 0 : 1);
+
+            var whitelisted = _prototypeManager.TryIndex<JobPrototype>(CMUSyntheticRoles.SyntheticWhitelistJob, out var marker)
+                && _requirements.CheckWhitelist(marker, out _);
+
+            if (!whitelisted)
+            {
+                selector.LockRequirements(FormattedMessage.FromUnformatted(
+                    Loc.GetString("humanoid-profile-editor-synthetic-locked")));
+
+                if (Profile?.Synthetic == true)
+                {
+                    Profile = Profile?.WithSynthetic(false);
+                    SetDirty();
+                }
+            }
+            else
+            {
+                selector.UnlockRequirements();
+            }
+
+            selector.OnSelected += preference =>
+            {
+                Profile = Profile?.WithSynthetic(preference == 0);
+                SetDirty();
+                RefreshJobs();
+            };
+
+            SyntheticContainer.AddChild(selector);
         }
 
         /// <summary>

@@ -18,6 +18,7 @@
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
     layers:
       - state: smallfloodon # Temporary until power works.
+        shader: RMCEmissiveGlowStrong
       - state: smallflood
         visible: false
         map: [ "light" ]
@@ -100,6 +101,7 @@
       - state: bigfloodon
         visible: true
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
     offset: "0.0,0.5"
     drawdepth: Mobs
   - type: Construction
@@ -197,7 +199,9 @@
   - type: Sprite
     noRot: true
     sprite: _RMC14/Objects/Misc/Lights/floodlight.rsi
-    state: magical
+    layers:
+    - state: magical
+      shader: RMCEmissiveGlowStrong
   - type: InteractionOutline
   - type: PointLight
     enabled: true
@@ -237,6 +241,7 @@
     - map: [ "enum.LandingLightVisuals.On" ]
       state: landingstripe0
       visible: false
+      shader: RMCEmissiveGlowStrong
   - type: Appearance
   - type: Clickable
   - type: LandingLight
@@ -266,6 +271,7 @@
     - map: [ "enum.LandingLightVisuals.On" ]
       state: landingstripe1
       visible: false
+      shader: RMCEmissiveGlowStrong
   - type: LandingLight
     onState: landingstripe1
 
@@ -282,6 +288,7 @@
     - map: [ "enum.LandingLightVisuals.On" ]
       state: landingstripe2
       visible: false
+      shader: RMCEmissiveGlowStrong
   - type: LandingLight
     onState: landingstripe2
 
@@ -298,6 +305,7 @@
     - map: [ "enum.LandingLightVisuals.On" ]
       state: landingstripe3
       visible: false
+      shader: RMCEmissiveGlowStrong
   - type: LandingLight
     onState: landingstripe3
 
@@ -313,6 +321,7 @@
     - map: [ "enum.LandingLightVisuals.On" ]
       state: lz_spoke_light1
       visible: false
+      shader: RMCEmissiveGlowStrong
   - type: LandingLight
     onState: lz_spoke_light1
   - type: PointLight
@@ -332,7 +341,9 @@
   components:
   - type: Sprite
     sprite: _RMC14/Objects/Misc/Lights/engineer_ship.rsi
-    state: engineerlight_on
+    layers:
+    - state: engineerlight_on
+      shader: RMCEmissiveGlowStrong
   - type: PointLight
     enabled: true
     radius: 14
@@ -366,6 +377,7 @@
       - state: street_on
         visible: true
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
     drawdepth: Mobs
   - type: Construction
     graph: RMCStreetlightBroken
@@ -425,6 +437,7 @@
       - state: trafficlight_on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
     drawdepth: Mobs
   - type: Fixtures
     fixtures:
@@ -499,6 +512,7 @@
       - state: trafficlight_alt_on
         visible: false
         map: [ "light" ]
+        shader: RMCEmissiveGlowStrong
   - type: Construction
     graph: RMCTrafficLightBrokenAlt
     node: completed

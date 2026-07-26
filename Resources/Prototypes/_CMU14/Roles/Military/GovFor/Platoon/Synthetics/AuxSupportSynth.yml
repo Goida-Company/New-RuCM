@@ -13,6 +13,7 @@
   canBeAntag: false
   whitelisted: true
   whitelistParent: RMCWhitelistMedium
+  isSynthetic: true
   displayWeight: -1
   accessGroups:
   - AU14GovforCommand

@@ -58,6 +58,7 @@
   playTimeTracker: AU14JobHRTPartySyntheticTracker
   whitelisted: true
   whitelistParent: RMCWhitelistMedium
+  isSynthetic: true
   ranks:
     AU14RankPrDSynth5:
     - !type:RoleTimeRequirement
