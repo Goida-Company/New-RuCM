@@ -1,7 +1,7 @@
 - type: entity
   parent: AU14MagazineRifleAG80
   id: RuMCMagazineRifleAG80Tracer
-  name: "AG80 magazine (9.7x16mmmm Tracer)"
+  name: "AG80 magazine (9.7x16mm Tracer)"
   components:
   - type: Tag
     tags:

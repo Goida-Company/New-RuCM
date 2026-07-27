@@ -10,11 +10,7 @@ contraband-examine-text-Restricted =
         [reagent] [color=yellow]Этот реагент департаментно ограничен.[/color]
     }
 
-contraband-examine-text-Restricted-department =
-    { $type ->
-        *[item] [color=yellow]Этот предмет ограничен для { $departments }, и может считаться контрабандой.[/color]
-        [reagent] [color=yellow]Этот реагент ограничен для { $departments }, и может считаться контрабандой.[/color]
-    }
+contraband-examine-text-Restricted-department = [color=yellow]Этот предмет ограничен для {$departments}, и может считаться контрабандой.[/color]
 
 contraband-examine-text-Major =
     { $type ->

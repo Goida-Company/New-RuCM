@@ -47,6 +47,45 @@
     - id: RuMCMachineGunTachanka
     - id: RuMCUPPNavalInfantryBeltMachinegunner
 
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCMachineGunAH12Case
+  name: AH12 gun case
+  description: Case for the AH12 rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,5
+    whitelist:
+      tags:
+      - RuMCRifleAH12
+      - RuMCMagazineAH12
+      - RuMCMachineGunnerRig
+      - RuMCUPPPouchDrum
+  - type: StorageFill
+    contents:
+    - id: RuMCRifleAH12
+    - id: RuMCUPPNavalInfantryBeltMachinegunner
+    - id: RuMCUPPPouchDrum
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12
+    - id: RuMCMagazineAH12Large
+    - id: RuMCMagazineAH12AP
+    - id: RuMCMagazineAH12AP
+    - id: RuMCMagazineAH12Tracer
+    - id: RuMCMagazineAH12Tracer
+    - id: RuMCMagazineAH12Tracer
+    - id: RuMCMagazineAH12Tracer
+    - id: RuMCMagazineAH12JHP
+
 #- type: entity
 #  parent: RMCGunCaseBase
 #  id: RuMCRPG_36Case

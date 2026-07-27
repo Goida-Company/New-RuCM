@@ -59,10 +59,10 @@ rank-AU14RankFlightCaptain = Лётный капитан
   .prefix = Лёт. Кап.
 
 rank-AU14RankOrbitalManager = Менеджер
-  .prefix = Мен.
+  .prefix = Менеджер
 
 rank-AU14RankSeniorOrbitalManager = Старший менеджер
-  .prefix = Ст. Мен.
+  .prefix = Ст. Менеджер
 
 rank-AU14RankColonyAdminAssistant = Ассистент
   .prefix = Асс.
@@ -85,14 +85,20 @@ rank-AU14RankAmbassador = Посол
 rank-AU14RankTWEAmbassador = Верховный комиссар
   .prefix = Верх. Ком.
 
-rank-AU14RankOrbitalLawyer = Орбитальный консул
-  .prefix = Орб. Кон.
+rank-AU14RankOrbitalCounselor = Орбитальный консул
+  .prefix = Консул
 
-rank-AU14RankSeniorOrbitalLawyer = Старший орбитальный консул
-  .prefix = Ст. Орб. Кон.
+rank-AU14RankOrbitalCounselorOC = Орбитальный консул Внешнего Круга
+  .prefix = Кон. Внеш. Кр.
+
+rank-AU14RankOrbitalCounselorIC = Орбитальный консул Внутреннего Круга
+  .prefix = Кон. Внут. Кр.
 
 rank-AU14RankOrbitalArbiter = Орбитальный арбитр
-  .prefix = Орб. Арб.
+  .prefix = Арбитр
 
-rank-AU14RankSeniorOrbitalArbiter = Старший орбитальный арбитр
-  .prefix = Ст. Орб. Арб.
+rank-AU14RankOrbitalArbiter1S = Орбитальный арбитр Первого Места
+  .prefix = Арб. Перв. Мес.
+
+rank-AU14RankOrbitalArbiterHS = Орбитальный арбитр Высшего Места
+  .prefix = Арб. Высш. Мес.

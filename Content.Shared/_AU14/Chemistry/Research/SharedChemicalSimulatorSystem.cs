@@ -307,7 +307,7 @@ public abstract partial class SharedChemicalSimulatorSystem : EntitySystem
                         }
                         if (properties[ent.Comp.ReferenceProperty].Category.HasFlag(ReagentPropertyTypeEnum.Unadjustable))
                         {
-                            ent.Comp.StatusBar = Loc.GetString("reseach-sim-status-reference-unadjustable");
+                            ent.Comp.StatusBar = Loc.GetString("research-sim-status-reference-unadjustable"); // RuMC edit reseach -> research
                             Dirty(ent);
                             return false;
                         }

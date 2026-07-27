@@ -67,8 +67,13 @@ public partial class ReagentPropertyPrototype : IPrototype, IInheritingPrototype
     [ViewVariables(VVAccess.ReadOnly), DataField]
     public bool Starter = false;
 
+    // RuMC edit start
     [ViewVariables(VVAccess.ReadOnly), DataField]
-    public string Code = "000";
+    public LocId Code = "cmu-reagent-property-code-unknown";
+
+    [ViewVariables(VVAccess.ReadOnly)]
+    public string LocalizedCode => Loc.GetString(Code);
+    // RuMC edit end
 
     [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ReagentPropertyPrototype>))]
     public string[]? Parents { get; private set; }

@@ -11,13 +11,13 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_ammo.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: au14-vendor-section-clothes # RuMC edit
+    - name: au14-vendor-section-fatigues
       takeAll: CMUCMBEssentialEquipmentClothes
       entries:
       - id: RMCJumpsuitVeteranPMCHybrisaLead
       - id: RMCOuterClothingExternalWebbingBlack
       - id: RMCBootsPMCFilled
-    - name: au14-vendor-section-headwear # RuMC edit
+    - name: au14-vendor-section-headwear
       choices: { CMUCMBDutyHeadgear: 1 }
       entries:
       - id: ArmorHelmetPMCCorporate
@@ -26,7 +26,7 @@
       - id: AU14CivBallCapBlack
       - id: RMCHeadCapWestonYamadaDark
       - id: AU14HeadCommandoBeanie
-    - name: au14-vendor-section-uniform # RuMC edit
+    - name: au14-vendor-section-fatigues
       choices: { CMUCMBDutyJacket: 1 }
       entries:
       - id: AU14JumpsuitVeteranPMCCorporateLead
@@ -34,20 +34,20 @@
       - id: AU14WYGuardFatigues
       - id: RMCJumpsuitMPCorporate
       - id: RMCJumpsuitVeteranPMCKutjevo
-    - name: au14-vendor-section-belt # RuMC edit
+    - name: au14-vendor-section-belts
       choices: { CMUCMBDutyBelt: 1 }
       entries:
       - id: RMCBeltSecurityWeYa
       - id: AU14BeltUtilityGeneralBlack
-    - name: au14-vendor-section-pistol-belt # RuMC edit
+    - name: au14-vendor-section-pistol-belt
       choices: { CMUCMBDutyeltPistol: 1 }
       entries:
       - id: RMCBeltHolsterPistolTSE
-    - name: au14-vendor-section-bag # RuMC edit
+    - name: au14-vendor-section-bag
       choices: { CMUCMBDutyStorageBag: 1 }
       entries:
       - id: RMCSatchelLightpackBlack
-    - name: au14-vendor-section-webbing # RuMC edit
+    - name: au14-vendor-section-webbings
       choices: { CMUCMBDutyStorageWebbing: 1 }
       entries:
       - id: RMCWebbingBlackSmall
@@ -55,7 +55,7 @@
       - id: RMCWebbingHolsterBlack
       - id: RMCWebbingDropPouchBlack
       - id: RMCWebbingLegPouchBlack
-    - name: au14-vendor-section-pouches # RuMC edit
+    - name: au14-vendor-section-pouches
       choices: { CMUCMBDutyPouches: 2 }
       entries:
       - id: AU14PouchIFAKFill
@@ -64,7 +64,7 @@
       - id: RMCPouchPistol
       - id: RMCPouchMagazinePistol
 #     - id: RMCPouchRadio
-    - name: au14-vendor-section-equipment # RuMC edit
+    - name: au14-vendor-section-equipment
       takeAll: CMUCMBEssentialEquipment
       entries:
       - id: RMCBinocularsCivPVE
@@ -72,21 +72,21 @@
       - id: CMStunbaton
       - id: RMCWeaponTaser
 #     - id: RMCRadioHandheldColonyOff
-    - name: au14-vendor-section-duty-weapons # RuMC edit
+    - name: au14-vendor-section-duty-weapons
       choices: { CMUCMBDutyWeapons: 1 }
       entries:
       - id: RMCGunCasePistolM77
-    - name: au14-vendor-section-non-lethal-ammo # RuMC edit
+    - name: au14-vendor-section-non-lethal-ammo
       entries:
       - id: CMMagazinePistolM88Rubber
         amount: 25
-    - name: au14-vendor-section-restraining-gear # RuMC edit
+    - name: au14-vendor-section-restraining-gear
       entries:
       - id: RMCHandcuffs
         amount: 10
       - id: RMCZipties
         amount: 30
-    - name: au14-vendor-section-inmate-clothing # RuMC edit
+    - name: au14-vendor-section-inmate-clothing
       entries:
       - id: AU14CivilianPrisonJumpsuit
         amount: 40

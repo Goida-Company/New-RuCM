@@ -2454,7 +2454,7 @@ namespace Content.Client.Lobby.UI
             if (id.Equals("abominations", StringComparison.OrdinalIgnoreCase))
                 return Loc.GetString("humanoid-profile-editor-threat-abomination") + markerSuffix;
 
-            if (id.Equals("tribal", StringComparison.OrdinalIgnoreCase))
+            if (id.Equals("tribals", StringComparison.OrdinalIgnoreCase)) // RuMC edit tribal -> tribals
                 return Loc.GetString("humanoid-profile-editor-threat-tribal") + markerSuffix;
 
             return HumanizePrototypeId(id) + markerSuffix;

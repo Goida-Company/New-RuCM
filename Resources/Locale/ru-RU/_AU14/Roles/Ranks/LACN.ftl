@@ -19,14 +19,14 @@ rank-AU14RankLACNPettyOfficerFirstClass = Старшина 1-й статьи
 rank-AU14RankLACNChiefPettyOfficer = Главный старшина
   .prefix = Гл. Ст.
 
-rank-AU14RankLACNSeniorChief = Старший чиф
-  .prefix = Ст. чиф
+rank-AU14RankLACNSeniorChief = Мичман
+  .prefix = Мич.
 
-rank-AU14RankLACNMasterChief = Мастер-чиф
-  .prefix = Мастер-чиф
+rank-AU14RankLACNMasterChief = Старший мичман
+  .prefix = Ст. Мич.
 
-rank-AU14RankLACNSubEnsign = Суб-энсин
-  .prefix = Суб-энсин
+rank-AU14RankLACNSubEnsign = Подэнсин
+  .prefix = Подэнсин
 
 rank-AU14RankLACNEnsign = Энсин
   .prefix = Энсин

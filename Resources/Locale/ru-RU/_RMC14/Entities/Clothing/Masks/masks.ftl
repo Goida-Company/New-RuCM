@@ -1,5 +1,38 @@
 ent-RMCMaskKeffiyeh = куфия
-    .desc = Традиционный головной платок, который носят для защиты от стихии и сокрытия лица.
+    .desc = Традиционный головной платок, который носят для сокрытия лица.
+ent-RMCMaskKeffiyehBlue = {ent-RMCMaskKeffiyeh}
+    .desc= {ent-RMCMaskKeffiyeh.desc}
+    .suffix = Синяя
+ent-RMCMaskKeffiyehBlack = {ent-RMCMaskKeffiyeh}
+    .desc= {ent-RMCMaskKeffiyeh.desc}
+    .suffix = Чёрная
+ent-RMCMaskKeffiyehWhite = {ent-RMCMaskKeffiyeh}
+    .desc= {ent-RMCMaskKeffiyeh.desc}
+    .suffix = Белая
+ent-RMCMaskKeffiyehRed = {ent-RMCMaskKeffiyeh}
+    .desc= {ent-RMCMaskKeffiyeh.desc}
+    .suffix = Красная
+ent-RMCMaskKeffiyehGreen = {ent-RMCMaskKeffiyeh}
+    .desc= {ent-RMCMaskKeffiyeh.desc}
+    .suffix = Зелёная
+
+ent-CMMaskCoif = подшлемник
+    .desc = Плотно прилегающий капюшон, который покрывает верхнюю, заднюю и боковые части головы.
+ent-RMCMaskCoifGrey = {ent-CMMaskCoif}
+    .desc = {ent-CMMaskCoif.desc}
+    .suffix = Серый
+ent-RMCMaskCoifGreen = {ent-CMMaskCoif}
+    .desc = {ent-CMMaskCoif.desc}
+    .suffix = Зелёный
+ent-RMCMaskCoifTan = {ent-CMMaskCoif}
+    .desc = {ent-CMMaskCoif.desc}
+    .suffix = Коричневый
+
+ent-RMCMaskBalaclava = балаклава
+    .desc = Базовая балаклава с одним отверстием для глаз.
+ent-RMCMaskBalaclavaGreen = {ent-RMCMaskBalaclava}
+    .desc = {ent-RMCMaskBalaclava.desc}
+    .suffix = Зелёная
 
 ent-RMCVisorSWAT = щиток ВЗ2 БКМ
     .desc = Желтоватое защитное стекло, которое можно поднять при необходимости.
@@ -12,24 +45,6 @@ ent-RMCMaskBalaclavaSkullBlue = балаклава-череп
 
 ent-RMCMaskBalaclavaMARSOC = бронированная балаклава ССО
     .desc = Разработана для максимальной защиты. Обеспечивает защиту от атак на лицо, фильтрует токсины и скрывает личность владельца.
-
-ent-RMCMaskBalaclava = балаклава
-  .desc = Базовая балаклава с одним отверстием для глаз.
-
-ent-RMCMaskBalaclavaGreen = зелёная балаклава
-  .desc = {ent-RMCMaskBalaclava.desc}
-
-ent-RMCMaskCoifTan = бежевая балаклава
-    .desc = {ent-RMCMaskBalaclava.desc}
-
-ent-RMCMaskCoifGrey = серая балаклава
-    .desc = {ent-RMCMaskBalaclava.desc}
-
-ent-RMCMaskCoifGreen = зелёная балаклава
-    .desc = {ent-RMCMaskBalaclava.desc}
-
-ent-CMMaskCoif = подшлемник
-    .desc = Плотно прилегающий капюшон, который покрывает верхнюю, заднюю и боковые части головы.
 
 ent-RMCMaskCoifPMC = бронированный подшлемник
     .desc = Бронированный подшлемник, предназначенный для сокрытия личности оператора и выполняющий роль воздушного фильтра.

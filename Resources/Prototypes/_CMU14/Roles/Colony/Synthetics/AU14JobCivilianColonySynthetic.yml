@@ -81,6 +81,7 @@
   supervisors: au14-job-supervisors-colonycivilian
   whitelisted: true
   whitelistParent: RMCWhitelistMedium
+  isSynthetic: true
   accessGroups:
   - Colonist
   - auadmin

@@ -16,23 +16,23 @@
     sprite: _AU14/Structures/Vendors/uscmgearrack.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Fatigues
+    - name: au14-vendor-section-fatigues
       entries:
       - id: AU14FatiguesUPP
         amount: 40
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       entries:
       - id: RMCBootsSPPBlack
         amount: 20
       - id: RMCBootsSPP
         amount: 40
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       entries:
       - id: RMCHandsBlack
         amount: 40
       - id: CMHandsBrown
         amount: 20
-    - name: Webbings
+    - name: au14-vendor-section-webbings
       entries:
       - id: AU14WebbingMagazine
         amount: 40
@@ -44,7 +44,7 @@
         amount: 15
       - id: AU14WebbingDropPouchUPP
         amount: 20
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       entries:
       - id: AU14UPPNavalInfantryHelmet
         amount: 40
@@ -58,13 +58,13 @@
         amount: 40
       - id: RMCM5CameraGear
         amount: 30
-    - name: Heads Up Display
+    - name: au14-vendor-section-hud
       entries:
       - id: RMCVisorSquad
         amount: 40
       - id: RMCVisorWelding
         amount: 8
-    - name: Armor
+    - name: au14-vendor-section-armor
       entries:
       - id: AU14UPPArmor
         amount: 40
@@ -72,7 +72,7 @@
         amount: 30
       - id: AU14UPPArmorBulky
         amount: 25
-    - name: Armor Components
+    - name: au14-vendor-section-armor-components
       entries:
       - id: AU14ArmorGarbShinGuardsUPP
         amount: 40
@@ -88,7 +88,7 @@
         amount: 12
       - id: AU14ArmorGarbJunglePonchoUPP
         amount: 40
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       entries:
       - id: RuMCBackpackLightSPN
         amount: 80
@@ -102,7 +102,7 @@
         amount: 3
       - id: RMCBackpackAmmo
         amount: 4
-    - name: Belts
+    - name: au14-vendor-section-belts
       entries:
       - id: RuMCUPPNavalInfantryBeltAmmo
         amount: 40
@@ -118,14 +118,14 @@
         amount: 2
       - id: RuMCUPPNavalInfantryBeltGeneral
         amount: 30
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       entries:
       - id: RuMCUPPPouchBayonet
         amount: 25
       - id: RuMCUPPPouchFlareFill
         amount: 30
-      #- id: RMCPouchDocumentSmall #Зачем они были добавлены?
-      #  amount: 3
+      - id: RuMCUPPPouchDocument #ok
+        amount: 3
       - id: RuMCUPPPouchMagazine
         amount: 50
       - id: RuMCUPPPouchMagazineLarge
@@ -154,7 +154,7 @@
         amount: 2
       - id: RuMCUPPPouchTools
         amount: 15
-    - name: Mask
+    - name: au14-vendor-section-mask
       entries:
       - id: CMMaskCoif
         amount: 20
@@ -174,7 +174,7 @@
         amount: 20
       - id: RMCMaskNeckerchiefGray
         amount: 20
-    - name: Glasses & Goggles
+    - name: au14-vendor-section-glasses-goggles
       entries:
       - id: AU14GogglesM1A1ClearBallistic
         amount: 25
@@ -194,7 +194,7 @@
         amount: 25
       - id: RMCGlassesTriMaxBronze
         amount: 25
-    - name: Patches
+    - name: au14-vendor-section-patches
       entries:
       - id: AU14PatchUPP
         amount: 80
@@ -218,16 +218,15 @@
     sprite: _AU14/Structures/Vendors/assortedequipment.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Food
+    - name: au14-vendor-section-food
       entries:
       - id: AU14MREUPP
         amount: 60
       - id: AU14BoxMREUPP
         amount: 10
-    - name: Medical Supplies
+    - name: au14-vendor-section-medical-supplies
       entries:
       - id: RuMCUPPPouchIFAKFill
-        name: infantry first aid kit (Full)
         recommended: true
         amount: 30
       - id: AU14HemostaticGauzePacket
@@ -246,7 +245,7 @@
         amount: 20
       - id: CMUSplintItem
         amount: 40
-    - name: Tools
+    - name: au14-vendor-section-tools
       entries:
       - id: CMEntrenchingTool
         recommended: true
@@ -258,12 +257,10 @@
         amount: 25
       - id: RMCCombatUtilityKnifeB
         recommended: true
-        name: "'Druzhina' combat utility knife (ceremony)"
         amount: 5
       - id: CMM11Knife
         amount: 15
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
         amount: 6
       - id: RMCHelmetGarbGunOil
         amount: 30
@@ -289,7 +286,7 @@
         amount: 4
       - id: RMCWelderPVE
         amount: 1
-    - name: Engineering Supplies
+    - name: au14-vendor-section-engineering-supplies
       entries:
       - id: CMSandbagEmpty25
         recommended: true
@@ -308,7 +305,7 @@
         amount: 5
       - id: RMCCableCoil
         amount: 15
-    - name: Flares and lights
+    - name: au14-vendor-section-flares-lights
       entries:
       - id: RMCBoxFlashlights
         amount: 4
@@ -322,7 +319,7 @@
         amount: 12
       - id: RuMCPackFlareRed
         amount: 8
-    - name: Gas Mask
+    - name: au14-vendor-section-gas-mask
       entries:
       - id: RMCMaskGasSPP
         amount: 40
@@ -330,13 +327,13 @@
         amount: 80
       - id: AU14PouchGasMaskBag
         amount: 20
-    - name: Optics
+    - name: au14-vendor-section-optics
       entries:
       - id: RMCLaserDesignatorPVE
         amount: 2
       - id: RMCBinocularsPVE
         amount: 5
-    - name: Miscellaneous
+    - name: au14-vendor-section-misc
       entries:
       - id: RMCZipties
         recommended: true
@@ -376,11 +373,11 @@
     - AU14JobOPFOROfficerMedical
     - AU14JobOPFORAuxSupportSynth
     sections:
-    - name: Essential Equipment
+    - name: au14-vendor-section-essential-equipment
       takeAll: CMUEssentialEquipment
       entries:
       - id: AU14VendorBundleCorpsmanEssentials
-    - name: Medical Pouches
+    - name: au14-vendor-section-medical-pouches
       choices: { CMUPlatoonMedicalPouch: 2 }
       entries:
       - id: RMCPouchAutoinjector
@@ -388,14 +385,12 @@
       - id: RMCPouchMedical
       - id: RMCPouchSyringeFill
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
-    - name: Medical Storage
+    - name: au14-vendor-section-medical-storage
       choices: { CMUPlatoonMedicalStorage: 1 }
       entries:
       - id: AU14BeltMedicBagUPP
-    - name: General Medical Supplies
+    - name: au14-vendor-section-general-medical-supplies
       entries:
       - id: AU14HemostaticGauzePacket
         amount: 60
@@ -415,20 +410,20 @@
         amount: 30
       - id: CMTraumaKit10
         amount: 30
-    - name: Limited Pill Medications
+    - name: au14-vendor-section-limited-pill-medications
       takeAll: CMULimitedPills
       entries:
       - id: AU14PillCanisterMeralyne
       - id: AU14PillCanisterDermaline
       - id: AU14PillCanisterAlbuterol
-    - name: Limited Injector Medications
+    - name: au14-vendor-section-limited-injector-medications
       choices: { CMUPlatoonMedicalLimitedMedicationsInjectors: 6 }
       entries:
       - id: AU14MeraBicAutoInjector
       - id: AU14KeloDermAutoInjector
       - id: AU14AlbuDexAutoInjector
       - id: AU14RevivalMixAutoInjector
-    - name: Pill Bottles
+    - name: au14-vendor-section-pill-bottles
       entries:
       - id: CMPillCanisterDexalin
         amount: 20
@@ -460,7 +455,7 @@
         amount: 20
       - id: AU14PillCanisterPulmovine
         amount: 20
-    - name: Injectors
+    - name: au14-vendor-section-injectors
       entries:
       - id: CMEpinephrineAutoInjector
         amount: 40
@@ -484,12 +479,12 @@
         amount: 40
       - id: AU14OxycodoneAutoInjector
         amount: 40
-    - name: Medical Gloves
+    - name: au14-vendor-section-medical-gloves
       choices: { CMUPlatoonMedicalGloves: 1 }
       entries:
       - id: CMHandsLatex
       - id: ClothingHandsGlovesNitrile
-    - name: Medical Masks
+    - name: au14-vendor-section-medical-masks
       choices: { CMUPlatoonMedicalMasks: 1 }
       entries:
       - id: CMMaskSterile
@@ -510,34 +505,34 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Fatigues
+    - name: au14-vendor-section-fatigues
       choices: { CMUPlatoonAirCrewFatigues: 1 }
       entries:
       - id: AU14BoilerFatiguesUPP
-    - name: Body Armor
+    - name: au14-vendor-section-body-armor
       choices: { CMUPlatoonAirCrewVest: 1 }
       entries:
       - id: AU14ArmorPilotFlakJacket
       - id: AU14ExternalWebbing
       - id: RMCArmorVestSquad
         amount: 2
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       choices: { CMUPlatoonAirCrewFootwear: 1 }
       entries:
       - id: RMCBootsSPPFilled
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       choices: { CMUPlatoonAirCrewGloves: 1 }
       entries:
       - id: AU14PVEHandsInsulatedBlackMarine
       - id: AU14PVEHandsFingerlessBlackGloves
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       choices: { CMUPlatoonAirCrewHeadgear: 1 }
       entries:
       - id: AU14UPPPatrolCap
       - id: AU14UPPBoonie
       - id: AU14UPPUshanka
       - id: CMHeadCapSPPBeret
-    - name: Webbings
+    - name: au14-vendor-section-webbings
       choices: { CMUPlatoonAirCrewWebbings: 1 }
       entries:
       - id: AU14WebbingMagazine
@@ -545,29 +540,29 @@
       - id: AU14WebbingDumpPouch
       - id: AU14WebbingAdminPouch
       - id: AU14WebbingDropPouch
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       choices: { CMUPlatoonAirCrewBackpack: 1 }
       entries:
       - id: RuMCUPPNavalInfantryBackpack1
-    - name: Belts
+    - name: au14-vendor-section-belts
       choices: { CMUPlatoonAirCrewBelts: 1 }
       entries:
       - id: RuMCUPPNavalInfantryBeltPistol
       - id: RuMCUPPNavalInfantryBeltGeneral
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       choices: { CMUPlatoonAirCrewPouches: 2 }
       entries:
       - id: RuMCUPPPouchBayonet
         name: Bayonet Sheath
       - id: RuMCUPPPouchFlareFill
         name: Flare Pouch (Full)
-      - id: RMCPouchDocumentSmall
+      - id: RuMCUPPPouchDocument
       - id: RuMCUPPPouchMagazine
       - id: RuMCUPPPouchGeneralLarge
       - id: RuMCUPPPouchPistolAlt
       - id: RuMCUPPPouchMagazinePistolLarge
       - id: RuMCUPPPouchTools
-    - name: Glasses
+    - name: au14-vendor-section-glasses
       choices: { CMUPlatoonAirCrewGlasses: 1 }
       entries:
       - id: RMCSunglassesBigFake
@@ -575,7 +570,7 @@
       - id: AU14GlassesBiMex
       - id: AU14GlassesBiMexOrange
       - id: RMCGlassesAviators
-    - name: Essential Medical Equipment
+    - name: au14-vendor-section-essential-medical-equipment
       takeAll: CMUEssentialEquipment
       entries:
       - id: RMCVisorMedical
@@ -587,18 +582,18 @@
       - id: RMCMedevacStretcherFolded
       - id: CMSurgicalLine
       - id: CMSynthGraft
-    - name: Medical Pouches
+    - name: au14-vendor-section-medical-pouches
       choices: { CMUPlatoonMedicalPouch: 2 }
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
-    - name: Medical Storage
+    - name: au14-vendor-section-medical-storage
       choices: { CMUPlatoonMedicalStorage: 1 }
       entries:
       - id: AU14BeltMedicalUPP
       - id: AU14BeltMedicBagUPP
-    - name: General Medical Supplies
+    - name: au14-vendor-section-general-medical-supplies
       entries:
       - id: AU14HemostaticGauzePacket
         amount: 60
@@ -610,7 +605,7 @@
         amount: 30
       - id: CMTraumaKit10
         amount: 30
-    - name: Pill Bottles
+    - name: au14-vendor-section-pill-bottles
       entries:
       - id: CMPillCanisterBicaridine
         amount: 15
@@ -642,7 +637,7 @@
         amount: 15
       - id: AU14PillCanisterPulmovine
         amount: 15
-    - name: Injectors
+    - name: au14-vendor-section-injectors
       entries:
       - id: CMEpinephrineAutoInjector
         amount: 15
@@ -664,12 +659,12 @@
         amount: 15
       - id: AU14OxycodoneAutoInjector
         amount: 15
-    - name: Medical Gloves
+    - name: au14-vendor-section-medical-gloves
       choices: { CMUPlatoonMedicalGloves: 1 }
       entries:
       - id: CMHandsLatex
       - id: ClothingHandsGlovesNitrile
-    - name: Medical Masks
+    - name: au14-vendor-section-medical-masks
       choices: { CMUPlatoonMedicalMasks: 1 }
       entries:
       - id: CMMaskSterile
@@ -688,7 +683,7 @@
     sprite: _AU14/Structures/Vendors/uscmcommandclothes.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Fatigues
+    - name: au14-vendor-section-fatigues
       entries:
       - id: AU14JumpsuitOfficerUPP
         amount: 2
@@ -696,7 +691,7 @@
         amount: 5
       - id: AU14ServiceFatiguesUPP
         amount: 3
-    - name: Coats
+    - name: au14-vendor-section-coats
       entries:
       - id: AU14CoatUPP
         amount: 3
@@ -704,13 +699,13 @@
         amount: 2
       - id: AU14CoatUPPMP
         amount: 5
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       entries:
       - id: RMCBootsSPPFilled
         amount: 5
       - id: CMBootsBrown
         amount: 5
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       entries:
       - id: CMHeadCapSPPPeaked
         amount: 5
@@ -718,21 +713,21 @@
         amount: 5
       - id: CMHeadCapSPPUshankaCivilian
         amount: 10
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       entries:
       - id: RMCBackpackRTOSPP
         amount: 5
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       entries:
       - id: AU14PouchCommandFill
         amount: 10
-    - name: Equipment
+    - name: au14-vendor-section-equipment
       takeAll: CMStandard
       entries:
       - id: RMCLaserDesignator
       - id: RMCWhistle
       - id: RuMCPackFlareRed
-    - name: Spare Equipment
+    - name: au14-vendor-section-spare-equipment
       entries:
       - id: ANPRC117GRadioOPFORFilled
         amount: 2
@@ -754,7 +749,7 @@
         amount: 6
       - id: AU14JoeUPP
         amount: 5
-    - name: Chevrons
+    - name: au14-vendor-section-chevrons
       entries:
       - id: AU14ChevronUPPNIPrivate
         amount: 2
@@ -776,28 +771,27 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/smart_gun_operator_gear.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Essential Equipment
+    - name: au14-vendor-section-essential-equipment
       takeAll: CMUAREssentialEquipment
       entries:
       - id: AU14ArmorSmartGunDesertCombatHarnessUPP
       - id: RuMCUPPPouchDrum
       - id: RMCScabbardMacheteSGFilled
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       choices: { CMHelmet: 1 }
       entries:
       - id: RuMCUPPNavalInfantryHeavyHelmet
-
-    - name: Firearm System
+    - name: au14-vendor-section-firearm-system
       choices: { CMUPlatoonMG: 1 }
       entries:
       - id: AU14SmartGunUPP
       - id: RMCWeaponLMGQYJ72
-    - name: Belt
+    - name: au14-vendor-section-belt
       choices: { CMUPlatoonMGBelt: 1 }
       entries:
       - id: RuMCUPPNavalInfantryBeltMachinegunner
       - id: AU14BeltSmartGunOperatorPistolUPP
-    - name: Gun Munitions
+    - name: au14-vendor-section-gun-munitions
       entries:
       - id: AU14MagazineSmartGunUPP
         amount: 40
@@ -820,16 +814,16 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/clothing.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Apparel
+    - name: au14-vendor-section-apparel
       choices: { CMHat: 1 }
       entries:
       - id: CMHeadCapSPPBeret
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       choices: { CMHelmet: 1 }
       entries:
       - id: RuMCUPPNavalInfantryHeavyHelmet
       - id: RuMCUPPNavalInfantryHeavyHelmet2
-    - name: Equipment
+    - name: au14-vendor-section-equipment
       takeAll: CMStandard
       entries:
       - id: RMCLaserDesignator
@@ -853,27 +847,27 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/guns.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Weapons
+    - name: au14-vendor-section-weapons
       choices: { CMUPrimaryWeapon: 1 }
       entries:
       - id: AU14KitWeaponAG80
       - id: AU14KitWeaponType64
-    - name: Weapon Ammunition
+    - name: au14-vendor-section-weapon-ammunition
       entries:
       - id: AU14MagazineRifleAG80
         amount: 60
       - id: RMCMagazineSMGType64
         amount: 60
-    - name: Handguns
+    - name: au14-vendor-section-handguns
       choices: { CMUHandgunsWeapon: 1 }
       entries:
       - id: AU14KitWeaponType74
       - id: AU14KitWeaponType73
-    - name: Handgun Ammunition
+    - name: au14-vendor-section-handgun-ammunition
       entries:
       - id: RMCMagazinePistolT73
         amount: 60
-    - name: Attachments
+    - name: au14-vendor-section-attachments
       choices: { CMUAttachmentsVendor: 1 }
       entries:
       - id: RMCAttachmentTwoPointSling
@@ -892,7 +886,7 @@
   components:
   - type: CMAutomatedVendor
     sections:
-    - name: Weapons Specialist Sets
+    - name: au14-vendor-section-weapons-specialist-sets
       takeOne: SquadSpecKit
       sharedSpecLimit: 1
       entries:
@@ -930,13 +924,13 @@
     sprite: _AU14/Structures/Vendors/genericweaponrack.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Weapons
+    - name: au14-vendor-section-weapons
       entries:
       - id: RMCWeaponSMGType19
         amount: 2
       - id: RMCWeaponPistolT74
         amount: 2
-    - name: Ammunition
+    - name: au14-vendor-section-ammunition
       entries:
       - id: RMCMagazineSMGType19
         amount: 12
@@ -959,67 +953,58 @@
     - AU14JobGOVFOROfficerEngi
     - AU14JobOPFOROfficerEngi
     sections:
-    - name: Engineer Set
+    - name: au14-vendor-section-engineer-set
       takeAll: CMEngineerSet
       entries:
       - id: AU14VendorBundleCombatTechnicianEssentials
-    - name: Support Equipment
+    - name: au14-vendor-section-support-equipment
       choices:  { CMHandheldDefense : 1 }
       entries:
       - id: AU14CaseSentry
       - id: AU14CaseSentryMini
       - id: AU14CaseSentrySniper
       - id: RMCM271A2BruteLauncherRigFilled
-    - name: Engineer Uniform
+    - name: au14-vendor-section-engineer-uniform
       choices: { CMUPlatoonMedicalUniform: 1 }
       entries:
       - id: AU14JumpsuitEngiUPP
-    - name: Tool Storage
+    - name: au14-vendor-section-tool-storage
       choices: { CMUCTToolStorage: 1 }
       entries:
       - id: AU14BeltUtilityCombatFilled
-        name: M276 pattern combat toolbelt rig (filled)
         recommended: true
       - id: AU14PouchToolsFilledComtech
-        name: tactical tools pouch (filled)
       - id: AU14BeltUtilityFilled
-        name: M276 pattern toolbelt rig (filled)
-    - name: Engineering Storage Bag
+    - name: au14-vendor-section-engineering-storage-bag
       choices: { CMUPouchesCTBag: 1 }
       entries:
       - id: RMCSatchelSPPWelder
         recommended: true
-    - name: Engineering Storage Pouch
+    - name: au14-vendor-section-engineering-storage-pouch
       choices: { CMUPouchesCT: 2 }
       entries:
       - id: RuMCUPPPouchConstruction
         recommended: true
       - id: RMCPouchEngineerKit
       - id: RMCPouchElectronics
-    - name: Engineering Materials
+    - name: au14-vendor-section-engineering-materials
       entries:
       - id: CMSheetMetal50
-        name: metal x50
         points: 6
         recommended: true
       - id: CMSheetPlasteel50
-        name: plasteel x50
         points: 8
         recommended: true
       - id: AU14HescoKit
-        name: HESCO barricade kit
         points: 4
         recommended: true
       - id: CMSandbagEmpty50
-        name: sandbags x50
         points: 4
       - id: RMCPlankWood
-        name: wood x50
         points: 2
-    - name: Engineering Supplies
+    - name: au14-vendor-section-engineering-supplies
       entries:
       - id: CMFoldingBarricadesMB6x3
-        name: MB-6 folding barricade x3
         points: 2
       - id: AU14MaintenanceJack
         points: 2
@@ -1031,7 +1016,7 @@
         points: 2
       - id: DoorElectronics
         points: 2
-    - name: Power Generation
+    - name: au14-vendor-section-power-generation
       entries:
       - id: RMCPowerCell
         points: 2
@@ -1042,18 +1027,14 @@
       - id: CMAPCElectronics
         points: 2
       - id: RMCPortableGeneratorPacmanMachineCircuitBoard
-        name: PACMAN generator machine board
         points: 4
       - id: RMCPortableGeneratorSuperPacmanMachineCircuitboard
-        name: super PACMAN generator machine board
         points: 6
       - id: CMSheetPhoron
-        name: phoron x50
         points: 2
       - id: SheetUranium
-        name: uranium x30
         points: 4
-    - name: Explosives
+    - name: au14-vendor-section-explosives
       entries:
       - id: RMCExplosivePlastic
         points: 4
@@ -1083,7 +1064,7 @@
     access: [["AU14AccessGovforSecurity" ], [ "AU14AccessOpforSecurity" ]]
   - type: CMAutomatedVendor
     sections:
-    - name: Standard Equipment
+    - name: au14-vendor-section-standard-equipment
       takeAll: CMStandard
       entries:
       - id: CMGlassesSecurity
@@ -1092,15 +1073,15 @@
       - id: AU14GuidebookLawMarine
       - id: AU14GuidebookSOP
       - id: AU14Scissors
-    - name: Uniform
+    - name: au14-vendor-section-fatigues
       choices: { AU14Uniform: 1 }
       entries:
       - id: AU14JumpsuitMPUPP
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       choices: { AU14FootWear: 1 }
       entries:
       - id: RMCBootsSPPFilled
-    - name: Hat
+    - name: au14-vendor-section-hat
       choices: { CMHat: 1 }
       entries:
       - id: CMHeadCapSPPPeaked
@@ -1108,38 +1089,38 @@
       choices: { CMHat: 1 }
       entries:
       - id: RuMCHeadKomisarCap
-    - name: Helmet
+    - name: au14-vendor-section-helmet
       choices: { AU14Helmet: 1 }
       entries:
       - id: AU14UPPNavalInfantryHelmet
-    - name: Outerwear
+    - name: au14-vendor-section-outerwear
       choices: { AU14vest: 1 }
       entries:
       - id: AU14CoatUPPMP
-    - name: Vest
+    - name: au14-vendor-section-vest
       choices: { AU14vest: 1 }
       entries:
       - id: AU14UPPArmorMinimalistic
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: RuMCUPPNavalInfantryBackpack1
       - id: CMSatchelSecurity
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       choices: { RMCPouch: 2 }
       entries:
       - id: RuMCUPPPouchGeneralLarge
       - id: RuMCUPPPouchIFAKFill
       - id: RuMCUPPPouchMagazinePistol
       - id: RMCPouchPistol
-    - name: Record Keeping
+    - name: au14-vendor-section-record-keeping
       takeAll: CMRecordKeeping
       entries:
       - id: RMCBoxRegulationTapesFull
       - id: RMCUniversalRecorder
       - id: CMHandLabeler
       - id: RMCDigitalClock
-    - name: Inmate Restraining Gear
+    - name: au14-vendor-section-inmate-restraining-gear
       entries:
       - id: AU14ClothingOuterStraitjacket
         amount: 5 # TODO: bandaid - remove after mappers have placed this
@@ -1162,19 +1143,19 @@
       sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/requisitions_wall/guns.rsi
       state: vend
     sections:
-    - name: Standard issue primaries
+    - name: au14-vendor-section-standard-primaries
       entries:
       - id: AU14WeaponRifleAG80
         amount: 30
       - id: RMCWeaponSMGType64
         amount: 20
-    - name: standard issue secondaries
+    - name: au14-vendor-section-standard-secondaries
       entries:
       - id: RMCWeaponPistolT73Empty
         amount: 20
       - id: RMCWeaponPistolT74
         amount: 10
-    - name: special issue firearms
+    - name: au14-vendor-section-special-firearms
       entries:
       - id: RMCWeaponRifleType71
         amount: 6
@@ -1196,7 +1177,7 @@
         amount: 1
       - id: RuMCUTES-CCase
         amount: 1
-    - name: primary ammunition
+    - name: au14-vendor-section-primary-ammunition
       entries:
       - id: AU14MagazineSmartGunUPP
         amount: 40
@@ -1238,7 +1219,7 @@
         amount: 1
       - id: RuMCMagazineTachankaLargeTracer
         amount: 1
-    - name: secondary ammunition
+    - name: au14-vendor-section-secondary-ammunition
       entries:
       - id: RMCMagazinePistolT73
         amount: 200
@@ -1252,7 +1233,7 @@
         amount: 100
       - id: RMCMagazineSMGType19Drum
         amount: 40
-    - name: Magazin-bullets
+    - name: au14-vendor-section-magazine-bullets
       entries:
       - id: RuMCBoxMagazineSMGType64
         amount: 10
@@ -1290,7 +1271,7 @@
         amount: 5
       - id: RuMCBoxBulletsPistol762x25mm
         amount: 2
-    - name: explosives
+    - name: au14-vendor-section-explosives
       entries:
       - id: AU14PacketGrenadeHighExplosiveUPPFilled
         amount: 10
@@ -1316,11 +1297,11 @@
         amount: 1
       - id: RMCRocketM5510Brute
         amount: 12
-    - name: Barrel Attachments
+    - name: au14-vendor-section-barrel-attachments
       entries:
       - id: RMCAttachmentExtendedBarrel
         amount: 5
-    - name: Rail Attachments
+    - name: au14-vendor-section-rail-attachments
       entries:
       - id: RMCAttachmentTwoPointSling
         amount: 50
@@ -1328,7 +1309,7 @@
         amount: 25
       - id: RMCAttachmentS42xTelescopicMiniscope
         amount: 2
-    - name: Underbarrel Attachments
+    - name: au14-vendor-section-underbarrel-attachments
       entries:
       - id: RMCAttachmentFlashlightGrip
         amount: 15
@@ -1338,19 +1319,19 @@
         amount: 5
       - id: RMCAttachmentUnderbarrelExtinguisher
         amount: 5
-    - name: Load Bearing Equipment
+    - name: au14-vendor-section-load-bearing-equipment
       entries:
       - id: RMCOuterClothingExternalWebbingBlack
         amount: 4
       - id: RMCOuterClothingExternalWebbing
         amount: 4
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       entries:
       - id: RMCPouchMagazineLarge
         amount: 10
       - id: RMCPouchMagazinePistolLarge
         amount: 10
-    - name: Devices
+    - name: au14-vendor-section-devices
       entries:
       - id: AU14PowerCellSmartgunUPP
         amount: 20
@@ -1360,13 +1341,13 @@
         amount: 4
       - id: RMCSentryLaptop
         amount: 4
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       entries:
       - id: RuMCUPPNavalInfantryHeavyHelmet
         amount: 4
       - id: RuMCUPPNavalInfantryHeavyHelmet2
         amount: 2
-    - name: RTO Packs
+    - name: au14-vendor-section-rto-packs
       entries:
       - id: AU14BackpackRTOPackJungle
         amount: 1
@@ -1374,7 +1355,7 @@
         amount: 1
       - id: AU14BackpackRTOPackGray
         amount: 1
-    - name: Materials
+    - name: au14-vendor-section-materials
       entries:
       - id: CMSheetMetal
         amount: 4
@@ -1396,7 +1377,7 @@
         amount: 1
       - id: SheetUranium
         amount: 1
-    - name: Tents
+    - name: au14-vendor-section-tents
       entries:
       - id: RMCTentUNMCStandardFolded
         amount: 2
@@ -1410,7 +1391,7 @@
         amount: 1
       - id: RMCTentUNMCExtendedMessFolded
         amount: 1
-    - name: Flag
+    - name: au14-vendor-section-flag
       entries:
       - id: AU14FlagCarriableUPP
         amount: 1
@@ -1427,7 +1408,7 @@
     sprite: _AU14/Structures/Vendors/uscmgearrack.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Softcovers
+    - name: au14-vendor-section-softcovers
       entries:
       - id: AU14UPPPatrolCap
         amount: 20
@@ -1437,17 +1418,17 @@
         amount: 15
       - id: AU14UPPUshanka
         amount: 40
-    - name: Fatigues
+    - name: au14-vendor-section-fatigues
       entries:
       - id: AU14FatiguesUPP
         amount: 40
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       entries:
       - id: RMCBootsSPPBlack
         amount: 20
       - id: RMCBootsSPP
         amount: 40
-    - name: Mask
+    - name: au14-vendor-section-mask
       entries:
       - id: CMMaskCoif
         amount: 20
@@ -1467,7 +1448,7 @@
         amount: 20
       - id: RMCMaskNeckerchiefGray
         amount: 20
-    - name: Glasses
+    - name: au14-vendor-section-glasses
       entries:
       - id: AU14GlassesBiMex
         amount: 25
@@ -1475,7 +1456,7 @@
         amount: 25
       - id: RMCGlassesTriMaxBronze
         amount: 25
-    - name: Bag
+    - name: au14-vendor-section-bag
       entries:
       - id: CMSatchelMarine
         amount: 40

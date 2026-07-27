@@ -1,7 +1,7 @@
 # CLF Sapper role.
-au14-job-name-clfsapper = Сапер CLF
-au14-job-description-clfsapper = Партизан, обученный полевому делу и взрывчатке. Вы ставите ловушки, маскируете их и обращаете землю колонии против GOVFOR.
-au14-job-prefix-clfsapper = CIV
+au14-job-name-clfsapper = Сапер КОФ
+au14-job-description-clfsapper = Партизан, обученный полевому делу и взрывчатке. Вы ставите ловушки, маскируете их и обращаете землю колонии против ГОВФОР.
+au14-job-prefix-clfsapper = СКОФ
 
 # Sapper trap deploy / disarm feedback.
 insfor-sapper-trap-deployed = Вы устанавливаете заряд, и он скрывается из виду.

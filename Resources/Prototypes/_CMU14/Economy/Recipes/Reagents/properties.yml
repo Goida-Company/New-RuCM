@@ -13,12 +13,12 @@
   id: Hypoxemic
   parent: Negative
   name: cmu-reagent-property-name-hypoxemic
-  code: HPX
+  code: cmu-reagent-property-code-hypoxemic
   effectName: Hypoxemic
   description: cmu-reagent-property-desc-hypoxemic
   rarity: common
   value: -1
-  
+
 - type: reagentProperty
   id: Toxic
   parent: Negative
@@ -27,7 +27,7 @@
   rarity: common
   starter: true
   value: -1
-  code: TXC
+  code: cmu-reagent-property-code-toxic
   effectName: Toxic
 
 - type: reagentProperty
@@ -35,7 +35,7 @@
   parent: Negative
   name: cmu-reagent-property-name-corrosive
   description: cmu-reagent-property-desc-corrosive
-  code: CRS
+  code: cmu-reagent-property-code-corrosive
   starter: true
   rarity: common
   value: 1
@@ -47,7 +47,7 @@
   parent: Negative
   name: cmu-reagent-property-name-biocidic
   description: cmu-reagent-property-desc-biocidic
-  code: BCD
+  code: cmu-reagent-property-code-biocidic
   rarity: common
   starter: true
   value: -1
@@ -57,7 +57,7 @@
   id: Neuropathic
   parent: Negative
   name: cmu-reagent-property-name-neuropathic
-  code: NPT
+  code: cmu-reagent-property-code-neuropathic
   description: cmu-reagent-property-desc-neuropathic
   rarity: uncommon
   category: stimulant
@@ -70,14 +70,14 @@
   name: cmu-reagent-property-name-hemolytic
   description: cmu-reagent-property-desc-hemolytic
   rarity: uncommon
-  code: HML
+  code: cmu-reagent-property-code-hemolytic
   effectName: Hemolytic
 
 - type: reagentProperty
   id: Hemorrhaging
   parent: Negative
   name: cmu-reagent-property-name-hemorrhaging
-  code: HMR
+  code: cmu-reagent-property-code-hemorrhaging
   description: cmu-reagent-property-desc-hemorrhaging
   rarity: uncommon
   value: 1
@@ -90,7 +90,7 @@
   name: cmu-reagent-property-name-carcinogenic
   description: cmu-reagent-property-desc-carcinogenic
   rarity: common
-  code: CRG
+  code: cmu-reagent-property-code-carcinogenic
   effectName: Carcinogenic
 
 - type: reagentProperty
@@ -99,12 +99,12 @@
   name: cmu-reagent-property-name-hepatotoxic
   description: cmu-reagent-property-desc-hepatotoxic
   rarity: uncommon
-  code: HPT
+  code: cmu-reagent-property-code-hepatotoxic
   effectName: Hepatotoxic
 
 - type: reagentProperty
   id: Intravenous
-  code: INV
+  code: cmu-reagent-property-code-intravenous
   parent: Negative
   name: cmu-reagent-property-name-intravenous
   description: cmu-reagent-property-desc-intravenous
@@ -115,7 +115,7 @@
 - type: reagentProperty
   id: Nephrotoxic
   name: cmu-reagent-property-name-nephrotoxic
-  code: NPT
+  code: cmu-reagent-property-code-nephrotoxic
   parent: Negative
   description: cmu-reagent-property-desc-nephrotoxic
   rarity: uncommon
@@ -124,7 +124,7 @@
 - type: reagentProperty
   id: Pneumotoxic
   name: cmu-reagent-property-name-pneumotoxic
-  code: PNT
+  code: cmu-reagent-property-code-pneumotoxic
   parent: Negative
   description: cmu-reagent-property-desc-pneumotoxic
   rarity: uncommon
@@ -133,7 +133,7 @@
 - type: reagentProperty
   id: Oculotoxic
   name: cmu-reagent-property-name-oculotoxic
-  code: OCT
+  code: cmu-reagent-property-code-oculotoxic
   parent: Negative
   description: cmu-reagent-property-desc-oculotoxic
   rarity: uncommon
@@ -143,7 +143,7 @@
   id: Cardiotoxic
   name: cmu-reagent-property-name-cardiotoxic
   parent: Negative
-  code: CDT
+  code: cmu-reagent-property-code-cardiotoxic
   description: cmu-reagent-property-desc-cardiotoxic
   rarity: common
   effectName: Cardiotoxic
@@ -152,7 +152,7 @@
   id: Neurotoxic
   parent: Negative
   name: cmu-reagent-property-name-neurotoxic
-  code: NRT
+  code: cmu-reagent-property-code-neurotoxic
   description: cmu-reagent-property-desc-neurotoxic
   rarity: common
   category: toxicant, stimulant
@@ -163,7 +163,7 @@
   id: Hypermetabolic
   parent: Negative
   name: cmu-reagent-property-name-hypermetabolic
-  code: EMB
+  code: cmu-reagent-property-code-hypermetabolic
   rarity: uncommon
   category: metabolite
   description: cmu-reagent-property-desc-hypermetabolic
@@ -173,7 +173,7 @@
   parent: Negative
   id: Addictive
   name: cmu-reagent-property-name-addictive
-  code: ADT
+  code: cmu-reagent-property-code-addictive
   description: cmu-reagent-property-desc-addictive
   rarity: rare
   category: stimulant
@@ -183,7 +183,7 @@
   parent: Negative
   id: Hemositic
   name: cmu-reagent-property-name-hemositic
-  code: HST
+  code: cmu-reagent-property-code-hemositic
   description: cmu-reagent-property-desc-hemositic
   rarity: disabled
   value: 2
@@ -194,7 +194,7 @@
   parent: Negative
   id: Igniting
   name: cmu-reagent-property-name-igniting
-  code: IGT
+  code: cmu-reagent-property-code-igniting
   description: cmu-reagent-property-desc-igniting
   rarity: disabled
   value: 1
@@ -216,7 +216,7 @@
   parent: Neutral
   id: Cryometabolizing
   name: cmu-reagent-property-name-cryometabolizing
-  code: CMB
+  code: cmu-reagent-property-code-cryometabolizing
   description: cmu-reagent-property-desc-cryometabolizing
   rarity: common
   category: metabolite
@@ -228,7 +228,7 @@
   id: Thanatometabolizing
   name: cmu-reagent-property-name-thanatometabolizing
   description: cmu-reagent-property-desc-thanatometabolizing
-  code: TMB
+  code: cmu-reagent-property-code-thanatometabolizing
   category: metabolite
   value: 1
   rarity: rare
@@ -239,7 +239,7 @@
   id: Excreting
   name: cmu-reagent-property-name-excreting
   description: cmu-reagent-property-desc-excreting
-  code: EXT
+  code: cmu-reagent-property-code-excreting
   rarity: uncommon
   category: irritant
   effectName: Excreting
@@ -249,7 +249,7 @@
   id: Nutritious
   name: cmu-reagent-property-name-nutritious
   description: cmu-reagent-property-desc-nutritious
-  code: NTR
+  code: cmu-reagent-property-code-nutritious
   effectName: Nutritious
   rarity: common
   category: metabolite
@@ -260,7 +260,7 @@
   id: Ketogenic
   name: cmu-reagent-property-name-ketogenic
   description: cmu-reagent-property-desc-ketogenic
-  code: KTG
+  code: cmu-reagent-property-code-ketogenic
   effectName: Ketogenic
   rarity: common
   category: metabolite
@@ -270,7 +270,7 @@
   id: Neuroinhibiting
   name: cmu-reagent-property-name-neuroinhibiting
   description: cmu-reagent-property-desc-neuroinhibiting
-  code: NIH
+  code: cmu-reagent-property-code-neuroinhibiting
   rarity: uncommon
   category: toxicant
   value: -1
@@ -282,7 +282,7 @@
   id: Alcoholic
   name: cmu-reagent-property-name-alcoholic
   description: cmu-reagent-property-desc-alcoholic
-  code: AOL
+  code: cmu-reagent-property-code-alcoholic
   rarity: common
   category: stimulant
   value: 0
@@ -293,7 +293,7 @@
   id: Hallucinogenic
   name: cmu-reagent-property-name-hallucinogenic
   description: cmu-reagent-property-desc-hallucinogenic
-  code: HLG
+  code: cmu-reagent-property-code-hallucinogenic
   rarity: common
   category: stimulant
   effectName: Hallucinogenic
@@ -303,7 +303,7 @@
   id: Antispasmodic
   name: cmu-reagent-property-name-antispasmodic
   description: cmu-reagent-property-desc-antispasmodic
-  code: ASP
+  code: cmu-reagent-property-code-antispasmodic
   rarity: common
   category: stimulant
   effectName: Antispasmodic
@@ -313,7 +313,7 @@
   id: Hyperthermic
   name: cmu-reagent-property-name-hyperthermic
   description: cmu-reagent-property-desc-hyperthermic
-  code: HPR
+  code: cmu-reagent-property-code-hyperthermic
   rarity: common
   category: metabolite
   volatile: true
@@ -324,7 +324,7 @@
   id: Hypothermic
   name: cmu-reagent-property-name-hypothermic
   description: cmu-reagent-property-desc-hypothermic
-  code: HPO
+  code: cmu-reagent-property-code-hypothermic
   rarity: uncommon
   category: metabolite
   effectName: Hypothermic
@@ -334,7 +334,7 @@
   id: Atrichogenic
   name: cmu-reagent-property-name-atrichogenic
   description: cmu-reagent-property-desc-atrichogenic
-  code: ATR
+  code: cmu-reagent-property-code-atrichogenic
   rarity: uncommon
   category: irritant
   value: 0
@@ -346,7 +346,7 @@
   id: Trichogenic
   name: cmu-reagent-property-name-trichogenic
   description: cmu-reagent-property-desc-trichogenic
-  code: TRI
+  code: cmu-reagent-property-code-trichogenic
   rarity: uncommon
   category: irritant
   value: 0
@@ -357,7 +357,7 @@
   id: Allergenic
   name: cmu-reagent-property-name-allergenic
   description: cmu-reagent-property-desc-allergenic
-  code: ALG
+  code: cmu-reagent-property-code-allergenic
   rarity: uncommon
   category: irritant
   value: 0
@@ -368,7 +368,7 @@
   id: Euphoric
   name: cmu-reagent-property-name-euphoric
   description: cmu-reagent-property-desc-euphoric
-  code: EPH
+  code: cmu-reagent-property-code-euphoric
   rarity: uncommon
   category: stimulant
   value: 1
@@ -379,7 +379,7 @@
   id: Emetic
   name: cmu-reagent-property-name-emetic
   description: cmu-reagent-property-desc-emetic
-  code: EME
+  code: cmu-reagent-property-code-emetic
   rarity: uncommon
   category: irritant
   effectName: Emetic
@@ -389,7 +389,7 @@
   id: Psychostimulating
   name: cmu-reagent-property-name-psychostimulating
   description: cmu-reagent-property-desc-psychostimulating
-  code: PST
+  code: cmu-reagent-property-code-psychostimulating
   rarity: common
   category: stimulant
   value: 0
@@ -401,7 +401,7 @@
   id: Antihallucinogenic
   name: cmu-reagent-property-name-antihallucinogenic
   description: cmu-reagent-property-desc-antihallucinogenic
-  code: AHL
+  code: cmu-reagent-property-code-antihallucinogenic
   rarity: common
   effectName: Antihallucinogenic
   category: stimulant
@@ -412,7 +412,7 @@
   id: Hypometabolic
   name: cmu-reagent-property-name-hypometabolic
   description: cmu-reagent-property-desc-hypometabolic
-  code: OMB
+  code: cmu-reagent-property-code-hypometabolic
   rarity: uncommon
   category: metabolite
   value: 3
@@ -423,7 +423,7 @@
   id: Hypnotic
   name: cmu-reagent-property-name-hypnotic
   description: cmu-reagent-property-desc-hypnotic
-  code: HYP
+  code: cmu-reagent-property-code-hypnotic
   rarity: common
   category: stimulant
   effectName: Hypnotic
@@ -433,7 +433,7 @@
   id: Hyperthrottling
   name: cmu-reagent-property-name-hyperthrottling
   description: cmu-reagent-property-desc-hyperthrottling
-  code: HTR
+  code: cmu-reagent-property-code-hyperthrottling
   rarity: rare
   category: stimulant
   value: 3
@@ -444,7 +444,7 @@
   id: Viscous
   name: cmu-reagent-property-name-viscous
   description: cmu-reagent-property-desc-viscous
-  code: VIS
+  code: cmu-reagent-property-code-viscous
   rarity: common
   category: reactant, combustible
   effectName: Viscous
@@ -454,7 +454,7 @@
   id: Thermostabilizing
   name: cmu-reagent-property-name-thermostabilizing
   description: cmu-reagent-property-desc-thermostabilizing
-  code: TSL
+  code: cmu-reagent-property-code-thermostabilizing
   rarity: disabled
   effectName: Thermostabilizing
   category: reactant
@@ -465,7 +465,7 @@
   id: Focusing
   name: cmu-reagent-property-name-focusing
   description: cmu-reagent-property-desc-focusing
-  code: FCS
+  code: cmu-reagent-property-code-focusing
   effectName: Focusing
   rarity: common
   category: stimulant
@@ -476,7 +476,7 @@
   id: Transformative
   name: cmu-reagent-property-name-transformative
   description: cmu-reagent-property-desc-transformative
-  code: TRF
+  code: cmu-reagent-property-code-transformative
   rarity: rare
   starter: false
   costPenalty: false
@@ -488,7 +488,7 @@
   id: Unknown
   name: cmu-reagent-property-name-unknown
   description: cmu-reagent-property-desc-unknown
-  code: UNK
+  code: cmu-reagent-property-code-unknown
   rarity: disabled
   category: anomalous, unadjustable
   effectName: Unknown
@@ -509,7 +509,7 @@
   id: Antitoxic
   name: cmu-reagent-property-name-antitoxic
   description: cmu-reagent-property-desc-antitoxic
-  code: ATX
+  code: cmu-reagent-property-code-antitoxic
   effectName: Antitoxic
   rarity: common
   starter: true
@@ -521,7 +521,7 @@
   name: cmu-reagent-property-name-anticorrosive
   description: cmu-reagent-property-desc-anticorrosive
   effectName: Anticorrosive
-  code: ACR
+  code: cmu-reagent-property-code-anticorrosive
   rarity: common
   starter: true
   value: 2
@@ -532,7 +532,7 @@
   name: cmu-reagent-property-name-neogenetic
   description: cmu-reagent-property-desc-neogenetic
   effectName: Neogenetic
-  code: NGN
+  code: cmu-reagent-property-code-neogenetic
   rarity: common
   starter: true
   value: 2
@@ -542,7 +542,7 @@
   id: Repairing
   name: cmu-reagent-property-name-repairing
   description: cmu-reagent-property-desc-repairing
-  code: REP
+  code: cmu-reagent-property-code-repairing
   rarity: uncommon
   category: medicine
   value: 1
@@ -554,13 +554,13 @@
   name: cmu-reagent-property-name-hemogenic
   description: cmu-reagent-property-desc-hemogenic
   effectName: Hemogenic
-  code: HMG
+  code: cmu-reagent-property-code-hemogenic
   rarity: common
 
 - type: reagentProperty
   parent: Hemogenic
   id: Yautjahemogenic
-  code: YHM
+  code: cmu-reagent-property-code-yautjahemogenic
   rarity: disabled
   effectName: Yautjahemogenic
 
@@ -569,7 +569,7 @@
   id: Hemostatic
   name: cmu-reagent-property-name-hemostatic
   description: cmu-reagent-property-desc-hemostatic
-  code: HSC
+  code: cmu-reagent-property-code-hemostatic
   rarity: uncommon
   maxLevel: 1
   value: 3
@@ -580,7 +580,7 @@
   id: Nervestimulating
   name: cmu-reagent-property-name-nervestimulating
   description: cmu-reagent-property-desc-nervestimulating
-  code: NST
+  code: cmu-reagent-property-code-nervestimulating
   rarity: disabled
   category: stimulant
   value: 4
@@ -591,7 +591,7 @@
   id: Musclestimulating
   name: cmu-reagent-property-name-musclestimulating
   description: cmu-reagent-property-desc-musclestimulating
-  code: MST
+  code: cmu-reagent-property-code-musclestimulating
   rarity: rare
   category: stimulant
   effectName: Musclestimulating
@@ -601,7 +601,7 @@
   id: Painkilling
   name: cmu-reagent-property-name-painkilling
   description: cmu-reagent-property-desc-painkilling
-  code: PNK
+  code: cmu-reagent-property-code-painkilling
   rarity: common
   category: stimulant
   value: 1
@@ -613,7 +613,7 @@
   id: Hepatopeutic
   name: cmu-reagent-property-name-hepatopeutic
   description: cmu-reagent-property-desc-hepatopeutic
-  code: HPP
+  code: cmu-reagent-property-code-hepatopeutic
   rarity: uncommon
   value: 1
   effectName: Hepatopeutic
@@ -623,7 +623,7 @@
   id: Nephropeutic
   name: cmu-reagent-property-name-nephropeutic
   description: cmu-reagent-property-desc-nephropeutic
-  code: NPP
+  code: cmu-reagent-property-code-nephropeutic
   rarity: uncommon
   value: 1
   effectName: Nephropeutic
@@ -633,7 +633,7 @@
   id: Pneumopeutic
   name: cmu-reagent-property-name-pneumopeutic
   description: cmu-reagent-property-desc-pneumopeutic
-  code: PNP
+  code: cmu-reagent-property-code-pneumopeutic
   rarity: uncommon
   value: 1
   effectName: Pneumopeutic
@@ -643,7 +643,7 @@
   id: Oculopeutic
   name: cmu-reagent-property-name-oculopeutic
   description: cmu-reagent-property-desc-oculopeutic
-  code: OCP
+  code: cmu-reagent-property-code-oculopeutic
   rarity: common
   value: 1
   effectName: Oculopeutic
@@ -653,7 +653,7 @@
   id: Cardiopeutic
   name: cmu-reagent-property-name-cardiopeutic
   description: cmu-reagent-property-desc-cardiopeutic
-  code: CDP
+  code: cmu-reagent-property-code-cardiopeutic
   rarity: uncommon
   value: 1
   effectName: Cardiopeutic
@@ -663,7 +663,7 @@
   id: Neuropeutic
   name: cmu-reagent-property-name-neuropeutic
   description: cmu-reagent-property-desc-neuropeutic
-  code: NRP
+  code: cmu-reagent-property-code-neuropeutic
   rarity: common
   effectName: Neuropeutic
 
@@ -672,7 +672,7 @@
   id: Bonemending
   name: cmu-reagent-property-name-bonemending
   description: cmu-reagent-property-desc-bonemending
-  code: BNM
+  code: cmu-reagent-property-code-bonemending
   rarity: rare
   effectName: Bonemending
 
@@ -681,7 +681,7 @@
   id: Fluxing
   name: cmu-reagent-property-name-fluxing
   description: cmu-reagent-property-desc-fluxing
-  code: FLX
+  code: cmu-reagent-property-code-fluxing
   rarity: uncommon
   category: reactant
   effectName: Fluxing
@@ -691,7 +691,7 @@
   id: Neurocryogenic
   name: cmu-reagent-property-name-neurocryogenic
   description: cmu-reagent-property-desc-neurocryogenic
-  code: NRC
+  code: cmu-reagent-property-code-neurocryogenic
   rarity: uncommon
   costPenalty: false
   category: reactant
@@ -702,7 +702,7 @@
   id: Antiparasitic
   name: cmu-reagent-property-name-antiparasitic
   description: cmu-reagent-property-desc-antiparasitic
-  code: APS
+  code: cmu-reagent-property-code-antiparasitic
   rarity: uncommon
   effectName: Antiparasitic
 
@@ -711,7 +711,7 @@
   id: Electrogenetic
   name: cmu-reagent-property-name-electrogenetic
   description: cmu-reagent-property-desc-electrogenetic
-  code: EGN
+  code: cmu-reagent-property-code-electrogenetic
   rarity: common
   effectName: Electrogenetic
   value: 2
@@ -723,7 +723,7 @@
   id: Defibrillating
   name: cmu-reagent-property-name-defibrillating
   description: cmu-reagent-property-desc-defibrillating
-  code: DFB
+  code: cmu-reagent-property-code-defibrillating
   rarity: rare
   value: 2
   costPenalty: false
@@ -735,7 +735,7 @@
   id: Hyperdensificating
   name: cmu-reagent-property-name-hyperdensificating
   description: cmu-reagent-property-desc-hyperdensificating
-  code: HDN
+  code: cmu-reagent-property-code-hyperdensificating
   rarity: rare
   value: 3
   maxLevel: 1
@@ -747,7 +747,7 @@
   id: Neuroshielding
   name: cmu-reagent-property-name-neuroshielding
   description: cmu-reagent-property-desc-neuroshielding
-  code: NRS
+  code: cmu-reagent-property-code-neuroshielding
   rarity: rare
   value: 2
   maxLevel: 1
@@ -759,8 +759,8 @@
   id: Antiaddictive
   name: cmu-reagent-property-name-antiaddictive
   description: cmu-reagent-property-desc-antiaddictive
-  code: AAD
-  rarity: rare 
+  code: cmu-reagent-property-code-antiaddictive
+  rarity: rare
   category: stimulant
   effectName: Antiaddictive
 
@@ -780,7 +780,7 @@
   id: Fueling
   name: cmu-reagent-property-name-fueling
   description: cmu-reagent-property-desc-fueling
-  code: FUL
+  code: cmu-reagent-property-code-fueling
   rarity: common
   value: 2
   intensityPerLevel: -3
@@ -795,7 +795,7 @@
   id: Oxidizing
   name: cmu-reagent-property-name-oxidizing
   description: cmu-reagent-property-desc-oxidizing
-  code: OXI
+  code: cmu-reagent-property-code-oxidizing
   rarity: common
   value: 2
   intensityPerLevel: 7
@@ -810,7 +810,7 @@
   id: Flowing
   name: cmu-reagent-property-name-flowing
   description: cmu-reagent-property-desc-flowing
-  code: FLW
+  code: cmu-reagent-property-code-flowing
   rarity: common
   value: 2
   rangePerLevel: 2
@@ -824,7 +824,7 @@
   id: Explosive
   name: cmu-reagent-property-name-explosive
   description: cmu-reagent-property-desc-explosive
-  code: EXP
+  code: cmu-reagent-property-code-explosive
   rarity: uncommon
   category: reactant, combustible
   volatile: true
@@ -835,7 +835,7 @@
   id: Photosensitive
   name: cmu-reagent-property-name-photosensitive
   description: cmu-reagent-property-desc-photosensitive
-  code: PTS
+  code: cmu-reagent-property-code-photosensitive
   rarity: uncommon
   category: toxicant
   maxLevel: 1
@@ -846,7 +846,7 @@
   id: Crystallization
   name: cmu-reagent-property-name-crystallization
   description: cmu-reagent-property-desc-crystallization
-  code: CRL
+  code: cmu-reagent-property-code-crystallization
   rarity: uncommon
   category: toxicant
   maxLevel: 1
@@ -857,7 +857,7 @@
   id: Disrupting
   name: cmu-reagent-property-name-disrupting
   description: cmu-reagent-property-desc-disrupting
-  code: DSR
+  code: cmu-reagent-property-code-disrupting
   rarity: uncommon
   category: toxicant
   costPenalty: false
@@ -868,7 +868,7 @@
   id: Neutralizing
   name: cmu-reagent-property-name-neutralizing
   description: cmu-reagent-property-desc-neutralizing
-  code: NEU
+  code: cmu-reagent-property-code-neutralizing
   rarity: uncommon
   category: irritant
   costPenalty: false
@@ -879,7 +879,7 @@
   id: Cardiostabilizing
   name: cmu-reagent-property-name-cardiostabilizing
   description: cmu-reagent-property-desc-cardiostabilizing
-  code: CSL
+  code: cmu-reagent-property-code-cardiostabilizing
   rarity: disabled
   category: stimulant
   value: 1
@@ -890,7 +890,7 @@
   id: Aiding
   name: cmu-reagent-property-name-aiding
   description: cmu-reagent-property-desc-aiding
-  code: AID
+  code: cmu-reagent-property-code-aiding
   rarity: disabled
   category: medicine
   value: 1
@@ -902,7 +902,7 @@
   id: Oxygenating
   name: cmu-reagent-property-name-oxygenating
   description: cmu-reagent-property-desc-oxygenating
-  code: OXG
+  code: cmu-reagent-property-code-oxygenating
   effectName: Oxygenating
   rarity: disabled
   category: medicine
@@ -914,7 +914,7 @@
   id: Anticarcinogenic
   name: cmu-reagent-property-name-anticarcinogenic
   description: cmu-reagent-property-desc-anticarcinogenic
-  code: ACG
+  code: cmu-reagent-property-code-anticarcinogenic
   rarity: disabled
   effectName: Anticarcinogenic
   category: medicine
@@ -925,7 +925,7 @@
   id: Firepenetrating
   name: cmu-reagent-property-name-firepenetrating
   description: cmu-reagent-property-desc-firepenetrating
-  code: PTR
+  code: cmu-reagent-property-code-firepenetrating
   rarity: rare
   category: reactant
   value: 3
@@ -949,7 +949,7 @@
   id: Boosting
   name: cmu-reagent-property-name-boosting
   description: cmu-reagent-property-desc-boosting
-  code: BST
+  code: cmu-reagent-property-code-boosting
   effectName: Boosting
   rarity: legendary
   value: 5
@@ -960,7 +960,7 @@
   id: Optimized
   name: cmu-reagent-property-name-optimized
   description: cmu-reagent-property-desc-optimized
-  code: OPM
+  code: cmu-reagent-property-code-optimized
   rarity: legendary
   value: 3
   category: metabolite
@@ -971,7 +971,7 @@
   id: Hypergenetic
   name: cmu-reagent-property-name-hypergenetic
   description: cmu-reagent-property-desc-hypergenetic
-  code: HGN
+  code: cmu-reagent-property-code-hypergenetic
   rarity: legendary
   value: 2
   category: medicine
@@ -982,7 +982,7 @@
   id: Organhealing
   name: cmu-reagent-property-name-organhealing
   description: cmu-reagent-property-desc-organhealing
-  code: OHG
+  code: cmu-reagent-property-code-organhealing
   rarity: admin
   category: medicine
   effectName: Organhealing
@@ -992,7 +992,7 @@
   id: DNADisintegrating
   name: cmu-reagent-property-name-dnadisintegrating
   description: cmu-reagent-property-desc-dnadisintegrating
-  code: DDI
+  code: cmu-reagent-property-code-dnadisintegrating
   rarity: disabled
   value: 16
   category: toxicant, anomalous
@@ -1003,7 +1003,7 @@
   id: Regulating
   name: cmu-reagent-property-name-regulating
   description: cmu-reagent-property-desc-regulating
-  code: REG
+  code: cmu-reagent-property-code-regulating
   rarity: legendary
   value: 6
   maxLevel: 1
@@ -1015,7 +1015,7 @@
   id: Ciphering
   name: cmu-reagent-property-name-ciphering
   description: cmu-reagent-property-desc-ciphering
-  code: CIP
+  code: cmu-reagent-property-code-ciphering
   rarity: disabled
   value: 16
   maxLevel: 6
@@ -1027,7 +1027,7 @@
   id: Encrypted
   name: cmu-reagent-property-name-encrypted
   description: cmu-reagent-property-desc-encrypted
-  code: ENC
+  code: cmu-reagent-property-code-encrypted
   rarity: disabled
   category: anomalous
   effectName: Encrypted
@@ -1036,7 +1036,7 @@
   parent: Ciphering
   id: Crossciphering
   name: cmu-reagent-property-name-cipheringpredator
-  code: PCI
+  code: cmu-reagent-property-code-crossciphering
   rarity: disabled
   maxLevel: 6
   effectName: Crossciphering
@@ -1046,7 +1046,7 @@
   id: Crossmetabolizing
   name: cmu-reagent-property-name-crossmetabolizing
   description: cmu-reagent-property-desc-crossmetabolizing
-  code: XMB
+  code: cmu-reagent-property-code-crossmetabolizing
   rarity: admin
   value: 666
   category: metabolite, anomalous, catalyst
@@ -1057,7 +1057,7 @@
   id: Embryonic
   name: cmu-reagent-property-name-embryonic
   description: cmu-reagent-property-desc-embryonic
-  code: MYO
+  code: cmu-reagent-property-code-embryonic
   rarity: admin
   value: 666
   category: anomalous
@@ -1068,7 +1068,7 @@
   id: Transforming
   name: cmu-reagent-property-name-transforming
   description: cmu-reagent-property-desc-transforming
-  code: HGN
+  code: cmu-reagent-property-code-transforming
   rarity: admin
   value: 666
   category: anomalous
@@ -1079,7 +1079,7 @@
   id: Ravenous
   name: cmu-reagent-property-name-ravenous
   description: cmu-reagent-property-desc-ravenous
-  code: RAV
+  code: cmu-reagent-property-code-ravenous
   rarity: admin
   value: 666
   category: anomalous
@@ -1090,7 +1090,7 @@
   id: Curing
   name: cmu-reagent-property-name-curing
   description: cmu-reagent-property-desc-curing
-  code: CUR
+  code: cmu-reagent-property-code-curing
   rarity: admin
   value: 666
   maxLevel: 4
@@ -1102,7 +1102,7 @@
   id: Omnipotent
   name: cmu-reagent-property-name-omnipotent
   description: cmu-reagent-property-desc-omnipotent
-  code: OMN
+  code: cmu-reagent-property-code-omnipotent
   rarity: admin
   value: 666
   category: medicine, anomalous
@@ -1113,7 +1113,7 @@
   id: Radius
   name: cmu-reagent-property-name-radius
   description: cmu-reagent-property-desc-radius
-  code: RAD
+  code: cmu-reagent-property-code-radius
   rarity: admin
   value: 666
   category: reactant, unadjustable
@@ -1124,7 +1124,7 @@
   id: Intensity
   name: cmu-reagent-property-name-intensity
   description: cmu-reagent-property-desc-intensity
-  code: INT
+  code: cmu-reagent-property-code-intensity
   rarity: admin
   value: 666
   category: reactant, unadjustable
@@ -1135,7 +1135,7 @@
   id: Duration
   name: cmu-reagent-property-name-duration
   description: cmu-reagent-property-desc-duration
-  code: DUR
+  code: cmu-reagent-property-code-duration
   rarity: admin
   value: 666
   category: reactant, unadjustable
@@ -1146,7 +1146,7 @@
   id: Encephaloprasive
   name: cmu-reagent-property-name-encephaloprasive
   description: cmu-reagent-property-desc-encephaloprasive
-  code: ESP
+  code: cmu-reagent-property-code-encephaloprasive
   rarity: admin
   value: 8
   category: stimulant

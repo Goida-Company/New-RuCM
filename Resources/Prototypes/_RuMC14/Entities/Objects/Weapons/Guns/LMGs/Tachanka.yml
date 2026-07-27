@@ -94,12 +94,12 @@
     - RuMCMachineGunTachanka
   - type: Wieldable
   - type: WieldableSpeedModifiers
-    base: 0.50
+    base: 0.70
     light: 0.75
     medium: 0.8
     heavy: 0.75
   - type: WieldDelay
-    baseDelay: 0.6
+    baseDelay: 0.5
   - type: GunRequiresWield
 
 # Magazines

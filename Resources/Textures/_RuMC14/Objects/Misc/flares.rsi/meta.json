@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 4,
   "license": "CC-BY-SA-3.0",
   "copyright": "'hubaruba' from Discord",
   "size": {
@@ -61,6 +61,24 @@
     },
     {
       "name": "rsp_open"
+    },
+    {
+      "name": "cas_overlay"
+    },
+    {
+      "name": "cas_flare_flame",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
     },
     {
       "name": "cas_flare_spent"

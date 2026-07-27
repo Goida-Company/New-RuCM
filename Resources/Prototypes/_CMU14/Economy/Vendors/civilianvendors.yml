@@ -12,7 +12,7 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Foot Wear
+    - name: au14-vendor-section-footwear
       choices: { CMUcivilianshoes: 2 }
       entries:
       - id: RMCShoesBlack
@@ -29,7 +29,7 @@
       - id: RMCShoesLaceupBrown
       - id: RMCShoesLaceup
       - id: RMCShoesLeather
-    - name: Work Wear
+    - name: au14-vendor-section-work-wear
       choices: { CMUcivilianworkwear: 1 }
       entries:
       - id: AU14CivilianWorkwearYellow
@@ -37,7 +37,7 @@
       - id: AU14CivilianWorkwearPink
       - id: AU14CivilianWorkwearBlue
       - id: AU14CivilianWorkwearGreen
-    - name: Business Attire
+    - name: au14-vendor-section-business-attire
       choices: { CMUcivilianbusinessatrire: 1 }
       entries:
       - id: CMJumpsuitLiaisonBlack
@@ -50,19 +50,19 @@
       - id: CMJumpsuitLiaison
       - id: CMJumpsuitLiaisonBlazer
       - id: CMJumpsuitLiaisonCharcoal
-    - name: Flannels
+    - name: au14-vendor-section-flannels
       choices: { CMUcivilianflannel: 1 }
       entries:
       - id: AU14CivilianFlannelWhite
       - id: AU14CivilianFlannelRed
       - id: AU14CivilianFlannelPurple
-    - name: Floral Shirts
+    - name: au14-vendor-section-floral-shirts
       choices: { CMUcivilianfloral: 1 }
       entries:
       - id: AU14CivilianFloralRed
       - id: AU14CivilianFloralBlue
       - id: AU14CivilianFloralYellow
-    - name: Miscellaneous Clothes
+    - name: au14-vendor-section-misc-clothes
       choices: { CMUcivilianclothesmisc: 1 }
       entries:
       - id: RMCJumpsuitDutchBandolier
@@ -71,14 +71,14 @@
       - id: CMJumpsuitTShirtWhite
       - id: CMJumpsuitTShirtGray
       - id: CMJumpsuitTShirtRed
-    - name: Suit Jackets
+    - name: au14-vendor-section-suit-jackets
       choices: { CMUcivilianclothessuitjacket: 1 }
       entries:
       - id: RMCJacketCorporateKhaki
       - id: RMCJacketCorporateBlack
       - id: RMCJacketCorporateBlue
       - id: RMCJacketCorporateBrown
-    - name: Puffer Wear
+    - name: au14-vendor-section-puffer-wear
       choices: { CMUcivilianclothespuffervest: 1 }
       entries:
       - id: AU14CivilianJacketGrayPufferVest
@@ -87,7 +87,7 @@
       - id: AU14CivilianJacketGrayPufferJacket
       - id: AU14CivilianJacketOrangePufferJacket
       - id: AU14CivilianJacketKhakiPufferJacket
-    - name: Windbreakers
+    - name: au14-vendor-section-windbreakers
       choices: { CMUcivilianclotheswindbreaker: 1 }
       entries:
       - id: AU14WindbreakerBlue
@@ -95,26 +95,26 @@
       - id: RMCJacketWindbreaker
       - id: RMCJacketWindbreakerFirstResponder
       - id: RMCJacketWindbreakerBrown
-    - name: Parkas
+    - name: au14-vendor-section-parkas
       choices: { CMUcivilianclothesparka: 1 }
       entries:
       - id: AU14CivilianJacketBlueParka
       - id: AU14CivilianJacketGreenParka
       - id: AU14CivilianJacketRedParka
       - id: AU14CivilianJacketYellowParka
-    - name: Trench Coats
+    - name: au14-vendor-section-trench-coats
       choices: { CMUcivilianclothestrenchcoat: 1 }
       entries:
       - id: AU14CivilianTanTrenchCoat
       - id: AU14CivilianBrownTrenchCoat
       - id: AU14CivilianGrayTrenchCoat
-    - name: Miscellaneous Jackets
+    - name: au14-vendor-section-misc-jackets
       choices: { CMUcivilianclothesmiscjacket: 1 }
       entries:
       - id: AU14CivilianJacketBomberJacket
       - id: AU14CivilianJacketOldCoat
       - id: AU14CivilianJacketSnowSuit
-    - name: Hats
+    - name: au14-vendor-section-headgear
       choices: { CMUcivilianclotheshat: 2 }
       entries:
       - id: AU14CivBallCapBlack
@@ -125,7 +125,7 @@
       - id: AU14CivFedoraBrown
       - id: AU14CivFedoraGray
       - id: AU14HeadCommandoBeanie
-    - name: Glasses
+    - name: au14-vendor-section-glasses
       choices: { CMUcivilianclothesglasses: 2 }
       entries:
       - id: RMCSunglasses
@@ -137,12 +137,12 @@
       - id: RMCGlassesTriMaxBlack
       - id: RMCGlassesTriMaxBronze
       - id: AU14GlassesBiMexOrange
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       choices: { CMUcivilianclothesgloves: 1 }
       entries:
       - id: CMHandsBrown
       - id: CMHandsLightBrown
-    - name: Storage
+    - name: au14-vendor-section-bag
       choices: { CMUcivilianclothesstorage: 2 }
       entries:
       - id: CMSatchel
@@ -169,39 +169,39 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Shoes
+    - name: au14-vendor-section-footwear
       choices: { CMUcivilianengineeringshoes: 1 }
       entries:
       - id: RMCBootsCorporate
-    - name: Hard Hats
+    - name: au14-vendor-section-helmet
       choices: { CMUcivilianengineeringhats: 1 }
       entries:
       - id: RMCHardhatOrange
       - id: RMCHardHat
       - id: RMCHardhatWhite
       - id: RMCHardhatBlue
-    - name: Engineering Clothing
+    - name: au14-vendor-section-work-wear
       takeAll: CMUEngineeringClothes
       entries:
       - id: AU14CivilianWeYuEngineerClothes
       - id: AU14CivilianFullSuitWeYuEngineer
       - id: RMCWeldingGoggles
-    - name: Waste Management Clothing
+    - name: au14-vendor-section-waste-clothes
       takeAll: CMUEngineeringClothesWM
       entries:
       - id: AU14CivilianSanitationClothes
       - id: AU14CivilianFullSuitSanitation
       - id: AU14CivilianHazardVestSanitation
-    - name: Jackets & Vests
+    - name: au14-vendor-section-jackets-vests
       choices: { CMUcivilianengineeringjackets: 2 }
       entries:
       - id: RMCHazardVest
       - id: AU14CivilianJacketSnowSuit
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       choices: { CMUcivilianengineeringgloves: 1 }
       entries:
       - id: RMCHandsVeteranInsulated
-    - name: Storage & Belts
+    - name: au14-vendor-section-storage-belts
       choices: { CMUcivilianengineeringstorage: 4 }
       entries:
       - id: RMCSatchelLightpackWelder
@@ -217,7 +217,7 @@
       - id: RMCPouchElectronics
       - id: RMCPouchConstruction
       - id: RMCWebbingDropPouch
-    - name: Miscellaneous
+    - name: au14-vendor-section-misc
       takeAll: CMUEngineeringMisc
       entries:
       - id: RMCSynthResetKey
@@ -239,7 +239,7 @@
   - type: CMAutomatedVendor
     jobs: [ AU14JobCivilianNurse, AU14JobCivilianPhysician, AU14JobCivilianHeadPhysician, AU14JobCLFPhysician, AU14JobCLFSurgeon ]
     sections:
-    - name: au14-vendor-section-shoes
+    - name: au14-vendor-section-footwear
       choices: { CMUcivilianmedicalshoes: 1 }
       entries:
       - id: RMCShoesBlack
@@ -327,11 +327,11 @@
   - type: CMAutomatedVendor
     jobs: [ AU14JobCivilianEmergencyResponseOfficer, AU14JobCLFPhysician, AU14JobCLFSurgeon ]
     sections:
-    - name: Shoes
+    - name: au14-vendor-section-footwear
       choices: { CMUcivilianmedicalshoes: 1 }
       entries:
       - id: RMCBootsVanBandolier
-    - name: Jackets & Vests
+    - name: au14-vendor-section-jackets-vests
       choices: { CMUcivilianmedicalouterwear: 3 }
       entries:
       - id: AU14CivilianFullSuitParamedicGreen
@@ -341,27 +341,27 @@
       - id: AU14CivilianHazardVestParamedicGreen
       - id: RMCOuterClothingExternalWebbingBlack
       - id: AU14CivilianJacketSnowSuit
-    - name: Innerwear
+    - name: au14-vendor-section-clothes
       choices: { CMUcivilianmedicalinnerwear: 1 }
       entries:
       - id: AU14CivilianParamedicClothesGreen
       - id: AU14CivilianParamedicClothesRed
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       choices: { CMUcivilianmedicalheadwear: 2 }
       entries:
       - id: AU14CivBallCapBlack
       - id: RMCHardhatRed
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       choices: { CMUcivilianmedicalgloves: 2 }
       entries:
       - id: CMHandsLatex
       - id: ClothingHandsGlovesNitrile
       - id: RMCHandsVeteranInsulated
-    - name: Masks
+    - name: au14-vendor-section-mask
       choices: { CMUcivilianmedicalmasks: 1 }
       entries:
       - id: CMMaskSterile
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       choices: { CMUcivilianmedicalpouches: 3 }
       entries:
       - id: RMCPouchAutoinjectorFill
@@ -370,19 +370,19 @@
       - id: RMCPouchToolsSocFill
       - id: RMCPouchGeneralLarge
       - id: RMCWebbingDropPouch
-    - name: Belts
+    - name: au14-vendor-section-belts
       choices: { CMUcivilianmedicalbelts: 2 }
       entries:
       - id: CMBeltUtilityFilled
       - id: CMBeltMedicalFilled
       - id: CMBeltMedicBagFilled
-    - name: Bags
+    - name: au14-vendor-section-bag
       choices: { CMUcivilianmedicalbags: 1 }
       entries:
       - id: CMSatchel
       - id: AU14SlingSatchelBlack
       - id: AU14SlingSatchelBlue
-    - name: Assorted Utilities
+    - name: au14-vendor-section-equipment
       takeAll: CMUEssentialEquipmentAssorted
       entries:
       - id: RMCGlassesMedicalHUDGlasses
@@ -408,13 +408,13 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Outerwear
+    - name: au14-vendor-section-outerwear
       choices: { CMUciviliansynthoutterwear: 1 }
       entries:
       - id: CMUtilityVestSynth
       - id: AU14ExternalWebbing
       - id: RMCOuterClothingExternalWebbingBlack
-    - name: Innerwear
+    - name: au14-vendor-section-clothes
       choices: { CMUciviliansynthinnerwear: 1 }
       entries:
       - id: CMJumpsuitSyntheticOutdated
@@ -432,30 +432,20 @@
       - id: AU14CivilianBoilerSuitCyan
       - id: AU14CivilianBoilerSuitKhaki
       - id: AU14CivilianBoilerSuitGreen
-    - name: Backpacks
+    - name: au14-vendor-section-backpack
       choices: { CMUciviliansynthsmartpack: 1 }
       entries:
       - id: RMCSmartpack
-        name: S-V42 smartpack, blue
       - id: RMCSmartpackBlack
-        name: S-V42 smartpack, black
       - id: RMCSmartpackGreen
-        name: S-V42 smartpack, green
       - id: RMCSmartpackTan
-        name: S-V42 smartpack, tan
       - id: RMCSmartpackWhite
-        name: S-V42 smartpack, white
       - id: RMCSmartpackA1
-        name: S-V42A1 smartpack, blue
       - id: RMCSmartpackA1Black
-        name: S-V42A1 smartpack, black
       - id: RMCSmartpackA1Green
-        name: S-V42A1 smartpack, green
       - id: RMCSmartpackA1Tan
-        name: S-V42A1 smartpack, tan
       - id: RMCSmartpackA1White
-        name: S-V42A1 smartpack, white
-    - name: Headgear
+    - name: au14-vendor-section-headgear
       choices: { CMUciviliansynthheadgear: 1 }
       entries:
       - id: AU14CivBallCapBlack
@@ -463,19 +453,17 @@
       - id: RMCHardhatOrange
       - id: RMCHardHat
       - id: RMCHardhatWhite
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       choices: { CMUciviliansynthgloves: 1 }
       entries:
       - id: RMCHandsVeteranInsulated
-    - name: Belts
+    - name: au14-vendor-section-belts
       choices: { CMUciviliansynthstoragebelt: 1 }
       entries:
       - id: CMBeltUtilityFilled
-        name: M276 pattern toolbelt rig (filled)
       - id: RMCBeltUtilityGeneral
       - id: AU14BeltMedicBagSupportSynth
-        name: M276 pattern lifesaver bag (filled, advanced)
-    - name: Bags
+    - name: au14-vendor-section-bag
       choices: { CMUciviliansynthstoragebag: 1 }
       entries:
       - id: RMCSatchelLightpackWelder
@@ -483,7 +471,7 @@
       - id: CMSatchel
       - id: AU14SlingSatchelBlack
       - id: AU14SlingSatchelBlue
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       choices: { CMUciviliansynthstoragepouch: 2 }
       entries:
       - id: RMCPouchGeneralLarge
@@ -491,7 +479,7 @@
       - id: RMCPouchElectronics
       - id: RMCPouchConstruction
       - id: RMCPouchMedkitFillAdvanced
-    - name: Utilities
+    - name: au14-vendor-section-utilities
       takeAll: CMUEssentialEquipmentSynth
       entries:
       - id: RMCSynthBreachingHammer

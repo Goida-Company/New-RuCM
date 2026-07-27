@@ -51,8 +51,8 @@
   requireAdminNotify: true
   joinNotifyCrew: false
   canBeAntag: false
-  whitelisted: true
-  whitelistParent: CMUJobCommandWhitelist
+  # whitelisted: true // RuCM удаление вайтлиста для администратора колонии
+  # whitelistParent: CMUJobCommandWhitelist // RuCM удаление вайтлиста для администратора колонии
   supervisors: au14-job-supervisors-colonyadministrator
   accessGroups:
   - auadmin

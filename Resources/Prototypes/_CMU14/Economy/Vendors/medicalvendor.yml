@@ -64,7 +64,7 @@
 #        amount: 7
       - id: AU14PillCanisterEthylredoxrazine
         amount: 10
-    - name: Painkiller Pill Bottles
+    - name: au14-vendor-section-painkillers-pill
       entries:
       - id: AU14PillCanisterParacetamol
         amount: 10
@@ -72,7 +72,7 @@
         amount: 10
       - id: AU14PillCanisterOxycodone
         amount: 10
-    - name: Organ Med Pill Bottles
+    - name: au14-vendor-section-organ-pill
       entries:
       - id: AU14PillCanisterCardiocaine
         amount: 10
@@ -106,7 +106,7 @@
         amount: 25
       - id: CMKelotaneAutoInjector
         amount: 25
-    - name: Painkiller Injectors
+    - name: au14-vendor-section-painkillers-injector
       entries:
       - id: AU14ParacetamolAutoInjector
         amount: 25
@@ -203,7 +203,7 @@
       entries:
       - id: CMBloodPackFull
         amount: 6
-    - name: au14-vendor-section-misc
+    - name: au14-vendor-section-empty-packs
       entries:
       - id: CMBloodPack
         amount: 20

@@ -20,7 +20,7 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
 
 
     private ChemSimulatorWindow? _window;
-    
+
 
     protected override void Open()
     {
@@ -92,22 +92,22 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
             if (state.RecipePicked is not null)
                 _window.Finalize.Disabled = false;
         }
-        
+
         _window.Override.Pressed = state.Override;
-        
+
         _window.NoDat.Visible = true;
         _window.ModeChange.Visible = false;
         _window.ModeRelateAdd.Visible = false;
         _window.TargetPropertyContainer.RemoveAllChildren();
         _window.ReferencePropertyContainer.RemoveAllChildren();
         _window.EjectTarget.Disabled = true;
-        
+
         _window.EjectReference.Disabled = true;
-        
+
         _window.TargPickBox.Visible = false;
         _window.RefPickBox.Visible = false;
 
-        
+
 
         _window.Amplify.Disabled = LockControl;
         _window.Suppress.Disabled = LockControl;
@@ -123,10 +123,10 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
         _window.SimCost.Text = (state.Cost is not null) ?
             Loc.GetString("research-sim-ui-sim-cost", ("NUM", state.Cost.Value)) : Loc.GetString("research-sim-ui-cost-null");
         _window.TargetName.Text = (state.TargetProp is not null) ?
-            Loc.GetString("research-sim-ui-target-name", ("NAME", state.TargetProp)) : Loc.GetString("research-sim-ui-no-targ-chem");
+            Loc.GetString("research-sim-ui-target-name", ("NAME", props[state.TargetProp].LocalizedName)) : Loc.GetString("research-sim-ui-no-targ-chem"); // RuMC edit
         _window.ReferenceName.Text = (state.ReferenceProp is not null) ?
-            Loc.GetString("research-sim-ui-ref-name", ("NAME", state.ReferenceProp)) : Loc.GetString("research-sim-ui-no-ref-chem");
-        
+            Loc.GetString("research-sim-ui-ref-name", ("NAME", props[state.ReferenceProp].LocalizedName)) : Loc.GetString("research-sim-ui-no-ref-chem"); // RuMC edit
+
 
         switch (state.Mode)
         {
@@ -163,7 +163,7 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
                     propbutton.Group = targetgroup;
                 }
                 propbutton.StyleClasses.Add("ButtonSquare");
-                propbutton.Text = propdat.Code + " " + kvp.Value.ToString();
+                propbutton.Text = propdat.LocalizedCode + " " + kvp.Value.ToString(); // RuMC edit
                 bool isLocked = false;
                 //this fucking sucks
                 if (state.ReferenceProp is not null)
@@ -195,7 +195,7 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
                 //propbutton.Name = "RefProps." + propdat.ID;
                 propbutton.OnPressed += _ => SendPredictedMessage(new ChemSimulatorPickReferencePropertyBuiMsg(kvp.Key));
                 propbutton.StyleClasses.Add("ButtonSquare");
-                propbutton.Text = propdat.Code + " " + kvp.Value.ToString();
+                propbutton.Text = propdat.LocalizedCode + " " + kvp.Value.ToString(); // RuMC edit
                 var isLocked = false;
                 if (state.TargetProp is not null)
                 {
@@ -265,7 +265,7 @@ public sealed partial class ChemSimulatorBui(EntityUid owner, Enum uiKey) : Boun
                     }
                 }
             }
-            
+
         }
     }
 }

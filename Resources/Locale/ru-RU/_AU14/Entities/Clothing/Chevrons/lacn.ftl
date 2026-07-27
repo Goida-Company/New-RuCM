@@ -14,27 +14,27 @@ ent-AU14ChevronLACNSeaman = лычка матроса
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNPettyOfficerThirdClass = лычка петти-офицера 3-й класса
+ent-AU14ChevronLACNPettyOfficerThirdClass = лычка старшины 3й статьи
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNPettyOfficerSecondClass = лычка петти-офицера 2-й класса
+ent-AU14ChevronLACNPettyOfficerSecondClass = лычка старшины 2й статьи
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNPettyOfficerFirstClass = лычка петти-офицера 1-й класса
+ent-AU14ChevronLACNPettyOfficerFirstClass = лычка старшины 1й статьи
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNChiefPettyOfficer = лычка главного петти-офицераы
+ent-AU14ChevronLACNChiefPettyOfficer = лычка главного старшины
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNSeniorChief = лычка старшего главного петти-офицера
+ent-AU14ChevronLACNSeniorChief = лычка мичмана
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNMasterChief = лычка мастер-петти-офицера
+ent-AU14ChevronLACNMasterChief = лычка старшего мичмана
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
@@ -46,23 +46,23 @@ ent-AU14ChevronLACNEnsign = лычка энсина
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNLieutenantJuniorGrade = лычка лейтенанта младшего класса
+ent-AU14ChevronLACNLieutenantJuniorGrade = лычка младшего лейтенанта флота
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNLieutenant = лычка лейтенанта
+ent-AU14ChevronLACNLieutenant = лычка лейтенанта флота
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNLieutenantCommander = лычка капитан-лейтенанта
+ent-AU14ChevronLACNLieutenantCommander = лычка лейтенант-командора флота
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNCommander = лычка командора
+ent-AU14ChevronLACNCommander = лычка командора флота
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 
-ent-AU14ChevronLACNCaptain = лычка капитана
+ent-AU14ChevronLACNCaptain = лычка капитана флота
     .desc = {ent-AU14ChevronLACNBase.desc}
     .suffix = ЛАКФ
 

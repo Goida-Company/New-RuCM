@@ -12,7 +12,7 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Rifles
+    - name: au14-vendor-section-rifles
       entries:
       - id: AU14WeaponRifleM16A1
         amount: 2
@@ -26,7 +26,7 @@
         amount: 2
       - id: RMCWeaponRifleType71C
         amount: 1
-    - name: Shotguns
+    - name: au14-vendor-section-shotguns
       entries:
       - id: RMCWeaponShotgunHG3712
         amount: 1
@@ -34,7 +34,7 @@
         amount: 2
       - id: WeaponShotgunM357
         amount: 3
-    - name: Handguns
+    - name: au14-vendor-section-handguns
       entries:
       - id: CMWeaponPistolM1984Empty
         amount: 3
@@ -46,13 +46,13 @@
         amount: 6
       - id: RMCWeaponPistolD18
         amount: 7
-    - name: Special Weapons
+    - name: au14-vendor-section-special-firearms
       entries:
       - id: RMCWeaponLauncherHJRA12
         amount: 1
       - id: RMCWeaponMar50LMG
         amount: 1
-    - name: Rifle Ammunition
+    - name: au14-vendor-section-rifle-ammo
       entries:
       - id: RMCMagazineRifleM16
         amount: 85
@@ -66,7 +66,7 @@
         amount: 5
       - id: RMCMagazineRifleType71
         amount: 9
-    - name: Shotgun Ammunition
+    - name: au14-vendor-section-shotgun-ammo
       entries:
       - id: RMCBoxShotgunFlechette
         amount: 7
@@ -74,7 +74,7 @@
         amount: 6
       - id: RMCBoxShotgunSlugs
         amount: 6
-    - name: Handgun Ammunition
+    - name: au14-vendor-section-handgun-ammunition
       entries:
       - id: CMMagazinePistolM1984
         amount: 30
@@ -88,7 +88,7 @@
         amount: 2
       - id: RMCMagazinePistolD18
         amount: 35
-    - name: Explosives
+    - name: au14-vendor-section-explosives
       entries:
       - id: RMCGrenadeMolotov
         amount: 10
@@ -102,7 +102,7 @@
         amount: 2
       - id: RMCRocketHJRA12HE
         amount: 2
-    - name: Improvised Explosive Devices
+    - name: au14-vendor-section-ied
       entries:
       - id: AU14IEDGuide
         amount: 5
@@ -129,11 +129,11 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Identifiers
+    - name: au14-vendor-section-identifiers
       entries:
       - id: RMCCLFArmband
         amount: 20
-    - name: Webbings
+    - name: au14-vendor-section-webbings
       entries:
       - id: AU14WebbingMagazine
         amount: 6
@@ -143,19 +143,19 @@
         amount: 4
       - id: AU14WebbingDumpPouch
         amount: 1
-    - name: Helmets and Hats
+    - name: au14-vendor-section-headgear
       entries:
       - id: RMCHardhatWhite
         amount: 2
       - id: AU14HeadBeanieclava
         amount: 10
-    - name: External Wear
+    - name: au14-vendor-section-vests
       entries:
       - id: RMCCoatMilitiaVest
         amount: 1
       - id: AU14ExternalWebbing
         amount: 8
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       entries:
       - id: CMBackpackMarine
         amount: 2
@@ -169,7 +169,7 @@
         amount: 1
       - id: RMCScabbardShotgun
         amount: 3
-    - name: Belts
+    - name: au14-vendor-section-belts
       entries:
       - id: CMBeltMarine
         amount: 5
@@ -184,17 +184,14 @@
 #      - id: M276 Pattern M82F Holster Rig
 #        amount: 5
       - id: CMBeltKnifeFilled
-        name: M276 Knife Rig (Full)
         amount: 1
       - id: RMCBeltUtilityGeneral
         amount: 3
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       entries:
       - id: RMCPouchBayonet
-        name: Bayonet Sheath
         amount: 12
       - id: RMCPouchFlareFilled
-        name: Flare Pouch (Full)
         amount: 2
       - id: RMCPouchDocumentSmall
         amount: 1
@@ -220,7 +217,7 @@
         amount: 3
 #      - id: Sling Pouch
 #        amount: 1
-    - name: Mask
+    - name: au14-vendor-section-mask
       entries:
       - id: CMMaskCoif
         amount: 10
@@ -232,11 +229,11 @@
         amount: 10
       - id: RMCMaskTornScarfBlack
         amount: 10
-    - name: Food
+    - name: au14-vendor-section-food
       entries:
       - id: RMCBoxMRE
         amount: 2
-    - name: Tools
+    - name: au14-vendor-section-tools
       entries:
       - id: RMCM5Bayonet
         amount: 30
@@ -256,7 +253,7 @@
         amount: 5
       - id: CMWelder
         amount: 5
-    - name: Flare and light
+    - name: au14-vendor-section-flares-lights
       entries:
       - id: RMCFlashlight # Combat Flashlight
         amount: 15
@@ -264,7 +261,7 @@
 #      #  amount: 1
       - id: CMPackFlare
         amount: 2
-    - name: Miscellaneous
+    - name: au14-vendor-section-misc
       entries:
       - id: ANPRCFillCardCLF
         amount: 3
@@ -287,7 +284,6 @@
       - id: CMRollerBedSpawnFolded
         amount: 1
       - id: RMCScabbardMacheteFilled
-        name: machete scabbard (Full)
         amount: 5
       - id: RMCBinoculars
         amount: 2
@@ -303,7 +299,7 @@
         amount: 30
       - id: AU14Wheelchair
         amount: 6
-    - name: Medical Supplies
+    - name: au14-vendor-section-medical-supplies
       entries:
       - id: AU14HemostaticGauzePacket
         amount: 24
@@ -322,32 +318,29 @@
     sprite: _RMC14/Structures/Machines/VendingMachines/ColMarTech/medical_gear.rsi
   - type: CMAutomatedVendor
     sections:
-    - name: Medical Pouches
+    - name: au14-vendor-section-medical-pouches
       entries:
       - id: RMCPouchAutoinjector
         amount: 2
       - id: RMCPouchFirstResponder
         amount: 2
       - id: RMCPouchVialFill
-        name: vial pouch (Full)
         amount: 2
       - id: RMCPouchMedical
         amount: 2
       - id: RMCPouchSyringeFill
         amount: 2
       - id: RMCPouchFirstAidSplintsGauzeOintment
-        name: first-aid pouch (gauze, ointment) # TODO RMC14 splints
         amount: 2
       - id: RMCPouchFirstAidPills
-        name: first-aid pouch (pills)
         amount: 2
-    - name: Medical Belts
+    - name: au14-vendor-section-medical-belts
       entries:
       - id: CMBeltMedical
         amount: 1
       - id: CMBeltMedicBag
         amount: 1
-    - name: General Medical Supplies
+    - name: au14-vendor-section-general-medical-supplies
       entries:
       - id: CMOintment10
         amount: 60
@@ -365,7 +358,7 @@
         amount: 6
       - id: CMSyringe
         amount: 10
-    - name: Pill Bottles
+    - name: au14-vendor-section-pill-bottles
       entries:
       - id: CMPillCanisterBicaridine
         amount: 10
@@ -391,7 +384,7 @@
         amount: 1
 #      - id: CMPillCanisterPeridaxon
 #      - id: CMPillCanisterTramadol
-    - name: Injectors
+    - name: au14-vendor-section-injectors
       entries:
       - id: CMEpinephrineAutoInjector
         amount: 3
@@ -403,7 +396,7 @@
         amount: 15
       - id: CMTricordrazineAutoInjector
         amount: 15
-    - name: Medical Utilities
+    - name: au14-vendor-section-medical-utilities
       entries:
      #    CMMS11SmartRefillTank
      # FixOVien
@@ -427,13 +420,13 @@
         amount: 1
       - id: RMCVial
         amount: 10
-    - name: Medical Gloves
+    - name: au14-vendor-section-medical-gloves
       entries:
       - id: CMHandsLatex
         amount: 1
       - id: ClothingHandsGlovesNitrile
         amount: 1
-    - name: Medical Masks
+    - name: au14-vendor-section-medical-masks
       entries:
       - id: CMMaskSterile
         amount: 1

@@ -81,7 +81,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
         var allBtn = new Button
         {
-            Text = "All",
+            Text = Loc.GetString("language-menu-tab-all"), // RuMC edit
             ToggleMode = true,
             Pressed = _activeCustomTab == null,
             HorizontalExpand = true,
@@ -119,7 +119,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
             TabStrip.AddChild(btn);
         }
 
-        var addBtn = new Button { Text = "+", MinWidth = 28, ToolTip = "New tab" };
+        var addBtn = new Button { Text = "+", MinWidth = 28, ToolTip = Loc.GetString("language-menu-tab-new-tooltip") }; // RuMC edit
         addBtn.OnPressed += _ => ShowNewTabDialog();
         TabStrip.AddChild(addBtn);
     }
@@ -129,14 +129,14 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         var popup = new Popup();
         var box = new BoxContainer { Orientation = BoxContainer.LayoutOrientation.Vertical };
 
-        var renameBtn = new Button { Text = "Rename" };
+        var renameBtn = new Button { Text = Loc.GetString("language-menu-tab-rename") }; // RuMC edit
         renameBtn.OnPressed += _ =>
         {
             popup.Orphan();
             ShowRenameTabDialog(tab);
         };
 
-        var deleteBtn = new Button { Text = "Delete tab" };
+        var deleteBtn = new Button { Text = Loc.GetString("language-menu-tab-delete") }; // RuMC edit
         deleteBtn.OnPressed += _ =>
         {
             popup.Orphan();
@@ -156,7 +156,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private void ShowNewTabDialog(string defaultName = "")
     {
-        ShowNameDialog("New tab", defaultName, name =>
+        ShowNameDialog(Loc.GetString("language-menu-tab-new"), defaultName, name => // RuMC edit
         {
             var tab = _tabs.AddTab(name);
             _activeCustomTab = tab;
@@ -167,7 +167,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
 
     private void ShowRenameTabDialog(LanguageTab tab)
     {
-        ShowNameDialog("Rename tab", tab.Name, name =>
+        ShowNameDialog(Loc.GetString("language-menu-tab-rename-dialog"), tab.Name, name => // RuMC edit
         {
             _tabs.RenameTab(tab, name);
             RebuildTabStrip();
@@ -185,7 +185,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         };
 
         var input = new LineEdit { Text = defaultValue, HorizontalExpand = true };
-        var confirmBtn = new Button { Text = "OK", HorizontalExpand = true, Margin = new Thickness(0, 4, 0, 0) };
+        var confirmBtn = new Button { Text = Loc.GetString("language-menu-confirm"), HorizontalExpand = true, Margin = new Thickness(0, 4, 0, 0) }; // RuMC edit
 
         confirmBtn.OnPressed += _ =>
         {
@@ -272,7 +272,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
                 Text = tabsContaining.Count > 0 ? "[*]" : "[+]",
                 MinWidth = 28,
                 MaxWidth = 28,
-                ToolTip = "Add/remove from tabs",
+                ToolTip = Loc.GetString("language-menu-tab-assign-tooltip"), // RuMC edit
             };
             tabBtn.OnPressed += _ => ShowLanguageTabMenu(capturedId, tabBtn);
             row.AddChild(tabBtn);
@@ -295,7 +295,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
         {
             KnownLanguageList.AddChild(new Label
             {
-                Text = "No languages found.",
+                Text = Loc.GetString("language-menu-no-languages"), // RuMC edit
                 FontColorOverride = Color.FromHex("#888888"),
                 HorizontalAlignment = HAlignment.Center,
                 Margin = new Thickness(0, 12),
@@ -320,7 +320,11 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
             var inTab = tab.Languages.Contains(languageId.Id);
             var btn = new Button
             {
-                Text = inTab ? $"In {tab.Name}" : $"   {tab.Name}",
+                // RuMC edit start
+                Text = inTab
+                    ? Loc.GetString("language-menu-tab-in", ("name", tab.Name))
+                    : $"   {tab.Name}",
+                // RuMC edit end
                 HorizontalExpand = true,
                 TextAlign = Label.AlignMode.Left,
             };
@@ -336,7 +340,7 @@ public sealed partial class LanguageMenuWindow : DefaultWindow
             box.AddChild(btn);
         }
 
-        var newTabBtn = new Button { Text = "+ New tab", TextAlign = Label.AlignMode.Left };
+        var newTabBtn = new Button { Text = Loc.GetString("language-menu-tab-new-button"), TextAlign = Label.AlignMode.Left }; // RuMC edit
         newTabBtn.OnPressed += _ =>
         {
             popup.Orphan();

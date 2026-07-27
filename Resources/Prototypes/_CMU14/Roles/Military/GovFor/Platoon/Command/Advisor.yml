@@ -130,6 +130,7 @@
 - type: startingGear
   id: AU14GearGOVFORadvisor
   equipment:
+    head: CMHeadCapDrill # RuMC edit
     id: AU14IDCardSquadAdvisor
     ears: AU14HeadsetGovforCommand
     belt: AU14BeltPostelPistolM48A5NoSuper

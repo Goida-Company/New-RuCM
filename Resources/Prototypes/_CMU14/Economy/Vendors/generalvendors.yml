@@ -35,7 +35,7 @@
       map: [ "enum.VendingMachineVisualLayers.BaseUnshaded", "enum.VendingMachineVisualLayers.Base" ]
   - type: CMAutomatedVendor
     sections:
-    - name: Shoes
+    - name: au14-vendor-section-footwear
       entries:
       - id: RMCShoesBlack
         amount: 30
@@ -65,7 +65,7 @@
         amount: 30
       - id: RMCShoesLeather
         amount: 30
-    - name: Work Wear
+    - name: au14-vendor-section-work-wear
       entries:
       - id: AU14CivilianWorkwearYellow
         amount: 30
@@ -75,7 +75,7 @@
         amount: 30
       - id: AU14CivilianWorkwearGreen
         amount: 30
-    - name: Business Attire
+    - name: au14-vendor-section-business-attire
       entries:
       - id: CMJumpsuitLiaisonBlack
         amount: 30
@@ -97,7 +97,7 @@
         amount: 30
       - id: CMJumpsuitLiaisonCharcoal
         amount: 30
-    - name: Miscellaneous Clothes
+    - name: au14-vendor-section-misc-clothes
       entries:
       - id: RMCJumpsuitDutchBandolier
         amount: 30
@@ -111,7 +111,7 @@
         amount: 30
       - id: CMJumpsuitTShirtRed
         amount: 30
-    - name: Suit Jackets
+    - name: au14-vendor-section-suit-jackets
       entries:
       - id: RMCJacketCorporateKhaki
         amount: 30
@@ -121,7 +121,7 @@
         amount: 30
       - id: RMCJacketCorporateBrown
         amount: 30
-    - name: Puffer Vests
+    - name: au14-vendor-section-puffer-wear
       entries:
       - id: AU14CivilianJacketGrayPufferVest
         amount: 30
@@ -129,15 +129,13 @@
         amount: 30
       - id: AU14CivilianJacketTanPufferVest
         amount: 30
-    - name: Puffer Jackets
-      entries:
       - id: AU14CivilianJacketGrayPufferJacket
         amount: 30
       - id: AU14CivilianJacketOrangePufferJacket
         amount: 30
       - id: AU14CivilianJacketKhakiPufferJacket
         amount: 30
-    - name: Windbreakers
+    - name: au14-vendor-section-windbreakers
       entries:
       - id: AU14WindbreakerBlue
         amount: 30
@@ -149,7 +147,7 @@
         amount: 30
       - id: RMCJacketWindbreakerBrown
         amount: 30
-    - name: Parkas
+    - name: au14-vendor-section-parkas
       entries:
       - id: AU14CivilianJacketBlueParka
         amount: 30
@@ -159,7 +157,7 @@
         amount: 30
       - id: AU14CivilianJacketYellowParka
         amount: 30
-    - name: Trench Coats
+    - name: au14-vendor-section-trench-coats
       entries:
       - id: AU14CivilianTanTrenchCoat
         amount: 30
@@ -167,7 +165,7 @@
         amount: 30
       - id: AU14CivilianGrayTrenchCoat
         amount: 30
-    - name: Miscellaneous Jackets
+    - name: au14-vendor-section-misc-jackets
       entries:
       - id: AU14CivilianJacketBomberJacket
         amount: 30
@@ -175,7 +173,7 @@
         amount: 30
       - id: AU14CivilianJacketSnowSuit
         amount: 30
-    - name: Hats
+    - name: au14-vendor-section-headgear
       entries:
       - id: AU14CivBallCapBlack
         amount: 30
@@ -191,7 +189,7 @@
         amount: 30
       - id: AU14CivFedoraGray
         amount: 30
-    - name: Glasses
+    - name: au14-vendor-section-glasses
       entries:
       - id: RMCSunglasses
         amount: 30
@@ -211,13 +209,13 @@
         amount: 30
       - id: AU14GlassesBiMexOrange
         amount: 30
-    - name: Gloves
+    - name: au14-vendor-section-gloves
       entries:
       - id: CMHandsBrown
         amount: 30
       - id: CMHandsLightBrown
         amount: 30
-    - name: Storage
+    - name: au14-vendor-section-bag
       entries:
       - id: CMSatchel
         amount: 30
@@ -283,7 +281,7 @@
     #     giveIcon:
     #       sprite: _AU14/Interface/au14govforjobicons.rsi
     #       state: govfor_eo
-    - name: Spare Equipment
+    - name: au14-vendor-section-spare-equipment
       entries:
       - id: RMCMegaphone
       - id: RMCLaserDesignator
@@ -305,7 +303,7 @@
     access: [["AU14AccessGovforSecurity" ], [ "AU14AccessOpforSecurity" ]]
   - type: CMAutomatedVendor
     sections:
-    - name: Standard Equipment
+    - name: au14-vendor-section-standard-equipment
       takeAll: CMStandard
       entries:
       - id: CMGlassesSecurity
@@ -314,31 +312,31 @@
       - id: AU14GuidebookLawMarine
       - id: AU14GuidebookSOP
       - id: AU14Scissors
-    - name: Hat
+    - name: au14-vendor-section-headgear
       choices: { CMHat: 1 }
       entries:
       - id: CMHeadCapMP
       - id: CMHeadBeretRed
-    - name: Backpack
+    - name: au14-vendor-section-backpack
       choices: { CMBackpack: 1 }
       entries:
       - id: CMSatchelMarine
       - id: CMSatchelSecurity
-    - name: Pouches
+    - name: au14-vendor-section-pouches
       choices: { RMCPouch: 2 }
       entries:
       - id: RMCPouchGeneralMedium
       - id: AU14PouchIFAKFill
       - id: RMCPouchMagazinePistol
       - id: RMCPouchPistol
-    - name: Record Keeping
+    - name: au14-vendor-section-record-keeping
       takeAll: CMRecordKeeping
       entries:
       - id: RMCBoxRegulationTapesFull
       - id: RMCUniversalRecorder
       - id: CMHandLabeler
       - id: RMCDigitalClock
-    - name: Inmate Restraining Gear
+    - name: au14-vendor-section-inmate-restraining-gear
       entries:
       - id: AU14ClothingOuterStraitjacket
         amount: 5 # TODO: bandaid - remove after mappers have placed this
@@ -361,55 +359,55 @@
     - AU14JobOPFOROfficerMedical
     - AU14JobOPFORAuxSupportSynth
     sections:
-    - name: Essential Equipment
+    - name: au14-vendor-section-essential-equipment
       takeAll: CMUEssentialEquipment
       entries:
       - id: AU14VendorBundleMilitaryDoctorEssentials
-    - name: Clothing
+    - name: au14-vendor-section-clothes
       choices: { CMUPlatoonMedicalClothing: 1 }
       entries:
       - id: RMCScrubsOlive
-    - name: Footwear
+    - name: au14-vendor-section-footwear
       choices: { CMUPlatoonMedicalClothingFeet: 1 }
       entries:
       - id: RMCBootsSPPBlackFilled
       - id: RMCShoesBlack
-    - name: Labcoats
+    - name: au14-vendor-section-labcoats
       choices: { CMUPlatoonMedicalClothingLabcoat: 1 }
       entries:
       - id: RMCLabcoat
       - id: RMCLabcoatShort
       - id: RMCLabcoatLong
-    - name: Cold Weather Gear
+    - name: au14-vendor-section-jackets
       choices: { CMUPlatoonMedicalClothingCold: 1 }
       entries:
       - id: AU14CivilianJacketSnowSuit
-    - name: Storage
+    - name: au14-vendor-section-bag
       choices: { CMUPlatoonMedicalStorageBack: 1 }
       entries:
       - id: CMSatchelMarine
-    - name: Medical Pouches
+    - name: au14-vendor-section-medical-pouches
       choices: { CMUPlatoonMedicalPouch: 2 }
       entries:
       - id: RMCPouchAutoinjector
       - id: RMCPouchFirstResponder
       - id: RMCPouchMedical
       - id: RMCPouchSyringeFill
-    - name: Medical Storage
+    - name: au14-vendor-section-medical-storage
       choices: { CMUPlatoonMedicalStorage: 1 }
       entries:
       - id: CMBeltMedicBag
       - id: AU14BeltMedicBagBlack
-    - name: Medical Webbing
+    - name: au14-vendor-section-medical-webbing
       choices: { CMUPlatoonSurgicalWebbing: 1 }
       entries:
       - id: CMWebbingSurgicalGreen
-    - name: Medical Gloves
+    - name: au14-vendor-section-medical-gloves
       choices: { CMUPlatoonMedicalGloves: 1 }
       entries:
       - id: CMHandsLatex
       - id: ClothingHandsGlovesNitrile
-    - name: Medical Masks
+    - name: au14-vendor-section-medical-masks
       choices: { CMUPlatoonMedicalMasks: 1 }
       entries:
       - id: CMMaskSterile
@@ -451,7 +449,7 @@
     - AU14JobOPFORWeaponsSpecialist # RuMC edit
     pointsType: Specialist
     sections:
-    - name: Weapons Specialist Sets
+    - name: au14-vendor-section-weapons-specialist-sets
       takeOne: SquadSpecKit
       sharedSpecLimit: 1
       entries:

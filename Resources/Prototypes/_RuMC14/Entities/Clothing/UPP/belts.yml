@@ -123,6 +123,7 @@
       - AU14MagazineSmartGunUPP
       - CMMagazinePistol
       - CMMagazineRifle
+      - RuMCMagazineAH12
       - RMCMagazineShotgun
       - CMMagazineSmg
       - CMMagazineSniper
@@ -138,6 +139,7 @@
       tags:
       - RMCMagazineLMGQYJ72
       - RuMCMagazineTachanka
+      - RuMCMagazineAH12
       - RuMCMagazineUTES-C
       - RuMCMagazineUTES-CTracter
   - type: ItemCamouflage
@@ -280,7 +282,7 @@
 
 
 - type: entity
-  parent: AU14BeltUtilityGeneralBlack
+  parent: RMCBeltUtilityGeneral
   id: RuMCUPPNavalInfantryBeltGeneral
   name: RD-47-General
   description: The classic Soviet-era load-bearing system, updated for modern use. Its modular pouches can carry rifle magazines, grenades, or tools, making it a favorite among experienced soldiers.

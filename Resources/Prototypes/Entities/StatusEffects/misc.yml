@@ -23,7 +23,7 @@
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectForcedSleeping
-  name: forced sleep
+  name: status-effect-forced-sleeping # RuMC edit
   components:
   - type: ForcedSleepingStatusEffect
 
@@ -31,7 +31,7 @@
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectSSDSleeping
-  name: forced sleep
+  name: status-effect-forced-sleeping # RuMC edit
   components:
   - type: ForcedSleepingStatusEffect
 
@@ -39,7 +39,7 @@
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectDrowsiness
-  name: drowsiness
+  name: status-effect-drowsiness # RuMC edit
   components:
   - type: DrowsinessStatusEffect
 
@@ -47,6 +47,6 @@
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectSeeingRainbow
-  name: hallucinations
+  name: status-effect-seeing-rainbow  RuMC edit
   components:
   - type: SeeingRainbowsStatusEffect

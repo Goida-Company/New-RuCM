@@ -70,6 +70,39 @@
     - state: smg_lid_marking
       map: [ "lid_marking" ]
       color: "#8a9ba8"
+
+- type: entity
+  abstract: true
+  parent: RMCBoxMagazineSMGBase
+  id: RuMCBoxMagazinePistolBase
+  name: generic smg magazine box (? x ?)
+  description: A box of pistol magazines.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Boxes/modular_boxes.rsi
+    layers:
+    - state: smg_box
+      color: "#4a545c"
+    - state: rifle_ammo_full_mags_base # "size"_ammo_full_base
+      map: [ "enum.CMItemSlotsLayers.Fill" ]
+    - state: rifle_ammo_full_mags_color # "size"_ammo_full_color - Type Colour
+      map: [ "enum.CMItemSlotsLayers2.Fill" ]
+      color: "#ffc000"
+    - state: smg_box_64
+      sprite: _RuMC14/Objects/Weapons/Guns/Ammunition/Boxes/UPP_Boxes.rsi
+      color: "#f5e6a3"
+    - state: star #Star.
+      sprite: _RuMC14/Objects/Weapons/Guns/Ammunition/Boxes/UPP_Boxes.rsi
+      color: "#c62828"
+    - state: smg_box_marking
+      sprite: _RuMC14/Objects/Weapons/Guns/Ammunition/Boxes/UPP_Boxes.rsi
+      color: "#8a9ba8"
+    - state: smg_lid
+      map: [ "lid" ]
+      color: "#4a545c"
+    - state: smg_lid_marking
+      map: [ "lid_marking" ]
+      color: "#8a9ba8"
 #Rifles
 
 #AK4047
@@ -624,7 +657,7 @@
 #Type73
 #Reg Mag "#ffc000" Marking "#8a9ba8"
 - type: entity
-  parent: RuMCBoxMagazineSMGBase
+  parent: RuMCBoxMagazinePistolBase
   id: RuMCBoxMagazinePistolType73Empty
   name: magazine box (Type73 x 15)
   components:
@@ -679,7 +712,7 @@
 #NP92
 #Reg Mag "#ffc000" Marking "#8a9ba8"
 - type: entity
-  parent: RuMCBoxMagazineSMGBase
+  parent: RuMCBoxMagazinePistolBase
   id: RuMCBoxMagazinePistolNP92Empty
   name: magazine box (NP92 x 15)
   components:

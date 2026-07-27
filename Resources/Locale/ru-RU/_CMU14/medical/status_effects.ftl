@@ -1,5 +1,3 @@
-# Missing entries synced from en-US
-
 cmu-medical-alert-splinted-name             = Наложена шина
 cmu-medical-alert-splinted-desc             = На ваш перелом наложена шина. Некоторые штрафы за передвижение отменены.
 
@@ -65,3 +63,11 @@ cmu-medical-alert-transplant-rejection-desc = Ваше тело борется �
 
 cmu-medical-alert-bone-regen-boost-name     = Регенерация костей
 cmu-medical-alert-bone-regen-boost-desc     = Остеокальк ускоряет заживление костей.
+
+status-effect-cmu-tachycardia        = тахикардию
+status-effect-cmu-arrhythmia         = аритмию
+status-effect-cmu-cardiac-arrest     = остановку сердца
+status-effect-cmu-opioid-haze        = опиоидный туман
+status-effect-cmu-fentanyl-haze      = опиоидный туман (фентанил)
+status-effect-cmu-pain-suppression   = подавление боли
+

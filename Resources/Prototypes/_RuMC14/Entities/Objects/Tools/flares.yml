@@ -75,7 +75,7 @@
     prototype: RuMCAirFlareWhite
 
 - type: entity
-  parent: RMCFlareCAS
+  parent: RuMCFlareWhite
   id: RuMCFlareRedCAS
   name: RSP-17 signal flare
   description: A UPP signal flare with a bright red flame. Used to indicate targets or request support. Visible from long distances.
@@ -90,13 +90,11 @@
       - map: [ "enum.ExpendableLightVisualLayers.Base" ]
         state: cas_flare
       - map: [ "enum.ExpendableLightVisualLayers.Glow" ]
-        sprite: _RMC14/Objects/Misc/cas_flares.rsi
-        state: flare_flame
+        state: cas_flare_flame
         color: "#FFA7A7"
         visible: false
       - map: [ "enum.ExpendableLightVisualLayers.Overlay" ]
-        sprite: _RMC14/Objects/Misc/cas_flares.rsi
-        state: overlay
+        state: cas_overlay
   - type: Icon
     sprite: _RuMC14/Objects/Misc/flares.rsi
     state: flare
