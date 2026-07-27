@@ -16,7 +16,7 @@
     voice: TWITCH
     faction: Xeno
   - type: GhostRole
-    name: cm-job-name-xeno-drone
+    name: cmu-job-name-xeno-unknown
   - type: MobState
     allowedStates:
     - Alive
@@ -129,7 +129,7 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.1
   - type: FixedIdentity
-    name: cm-job-name-xeno-drone
+    name: cmu-job-name-xeno-unknown
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT1
   - type: CMUXenoZJump

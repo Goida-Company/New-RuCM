@@ -13,7 +13,7 @@
     voice: SANCTUARY_HOUSE_ELF
     faction: Xeno
   - type: GhostRole
-    name: cm-job-name-xeno-lesser-drone
+    name: cmu-job-name-xeno-unknown
     description: roles-lesser-drone-description
     raffle:
       settings: short
@@ -147,7 +147,7 @@
   - type: XenoInhands
     prefix: lesser
   - type: FixedIdentity
-    name: cm-job-name-xeno-lesser-drone
+    name: cmu-job-name-xeno-unknown
   - type: VentCrawler
     ventCrawlIcon: lesser
   - type: RMCActionOrder

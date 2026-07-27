@@ -1,4 +1,4 @@
-﻿- type: guideEntry
+- type: guideEntry
   parent: RMC
   id: RMCOverview
   name: Обзор правил
@@ -41,10 +41,10 @@
   text: "/ServerInfo/Guidebook/_AU14/Rules/Gamemodes/AU14GamemodeRulesOverview.xml"
   children:
   - AU14GamemodeRulesInsurgency
-  - AU14GamemodeRulesForceOnForce
-  - AU14GamemodeRulesDistressSignal
-  - AU14GamemodeRulesColonyFall
-  - AU14GamemodeRulesPrometheus
+  # - AU14GamemodeRulesForceOnForce
+  # - AU14GamemodeRulesDistressSignal
+  # - AU14GamemodeRulesColonyFall
+  # - AU14GamemodeRulesPrometheus
 
 - type: guideEntry
   parent: RMC

@@ -120,21 +120,73 @@
   Участники фракции автоматически получают позывные при развёртывании.
 
   <Table Columns="2" MinForcedColumnWidth="100">
-    <ColorBox Color="#263238"><Box Margin="4">[bold]Пример[/bold]</Box></ColorBox>
-    <ColorBox Color="#263238"><Box Margin="4">[bold]Абонент[/bold]</Box></ColorBox>
-    <ColorBox><Box Margin="4">HAVOC 6</Box></ColorBox><ColorBox><Box Margin="4">Командир подразделения</Box></ColorBox>
-    <ColorBox><Box Margin="4">HAVOC 5</Box></ColorBox><ColorBox><Box Margin="4">Заместитель командира либо второй по старшинству</Box></ColorBox>
-    <ColorBox><Box Margin="4">HAVOC 7</Box></ColorBox><ColorBox><Box Margin="4">Старший унтер-офицер</Box></ColorBox>
-    <ColorBox><Box Margin="4">HAVOC ROMEO</Box></ColorBox><ColorBox><Box Margin="4">Радиотелефонист командования</Box></ColorBox>
-    <ColorBox><Box Margin="4">HAVOC OPS</Box></ColorBox><ColorBox><Box Margin="4">Офицеры штаба</Box></ColorBox>
-    <ColorBox><Box Margin="4">ALPHA ACTUAL</Box></ColorBox><ColorBox><Box Margin="4">Командир отделения «Альфа»</Box></ColorBox>
-    <ColorBox><Box Margin="4">ALPHA ROMEO</Box></ColorBox><ColorBox><Box Margin="4">Радиотелефонист, приданный отделению «Альфа»</Box></ColorBox>
-    <ColorBox><Box Margin="4">ALPHA 1-1 ... 1-N</Box></ColorBox><ColorBox><Box Margin="4">Бойцы отделения «Альфа»</Box></ColorBox>
+    <ColorBox Color="#263238">
+      <Box Margin="4">[bold]Example[/bold]</Box>
+    </ColorBox>
+    <ColorBox Color="#263238">
+      <Box Margin="4">[bold]Station[/bold]</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">HAVOC 6</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Commanding officer</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">HAVOC 5</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Executive officer or second-in-command</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">HAVOC 7</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Senior non-commissioned officer</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">HAVOC ROMEO</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Command radio operator</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">HAVOC OPS</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Staff officers</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">SABRE ACTUAL</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Sabre (Alpha) squad leader</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">SABRE ROMEO</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Radio operator attached to Sabre (Alpha)</Box>
+    </ColorBox>
+
+    <ColorBox>
+      <Box Margin="4">SABRE 1-1 ... 1-N</Box>
+    </ColorBox>
+    <ColorBox>
+      <Box Margin="4">Sabre (Alpha) squad members</Box>
+    </ColorBox>
   </Table>
 
   [bold]ACTUAL[/bold] обозначает, что лично говорит командир, а не оператор, передающий сообщение от его имени.
 
-  Командиры отделений отвечают как станция ACTUAL своего подразделения, например [bold]ALPHA ACTUAL[/bold]. На уровне взвода [bold]HAVOC 6 ACTUAL[/bold] означает, что командир лично взял трубку вместо радиотелефониста.
+  Squad leaders answer as their element's ACTUAL station, for example [bold]SABRE ACTUAL[/bold]. At platoon level, [bold]HAVOC 6 ACTUAL[/bold] means the commander has taken the handset personally instead of the RTO.
 
   ### Справочник радиосети
 
@@ -143,11 +195,7 @@
   Уполномоченный личный состав связи может:
 
   - Переименовывать словесные обозначения подразделений.
-  - Переназначать индивидуальные цифровые суффиксы.
-  - Просматривать текущие назначения позывных.
-
   Надетая AN/PRC обычно использует позывной, назначенный её носителю. На панели это отображается как [bold]АВТО[/bold].
-
   Радиостанция автоматически обновляет позывной, когда:
 
   - Её передают другому человеку.

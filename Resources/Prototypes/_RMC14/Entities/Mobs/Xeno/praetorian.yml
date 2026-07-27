@@ -15,7 +15,7 @@
     voice: QUEEN_OF_PAIN_DOTA_2
     faction: Xeno
   - type: GhostRole
-    name: cm-job-name-xeno-praetorian
+    name: cmu-job-name-xeno-unknown
   - type: Sprite
     sprite: _AU14/Mobs/Xenos/Praetorian/praetorian.rsi # AU14-Edit
   - type: MobState
@@ -143,7 +143,7 @@
   - type: IntelRecoverCorpseObjectiveOnDeath
     value: 0.7
   - type: FixedIdentity
-    name: cm-job-name-xeno-praetorian
+    name: cmu-job-name-xeno-unknown
   - type: RMCSurgeryXenoHeart
     item: RMCOrganXenoHeartT3
 
