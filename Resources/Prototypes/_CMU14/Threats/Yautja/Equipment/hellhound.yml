@@ -89,6 +89,8 @@
   - type: RemoveComponents
     components:
     - type: Internals
+    - type: Hunger
+    - type: Thirst
   - type: Puller
   - type: Hands
     examineShowEmpty: false

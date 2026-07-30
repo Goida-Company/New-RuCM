@@ -1,4 +1,6 @@
-﻿rmc-loadout-group-backpack = Backpack
+﻿rmc-loadout-window-title = {$job} Loadout
+
+rmc-loadout-group-backpack = Backpack
 rmc-loadout-group-eyewear = Eyewear
 rmc-loadout-group-masks = Masks and scarves
 rmc-loadout-group-headwear = Headwear

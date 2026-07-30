@@ -59,11 +59,6 @@ public sealed partial class YautjaBracerUtilitySystem : EntitySystem
     private static readonly Color ModernTranslatorColor = Color.FromHex("#ff4d4d");
     private static readonly Color RetroTranslatorColor = Color.White;
     private static readonly ProtoId<EmotePrototype> HumanPainEmote = "Scream";
-    private static readonly ProtoId<AccessLevelPrototype> YautjaSecureAccess = "CMUAccessYautjaSecure";
-    private static readonly ProtoId<AccessLevelPrototype> YautjaEliteAccess = "CMUAccessYautjaElite";
-    private static readonly ProtoId<AccessLevelPrototype> YautjaElderAccess = "CMUAccessYautjaElder";
-    private static readonly ProtoId<AccessLevelPrototype> YautjaLeaderAccess = "CMUAccessYautjaLeader";
-    private static readonly ProtoId<AccessLevelPrototype> YautjaAncientAccess = "CMUAccessYautjaAncient";
     private static readonly ProtoId<AccessLevelPrototype> YautjaBadBloodAccess = "CMUAccessYautjaBadBlood";
     private static readonly DamageSpecifier DefaultTechShockDamage = new()
     {
@@ -1178,11 +1173,7 @@ public sealed partial class YautjaBracerUtilitySystem : EntitySystem
 
     private bool IsTrackedItem(EntityUid item)
     {
-        if (HasComp<YautjaTrackedItemComponent>(item))
-            return true;
-
-        return HasComp<YautjaTechItemComponent>(item) &&
-               !HasComp<YautjaUntrackedItemComponent>(item);
+        return HasComp<YautjaTrackedItemComponent>(item);
     }
 
     private bool ToggleIdChip(Entity<YautjaBracerComponent> bracer, EntityUid user)
@@ -1287,14 +1278,7 @@ public sealed partial class YautjaBracerUtilitySystem : EntitySystem
 
     private static ProtoId<AccessLevelPrototype>[] AccessForOwnerRank(YautjaBracerOwnerRank ownerRank)
     {
-        return ownerRank switch
-        {
-            YautjaBracerOwnerRank.Elite => [YautjaSecureAccess, YautjaEliteAccess],
-            YautjaBracerOwnerRank.Elder => [YautjaSecureAccess, YautjaEliteAccess, YautjaElderAccess],
-            YautjaBracerOwnerRank.Leader => [YautjaSecureAccess, YautjaEliteAccess, YautjaElderAccess, YautjaLeaderAccess],
-            YautjaBracerOwnerRank.Admin => [YautjaSecureAccess, YautjaEliteAccess, YautjaElderAccess, YautjaLeaderAccess, YautjaAncientAccess],
-            _ => [YautjaSecureAccess],
-        };
+        return YautjaRankMetadata.GetAccessTags(YautjaRankResolver.FromOwnerRank(ownerRank));
     }
 
     private ContainerSlot EnsureIdContainer(Entity<YautjaBracerComponent> bracer)

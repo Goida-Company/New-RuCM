@@ -10,7 +10,7 @@
             </BoxContainer>
             <RichTextLabel Name="PlatformLabel" Access="Public" Margin="0 0 0 4" />
             <LineEdit Name="SearchBar"
-                PlaceHolder="Search crates..."
+                PlaceHolder="{Loc rmc-requisitions-search-crates-placeholder}"
                 HorizontalExpand="True"
                 Access="Public" />
             <cc:HSeparator Color="#4972A1" Margin="0 5" />
@@ -46,7 +46,7 @@
                                 <RichTextLabel Name="PreviewContentsLabel" Access="Public" />
                             </BoxContainer>
                             <Control MinWidth="6" />
-                            <Button Name="PreviewOrderButton" Access="Public" Text="Order" StyleClasses="ButtonSquare" MinWidth="64" />
+                            <Button Name="PreviewOrderButton" Access="Public" Text="{Loc rmc-requisitions-order-button}" StyleClasses="ButtonSquare" MinWidth="64" />
                         </BoxContainer>
                     </PanelContainer>
                 </BoxContainer>

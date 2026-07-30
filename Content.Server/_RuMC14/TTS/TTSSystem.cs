@@ -99,7 +99,8 @@ public sealed partial class TTSSystem : EntitySystem
 
         RegisterRateLimits();
         _linkAccount.PatronUpdated += OnPatronUpdated;
-        _ = EnsureReferenceVoiceCatalogLoaded();
+        if (_isEnabled)
+            _ = EnsureReferenceVoiceCatalogLoaded();
     }
 
     public override void Shutdown()
@@ -301,6 +302,9 @@ public sealed partial class TTSSystem : EntitySystem
 
     private Task<bool> EnsureReferenceVoiceCatalogLoaded()
     {
+        if (!_isEnabled)
+            return Task.FromResult(false);
+
         if (_catalogLoaded)
             return Task.FromResult(true);
 

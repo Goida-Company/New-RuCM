@@ -263597,7 +263597,7 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 33609
+  - uid: 33610
     components:
     - type: MetaData
       name: LV624 ground relay

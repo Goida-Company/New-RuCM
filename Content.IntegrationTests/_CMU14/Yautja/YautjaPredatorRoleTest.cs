@@ -4,6 +4,7 @@ using System.IO;
 using System.Numerics;
 using System.Reflection;
 using Content.Client.Popups;
+using Content.Client.StatusIcon;
 using Content.Client.ContextMenu.UI;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client._CMU14.Yautja;
@@ -13,6 +14,7 @@ using Content.Client.UserInterface.Systems.Actions.Controls;
 using Content.Client.Verbs.UI;
 using Content.Server._CMU14.Yautja;
 using Content.Server.Administration.Logs;
+using Content.Server.Database;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
 using Content.Server.Maps;
@@ -72,9 +74,11 @@ using Robust.Shared.EntitySerialization;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Localization;
+using Robust.Shared.Log;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Maths;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Robust.UnitTesting;
@@ -137,6 +141,8 @@ public sealed class YautjaPredatorRoleTest
             {
                 Assert.That(meta.EntityName, Is.EqualTo("Kainde Amedha"));
                 Assert.That(humanoid.Species, Is.EqualTo("Yautja"));
+                Assert.That(entMan.HasComponent<YautjaHudViewerComponent>(hunter), Is.True,
+                    "A spawned Hunter with the clan mask must have the HUD used to see Yautja ranks.");
                 Assert.That(humanoid.SkinColor, Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Green)));
                 Assert.That(humanoid.EyeColor,
                     Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Gold)));
@@ -239,6 +245,62 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
+    public async Task PredatorSpawnKeepsProfileColorsAfterYautjaStartup()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+        EntityUid hunter = default;
+
+        try
+        {
+            var profile = YautjaCharacterProfile.Default
+                .WithName("Color Test Hunter")
+                .WithSkinColor(YautjaSkinColor.Blue)
+                .WithEyeColor(YautjaEyeColor.Slate)
+                .WithDreadColor(YautjaDreadColor.Bone)
+                .WithQuillStyle(YautjaQuillStyle.LongCurved);
+
+            await server.WaitPost(() =>
+            {
+                var spawning = server.EntMan.System<StationSpawningSystem>();
+                var normalProfile = HumanoidCharacterProfile.DefaultWithSpecies("Human")
+                    .WithYautjaProfile(profile);
+                hunter = spawning.SpawnPlayerMob(map.GridCoords, "CMUYautjaHunter", normalProfile, station: null);
+            });
+
+            await server.WaitRunTicks(2);
+
+            await server.WaitAssertion(() =>
+            {
+                var entMan = server.EntMan;
+                var humanoid = entMan.GetComponent<HumanoidAppearanceComponent>(hunter);
+                var quills = humanoid.MarkingSet.Markings.Values
+                    .SelectMany(markings => markings)
+                    .Single(marking => marking.MarkingId == profile.QuillMarkingId);
+
+                Assert.Multiple(() =>
+                {
+                    Assert.That(humanoid.SkinColor, Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Blue)));
+                    Assert.That(humanoid.EyeColor, Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Slate)));
+                    Assert.That(quills.MarkingColors.Single(),
+                        Is.EqualTo(YautjaCharacterProfile.GetDreadColorColor(YautjaDreadColor.Bone, humanoid.SkinColor)));
+                });
+            });
+        }
+        finally
+        {
+            await server.WaitAssertion(() =>
+            {
+                if (hunter != default && !server.EntMan.Deleted(hunter))
+                    server.EntMan.DeleteEntity(hunter);
+            });
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
     public async Task PredatorJobIsRoundPlayableWhitelistedYautjaRole()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -265,6 +327,34 @@ public sealed class YautjaPredatorRoleTest
         });
 
         await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task F7HunterSpawnUsesDirectCmumobYautjaPrototype()
+    {
+        var (server, _) = await PoolManager.GenerateServer(new PoolSettings(), TestContext.Out);
+
+        try
+        {
+            await server.WaitAssertion(() =>
+            {
+                var prototypes = server.ResolveDependency<IPrototypeManager>();
+
+                Assert.That(prototypes.TryIndex<EntityPrototype>("CMUMobYautja", out var hunter), Is.True);
+                Assert.That(hunter!.HideSpawnMenu, Is.False,
+                    "CMUMobYautja must remain the visible direct F7 spawn prototype.");
+                Assert.That(hunter.Components.ContainsKey("Loadout"), Is.True,
+                    "The direct F7 hunter must retain its standard loadout and mask.");
+
+                Assert.That(prototypes.TryIndex<EntityPrototype>("CMURandomHumanoidYautjaHunter", out var legacySpawner), Is.True);
+                Assert.That(legacySpawner!.HideSpawnMenu, Is.True,
+                    "The legacy random humanoid marker must not be selectable from F7.");
+            });
+        }
+        finally
+        {
+            server.Dispose();
+        }
     }
 
     [Test]
@@ -449,6 +539,7 @@ public sealed class YautjaPredatorRoleTest
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings
         {
+            Connected = true,
             Dirty = true,
             DummyTicker = false,
         });
@@ -456,6 +547,14 @@ public sealed class YautjaPredatorRoleTest
 
         try
         {
+            var session = pair.Player!;
+            var db = server.ResolveDependency<IServerDbManager>();
+            await db.SetYautjaRank(session.UserId.UserId, YautjaRank.Ancient);
+            await server.ResolveDependency<YautjaRankManager>().Refresh(session.UserId);
+            var clientNet = pair.Client.ResolveDependency<IClientNetManager>();
+            await pair.Client.WaitPost(() => clientNet.ClientDisconnect("Predator round spawn entitlement test"));
+            await pair.RunTicksSync(2);
+
             await server.WaitPost(() =>
             {
                 var cfg = server.CfgMan;
@@ -581,7 +680,12 @@ public sealed class YautjaPredatorRoleTest
                     .WithName("Late Join Kainde Amedha")
                     .WithSkinColor(YautjaSkinColor.Green)
                     .WithEyeColor(YautjaEyeColor.Gold)
-                    .WithArmor(YautjaGearMaterial.Bronze, 3);
+                    .WithArmor(YautjaGearMaterial.Bronze, 3)
+                    .WithStatus(YautjaProfileStatus.Normal)
+                    .WithUnique(YautjaUniqueSet.Anubys)
+                    .WithLegacy(YautjaLegacySet.None)
+                    .WithCapeStyle(YautjaCapeStyle.Ceremonial)
+                    .WithBracer(YautjaBracerMaterial.Bone);
                 var selectedLobbyProfile = HumanoidCharacterProfile.DefaultWithSpecies("Human")
                     .WithName("Human Lobby Profile")
                     .WithYautjaProfile(selectedYautjaProfile);
@@ -590,7 +694,8 @@ public sealed class YautjaPredatorRoleTest
                 var spawned = entMan.System<StationSpawningSystem>().SpawnPlayerCharacterOnStation(
                     hunterStation,
                     "CMUYautjaHunter",
-                    selectedLobbyProfile);
+                    selectedLobbyProfile,
+                    player: session);
                 try
                 {
                     Assert.That(spawned, Is.Not.Null);
@@ -614,6 +719,11 @@ public sealed class YautjaPredatorRoleTest
                             Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Green)));
                         Assert.That(spawnedHumanoid.EyeColor,
                             Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Gold)));
+                        Assert.That(spawnedYautja.Profile.Status, Is.EqualTo(YautjaProfileStatus.Normal));
+                        Assert.That(spawnedYautja.Profile.ClanRank, Is.EqualTo(YautjaRank.Blooded));
+                        Assert.That(spawnedYautja.Profile.Unique, Is.EqualTo(YautjaUniqueSet.Anubys));
+                        Assert.That(spawnedYautja.Profile.CapeStyle, Is.EqualTo(YautjaCapeStyle.Ceremonial));
+                        Assert.That(spawnedYautja.Profile.BracerMaterial, Is.EqualTo(YautjaBracerMaterial.Bone));
                     });
                     Assert.That(hunterJobs.JobList["CMUYautjaHunter"], Is.EqualTo(remainingHunterSlots));
                 }
@@ -1222,11 +1332,11 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
-    public async Task SimpleRelayBeaconSuccessfulDoAfterDecloaksUserLikeCmss13ThrallTeleporter()
+    public async Task SimpleRelayBeaconSuccessfulDoAfterKeepsUserCloaked()
     {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
+        var (server, _) = await PoolManager.GenerateServer(new PoolSettings(), TestContext.Out);
+        server.ResolveDependency<ILogManager>().GetSawmill("tts").Level = LogLevel.Fatal;
+        var gridCoords = await CreateServerTestGrid(server);
 
         EntityUid bloodedThrall = default;
         EntityUid simpleBeacon = default;
@@ -1241,11 +1351,11 @@ public sealed class YautjaPredatorRoleTest
                 var hands = entMan.System<SharedHandsSystem>();
                 var inventory = entMan.System<InventorySystem>();
 
-                bloodedThrall = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
+                bloodedThrall = entMan.SpawnEntity("CMMobHuman", gridCoords);
                 entMan.EnsureComponent<YautjaTechAuthorizedComponent>(bloodedThrall);
-                simpleBeacon = entMan.SpawnEntity("CMUYautjaSimpleRelayBeacon", map.GridCoords);
-                bracer = entMan.SpawnEntity("CMUYautjaBracer", map.GridCoords);
-                yautjaShipDestination = entMan.SpawnEntity("CMUHunterShipMarkerPredatorSpawn", map.GridCoords.Offset(new Vector2(14, 0)));
+                simpleBeacon = entMan.SpawnEntity("CMUYautjaSimpleRelayBeacon", gridCoords);
+                bracer = entMan.SpawnEntity("CMUYautjaBracer", gridCoords);
+                yautjaShipDestination = entMan.SpawnEntity("CMUHunterShipMarkerPredatorSpawn", gridCoords.Offset(new Vector2(14, 0)));
 
                 Assert.That(inventory.TryEquip(bloodedThrall, bracer, "gloves", silent: true, force: true), Is.True);
                 MakeActivelyCloaked(entMan, bloodedThrall);
@@ -1258,14 +1368,14 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(ActiveRelayDoAfters(entMan, bloodedThrall), Is.EqualTo(1));
             });
 
-            await pair.RunTicksSync(pair.SecondsToTicks(10.5f));
-            await pair.RunTicksSync(1);
+            await server.WaitRunTicks((int) Math.Ceiling(10.5f / server.Timing.TickPeriod.TotalSeconds));
+            await server.WaitRunTicks(1);
 
             await server.WaitAssertion(() =>
             {
                 var entMan = server.EntMan;
-                Assert.That(entMan.HasComponent<EntityActiveInvisibleComponent>(bloodedThrall), Is.False,
-                    "CMSS13 thrall_teleporter attack_self() sends COMSIG_MOB_EFFECT_CLOAK_CANCEL to the user before teleporting.");
+                Assert.That(entMan.HasComponent<EntityActiveInvisibleComponent>(bloodedThrall), Is.True,
+                    "A relay teleport must preserve the user's active invisibility.");
             });
         }
         finally
@@ -1281,15 +1391,15 @@ public sealed class YautjaPredatorRoleTest
             });
         }
 
-        await pair.CleanReturnAsync();
+        server.Dispose();
     }
 
     [Test]
-    public async Task SimpleRelayBeaconSuccessfulDoAfterDecloaksPulledLivingPassengerAndTeleportsTrainLikeCmss13ThrallTeleporter()
+    public async Task SimpleRelayBeaconSuccessfulDoAfterKeepsPulledPassengerCloakedAndTeleportsTrain()
     {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
+        var (server, _) = await PoolManager.GenerateServer(new PoolSettings(), TestContext.Out);
+        server.ResolveDependency<ILogManager>().GetSawmill("tts").Level = LogLevel.Fatal;
+        var gridCoords = await CreateServerTestGrid(server);
 
         EntityUid bloodedThrall = default;
         EntityUid passenger = default;
@@ -1308,12 +1418,12 @@ public sealed class YautjaPredatorRoleTest
                 var pulling = entMan.System<PullingSystem>();
                 var transform = entMan.System<SharedTransformSystem>();
 
-                bloodedThrall = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
+                bloodedThrall = entMan.SpawnEntity("CMMobHuman", gridCoords);
                 entMan.EnsureComponent<YautjaTechAuthorizedComponent>(bloodedThrall);
-                passenger = entMan.SpawnEntity("CMMobHuman", map.GridCoords.Offset(new Vector2(1, 0)));
-                simpleBeacon = entMan.SpawnEntity("CMUYautjaSimpleRelayBeacon", map.GridCoords);
-                passengerBracer = entMan.SpawnEntity("CMUYautjaBracer", map.GridCoords);
-                yautjaShipDestination = entMan.SpawnEntity("CMUHunterShipMarkerPredatorSpawn", map.GridCoords.Offset(new Vector2(14, 0)));
+                passenger = entMan.SpawnEntity("CMMobHuman", gridCoords.Offset(new Vector2(1, 0)));
+                simpleBeacon = entMan.SpawnEntity("CMUYautjaSimpleRelayBeacon", gridCoords);
+                passengerBracer = entMan.SpawnEntity("CMUYautjaBracer", gridCoords);
+                yautjaShipDestination = entMan.SpawnEntity("CMUHunterShipMarkerPredatorSpawn", gridCoords.Offset(new Vector2(14, 0)));
                 yautjaShipCoordinates = transform.GetMapCoordinates(yautjaShipDestination);
 
                 Assert.That(inventory.TryEquip(passenger, passengerBracer, "gloves", silent: true, force: true), Is.True);
@@ -1328,8 +1438,8 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(ActiveRelayDoAfters(entMan, bloodedThrall), Is.EqualTo(1));
             });
 
-            await pair.RunTicksSync(pair.SecondsToTicks(10.5f));
-            await pair.RunTicksSync(1);
+            await server.WaitRunTicks((int) Math.Ceiling(10.5f / server.Timing.TickPeriod.TotalSeconds));
+            await server.WaitRunTicks(1);
 
             await server.WaitAssertion(() =>
             {
@@ -1340,8 +1450,8 @@ public sealed class YautjaPredatorRoleTest
 
                 Assert.Multiple(() =>
                 {
-                    Assert.That(entMan.HasComponent<EntityActiveInvisibleComponent>(passenger), Is.False,
-                        "CMSS13 thrall_teleporter attack_self() sends COMSIG_MOB_EFFECT_CLOAK_CANCEL to a pulled living mob passenger.");
+                    Assert.That(entMan.HasComponent<EntityActiveInvisibleComponent>(passenger), Is.True,
+                        "A relay teleport must preserve a pulled passenger's active invisibility.");
                     Assert.That(userCoordinates.MapId, Is.EqualTo(yautjaShipCoordinates.MapId));
                     Assert.That(userCoordinates.Position, Is.EqualTo(yautjaShipCoordinates.Position));
                     Assert.That(passengerCoordinates.MapId, Is.EqualTo(yautjaShipCoordinates.MapId));
@@ -1363,7 +1473,7 @@ public sealed class YautjaPredatorRoleTest
             });
         }
 
-        await pair.CleanReturnAsync();
+        server.Dispose();
     }
 
     [Test]
@@ -3710,7 +3820,10 @@ public sealed class YautjaPredatorRoleTest
                 "CMUActionYautjaOpenBracerMenu",
                 "CMUActionYautjaToggleBracerLock",
                 "CMUActionYautjaToggleBracerIdChip",
-                "CMUActionYautjaChangeExplosionType",
+                "CMUActionYautjaRemoveBracerAttachments",
+                "CMUActionYautjaCreateHealingCapsule",
+                "CMUActionYautjaAddTrackedItem",
+                "CMUActionYautjaRemoveTrackedItem",
                 "CMUActionYautjaToggleBracerNotificationSound",
                 "CMUActionYautjaToggleBracerName",
                 "CMUActionYautjaTrackGear",
@@ -4385,7 +4498,9 @@ public sealed class YautjaPredatorRoleTest
                 {
                     Assert.That(actionPrototypeIds, Does.Contain("CMUActionYautjaLeap"));
                     Assert.That(actionPrototypeIds, Does.Contain("CMUActionYautjaMarkForHunt"));
+                    Assert.That(actionPrototypeIds, Does.Contain("CMUActionYautjaButcher"));
                     Assert.That(actionPrototypeIds, Does.Contain("CMUActionYautjaAudioPanel"));
+                    Assert.That(actionPrototypeIds, Does.Not.Contain("CMUActionYautjaOpenMarkPanel"));
                     Assert.That(actionPrototypeIds.Any(id => id.StartsWith("CMUActionYautjaVoice")), Is.False);
 
                     var speech = entMan.GetComponent<SpeechComponent>(hunter);
@@ -4563,6 +4678,205 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
+    public async Task YautjaRankHudIconsAreVisibleInGameAndUseCmss13States()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        var map = await pair.CreateTestMap();
+        EntityUid target = default;
+        EntityUid otherTarget = default;
+        EntityUid? previousAttached = null;
+        NetEntity targetNet = default;
+        NetEntity otherTargetNet = default;
+
+        await pair.Server.WaitPost(() =>
+        {
+            var entMan = pair.Server.EntMan;
+            var session = pair.Server.PlayerMan.Sessions.Single();
+            previousAttached = session.AttachedEntity;
+            target = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
+            otherTarget = entMan.SpawnEntity("CMMobHuman", map.GridCoords.Offset(new Vector2(1, 0)));
+            targetNet = entMan.GetNetEntity(target);
+            otherTargetNet = entMan.GetNetEntity(otherTarget);
+            pair.Server.PlayerMan.SetAttachedEntity(session, target);
+        });
+
+        await pair.RunTicksSync(5);
+
+        try
+        {
+            await pair.Client.WaitAssertion(() =>
+            {
+                var entMan = pair.Client.EntMan;
+                var player = pair.Client.ResolveDependency<Robust.Client.Player.IPlayerManager>();
+                Assert.That(player.LocalEntity, Is.Not.Null);
+                Assert.That(entMan.TryGetEntity(targetNet, out var clientTarget), Is.True);
+                Assert.That(entMan.TryGetEntity(otherTargetNet, out var clientOtherTarget), Is.True);
+
+                var targetUid = clientTarget!.Value;
+                var otherTargetUid = clientOtherTarget!.Value;
+                Assert.That(player.LocalEntity, Is.EqualTo(targetUid));
+                if (entMan.HasComponent<YautjaHudViewerComponent>(targetUid))
+                    entMan.RemoveComponent<YautjaHudViewerComponent>(targetUid);
+
+                var cache = pair.Client.ResolveDependency<IResourceCache>();
+                var rsiPath = new ResPath("/Textures/_CMU14/Yautja/hud_yautja.rsi");
+                Assert.That(cache.TryGetResource<RSIResource>(rsiPath, out var resource), Is.True);
+
+                var yautja = entMan.EnsureComponent<YautjaComponent>(targetUid);
+                var otherYautja = entMan.EnsureComponent<YautjaComponent>(otherTargetUid);
+                var expectedStates = new Dictionary<YautjaRank, string>
+                {
+                    [YautjaRank.Unblooded] = "predhud",
+                    [YautjaRank.YoungBlood] = "predhud",
+                    [YautjaRank.Blooded] = "predhud",
+                    [YautjaRank.Elite] = "predhud",
+                    [YautjaRank.Elder] = "predhud",
+                    [YautjaRank.Leader] = "leaderhud",
+                    [YautjaRank.Ancient] = "councilhud",
+                };
+
+                Assert.Multiple(() =>
+                {
+                    foreach (var expectedState in expectedStates.Values.Distinct())
+                    {
+                        Assert.That(resource!.RSI.TryGetState(expectedState, out _), Is.True,
+                            $"CMSS13 Yautja HUD state {expectedState} must be present in the loaded RSI.");
+                    }
+                });
+
+                foreach (var (rank, expectedState) in expectedStates)
+                {
+                    yautja.ClanRank = rank;
+                    var icons = new List<StatusIconData>();
+                    var ev = new GetStatusIconsEvent(icons);
+                    entMan.EventBus.RaiseLocalEvent(targetUid, ref ev);
+
+                    var states = icons
+                        .Select(icon => icon.Icon)
+                        .OfType<SpriteSpecifier.Rsi>()
+                        .Select(icon => icon.RsiState)
+                        .ToList();
+
+                    Assert.That(states, Does.Contain(expectedState),
+                        $"The local Yautja must see the {rank} rank icon in-game without a mask.");
+                }
+
+                otherYautja.ClanRank = YautjaRank.Leader;
+                var unmaskedOtherIcons = new List<StatusIconData>();
+                var unmaskedOtherEvent = new GetStatusIconsEvent(unmaskedOtherIcons);
+                entMan.EventBus.RaiseLocalEvent(otherTargetUid, ref unmaskedOtherEvent);
+                var unmaskedOtherStates = unmaskedOtherIcons
+                    .Select(icon => icon.Icon)
+                    .OfType<SpriteSpecifier.Rsi>()
+                    .Select(icon => icon.RsiState)
+                    .ToList();
+                Assert.That(unmaskedOtherStates, Does.Not.Contain("leaderhud"),
+                    "A Yautja without the mask HUD must not see another Yautja's rank icon.");
+
+                entMan.EnsureComponent<YautjaHudViewerComponent>(targetUid);
+                var maskedOtherIcons = new List<StatusIconData>();
+                var maskedOtherEvent = new GetStatusIconsEvent(maskedOtherIcons);
+                entMan.EventBus.RaiseLocalEvent(otherTargetUid, ref maskedOtherEvent);
+                var maskedOtherStates = maskedOtherIcons
+                    .Select(icon => icon.Icon)
+                    .OfType<SpriteSpecifier.Rsi>()
+                    .Select(icon => icon.RsiState)
+                    .ToList();
+                Assert.That(maskedOtherStates, Does.Contain("leaderhud"),
+                    "A Yautja with the mask HUD must see another Yautja's rank icon.");
+            });
+        }
+        finally
+        {
+            await pair.Server.WaitPost(() =>
+            {
+                var entMan = pair.Server.EntMan;
+                var session = pair.Server.PlayerMan.Sessions.Single();
+                pair.Server.PlayerMan.SetAttachedEntity(session, previousAttached);
+                DeleteEntities(entMan, target, otherTarget);
+            });
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task YautjaRankHudIconsAreVisibleAfterShipSpawn()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        pair.Server.ResolveDependency<ILogManager>().GetSawmill("tts").Level = LogLevel.Fatal;
+        var map = await pair.CreateTestMap();
+        NetEntity hunterNet = default;
+        EntityUid hunter = default;
+
+        await pair.Server.WaitPost(() =>
+        {
+            var entMan = pair.Server.EntMan;
+            var session = pair.Server.PlayerMan.Sessions.Single();
+            var profile = HumanoidCharacterProfile.DefaultWithSpecies("Human")
+                .WithName("Ship HUD Hunter")
+                .WithYautjaProfile(YautjaCharacterProfile.Default.WithName("Ship HUD Hunter"));
+
+            hunter = entMan.System<StationSpawningSystem>().SpawnPlayerMob(
+                map.GridCoords,
+                "CMUYautjaHunter",
+                profile,
+                station: null,
+                authoritativeYautjaRank: YautjaRank.Blooded);
+            hunterNet = entMan.GetNetEntity(hunter);
+            pair.Server.PlayerMan.SetAttachedEntity(session, hunter);
+        });
+
+        await pair.RunTicksSync(10);
+
+        try
+        {
+            await pair.Client.WaitAssertion(() =>
+            {
+                var entMan = pair.Client.EntMan;
+                var player = pair.Client.ResolveDependency<Robust.Client.Player.IPlayerManager>();
+                Assert.That(player.LocalEntity, Is.Not.Null);
+                Assert.That(entMan.TryGetEntity(hunterNet, out var clientHunter), Is.True);
+
+                var clientUid = clientHunter!.Value;
+                Assert.Multiple(() =>
+                {
+                    Assert.That(player.LocalEntity, Is.EqualTo(clientUid));
+                    Assert.That(entMan.HasComponent<YautjaComponent>(clientUid), Is.True);
+                    Assert.That(entMan.HasComponent<StatusIconComponent>(clientUid), Is.True);
+                    Assert.That(entMan.HasComponent<YautjaHudViewerComponent>(clientUid), Is.True);
+                });
+
+                var statusIcons = entMan.System<StatusIconSystem>();
+                var states = statusIcons.GetStatusIcons(clientUid)
+                    .Select(icon => icon.Icon)
+                    .OfType<SpriteSpecifier.Rsi>()
+                    .Select(icon => icon.RsiState)
+                    .ToList();
+
+                Assert.That(states, Does.Contain("predhud"),
+                    "A real ship-spawned Yautja must expose its rank icon through the client status-icon pipeline.");
+
+                var prototypes = pair.Client.ResolveDependency<IPrototypeManager>();
+                var rankIcon = prototypes.Index<HealthIconPrototype>("CMUYautjaRankIconBlooded");
+                Assert.That(rankIcon.IsShaded, Is.False,
+                    "CMSS13 rank HUD icons must remain visible independently of world lighting.");
+            });
+        }
+        finally
+        {
+            await pair.Server.WaitPost(() =>
+            {
+                var entMan = pair.Server.EntMan;
+                if (!entMan.Deleted(hunter))
+                    entMan.DeleteEntity(hunter);
+            });
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
     public async Task YautjaAudioPanelMatchesCmss13PanelEmotes()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -4641,6 +4955,25 @@ public sealed class YautjaPredatorRoleTest
         invisible.Opacity = 0.2f;
         var turnInvisible = entMan.EnsureComponent<EntityTurnInvisibleComponent>(user);
         turnInvisible.Enabled = true;
+    }
+
+    private static async Task<EntityCoordinates> CreateServerTestGrid(RobustIntegrationTest.ServerIntegrationInstance server)
+    {
+        EntityCoordinates gridCoords = default;
+
+        await server.WaitPost(() =>
+        {
+            var mapSystem = server.System<SharedMapSystem>();
+            mapSystem.CreateMap(out var mapId);
+            var grid = mapSystem.CreateGridEntity(mapId);
+            gridCoords = new EntityCoordinates(grid, 0, 0);
+
+            var tileDefinitionManager = server.ResolveDependency<ITileDefinitionManager>();
+            var plating = tileDefinitionManager["Plating"];
+            mapSystem.SetTile(grid.Owner, grid.Comp, gridCoords, new Tile(plating.TileId));
+        });
+
+        return gridCoords;
     }
 
     private static SixLabors.ImageSharp.Image<Rgba32> LoadRgbaImage(IResourceManager resources, ResPath path)

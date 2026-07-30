@@ -15,22 +15,16 @@ ent-RMCWeldingGoggles = сварочные очки
 
 ent-RMCHippieGlassesSunset = круглые очки "Закат" СтарТех
     .desc = Красочные круглые очки от СтарТех.
-
 ent-RMCHippieGlassesSunrise = круглые очки "Восход" СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
-
 ent-RMCHippieGlassesPink = розовые круглые очки СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
-
 ent-RMCHippieGlassesNightblue = тёмно-синие круглые очки СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
-
 ent-RMCHippieGlassesMidnight = круглые очки "Полночь" СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
-
 ent-RMCHippieGlassesGreen = зелёные круглые очки СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
-
 ent-RMCHippieGlassesBloodred = кроваво-красные круглые очки СтарТех
     .desc = {ent-RMCHippieGlassesSunset.desc}
 
@@ -41,27 +35,25 @@ ent-RMCHipsterGlasses = очки с диоптриями
     .desc = Скучные очки, делают вас умным и потенциально респектабельным.
 
 ent-RMCGlassesAviators = авиаторы
-    .desc = Пара солнцезащитных очков с коричневым затемнением.
+    .desc = Пара солнцезащитных очков с затемнением.
+ent-RMCGlassesAviatorsSilver = {ent-RMCGlassesAviators}
+    .desc = {ent-RMCGlassesAviators.desc}
+    .suffix = Серебро
 
 ent-RMCSunglassesBigFake = очки ТриМекс
     .desc = Это дешёвая пара солнцезащитных очков в стиле ТриМакс.
-
 ent-RMCGlassesTriMaxBlackFake = чёрные очки ТриМекс
     .desc = {ent-RMCSunglassesBigFake.desc}
-
 ent-RMCGlassesTriMaxYellowFake = жёлтые очки ТриМекс
     .desc = {ent-RMCSunglassesBigFake.desc}
 
 
 ent-RMCSunglassesBig = очки ТриМакс
     .desc = Дорогая пара солнцезащитных очков ТриМакс. Этот бренд популярен среди пехотинцев КМП.
-
 ent-RMCGlassesTriMaxBlack = чёрные очки ТриМакс
     .desc = {ent-RMCSunglassesBig.desc}
-
 ent-RMCGlassesTriMaxYellow = жёлтые очки ТриМакс
     .desc = {ent-RMCSunglassesBig.desc}
-
 ent-RMCGlassesTriMaxBronze = бронзовые очки Тримакс
     .desc = {ent-RMCSunglassesBig.desc}
 

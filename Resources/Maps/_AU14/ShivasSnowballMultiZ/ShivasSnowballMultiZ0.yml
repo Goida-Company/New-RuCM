@@ -131942,7 +131942,7 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 17501
+  - uid: 17586
     components:
     - type: MetaData
       name: Shivas Snowball ground relay

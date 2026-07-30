@@ -1,33 +1,29 @@
-ent-TreasureDatadiskEncrypted-name = зашифрованный диск с данными
-ent-TreasureDatadiskEncrypted-desc = Старый диск с данными. Кто-то более сообразительный, чем вы, мог бы расшифровать его и узнать что-то интересное. Все, что вы можете сделать, это продать его.
+ent-TreasureDatadiskEncrypted = зашифрованный диск данных
+    .desc = Старый диск с данными. Всё, что вы можете сделать, это продать его.
 
-ent-TreasureHardDiskDrive-name = жесткий диск
-ent-TreasureHardDiskDrive-desc = Дисковод, разработанный для старых земных технологий, примерно 1980 года. Вероятно, найдется какой-нибудь коллекционер, который захочет заполучить это.
+ent-TreasureHardDiskDrive = жёсткий диск
+    .desc = Твердотельный накопитель, предназначенный для старой земной техники 1980-ых годов.
 
-ent-TreasureFlopDiskDrive-name = дисковод для гибких дисков
-ent-TreasureFlopDiskDrive-desc = Дисковод для считывания информации с дискет. Жаль, что в настоящее время на них хранится только информация об операциях с ядерными бомбами.
+ent-TreasureFlopDiskDrive = дисковод дискет
+    .desc = Привод для считывания информации с дискет.
 
-ent-TreasureCDDrive-name = CD-привод
-ent-TreasureCDDrive-desc = Технология чтения данных с компакт-дисков. Сейчас это не самая полезная вещь, если только вы не планируете куда-то лететь.
+ent-TreasureCDDrive = дисковод компакт-дисков
+    .desc = Прибор для чтения данных с компакт-дисков.
 
-ent-TreasureCPUSupercharged-name = перегруженный процессор
-ent-TreasureCPUSupercharged-desc = Какая-то супер-инопланетная космическая технология. Жаль, что сегодня все компьютеры уже оснащены процессорами.
+ent-TreasureCPUSupercharged = супермощный процессор
+    .desc = Какая-то инопланетная технология. Жаль, что в наше время все компьютеры уже оснащены процессорами.
 
-ent-TreasureSampleTube-name = пробирка для проб
-ent-TreasureSampleTube-desc = Стеклянная трубка с какой-то ерундой внутри. Выглядит склонным к поломке.
+ent-TreasureSampleTube = пробирка для образцов
+    .desc = Стеклянная трубка с какой-то жижей внутри.
 
-ent-TreasureCoinIron-name = монета
-ent-TreasureCoinIron-desc = Плоский кусок металла. Если бы он все еще находился в обращении, инфляция сделала бы его бесполезным. Поскольку это не так, это стоит сохранить в книге.
-
-ent-TreasureCoinSilver-name = монета
-ent-TreasureCoinSilver-desc = Плоский кусок металла. Если бы он все еще находился в обращении, инфляция сделала бы его бесполезным. Поскольку это не так, это стоит сохранить в книге.
-
-ent-TreasureCoinGold-name = монета
-ent-TreasureCoinGold-desc = Плоский кусок металла. Если бы он все еще находился в обращении, инфляция сделала бы его бесполезным. Поскольку это не так, это стоит сохранить в книге.
-
-ent-TreasureCoinAdamantine-name = монета
-ent-TreasureCoinAdamantine-desc = Плоский кусок металла. Если бы он все еще находился в обращении, инфляция сделала бы его бесполезным. Поскольку это не так, это стоит сохранить в книге.
-
-ent-TreasureCoinDiamond-name = монета
-ent-TreasureCoinDiamond-desc = Плоский кусок металла. Если бы он все еще находился в обращении, инфляция сделала бы его бесполезным. Поскольку это не так, это стоит сохранить в книге.
+ent-TreasureCoinIron = монета
+    .desc = Плоский кусочек металла для ведения расчётов. Настоящий антиквариат.
+ent-TreasureCoinSilver = {ent-TreasureCoinIron}
+    .desc = {ent-TreasureCoinIron.desc}
+ent-TreasureCoinGold = {ent-TreasureCoinIron}
+    .desc = {ent-TreasureCoinIron.desc}
+ent-TreasureCoinAdamantine = {ent-TreasureCoinIron}
+    .desc = {ent-TreasureCoinIron.desc}
+ent-TreasureCoinDiamond = {ent-TreasureCoinIron}
+    .desc = {ent-TreasureCoinIron.desc}
 

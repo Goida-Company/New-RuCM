@@ -3,7 +3,7 @@
   id: CMUYautjaIconBase
   priority: -10
   locationPreference: Right
-  isShaded: true
+  isShaded: false
 
 - type: healthIcon
   parent: CMUYautjaIconBase
@@ -74,3 +74,52 @@
   icon:
     sprite: /Textures/_CMU14/HunterShip/obj/items/hunter/pred_gear.rsi
     state: falcon_drone_badblood_active
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconUnblooded
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: predhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconYoungBlood
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: predhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconBlooded
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: predhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconElite
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: predhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconElder
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: predhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconLeader
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: leaderhud
+
+- type: healthIcon
+  parent: CMUYautjaIconBase
+  id: CMUYautjaRankIconAncient
+  icon:
+    sprite: /Textures/_CMU14/Yautja/hud_yautja.rsi
+    state: councilhud

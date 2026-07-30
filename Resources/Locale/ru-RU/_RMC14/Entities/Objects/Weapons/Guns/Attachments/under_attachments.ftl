@@ -16,8 +16,8 @@ ent-RMCAttachmentMK1GrenadeLauncher = подствольный гранатом�
 ent-RMCAttachmentU1GrenadeLauncher = гранатомёт U1
     .desc = Перезаряжаемый гранатомёт, устанавливаемый на оружие.
 
-ent-RMCAttachmentUnderbarrelExtinguisher = подствольный огнетушитель HME-12
-    .desc = Подствольный огнетушитель Тайхо Технолоджис HME-12. Направьте на пламя перед применением.
+ent-RMCAttachmentUnderbarrelExtinguisher = подствольный огнетушитель
+    .desc = Подствольный огнетушитель от Тайхо Технолоджис. Направьте на пламя перед применением.
 
 ent-RMCAttachmentU7UnderbarrelShotgun = подствольный дробовик U7
     .desc = Тактический дробовик АЕГИС U7. Способен заряжать только до пяти патронов с картечью.

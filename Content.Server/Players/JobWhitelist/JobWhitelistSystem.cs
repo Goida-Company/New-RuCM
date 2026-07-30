@@ -1,10 +1,8 @@
 using System.Collections.Immutable;
 using Content.Server.GameTicking.Events;
 using Content.Server.Station.Events;
-using Content.Shared.CCVar;
 using Content.Shared.Roles;
 using Robust.Server.Player;
-using Robust.Shared.Configuration;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 
@@ -12,7 +10,6 @@ namespace Content.Server.Players.JobWhitelist;
 
 public sealed partial class JobWhitelistSystem : EntitySystem
 {
-    [Dependency] private IConfigurationManager _config = default!;
     [Dependency] private JobWhitelistManager _manager = default!;
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
@@ -37,9 +34,6 @@ public sealed partial class JobWhitelistSystem : EntitySystem
 
     private void OnStationJobsGetCandidates(ref StationJobsGetCandidatesEvent ev)
     {
-        if (!_config.GetCVar(CCVars.GameRoleWhitelist))
-            return;
-
         for (var i = ev.Jobs.Count - 1; i >= 0; i--)
         {
             var jobId = ev.Jobs[i];
@@ -59,9 +53,6 @@ public sealed partial class JobWhitelistSystem : EntitySystem
 
     private void OnGetDisallowedJobs(ref GetDisallowedJobsEvent ev)
     {
-        if (!_config.GetCVar(CCVars.GameRoleWhitelist))
-            return;
-
         foreach (var job in _whitelistedJobs)
         {
             if (!_manager.IsAllowed(ev.Player, job))

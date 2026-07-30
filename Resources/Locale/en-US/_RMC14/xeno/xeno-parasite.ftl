@@ -10,6 +10,7 @@ rmc-xeno-parasite-dead = {CAPITALIZE(SUBJECT($parasite))} {CONJUGATE-BE($parasit
 rmc-xeno-parasite-announce-infect = We sense that a {$xeno} has infected a host at {$location}!
 
 rmc-xeno-parasite-player-pickup = {CAPITALIZE($parasite)} can handle {REFLEXIVE($parasite)}!
+rmc-xeno-parasite-touch-on-fire = Touching the parasite while you're on fire would burn it!
 rmc-xeno-parasite-nonplayer-pull = Pulling the {$parasite} might hurt {OBJECT($parasite)}!
 
 rmc-xeno-parasite-ai-active = {CAPITALIZE(SUBJECT($parasite))} seems to be active.

@@ -310381,7 +310381,7 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 47870
+  - uid: 47871
     components:
     - type: MetaData
       name: Flight ground relay

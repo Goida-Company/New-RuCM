@@ -54,39 +54,64 @@ public sealed partial class YautjaProfileApplySystem : EntitySystem
         SubscribeLocalEvent<YautjaAppliedProfileComponent, RMCAutomatedVendedUserEvent>(OnAutomatedVendorVended);
     }
 
-    public void ApplyProfile(EntityUid uid, YautjaCharacterProfile yautjaProfile)
+    public void ApplyProfile(
+        EntityUid uid,
+        YautjaCharacterProfile yautjaProfile,
+        YautjaRank? authoritativeRank = null,
+        YautjaProfileCapabilities? authoritativeCapabilities = null)
     {
         if (!TryComp(uid, out HumanoidAppearanceComponent? humanoid))
             return;
 
-        EnsureComp<YautjaAppliedProfileComponent>(uid).Profile = yautjaProfile.Clone();
+        // A client-supplied profile is never an authority for clan rank. Ordinary
+        // spawns stay Blooded until the server passes the persisted rank explicitly.
+        var authoritativeBaseRank = authoritativeCapabilities?.Rank ??
+                                    YautjaRankManager.CanonicalHunterSpawnRank(
+                                        authoritativeRank ?? YautjaRank.Blooded);
+        var capabilities = authoritativeCapabilities ?? new YautjaProfileCapabilities(
+            authoritativeBaseRank,
+            YautjaRankResolver.CanUseUnique(authoritativeBaseRank),
+            false);
+        var profile = yautjaProfile.SanitizeForCapabilities(capabilities);
+        var rank = capabilities.ForStatus(profile.Status).Rank;
+        EnsureComp<YautjaAppliedProfileComponent>(uid).Profile = profile.Clone();
 
-        var profile = HumanoidCharacterProfile.DefaultWithSpecies("Yautja")
-            .WithName(yautjaProfile.Name)
-            .WithAge(yautjaProfile.Age)
+        var yautja = EnsureComp<YautjaComponent>(uid);
+        yautja.ClanRank = rank;
+        yautja.RankName = YautjaRankMetadata.For(rank).LocalizedName;
+        Dirty(uid, yautja);
+
+        var humanoidProfile = HumanoidCharacterProfile.DefaultWithSpecies("Yautja")
+            .WithName(profile.Name)
+            .WithAge(profile.Age)
             .WithSex(Sex.Male)
             .WithGender(Gender.Male)
-            .WithCharacterAppearance(yautjaProfile.Appearance);
+            .WithCharacterAppearance(profile.Appearance);
 
-        _humanoid.LoadProfile(uid, profile, humanoid);
-        _meta.SetEntityName(uid, yautjaProfile.Name);
+        _humanoid.LoadProfile(uid, humanoidProfile, humanoid);
+        // YautjaStatsSystem schedules its normal random skin pass on startup.
+        // A player profile is authoritative and must not be replaced on the
+        // first server tick after the profile was applied.
+        yautja.SkinColorRandomized = true;
+        Dirty(uid, yautja);
+        _meta.SetEntityName(uid, profile.Name);
 
-        ReplaceEquipped(uid, "outerClothing", yautjaProfile.ArmorPrototype);
-        var mask = ReplaceEquipped(uid, "mask", yautjaProfile.MaskPrototype);
-        ReplaceEquipped(uid, "shoes", yautjaProfile.GreavesPrototype);
-        var bracer = ReplaceEquipped(uid, "gloves", yautjaProfile.BracerPrototype);
-        var cape = ReplaceEquipped(uid, "back", yautjaProfile.CapePrototype);
+        ReplaceEquipped(uid, "outerClothing", profile.ArmorPrototype);
+        var mask = ReplaceEquipped(uid, "mask", profile.MaskPrototype);
+        ReplaceEquipped(uid, "shoes", profile.GreavesPrototype);
+        var bracer = ReplaceEquipped(uid, "gloves", profile.BracerPrototype);
+        var cape = ReplaceEquipped(uid, "back", profile.CapePrototype);
 
         if (mask != null)
-            ApplyMaskAccessory(mask.Value, yautjaProfile);
+            ApplyMaskAccessory(mask.Value, profile);
 
         if (bracer != null)
-            ApplyBracerSettings(bracer.Value, yautjaProfile);
+            ApplyBracerSettings(bracer.Value, profile);
 
         if (cape != null)
-            ApplyCapeColor(cape.Value, yautjaProfile);
+            ApplyCapeColor(cape.Value, profile);
 
-        ApplyFlavorText(uid, yautjaProfile);
+        ApplyFlavorText(uid, profile);
     }
 
     private void OnAutomatedVendorVended(Entity<YautjaAppliedProfileComponent> ent, ref RMCAutomatedVendedUserEvent args)

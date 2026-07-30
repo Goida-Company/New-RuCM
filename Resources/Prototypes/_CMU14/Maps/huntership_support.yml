@@ -121,6 +121,11 @@
     offset: 0.5,0.5
     layers:
     - state: "Normal Hellhound Sleeping"
+  - type: InteractionOutline
+  - type: UserInterface
+    interfaces:
+      enum.DialogUiKey.Key:
+        type: DialogBui
   - type: Icon
     sprite: _CMU14/HunterShip/mob/humans/onmob/hunter/hellhound.rsi
     state: "Normal Hellhound Sleeping"
@@ -189,7 +194,7 @@
   components:
   - type: FTLBeacon
   - type: DropshipDestination
-    FactionControlling: thirdparty
+    FactionControlling: yautja
   - type: FTLSmashImmune
   - type: NoFTL
 
@@ -202,7 +207,7 @@
   components:
   - type: FTLBeacon
   - type: DropshipDestination
-    FactionControlling: thirdparty
+    FactionControlling: yautja
   - type: FTLSmashImmune
   - type: NoFTL
 
@@ -215,7 +220,7 @@
   components:
   - type: FTLBeacon
   - type: DropshipDestination
-    FactionControlling: thirdparty
+    FactionControlling: yautja
   - type: FTLSmashImmune
   - type: NoFTL
 

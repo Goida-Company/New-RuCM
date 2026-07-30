@@ -12,7 +12,7 @@
             <Label Name="PaperStatusLabel" StyleClasses="LabelSubText" />
 
                         <LineEdit Name="SearchBar"
-                      PlaceHolder="Search templates..."
+                      PlaceHolder="{Loc cmu-universal-paper-tool-search-placeholder}"
                       HorizontalExpand="True" />
 
             <ScrollContainer VerticalExpand="True" HScrollEnabled="False">
@@ -22,7 +22,7 @@
             </ScrollContainer>
 
             <Button Name="ExitButton"
-                    Text="Close"
+                    Text="{Loc cmu-universal-paper-tool-close}"
                     HorizontalAlignment="Center" />
         </BoxContainer>
     </PanelContainer>

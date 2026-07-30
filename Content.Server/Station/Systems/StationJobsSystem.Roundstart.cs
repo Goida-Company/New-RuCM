@@ -110,6 +110,8 @@ public sealed partial class StationJobsSystem
                 protoJob = new ProtoId<JobPrototype>(jobId);
             }
             assigned[player] = (protoJob, assignedStation ?? EntityUid.Invalid);
+            if (protoJob is { } forcedJob)
+                RaiseLocalEvent(new StationJobsRoundStartPlayerAssignedEvent(player, forcedJob, assignedStation ?? EntityUid.Invalid));
             forcedToRemove.Add(player);
         }
         // Remove forced players from profiles so they are not assigned again
@@ -176,6 +178,7 @@ public sealed partial class StationJobsSystem
                     stationJobs[station][job]--;
                     profiles.Remove(player);
                     assigned.Add(player, (job, station));
+                    RaiseLocalEvent(new StationJobsRoundStartPlayerAssignedEvent(player, job, station));
 
                     optionsRemaining--;
                 }

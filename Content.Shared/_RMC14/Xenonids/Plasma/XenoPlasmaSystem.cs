@@ -109,7 +109,7 @@ public sealed partial class XenoPlasmaSystem : EntitySystem
 
         if (otherXeno.Plasma == otherXeno.MaxPlasma)
         {
-            _popup.PopupClient("That xeno already has max plasma!", args.Target.Value, self, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("cm-xeno-plasma-other-max-full"), args.Target.Value, self, PopupType.MediumCaution); // RuMC edit
             return;
         }
 

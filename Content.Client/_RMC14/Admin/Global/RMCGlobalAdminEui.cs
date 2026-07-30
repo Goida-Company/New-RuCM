@@ -130,7 +130,7 @@ public sealed partial class RMCGlobalAdminEui : BaseEui
             });
         }
 
-        _window.XenosLabel.Text = $"Total xenonid players alive: {s.Xenos.Count}";
+        _window.XenosLabel.Text = $"Total xenonids alive: {s.Xenos.Count}";
 
         foreach (var (guid, actor, round) in s.TacticalMapHistory)
         {

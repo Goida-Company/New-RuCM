@@ -107,10 +107,27 @@ au14-job-prefix-govformo = СМО
 au14-job-name-govforpolicechief = Начальник военной полиции
 au14-job-description-govforpolicechief = Руководи военными полицейскими. Поддерживай дисциплину и порядок в подразделении.
 au14-job-prefix-govforpolicechief = НВП
+
 AU14JobVehicleCrewmanBaseAbstract = Член экипажа техники
 au14-job-name-vehiclecrewman = Член экипажа техники
 au14-job-description-vehiclecrewman = Управляй бронетехникой для поддержки своей фракции.
 au14-job-prefix-vehiclecrewman = ЧЭТ
+
+au14-job-name-vehiclecommander = Командир экипажа техники
+au14-job-description-vehiclecommander = Командуй бронетехникой своей фракции. Управляй экипажем, координируй действия с пехотой и удерживай машину в бою.
+au14-job-prefix-vehiclecommander = КЭТ
+
+au14-job-name-govforengineeringtech = Инженер-техник
+au14-job-description-govforengineeringtech = Обеспечивай строительную и инженерную поддержку своей фракции.
+au14-job-prefix-govforengineeringtech = ИТ
+
+au14-job-name-govfornurse = Медсестра
+au14-job-description-govfornurse = Помогай врачам и санитарам в лечении раненых.
+au14-job-prefix-govfornurse = МС
+
+au14-job-name-radiotrafficoperator = Оператор радио
+au14-job-description-radiotrafficoperator = Обеспечивай радиообмен между солдатами и командованием.
+au14-job-prefix-radiotrafficoperator = ОПР
 
 au14-job-prefix-AU14JobGOVFORPlatCoUPP = КМВЗ
 au14-job-prefix-AU14JobGOVFORPlatoonCorpsmanUPP = САН

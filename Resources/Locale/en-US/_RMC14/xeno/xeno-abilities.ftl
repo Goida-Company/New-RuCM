@@ -189,6 +189,7 @@ cm-xeno-plasma-transferred-to-other = You have transferred {$plasma} plasma to {
 cm-xeno-plasma-transferred-to-self = {$target} has transferred {$plasma} plasma to you. You now have {$total}
 cm-xeno-plasma-cannot-self = You can't transfer plasma to yourself!
 cm-xeno-plasma-other-max-zero = {CAPITALIZE(THE($target))} doesn't have any use for plasma!
+cm-xeno-plasma-other-max-full = That xeno already has max plasma!
 rmc-xeno-plasma-ovipositor = We can't transfer plasma to a queen mounted on her ovipositor.
 
 # Watch
@@ -205,6 +206,8 @@ rmc-xeno-invisibility-expire-bump = We bumped into someone and lost our invisibi
 # Ovipositor
 cm-xeno-ovipositor-attach = We start attaching to the ovipositor.
 cm-xeno-ovipositor-detach = We start detaching from the ovipositor.
+rmc-xeno-hive-needs-ovipositor-announce = Enough time has passed, we require the Queen in oviposition for evolution.
+rmc-xeno-hive-needs-ovipositor-popup = It is time to settle down and let your children grow.
 
 # Retrieve Egg
 cm-xeno-retrieve-egg-no-eggs = We don't have any eggs stored!
@@ -214,6 +217,7 @@ cm-xeno-retrieve-egg-unstash-egg = We grab an egg from our storage. Now holding:
 rmc-xeno-retrieve-egg-current = {CAPITALIZE(SUBJECT($xeno))} {CONJUGATE-BE($xeno)} holding: {$cur_eggs}/{$max_eggs} eggs.
 
 # Throw Parasite
+cm-xeno-throw-parasite-on-fire = Retrieving a stored parasite while we're on fire would burn it!
 cm-xeno-throw-parasite-no-parasites = We don't have any children stored!
 cm-xeno-throw-parasite-too-many-parasites = We can't carry more children!
 cm-xeno-throw-parasite-stash-parasite = We store the child for safekeeping. Now sheltering: {$cur_parasites}/{$max_parasites}.

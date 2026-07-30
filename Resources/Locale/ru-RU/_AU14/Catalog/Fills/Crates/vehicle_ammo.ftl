@@ -1,7 +1,7 @@
 ent-RMCCrateVehicleAmmoLTBCannon = ящик магазинов пушки танка ЛТБ (x6)
     .desc = Ящик с боеприпасами.
 
-ent-RMCCrateVehicleAmmoLTAAAP = ящик магазинов миниганa ПВО (x3)
+ent-RMCCrateVehicleAmmoLTAAAP = ящик магазинов минигана ПВО (x3)
     .desc = Ящик с боеприпасами.
 
 ent-RMCCrateVehicleAmmoAceAutocannon = ящик магазинов автопушки "АС" (x5)

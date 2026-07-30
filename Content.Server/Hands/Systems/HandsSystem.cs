@@ -10,8 +10,10 @@ using Content.Shared.Explosion;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Input;
+using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Stacks;
 using Content.Shared.Standing;
 using Content.Shared.Throwing;
@@ -34,6 +36,7 @@ namespace Content.Server.Hands.Systems
         [Dependency] private SharedTransformSystem _transformSystem = default!;
         [Dependency] private PullingSystem _pullingSystem = default!;
         [Dependency] private ThrowingSystem _throwingSystem = default!;
+        [Dependency] private SharedInteractionSystem _interaction = default!;
 
         private EntityQuery<PhysicsComponent> _physicsQuery;
 
@@ -43,6 +46,10 @@ namespace Content.Server.Hands.Systems
         /// movement direction.
         /// </summary>
         private const float DropHeldItemsSpread = 45;
+
+        // A click on a wall must still be a valid throw so the item can collide
+        // with it. Targets beyond the first impassable collision are rejected.
+        private const float ThrowImpactTolerance = 1f;
 
         public override void Initialize()
         {
@@ -228,6 +235,29 @@ namespace Content.Server.Hands.Systems
                 return false;
             hands.NextThrowTime = _timing.CurTime + hands.ThrowCooldown;
 
+            var playerCoordinates = _transformSystem.GetMapCoordinates(player);
+            var targetCoordinates = _transformSystem.ToMapCoordinates(coordinates);
+            if (targetCoordinates.MapId != playerCoordinates.MapId)
+                return false;
+
+            var direction = targetCoordinates.Position - playerCoordinates.Position;
+            if (direction == Vector2.Zero)
+                return true;
+
+            var length = direction.Length();
+            var distance = Math.Clamp(length, minDistance, hands.ThrowRange);
+            direction *= distance / length;
+
+            var unobstructedDistance = _interaction.UnobstructedDistance(
+                playerCoordinates,
+                targetCoordinates,
+                collisionMask: (int) CollisionGroup.Impassable,
+                predicate: entity => entity == player || entity == throwEnt.Value);
+            if (unobstructedDistance + ThrowImpactTolerance < length)
+            {
+                return false;
+            }
+
             if (TryComp(throwEnt, out StackComponent? stack) && stack.Count > 1 && stack.ThrowIndividually)
             {
                 var splitStack = _stackSystem.Split(throwEnt.Value, 1, Comp<TransformComponent>(player).Coordinates, stack);
@@ -237,14 +267,6 @@ namespace Content.Server.Hands.Systems
 
                 throwEnt = splitStack.Value;
             }
-
-            var direction = _transformSystem.ToMapCoordinates(coordinates).Position - _transformSystem.GetWorldPosition(player);
-            if (direction == Vector2.Zero)
-                return true;
-
-            var length = direction.Length();
-            var distance = Math.Clamp(length, minDistance, hands.ThrowRange);
-            direction *= distance / length;
 
             var throwSpeed = hands.BaseThrowspeed;
 

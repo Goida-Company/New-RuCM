@@ -19,3 +19,4 @@
       components:
       - type: StationNameSetup
         mapNameTemplate: 'Yautja Hunter Ship'
+      - type: CMUHunterShipHiveBootstrap

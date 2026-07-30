@@ -1,7 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Client.Administration.Managers;
+using Content.Client.Lobby;
+using Content.Client._RMC14.LinkAccount;
 using Content.Client._RMC14.PlayTimeTracking;
+using Content.Shared._RMC14.LinkAccount;
 using Content.Shared._RMC14.Mentor;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
@@ -32,6 +35,8 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     [Dependency] private IPlayerManager _playerManager = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private RMCPlayTimeManager _rmcPlayTime = default!;
+    [Dependency] private LinkAccountManager _linkAccount = default!;
+    [Dependency] private IClientPreferencesManager _preferences = default!;
 
     private readonly Dictionary<string, TimeSpan> _roles = new();
     private readonly List<string> _roleBans = new();
@@ -53,6 +58,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
         _client.RunLevelChanged += ClientOnRunLevelChanged;
         _admin.AdminStatusUpdated += () => Updated?.Invoke();
         _rmcPlayTime.Updated += () => Updated?.Invoke();
+        _linkAccount.Updated += () => Updated?.Invoke();
     }
 
     private void ClientOnRunLevelChanged(object? sender, RunLevelChangedEventArgs e)
@@ -95,6 +101,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
 
     private void RxJobWhitelist(MsgJobWhitelist message)
     {
+        _preferences.UpdateYautjaCapabilities(message.YautjaCapabilities);
         _jobWhitelists.Clear();
         _jobWhitelists.AddRange(message.Whitelist);
         Updated?.Invoke();
@@ -104,6 +111,9 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     private bool IsWhitelistedInternal(string jobId)
     {
         if (_jobWhitelists.Contains(jobId))
+            return true;
+
+        if (BoostyYautjaWhitelist.IsAllowed(jobId, _linkAccount.Tier?.Priority))
             return true;
 
         if (!_prototypes.TryIndex<JobPrototype>(jobId, out var jobPrototype))
@@ -138,7 +148,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
             return false;
         }
 
-        if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
+        if (!_cfg.GetCVar(CCVars.GameRoleWhitelist) && jobId != BoostyYautjaWhitelist.JobId)
             return true;
 
         return !jobPrototype.Whitelisted || IsWhitelistedInternal(jobId);
@@ -197,7 +207,7 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
     public bool CheckWhitelist(JobPrototype job, [NotNullWhen(false)] out FormattedMessage? reason)
     {
         reason = default;
-        if (!_cfg.GetCVar(CCVars.GameRoleWhitelist))
+        if (!_cfg.GetCVar(CCVars.GameRoleWhitelist) && job.ID != BoostyYautjaWhitelist.JobId)
             return true;
 
         // RMC14-Whitelist-Tweak-Start

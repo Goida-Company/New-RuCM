@@ -117,4 +117,5 @@ ent-RMCCrateBravo = ящик отряда браво
 ent-RMCCrateAlpha = ящик отряда альфа
     .desc = Ящик с символом отряда Альфа.
 
-
+ent-RMCCrateFoldingBarricades = ящик со складными баррикадами
+    .desc = Ящик со складными баррикадами МБ-6.

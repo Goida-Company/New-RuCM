@@ -24,11 +24,14 @@ using Robust.Shared.Serialization;
 
 namespace Content.Shared._CMU14.Yautja;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState(true)]
 public sealed partial class YautjaComponent : Component
 {
     [DataField]
     public LocId RankName = "cmu-yautja-rank-hunter";
+
+    [DataField, AutoNetworkedField]
+    public YautjaRank ClanRank = YautjaRank.Blooded;
 
     [DataField]
     public float BaseWalkSpeed = 4.4f;
@@ -49,7 +52,7 @@ public sealed partial class YautjaComponent : Component
     public int SkillLevel = 4;
 
     [DataField]
-    public float StunResistance = 2f;
+    public float StunResistance = 1.5f;
 
     [DataField]
     public float ShoveChanceBonus = 0.2f;
@@ -1335,7 +1338,7 @@ public sealed partial class YautjaSmartDiscComponent : Component
 [Access(typeof(YautjaCasterSystem))]
 public sealed partial class YautjaCasterComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 PowerCost = 100;
 
     [DataField]
@@ -1362,9 +1365,6 @@ public sealed partial class YautjaCasterMode
 
     [DataField(required: true)]
     public EntProtoId Projectile = default!;
-
-    [DataField]
-    public FixedPoint2 PowerCost = 100;
 
     [DataField]
     public string ExamineStrength = string.Empty;
@@ -2676,6 +2676,21 @@ public enum YautjaButcherKind : byte
 }
 
 [Serializable, NetSerializable]
+public enum YautjaButcherProcedure : byte
+{
+    Skin,
+    Head,
+    RightHand,
+    LeftHand,
+    RightArm,
+    LeftArm,
+    RightFoot,
+    LeftFoot,
+    RightLeg,
+    LeftLeg,
+}
+
+[Serializable, NetSerializable]
 public enum YautjaTechMisuseKind : byte
 {
     Pickup,
@@ -3184,6 +3199,34 @@ public sealed partial class YautjaCasterImmobilizerProjectileComponent : Compone
 
 [RegisterComponent]
 public sealed partial class YautjaCasterSingleLethalProjectileComponent : Component;
+
+[RegisterComponent]
+public sealed partial class YautjaCasterEradicatorProjectileComponent : Component
+{
+    [DataField]
+    public TimeSpan VehicleSlowdownTime = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public float VehicleHullDamage = 100f;
+
+    [DataField]
+    public SoundSpecifier VehicleImpactSound = new SoundPathSpecifier("/Audio/_RMC14/Effects/meteorimpact.ogg");
+
+    [DataField]
+    public float InteriorExplosionIntensity = 170f;
+
+    [DataField]
+    public float InteriorExplosionSlope = 50f;
+
+    [DataField]
+    public float InteriorExplosionMaxTileIntensity = 170f;
+
+    [DataField]
+    public TimeSpan InteriorCrashStun = TimeSpan.FromSeconds(1);
+
+    [DataField]
+    public TimeSpan InteriorCrashKnockdown = TimeSpan.FromSeconds(2);
+}
 
 [RegisterComponent]
 public sealed partial class YautjaSpikeLauncherComponent : Component;

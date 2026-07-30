@@ -14,6 +14,7 @@
     - RMCGuideRoleDrone
   - type: GhostRole
     name: cmu-job-name-xeno-unknown
+  - type: LarvaQueueable
   - type: Sprite
     sprite: _AU14/Mobs/Xenos/Larva/larva.rsi # AU14-Edit
   - type: FiremanCarriable

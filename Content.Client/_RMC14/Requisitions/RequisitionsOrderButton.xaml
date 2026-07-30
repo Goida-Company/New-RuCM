@@ -17,9 +17,9 @@
                 </BoxContainer>
             </BoxContainer>
             <Control MinWidth="4" />
-            <Button Name="DetailsButton" Access="Public" Text="Info" StyleClasses="ButtonSquare" MinWidth="48" />
+            <Button Name="DetailsButton" Access="Public" Text="{Loc rmc-requisitions-info}" StyleClasses="ButtonSquare" MinWidth="48" />
             <Control MinWidth="3" />
-            <Button Name="OrderButton" Access="Public" Text="Buy" StyleClasses="ButtonSquare" MinWidth="48" />
+            <Button Name="OrderButton" Access="Public" Text="{Loc rmc-requisitions-buy}" StyleClasses="ButtonSquare" MinWidth="48" />
         </BoxContainer>
     </PanelContainer>
 </controls:RequisitionsOrderButton>

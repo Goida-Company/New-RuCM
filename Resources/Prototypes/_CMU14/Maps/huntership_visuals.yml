@@ -2011,12 +2011,14 @@
 
 
 - type: entity
-  parent: CMUHunterShipStaticAlienEffect
+  parent: XenoEgg
   id: CMUHunterShipObjEffectAlienEggForsakenEggGrowingSouth
   name: "Egg"
   description: "It looks like a weird egg."
   suffix: Hunter Ship exact visual
   components:
+  - type: Transform
+    anchored: true
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: BelowMobs
@@ -2025,18 +2027,36 @@
     overrideDir: South
     layers:
     - state: "Egg Growing"
+      map: [ "enum.XenoEggLayers.Base" ]
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "Egg Growing"
+  - type: XenoEgg
+    state: Growing
+    canSpawnGhostParasite: false
+    spawn: CMXenoLarva
+    normalSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
+    currentSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
+    growingState: "Egg Growing"
+    grownState: "Egg"
+    openingState: "Egg Opening"
+    openedState: "Egg Opened"
+  - type: CMUHunterShipHiveAssignment
+    hive: Forsaken
 
 
 - type: entity
-  parent: CMUHunterShipStaticAlienEffect
+  parent: XenoHiveWeedsSource
   id: CMUHunterShipObjEffectAlienWeedsNodeForsakenWeednodeSouth
   name: "Weed node"
   description: "A weird, pulsating node."
   suffix: Hunter Ship exact visual
   components:
+  - type: RemoveComponents
+    components:
+    - type: IconSmooth
+    - type: IconSmoothRandom
+    - type: RandomSprite
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/weeds.rsi
     drawdepth: HighFloorObjects
@@ -2048,6 +2068,8 @@
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/weeds.rsi
     state: "weednode"
+  - type: CMUHunterShipHiveAssignment
+    hive: Forsaken
 
 
 - type: entity
@@ -5003,7 +5025,6 @@
     access:
     - [ "CMUAccessYautjaAncient" ]
     - [ "CMUAccessYautjaElder" ]
-    - [ "CMUAccessYautjaElite" ]
     - [ "CMUAccessYautjaLeader" ]
   - type: Clickable
   - type: InteractionOutline
@@ -5062,7 +5083,6 @@
     access:
     - [ "CMUAccessYautjaAncient" ]
     - [ "CMUAccessYautjaElder" ]
-    - [ "CMUAccessYautjaElite" ]
     - [ "CMUAccessYautjaLeader" ]
   - type: Clickable
   - type: InteractionOutline
@@ -9519,11 +9539,29 @@
 
 - type: entity
   parent: XenoEgg
+  id: CMUHunterShipItemEggBase
+  abstract: true
+  components:
+  - type: XenoEgg
+    canSpawnGhostParasite: false
+    spawn: CMXenoLarva
+    normalSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
+    currentSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
+    growingState: "Egg Growing"
+    grownState: "Egg"
+    openingState: "Egg Opening"
+    openedState: "Egg Opened"
+
+
+- type: entity
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthOffset1x2
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Alpha
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9534,7 +9572,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#ff4040"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9565,12 +9602,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthOffset6x7
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Alpha
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9581,7 +9620,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#ff4040"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9612,12 +9650,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthOffset8x13
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Alpha
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9628,7 +9668,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#ff4040"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9659,12 +9698,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthOffsetNeg5x9
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Alpha
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9675,7 +9716,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#ff4040"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9706,12 +9746,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthOffsetNeg7x15
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Alpha
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9722,7 +9764,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#ff4040"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9753,12 +9794,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthVariant02Offset1xNeg2
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Forsaken
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9769,7 +9812,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#cc8ec4"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9800,12 +9842,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthVariant02Offset9x10
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Forsaken
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9816,7 +9860,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#cc8ec4"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -9847,12 +9890,14 @@
 
 
 - type: entity
-  parent: XenoEgg
+  parent: CMUHunterShipItemEggBase
   id: CMUHunterShipPlacedBaseItemEggItemSouthVariant02OffsetNeg7x11
   name: "Egg"
   description: "Some sort of egg."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUHunterShipHiveAssignment
+    hive: Forsaken
   - type: Sprite
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     drawdepth: Items
@@ -9863,7 +9908,6 @@
     layers:
     - state: "egg_item"
       map: [ "enum.XenoEggLayers.Base" ]
-      color: "#cc8ec4"
   - type: Icon
     sprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     state: "egg_item"
@@ -29270,7 +29314,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29315,7 +29359,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29360,7 +29404,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29405,7 +29449,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29450,7 +29494,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29495,7 +29539,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -31139,7 +31183,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffset0x9
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31163,7 +31207,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -31184,7 +31228,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffset0xNeg9
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31208,7 +31252,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/guns.rsi
+    sprite: _CMU14/Yautja/weapons.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -31229,7 +31273,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffset1xNeg11
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31274,7 +31318,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffset9x0
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31319,7 +31363,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffsetNeg12x7
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31364,7 +31408,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffsetNeg3x2
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31409,7 +31453,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffsetNeg5x6
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."
@@ -31454,7 +31498,7 @@
 
 
 - type: entity
-  parent: CMUYautjaSpikeLauncher
+  parent: CMUYautjaHarpoon
   id: CMUHunterShipPlacedCMUYautjaSpikeLauncherSpikeSouthOffsetNeg9x0
   name: "Large harpoon"
   description: "A huge metal spike with a hook at the end. It's carved with mysterious alien writing."

@@ -49,7 +49,7 @@
 
 - type: entity
   parent: RMCGunCaseBase
-  id: RuMCMachineGunAH12Case
+  id: RuMCGunAH12Case
   name: AH12 gun case
   description: Case for the AH12 rifle.
   components:

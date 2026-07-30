@@ -90,6 +90,18 @@ public enum YautjaEyeColor : byte
 }
 
 [Serializable, NetSerializable]
+public enum YautjaDreadColor : byte
+{
+    MatchSkin,
+    Black,
+    DarkBrown,
+    Brown,
+    Auburn,
+    Ash,
+    Bone,
+}
+
+[Serializable, NetSerializable]
 public enum YautjaCapeStyle : byte
 {
     Full,
@@ -182,6 +194,13 @@ public sealed partial class YautjaCharacterProfile
         YautjaLegacySet.Collector,
     ];
 
+    public static readonly YautjaProfileStatus[] StatusOrder =
+    [
+        YautjaProfileStatus.Normal,
+        YautjaProfileStatus.Council,
+        YautjaProfileStatus.Leader,
+    ];
+
     public static readonly YautjaUniqueSet[] UniqueOrder =
     [
         YautjaUniqueSet.None,
@@ -223,6 +242,17 @@ public sealed partial class YautjaCharacterProfile
         YautjaEyeColor.Red,
         YautjaEyeColor.Jade,
         YautjaEyeColor.Slate,
+    ];
+
+    public static readonly YautjaDreadColor[] DreadColorOrder =
+    [
+        YautjaDreadColor.MatchSkin,
+        YautjaDreadColor.Black,
+        YautjaDreadColor.DarkBrown,
+        YautjaDreadColor.Brown,
+        YautjaDreadColor.Auburn,
+        YautjaDreadColor.Ash,
+        YautjaDreadColor.Bone,
     ];
 
     public static readonly YautjaCapeStyle[] CapeStyleOrder =
@@ -275,6 +305,9 @@ public sealed partial class YautjaCharacterProfile
     public HumanoidCharacterAppearance Appearance { get; private set; } = BuildDefaultAppearance();
 
     [DataField]
+    public YautjaDreadColor DreadColor { get; private set; } = YautjaDreadColor.MatchSkin;
+
+    [DataField]
     public YautjaGearMaterial ArmorMaterial { get; private set; } = YautjaGearMaterial.Ebony;
 
     [DataField]
@@ -302,7 +335,13 @@ public sealed partial class YautjaCharacterProfile
     public YautjaBracerMaterial CasterMaterial { get; private set; } = YautjaBracerMaterial.Ebony;
 
     [DataField]
+    public YautjaRank? ClanRank { get; private set; }
+
+    [DataField]
     public YautjaBracerOwnerRank OwnerRank { get; private set; } = YautjaBracerOwnerRank.Unblooded;
+
+    [DataField]
+    public YautjaProfileStatus Status { get; private set; } = YautjaProfileStatus.Normal;
 
     [DataField]
     public YautjaCapeStyle CapeStyle { get; private set; } = YautjaCapeStyle.Full;
@@ -329,6 +368,7 @@ public sealed partial class YautjaCharacterProfile
     public string QuillMarkingId => GetQuillMarkingId(QuillStyle);
     public YautjaSkinColor SkinColor => GetClosestSkinColor(Appearance.SkinColor);
     public YautjaEyeColor EyeColor => GetClosestEyeColor(Appearance.EyeColor);
+    public Color DreadColorValue => GetDreadColorColor(DreadColor, Appearance.SkinColor);
 
     public string ArmorPrototype => Legacy != YautjaLegacySet.None
         ? $"CMUYautjaArmorLegacy{Legacy}"
@@ -421,23 +461,26 @@ public sealed partial class YautjaCharacterProfile
         Age = other.Age;
         Sex = Sex.Male;
         Gender = Gender.Male;
-        Appearance = SanitizeAppearance(other.Appearance);
-        ArmorMaterial = other.ArmorMaterial;
-        ArmorStyle = other.ArmorStyle;
-        MaskMaterial = other.MaskMaterial;
-        MaskStyle = other.MaskStyle;
-        MaskAccessoryStyle = other.MaskAccessoryStyle;
-        GreavesMaterial = other.GreavesMaterial;
-        GreavesStyle = other.GreavesStyle;
-        BracerMaterial = other.BracerMaterial;
-        CasterMaterial = other.CasterMaterial;
-        OwnerRank = other.OwnerRank;
-        CapeStyle = other.CapeStyle;
+        DreadColor = SanitizeDreadColor(other.DreadColor);
+        Appearance = SanitizeAppearance(other.Appearance, DreadColor);
+        ArmorMaterial = SanitizeEnum(other.ArmorMaterial, YautjaGearMaterial.Ebony);
+        ArmorStyle = other.ArmorStyle is >= 1 and <= 8 ? other.ArmorStyle : DefaultArmorStyle;
+        MaskMaterial = SanitizeEnum(other.MaskMaterial, YautjaGearMaterial.Ebony);
+        MaskStyle = other.MaskStyle is >= 1 and <= 20 ? other.MaskStyle : DefaultMaskStyle;
+        MaskAccessoryStyle = other.MaskAccessoryStyle is >= 0 and <= 3 ? other.MaskAccessoryStyle : 0;
+        GreavesMaterial = SanitizeEnum(other.GreavesMaterial, YautjaGearMaterial.Ebony);
+        GreavesStyle = other.GreavesStyle is >= 1 and <= 4 ? other.GreavesStyle : DefaultGreavesStyle;
+        BracerMaterial = SanitizeEnum(other.BracerMaterial, YautjaBracerMaterial.Ebony);
+        CasterMaterial = SanitizeEnum(other.CasterMaterial, YautjaBracerMaterial.Ebony);
+        ClanRank = other.ClanRank is { } clanRank && Enum.IsDefined(clanRank) ? clanRank : null;
+        OwnerRank = SanitizeEnum(other.OwnerRank, YautjaBracerOwnerRank.Unblooded);
+        Status = SanitizeEnum(other.Status, YautjaProfileStatus.Normal);
+        CapeStyle = SanitizeEnum(other.CapeStyle, YautjaCapeStyle.Full);
         CapeColor = other.CapeColor;
-        TranslatorType = other.TranslatorType;
-        InvisibilitySound = other.InvisibilitySound;
-        Legacy = other.Legacy;
-        Unique = other.Unique;
+        TranslatorType = SanitizeEnum(other.TranslatorType, YautjaTranslatorType.Modern);
+        InvisibilitySound = SanitizeEnum(other.InvisibilitySound, YautjaInvisibilitySound.Modern);
+        Legacy = SanitizeEnum(other.Legacy, YautjaLegacySet.None);
+        Unique = SanitizeEnum(other.Unique, YautjaUniqueSet.None);
         FlavorText = other.FlavorText;
     }
 
@@ -468,18 +511,30 @@ public sealed partial class YautjaCharacterProfile
 
     public YautjaCharacterProfile WithAppearance(HumanoidCharacterAppearance appearance)
     {
-        return new(this) { Appearance = SanitizeAppearance(appearance) };
+        var profile = new YautjaCharacterProfile(this);
+        profile.Appearance = SanitizeAppearance(appearance, profile.DreadColor);
+        return profile;
     }
 
     public YautjaCharacterProfile WithSkinColor(YautjaSkinColor skinColor)
     {
         var color = GetSkinColorColor(skinColor);
-        return WithAppearance(Appearance.WithSkinColor(color).WithHairColor(color));
+        return WithAppearance(Appearance.WithSkinColor(color));
     }
 
     public YautjaCharacterProfile WithEyeColor(YautjaEyeColor eyeColor)
     {
         return WithAppearance(Appearance.WithEyeColor(GetEyeColorColor(eyeColor)));
+    }
+
+    public YautjaCharacterProfile WithDreadColor(YautjaDreadColor dreadColor)
+    {
+        var profile = new YautjaCharacterProfile(this)
+        {
+            DreadColor = SanitizeDreadColor(dreadColor),
+        };
+        profile.Appearance = SanitizeAppearance(profile.Appearance, profile.DreadColor);
+        return profile;
     }
 
     public YautjaCharacterProfile WithQuillStyle(YautjaQuillStyle style)
@@ -529,9 +584,75 @@ public sealed partial class YautjaCharacterProfile
         return new(this) { CasterMaterial = material };
     }
 
+    public YautjaCharacterProfile WithClanRank(YautjaRank rank)
+    {
+        return WithRank(rank);
+    }
+
+    public YautjaCharacterProfile WithRank(YautjaRank rank)
+    {
+        if (!Enum.IsDefined(rank))
+            rank = YautjaRank.Blooded;
+
+        var profile = new YautjaCharacterProfile(this)
+        {
+            ClanRank = rank,
+            OwnerRank = YautjaRankResolver.ToOwnerRank(rank),
+        };
+
+        return YautjaRankResolver.CanUseUnique(rank)
+            ? profile
+            : profile.WithUnique(YautjaUniqueSet.None);
+    }
+
+    public YautjaCharacterProfile WithStatus(YautjaProfileStatus status)
+    {
+        return new(this)
+        {
+            Status = Enum.IsDefined(status) ? status : YautjaProfileStatus.Normal,
+        };
+    }
+
+    private YautjaCharacterProfile WithActiveRank(YautjaRank rank)
+    {
+        if (!Enum.IsDefined(rank))
+            rank = YautjaRank.Blooded;
+
+        return new YautjaCharacterProfile(this)
+        {
+            ClanRank = rank,
+            OwnerRank = YautjaRankResolver.ToOwnerRank(rank),
+        };
+    }
+
+    public YautjaCharacterProfile SanitizeForCapabilities(YautjaProfileCapabilities capabilities)
+    {
+        var status = capabilities.SanitizeStatus(Status);
+        var activeCapabilities = capabilities.ForStatus(status);
+        var profile = WithStatus(status).WithActiveRank(activeCapabilities.Rank);
+
+        if (!capabilities.CanUseLegacySet(profile.Legacy))
+            profile = profile.WithLegacy(YautjaLegacySet.None);
+
+        if (!capabilities.CanUseUnique || profile.Legacy != YautjaLegacySet.None)
+            profile = profile.WithUnique(YautjaUniqueSet.None);
+
+        if (!capabilities.CanUseCape(profile.CapeStyle))
+            profile = profile.WithCapeStyle(YautjaCapeStyle.Full);
+
+        if (!capabilities.CanUseBracer(profile.BracerMaterial))
+            profile = profile.WithBracer(YautjaBracerMaterial.Ebony);
+
+        return profile;
+    }
+
     public YautjaCharacterProfile WithOwnerRank(YautjaBracerOwnerRank ownerRank)
     {
-        return new(this) { OwnerRank = ownerRank };
+        return new(this)
+        {
+            ClanRank = null,
+            OwnerRank = ownerRank,
+        };
     }
 
     public YautjaCharacterProfile WithCapeStyle(YautjaCapeStyle style)
@@ -689,6 +810,16 @@ public sealed partial class YautjaCharacterProfile
         };
     }
 
+    public static string GetStatusDisplayName(YautjaProfileStatus status)
+    {
+        return status switch
+        {
+            YautjaProfileStatus.Council => "Council",
+            YautjaProfileStatus.Leader => "Leader",
+            _ => "Normal",
+        };
+    }
+
     public static string GetUniqueDisplayName(YautjaUniqueSet unique)
     {
         return unique switch
@@ -725,6 +856,20 @@ public sealed partial class YautjaCharacterProfile
             YautjaEyeColor.Slate => Loc.GetString("cmu-yautja-profile-eye-slate"),
             YautjaEyeColor.Black => Loc.GetString("cmu-yautja-profile-eye-black"),
             _ => Loc.GetString("cmu-yautja-profile-eye-gold"),
+        };
+    }
+
+    public static string GetDreadColorDisplayName(YautjaDreadColor dreadColor)
+    {
+        return dreadColor switch
+        {
+            YautjaDreadColor.Black => "black",
+            YautjaDreadColor.DarkBrown => "dark brown",
+            YautjaDreadColor.Brown => "brown",
+            YautjaDreadColor.Auburn => "auburn",
+            YautjaDreadColor.Ash => "ash",
+            YautjaDreadColor.Bone => "bone",
+            _ => "match skin",
         };
     }
 
@@ -786,6 +931,20 @@ public sealed partial class YautjaCharacterProfile
         };
     }
 
+    public static Color GetDreadColorColor(YautjaDreadColor color, Color skinColor)
+    {
+        return color switch
+        {
+            YautjaDreadColor.Black => C(20, 18, 16),
+            YautjaDreadColor.DarkBrown => C(45, 32, 24),
+            YautjaDreadColor.Brown => C(78, 54, 34),
+            YautjaDreadColor.Auburn => C(94, 48, 36),
+            YautjaDreadColor.Ash => C(105, 105, 100),
+            YautjaDreadColor.Bone => C(185, 174, 145),
+            _ => skinColor.WithAlpha(1f),
+        };
+    }
+
     public static Color GetClosestEyeColorColor(Color color)
     {
         return GetEyeColorColor(GetClosestEyeColor(color));
@@ -827,15 +986,28 @@ public sealed partial class YautjaCharacterProfile
             Color.Black);
     }
 
-    private static HumanoidCharacterAppearance SanitizeAppearance(HumanoidCharacterAppearance appearance)
+    private static HumanoidCharacterAppearance SanitizeAppearance(
+        HumanoidCharacterAppearance appearance,
+        YautjaDreadColor dreadColor)
     {
         var skinColor = GetClosestSkinToneColor(appearance.SkinColor);
+        var hairColor = GetDreadColorColor(SanitizeDreadColor(dreadColor), skinColor);
         return ApplyQuillStyle(
             appearance.Clone()
                 .WithSkinColor(skinColor)
-                .WithHairColor(skinColor)
+                .WithHairColor(hairColor)
                 .WithEyeColor(GetClosestEyeColorColor(appearance.EyeColor)),
             GetQuillStyle(appearance));
+    }
+
+    private static YautjaDreadColor SanitizeDreadColor(YautjaDreadColor dreadColor)
+    {
+        return Enum.IsDefined(dreadColor) ? dreadColor : YautjaDreadColor.MatchSkin;
+    }
+
+    private static T SanitizeEnum<T>(T value, T fallback) where T : struct, Enum
+    {
+        return Enum.IsDefined(value) ? value : fallback;
     }
 
     private static HumanoidCharacterAppearance ApplyQuillStyle(HumanoidCharacterAppearance appearance, YautjaQuillStyle style)

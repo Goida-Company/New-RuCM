@@ -1,0 +1,19 @@
+
+
+
+- type: entity
+  parent: RMCMarineHelmetBase
+  id: RuMCBEARInfantryHelmet
+  name: Altyn-D
+  description: A heavy spherical helmet designed in the style of Altyn, but without a visor. Provides a high level of head protection while maintaining a wide field of vision. Built-in communication system. Created for BEAR PMC soldiers.
+  components:
+  - type: IdentityBlocker
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/helmets/helmet.rsi
+  - type: Clothing
+    sprite: _RuMC14/Clothing/BEAR/helmets/helmet.rsi
+  - type: CMArmor
+    melee: 30
+    bullet: 30
+    bio: 20
+    explosionArmor: 12

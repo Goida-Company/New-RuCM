@@ -515,16 +515,13 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
 
     public override bool FlyTo(Entity<DropshipNavigationComputerComponent> computer, EntityUid destination, EntityUid? user, bool hijack = false, float? startupTime = null, float? hyperspaceTime = null, bool offset = false)
     {
-        if (TryComp(computer.Owner, out WhitelistedShuttleComponent? whitelistComp) &&
-            IsStrictThirdPartyFaction(whitelistComp.Faction) &&
-            TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
-            !HasComp<EphemeralDropshipDestinationComponent>(destination) &&
-            !IsThirdPartyDestination(destinationComp))
+        if (TryComp(destination, out DropshipDestinationComponent? destinationComp) &&
+            !CanUseDestination(computer.Owner, destination, destinationComp))
         {
             if (user != null)
-                _popup.PopupEntity("This shuttle can only land at third party dropship destinations.", computer.Owner, user.Value, PopupType.MediumCaution);
+                _popup.PopupEntity("This shuttle is not authorized for that dropship destination.", computer.Owner, user.Value, PopupType.MediumCaution);
 
-            Log.Warning($"{ToPrettyString(user)} tried to launch thirdparty whitelisted shuttle {ToPrettyString(computer.Owner)} to non-thirdparty destination {ToPrettyString(destination)}");
+            Log.Warning($"{ToPrettyString(user)} tried to launch {ToPrettyString(computer.Owner)} to unauthorized dropship destination {ToPrettyString(destination)}");
             return false;
         }
 
@@ -844,16 +841,8 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
                     continue;
                 }
 
-                if (IsStrictThirdPartyFaction(whitelistedFaction))
-                {
-                    if (!IsThirdPartyDestination(comp))
-                        continue;
-                }
-                else if (!string.IsNullOrEmpty(comp.FactionController))
-                {
-                    if (string.IsNullOrEmpty(whitelistedFaction) || comp.FactionController.ToLowerInvariant() != whitelistedFaction)
-                        continue;
-                }
+                if (!CanUseDestination(computer.Owner, uid, comp))
+                    continue;
 
                 // --- Filter by destination type ---
                 if (shuttleType == DropshipDestinationComponent.DestinationType.Figher)
@@ -939,6 +928,28 @@ public sealed partial class DropshipSystem : SharedDropshipSystem
     private static bool IsThirdPartyDestination(DropshipDestinationComponent destination)
     {
         return string.Equals(destination.FactionController, "thirdparty", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private bool CanUseDestination(EntityUid navConsole, EntityUid destination, DropshipDestinationComponent destinationComp)
+    {
+        if (HasComp<EphemeralDropshipDestinationComponent>(destination))
+            return true;
+
+        string? consoleFaction = null;
+        if (TryComp(navConsole, out WhitelistedShuttleComponent? whitelistComp) &&
+            !string.IsNullOrWhiteSpace(whitelistComp.Faction))
+        {
+            consoleFaction = whitelistComp.Faction;
+        }
+
+        if (IsStrictThirdPartyFaction(consoleFaction))
+            return IsThirdPartyDestination(destinationComp);
+
+        if (string.IsNullOrWhiteSpace(destinationComp.FactionController))
+            return true;
+
+        return !string.IsNullOrWhiteSpace(consoleFaction) &&
+               string.Equals(destinationComp.FactionController, consoleFaction, StringComparison.OrdinalIgnoreCase);
     }
 
     private void ArmThirdPartyAutoReturn(EntityUid dropship, EntityUid destination)

@@ -13,12 +13,9 @@
     currentLanguage: Yautja
     defaultLanguage: Yautja
   - type: Yautja
-  - type: YautjaHeatResistance
   - type: IgnoreXenoWeedsSlowdown
   - type: Skills
-    skills:
-      RMCSkillMedical: 3
-      RMCSkillSurgery: 2
+    preset: CMUSkillPresetYautjaWarrior
   - type: Loadout
     prototypes:
     - CMUYautjaHunterGear
@@ -189,6 +186,7 @@
   name: Yautja Bad Blood
   suffix: Yautja, Bad Blood, Event
   components:
+  - type: YautjaBadBlood
   - type: NpcFactionMember
     factions:
     - CMUYautjaBadBlood
@@ -207,9 +205,7 @@
   - type: YautjaYoungblood
   - type: IgnoreXenoWeedsSlowdown
   - type: Skills
-    skills:
-      RMCSkillMedical: 3
-      RMCSkillSurgery: 2
+    preset: CMUSkillPresetYautjaWarrior
   - type: HumanoidAppearance
     species: Yautja
     hideLayersOnEquip:

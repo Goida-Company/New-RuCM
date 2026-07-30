@@ -28,6 +28,12 @@ public sealed partial class YautjaCallCombiActionEvent : InstantActionEvent;
 
 public sealed partial class YautjaButcherActionEvent : InstantActionEvent;
 
+[Serializable, NetSerializable]
+public sealed record YautjaButcherTargetSelectedEvent(NetEntity User, NetEntity Target);
+
+[Serializable, NetSerializable]
+public sealed record YautjaButcherProcedureSelectedEvent(NetEntity User, NetEntity Target, YautjaButcherProcedure Procedure);
+
 public sealed partial class YautjaFalconControlActionEvent : InstantActionEvent;
 
 public sealed partial class YautjaFalconRecallActionEvent : InstantActionEvent;
@@ -223,6 +229,13 @@ public enum YautjaBracerPanelCommand : byte
     CreateHuntingTrap,
     ToggleSelfDestruct,
     RefreshTracker,
+    ChangeExplosionType,
+    RemoveBracerAttachments,
+    CreateHealingCapsule,
+    AddTrackedItem,
+    RemoveTrackedItem,
+    ToggleBracerName,
+    ToggleBracerNotificationSound,
 }
 
 [Serializable, NetSerializable]

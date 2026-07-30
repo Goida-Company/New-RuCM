@@ -121,7 +121,6 @@ public sealed partial class YautjaPowerSystem : EntitySystem
             {
                 AddAction(ent.Comp, ref args, ref ent.Comp.ToggleIdChipAction, ent.Comp.ToggleIdChipActionId);
                 AddAction(ent.Comp, ref args, ref ent.Comp.LinkThrallBracerAction, ent.Comp.LinkThrallBracerActionId);
-                AddAction(ent.Comp, ref args, ref ent.Comp.ChangeExplosionTypeAction, ent.Comp.ChangeExplosionTypeActionId);
             }
 
             return;
@@ -133,27 +132,7 @@ public sealed partial class YautjaPowerSystem : EntitySystem
         AddAction(ent.Comp, ref args, ref ent.Comp.OpenBracerMenuAction, ent.Comp.OpenBracerMenuActionId);
         AddAction(ent.Comp, ref args, ref ent.Comp.ToggleCloakAction, ent.Comp.ToggleCloakActionId);
         AddAction(ent.Comp, ref args, ref ent.Comp.RecallAction, ent.Comp.RecallActionId);
-        AddAction(ent.Comp, ref args, ref ent.Comp.CallDiscAction, ent.Comp.CallDiscActionId);
 
-        if (isYautja && !HasComp<YautjaYoungbloodComponent>(args.User))
-            AddAction(ent.Comp, ref args, ref ent.Comp.SelfDestructAction, ent.Comp.SelfDestructActionId);
-
-        AddAction(ent.Comp, ref args, ref ent.Comp.TranslatorAction, ent.Comp.TranslatorActionId);
-
-        if (isYautja)
-        {
-            AddAction(ent.Comp, ref args, ref ent.Comp.ToggleIdChipAction, ent.Comp.ToggleIdChipActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.LinkThrallBracerAction, ent.Comp.LinkThrallBracerActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.ChangeExplosionTypeAction, ent.Comp.ChangeExplosionTypeActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.ToggleNotificationSoundAction, ent.Comp.ToggleNotificationSoundActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.ToggleBracerNameAction, ent.Comp.ToggleBracerNameActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.TransmitThrallMessageAction, ent.Comp.TransmitThrallMessageActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.TrackGearAction, ent.Comp.TrackGearActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.AddTrackedItemAction, ent.Comp.AddTrackedItemActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.RemoveTrackedItemAction, ent.Comp.RemoveTrackedItemActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.CreateStabilisingCrystalAction, ent.Comp.CreateStabilisingCrystalActionId);
-            AddAction(ent.Comp, ref args, ref ent.Comp.CreateHealingCapsuleAction, ent.Comp.CreateHealingCapsuleActionId);
-        }
     }
 
     private static void AddAction(

@@ -1,4 +1,7 @@
 cm-xeno-construction-failed-weeds = Bad place for a garden!
+cm-xeno-construction-weeds-pod-here = There's a pod here already!
+cm-xeno-construction-weeds-too-strong = These weeds are too strong to plant a node on!
+cm-xeno-construction-weeds-needs-nearby = We can only plant weed nodes near other weed nodes our hive owns!
 ent-XenoResinSpikes = resin spikes
     .desc = A small cluster of bone spikes. Ouch.
 cm-xeno-construction-failed-need-weeds = We can only shape on weeds. Find some resin before you start building!
@@ -114,6 +117,7 @@ rmc-xeno-designer-delete-node-none = There's no design node here.
 rmc-xeno-designer-delete-node-not-owned = We can only delete our own design nodes.
 rmc-xeno-designer-use-node-wrong-hive = This node does not belong to your hive!
 rmc-xeno-designer-node-needs-weed = There are no weeds to create a connection!
+rmc-xeno-designer-node-no-walls = This design node cannot be used to build walls.
 
 rmc-xeno-designer-thicken-none = There's no resin structure here to thicken.
 rmc-xeno-designer-thicken-weedbound = We can't thicken weedbound resin.

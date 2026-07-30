@@ -13,6 +13,7 @@ rmc-xeno-cant-throw = Мы не можем швырнуть {$target}!
 rmc-xeno-parasite-announce-infect = Мы чувствуем, как {$xeno} заразил носителя в {$location}!
 
 rmc-xeno-parasite-player-pickup = {CAPITALIZE($parasite)} может передвигаться самостоятельно!
+rmc-xeno-parasite-touch-on-fire = Если тронуть лицехвата, пока вы горите, он сгорит!
 
 rmc-xeno-parasite-nonplayer-pull = Принудительное перемещение {$parasite} может повредить ему!
 

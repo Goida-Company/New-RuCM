@@ -9,6 +9,7 @@ using Robust.Client.Graphics;
 using Robust.Client.UserInterface;
 using Robust.Client.UserInterface.Controls;
 using Robust.Shared.GameObjects;
+using Robust.Shared.Localization; // RuMC edit
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using static Content.Shared._RMC14.Requisitions.Components.RequisitionsElevatorMode;
@@ -75,35 +76,37 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
     private void UpdatePlatform(RequisitionsBuiState uiState)
     {
-        var platformLabel = "No platform";
-        var platformButtonLabel = "No platform";
+        var platformLabel = Loc.GetString("rmc-requisitions-no-platform"); // RuMC edit
+        var platformButtonLabel = Loc.GetString("rmc-requisitions-no-platform"); // RuMC edit
         var platformButtonDisabled = false;
         bool? raise = null;
         switch (uiState.PlatformLowered)
         {
-            case Lowered or Raised when uiState.Busy:
-                platformLabel = $"Platform: {uiState.PlatformLowered}";
-                platformButtonLabel = "ASRS busy";
+            case Lowered or Raised when uiState.Busy: // RuMC edit
+                platformLabel = uiState.PlatformLowered == Lowered
+                    ? Loc.GetString("rmc-requisitions-platform-lowered")
+                    : Loc.GetString("rmc-requisitions-platform-raised");
+                platformButtonLabel = Loc.GetString("rmc-requisitions-asrs-busy");
                 platformButtonDisabled = true;
                 break;
             case Lowered:
-                platformButtonLabel = "Raise";
-                platformLabel = "Platform: Lowered";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-raise"); // RuMC edit
+                platformLabel = Loc.GetString("rmc-requisitions-platform-lowered"); // RuMC edit
                 raise = true;
                 break;
             case Raised:
-                platformButtonLabel = "Lower";
-                platformLabel = "Platform: Raised";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-lower"); // RuMC edit
+                platformLabel = Loc.GetString("rmc-requisitions-platform-raised"); // RuMC edit
                 raise = false;
                 break;
             case Lowering:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Lowering...";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-please-wait"); // RuMC edit
+                platformLabel = Loc.GetString("rmc-requisitions-lowering"); // RuMC edit
                 platformButtonDisabled = true;
                 break;
             case Raising:
-                platformButtonLabel = "Please wait";
-                platformLabel = "Raising...";
+                platformButtonLabel = Loc.GetString("rmc-requisitions-please-wait"); // RuMC edit
+                platformLabel = Loc.GetString("rmc-requisitions-raising"); // RuMC edit
                 platformButtonDisabled = true;
                 break;
             case null:
@@ -124,7 +127,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
     private void UpdateBudget(RequisitionsBuiState uiState)
     {
-        var text = $"Supply budget: ${uiState.Balance}";
+        var text = Loc.GetString("rmc-requisitions-supply-budget", ("balance", uiState.Balance)); // RuMC edit
         var budget = new FormattedMessage();
         budget.AddMarkupOrThrow($"[bold]{text}[/bold]");
         _window!.MainView.BudgetLabel.SetMessage(budget);
@@ -164,7 +167,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
     private void RebuildCategories(RequisitionsComputerComponent computer)
     {
         var categoryHeader = new FormattedMessage();
-        categoryHeader.AddMarkupOrThrow("[bold]CATEGORIES[/bold]");
+        categoryHeader.AddMarkupOrThrow($"[bold]{Loc.GetString("rmc-requisitions-categories-header")}[/bold]"); // RuMC edit
         _window!.OrderCategoriesView.CategoryHeaderLabel.SetMessage(categoryHeader);
         _window.OrderCategoriesView.CategoriesContainer.DisposeAllChildren();
 
@@ -174,7 +177,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
             var selected = _selectedCategory == categoryIndex;
             var categoryButton = new Button
             {
-                Text = $"{(selected ? "> " : string.Empty)}{GetCategoryLabel(category.Name)}",
+                Text = $"{(selected ? "> " : string.Empty)}{GetCategoryLabel(GetCategoryDisplayName(category.Name))}", // RuMC edit
                 HorizontalExpand = true,
                 StyleClasses = { "ButtonSquare" },
             };
@@ -194,9 +197,9 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
         var filter = _window.OrderCategoriesView.SearchBar.Text?.Trim();
         var searching = !string.IsNullOrWhiteSpace(filter);
-        var header = "ALL CATEGORIES";
+        var header = Loc.GetString("rmc-requisitions-all-categories"); // RuMC edit
         if (searching)
-            header = "SEARCH RESULTS";
+            header = Loc.GetString("rmc-requisitions-search-results"); // RuMC edit
 
         (int Category, int Order)? firstVisible = null;
         var selectedVisible = false;
@@ -211,7 +214,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
             var category = computer.Categories[categoryIndex];
             if (!searching)
-                header = category.Name.ToUpperInvariant();
+                header = GetCategoryDisplayName(category.Name).ToUpperInvariant(); // RuMC edit
 
             for (var orderIndex = 0; orderIndex < category.Entries.Count; orderIndex++)
             {
@@ -240,7 +243,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
         }
 
         if (firstVisible == null)
-            _window.OrderCategoriesView.OrdersContainer.AddChild(new Label { Text = "No matching orders." });
+            _window.OrderCategoriesView.OrdersContainer.AddChild(new Label { Text = Loc.GetString("rmc-requisitions-no-matching-orders") }); // RuMC edit
 
         var catalogHeader = new FormattedMessage();
         catalogHeader.AddMarkupOrThrow($"[bold]{header}[/bold]");
@@ -267,7 +270,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
     private void UpdatePreview(RequisitionsComputerComponent computer)
     {
         var previewHeader = new FormattedMessage();
-        previewHeader.AddMarkupOrThrow("[bold]ORDER PREVIEW[/bold]");
+        previewHeader.AddMarkupOrThrow($"[bold]{Loc.GetString("rmc-requisitions-order-preview")}[/bold]"); // RuMC edit
         _window!.OrderCategoriesView.PreviewHeaderLabel.SetMessage(previewHeader);
         _window.OrderCategoriesView.PreviewPanel.Visible = _previewOpen;
 
@@ -277,7 +280,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
         {
             _window.OrderCategoriesView.PreviewPanel.Visible = false;
             _window.OrderCategoriesView.PreviewTexture.Textures.Clear();
-            _window.OrderCategoriesView.PreviewNameLabel.Text = "No order selected";
+            _window.OrderCategoriesView.PreviewNameLabel.Text = Loc.GetString("rmc-requisitions-no-order-selected"); // RuMC edit
             _window.OrderCategoriesView.PreviewCostLabel.Text = string.Empty;
             _window.OrderCategoriesView.PreviewStockLabel.Text = string.Empty;
             _window.OrderCategoriesView.PreviewDescriptionLabel.SetMessage(string.Empty);
@@ -288,7 +291,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
         SetPrototypeIcon(_window.OrderCategoriesView.PreviewTexture, entry);
         _window.OrderCategoriesView.PreviewNameLabel.Text = GetEntryName(entry);
-        _window.OrderCategoriesView.PreviewCostLabel.Text = $"Cost: ${entry.Cost}";
+        _window.OrderCategoriesView.PreviewCostLabel.Text = Loc.GetString("rmc-requisitions-cost", ("cost", entry.Cost)); // RuMC edit
         _window.OrderCategoriesView.PreviewStockLabel.Text = GetStockText(_selectedCategory.Value, _selectedOrder.Value);
         _window.OrderCategoriesView.PreviewDescriptionLabel.SetMessage(GetEntryDescription(entry));
         _window.OrderCategoriesView.PreviewContentsLabel.SetMessage(GetContentsText(entry));
@@ -298,6 +301,7 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
     private bool MatchesFilter(string categoryName, RequisitionsEntry entry, string filter)
     {
         return categoryName.Contains(filter, StringComparison.OrdinalIgnoreCase) ||
+               GetCategoryDisplayName(categoryName).Contains(filter, StringComparison.OrdinalIgnoreCase) || // RuMC edit
                GetEntryName(entry).Contains(filter, StringComparison.OrdinalIgnoreCase) ||
                GetEntryDescription(entry).Contains(filter, StringComparison.OrdinalIgnoreCase);
     }
@@ -416,15 +420,15 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
         return _prototypes.TryIndex<EntityPrototype>(entry.Crate, out var prototype) &&
                !string.IsNullOrWhiteSpace(prototype.Description)
             ? prototype.Description
-            : "No manifest description.";
+            : Loc.GetString("rmc-requisitions-no-manifest-description"); // RuMC edit
     }
 
     private string GetContentsText(RequisitionsEntry entry)
     {
         if (entry.Entities.Count == 0)
-            return "Delivered as a sealed crate.";
+            return Loc.GetString("rmc-requisitions-delivered-sealed-crate"); // RuMC edit
 
-        var contents = "MANIFEST";
+        var contents = Loc.GetString("rmc-requisitions-manifest"); // RuMC edit
         foreach (var entity in entry.Entities)
         {
             contents += _prototypes.TryIndex<EntityPrototype>(entity, out var prototype)
@@ -438,19 +442,19 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
     private string GetStockText(int category, int order)
     {
         if (!_stock.TryGetValue((category, order), out var stock))
-            return "Stock: unlimited";
+            return Loc.GetString("rmc-requisitions-stock-unlimited"); // RuMC edit
 
         var refill = stock.Current < stock.Max
-            ? $"  +{FormatTime(stock.SecondsUntilNextReplenish)}"
+            ? Loc.GetString("rmc-requisitions-stock-refill", ("time", FormatTime(stock.SecondsUntilNextReplenish))) // RuMC edit
             : string.Empty;
 
-        return $"Stock: {stock.Current}/{stock.Max}{refill}";
+        return Loc.GetString("rmc-requisitions-stock", ("current", stock.Current), ("max", stock.Max), ("refill", refill)); // RuMC edit
     }
 
     private static string FormatTime(int seconds)
     {
         if (seconds <= 0)
-            return "now";
+            return Loc.GetString("rmc-requisitions-now"); // RuMC edit
 
         var time = TimeSpan.FromSeconds(seconds);
         return $"{(int) time.TotalMinutes:00}:{time.Seconds:00}";
@@ -551,6 +555,38 @@ public sealed partial class RequisitionsBui(EntityUid owner, Enum uiKey) : Bound
 
         return $"{value[..Math.Max(0, length - 3)]}...";
     }
+
+    // RuMC edit start
+    private static readonly Dictionary<string, string> CategoryLocKeys = new()
+    {
+        ["Engineering"] = "rmc-requisitions-category-engineering",
+        ["Materials"] = "rmc-requisitions-category-materials",
+        ["Explosives"] = "rmc-requisitions-category-explosives",
+        ["Food and Drinks"] = "rmc-requisitions-category-food-and-drinks",
+        ["Gear"] = "rmc-requisitions-category-gear",
+        ["Pouches"] = "rmc-requisitions-category-pouches",
+        ["Medical"] = "rmc-requisitions-category-medical",
+        ["Mortar"] = "rmc-requisitions-category-mortar",
+        ["Supplies"] = "rmc-requisitions-category-supplies",
+        ["Vehicle Ammo"] = "rmc-requisitions-category-vehicle-ammo",
+        ["Weapons"] = "rmc-requisitions-category-weapons",
+        ["Ammo"] = "rmc-requisitions-category-ammo",
+        ["Ammunition"] = "rmc-requisitions-category-ammunition",
+        ["Specialist Ammo"] = "rmc-requisitions-category-specialist-ammo",
+        ["AP Ammo"] = "rmc-requisitions-category-ap-ammo",
+        ["Dropship Parts"] = "rmc-requisitions-category-dropship-parts",
+        ["Dropship Munitions"] = "rmc-requisitions-category-dropship-munitions",
+        ["Furniture"] = "rmc-requisitions-category-furniture",
+        ["Machines and Vendors (Wrench Required)"] = "rmc-requisitions-category-machines-and-vendors",
+        ["Research"] = "rmc-requisitions-category-research",
+        ["Botany"] = "rmc-requisitions-category-botany",
+    };
+
+    private static string GetCategoryDisplayName(string name)
+    {
+        return CategoryLocKeys.TryGetValue(name, out var key) ? Loc.GetString(key) : name;
+    }
+    // RuMC edit end
 
     private static string GetCategoryLabel(string name)
     {

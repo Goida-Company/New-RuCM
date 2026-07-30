@@ -134,7 +134,7 @@ public sealed partial class XenoParasiteThrowerSystem : SharedXenoParasiteThrowe
 
         if (HasComp<OnFireComponent>(xeno))
         {
-            _popup.PopupEntity("Retrieving a stored parasite while we're on fire would burn it!", xeno, args.Performer, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("cm-xeno-throw-parasite-on-fire"), xeno, args.Performer, PopupType.MediumCaution); // RuMC edit
             return;
         }
 

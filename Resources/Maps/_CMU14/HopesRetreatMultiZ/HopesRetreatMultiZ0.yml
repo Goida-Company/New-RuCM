@@ -332905,7 +332905,7 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 39093
+  - uid: 39194
     components:
     - type: MetaData
       name: Hope's Retreat ground relay

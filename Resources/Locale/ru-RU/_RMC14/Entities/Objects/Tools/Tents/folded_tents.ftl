@@ -1,24 +1,26 @@
-ent-RMCTentUNMCStandardFolded = полевая палатка UNMC в сложенном виде
-  .desc = Стандартная полевая палатка UNMC.
+ent-RMCTentUNMCStandardFolded = сложенная полевая палатка КМП
+    .desc = Стандартная полевая палатка КМП.
 
-ent-RMCTentUNMCBigFolded = Большая палатка UNMC в сложенном виде
-  .desc = Стандартная полевая палатка UNMC.
+ent-RMCTentUNMCBigFolded = сложенная большая палатка КМП
+    .desc = Стандартная полевая палатка КМП.
 
-ent-RMCTentUNMCStandardCommandFolded = командная палатка UNMC в сложенном виде
-  .desc = Стандартная командная палатка UNMC.
+ent-RMCTentUNMCStandardCommandFolded = сложенная командирская палатка КМП
+    .desc = Стандартная командная палатка КМП.
 
-ent-RMCTentUNMCStandardMedicalFolded = медицинская палатка UNMC в сложенном виде
-  .desc = Стандартная медицинская палатка UNMC.
+ent-RMCTentUNMCStandardMedicalFolded = сложенная медицинская палатка КМП
+    .desc = Стандартная медицинская палатка КМП.
 
-ent-RMCTentUNMCExtendedFolded = Удлиненная полевая палатка UNMC в сложенном виде
-  .desc = Стандартная палатка UNMC.
+ent-RMCTentUNMCExtendedFolded = сложенная увеличенная полевая палатка КМП
+    .desc = Стандартная палатка КМП.
 
-ent-RMCTentUNMCExtendedReqFolded = складная палатка UNMC для реквизиции
-  .desc = Стандартная палатка для реквизиции UNMC.
+ent-RMCTentUNMCExtendedReqFolded = сложенная палатка снабжения КМП
+    .desc = Стандартная палатка для реквизиции UNMC.
 
-ent-RMCTentUNMCExtendedMessFolded = складная палатка UNMC
-  .desc = Стандартная палатка-столовая UNMC.
+ent-RMCTentUNMCExtendedMessFolded = сложенная палатка-столовая КМП
+    .desc = Стандартная палатка-столовая КМП.
 
-ent-RMCTentUNMCExtendedMPFolded = сложенная палатка военной полиции UNMC
-  .desc = Стандартная палатка военной полиции UNMC.
+ent-RMCTentUNMCExtendedMPFolded = сложенная палатка военной полиции КМП
+    .desc = Стандартная палатка военной полиции КМП.
 
+ent-AU14TentBigFoldedSurgical = сложенная хирургическая палатка КМП
+    .desc = Стандартная хирургическая палатка.

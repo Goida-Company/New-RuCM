@@ -67,3 +67,7 @@ ent-RuMCUPPPouchFlareFill = {ent-RuMCUPPPouchFlare}
 ent-RuMCUPPPouchPistolAlt = подсумок-кобура ПМ-18
     .desc = Лёгкий подсумок для пистолета.
     .suffix = РуМС, СПН
+
+ent-RuMCUPPPouchDocument = административный подсумок ПМ-68
+    .desc = Подсумок под разные документы.
+    .suffix = РуМС, СПН

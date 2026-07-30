@@ -2602,7 +2602,8 @@ public sealed class YautjaBowTest
                         Assert.That(meta.EntityName, Is.EqualTo("medicomp"), $"{row.Id} CMSS13 source name");
                         Assert.That(meta.EntityDescription, Is.EqualTo("A complex kit of alien tools and medicines."),
                             $"{row.Id} CMSS13 source description");
-                        Assert.That(item.Size.Id, Is.EqualTo("Normal"), $"{row.Id} CMSS13 w_class = SIZE_MEDIUM");
+                        Assert.That(item.Size.Id, Is.EqualTo("Small"),
+                            $"{row.Id} uses the local Small outer size so it fits a Yautja pocket.");
                         Assert.That(clothing.Slots, Is.EqualTo(SlotFlags.SUITSTORAGE), $"{row.Id} CMSS13 flags_equip_slot = SLOT_STORE");
                         Assert.That(storage.MaxItemSize, Is.EqualTo("Normal"), $"{row.Id} should accept source medicomp contents.");
                         Assert.That(limited.Limits, Has.Count.EqualTo(1), $"{row.Id} CMSS13 storage_slots = 12");
@@ -3286,21 +3287,11 @@ public sealed class YautjaBowTest
 
                         Assert.That(actionIds, Does.Contain("CMUActionYautjaToggleWristBlades"),
                             "CMSS13 soldier bracer bracer_actions includes wristblade.");
-                        Assert.That(actionIds, Does.Contain("CMUActionYautjaCreateStabilisingCrystal"),
-                            "CMSS13 soldier bracer bracer_actions includes thwei.");
-                        Assert.That(actionIds, Does.Contain("CMUActionYautjaCreateHealingCapsule"),
-                            "CMSS13 soldier bracer bracer_actions includes capsule.");
-                        Assert.That(actionIds, Does.Contain("CMUActionYautjaTranslator"),
-                            "CMSS13 soldier bracer bracer_actions includes translator.");
-                        Assert.That(actionIds, Does.Contain("CMUActionYautjaSelfDestruct"),
-                            "CMSS13 soldier bracer bracer_actions includes self_destruct.");
+                        Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaCreateHealingCapsule"),
+                            "Healing capsule is exposed through the Yautja bracer menu, not the action bar.");
                         Assert.That(actionIds, Is.EquivalentTo(new[]
                         {
                             "CMUActionYautjaToggleWristBlades",
-                            "CMUActionYautjaCreateStabilisingCrystal",
-                            "CMUActionYautjaCreateHealingCapsule",
-                            "CMUActionYautjaTranslator",
-                            "CMUActionYautjaSelfDestruct",
                         }), "CMSS13 soldier bracer replaces the inherited bracer_actions list instead of keeping normal hunter bracer actions.");
                     }
 
@@ -4751,6 +4742,15 @@ public sealed class YautjaBowTest
                 var holderStored = entMan.GetComponent<YautjaStoredGearComponent>(holder);
                 Assert.That(install.Handled, Is.True);
                 Assert.That(gearComp.Container, Is.Not.Null);
+                var gearActions = new GetItemActionsEvent(entMan.System<ActionContainerSystem>(), hunter, bracer, SlotFlags.GLOVES);
+                entMan.EventBus.RaiseLocalEvent(bracer, gearActions);
+                var gearActionIds = ActionPrototypeIds(entMan, gearActions.Actions);
+                Assert.Multiple(() =>
+                {
+                    Assert.That(gearActionIds, Does.Not.Contain("CMUActionYautjaRemoveBracerAttachments"));
+                    Assert.That(gearActionIds, Does.Contain("CMUActionYautjaToggleScimitar"),
+                        "Installed gear deployment actions remain available on the worn bracer.");
+                });
                 Assert.That(gearComp.Container!.Contains(holder), Is.True,
                     "CMSS13 bracer attachment holder remains the installed item in the bracer.");
                 Assert.That(gearComp.InstalledGear, Does.Contain(holder));
@@ -12856,26 +12856,24 @@ public sealed class YautjaBowTest
                         "CMSS13 plasma caster uses use_unique_action() to toggle stun/lethal mode.");
                     Assert.That(casterComp.Modes, Has.Count.EqualTo(4));
                     Assert.That(casterComp.CurrentMode, Is.EqualTo(0));
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 100),
+                        "CMSS13 plasma caster starts with charge_cost = 100 before any attack_self transition.");
 
                     AssertCasterMode(casterComp.Modes[0],
                         "cmu-yautja-caster-mode-stun",
                         "CMUYautjaCasterStunBolt",
-                        30,
                         "/Audio/_CMU14/Yautja/Weapons/Plasma/pred_plasmacaster_fire.wav");
                     AssertCasterMode(casterComp.Modes[1],
                         "cmu-yautja-caster-mode-immobilizer",
                         "CMUYautjaCasterImmobilizerBolt",
-                        150,
                         "/Audio/_CMU14/Yautja/Weapons/Plasma/pulse.wav");
                     AssertCasterMode(casterComp.Modes[2],
                         "cmu-yautja-caster-mode-lethal",
                         "CMUYautjaCasterLethalBolt",
-                        100,
                         "/Audio/_CMU14/Yautja/Weapons/Plasma/pred_lasercannon.wav");
                     AssertCasterMode(casterComp.Modes[3],
                         "cmu-yautja-caster-mode-eradicator",
                         "CMUYautjaCasterEradicatorBolt",
-                        1000,
                         "/Audio/_CMU14/Yautja/Weapons/Plasma/pulse.wav");
                 });
             }
@@ -12919,6 +12917,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(strengthenStun.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 1, "CMUYautjaCasterImmobilizerBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 150));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 80f).Within(0.0001f),
                         "CMSS13 plasma immobilizers set fire_delay = FIRE_DELAY_TIER_2 * 8.");
                 });
@@ -12929,6 +12928,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(weakenStun.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 0, "CMUYautjaCasterStunBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 30));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 6f).Within(0.0001f));
                 });
 
@@ -12938,6 +12938,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(lethalMode.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 2, "CMUYautjaCasterLethalBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 100));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 18f).Within(0.0001f),
                         "CMSS13 plasma bolt sets fire_delay = FIRE_DELAY_TIER_6 * 3.");
                 });
@@ -12948,6 +12949,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(strengthenLethal.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 3, "CMUYautjaCasterEradicatorBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 1000));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 120f).Within(0.0001f),
                         "CMSS13 plasma eradicator sets fire_delay = FIRE_DELAY_TIER_2 * 12.");
                 });
@@ -12958,6 +12960,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(weakenLethal.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 2, "CMUYautjaCasterLethalBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 500));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 18f).Within(0.0001f));
                 });
 
@@ -12967,6 +12970,7 @@ public sealed class YautjaBowTest
                 {
                     Assert.That(stunMode.Handled, Is.True);
                     AssertCasterState(casterComp, ammo, 0, "CMUYautjaCasterStunBolt");
+                    Assert.That(casterComp.PowerCost, Is.EqualTo((FixedPoint2) 30));
                     Assert.That(gun.FireRate, Is.EqualTo(10f / 6f).Within(0.0001f));
                 });
             }
@@ -15337,14 +15341,12 @@ public sealed class YautjaBowTest
         YautjaCasterMode mode,
         string name,
         string projectile,
-        int powerCost,
         string fireSound)
     {
         Assert.Multiple(() =>
         {
             Assert.That(mode.Name.Id, Is.EqualTo(name));
             Assert.That(mode.Projectile.Id, Is.EqualTo(projectile));
-            Assert.That(mode.PowerCost, Is.EqualTo((FixedPoint2) powerCost));
             AssertSoundPath(mode.FireSound, fireSound);
         });
     }
@@ -16648,6 +16650,14 @@ public sealed class YautjaBowTest
             "A bone that appears to be of human origin.",
             yautjaItems,
             "spine",
+            Cmss13ButcherOutputKind.SkeletonLimb);
+
+        yield return new Cmss13ButcherOutputRow(
+            "CMUYautjaHumanTorso",
+            "ribcage",
+            "A bone that appears to be of human origin.",
+            yautjaItems,
+            "torso",
             Cmss13ButcherOutputKind.SkeletonLimb);
 
         yield return new Cmss13ButcherOutputRow(

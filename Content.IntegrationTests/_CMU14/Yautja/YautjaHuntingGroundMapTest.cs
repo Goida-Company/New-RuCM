@@ -7,6 +7,7 @@ using Content.Client._RMC14.Dialog;
 using Content.Client.Clickable;
 using Content.Server.Maps;
 using Content.Server.Power.Components;
+using Content.Shared.Access.Components;
 using Content.Shared._RMC14.Dialog;
 using Content.Shared._CMU14.Yautja;
 using Content.Shared._RMC14.Doors;
@@ -60,6 +61,44 @@ public sealed class YautjaHuntingGroundMapTest
         "CMUHunterShipPlacedRMCPodDoorButtonDoorctrlSouthOffsetNeg20x0",
         "CMUHunterShipPlacedRMCPodDoorButtonDoorctrlSouthOffsetNeg24x0",
     ];
+
+    [Test]
+    public async Task HunterShipElderQuartersRequireElderOrAboveAccess()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+
+        await server.WaitAssertion(() =>
+        {
+            var prototypes = server.ResolveDependency<IPrototypeManager>();
+            var factory = server.EntMan.ComponentFactory;
+            var expected = new HashSet<string>
+            {
+                "CMUAccessYautjaAncient",
+                "CMUAccessYautjaElder",
+                "CMUAccessYautjaLeader",
+            };
+
+            foreach (var prototypeId in new[]
+                     {
+                         "CMUHunterShipObjStructureMachineryDoorAirlockYautjaSecureElderDoorClosedEast",
+                         "CMUHunterShipObjStructureMachineryDoorAirlockYautjaSecureElderDoorClosedNorth",
+                     })
+            {
+                var prototype = prototypes.Index<EntityPrototype>(prototypeId);
+                Assert.That(prototype.TryGetComponent<AccessReaderComponent>(out var reader, factory), Is.True, prototypeId);
+
+                var actual = reader!.AccessLists
+                    .SelectMany(access => access)
+                    .Select(access => access.Id)
+                    .ToHashSet();
+
+                Assert.That(actual, Is.EquivalentTo(expected), prototypeId);
+            }
+        });
+
+        await pair.CleanReturnAsync();
+    }
 
     [Test]
     public async Task InRotationPlanetMapsHaveGroundRelayMarkers()

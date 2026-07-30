@@ -139,8 +139,6 @@ public sealed partial class YautjaAttachmentSystem : EntitySystem
 
         if (HasAction(ent.Comp, YautjaGearKind.ChainGauntlet))
             args.AddAction(ref ent.Comp.ToggleChainGauntletAction, ent.Comp.ToggleChainGauntletActionId);
-        if (ent.Comp.ActionWhitelist == null)
-            args.AddAction(ref ent.Comp.RemoveBracerAttachmentsAction, ent.Comp.RemoveBracerAttachmentsActionId);
     }
 
     private static bool HasAction(YautjaGearContainerComponent bracer, YautjaGearKind kind)

@@ -1,130 +1,99 @@
-ent-ReagentContainerFlour-name = мешок муки
-ent-ReagentContainerFlour-desc = Большой мешок муки. Хорошо подходит для выпечки!
+ent-ReagentContainerFlour = мешок муки
+    .desc = Большой мешок муки. Отлично подходит для выпечки!
+ent-ReagentContainerFlourSmall = пачка муки
+    .desc = Пакет муки. Отлично подходит для выпечки!
 
-ent-ReagentContainerFlourSmall-name = пакет муки
-ent-ReagentContainerFlourSmall-desc = Пачка муки. Хорошо подходит для выпечки!
+ent-ReagentContainerCornmeal = мешок кукурузной муки
+    .desc = Большой мешок кукурузной муки. Отлично подходит для выпечки!
+ent-ReagentContainerCornmealSmall = пачка кукурузной муки
+    .desc = Пакет кукурузной муки. Отлично подходит для выпечки!
 
-ent-ReagentContainerCornmeal-name = мешок кукурузной муки
-ent-ReagentContainerCornmeal-desc = Большой мешок кукурузной муки. Хорошо готовить!
+ent-ReagentContainerRice = мешок риса
+    .desc = Большой мешок риса. Отлично подходит для готовки!
+ent-ReagentContainerRiceSmall = пачка риса
+    .desc = Пачка риса. Отлично подходит для готовки!
 
-ent-ReagentContainerCornmealSmall-name = пакет кукурузной муки
-ent-ReagentContainerCornmealSmall-desc = Пачка кукурузной муки. Хорошо готовить!
+ent-ReagentContainerSugar = мешок сахара
+    .desc = Большой мешок вкусного космического сахара.
+ent-ReagentContainerSugarSmall = пачка сахара
+    .desc = Пачка вкусного, космического сахара.
 
-ent-ReagentContainerRice-name = мешок для риса
-ent-ReagentContainerRice-desc = Большой мешок риса. Хорошо готовить!
+ent-ReagentContainerOliveoil = оливковое масло
+    .desc = Оливковое масло. Из космических оливок, предположительно.
 
-ent-ReagentContainerRiceSmall-name = пакет риса
-ent-ReagentContainerRiceSmall-desc = Пачка риса. Хорошо готовить!
+ent-ReagentContainerMayo = майонез
+    .desc = Бутылка майонеза.
 
-ent-ReagentContainerSugar-name = мешок сахара
-ent-ReagentContainerSugar-desc = Большой мешок вкусного космического сахара.
+ent-FoodDough = тесто
+    .desc = Большой кусок теста.
+ent-FoodDoughSlice = кусок теста
+    .desc = Кусок теста. Из него готовятся булочки.
+ent-FoodDoughRope = косичка теста
+    .desc = Тонкая верёвка теста. Может быть превращена в бублик.
+ent-FoodDoughCornmeal = кукурузное тесто
+    .desc = Большой кусок кукурузного теста.
+ent-FoodDoughCornmealSlice = кусок кукурузного теста
+    .desc = Кусок кукурузного теста.
+ent-FoodDoughTortilla = тесто тортильи
+    .desc = Большой кусок теста тортильи.
+ent-FoodDoughTortillaSlice = кусок теста тортильи
+    .desc = Кусок теста тортильи.
+ent-FoodDoughTortillaFlat = плоское тесто тортильи
+    .desc = Расплющенный кусок теста тортильи. Приготовьте его, чтобы получить лепёшку тако.
+ent-FoodDoughCotton = хлопковое тесто
+    .desc = Кусок ткани из хлопка.
+ent-FoodDoughCottonSlice = кусок хлопкового теста
+    .desc = Кусочек хлопкового теста.
+ent-FoodDoughCottonRope = косичка хлопкового теста
+    .desc = Тонкая верёвка хлопкового теста. Может быть превращена в хлопковый бублик.
+ent-FoodDoughPastryBaseRaw = сырая основа для выпечки
+    .desc = Перед использованием необходимо приготовить.
+ent-FoodDoughPastryBase = основа для выпечки
+    .desc = Основа любой уважающей себя выпечки.
+ent-FoodDoughPie = тесто для пирога
+    .desc = Приготовьте его, чтобы получить пирог.
+ent-FoodDoughFlat = плоское тесто
+    .desc = Расплющенное тесто.
+ent-FoodDoughCottonFlat = плоское хлопковое тесто
+    .desc = Расплющенный кусок хлопкового теста.
+ent-FoodDoughPizzaBaked = основа для пиццы
+    .desc = Добавьте ингредиенты для приготовления пиццы.
 
-ent-ReagentContainerSugarSmall-name = пакет сахара
-ent-ReagentContainerSugarSmall-desc = Пачка вкусного космического сахара.
+ent-FoodCakeBatter = тесто для торта
+    .desc = Приготовьте его, чтобы получить торт.
 
-ent-ReagentContainerOliveoil-name = оливковое масло
-ent-ReagentContainerOliveoil-desc = Оливковое масло. Предположительно, из космических оливок.
+ent-FoodButter = брусок сливочного масла
+    .desc = Брусок вкусного, золотистого, жирного лакомства.
+ent-FoodButterSlice = ломтик масла
+    .desc = Вкусный, золотистый, жирный кусочек.
 
-ent-ReagentContainerMayo-name = майонез
-ent-ReagentContainerMayo-desc = Бутылка майонеза.
+ent-FoodCannabisButter = брусок конопляного масла
+    .desc = Добавляйте это в свою любимую выпечку для весёлого времяпровождения.
 
-ent-FoodBakingBase-name = элемент
-ent-FoodBakingBase-desc = Используется в различных рецептах.
+ent-FoodCheese = головка сыра
+    .desc = Большое колесо восхитительного Чеддера.
+ent-FoodCheeseSlice = кусок сыра
+    .desc = Клин восхитительного Чеддера. Сырная головка, от которой его отрезали, не могла уйти далеко.
 
-ent-FoodDough-name = тесто
-ent-FoodDough-desc = Кусок теста.
+ent-FoodChevre = брусок козьего сыра
+    .desc = Мягкий брусок сливочного козьего сыра.
+ent-FoodChevreSlice = кружок козьего сыра
+    .desc = Маленький кружок сливочного козьего сыра. Идеальное дополнение к французским гарнирам.
 
-ent-FoodDoughSlice-name = кусочек теста
-ent-FoodDoughSlice-desc = Кусок теста. Можно приготовить в виде булочки.
+ent-FoodTofu = тофу
+    .desc = Твёрдый белый брусок почти без вкуса.
+ent-FoodTofuSlice = кусок тофу
+    .desc = Кусок тофу. Ингредиент различных вегетарианских блюд.
 
-ent-FoodDoughRope-name = веревка для теста
-ent-FoodDoughRope-desc = Тонкая лапша из теста. Можно приготовить бублик.
+ent-FoodBadRecipe = горелое месиво
+    .desc = За это кого-то следует понизить с должности повара.
 
-ent-FoodDoughCornmeal-name = тесто из кукурузной муки
-ent-FoodDoughCornmeal-desc = Кусок кукурузного теста.
+ent-FoodCocoaBeans = какао-бобы
+    .desc = Шоколада много не бывает!
 
-ent-FoodDoughCornmealSlice-name = кусочек теста из кукурузной муки
-ent-FoodDoughCornmealSlice-desc = Кусочек кукурузного теста.
+ent-FoodCroissantRaw = сырой круассан
+    .desc = Маслянистая, слоистая вкуснятина, ожидающая своего часа.
 
-ent-FoodDoughTortilla-name = тесто для тортильи
-ent-FoodDoughTortilla-desc = Кусок теста для тортильи.
-
-ent-FoodDoughTortillaSlice-name = кусочек теста для тортильи
-ent-FoodDoughTortillaSlice-desc = Кусочек теста для тортильи.
-
-ent-FoodDoughTortillaFlat-name = раскатанное тесто для тортильи
-ent-FoodDoughTortillaFlat-desc = Расплющенный кусок теста для тортильи. Приготовьте его, чтобы получить оболочку тако.
-
-ent-FoodDoughCotton-name = хлопковое тесто
-ent-FoodDoughCotton-desc = Кусок тканевого теста.
-
-ent-FoodDoughCottonSlice-name = кусочек хлопкового теста
-ent-FoodDoughCottonSlice-desc = Кусочек хлопкового теста.
-
-ent-FoodDoughCottonRope-name = веревка из хлопкового теста
-ent-FoodDoughCottonRope-desc = Тонкая лапша из хлопкового теста. Можно приготовить хлопковый бублик.
-
-ent-FoodDoughPastryBaseRaw-name = сырая основа для теста
-ent-FoodDoughPastryBaseRaw-desc = Перед употреблением необходимо приготовить.
-
-ent-FoodDoughPastryBase-name = основа для теста
-ent-FoodDoughPastryBase-desc = Основа для любой уважающей себя выпечки.
-
-ent-FoodDoughPie-name = тесто для пирога
-ent-FoodDoughPie-desc = Приготовьте его, чтобы получить пирог.
-
-ent-FoodDoughFlat-name = плоское тесто
-ent-FoodDoughFlat-desc = Раскатанное тесто.
-
-ent-FoodDoughCottonFlat-name = плоское хлопковое тесто
-ent-FoodDoughCottonFlat-desc = Раскатанное хлопчатобумажное тесто.
-
-ent-FoodDoughPizzaBaked-name = пицца хлеб
-ent-FoodDoughPizzaBaked-desc = Добавьте ингредиенты, чтобы приготовить пиццу.
-
-ent-FoodCakeBatter-name = тесто для торта
-ent-FoodCakeBatter-desc = Приготовьте его, чтобы получить торт.
-
-ent-FoodButter-name = палочка сливочного масла
-ent-FoodButter-desc = Палочка восхитительного, золотого, жирного добра.
-
-ent-FoodButterSlice-name = кусочек сливочного масла
-ent-FoodButterSlice-desc = Немного восхитительного, золотого, жирного вкуса.
-
-ent-FoodCannabisButter-name = палочка конопляного масла
-ent-FoodCannabisButter-desc = Добавьте это в свою любимую выпечку, чтобы скоротать время.
-
-ent-FoodCheese-name = сырное колесо
-ent-FoodCheese-desc = Большое колесо вкуснейшего Чеддера.
-
-ent-FoodCheeseSlice-name = сырный клин
-ent-FoodCheeseSlice-desc = Кусочек восхитительного чеддера. Сырное колесо, из которого оно было вырезано, не могло уйти далеко.
-
-ent-FoodChevre-name = шеврский журнал
-ent-FoodChevre-desc = Мягкое полено сливочного Шевра.
-
-ent-FoodChevreSlice-name = шеврский диск
-ent-FoodChevreSlice-desc = Маленький диск сливочного Шевра. Идеальное украшение для французских гарниров.
-
-ent-FoodTofu-name = тофу
-ent-FoodTofu-desc = Твердый белый блок с тонким ароматом.
-
-ent-FoodTofuSlice-name = ломтик тофу
-ent-FoodTofuSlice-desc = Кусочек тофу. Ингредиент различных вегетарианских блюд.
-
-ent-FoodBadRecipe-name = сгоревший беспорядок
-ent-FoodBadRecipe-desc = За это кого-то следует понизить в должности с должности повара.
-
-ent-FoodCocoaBeans-name = какао-бобы
-ent-FoodCocoaBeans-desc = Шоколада много не бывает!
-
-ent-FoodCroissantRaw-name = сырой круассан
-ent-FoodCroissantRaw-desc = Маслянистое, слоеное совершенство ждет своего часа.
-
-ent-FoodCroissantRawCotton-name = круассан из сырого хлопка
-ent-FoodCroissantRawCotton-desc = Маслянистое, слоеное, волокнистое совершенство ждет своего часа.
-
-ent-ReagentContainerBase-name = элемент
-
-ent-ReagentPacketBase-name = элемент
+ent-FoodCroissantRawCotton = сырой хлопковый круассан
+    .desc = Маслянистая, слоистая, волокнистая вкуснятина, ожидающая своего часа.
 

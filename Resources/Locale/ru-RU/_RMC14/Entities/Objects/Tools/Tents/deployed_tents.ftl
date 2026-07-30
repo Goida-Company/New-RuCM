@@ -1,27 +1,29 @@
-ent-RMCTentBase = Полевая палатка UNMC
-  .desc = Стандартная палатка UNMC.
+ent-RMCTentBase = полевая палатка КМП
+  .desc = Стандартная палатка КМП.
 
-ent-RMCTentUNMCBig = Большая палатка UNMC
-  .desc = Стандартная полевая палатка UNMC.
+ent-RMCTentUNMCBig = большая палатка КМП
+  .desc = Стандартная полевая палатка КМП.
 
-ent-RMCTentUNMCStandardCommand = Командная палатка UNMC
-  .desc = Стандартная командная палатка UNMC.
+ent-RMCTentUNMCStandardCommand = командирская палатка КМП
+  .desc = Стандартная командирская палатка КМП.
 
-ent-RMCTentUNMCStandardMedical = Медицинская палатка UNMC
+ent-RMCTentUNMCStandardMedical = медицинская палатка КМП
   .desc = Стандартная медицинская палатка UNMC.
 
-ent-RMCTentUNMCExtended = Расширенная полевая палатка UNMC
+ent-RMCTentUNMCExtended = увеличенная полевая палатка КМП
   .desc = Стандартная палатка UNMC.
 
-ent-RMCTentUNMCExtendedReq = Палатка для реквизиции UNMC
-  .desc = Стандартная палатка для реквизиции UNMC.
+ent-RMCTentUNMCExtendedReq = палатка снабжения КМП
+  .desc = Стандартная палатка снабжения КМП.
 
-ent-RMCTentUNMCExtendedMess = Палатка-столовая UNMC
-  .desc = Стандартная палатка-столовая UNMC.
+ent-RMCTentUNMCExtendedMess = палатка-столовая КМП
+  .desc = Стандартная палатка-столовая КМП.
 
-ent-RMCTentUNMCExtendedMP = Палатка военной полиции UNMC
-  .desc = Стандартная палатка военной полиции UNMC.
+ent-RMCTentUNMCExtendedMP = палатка военной полиции КМП
+  .desc = Стандартная палатка военной полиции КМП.
 
-ent-RMCTentUNMCStandard = Полевая палатка UNMC
-  .desc = Стандартная палатка UNMC. 
+ent-RMCTentUNMCStandard = полевая палатка КМП
+  .desc = Стандартная палатка КМП.
 
+ent-AU14TentBigMedical = хирургическая палатка КМП
+    .desc = Стандартная хирургическая палатка КМП.

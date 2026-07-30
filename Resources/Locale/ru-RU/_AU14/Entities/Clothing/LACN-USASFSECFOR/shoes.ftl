@@ -1,2 +1,2 @@
-ent-AU14LACNBoots-name = ботинки ЛАКФ
-ent-AU14LACNBoots-desc = Стандартные ботинки ЛАКФ.
+ent-AU14LACNBoots = ботинки ЛАКФ
+    .desc = Стандартные ботинки десантников ЛАКФ.

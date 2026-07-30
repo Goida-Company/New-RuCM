@@ -89,6 +89,8 @@ rmc-dropship-weapons-auto-deploy = АВТОМАТИЧЕСКОЕ РАЗВЕРТЫ
 
 rmc-dropship-firemission-warning = КОРАБЛЬ СТРЕЛЯЕТ ПО {$direction}
 rmc-dropship-firemission-warning-above = ТРАНСПОРТНИК СТРЕЛЯЕТ ПРЯМО ПО ВАМ!
+rmc-dropship-firemission-warning-early = ВЫ СЛЫШИТЕ РЁВ ТРАНСПОРТНИКА, ГОТОВЯЩЕГОСЯ ОТКРЫТЬ ОГОНЬ РЯДОМ С ВАМИ!
+rmc-dropship-firemission-warning-early-above = ВЫ СЛЫШИТЕ РЁВ ТРАНСПОРТНИКА, ГОТОВЯЩЕГОСЯ ОТКРЫТЬ ОГОНЬ РЯДОМ С ВАМИ!
 
 rmc-dropship-paradrop-target-screen-text = Система парашютного развертывания HPU-1
     {$hasTarget}

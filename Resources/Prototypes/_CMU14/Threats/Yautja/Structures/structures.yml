@@ -4967,6 +4967,10 @@
       sprite: _CMU14/Yautja/Structures/yautja_machines.rsi
       state: "console_shuttle"
     - type: YautjaShuttleConsole
+    - type: WhitelistedShuttle
+      faction: yautja
+      ShuttleType: Dropship
+      autoReturn: false
     - type: DropshipNavigationComputer
       hijackable: false
       canTacticalLand: true
@@ -4991,6 +4995,7 @@
   description: Used to monitor active health sensors of all Yautja in the system.
   suffix: Yautja, Hunter Shuttle
   components:
+    - type: YautjaCrewMonitoringConsole
     - type: RemoveComponents
       components:
         - type: ActivatableUIRequiresPower

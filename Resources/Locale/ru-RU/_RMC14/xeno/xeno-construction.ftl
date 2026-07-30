@@ -1,4 +1,7 @@
 cm-xeno-construction-failed-weeds = Плохое место для строительства!
+cm-xeno-construction-weeds-pod-here = Здесь уже есть стручок!
+cm-xeno-construction-weeds-too-strong = Эти сорняки слишком крепкие, чтобы посадить на них узел!
+cm-xeno-construction-weeds-needs-nearby = Мы можем сажать узлы сорняков только рядом с другими узлами сорняков нашего улья!
 cm-xeno-construction-failed-need-weeds = Можно строить только на смоляных сорняках. Сначала найдите смолу!
 cm-xeno-construction-failed-cant-build = Здесь нельзя строить!
 cm-xeno-construction-failed-select-structure = Сначала выберите что строить! Используйте "Выбрать смоляную конструкцию".
@@ -83,6 +86,7 @@ rmc-xeno-designer-delete-node-none = Здесь нет узла проектир
 rmc-xeno-designer-delete-node-not-owned = Мы можем удалять только собственные узлы проектирования.
 rmc-xeno-designer-use-node-wrong-hive = Этот узел не принадлежит вашему улью!
 rmc-xeno-designer-node-needs-weed = Здесь нет сорняков для создания связи!
+rmc-xeno-designer-node-no-walls = Этот узел проектирования нельзя использовать для строительства стен.
 rmc-xeno-designer-thicken-none = Здесь нет смоляной структуры, которая могла бы загустеть.
 rmc-xeno-designer-thicken-weedbound = Мы не можем загустить смолу, связанную с сорняками.
 rmc-xeno-designer-thicken-success = Загущаем смолу.

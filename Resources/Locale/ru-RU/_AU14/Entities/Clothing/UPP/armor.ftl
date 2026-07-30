@@ -7,10 +7,10 @@ ent-AU14UPPArmorMinimalistic = лёгкая броня СПН
 ent-AU14UPPArmorBulky = тяжёлая броня СПН
     .desc = Комплект довольно громоздкой брони Союза Прогрессивных Народов.
 
-ent-AU14ArmorSmartGunDesertCombatHarnessUPP = бронированная РПС для пулемёта РВС-37
-    .desc = Разгрузка, специально изготовленная для пулемёта РВС-37.
+ent-AU14ArmorSmartGunDesertCombatHarnessUPP = бронежилет пулемётчика СПН
+    .desc = Бронежилет, специально изготовленный для пулемёта РВС-37.
 
-ent-AU14ArmorArmyUPP = личная броня 6Б80
+ent-AU14ArmorArmyUPP = бронежилет 6Б80
     .desc = Устаревший бронежилет, который давно был заменён.
 
 ent-AU14CoatUPP = куртка офицера

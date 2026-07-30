@@ -274,7 +274,7 @@ public abstract partial class SharedXenoParasiteSystem : EntitySystem
     {
         if (HasComp<OnFireComponent>(args.User))
         {
-            _popup.PopupClient("Touching the parasite while you're on fire would burn it!", ent, args.User, PopupType.MediumCaution);
+            _popup.PopupClient(Loc.GetString("rmc-xeno-parasite-touch-on-fire"), ent, args.User, PopupType.MediumCaution); // RuMC edit
             args.Cancel();
             return;
         }

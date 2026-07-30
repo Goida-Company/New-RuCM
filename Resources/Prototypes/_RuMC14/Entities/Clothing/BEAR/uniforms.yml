@@ -1,0 +1,38 @@
+- type: entity
+  parent: [RMCMarineUniformBase, RMCFoldableUniformBase]
+  id: RuMCUniformBEAR
+  name: uniform BEAR
+  description: Standardized uniform for the BEAR PMC operator.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/jumpsuits/bear_forms_brown.rsi
+  - type: Foldable
+    unfoldVerbText: rmc-sleeves-verb-unfold
+    foldVerbText: rmc-sleeves-verb-fold
+#  - type: UniformAccessoryHolder
+#    startingAccessories:
+#    - AU14PatchUPP
+  - type: Tag
+    tags:
+    - RuMCUniformBEAR
+
+- type: Tag
+  id: RuMCUniformBEAR
+
+- type: entity
+  parent: RuMCUniformBEAR
+  id: RuMCJumpsuitBEAR_Black
+  name: uniform BEAR
+  description: Standardized uniform for the BEAR PMC operator.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/jumpsuits/bear_forms_black.rsi
+
+- type: entity
+  parent: RuMCUniformBEAR
+  id: RuMCJumpsuitBEAR_Gray
+  name: uniform BEAR
+  description: Standardized uniform for the BEAR PMC operator.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/jumpsuits/bear_forms_gray.rsi

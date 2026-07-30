@@ -123,5 +123,19 @@ namespace Content.Shared.Administration
             var flagsText = string.Join(' ', posFlagNames.Concat(negFlagNames).OrderBy(f => f.flag).Select(p => p.fText));
             return flagsText;
         }
+
+        /// <summary>
+        ///     Checks whether an administrator may assign a set of flags.
+        /// </summary>
+        /// <remarks>
+        ///     Host administrators may assign the Clans flag without having it themselves,
+        ///     but they still cannot assign any other flag they do not possess.
+        /// </remarks>
+        public static bool CanGrant(AdminFlags actorFlags, AdminFlags requestedFlags)
+        {
+            var missingFlags = requestedFlags & ~actorFlags;
+            return missingFlags == AdminFlags.None ||
+                   missingFlags == AdminFlags.Clans && (actorFlags & AdminFlags.Host) != AdminFlags.None;
+        }
     }
 }

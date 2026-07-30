@@ -1,4 +1,4 @@
-ent-AU14MaskUSASFPilotOxygen = кислородная маска ССО США LAH-99
+ent-AU14MaskUSASFPilotOxygen = кислородная маска ССО США КМ-99
     .desc = Маска, крепящаяся к шлемам ССО США LAH-99, для обеспечения лётного состава кислородом.
 
 ent-AU14MOPPMask = маска РХБЗ M3 ОЗК

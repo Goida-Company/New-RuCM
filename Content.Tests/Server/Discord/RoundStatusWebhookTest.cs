@@ -1,13 +1,83 @@
 using System;
+using System.Collections.Generic; // RuMC edit
 using System.Linq;
 using Content.Server.Discord;
+using Moq; // RuMC edit
 using NUnit.Framework;
+using Robust.Shared.Localization; // RuMC edit
 
 namespace Content.Tests.Server.Discord;
 
 [TestFixture]
 public sealed class RoundStatusWebhookTest
 {
+    // RuMC edit start
+    private static readonly Dictionary<string, string> Templates = new()
+    {
+        ["discord-round-status-footer"] = "CMU Status Network",
+        ["discord-round-status-title-starting"] = "CMU Round Status - Starting",
+        ["discord-round-status-title-lobby"] = "CMU Round Status - Lobby",
+        ["discord-round-status-title-running"] = "CMU Round #{$id} - Running",
+        ["discord-round-status-title-ended"] = "CMU Round #{$id} - Ended",
+        ["discord-round-status-title-offline"] = "CMU Round Status - Offline",
+        ["discord-round-status-title-unknown"] = "CMU Round Status",
+        ["discord-round-status-description-starting"] = "Server starting. Preparing the next operation.",
+        ["discord-round-status-description-lobby"] = "Server online in pre-round lobby.",
+        ["discord-round-status-description-running"] = "Round in progress. Live operation status is below.",
+        ["discord-round-status-description-ended"] = "Round ended. Final operation summary is below.",
+        ["discord-round-status-description-offline"] = "Server offline.",
+        ["discord-round-status-description-unknown"] = "Server status.",
+        ["discord-round-status-state-starting"] = "Starting",
+        ["discord-round-status-state-lobby"] = "Lobby",
+        ["discord-round-status-state-running"] = "Running",
+        ["discord-round-status-state-ended"] = "Ended",
+        ["discord-round-status-state-offline"] = "Offline",
+        ["discord-round-status-state-unknown"] = "Unknown",
+        ["discord-round-status-field-status"] = "Status",
+        ["discord-round-status-field-players"] = "Players",
+        ["discord-round-status-field-round"] = "Round",
+        ["discord-round-status-field-runtime"] = "Runtime",
+        ["discord-round-status-field-operation"] = "Operation",
+        ["discord-round-status-field-recent-rounds"] = "Recent Rounds",
+        ["discord-round-status-field-last-updated"] = "Last Updated",
+        ["discord-round-status-operation-map"] = "**Map:** {$value}",
+        ["discord-round-status-operation-govfor"] = "**GOVFOR:** {$value}",
+        ["discord-round-status-operation-mode"] = "**Mode:** {$value}",
+        ["discord-round-status-no-recent-rounds"] = "No completed rounds yet.",
+        ["discord-round-status-unknown-value"] = "Unknown",
+        ["discord-round-status-duration-long"] = "{$hours}h {$minutes}m {$seconds}s",
+        ["discord-round-status-duration-short-hours"] = "{$hours}h{$minutes}m",
+        ["discord-round-status-duration-short-minutes"] = "{$minutes}m{$seconds}s",
+    };
+
+    private static string Resolve(string messageId, params (string, object)[] args)
+    {
+        var value = Templates[messageId];
+        foreach (var (name, arg) in args)
+        {
+            value = value.Replace($"{{${name}}}", arg.ToString());
+        }
+
+        return value;
+    }
+
+    private static ILocalizationManager CreateLoc()
+    {
+        var loc = new Mock<ILocalizationManager>();
+
+        loc.Setup(l => l.GetString(It.IsAny<string>()))
+            .Returns<string>(key => Resolve(key));
+        loc.Setup(l => l.GetString(It.IsAny<string>(), It.IsAny<(string, object)>()))
+            .Returns<string, (string, object)>((key, arg) => Resolve(key, arg));
+        loc.Setup(l => l.GetString(It.IsAny<string>(), It.IsAny<(string, object)>(), It.IsAny<(string, object)>()))
+            .Returns<string, (string, object), (string, object)>((key, arg1, arg2) => Resolve(key, arg1, arg2));
+        loc.Setup(l => l.GetString(It.IsAny<string>(), It.IsAny<(string, object)[]>()))
+            .Returns<string, (string, object)[]>(Resolve);
+
+        return loc.Object;
+    }
+    // RuMC edit end
+
     [Test]
     public void RoundEndPayloadIncludesStatusEmbedAndConfiguredRolePings()
     {
@@ -28,7 +98,10 @@ public sealed class RoundStatusWebhookTest
         var payload = RoundStatusWebhook.CreatePayload(
             RoundStatusWebhookKind.Ended,
             status,
-            new[] { "111", "222" });
+            // RuMC edit start
+            new[] { "111", "222" },
+            CreateLoc());
+            // RuMC edit end
 
         Assert.That(payload.Content, Is.EqualTo("<@&111> <@&222>"));
         Assert.That(payload.AllowedMentions.Parse, Has.Member("roles"));
@@ -84,7 +157,10 @@ public sealed class RoundStatusWebhookTest
         var payload = RoundStatusWebhook.CreatePayload(
             RoundStatusWebhookKind.Running,
             status,
-            Array.Empty<string>());
+            // RuMC edit start
+            Array.Empty<string>(),
+            CreateLoc());
+            // RuMC edit end
 
         Assert.That(payload.Content, Is.EqualTo(string.Empty));
         Assert.That(payload.AllowedMentions.Parse, Is.Empty);
@@ -138,7 +214,10 @@ public sealed class RoundStatusWebhookTest
         var payload = RoundStatusWebhook.CreatePayload(
             RoundStatusWebhookKind.Lobby,
             status,
-            Array.Empty<string>());
+            // RuMC edit start
+            Array.Empty<string>(),
+            CreateLoc());
+            // RuMC edit end
 
         var fields = payload.Embeds![0].Fields.ToDictionary(field => field.Name, field => field.Value);
         Assert.That(fields["Operation"], Is.EqualTo("**Map:** Fiorina Orbital Penitentiary\n**GOVFOR:** United States Colonial Marines\n**Mode:** Distress Signal With An Extremely Long Name"));
@@ -163,7 +242,10 @@ public sealed class RoundStatusWebhookTest
         var payload = RoundStatusWebhook.CreatePayload(
             RoundStatusWebhookKind.Shutdown,
             status,
-            Array.Empty<string>());
+            // RuMC edit start
+            Array.Empty<string>(),
+            CreateLoc());
+            // RuMC edit end
 
         var embed = payload.Embeds![0];
         Assert.That(embed.Title, Is.EqualTo("CMU Round Status - Offline"));
@@ -229,7 +311,7 @@ public sealed class RoundStatusWebhookTest
 
         void AssertState(RoundStatusWebhookKind kind, string title, int color)
         {
-            var payload = RoundStatusWebhook.CreatePayload(kind, status, Array.Empty<string>(), colors);
+            var payload = RoundStatusWebhook.CreatePayload(kind, status, Array.Empty<string>(), CreateLoc(), colors); // RuMC edit
 
             Assert.That(payload.Embeds, Has.Count.EqualTo(1));
             Assert.That(payload.Embeds![0].Title, Is.EqualTo(title));

@@ -4,6 +4,7 @@ namespace Content.Server._CMU14.ZLevels.Core;
 public sealed partial class CMUZLevelLadderWatchingComponent : Component
 {
     public EntityUid? Ladder;
+    public int Offset;
     public EntityUid? PeekTarget;
     public EntityUid? PreviousTarget;
 }

@@ -1,87 +1,115 @@
-ent-BaseScrap-name = металлолом
-ent-BaseScrap-desc = Бесполезный хлам. Хотя, возможно, вы могли бы получить некоторые материалы из этого.
+ent-BaseScrap = лом
+    .desc = Бесполезный хлам. Хотя, возможно, из него можно получить кое-какие материалы.
+    .suffix = Лом
 
-ent-BaseScrapLarge-name = металлолом
-ent-BaseScrapLarge-desc = Бесполезный хлам. Хотя, возможно, вы могли бы получить некоторые материалы из этого.
+ent-BaseScrapLarge = лом
+    .desc = Бесполезный хлам. Хотя, возможно, из него можно получить кое-какие материалы.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapSteel-name = взорванная стальная свая
-ent-ScrapSteel-desc = Груда стали, сваренная вместе при сильной жаре. В целом он приличного размера; из него, вероятно, можно было бы получить изрядное количество листов.
+ent-ScrapSteel = взорванная куча стали
+    .desc = Груда стали, сваренная вместе при экстремальной жаре.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGlass-name = металлолом
-ent-ScrapGlass-desc = Огромная глыба различных цепей, причудливым образом слитых воедино. Вероятно, вы могли бы извлечь из этого некоторые материалы.
+ent-ScrapGlass = бракованные схемы
+    .desc = Огромный комок схем, странным образом сплавленных вместе.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapAirlock1-name = дверь шлюза
-ent-ScrapAirlock1-desc = Раньше он удерживал воздух. Теперь, похоже, он вообще ничего не делает.
+ent-ScrapAirlock1 = дверь шлюза
+    .desc = Раньше она задерживала воздух.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapAirlock2-name = свет шлюза
-ent-ScrapAirlock2-desc = Правильно, все время мигает красным.
+ent-ScrapAirlock2 = лампа шлюза
+    .desc = Заслуживает уважения за то, что всё это время мигала красным.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapBucket-name = разбитое ведро
-ent-ScrapBucket-desc = Дорогой бог...
+ent-ScrapBucket = лопнувшее ведро
+    .desc = Носить воду больше не выйдет.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapCamera-name = сломанная камера
-ent-ScrapCamera-desc = Возможно, он все еще смотрит.
+ent-ScrapCamera = сломанная камера
+    .desc = Возможно, она всё ещё наблюдает.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapCanister1-name = ручка канистры
-ent-ScrapCanister1-desc = Полезно держать канистру. Теперь вам просто нужна фактическая часть канистры.
+ent-ScrapCanister1 = ручка канистры
+    .desc = Помогает держать канистру.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapCanister2-name = клапан канистры
-ent-ScrapCanister2-desc = Клапан от газового баллона.
+ent-ScrapCanister2 = вентиль канистры
+    .desc = Вентиль от канистры.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapCloset-name = дверь шкафа
-ent-ScrapCloset-desc = Вырванная дверь из сервисного чулана. Выглядит как красивый предмет декора стены.
+ent-ScrapCloset = дверь шкафчика
+    .desc = Снесённая дверь от шкафа. Выглядит как хороший настенный декор.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapFaxMachine-name = факс
-ent-ScrapFaxMachine-desc = Неудачный результат отправки слишком большого количества изображений ASCII в Центральное командование.
+ent-ScrapFaxMachine = факс
+    .desc = Печальный результат слишком большого количества отправленных картинок.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapFireExtinguisher-name = разделенный огнетушитель
-ent-ScrapFireExtinguisher-desc = Большая рана в центре заставляет волноваться за предыдущего пользователя.
+ent-ScrapFireExtinguisher = расколотый огнетушитель
+    .desc = Большая трещина по центру заставляет беспокоиться за предыдущего пользователя.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapFirelock1-name = противопожарная дверь
-ent-ScrapFirelock1-desc = По крайней мере, вы все еще знаете, для чего это предназначено.
+ent-ScrapFirelock1 = дверь пожарного шлюза
+    .desc = По крайней мере, вы всё ещё знаете, для чего она предназначена.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapFirelock2-name = противопожарная дверь
-ent-ScrapFirelock2-desc = ОХ! Вот куда пошла вторая половина!
+ent-ScrapFirelock2 = дверь пожарного шлюза
+    .desc = О! Вот куда делась вторая половина!
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapFirelock3-name = противопожарная рама
-ent-ScrapFirelock3-desc = Бесполезный хлам. Хотя, возможно, вы могли бы получить некоторые материалы из этого.
+ent-ScrapFirelock3 = каркас пожарного шлюза
+    .desc = Основание пожарного шлюза.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapIntercom-name = лом домофона
-ent-ScrapIntercom-desc = Вы бы хотели, чтобы у него были хотя бы несколько ключей шифрования.
+ent-ScrapIntercom = обломок интеркома
+    .desc = Хотелось бы, чтобы у него были хотя бы какие-то ключи шифрования.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapJetpack-name = сломанный реактивный ранец
-ent-ScrapJetpack-desc = Похоже, он больше не полетит.
+ent-ScrapJetpack = расколотый джетпак
+    .desc = Похоже, он больше не будет летать.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapMedkit-name = сломанная аптечка
-ent-ScrapMedkit-desc = Надеюсь, они извлекли из этого какую-то пользу.
+ent-ScrapMedkit = разломанная аптечка
+    .desc = Надеюсь, она кому-то помогла.
+    .suffix = {ent-BaseScrap.suffix}
+ent-ScrapMopBucket = половина ведра для швабры
+    .desc = Тайдеры умирают. Уборщики выживают.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapMopBucket-name = половина ведра швабры
-ent-ScrapMopBucket-desc = Тайдеры умирают. Дворники выживают.
+ent-ScrapPAI = персональный ИИ
+    .desc = Дружище! Ты ещё там? Алло? Дружище???
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapPAI-name = персональное устройство искусственного интеллекта
-ent-ScrapPAI-desc = Дружище! Ты все еще там? Привет? Приятель???
+ent-ScrapPAIGold = позолочённый персональный ИИ
+    .desc = Вау! Какая находка на миллион! Он мог бы стоить целое состояние... если бы он был в хорошем состоянии.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapPAIGold-name = позолоченное личное устройство искусственного интеллекта
-ent-ScrapPAIGold-desc = Вау! Какая находка одна на миллион! Это стоило бы целое состояние... если бы оно было в хорошем состоянии.
+ent-ScrapTube = разбитая пробирка с образцами
+    .desc = Стеклянная трубка, содержащая какой-то редкий образец.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapTube-name = разбитая пробирка для проб
-ent-ScrapTube-desc = Стеклянная трубка, содержащая какой-то редкий образец. Или, по крайней мере, раньше оно его содержало. Сейчас там мало что осталось.
+ent-ScrapGeneratorPlasmaLeaking = протекающий генератор П.А.К.М.А.Н.
+    .desc = Старый на вид генератор, чей бак начал протекать.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGeneratorPlasmaLeaking-name = утечка P.A.C.M.A.N. генератор
-ent-ScrapGeneratorPlasmaLeaking-desc = Старенький P.A.C.M.A.N. генератор, плазменные баки которого начали течь.
+ent-ScrapGeneratorPlasma = старый генератор П.А.К.М.А.Н.
+    .desc = Старый на вид генератор. Он находится в очень плохом состоянии и не функционирует.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGeneratorPlasma-name = старый П.А.К.М.А.Н. генератор
-ent-ScrapGeneratorPlasma-desc = Старенький P.A.C.M.A.N. генератор. Он в очень плохом состоянии и не функционален.
+ent-ScrapGeneratorUraniumLeaking = протекающий генератор С.У.П.Е.Р.П.А.К.М.А.Н.
+    .desc = Генератор, который, похоже, пережил какую-то катастрофу. Из него вытекает уран.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGeneratorUraniumLeaking-name = утечка S.U.P.E.R.P.A.C.M.A.N. генератор
-ent-ScrapGeneratorUraniumLeaking-desc = СУПЕРПАКМАН. Генератор, у которого, судя по всему, произошел какой-то катастрофический отказ. Это утечка урана.
+ent-ScrapGeneratorUranium = сломанный генератор С.У.П.Е.Р.П.А.К.М.А.Н.
+    .desc = Генератор, который, похоже, пережил какую-то катастрофу.
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGeneratorUranium-name = уничтожен S.U.P.E.R.P.A.C.M.A.N. генератор
-ent-ScrapGeneratorUranium-desc = СУПЕРПАКМАН. Генератор, у которого, судя по всему, произошел какой-то катастрофический отказ.
+ent-ScrapGeneratorFrame = каркас генератора
+    .desc = Основание генератора. Где же остальная часть?
+    .suffix = {ent-BaseScrap.suffix}
 
-ent-ScrapGeneratorFrame-name = рама генератора
-ent-ScrapGeneratorFrame-desc = Кадр из P.A.C.M.A.N. или СУПЕРПАКМАН. типа генератор. Где все остальное?
-
-ent-ScrapGeneratorFuelTank-name = топливный бак
-ent-ScrapGeneratorFuelTank-desc = Топливный бак от S.U.P.E.R.P.A.C.M.A.N. типа генератор. Датчик показывает, что осталось немного топлива.
+ent-ScrapGeneratorFuelTank = топливный бак
+    .desc = Топливный бак из генератора.
+    .suffix = {ent-BaseScrap.suffix}
 

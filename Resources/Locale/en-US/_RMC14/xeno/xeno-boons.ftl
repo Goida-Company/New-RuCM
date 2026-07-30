@@ -11,6 +11,10 @@ rmc-boon-on-cooldown = Our hive has already used {$boon} recently! Wait {$minute
 rmc-boon-duplicate-active = We already have a boon of {$boon} active!
 rmc-boon-not-reusable = Our hive has already used {$boon} and cannot use it again!
 
+rmc-boon-fire-resistance-xeno = The Queen has imbued us with flame-resistant chitin for 5 minutes.
+rmc-boon-larva-surge-xeno = The Queen has awakened 5 extra burrowed larva to join the hive!
+rmc-boon-king-unlocked-xeno = The hive is now ready to begin hatching His Grace, the King, if we gain control of both tall hivemind towers.
+
 rmc-boon-pylon-announcement-marine = [color=#CECECE][font size=16][bold]APOLLO MK.II - Biological Scanner[/bold][/font][/color][color=red][font size=16]
 
     ALERT.

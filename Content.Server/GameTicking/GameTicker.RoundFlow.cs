@@ -766,7 +766,7 @@ namespace Content.Server.GameTicking
                 return;
 
             var status = GetRoundStatusWebhookData(GetRoundStatusDuration(kind));
-            var payload = RoundStatusWebhook.CreatePayload(kind, status, roles, DiscordRoundStatusColors);
+            var payload = RoundStatusWebhook.CreatePayload(kind, status, roles, Loc, DiscordRoundStatusColors); // RuMC edit
 
             if (_roundStatusWebhookMessageId == 0)
             {

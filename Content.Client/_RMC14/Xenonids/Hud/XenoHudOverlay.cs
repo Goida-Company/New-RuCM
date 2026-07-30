@@ -668,31 +668,16 @@ public sealed partial class XenoHudOverlay : Overlay
             _mobThresholds.TryGetDeadThreshold(uid, out deadThresholdNullable, mobThresholds);
         }
 
-        string state;
-        if (_mobState.IsCritical(uid, mobState) ||
-            _mobState.IsAlive(uid) &&
-            critThresholdNullable != null &&
-            damageable.TotalDamage > critThresholdNullable)
-        {
-            if (critThresholdNullable is not { } critThreshold || deadThresholdNullable is not { } deadThreshold)
-                return;
+        if (mobState is not { } currentMobState)
+            return;
 
-            deadThreshold -= critThreshold;
-            damage -= critThreshold;
-            var level = ContentHelpers.RoundToLevels(damage.Double(), deadThreshold.Double(), 11);
-            var name = level > 0 ? $"{level * 10}" : "1";
-            state = $"xenohealth-{name}";
-        }
-        else
-        {
-            critThresholdNullable ??= deadThresholdNullable;
-            if (critThresholdNullable == null)
-                return;
-
-            var level = ContentHelpers.RoundToLevels((critThresholdNullable - damage).Value.Double(), critThresholdNullable.Value.Double(), 11);
-            var name = level > 0 ? $"{level * 10}" : "0";
-            state = $"xenohealth{name}";
-        }
+        var state = CMXenoHealthIconState.GetState(
+            damage,
+            currentMobState.CurrentState,
+            critThresholdNullable,
+            deadThresholdNullable);
+        if (state is null)
+            return;
 
         var icon = new Rsi(RsiPath, state);
         var rsi = _resourceCache.GetResource<RSIResource>(icon.RsiPath).RSI;

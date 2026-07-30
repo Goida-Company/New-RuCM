@@ -80,6 +80,14 @@
                        "directions":  1
                    },
                    {
+                       "name":  "councilhud",
+                       "directions":  1
+                   },
+                   {
+                       "name":  "leaderhud",
+                       "directions":  1
+                   },
+                   {
                        "name":  "hunter_student",
                        "directions":  1
                    },

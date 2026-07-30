@@ -19,9 +19,7 @@
     - type: Yautja
     - type: IgnoreXenoWeedsSlowdown
     - type: Skills
-      skills:
-        RMCSkillMedical: 3
-        RMCSkillSurgery: 2
+      preset: CMUSkillPresetYautjaWarrior
 
 - type: job
   parent: CMJobBase
@@ -100,6 +98,7 @@
   id: CMUYautjaYoungbloodGear
   equipment:
     ears: CMUYautjaCommunicator
+    mask: CMUYautjaMask
     gloves: CMUYautjaBracer
 
 - type: startingGear
@@ -488,6 +487,7 @@
   id: CMURandomHumanoidYautjaHunter
   name: yautja hunter spawner
   suffix: Spawner, Player, Event
+  categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _CMU14/Yautja/mask.rsi
@@ -503,9 +503,7 @@
   - type: Yautja
   - type: IgnoreXenoWeedsSlowdown
   - type: Skills
-    skills:
-      RMCSkillMedical: 3
-      RMCSkillSurgery: 2
+    preset: CMUSkillPresetYautjaWarrior
   - type: MovementSpeedModifier
     baseWalkSpeed: 4.4
     baseSprintSpeed: 8.4

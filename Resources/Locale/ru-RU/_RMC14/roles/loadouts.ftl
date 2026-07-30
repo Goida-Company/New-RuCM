@@ -1,4 +1,6 @@
-﻿rmc-loadout-group-backpack = Рюкзак
+﻿rmc-loadout-window-title = Экипировка: {$job}
+
+rmc-loadout-group-backpack = Рюкзак
 rmc-loadout-group-eyewear = Очки
 rmc-loadout-group-masks = Маски и шарфы
 rmc-loadout-group-headwear = Головные уборы

@@ -1,7 +1,7 @@
 ﻿<controls:RequisitionsWindow
     xmlns="https://spacestation14.io"
     xmlns:controls="clr-namespace:Content.Client._RMC14.Requisitions"
-    Title="Automated Storage and Retrieval System"
+    Title="{Loc rmc-requisitions-window-title}"
     SetSize="896 560"
     MinSize="896 560">
     <controls:RequisitionsMainView Name="MainView" Access="Public" Visible="False" />

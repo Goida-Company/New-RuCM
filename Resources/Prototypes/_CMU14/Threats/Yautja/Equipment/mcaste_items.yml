@@ -21,9 +21,6 @@
     autoSelfDestructOnUserDeath: true
     actionWhitelist:
     - CMUActionYautjaCreateHealingCapsule
-    - CMUActionYautjaCreateStabilisingCrystal
-    - CMUActionYautjaSelfDestruct
-    - CMUActionYautjaTranslator
   - type: YautjaGearContainer
     actionWhitelist:
     - WristBlades

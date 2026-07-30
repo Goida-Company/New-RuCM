@@ -11,6 +11,10 @@ rmc-boon-on-cooldown = Наш улей уже недавно использов�
 rmc-boon-duplicate-active = У нас уже активен бонус {$boon}!
 rmc-boon-not-reusable = Наш улей уже использовал {$boon} и не может использовать его снова!
 
+rmc-boon-fire-resistance-xeno = Королева наделила нас огнестойким хитином на 5 минут.
+rmc-boon-larva-surge-xeno = Королева разбудила 5 дополнительных закопанных личинок, чтобы они присоединились к улью!
+rmc-boon-king-unlocked-xeno = Улей теперь готов начать вылупление Его Величества, Короля, если мы получим контроль над обеими коммуникационными башнями носителей.
+
 rmc-boon-pylon-announcement-marine = [color=#CECECE][font size=16][bold]ARES v3.2 Биологический сканер[/bold][/font][/color][color=red][font size=16]
 
     ТРЕВОГА.

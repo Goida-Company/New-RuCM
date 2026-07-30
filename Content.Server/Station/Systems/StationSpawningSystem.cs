@@ -16,8 +16,11 @@ using Content.Shared._RMC14.Weapons.Ranged.IFF;
 using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
+using Content.Shared.Administration.Logs;
+using Content.Shared._CMU14.CharacterDescription;
 using Content.Shared.CCVar;
 using Content.Shared.Clothing;
+using Content.Shared.Database;
 using Content.Shared.DetailExaminable;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
@@ -28,6 +31,7 @@ using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
 using Content.Shared.Station;
 using Content.Shared._CMU14.Round.Roles;
+using Content.Shared.Traits;
 using JetBrains.Annotations;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;
@@ -66,6 +70,7 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private MarkingManager _markingManager = default!;
     [Dependency] private YautjaProfileApplySystem _yautjaProfile = default!;
+    [Dependency] private ISharedAdminLogManager _adminLog = default!;
 
     private static readonly PlatoonJobClass[] PlatoonJobClasses = Enum.GetValues<PlatoonJobClass>();
     private static readonly FrozenDictionary<PlatoonJobClass, string> PlatoonJobClassNames =
@@ -97,6 +102,8 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     {
         "AuxSupportSynth",
         "AuxTech",
+        "CombatCorrespondent",
+        "DroneOperator",
         "EngineeringTech",
         "IntelOfficer",
         "JuniorOfficer",
@@ -134,12 +141,17 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
     /// <remarks>
     /// This only spawns the character, and does none of the mind-related setup you'd need for it to be playable.
     /// </remarks>
-    public EntityUid? SpawnPlayerCharacterOnStation(EntityUid? station, ProtoId<JobPrototype>? job, HumanoidCharacterProfile? profile, StationSpawningComponent? stationSpawning = null)
+    public EntityUid? SpawnPlayerCharacterOnStation(
+        EntityUid? station,
+        ProtoId<JobPrototype>? job,
+        HumanoidCharacterProfile? profile,
+        StationSpawningComponent? stationSpawning = null,
+        ICommonSession? player = null)
     {
         if (station != null && !Resolve(station.Value, ref stationSpawning))
             throw new ArgumentException("Tried to use a non-station entity as a station!", nameof(station));
 
-        var ev = new PlayerSpawningEvent(job, profile, station);
+        var ev = new PlayerSpawningEvent(job, profile, station, player);
 
         RaiseLocalEvent(ev);
         DebugTools.Assert(ev.SpawnResult is { Valid: true } or null);
@@ -165,7 +177,9 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
         ProtoId<JobPrototype>? job,
         HumanoidCharacterProfile? profile,
         EntityUid? station,
-        EntityUid? entity = null)
+        EntityUid? entity = null,
+        YautjaRank? authoritativeYautjaRank = null,
+        YautjaProfileCapabilities? authoritativeYautjaCapabilities = null)
     {
         // --- Platoon job override logic start ---
         string? jobId = job?.ToString();
@@ -245,6 +259,9 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
 
                 if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
                     AddComp<DetailExaminableComponent>(jobEntity).Content = profile.FlavorText;
+
+                if (_configurationManager.GetCVar(CCVars.CharacterDescription))
+                    BakeCharacterDescription(jobEntity, profile);
             }
 
             // Make sure custom names get handled, what is gameticker control flow whoopy.
@@ -259,7 +276,11 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
                 !IsBadBloodFactionMember(jobEntity))
             {
                 if (profile != null)
-                    _yautjaProfile.ApplyProfile(jobEntity, profile.YautjaProfile);
+                    _yautjaProfile.ApplyProfile(
+                        jobEntity,
+                        profile.YautjaProfile,
+                        authoritativeYautjaRank,
+                        authoritativeYautjaCapabilities);
             }
 
             // Use originalPrototype for access, ID, and faction
@@ -284,6 +305,9 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
 
             if (profile.FlavorText != "" && _configurationManager.GetCVar(CCVars.FlavorText))
                 AddComp<DetailExaminableComponent>(entity.Value).Content = profile.FlavorText;
+
+            if (_configurationManager.GetCVar(CCVars.CharacterDescription))
+                BakeCharacterDescription(entity.Value, profile);
         }
 
         if (loadout != null && loadoutProto != null)
@@ -721,6 +745,45 @@ public sealed partial class StationSpawningSystem : SharedStationSpawningSystem
         _roundJobProfiles.ApplyJobProfile(entity, prototype);
     }
 
+    private const string DisabilitiesTraitCategory = "Disabilities";
+    private const string DrugAllergyTraitId = "RandomDrugAllergy";
+
+    private void BakeCharacterDescription(EntityUid uid, HumanoidCharacterProfile profile)
+    {
+        var comp = AddComp<CharacterDescriptionComponent>(uid);
+        comp.ShortExamine = profile.ShortExamine;
+        comp.FullDescription = profile.FullDescription;
+        comp.MedicalRecord = profile.MedicalRecord;
+        comp.CriminalRecord = profile.CriminalRecord;
+        comp.GeneralRecord = profile.GeneralRecord;
+        comp.Height = profile.Height;
+        comp.Weight = profile.Weight;
+        comp.Build = profile.Build;
+        comp.Age = profile.Age;
+        comp.Allegiance = profile.Allegiance;
+        comp.Origin = profile.Origin;
+        comp.HideMetaInformation = profile.HideMetaInformation;
+
+        foreach (var traitId in profile.TraitPreferences)
+        {
+            if (!_prototypeManager.TryIndex(traitId, out TraitPrototype? traitProto))
+                continue;
+
+            if (traitProto.Category is not { } category || category.Id != DisabilitiesTraitCategory)
+                continue;
+
+            comp.DisabilityTraitNames.Add(Loc.GetString(traitProto.Name));
+
+            if (traitId.Id == DrugAllergyTraitId)
+                comp.HasDrugAllergyTrait = true;
+        }
+
+        Dirty(uid, comp);
+
+        _adminLog.Add(LogType.RMCCharacterDescription,
+            $"{ToPrettyString(uid):player} has skin tone {NamedColorHelper.NearestColorName(profile.Appearance.SkinColor)}");
+    }
+
     /// <summary>
     /// Overrides the spawned mob's hairstyle/color and facial hair/color with the player's
     /// Regulation Appearance selections, if the job (via <see cref="RoundJobProfileSystem"/>)
@@ -895,11 +958,17 @@ public sealed partial class PlayerSpawningEvent : EntityEventArgs
     /// The target station, if any.
     /// </summary>
     public readonly EntityUid? Station;
+    public readonly ICommonSession? PlayerSession;
 
-    public PlayerSpawningEvent(ProtoId<JobPrototype>? job, HumanoidCharacterProfile? humanoidCharacterProfile, EntityUid? station)
+    public PlayerSpawningEvent(
+        ProtoId<JobPrototype>? job,
+        HumanoidCharacterProfile? humanoidCharacterProfile,
+        EntityUid? station,
+        ICommonSession? playerSession = null)
     {
         Job = job;
         HumanoidCharacterProfile = humanoidCharacterProfile;
         Station = station;
+        PlayerSession = playerSession;
     }
 }

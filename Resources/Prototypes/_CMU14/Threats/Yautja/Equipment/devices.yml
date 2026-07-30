@@ -530,6 +530,13 @@
     - GasMask
   - type: Mask
     enabled: false
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+    - Xeno
   - type: YautjaMask
     requiresYautjaWearer: true
     drain: 3
@@ -991,7 +998,7 @@
   - type: YautjaStoredGear
     kind: Caster
   - type: YautjaCaster
-    powerCost: 30
+    powerCost: 100
     modes:
     - name: cmu-yautja-caster-mode-stun
       projectile: CMUYautjaCasterStunBolt
@@ -1793,7 +1800,7 @@
       map: [ "emptyLayer" ]
       visible: false
   - type: Item
-    size: Normal
+    size: Small
     sprite: _CMU14/Yautja/yautja_items.rsi
   - type: Clothing
     quickEquip: false

@@ -18,6 +18,12 @@ ent-RMCM5Bayonet = штык-нож M5 «Ночной рейдер»
 
 ent-RMCCombatUtilityKnifeA = боевой нож «Дружина»
     .desc = Тяжёлый боевой нож, разработанный для сил специального назначения СПН. От кизлярских мастеров.
+ent-RMCCombatUtilityKnifeB = {ent-RMCCombatUtilityKnifeA}
+    .desc = {ent-RMCCombatUtilityKnifeA.desc}
+    .suffix = Церемониальный
 
-ent-RMCCombatUtilityKnifeB = { ent-RMCCombatUtilityKnifeA }
-    .desc = { ent-RMCCombatUtilityKnifeA.desc }
+ent-RMCSawtoothDaggerA = окопный штык-нож
+    .desc = Даже спустя века все ещё популярен за эффективность.
+ent-RMCSawtoothDaggerB = {ent-RMCSawtoothDaggerA}
+    .desc = {ent-RMCSawtoothDaggerA.desc}
+    .suffix = Церемониальный

@@ -573,7 +573,7 @@ public abstract partial class SharedMortarSystem : EntitySystem
             if (distance > range)
                 continue;
 
-            var direction = distanceVec.GetDir().ToString().ToUpperInvariant();
+            var direction = Loc.GetString($"zzzz-fmt-direction-{distanceVec.GetDir()}").ToUpperInvariant(); // RuMC edit
             var msg = distance < 1
                 ? Loc.GetString(warningAbove)
                 : Loc.GetString(warning, ("direction", direction));

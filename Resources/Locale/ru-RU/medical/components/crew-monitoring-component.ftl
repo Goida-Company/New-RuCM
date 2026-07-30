@@ -40,3 +40,5 @@ crew-monitoring-user-interface-no-department = Неизвестно
 crew-monitoring-user-interface-flavor-left = В случае возникновения чрезвычайной ситуации немедленно свяжитесь с медицинским персоналом станции.
 
 crew-monitoring-user-interface-flavor-right = v1.7
+
+cmu-yautja-crew-monitor-tooltip = Зона: {$area}; O₂: {$oxygen}; Токсины: {$toxin}; Ожоги: {$burn}; Удары: {$brute}

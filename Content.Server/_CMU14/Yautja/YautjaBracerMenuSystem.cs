@@ -167,6 +167,28 @@ public sealed partial class YautjaBracerMenuSystem : EntitySystem
             case YautjaBracerPanelCommand.ToggleSelfDestruct:
                 _selfDestruct.TryOpenSelfDestructDialog(ent, args.Actor);
                 break;
+            case YautjaBracerPanelCommand.ChangeExplosionType:
+                _utility.TryChangeExplosionType(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.RemoveBracerAttachments:
+                if (TryComp(ent.Owner, out YautjaGearContainerComponent? gearContainer))
+                    EntityManager.System<YautjaAttachmentSystem>().TryRemoveBracerAttachments((ent.Owner, gearContainer), args.Actor);
+                break;
+            case YautjaBracerPanelCommand.CreateHealingCapsule:
+                _utility.TryCreateHealingCapsule(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.AddTrackedItem:
+                _utility.TryAddTrackedItem(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.RemoveTrackedItem:
+                _utility.TryRemoveTrackedItem(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.ToggleBracerName:
+                _utility.TryToggleBracerName(ent, args.Actor);
+                break;
+            case YautjaBracerPanelCommand.ToggleBracerNotificationSound:
+                _utility.TryToggleNotificationSound(ent, args.Actor);
+                break;
             case YautjaBracerPanelCommand.RefreshTracker:
                 break;
         }
@@ -297,11 +319,7 @@ public sealed partial class YautjaBracerMenuSystem : EntitySystem
 
     private bool IsTrackedItem(EntityUid uid)
     {
-        if (HasComp<YautjaTrackedItemComponent>(uid))
-            return true;
-
-        return HasComp<YautjaTechItemComponent>(uid) &&
-               !HasComp<YautjaUntrackedItemComponent>(uid);
+        return HasComp<YautjaTrackedItemComponent>(uid);
     }
 
     private string GetTrackerAreaName(MapCoordinates coords)

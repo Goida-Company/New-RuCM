@@ -1,0 +1,21 @@
+- type: entity
+  parent: RMCBoonie
+  id: RuMCBEARCapBlack
+  name: cap BEAR
+  description: Cap for BEAR PMC fighters. Built-in microphone and speaker for tactical communication.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/hats/cap_black.rsi
+  - type: Clothing
+    sprite: _RuMC14/Clothing/BEAR/hats/cap_black.rsi
+
+- type: entity
+  parent: RMCBoonie
+  id: RuMCBEARCapBrown
+  name: cap BEAR
+  description: Cap for BEAR PMC fighters. Built-in microphone and speaker for tactical communication.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/BEAR/hats/cap_brown.rsi
+  - type: Clothing
+    sprite: _RuMC14/Clothing/BEAR/hats/cap_brown.rsi

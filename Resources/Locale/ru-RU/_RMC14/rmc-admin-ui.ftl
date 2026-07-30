@@ -16,10 +16,6 @@ rmc-ui-create-hive-title = Имя нового улья
 rmc-ui-humanoid = Гуманоид
 rmc-ui-tier = Уровень {$tier}
 rmc-ui-admin = Админ-панель RMC
-rmc-ui-rejuvenate-nearby-marines = Омолодить всех nearby морпехов
-
-# Missing entries synced from en-US
-
+rmc-ui-rejuvenate-nearby-marines = Возродить всех морпехов рядом
 rmc-ui-chat-bans = Баны в чате
-
 rmc-ui-delay-round-end = Задержка завершения раунда

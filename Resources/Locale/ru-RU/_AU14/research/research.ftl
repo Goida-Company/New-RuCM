@@ -1,11 +1,11 @@
 research-xrf-scanner-processing = Сканер уже обрабатывает образец.
-research-xrf-scanner-only-vials = В сканер можно помещать только флаконы.
+research-xrf-scanner-only-vials = В сканер можно помещать только пробирки.
 research-xrf-scanner-full = В сканере уже находится образец.
-research-xrf-scanner-config = {$USER} помещает флакон в сканер.
+research-xrf-scanner-config = {$USER} помещает пробирку в сканер.
 research-xrf-scanner-empty = В сканере нет образца.
 
 xrf-scanner-fail-missing = Образец исчез во время сканирования.
-xrf-scanner-fail-empty = Флакон пуст.
+xrf-scanner-fail-empty = Пробирка пуста.
 xrf-scanner-fail-insufficient = Недостаточный объём образца (требуется минимум 30 ед.).
 xrf-scanner-fail-contaminated = Образец загрязнён — обнаружено несколько реагентов.
 xrf-scanner-fail-unknown = Неизвестная ошибка анализа.

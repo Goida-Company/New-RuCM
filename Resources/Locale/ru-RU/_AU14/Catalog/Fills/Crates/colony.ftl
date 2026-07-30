@@ -1,3 +1,6 @@
+ent-AU14CrateBoxFusionCells = ящик термоядерных элементов (4x УТЭ-6)
+    .desc = {ent-RMCCrateBase.desc}
+
 ent-AU14CrateBoxGamblingTableParts = ящик частей игрового стола (15x частей игрового стола)
     .desc = {ent-RMCCrateBase.desc}
 

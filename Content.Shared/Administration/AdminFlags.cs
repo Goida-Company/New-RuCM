@@ -150,5 +150,10 @@
         ///     Admin Ghost
         /// </summary>
         AdminGhost = 1ul << 33,
+
+        /// <summary>
+        ///     Yautja clan administration.
+        /// </summary>
+        Clans = 1ul << 34,
     }
 }
