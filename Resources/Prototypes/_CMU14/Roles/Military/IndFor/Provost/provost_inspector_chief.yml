@@ -8,7 +8,7 @@
   playTimeTracker: CMJobProvostChiefInspector
   supervisors: cm-job-supervisors-staff
   whitelisted: true
-  whitelistParent: CMUJobCommandWhitelist
+  whitelistParent: RMCWhitelistHard
   ranks:
     CMURankProvostChiefInspector: []
   roundComponents:

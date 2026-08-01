@@ -1,5 +1,6 @@
+rmc-xeno-construction-cost = ({$cost} плазмы)
 cm-xeno-construction-failed-weeds = Плохое место для строительства!
-cm-xeno-construction-weeds-pod-here = Здесь уже есть стручок!
+cm-xeno-construction-weeds-pod-here = Здесь уже есть сорняк!
 cm-xeno-construction-weeds-too-strong = Эти сорняки слишком крепкие, чтобы посадить на них узел!
 cm-xeno-construction-weeds-needs-nearby = Мы можем сажать узлы сорняков только рядом с другими узлами сорняков нашего улья!
 cm-xeno-construction-failed-need-weeds = Можно строить только на смоляных сорняках. Сначала найдите смолу!

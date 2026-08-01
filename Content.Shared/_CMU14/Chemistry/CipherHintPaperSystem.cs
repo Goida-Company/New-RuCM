@@ -1,9 +1,11 @@
 using Content.Shared._AU14.Chemistry.Reagents;
+using Content.Shared._CMU14.Chemistry.Reagent; // RuMC edit
 using Content.Shared._RMC14.Requisitions;
 using Content.Shared._RMC14.Requisitions.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 using Robust.Shared.Physics;
+using Robust.Shared.Prototypes; // RuMC edit
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +18,7 @@ public sealed partial class CipherHintPaperSystem : EntitySystem
     [Dependency] private SharedReagentGeneratorSystem _gen = default!;
     [Dependency] private EntityLookupSystem _look = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!; // RuMC edit
 
     private bool hasSpawnedXenoBox = false;
     public override void Initialize()
@@ -37,7 +40,13 @@ public sealed partial class CipherHintPaperSystem : EntitySystem
             string content = string.Empty;
             content += Loc.GetString("cmu-paper-ciph-hint-header") + '\n';
             content += Loc.GetString("cmu-paper-ciph-hint-subheader") + '\n';
-            content += Loc.GetString("cmu-paper-ciph-hint", ("CIPH", "Ciphering"), ("A", ciph[0]), ("B", ciph[1]), ("C", ciph[2])) + '\n';
+            // RuMC edit start
+            content += Loc.GetString("cmu-paper-ciph-hint",
+                ("CIPH", GetPropertyName("Ciphering")),
+                ("A", GetPropertyName(ciph[0])),
+                ("B", GetPropertyName(ciph[1])),
+                ("C", GetPropertyName(ciph[2]))) + '\n';
+            // RuMC edit end
             content += Loc.GetString("cmu-paper-xeno-knowledge") + '\n';
             if (ent.Comp.InformDelivery)
             {
@@ -94,4 +103,11 @@ public sealed partial class CipherHintPaperSystem : EntitySystem
             _paper.SetContent(ent.Owner, content);
         }
     }
+
+    // RuMC edit start
+    private string GetPropertyName(string propertyId)
+    {
+        return _proto.TryIndex<ReagentPropertyPrototype>(propertyId, out var prop) ? prop.LocalizedName : propertyId;
+    }
+    // RuMC edit end
 }

@@ -141,36 +141,6 @@ public sealed partial class AreaEchoSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Takes an entity's <see cref="TransformComponent"/>. Goes through every parent it
-    ///         has before reaching one that is a map. Returns the hierarchy
-    ///         discovered, which includes the given <paramref name="originEntity"/>.
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private List<Entity<TransformComponent>> TryGetHierarchyBeforeMap(Entity<TransformComponent> originEntity)
-    {
-        var hierarchy = new List<Entity<TransformComponent>>() { originEntity };
-
-        ref var currentEntity = ref originEntity;
-        ref var currentTransformComponent = ref currentEntity.Comp;
-
-        var mapUid = currentEntity.Comp.MapUid;
-
-        while (currentTransformComponent.ParentUid != mapUid /* break when the next entity is a map... */ &&
-            currentTransformComponent.ParentUid.IsValid() /* ...or invalid */ )
-        {
-            // iterate to next entity
-            var nextUid = currentTransformComponent.ParentUid;
-            currentEntity.Owner = nextUid;
-            currentTransformComponent = Transform(nextUid);
-
-            hierarchy.Add(currentEntity);
-        }
-
-        DebugTools.Assert(hierarchy.Count >= 1, "Malformed entity hierarchy! Hierarchy must always contain one element, but it doesn't. How did this happen?");
-        return hierarchy;
-    }
-
-    /// <summary>
     ///     Basic check for whether an audio can echo. Doesn't account for distance.
     /// </summary>
     public bool CanAudioEcho(AudioComponent audioComponent)
@@ -199,26 +169,20 @@ public sealed partial class AreaEchoSystem : EntitySystem
         magnitude = 0f;
         var transformComponent = entity.Comp;
 
-        // get either the grid or other parent entity this entity is on, and it's rotation
-        var entityHierarchy = TryGetHierarchyBeforeMap(entity);
-        if (entityHierarchy.Count <= 1) // hierarchy always starts with our entity. if it only has our entity, it means the next parent was the map, which we don't want
-            return false; // means this entity is in space/otherwise not on a grid
-
-        // at this point, we know that we are somewhere on a grid
-
-        // e.g.: if a sound is inside a crate, this will now be the grid the crate is on; if the sound is just on the grid, this will be the grid that the sound is on.
-        var entityGrid = entityHierarchy.Last();
-
-        // this is the last entity, or this entity itself, that this entity has, before the parent is a grid/map. e.g.: if a sound is inside a crate, this will be the crate; if the sound is just on the grid, this will be the sound
-        var lastEntityBeforeGrid = entityHierarchy[^2]; // `l[^x]` is analogous to `l[l.Count - x]`
-        // `lastEntityBeforeGrid` is obviously directly before `entityGrid`
-        // the earlier guard clause makes sure this will always be valid
-
-        if (!_gridQuery.TryGetComponent(entityGrid, out var gridComponent))
+        // A movable shuttle can be both the map and the grid. Walking towards MapUid stops
+        // one entity too early in that case, so always use the transform's resolved grid.
+        if (transformComponent.GridUid is not { } entityGrid ||
+            !_gridQuery.TryGetComponent(entityGrid, out var gridComponent))
             return false;
 
         var checkRoof = _roofQuery.TryGetComponent(entityGrid, out var roofComponent);
-        var tileRef = _mapSystem.GetTileRef(entityGrid, gridComponent, lastEntityBeforeGrid.Comp.Coordinates);
+
+        var worldPosition = _transformSystem.GetWorldPosition(transformComponent);
+        if (!IsFinite(worldPosition) ||
+            !_mapSystem.TryGetTileRef(entityGrid, gridComponent, worldPosition, out var tileRef))
+        {
+            return false;
+        }
 
         if (tileRef.Tile.IsEmpty)
             return false;
@@ -229,15 +193,14 @@ public sealed partial class AreaEchoSystem : EntitySystem
             return false;
 
         var originTileIndices = tileRef.GridIndices;
-        var worldPosition = _transformSystem.GetWorldPosition(transformComponent);
-        if (!IsFinite(worldPosition))
-            return false;
 
         // At this point, we are ready for war against the client's pc.
         foreach (var direction in _calculatedDirections)
         {
             var currentDirectionVector = direction.ToVec();
-            var currentTargetEntityUid = lastEntityBeforeGrid.Owner;
+            var currentTargetEntityUid = transformComponent.ParentUid.IsValid()
+                ? transformComponent.ParentUid
+                : entity.Owner;
 
             var totalDistance = 0f;
             var remainingDistance = maximumMagnitude;
@@ -442,23 +405,32 @@ public sealed partial class AreaEchoSystem : EntitySystem
     {
         TryProcessAreaSpaceMagnitude((entity, transformComponent), maximumMagnitude, out var echoMagnitude);
 
-        if (echoMagnitude > minimumMagnitude)
-        {
-            ProtoId<AudioPresetPrototype>? bestPreset = null;
-            for (var i = DistancePresets.Count - 1; i >= 0; i--)
-            {
-                var preset = DistancePresets[i];
-                if (preset.Item1 < echoMagnitude)
-                    continue;
-
-                bestPreset = preset.Item2;
-            }
-
-            if (bestPreset != null)
-                _audioEffectSystem.TryAddEffect(entity, DistancePresets[0].Item2);
-        }
+        var preset = GetPresetForMagnitude(echoMagnitude, minimumMagnitude);
+        if (preset is { } effect)
+            _audioEffectSystem.TryAddEffect(entity, effect);
         else
             _audioEffectSystem.TryRemoveEffect(entity);
+    }
+
+    /// <summary>
+    /// Selects progressively larger reverb presets as the enclosed space grows.
+    /// </summary>
+    private static ProtoId<AudioPresetPrototype>? GetPresetForMagnitude(float magnitude, float minimumMagnitude)
+    {
+        if (!float.IsFinite(magnitude) || magnitude <= minimumMagnitude)
+            return null;
+
+        ProtoId<AudioPresetPrototype>? bestPreset = null;
+        foreach (var preset in DistancePresets)
+        {
+            if (preset.Item1 > magnitude)
+                break;
+
+            bestPreset = preset.Item2;
+        }
+
+        // The first preset covers the range immediately above the echo threshold.
+        return bestPreset ?? DistancePresets[0].Item2;
     }
 
     // Maybe TODO: defer this onto ticks? but whatever its just clientside

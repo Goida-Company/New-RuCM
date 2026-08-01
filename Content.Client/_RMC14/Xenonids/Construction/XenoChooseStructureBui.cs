@@ -58,12 +58,12 @@ public sealed partial class XenoChooseStructureBui : BoundUserInterface
                         displayId = queenVariant;
                         displayName = queenStructure.Name;
                     }
-                    displayName += " (0 plasma)";
+                    displayName += " " + Loc.GetString("rmc-xeno-construction-cost", ("cost", 0)); // RuMC edit
                 }
                 else
                 {
                     if (_xenoConstruction.GetStructurePlasmaCost(structureId) is { } cost)
-                        displayName += $" ({cost} plasma)";
+                        displayName += " " + Loc.GetString("rmc-xeno-construction-cost", ("cost", cost)); // RuMC edit
                 }
 
                 control.Set(displayName, _sprite.Frame0(_prototype.Index(displayId)));

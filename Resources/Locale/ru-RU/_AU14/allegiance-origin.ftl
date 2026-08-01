@@ -1,8 +1,8 @@
 # Прототипы принадлежностей
 allegiance-no-matching-character = Ни один из ваших персонажей не имеет принадлежности, соответствующей этому взводу. Создайте персонажа с правильной принадлежностью или включите «Игнорировать принадлежность» в лобби.
 
-allegiance-ua-name = Объдинённые Америки
-allegiance-ua-description = Объдинённые Америки. Крупная межзвёздная сверхдержава, объединяющая Северную и Южную Америку.
+allegiance-ua-name = Объединённые Америки
+allegiance-ua-description = Объединённые Америки. Крупная межзвёздная сверхдержава, объединяющая Северную и Южную Америку.
 
 allegiance-upp-name = СПН
 allegiance-upp-description = Союз Прогрессивных Народов. Социалистическая сверхдержава, соперничающая с США.
@@ -26,28 +26,28 @@ allegiance-twe-name = Империя Трёх Миров
 allegiance-twe-description = Империя Трёх Миров. Конституционная монархия, охватывающая Великобританию, Японию, Индию и Австралию.
 
 # ОА
-origin-ua-mexico-name = Объдинённые Америки - Мексика
+origin-ua-mexico-name = Объединённые Америки - Мексика
 origin-ua-mexico-description = Рождён в Мексике, части Соединённых Штатов.
 
-origin-ua-colonies-name = Объдинённые Америки - Колонии
+origin-ua-colonies-name = Объединённые Америки - Колонии
 origin-ua-colonies-description = Вырос в одной из внесолнечных колоний Соединённых Штатов.
 
-origin-ua-other-name = Объдинённые Америки - Другое
+origin-ua-other-name = Объединённые Америки - Другое
 origin-ua-other-description = Из другого места в пределах Соединённых Штатов.
 
-origin-ua-luna-name = Объдинённые Америки - Луна
+origin-ua-luna-name = Объединённые Америки - Луна
 origin-ua-luna-description = Вырос в районе ОА на Луне.
 
-origin-ua-canada-name = Объдинённые Америки - Канада
+origin-ua-canada-name = Объединённые Америки - Канада
 origin-ua-canada-description = Рождён в Канаде, части Соединённых Штатов.
 
-origin-ua-america-name = Объдинённые Америки - Америка
+origin-ua-america-name = Объединённые Америки - Америка
 origin-ua-america-description = Рождён в Соединённых Штатах Америки, сердце СА.
 
-origin-ua-brazil-name = Объдинённые Америки - Бразилия
+origin-ua-brazil-name = Объединённые Америки - Бразилия
 origin-ua-brazil-description = Рождён в Бразилии, части Соединённых Штатов.
 
-origin-ua-argentina-name = Объдинённые Америки - Аргентина
+origin-ua-argentina-name = Объединённые Америки - Аргентина
 origin-ua-argentina-description = Рождён в Аргентине, части Соединённых Америк.
 
 # ИТМ
@@ -241,3 +241,7 @@ origin-icsc-turkey-description = Рождён в Турции, независи�
 
 origin-icsc-pakistan-name = НКВС - Пакистан
 origin-icsc-pakistan-description = Рождён в Пакистане, независимом государстве в составе НКВС
+
+# Продиджи
+origin-prodigy-newsiam-name = Продиджи - Новый Сиам
+origin-prodigy-newsiam-description = Из Нового Сиама, территории корпорации «Продиджи».

@@ -246,3 +246,7 @@ AU14JobGOVFORWeaponsSpecialist = Специалист по вооружению
 au14-job-name-govforweaponsspecialist = Специалист по вооружению
 au14-job-description-govforweaponsspecialist = Управляй огневой поддержкой своей фракции и прикрывай отряд.
 au14-job-prefix-govforweaponsspecialist = СВ
+
+au14-job-name-govforcombatcorrespondent = Военкор
+au14-job-description-govforcombatcorrespondent = Выполняй приказы и добывай материал для репортажа.
+au14-job-prefix-govforcombatcorrespondent = ВК

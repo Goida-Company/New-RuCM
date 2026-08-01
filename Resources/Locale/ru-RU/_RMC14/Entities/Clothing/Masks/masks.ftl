@@ -63,6 +63,10 @@ ent-CMMaskSterile = стерильная маска
 
 ent-RMCMaskGasSPP = противогаз ПМГ-4
     .desc = Стандартный противогаз СПН.
+ent-RMCMaskPrescriptionGasSPP = противогаз ПМГ-4 с диоптриями
+    .desc = {ent-RMCMaskGasSPP.desc}
 
 ent-CMMaskGas = противогаз
     .desc = Резиновая маска, закрывающая лицо. Фильтрует вредные элементы в воздухе.
+ent-CMMaskPrescriptionGas = противогаз с диоптриями
+    .desc = {ent-CMMaskGas.desc}

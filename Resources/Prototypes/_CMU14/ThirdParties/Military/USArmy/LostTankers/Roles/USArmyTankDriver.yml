@@ -23,7 +23,7 @@
     prefix: au14-job-prefix-usarmy-tankloader
 
   name: au14-job-name-usarmy-tankdriver
-  description: au14-job-description-usarmy-tankccrew
+  description: au14-job-description-usarmy-tankcrew
   playTimeTracker: AU14JobUSArmyTankDriver
   ranks:
     RMCRankCivilian: []

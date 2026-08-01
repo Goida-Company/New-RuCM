@@ -1,3 +1,17 @@
+language-menu-title = Меню языков
+language-menu-known-tab = Известные языки
+language-menu-learning-tab = Изучаемые языки
+
+game-hud-open-language-menu-button-tooltip = Открыть меню языков.
+
+language-learning-overall-progress = Всего: {$progress}
+language-learning-word-count = Слов: {$count}
+language-learning-average-comprehension = Ср.: {$average}
+language-learning-search-placeholder = Поиск слов...
+language-learning-show-words = Показать слова
+language-learning-hide-words = Скрыть слова
+language-learning-no-results = Слова, соответствующие запросу, не найдены.
+
 language-Yautja-name = Яутжа
 language-Yautja-description = Древний инопланетный язык охотников и воинов.
 language-Yautja-first-contact = Звуки следуют паттерну инопланетного охотника.
@@ -98,5 +112,42 @@ language-Mandarin-description = Старый земной язык с тонал
 language-Arcturian-name = Арктурианский
 language-Arcturian-description = Инопланетный язык с Арктура с гармоническими тонами и необычными речевыми паттернами.
 language-Arcturian-first-contact = Звуки следуют паттерну инопланетного племени.
+
+language-English-name = Английский
+language-English-description = Общий земной язык, используемый для общения во многих регионах.
+
+language-Xeno-name = Ксенийский
+language-Xeno-description = Инопланетный язык улья ксеноморфов.
+language-Xeno-first-contact = Звуки следуют паттерну инопланетного улья.
+
+language-Primitive-name = Примитивный
+language-Primitive-description = Примитивный язык из криков, воя, зовов и жестов.
+
+language-SignLanguage-name = Язык жестов
+language-SignLanguage-description = Визуальный язык, использующий жесты рук, движения и мимику.
+
+language-Spanish-name = Испанский
+language-Spanish-description = Романский земной язык, на котором говорят на многих континентах.
+
+language-French-name = Французский
+language-French-description = Романский земной язык, известный своим плавным произношением.
+
+language-German-name = Немецкий
+language-German-description = Германский земной язык, известный точной структурой и составными словами.
+
+language-Russian-name = Русский
+language-Russian-description = Славянский земной язык с самобытной кириллической письменностью.
+
+language-Japanese-name = Японский
+language-Japanese-description = Земной язык с уникальной письменностью и структурированной речью.
+
+language-Swedish-name = Шведский
+language-Swedish-description = Нордический земной язык с мелодичными тонами и уникальными гласными.
+
+language-Binary-name = Двоичный
+language-Binary-description = Машинный язык из единиц и нулей, чистая информация без эмоций.
+
+language-Legalese-name = Канцелярит
+language-Legalese-description = Элитарный корпоративный жаргон, полный оговорок и дисклеймеров.
 
 

@@ -1,3 +1,11 @@
+ent-RMCBeltRoyalMortar = разгрузочный пояс Л79
+    .desc = Разгрузочный пояс, предназначенный для переноски боеприпасов лёгкого миномёта или многозарядного гранатомёта, а также личного оружия с магазином.
+    .suffix = PVE, RCM, Заполнен
+
+ent-RMCBeltRoyalMortarFilled = {ent-RMCBeltRoyalMortar}
+    .desc = {ent-RMCBeltRoyalMortar.desc}
+    .suffix = PVE, RCM, Заполнен
+
 ent-RMCBeltSPPBrown = пояс для боеприпасов схемы 6Б80
     .desc = Устаревшая, но надёжная разгрузка для боеприпасов, ранее бывшая стандартом для армии СПН.
 

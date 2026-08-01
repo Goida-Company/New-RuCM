@@ -1,18 +1,22 @@
 using System.Linq;
 using System.Text;
+// RuMC edit start
+using Robust.Shared.IoC;
+using Robust.Shared.Localization;
+// RuMC edit end
 using Robust.Shared.Maths;
 
 namespace Content.Shared._CMU14.CharacterDescription;
 
 public static class NamedColorHelper
 {
-    private static readonly (string Name, Color Color)[] NamedColors = BuildPalette();
+    private static readonly (string Id, Color Color)[] NamedColors = BuildPalette(); // RuMC edit
 
-    private static (string Name, Color Color)[] BuildPalette()
+    private static (string Id, Color Color)[] BuildPalette() // RuMC edit
     {
         return Color.GetAllDefaultColors()
             .Where(pair => pair.Key != "transparent")
-            .Select(pair => (Name: Capitalize(pair.Key), pair.Value))
+            .Select(pair => (Id: pair.Key, pair.Value)) // RuMC edit
             .ToArray();
     }
 
@@ -29,10 +33,10 @@ public static class NamedColorHelper
 
     public static string NearestColorName(Color color)
     {
-        var bestName = "Unknown";
+        var bestId = "unknown"; // RuMC edit
         var bestDistance = float.MaxValue;
 
-        foreach (var (name, named) in NamedColors)
+        foreach (var (id, named) in NamedColors) // RuMC edit
         {
             var dr = color.R - named.R;
             var dg = color.G - named.G;
@@ -42,10 +46,13 @@ public static class NamedColorHelper
             if (distance < bestDistance)
             {
                 bestDistance = distance;
-                bestName = name;
+                bestId = id; // RuMC edit
             }
         }
 
-        return bestName;
+        // RuMC edit start
+        var loc = IoCManager.Resolve<ILocalizationManager>();
+        return loc.TryGetString($"color-name-{bestId}", out var localized) ? localized : Capitalize(bestId);
+        // RuMC edit end
     }
 }

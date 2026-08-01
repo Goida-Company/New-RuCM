@@ -1,4 +1,4 @@
-ent-RuMCMachineGunAH12Case = кейс для винтовки АШ-12
+ent-RuMCGunAH12Case = кейс для винтовки АШ-12
     .desc = Оружейный кейс.
     .suffix = РуМС, СПН
 

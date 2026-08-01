@@ -2,6 +2,8 @@ using System.Numerics;
 using System.Reflection;
 using Content.Goobstation.Client.Audio;
 using NUnit.Framework;
+using Robust.Shared.Audio;
+using Robust.Shared.Prototypes;
 
 namespace Content.Tests.Client._Mono.Audio;
 
@@ -34,6 +36,25 @@ public sealed class AudioEchoSystemTest
         var normal = InvokeGetTileHitNormal(new Vector2(0.1f, 0.5f), Vector2.Zero, 1f);
 
         Assert.That(normal, Is.EqualTo(new Vector2(-1f, 0f)));
+    }
+
+    [TestCase(12f, null)]
+    [TestCase(12.1f, "Hallway")]
+    [TestCase(20f, "Auditorium")]
+    [TestCase(30f, "ConcertHall")]
+    [TestCase(40f, "Hangar")]
+    [TestCase(100f, "Hangar")]
+    public void EchoPresetScalesWithEnclosedSpace(float magnitude, string expected)
+    {
+        var method = typeof(AreaEchoSystem).GetMethod(
+            "GetPresetForMagnitude",
+            BindingFlags.Static | BindingFlags.NonPublic);
+
+        Assert.That(method, Is.Not.Null);
+
+        var result = method!.Invoke(null, new object[] { magnitude, 12f });
+        var preset = result is null ? null : ((ProtoId<AudioPresetPrototype>) result).Id;
+        Assert.That(preset, Is.EqualTo(expected));
     }
 
     private static Vector2 InvokeGetTileHitNormal(Vector2 rayHitPos, Vector2 tileOrigin, float tileSize)

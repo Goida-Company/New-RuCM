@@ -10,7 +10,7 @@
   icon: "RMCJobIconReconSynthetic"
   joinNotifyCrew: false
   whitelisted: true
-  whitelistParent: CMUJobSyntheticWhitelist
+  whitelistParent: RMCWhitelistMedium
   isSynthetic: true
   accessGroups:
   - ShipMasterAccess

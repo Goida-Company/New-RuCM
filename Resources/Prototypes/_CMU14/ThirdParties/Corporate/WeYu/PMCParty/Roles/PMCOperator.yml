@@ -183,7 +183,7 @@
     job: AU14JobWYPMCPartyContractor
     raffle:
       settings: short
-    rules: au14-wypmc-description
+    rules: au14-pmcparty-description
 
 - type: entity
   parent: AU14BaseMobSpeciesOrganicWeYu
@@ -203,7 +203,7 @@
     job: AU14JobWYPMCPartyContractorM39B2
     raffle:
       settings: short
-    rules: au14-wypmc-description
+    rules: au14-pmcparty-description
 
 - type: entity
   parent: AU14BaseMobSpeciesOrganicWeYu
@@ -223,7 +223,7 @@
     job: AU14JobWYPMCPartyContractorNSG23
     raffle:
       settings: short
-    rules: au14-wypmc-description
+    rules: au14-pmcparty-description
 
 - type: entity
   parent: AU14BaseMobSpeciesOrganicWeYu
@@ -243,7 +243,7 @@
     job: AU14JobWYPMCPartyContractorM42A
     raffle:
       settings: short
-    rules: au14-wypmc-description
+    rules: au14-pmcparty-description
 
 - type: startingGear
   id: AU14GearWYPMCPartyContractor

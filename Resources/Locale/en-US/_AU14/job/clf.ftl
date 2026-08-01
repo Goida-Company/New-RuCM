@@ -7,6 +7,7 @@ au14-job-supervisors-clfcellleader = CLF High Command.
 au14-job-name-clfguerilla = CLF Guerilla Fighter
 au14-job-name-clfguerilla-alt = CLF Fighter (3rd-Party)
 au14-job-description-clfguerilla = Fight for the CLF, free your brothers and sisters in the colony of their oppression.
+au14-job-description-clfguerilla-alt = Reinforce the CLF cell in the colony, free your brothers and sisters from their oppression.
 au14-job-prefix-clfguerilla = CIV
 AU14JobCLFGuerilla = CLF Guerilla Fighter
 

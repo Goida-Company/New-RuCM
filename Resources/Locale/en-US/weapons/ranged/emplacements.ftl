@@ -4,6 +4,7 @@ emplacement-mount-anchored-examine = Attach a [color={$color}]mountable weapon[/
 emplacement-mount-weapon-secured-examine = Use a [color={$color}]screwdriver[/color] to unanchor the weapon for transport.
 emplacement-mount-too-close = This is too close to the nearby {$mount}.
 emplacement-mount-deploy-broken = You can't set up the {$mount}, it's completely broken!
+emplacement-mount-deploy-vehicle = You can't set this up inside a vehicle!
 emplacement-mounted-weapon-overheated = The {$weapon} is damaged by overheating!
 emplacement-mount-broken-examine = [color=red]The gun can't be used in it's current broken state, use a [/color] [color=cyan]welder[/color][color=red] to start repairing it.[/color]
 emplacement-mount-need-hands-free = You need both hands free to grab the handles!
@@ -22,5 +23,8 @@ emplacement-mount-RMCMachineGunM2C-description-mounted = A deployable, heavy mac
 
 emplacement-mount-AU14AGLMK86-description = The disassembled Mk86 automatic grenade launcher, with its telescopic tripods folded up and unable to fire.
 emplacement-mount-AU14AGLMK86-description-mounted = A deployable, automatic grenade launcher. The Mk86 'Chew' is based on the original designs of the MK19, improved over the past one hundred years to use airburst grenades.
+
+emplacement-mount-RuMCMachineGunUTES-C-description = The disassembled UTES-C HMG, with its telescopic tripods folded up and unable to fire.
+emplacement-mount-RuMCMachineGunUTES-C-description-mounted = UPP 12.7x108mm heavy machine gun. If you're carrying this without a tripod, you hate your back. If you're shooting it with a tripod, you hate the enemy.
 
 emplacement-mount-undeploy = Undeploy

@@ -308,6 +308,8 @@ au14-vaisp-greeting = You are part of Vanguard's Arrow Incorporated.
 
     You are FRIENDLY to all UA units.
 
+rmc-job-name-part-synth = Support Synth
+
 au14-prodigyparty-description = You are a part of "Prodigy Armed Repair Team" (PART)! You were called for a special mission in the area, follow your orders.
 
 au14-prodigyparty-greeting = You are a part of "Prodigy Armed Repair Team" (PART) party!
@@ -389,6 +391,8 @@ au14-job-name-tweiasf-pl = Fleet Air Arm Pilot
 au14-job-prefix-tweiasf-pl = 24/PARA PL
 
 au14-job-description-twepara = You are a member of the Imperial Armed Space Forces 24th Parachute Regiment. Follow your orders.
+
+au14-job-description-tweiasf = You are a member of the Imperial Armed Space Forces. Follow your orders.
 
 au14-job-description-IASFsurv = You are a stranded member of the IASF 24th Parachute Regiment. Fight for Empress, country and also your life.
 

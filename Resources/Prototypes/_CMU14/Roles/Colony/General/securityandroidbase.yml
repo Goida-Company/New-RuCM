@@ -9,7 +9,7 @@
   setPreference: true
   canBeAntag: false
   whitelisted: true
-  whitelistParent: AU14JobGeneralWhitelist
+  whitelistParent: RMCWhitelistMedium
   jobEntity: AU14MobSecurityAndroid
   jobPreviewEntity: AU14MobSecurityAndroidDummy
 

@@ -1,3 +1,4 @@
+rmc-xeno-construction-cost = ({$cost} plasma)
 cm-xeno-construction-failed-weeds = Bad place for a garden!
 cm-xeno-construction-weeds-pod-here = There's a pod here already!
 cm-xeno-construction-weeds-too-strong = These weeds are too strong to plant a node on!

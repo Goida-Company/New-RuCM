@@ -7,7 +7,7 @@
   startingGear: CMUGearProvostInspector
   playTimeTracker: CMJobProvostInspector
   whitelisted: true
-  whitelistParent: CMUJobCommandWhitelist
+  whitelistParent: RMCWhitelistHard
   ranks:
     CMURankProvostInspector: []
   roundComponents:
