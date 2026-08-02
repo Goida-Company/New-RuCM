@@ -67,7 +67,7 @@
         startingAttachable: RuMCAttachmentSuppressorAH12
         whitelist:
           tags:
-          - RuMCAttachmentSuppressorAH12
+          - RuMCAttachmentSuppressorAH
       rmc-aslot-rail:
         whitelist:
           tags:
@@ -451,5 +451,4 @@
 
 - type: Tag
   id: RuMCCartridgeHMG127x55mmAP
-
 

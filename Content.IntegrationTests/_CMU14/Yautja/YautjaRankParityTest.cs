@@ -86,10 +86,10 @@ public sealed class YautjaRankParityTest
 
         Assert.Multiple(() =>
         {
-             Assert.That(capabilities.Rank, Is.EqualTo(YautjaRank.Ancient));
-             Assert.That(capabilities.CanUseUnique, Is.True);
-             Assert.That(capabilities.CanUseCape(YautjaCapeStyle.Ceremonial), Is.True);
-             Assert.That(capabilities.ForStatus(YautjaProfileStatus.Normal).Rank, Is.EqualTo(YautjaRank.Blooded));
+            Assert.That(capabilities.Rank, Is.EqualTo(YautjaRank.Ancient));
+            Assert.That(capabilities.CanUseUnique, Is.True);
+            Assert.That(capabilities.CanUseCape(YautjaCapeStyle.Ceremonial), Is.True);
+            Assert.That(capabilities.ForStatus(YautjaProfileStatus.Normal).Rank, Is.EqualTo(YautjaRank.Blooded));
             Assert.That(capabilities.ForStatus(YautjaProfileStatus.Normal).CanUseUnique, Is.False);
             Assert.That(capabilities.ForStatus(YautjaProfileStatus.Council).Rank, Is.EqualTo(YautjaRank.Ancient));
             Assert.That(capabilities.ForStatus(YautjaProfileStatus.Council).CanUseUnique, Is.True);

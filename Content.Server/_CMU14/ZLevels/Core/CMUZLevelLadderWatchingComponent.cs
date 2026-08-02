@@ -7,4 +7,5 @@ public sealed partial class CMUZLevelLadderWatchingComponent : Component
     public int Offset;
     public EntityUid? PeekTarget;
     public EntityUid? PreviousTarget;
+    public int LookOffset;
 }

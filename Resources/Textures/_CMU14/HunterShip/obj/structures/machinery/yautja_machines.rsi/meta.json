@@ -9,6 +9,9 @@
   "rsic": false,
   "states": [
     {
+      "name": "base"
+    },
+    {
       "name": "globe",
       "delays": [
         [
@@ -803,9 +806,6 @@
     },
     {
       "name": "nutri_deny"
-    },
-    {
-      "name": ""
     },
     {
       "name": "t_20"

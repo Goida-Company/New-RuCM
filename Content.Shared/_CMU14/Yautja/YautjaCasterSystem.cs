@@ -30,7 +30,7 @@ public sealed partial class YautjaCasterSystem : EntitySystem
         SubscribeLocalEvent<YautjaCasterComponent, ShotAttemptedEvent>(OnShotAttempted);
         SubscribeLocalEvent<YautjaCasterComponent, AttemptShootEvent>(OnAttemptShoot);
         SubscribeLocalEvent<YautjaCasterComponent, GunRefreshModifiersEvent>(OnGunRefreshModifiers);
-        SubscribeLocalEvent<YautjaCasterComponent, TakeAmmoEvent>(OnTakeAmmo, after: [typeof(SharedGunSystem)]);
+        SubscribeLocalEvent<YautjaCasterComponent, TakeAmmoEvent>(OnTakeAmmo, before: [typeof(SharedGunSystem)]);
         SubscribeLocalEvent<YautjaCasterComponent, AmmoShotEvent>(OnAmmoShot);
         SubscribeLocalEvent<YautjaCasterComponent, GunShotEvent>(OnGunShot);
         SubscribeLocalEvent<YautjaCasterProjectileRefundComponent, EntityTerminatingEvent>(OnProjectileTerminating);
@@ -177,27 +177,31 @@ public sealed partial class YautjaCasterSystem : EntitySystem
 
     private void OnTakeAmmo(Entity<YautjaCasterComponent> ent, ref TakeAmmoEvent args)
     {
-        if (_net.IsClient || args.Ammo.Count == 0)
+        if (args.Ammo.Count != 0 || args.Shots <= 0)
             return;
 
         if (args.User is not { } user ||
-            !TryGetSourceBracer(ent.Owner, out var sourceBracer))
+            !TryGetSourceBracer(ent.Owner, out var sourceBracer) ||
+            GetMode(ent.Comp) is not { } mode)
         {
-            ClearPreparedAmmo(args);
+            args.Reason = Loc.GetString("cmu-yautja-spike-launcher-denied");
             return;
         }
 
         var chargeCost = GetPowerCost(ent.Comp);
-        if (!_power.TryDrainPower(sourceBracer, user, chargeCost, popup: false))
+        for (var shot = 0; shot < args.Shots; shot++)
         {
-            ClearPreparedAmmo(args);
-            return;
-        }
+            if (_net.IsServer && !_power.TryDrainPower(sourceBracer, user, chargeCost, popup: false))
+            {
+                args.Reason = GetPowerFailureMessage(sourceBracer.Comp, chargeCost);
+                return;
+            }
 
-        foreach (var (ammoEntity, _) in args.Ammo)
-        {
-            if (ammoEntity is { } uid)
-                AddProjectileRefund(uid, sourceBracer, chargeCost);
+            var projectile = Spawn(mode.Projectile, args.Coordinates);
+            if (_net.IsServer)
+                AddProjectileRefund(projectile, sourceBracer, chargeCost);
+
+            args.Ammo.Add((projectile, _gun.EnsureShootable(projectile)));
         }
     }
 
@@ -242,13 +246,6 @@ public sealed partial class YautjaCasterSystem : EntitySystem
         var mode = GetMode(ent.Comp);
         if (mode == null)
             return;
-
-        if (TryComp(ent, out ProjectileBatteryAmmoProviderComponent? ammo) &&
-            ammo.Prototype != mode.Projectile)
-        {
-            ammo.Prototype = mode.Projectile;
-            Dirty(ent, ammo);
-        }
 
         _gun.RefreshModifiers(ent.Owner);
     }
@@ -332,15 +329,13 @@ public sealed partial class YautjaCasterSystem : EntitySystem
         refund.Fired = false;
     }
 
-    private void ClearPreparedAmmo(TakeAmmoEvent args)
+    private string GetPowerFailureMessage(YautjaBracerComponent bracer, FixedPoint2 amount)
     {
-        foreach (var (ammoEntity, _) in args.Ammo)
-        {
-            if (ammoEntity is { } uid)
-                QueueDel(uid);
-        }
-
-        args.Ammo.Clear();
+        return Loc.GetString(
+            "cmu-yautja-drain-power-failed",
+            ("charge", (int) bracer.Charge),
+            ("max", (int) bracer.MaxCharge),
+            ("amount", (int) amount));
     }
 
     private void PopupMode(Entity<YautjaCasterComponent> ent, EntityUid user, LocId message)

@@ -10,9 +10,7 @@
   components:
   - type: YautjaHellhound
   - type: RMCCamera
-    id: CMUYautjaHellhoundCamera
-    networks:
-    - Yautja
+    id: CMUMobYautjaHellhound
     rename: false
   - type: GhostRole
     name: cmu-yautja-hellhound-ghost-name

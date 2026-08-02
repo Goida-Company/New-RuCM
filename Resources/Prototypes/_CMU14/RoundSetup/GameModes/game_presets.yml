@@ -85,7 +85,6 @@
   - colonyfall
   name: au14-preset-colonyfall-title # RuMC edit
   showInVote: true
-  maxPlayers: 60
   description: au14-preset-colonyfall-description # RuMC edit
   supportedPlanets:
     - AUPlanetShepherdsPride

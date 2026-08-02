@@ -179643,7 +179643,7 @@ entities:
     - type: MetaData
       name: Kutjevo ground relay
     - type: Transform
-      pos: 114.5,-81.5
+      pos: 91.5,-138.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

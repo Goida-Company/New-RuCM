@@ -15,7 +15,6 @@ using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
-using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -62,7 +61,6 @@ public sealed partial class YautjaChainGauntletSystem : EntitySystem
     public override void Initialize()
     {
         SubscribeLocalEvent<YautjaChainGauntletComponent, GetItemActionsEvent>(OnGetItemActions);
-        SubscribeLocalEvent<YautjaChainGauntletComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<YautjaChainGauntletComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<YautjaChainGauntletComponent, MeleeHitEvent>(OnMeleeHit);
         SubscribeLocalEvent<YautjaChainGauntletComponent, YautjaChainGauntletExecuteDoAfterEvent>(OnExecutionDoAfter);
@@ -107,17 +105,6 @@ public sealed partial class YautjaChainGauntletSystem : EntitySystem
             return;
 
         args.AddAction(ref ent.Comp.GuardAction, ent.Comp.GuardActionId);
-    }
-
-    private void OnExamined(Entity<YautjaChainGauntletComponent> ent, ref ExaminedEvent args)
-    {
-        if (!HasComp<YautjaComponent>(args.Examiner))
-            return;
-
-        args.PushMarkup(Loc.GetString("cmu-yautja-chain-gauntlet-examine-combo"));
-        args.PushMarkup(Loc.GetString("cmu-yautja-chain-gauntlet-examine-help"));
-        args.PushMarkup(Loc.GetString("cmu-yautja-chain-gauntlet-examine-shove"));
-        args.PushMarkup(Loc.GetString("cmu-yautja-chain-gauntlet-examine-grab"));
     }
 
     private void OnInteractUsing(Entity<YautjaChainGauntletComponent> ent, ref InteractUsingEvent args)
@@ -610,7 +597,7 @@ public sealed partial class YautjaChainGauntletSystem : EntitySystem
         {
             _chat.TrySendInGameICMessage(
                 user,
-                Loc.GetString(gauntlet.ChainMessage),
+                gauntlet.ChainMessage,
                 InGameICChatType.Speak,
                 ChatTransmitRange.Normal,
                 hideLog: true,

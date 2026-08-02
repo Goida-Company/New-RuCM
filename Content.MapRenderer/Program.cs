@@ -246,7 +246,7 @@ namespace Content.MapRenderer
                 {
                     Console.WriteLine($"Painting map {map} failed due to an internal exception:");
                     Console.WriteLine(ex);
-                    continue;
+                    throw;
                 }
 
                 if (arguments.ExportViewerJson)

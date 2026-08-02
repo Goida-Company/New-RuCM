@@ -557,6 +557,11 @@ public sealed partial class YautjaBracerUtilitySystem : EntitySystem
             case YautjaBracerMisuseAction.CreateHumanStabilisingCrystal:
                 return TryCreateItem(bracer, user, bracer.Comp.HumanStabilisingCrystalPrototype, bracer.Comp.HumanStabilisingCrystalCost, bracer.Comp.StabilisingCrystalCooldown, ref bracer.Comp.NextStabilisingCrystal, "cmu-yautja-bracer-human-crystal-created");
             case YautjaBracerMisuseAction.CreateHealingCapsule:
+                if (!bracer.Comp.HealingEnabled)
+                {
+                    _popup.PopupEntity(Loc.GetString("cmu-yautja-bracer-healing-disabled"), user, user, PopupType.MediumCaution);
+                    return true;
+                }
                 return TryCreateItem(bracer, user, bracer.Comp.HealingCapsulePrototype, bracer.Comp.HealingCapsuleCost, bracer.Comp.HealingCapsuleCooldown, ref bracer.Comp.NextHealingCapsule, "cmu-yautja-bracer-healing-capsule-created");
             case YautjaBracerMisuseAction.CreateHuntingTrap:
                 return TryCreateItem(bracer, user, bracer.Comp.HuntingTrapPrototype, bracer.Comp.HuntingTrapCost, bracer.Comp.HuntingTrapCooldown, ref bracer.Comp.NextHuntingTrap, "cmu-yautja-bracer-hunting-trap-created");

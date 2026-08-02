@@ -20,8 +20,8 @@ public sealed class CMXenoHealthIconStateTest
     }
 
     [Test]
-    public void DeadXenoUsesTheZeroHealthState()
+    public void DeadXenoDoesNotExposeAHealthState()
     {
-        Assert.That(CMXenoHealthIconState.GetState(300, MobState.Dead, 200, 300), Is.EqualTo("xenohealth0"));
+        Assert.That(CMXenoHealthIconState.GetState(300, MobState.Dead, 200, 300), Is.Null);
     }
 }

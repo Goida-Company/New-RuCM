@@ -401,6 +401,7 @@
     sprite: _CMU14/HunterShip/obj/items/hunter/pred_gear.rsi
     layers:
     - state: falcon_drone_active
+      map: [ "enum.YautjaFalconVisualLayers.Base" ]
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.5
     baseSprintSpeed: 8
@@ -441,6 +442,7 @@
     sprite: _CMU14/HunterShip/obj/items/hunter/pred_gear.rsi
     layers:
     - state: falcon_drone_badblood_active
+      map: [ "enum.YautjaFalconVisualLayers.Base" ]
   - type: YautjaFalconHudIcon
     icon: CMUYautjaIconFalconDroneBadBlood
 
@@ -745,9 +747,7 @@
         type: RMCCameraBui
   - type: RMCCameraComputer
     protoIds:
-    - CMUYautjaHellhoundCamera
-    networks:
-    - Yautja
+    - CMUMobYautjaHellhound
     title: cmu-yautja-houndpad-interface-title
     viewportSize: 672, 480
 

@@ -44821,7 +44821,7 @@ entities:
     - type: MetaData
       name: Gixens Caverns ground relay
     - type: Transform
-      pos: 78.43822,32.16383
+      pos: -16.5,272.5
       parent: 2
     - type: YautjaRelayDestination
       kind: Ground

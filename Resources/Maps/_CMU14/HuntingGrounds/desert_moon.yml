@@ -5,7 +5,7 @@ meta:
   forkId: cmu14
   forkVersion: yautja-hunting-grounds-source-port
   time: 2026-05-29T00:00:00.000Z
-  entityCount: 6686
+  entityCount: 6692
 maps:
 - 1
 grids:
@@ -30,19 +30,24 @@ entities:
   - uid: 1
     components:
     - type: MetaData
-      name: Yautja Desert Moon Map
+      name: Yautja Desert Moon Caves Map
     - type: Transform
     - type: Map
       mapPaused: True
     - type: GridTree
     - type: MapLight
       ambientLightColor: '#FFFFFFFF'
+    - type: AmbientSound
+      sound:
+        collection: CMUYautjaHuntingGroundCaves
+      range: 512
+      volume: -8
     - type: Broadphase
     - type: OccluderTree
   - uid: 2
     components:
     - type: MetaData
-      name: Yautja Desert Moon
+      name: Yautja Desert Moon Caves
     - type: Transform
       parent: 1
     - type: MapGrid
@@ -31851,11 +31856,6 @@ entities:
     - type: Transform
       pos: 23.5,93.5
       parent: 2
-  - uid: 6300
-    components:
-    - type: Transform
-      pos: 24.5,93.5
-      parent: 2
   - uid: 6301
     components:
     - type: Transform
@@ -33785,4 +33785,48 @@ entities:
     components:
     - type: Transform
       pos: 112.5,96.5
+      parent: 2
+- proto: CMUYautjaHuntingGroundPreserveEdge
+  entities:
+  - uid: 6687
+    components:
+    - type: Transform
+      pos: 12.5,93.5
+      parent: 2
+  - uid: 6688
+    components:
+    - type: Transform
+      pos: 12.5,94.5
+      parent: 2
+  - uid: 6689
+    components:
+    - type: Transform
+      pos: 12.5,95.5
+      parent: 2
+- proto: CMUYautjaHuntingGroundPreserveShutter
+  entities:
+  - uid: 6690
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,90.5
+      parent: 2
+  - uid: 6691
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,91.5
+      parent: 2
+  - uid: 6692
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: 23.5,92.5
+      parent: 2
+- proto: CMUYautjaHuntingGroundEscapeConsole
+  entities:
+  - uid: 6693
+    components:
+    - type: Transform
+      pos: 24.5,93.5
       parent: 2

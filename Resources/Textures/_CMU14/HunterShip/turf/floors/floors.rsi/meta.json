@@ -9,10 +9,10 @@
   "rsic": false,
   "states": [
     {
-      "name": "noop"
+      "name": "base"
     },
     {
-      "name": ""
+      "name": "noop"
     },
     {
       "name": "floor"

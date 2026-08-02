@@ -125,11 +125,11 @@ public sealed class YautjaCharacterProfileTest
         Assert.Multiple(() =>
         {
             Assert.That(YautjaCharacterProfile.GetArmorStyleDisplayName(YautjaGearMaterial.Bronze, 3),
-                Is.EqualTo("bronze clan armor, pattern 3"));
+                Is.EqualTo("cmu-yautja-profile-armor-bronze-3"));
             Assert.That(YautjaCharacterProfile.GetMaskStyleDisplayName(YautjaGearMaterial.Bone, 12),
-                Is.EqualTo("bone clan mask, pattern 12"));
+                Is.EqualTo("cmu-yautja-profile-mask-bone-12"));
             Assert.That(YautjaCharacterProfile.GetGreavesStyleDisplayName(YautjaGearMaterial.Silver, 2),
-                Is.EqualTo("silver clan greaves, pattern 2"));
+                Is.EqualTo("cmu-yautja-profile-greaves-silver-2"));
             Assert.That(YautjaCharacterProfile.CapeStyleOrder,
                 Is.EqualTo(new[]
                 {
@@ -142,7 +142,7 @@ public sealed class YautjaCharacterProfileTest
                     YautjaCapeStyle.Damaged,
                 }));
             Assert.That(YautjaCharacterProfile.GetCapeDisplayName(YautjaCapeStyle.Poncho),
-                Is.EqualTo("councilor poncho"));
+                Is.EqualTo("cmu-yautja-profile-cape-poncho"));
             Assert.That(YautjaCharacterProfile.Default.WithCapeStyle(YautjaCapeStyle.Damaged).CapePrototype,
                 Is.EqualTo("CMUYautjaCapeDamaged"));
         });
@@ -168,13 +168,13 @@ public sealed class YautjaCharacterProfileTest
                     YautjaBracerMaterial.Collector,
                 }));
             Assert.That(YautjaCharacterProfile.GetBracerDisplayName(YautjaBracerMaterial.Silver),
-                Is.EqualTo("silver clan bracers"));
+                Is.EqualTo("cmu-yautja-profile-bracer-silver-clan"));
             Assert.That(YautjaCharacterProfile.Default.WithBracer(YautjaBracerMaterial.Retro).BracerPrototype,
                 Is.EqualTo("CMUYautjaBracerRetro"));
             Assert.That(YautjaCharacterProfile.Default.WithBracer(YautjaBracerMaterial.Dragon).BracerPrototype,
                 Is.EqualTo("CMUYautjaBracerLegacyDragon"));
             Assert.That(YautjaCharacterProfile.GetBracerDisplayName(YautjaBracerMaterial.Collector),
-                Is.EqualTo("collector legacy bracers"));
+                Is.EqualTo("cmu-yautja-profile-bracer-collector-legacy"));
             Assert.That(YautjaCharacterProfile.Default.WithLegacy(YautjaLegacySet.Enforcer).BracerPrototype,
                 Is.EqualTo("CMUYautjaBracerLegacyEnforcer"));
         });
@@ -253,7 +253,7 @@ public sealed class YautjaCharacterProfileTest
     public void EmptyMaskAccessoryDisplayNameFitsVisualSelector()
     {
         Assert.That(YautjaCharacterProfile.GetMaskAccessoryDisplayName(0, YautjaGearMaterial.Ebony),
-            Is.EqualTo("None"));
+            Is.EqualTo("cmu-yautja-profile-mask-accessory-none"));
     }
 
     [Test]
@@ -567,16 +567,46 @@ public sealed class YautjaCharacterProfileTest
     }
 
     [Test]
-    public void YautjaProfileAlwaysUsesMaleSexAndGender()
+    public void YautjaProfileDefaultsToMaleSexAndGender()
     {
-        var yautja = YautjaCharacterProfile.Default
-            .WithSex(Sex.Female)
-            .WithGender(Gender.Female);
+        var yautja = YautjaCharacterProfile.Default;
 
         Assert.Multiple(() =>
         {
             Assert.That(yautja.Sex, Is.EqualTo(Sex.Male));
             Assert.That(yautja.Gender, Is.EqualTo(Gender.Male));
+        });
+    }
+
+    [Test]
+    public void YautjaProfileSupportsFemaleSexAndGender()
+    {
+        var bySex = YautjaCharacterProfile.Default.WithSex(Sex.Female);
+        var byGender = YautjaCharacterProfile.Default.WithGender(Gender.Female);
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(bySex.Sex, Is.EqualTo(Sex.Female));
+            Assert.That(bySex.Gender, Is.EqualTo(Gender.Female));
+            Assert.That(byGender.Sex, Is.EqualTo(Sex.Female));
+            Assert.That(byGender.Gender, Is.EqualTo(Gender.Female));
+        });
+    }
+
+    [Test]
+    public void FemaleYautjaSexAndGenderSurviveCloneAndSanitize()
+    {
+        var female = YautjaCharacterProfile.Default.WithGender(Gender.Female);
+        var clone = female.Clone();
+        var sanitized = female.SanitizeForCapabilities(
+            new YautjaProfileCapabilities(YautjaRank.Blooded, false, false));
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(clone.Sex, Is.EqualTo(Sex.Female));
+            Assert.That(clone.Gender, Is.EqualTo(Gender.Female));
+            Assert.That(sanitized.Sex, Is.EqualTo(Sex.Female));
+            Assert.That(sanitized.Gender, Is.EqualTo(Gender.Female));
         });
     }
 
@@ -611,7 +641,7 @@ public sealed class YautjaCharacterProfileTest
     }
 
     [Test]
-     public void ExternalAncientNormalStatusKeepsEntitledGearAndBloodedActiveRank()
+    public void ExternalAncientNormalStatusKeepsEntitledGearAndBloodedActiveRank()
     {
         var capabilities = new YautjaProfileCapabilities(
             YautjaRank.Ancient,
@@ -638,8 +668,8 @@ public sealed class YautjaCharacterProfileTest
         });
     }
 
-     [Test]
-     public void ProfileSanitizerEnforcesEquipmentAccessPolicy()
+    [Test]
+    public void ProfileSanitizerEnforcesEquipmentAccessPolicy()
     {
         var ordinaryCapabilities = new YautjaProfileCapabilities(YautjaRank.Blooded, false, false);
         var eliteCapabilities = new YautjaProfileCapabilities(YautjaRank.Elite, true, false);
@@ -755,6 +785,41 @@ public sealed class YautjaCharacterProfileTest
             {
                 entMan.DeleteEntity(normal);
                 entMan.DeleteEntity(council);
+            }
+        });
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task AppliedProfileCopiesSelectedYautjaSexAndGender()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+        var server = pair.Server;
+        var map = await pair.CreateTestMap();
+
+        await server.WaitAssertion(() =>
+        {
+            var entMan = server.EntMan;
+            var profileApply = entMan.System<YautjaProfileApplySystem>();
+            var entity = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
+
+            try
+            {
+                profileApply.ApplyProfile(
+                    entity,
+                    YautjaCharacterProfile.Default.WithGender(Gender.Female));
+
+                var humanoid = entMan.GetComponent<HumanoidAppearanceComponent>(entity);
+                Assert.Multiple(() =>
+                {
+                    Assert.That(humanoid.Sex, Is.EqualTo(Sex.Female));
+                    Assert.That(humanoid.Gender, Is.EqualTo(Gender.Female));
+                });
+            }
+            finally
+            {
+                entMan.DeleteEntity(entity);
             }
         });
 

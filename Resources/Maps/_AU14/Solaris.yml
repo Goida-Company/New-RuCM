@@ -411102,7 +411102,7 @@ entities:
     - type: MetaData
       name: Solaris ground relay
     - type: Transform
-      pos: 20.5,-155.5
+      pos: 173.5,-167.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

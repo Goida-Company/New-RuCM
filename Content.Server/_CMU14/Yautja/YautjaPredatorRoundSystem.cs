@@ -377,16 +377,17 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
                 continue;
             }
 
-            EnsurePredatorRound((uid, comp), !comp.HunterShipLoaded);
-            if (GetRandomPredatorSpawn(comp.PredatorJob) is not { } coordinates)
-                return;
-
             var entitlementCapabilities = ev.PlayerSession is { } session
                 ? _rankManager.ResolveProfileCapabilitiesCached(session.UserId)
                 : YautjaProfileCapabilities.Default;
             var activeCapabilities = entitlementCapabilities.ForStatus(
                 ev.HumanoidCharacterProfile?.YautjaProfile.Status ?? YautjaProfileStatus.Normal);
             var rank = activeCapabilities.Rank;
+            var spawnKind = GetRankSpawnPolicy(rank).SpawnKind;
+
+            EnsurePredatorRound((uid, comp), !comp.HunterShipLoaded);
+            if (GetRandomPredatorSpawn(comp.PredatorJob, spawnKind) is not { } coordinates)
+                return;
 
             if (GetRankSpawnPolicy(rank).BypassSlotCap && comp.RankBypassSlotsRemaining > 0)
                 comp.RankBypassSlotsRemaining--;
@@ -593,8 +594,8 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
 
     private bool HasPredatorSpawnPoint(ProtoId<JobPrototype> job)
     {
-        var query = EntityQueryEnumerator<SpawnPointComponent>();
-        while (query.MoveNext(out _, out var spawn))
+        var query = EntityQueryEnumerator<YautjaPredatorSpawnPointComponent, SpawnPointComponent>();
+        while (query.MoveNext(out _, out _, out var spawn))
         {
             if (spawn.SpawnType == SpawnPointType.Job && spawn.Job == job)
                 return true;
@@ -603,13 +604,15 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
         return false;
     }
 
-    private EntityCoordinates? GetRandomPredatorSpawn(ProtoId<JobPrototype> job)
+    private EntityCoordinates? GetRandomPredatorSpawn(ProtoId<JobPrototype> job, YautjaSpawnKind kind)
     {
         var candidates = new List<EntityCoordinates>();
-        var query = EntityQueryEnumerator<SpawnPointComponent, TransformComponent>();
-        while (query.MoveNext(out _, out var spawn, out var xform))
+        var query = EntityQueryEnumerator<YautjaPredatorSpawnPointComponent, SpawnPointComponent, TransformComponent>();
+        while (query.MoveNext(out _, out var predatorSpawn, out var spawn, out var xform))
         {
-            if (spawn.SpawnType != SpawnPointType.Job || spawn.Job != job)
+            if (predatorSpawn.Kind != kind ||
+                spawn.SpawnType != SpawnPointType.Job ||
+                spawn.Job != job)
                 continue;
 
             candidates.Add(xform.Coordinates);

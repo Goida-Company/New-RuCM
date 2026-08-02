@@ -11,28 +11,23 @@ jobs:
     name: Run Benchmarks
     runs-on: ubuntu-latest
     steps:
-      - name: Run script on centcomm
-        uses: appleboy/ssh-action@v1.2.5
+      - uses: actions/checkout@v6.0.2
         with:
-          host: centcomm.spacestation14.io
-          username: robust-benchmark-runner
-          key: ${{ secrets.CENTCOMM_ROBUST_BENCHMARK_RUNNER_KEY }}
-          command_timeout: 100000m
-          script: |
-            mkdir benchmark_run_content_${{ github.sha }}
-            cd benchmark_run_content_${{ github.sha }}
-            git clone https://github.com/space-wizards/space-station-14.git repo_dir --recursive
-            cd repo_dir
-            git checkout ${{ github.sha }}
-            cd Content.Benchmarks
-            dotnet restore
-            export ROBUST_BENCHMARKS_ENABLE_SQL=1
-            export ROBUST_BENCHMARKS_SQL_ADDRESS="${{ secrets.BENCHMARKS_WRITE_ADDRESS }}"
-            export ROBUST_BENCHMARKS_SQL_PORT="${{ secrets.BENCHMARKS_WRITE_PORT }}"
-            export ROBUST_BENCHMARKS_SQL_USER="${{ secrets.BENCHMARKS_WRITE_USER }}"
-            export ROBUST_BENCHMARKS_SQL_PASSWORD="${{ secrets.BENCHMARKS_WRITE_PASSWORD  }}"
-            export ROBUST_BENCHMARKS_SQL_DATABASE="content_benchmarks"
-            export GITHUB_SHA="${{ github.sha }}"
-            dotnet run --filter '*' --configuration Release
-            cd ../../..
-            rm -rf benchmark_run_content_${{ github.sha }}
+          submodules: recursive
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5.2.0
+        with:
+          dotnet-version: 10.0.x
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            **/*.props
+            **/*.targets
+            **/packages.lock.json
+
+      - name: Restore benchmarks
+        run: dotnet restore Content.Benchmarks/Content.Benchmarks.csproj
+
+      - name: Run benchmarks
+        run: dotnet run --project Content.Benchmarks --no-restore --configuration Release -- --filter '*'

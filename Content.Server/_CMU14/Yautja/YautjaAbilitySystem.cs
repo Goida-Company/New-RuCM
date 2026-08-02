@@ -7,8 +7,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Physics;
 using Content.Shared.Throwing;
 using Robust.Shared.Map;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
 
 namespace Content.Server._CMU14.Yautja;
 
@@ -22,6 +25,7 @@ public sealed partial class YautjaAbilitySystem : EntitySystem
     [Dependency] private YautjaMarkSystem _marks = default!;
     [Dependency] private YautjaPowerSystem _power = default!;
     [Dependency] private YautjaTrophySystem _trophies = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
 
     public override void Initialize()
     {
@@ -29,6 +33,8 @@ public sealed partial class YautjaAbilitySystem : EntitySystem
         SubscribeLocalEvent<YautjaComponent, YautjaLeapDoAfterEvent>(OnLeapDoAfter);
         SubscribeLocalEvent<YautjaComponent, YautjaButcherActionEvent>(OnButcher);
         SubscribeLocalEvent<YautjaComponent, YautjaMarkForHuntActionEvent>(OnMarkForHunt);
+        SubscribeLocalEvent<YautjaLeapingComponent, StopThrowEvent>(OnLeapStopped);
+        SubscribeLocalEvent<YautjaLeapingComponent, ComponentRemove>(OnLeapComponentRemoved);
     }
 
     public void GrantActions(Entity<YautjaComponent> ent)
@@ -102,6 +108,8 @@ public sealed partial class YautjaAbilitySystem : EntitySystem
         if (direction == Vector2.Zero)
             return;
 
+        PrepareLeapCollision((ent.Owner, EnsureComp<YautjaLeapingComponent>(ent.Owner)));
+
         _throwing.TryThrow(
             ent.Owner,
             direction,
@@ -110,6 +118,60 @@ public sealed partial class YautjaAbilitySystem : EntitySystem
             animated: true,
             compensateFriction: true);
         args.Handled = true;
+    }
+
+    private void OnLeapStopped(Entity<YautjaLeapingComponent> ent, ref StopThrowEvent args)
+    {
+        RestoreLeapCollision(ent);
+        RemCompDeferred<YautjaLeapingComponent>(ent.Owner);
+    }
+
+    private void OnLeapComponentRemoved(Entity<YautjaLeapingComponent> ent, ref ComponentRemove args)
+    {
+        RestoreLeapCollision(ent);
+    }
+
+    private void PrepareLeapCollision(Entity<YautjaLeapingComponent> ent)
+    {
+        if (!TryComp(ent.Owner, out FixturesComponent? fixtures))
+            return;
+
+        ent.Comp.OriginalCollisionMasks.Clear();
+        foreach (var (fixtureId, fixture) in fixtures.Fixtures)
+        {
+            ent.Comp.OriginalCollisionMasks[fixtureId] = fixture.CollisionMask;
+            _physics.SetCollisionMask(
+                ent.Owner,
+                fixtureId,
+                fixture,
+                GetLeapCollisionMask(fixture.CollisionMask),
+                fixtures);
+        }
+    }
+
+    private void RestoreLeapCollision(Entity<YautjaLeapingComponent> ent)
+    {
+        if (!TryComp(ent.Owner, out FixturesComponent? fixtures))
+            return;
+
+        foreach (var (fixtureId, originalMask) in ent.Comp.OriginalCollisionMasks)
+        {
+            if (!fixtures.Fixtures.TryGetValue(fixtureId, out var fixture))
+                continue;
+
+            _physics.SetCollisionMask(ent.Owner, fixtureId, fixture, originalMask, fixtures);
+        }
+
+        ent.Comp.OriginalCollisionMasks.Clear();
+    }
+
+    public static int GetLeapCollisionMask(int originalMask)
+    {
+        const int passableDuringLeap = (int) (CollisionGroup.MidImpassable |
+                                               CollisionGroup.HighImpassable |
+                                               CollisionGroup.LowImpassable |
+                                               CollisionGroup.MobCollision);
+        return originalMask & ~passableDuringLeap;
     }
 
     private static Vector2 ClampLeapDirection(Entity<YautjaComponent> ent, Vector2 direction)

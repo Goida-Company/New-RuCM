@@ -2034,7 +2034,6 @@
   - type: XenoEgg
     state: Growing
     canSpawnGhostParasite: false
-    spawn: CMXenoLarva
     normalSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     currentSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     growingState: "Egg Growing"
@@ -5025,6 +5024,7 @@
     access:
     - [ "CMUAccessYautjaAncient" ]
     - [ "CMUAccessYautjaElder" ]
+    - [ "CMUAccessYautjaElite" ]
     - [ "CMUAccessYautjaLeader" ]
   - type: Clickable
   - type: InteractionOutline
@@ -5083,6 +5083,7 @@
     access:
     - [ "CMUAccessYautjaAncient" ]
     - [ "CMUAccessYautjaElder" ]
+    - [ "CMUAccessYautjaElite" ]
     - [ "CMUAccessYautjaLeader" ]
   - type: Clickable
   - type: InteractionOutline
@@ -7967,6 +7968,9 @@
     layers:
     - state: "vial"
       color: "#9b1818"
+    - state: "vial"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "vial"
@@ -7977,6 +7981,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Chemistry/vials.rsi
+      state: vial1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -8013,6 +8021,9 @@
     layers:
     - state: "vial"
       color: "#9b1818"
+    - state: "vial"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "vial"
@@ -8023,6 +8034,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Chemistry/vials.rsi
+      state: vial1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -8059,6 +8074,9 @@
     layers:
     - state: "vial"
       color: "#9b1818"
+    - state: "vial"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "vial"
@@ -8069,6 +8087,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Chemistry/vials.rsi
+      state: vial1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -8105,6 +8127,9 @@
     layers:
     - state: "vial"
       color: "#9b1818"
+    - state: "vial"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "vial"
@@ -8115,6 +8140,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Chemistry/vials.rsi
+      state: vial1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -8151,6 +8180,9 @@
     layers:
     - state: "vial"
       color: "#9b1818"
+    - state: "vial"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "vial"
@@ -8161,6 +8193,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Chemistry/vials.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Chemistry/vials.rsi
+      state: vial1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -9543,8 +9579,6 @@
   abstract: true
   components:
   - type: XenoEgg
-    canSpawnGhostParasite: false
-    spawn: CMXenoLarva
     normalSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     currentSprite: _CMU14/HunterShip/mob/xenos/effects.rsi
     growingState: "Egg Growing"
@@ -14296,16 +14330,16 @@
     enableOverrideDir: true
     overrideDir: South
     layers:
-    - state: ""
+    - state: base
       color: "#9bb1be"
       map: [ "enum.IVDripVisualLayers.Base" ]
     - state: reagent0
       map: [ "enum.IVDripVisualLayers.Reagent" ]
   - type: Icon
     sprite: _CMU14/HunterShip/obj/structures/machinery/iv_drip.rsi
-    state: ""
+    state: base
   - type: IVDrip
-    unattachedState: ""
+    unattachedState: base
     attachedState: hooked
     reagentStates:
     - 0: reagent0
@@ -14757,6 +14791,9 @@
     layers:
     - state: "beakersilver"
       color: "#9b1818"
+    - state: "beakersilver"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "beakersilver"
@@ -14767,6 +14804,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Medical/large_beaker.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Medical/large_beaker.rsi
+      state: beakerlarge1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -14803,6 +14844,9 @@
     layers:
     - state: "beakersilver"
       color: "#9b1818"
+    - state: "beakersilver"
+      map: ["enum.SolutionContainerLayers.Fill"]
+      visible: false
   - type: Icon
     sprite: _CMU14/HunterShip/obj/items/chemistry.rsi
     state: "beakersilver"
@@ -14813,6 +14857,10 @@
     - type: Contraband
   - type: Item
     sprite: _RMC14/Objects/Medical/large_beaker.rsi
+  - type: SolutionContainerVisuals
+    fillSprite:
+      sprite: _RMC14/Objects/Medical/large_beaker.rsi
+      state: beakerlarge1
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -15961,6 +16009,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -15990,6 +16040,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16019,6 +16071,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16048,6 +16102,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16077,6 +16133,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16106,6 +16164,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16134,6 +16194,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: North
   - type: Clickable
   - type: InteractionOutline
 
@@ -16162,6 +16224,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: South
   - type: Clickable
   - type: InteractionOutline
 
@@ -16190,6 +16254,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -16219,6 +16285,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -16248,6 +16316,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -16277,6 +16347,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: South
   - type: Clickable
   - type: InteractionOutline
 
@@ -16306,6 +16378,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: South
   - type: Clickable
   - type: InteractionOutline
 
@@ -16334,6 +16408,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16363,6 +16439,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: East
   - type: Clickable
   - type: InteractionOutline
 
@@ -16391,6 +16469,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: North
   - type: Clickable
   - type: InteractionOutline
 
@@ -16420,6 +16500,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: North
   - type: Clickable
   - type: InteractionOutline
 
@@ -16449,6 +16531,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: North
   - type: Clickable
   - type: InteractionOutline
 
@@ -16478,6 +16562,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: North
   - type: Clickable
   - type: InteractionOutline
 
@@ -16507,6 +16593,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: South
   - type: Clickable
   - type: InteractionOutline
 
@@ -16536,6 +16624,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: South
   - type: Clickable
   - type: InteractionOutline
 
@@ -16564,6 +16654,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -16593,6 +16685,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -16622,6 +16716,8 @@
       visuals: {}
   - type: Strap
     position: Stand
+  - type: YautjaChairFacing
+    direction: West
   - type: Clickable
   - type: InteractionOutline
 
@@ -18207,6 +18303,30 @@
   description: "A fancy bed with built-in injectors, a dialysis machine, and a limited health scanner."
   suffix: Hunter Ship CMU exact wrapper
   components:
+  - type: CMUAutodocPod
+    availableChemicals:
+    - thwei
+    - CMInaprovaline
+    - CMUOxycodone
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    - CMAlkysine
+    - CMImidazoline
+    emergencyChemicals:
+    - thwei
+    - CMInaprovaline
+    - CMUOxycodone
+    - CMDylovene
+    - CMDexalinPlus
+    - CMTricordrazine
+    - CMBicaridine
+    - CMKelotane
+    - CMMeralyne
+    - CMDermaline
+    - CMAlkysine
+    - CMImidazoline
+    dialysisRatePerSecond: 8
   - type: Sprite
     sprite: _CMU14/HunterShip/obj/structures/machinery/yautja_machines.rsi
     drawdepth: Mobs
@@ -29314,7 +29434,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29359,7 +29479,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29404,7 +29524,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29449,7 +29569,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29494,7 +29614,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -29539,7 +29659,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -31207,7 +31327,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false
@@ -31252,7 +31372,7 @@
       visuals: {}
     - type: Contraband
   - type: Item
-    sprite: _CMU14/Yautja/weapons.rsi
+    sprite: _CMU14/Yautja/guns.rsi
   - type: Physics
     bodyType: Dynamic
     fixedRotation: false

@@ -342939,7 +342939,7 @@ entities:
     - type: MetaData
       name: Stable Garrison ground relay
     - type: Transform
-      pos: 221.5,-45.5
+      pos: 47.5,-121.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

@@ -28,6 +28,8 @@ reagent-name-cmmeralyne = Мералин
 reagent-desc-cmmeralyne = Сильнодействующий анальгетик для критических травм. Передозировка разрушает клеточные мембраны.
 reagent-name-cmimidazoline = Имидазолин
 reagent-desc-cmimidazoline = Лечит травмы глаз (негенетические). Альтернатива хирургическому вмешательству.
+reagent-name-cmalkysine = Алкизин
+reagent-desc-cmalkysine = Лекарство яутжа для восстановления повреждённой ткани мозга.
 reagent-name-cmclonexadone = Клонексадон
 reagent-desc-cmclonexadone = Улучшенная версия криоксадона. Требует температуры ниже 170K.
 # Медицинские обозначения

@@ -11,7 +11,7 @@
   whitelisted: true
   jobEntity: CMUMobYautja
   jobPreviewEntity: CMUMobYautja
-  startingGear: CMUYautjaHunterGear
+  startingGear: CMUYautjaHunterSpawnGear
   usePlayerProfile: false
   special:
   - !type:AddComponentSpecial
@@ -67,14 +67,86 @@
   whitelisted: true
   jobEntity: CMUMobYautjaBadBlood
   jobPreviewEntity: CMUMobYautjaBadBlood
-  startingGear: CMUYautjaBadBloodGear
+  startingGear: CMUYautjaBadBloodSpawnGear
   usePlayerProfile: false
+
+- type: job
+  parent: CMJobBase
+  id: CMUYautjaMilitaryCasteSoldier
+  name: cmu-yautja-job-name-military-soldier
+  description: cmu-yautja-job-description-military-soldier
+  playTimeTracker: CMUYautjaMilitaryCasteSoldier
+  icon: CMJobIconEmpty
+  supervisors: cm-job-supervisors-nobody
+  joinNotifyCrew: false
+  hidden: true
+  canBeAntag: false
+  whitelisted: false
+  jobEntity: CMUMobYautjaMilitaryCasteSoldier
+  jobPreviewEntity: CMUMobYautjaMilitaryCasteSoldier
+  startingGear: CMUYautjaMilitaryCasteSoldierGear
+  usePlayerProfile: false
+
+- type: job
+  parent: CMJobBase
+  id: CMUYautjaMilitaryCasteEnforcer
+  name: cmu-yautja-job-name-military-enforcer
+  description: cmu-yautja-job-description-military-enforcer
+  playTimeTracker: CMUYautjaMilitaryCasteEnforcer
+  icon: CMJobIconEmpty
+  supervisors: cm-job-supervisors-nobody
+  joinNotifyCrew: false
+  hidden: true
+  canBeAntag: false
+  whitelisted: false
+  jobEntity: CMUMobYautjaMilitaryCasteEnforcer
+  jobPreviewEntity: CMUMobYautjaMilitaryCasteEnforcer
+  startingGear: CMUYautjaMilitaryCasteEnforcerGear
+  usePlayerProfile: false
+
+- type: startingGear
+  id: CMUYautjaMilitaryCasteSoldierGear
+  equipment:
+    ears: CMUYautjaMilitaryCommunicator
+    head: CMUYautjaPoweredHelmet
+    gloves: CMUYautjaSoldierBracers
+    back: CMUYautjaHeavyGelDefoliatorDeathsquad
+    outerClothing: CMUYautjaPoweredArmor
+    jumpsuit: CMUYautjaBodyMesh
+    shoes: CMUYautjaPoweredGreaves
+    belt: CMUYautjaHuntingPouch
+    pocket2: CMUYautjaMedicompFull
+  storage:
+    belt:
+    - CMUYautjaWristBladesAttachment
+    - CMUYautjaWristBladesAttachment
+    - CMUYautjaCleanserGelVial
+    - CMUYautjaPlasmaPistol
+    - CMUYautjaSpikeLauncher
+    - CMUYautjaDefoliatorFuelTankDeathsquad
+    - CMUYautjaDefoliatorFuelTankDeathsquad
+    - CMUYautjaDefoliatorFuelTankDeathsquad
+    - CMUYautjaMcasteHerbContainerFilled
+    - RMCHandcuffs
+    - RMCZipties
+
+- type: startingGear
+  parent: CMUYautjaMilitaryCasteSoldierGear
+  id: CMUYautjaMilitaryCasteEnforcerGear
+  equipment:
+    back: CMUYautjaCannonPack
+    outerClothing: CMUYautjaPoweredArmorEnforcer
+
+- type: startingGear
+  id: CMUYautjaHunterSpawnGear
+  equipment:
+    ears: CMUYautjaCommunicator
+    gloves: CMUYautjaBracer
 
 - type: startingGear
   id: CMUYautjaHunterGear
   equipment:
     ears: CMUYautjaCommunicator
-    ears2: CMUYautjaFalconDrone
     mask: CMUYautjaMask
     gloves: CMUYautjaBracer
     back: CMUYautjaCapeFull
@@ -100,6 +172,12 @@
     ears: CMUYautjaCommunicator
     mask: CMUYautjaMask
     gloves: CMUYautjaBracer
+
+- type: startingGear
+  id: CMUYautjaBadBloodSpawnGear
+  equipment:
+    ears: CMUYautjaBadBloodCommunicator
+    gloves: CMUYautjaBadBloodBracer
 
 - type: startingGear
   id: CMUYautjaBadBloodGear
@@ -543,6 +621,12 @@
 
 - type: playTimeTracker
   id: CMUYautjaHunter
+
+- type: playTimeTracker
+  id: CMUYautjaMilitaryCasteSoldier
+
+- type: playTimeTracker
+  id: CMUYautjaMilitaryCasteEnforcer
 
 - type: playTimeTracker
   id: CMUYautjaHellhound

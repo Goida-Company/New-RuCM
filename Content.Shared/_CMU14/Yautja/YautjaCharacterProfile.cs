@@ -2,7 +2,6 @@ using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Robust.Shared.Enums;
 using Robust.Shared.Serialization;
-using Robust.Shared.Utility;
 
 namespace Content.Shared._CMU14.Yautja;
 
@@ -430,25 +429,25 @@ public sealed partial class YautjaCharacterProfile
     };
 
     public string ArmorDisplayName => Legacy != YautjaLegacySet.None
-        ? Loc.GetString("cmu-yautja-profile-legacy-armor", ("set", GetLegacyDisplayName(Legacy)))
+        ? $"{GetLegacyDisplayName(Legacy)}-armor"
         : Unique != YautjaUniqueSet.None
-            ? Loc.GetString("cmu-yautja-profile-unique-armor", ("set", GetUniqueDisplayName(Unique)))
+            ? $"{GetUniqueDisplayName(Unique)}-armor"
             : GetArmorStyleDisplayName(ArmorMaterial, ArmorStyle);
 
     public string MaskDisplayName => Legacy != YautjaLegacySet.None
-        ? Loc.GetString("cmu-yautja-profile-legacy-mask", ("set", GetLegacyDisplayName(Legacy)))
+        ? $"{GetLegacyDisplayName(Legacy)}-mask"
         : Unique != YautjaUniqueSet.None
-            ? Loc.GetString("cmu-yautja-profile-unique-mask", ("set", GetUniqueDisplayName(Unique)))
+            ? $"{GetUniqueDisplayName(Unique)}-mask"
             : GetMaskStyleDisplayName(MaskMaterial, MaskStyle);
 
     public string GreavesDisplayName => Legacy != YautjaLegacySet.None
-        ? Loc.GetString("cmu-yautja-profile-legacy-greaves", ("set", GetLegacyDisplayName(Legacy)))
+        ? $"{GetLegacyDisplayName(Legacy)}-greaves"
         : Unique != YautjaUniqueSet.None
-            ? Loc.GetString("cmu-yautja-profile-unique-greaves", ("set", GetUniqueDisplayName(Unique)))
+            ? $"{GetUniqueDisplayName(Unique)}-greaves"
             : GetGreavesStyleDisplayName(GreavesMaterial, GreavesStyle);
 
     public string BracerDisplayName => Legacy != YautjaLegacySet.None
-        ? Loc.GetString("cmu-yautja-profile-legacy-bracers", ("set", GetLegacyDisplayName(Legacy)))
+        ? $"{GetLegacyDisplayName(Legacy)}-bracer"
         : GetBracerDisplayName(BracerMaterial);
 
     public YautjaCharacterProfile()
@@ -459,8 +458,9 @@ public sealed partial class YautjaCharacterProfile
     {
         Name = other.Name;
         Age = other.Age;
-        Sex = Sex.Male;
-        Gender = Gender.Male;
+        var isFemale = other.Sex == Sex.Female || other.Gender == Gender.Female;
+        Sex = isFemale ? Sex.Female : Sex.Male;
+        Gender = isFemale ? Gender.Female : Gender.Male;
         DreadColor = SanitizeDreadColor(other.DreadColor);
         Appearance = SanitizeAppearance(other.Appearance, DreadColor);
         ArmorMaterial = SanitizeEnum(other.ArmorMaterial, YautjaGearMaterial.Ebony);
@@ -501,12 +501,22 @@ public sealed partial class YautjaCharacterProfile
 
     public YautjaCharacterProfile WithSex(Sex sex)
     {
-        return new(this) { Sex = Sex.Male };
+        var isFemale = sex == Sex.Female;
+        return new(this)
+        {
+            Sex = isFemale ? Sex.Female : Sex.Male,
+            Gender = isFemale ? Gender.Female : Gender.Male,
+        };
     }
 
     public YautjaCharacterProfile WithGender(Gender gender)
     {
-        return new(this) { Gender = Gender.Male };
+        var isFemale = gender == Gender.Female;
+        return new(this)
+        {
+            Sex = isFemale ? Sex.Female : Sex.Male,
+            Gender = isFemale ? Gender.Female : Gender.Male,
+        };
     }
 
     public YautjaCharacterProfile WithAppearance(HumanoidCharacterAppearance appearance)
@@ -696,172 +706,157 @@ public sealed partial class YautjaCharacterProfile
 
     public static string GetArmorStyleDisplayName(YautjaGearMaterial material, int style)
     {
-        return GearDisplayName(material, Loc.GetString("cmu-yautja-lobby-armor"), Clamp(style, 1, 8));
+        return GearDisplayName(material, "armor", Clamp(style, 1, 8));
     }
 
     public static string GetMaskStyleDisplayName(YautjaGearMaterial material, int style)
     {
-        return GearDisplayName(material, Loc.GetString("cmu-yautja-lobby-mask"), Clamp(style, 1, 20));
+        return GearDisplayName(material, "mask", Clamp(style, 1, 20));
     }
 
     public static string GetGreavesStyleDisplayName(YautjaGearMaterial material, int style)
     {
-        return GearDisplayName(material, Loc.GetString("cmu-yautja-lobby-greaves"), Clamp(style, 1, 4));
+        return GearDisplayName(material, "greaves", Clamp(style, 1, 4));
     }
 
     public static string GetBracerDisplayName(YautjaBracerMaterial material)
     {
-        return material is YautjaBracerMaterial.Dragon or
+        var variant = material is YautjaBracerMaterial.Dragon or
             YautjaBracerMaterial.Swamp or
             YautjaBracerMaterial.Enforcer or
             YautjaBracerMaterial.Collector
-            ? Loc.GetString("cmu-yautja-profile-legacy-bracers", ("set", GetBracerMaterialDisplayName(material)))
-            : Loc.GetString("cmu-yautja-profile-clan-bracers", ("set", GetBracerMaterialDisplayName(material)));
+            ? "legacy"
+            : "clan";
+        return $"cmu-yautja-profile-bracer-{BracerMaterialKey(material)}-{variant}";
     }
 
     public static string GetCasterDisplayName(YautjaBracerMaterial material)
     {
-        return Loc.GetString(
-            "cmu-yautja-profile-shoulder-caster",
-            ("material", GetBracerMaterialDisplayName(material)));
+        return $"cmu-yautja-profile-caster-{BracerMaterialKey(material)}";
     }
 
     public static string GetCapeDisplayName(YautjaCapeStyle style)
     {
-        return style switch
+        var suffix = style switch
         {
-            YautjaCapeStyle.Ceremonial => Loc.GetString("cmu-yautja-profile-cape-ceremonial"),
-            YautjaCapeStyle.Third => Loc.GetString("cmu-yautja-profile-cape-third"),
-            YautjaCapeStyle.Half => Loc.GetString("cmu-yautja-profile-cape-half"),
-            YautjaCapeStyle.Quarter => Loc.GetString("cmu-yautja-profile-cape-quarter"),
-            YautjaCapeStyle.Poncho => Loc.GetString("cmu-yautja-profile-cape-poncho"),
-            YautjaCapeStyle.Damaged => Loc.GetString("cmu-yautja-profile-cape-damaged"),
-            _ => Loc.GetString("cmu-yautja-profile-cape-battle-worn"),
+            YautjaCapeStyle.Ceremonial => "ceremonial",
+            YautjaCapeStyle.Third => "third",
+            YautjaCapeStyle.Half => "half",
+            YautjaCapeStyle.Quarter => "quarter",
+            YautjaCapeStyle.Poncho => "poncho",
+            YautjaCapeStyle.Damaged => "damaged",
+            _ => "full",
         };
+        return $"cmu-yautja-profile-cape-{suffix}";
     }
 
     public static string GetMaskAccessoryDisplayName(int style, YautjaGearMaterial material)
     {
         return style == 0
-            ? Loc.GetString("cmu-yautja-profile-no-accessory")
-            : Loc.GetString(
-                "cmu-yautja-profile-mask-accessory",
-                ("material", GetMaterialDisplayName(material)),
-                ("style", Clamp(style, 1, 3)));
+            ? "cmu-yautja-profile-mask-accessory-none"
+            : $"cmu-yautja-profile-mask-accessory-{MaterialKey(material)}-{Clamp(style, 1, 3)}";
     }
 
     public static string GetMaterialDisplayName(YautjaGearMaterial material)
     {
-        return material switch
-        {
-            YautjaGearMaterial.Bronze => Loc.GetString("cmu-yautja-profile-material-bronze"),
-            YautjaGearMaterial.Silver => Loc.GetString("cmu-yautja-profile-material-silver"),
-            YautjaGearMaterial.Crimson => Loc.GetString("cmu-yautja-profile-material-crimson"),
-            YautjaGearMaterial.Bone => Loc.GetString("cmu-yautja-profile-material-bone"),
-            _ => Loc.GetString("cmu-yautja-profile-material-ebony"),
-        };
+        return $"cmu-yautja-profile-material-{MaterialKey(material)}";
     }
 
     public static string GetBracerMaterialDisplayName(YautjaBracerMaterial material)
     {
-        return material switch
-        {
-            YautjaBracerMaterial.Retro => Loc.GetString("cmu-yautja-profile-bracer-material-retro"),
-            YautjaBracerMaterial.Silver => Loc.GetString("cmu-yautja-profile-bracer-material-silver"),
-            YautjaBracerMaterial.Bronze => Loc.GetString("cmu-yautja-profile-bracer-material-bronze"),
-            YautjaBracerMaterial.Crimson => Loc.GetString("cmu-yautja-profile-bracer-material-crimson"),
-            YautjaBracerMaterial.Bone => Loc.GetString("cmu-yautja-profile-bracer-material-bone"),
-            YautjaBracerMaterial.Dragon => Loc.GetString("cmu-yautja-profile-bracer-material-dragon"),
-            YautjaBracerMaterial.Swamp => Loc.GetString("cmu-yautja-profile-bracer-material-swamp"),
-            YautjaBracerMaterial.Enforcer => Loc.GetString("cmu-yautja-profile-bracer-material-enforcer"),
-            YautjaBracerMaterial.Collector => Loc.GetString("cmu-yautja-profile-bracer-material-collector"),
-            _ => Loc.GetString("cmu-yautja-profile-bracer-material-ebony"),
-        };
+        return $"cmu-yautja-profile-bracer-material-{BracerMaterialKey(material)}";
     }
 
     public static string GetTranslatorTypeDisplayName(YautjaTranslatorType type)
     {
-        return type switch
+        var suffix = type switch
         {
-            YautjaTranslatorType.Retro => Loc.GetString("cmu-yautja-profile-translator-retro"),
-            YautjaTranslatorType.Combo => Loc.GetString("cmu-yautja-profile-translator-combo"),
-            _ => Loc.GetString("cmu-yautja-profile-translator-modern"),
+            YautjaTranslatorType.Retro => "retro",
+            YautjaTranslatorType.Combo => "combo",
+            _ => "modern",
         };
+        return $"cmu-yautja-profile-translator-{suffix}";
     }
 
     public static string GetInvisibilitySoundDisplayName(YautjaInvisibilitySound sound)
     {
-        return sound switch
+        var suffix = sound switch
         {
-            YautjaInvisibilitySound.Retro => Loc.GetString("cmu-yautja-profile-sound-retro"),
-            _ => Loc.GetString("cmu-yautja-profile-sound-modern"),
+            YautjaInvisibilitySound.Retro => "retro",
+            _ => "modern",
         };
+        return $"cmu-yautja-profile-invisibility-sound-{suffix}";
     }
 
     public static string GetLegacyDisplayName(YautjaLegacySet legacy)
     {
-        return legacy switch
+        var suffix = legacy switch
         {
-            YautjaLegacySet.Dragon => Loc.GetString("cmu-yautja-profile-legacy-dragon"),
-            YautjaLegacySet.Swamp => Loc.GetString("cmu-yautja-profile-legacy-swamp"),
-            YautjaLegacySet.Enforcer => Loc.GetString("cmu-yautja-profile-legacy-enforcer"),
-            YautjaLegacySet.Collector => Loc.GetString("cmu-yautja-profile-legacy-collector"),
-            _ => Loc.GetString("cmu-yautja-profile-legacy-none"),
+            YautjaLegacySet.Dragon => "dragon",
+            YautjaLegacySet.Swamp => "swamp",
+            YautjaLegacySet.Enforcer => "enforcer",
+            YautjaLegacySet.Collector => "collector",
+            _ => "none",
         };
+        return $"cmu-yautja-profile-legacy-{suffix}";
     }
 
     public static string GetStatusDisplayName(YautjaProfileStatus status)
     {
-        return status switch
+        var suffix = status switch
         {
-            YautjaProfileStatus.Council => "Council",
-            YautjaProfileStatus.Leader => "Leader",
-            _ => "Normal",
+            YautjaProfileStatus.Council => "council",
+            YautjaProfileStatus.Leader => "leader",
+            _ => "normal",
         };
+        return $"cmu-yautja-profile-status-{suffix}";
     }
 
     public static string GetUniqueDisplayName(YautjaUniqueSet unique)
     {
-        return unique switch
+        var suffix = unique switch
         {
-            YautjaUniqueSet.Anubys => Loc.GetString("cmu-yautja-profile-unique-anubys"),
-            YautjaUniqueSet.Cleopatra => Loc.GetString("cmu-yautja-profile-unique-cleopatra"),
-            YautjaUniqueSet.Plated => Loc.GetString("cmu-yautja-profile-unique-plated"),
-            YautjaUniqueSet.Ronin => Loc.GetString("cmu-yautja-profile-unique-ronin"),
-            _ => Loc.GetString("cmu-yautja-profile-unique-none"),
+            YautjaUniqueSet.Anubys => "anubys",
+            YautjaUniqueSet.Cleopatra => "cleopatra",
+            YautjaUniqueSet.Plated => "plated",
+            YautjaUniqueSet.Ronin => "ronin",
+            _ => "none",
         };
+        return $"cmu-yautja-profile-unique-{suffix}";
     }
 
     public static string GetSkinColorDisplayName(YautjaSkinColor skinColor)
     {
-        return skinColor switch
+        var suffix = skinColor switch
         {
-            YautjaSkinColor.Green => Loc.GetString("cmu-yautja-profile-skin-green"),
-            YautjaSkinColor.Purple => Loc.GetString("cmu-yautja-profile-skin-purple"),
-            YautjaSkinColor.Blue => Loc.GetString("cmu-yautja-profile-skin-blue"),
-            YautjaSkinColor.Red => Loc.GetString("cmu-yautja-profile-skin-red"),
-            YautjaSkinColor.Black => Loc.GetString("cmu-yautja-profile-skin-black"),
-            _ => Loc.GetString("cmu-yautja-profile-skin-tan"),
+            YautjaSkinColor.Green => "green",
+            YautjaSkinColor.Purple => "purple",
+            YautjaSkinColor.Blue => "blue",
+            YautjaSkinColor.Red => "red",
+            YautjaSkinColor.Black => "black",
+            _ => "tan",
         };
+        return $"cmu-yautja-profile-skin-color-{suffix}";
     }
 
     public static string GetEyeColorDisplayName(YautjaEyeColor eyeColor)
     {
-        return eyeColor switch
+        var suffix = eyeColor switch
         {
-            YautjaEyeColor.Amber => Loc.GetString("cmu-yautja-profile-eye-amber"),
-            YautjaEyeColor.Copper => Loc.GetString("cmu-yautja-profile-eye-copper"),
-            YautjaEyeColor.Red => Loc.GetString("cmu-yautja-profile-eye-red"),
-            YautjaEyeColor.Jade => Loc.GetString("cmu-yautja-profile-eye-jade"),
-            YautjaEyeColor.Slate => Loc.GetString("cmu-yautja-profile-eye-slate"),
-            YautjaEyeColor.Black => Loc.GetString("cmu-yautja-profile-eye-black"),
-            _ => Loc.GetString("cmu-yautja-profile-eye-gold"),
+            YautjaEyeColor.Amber => "amber",
+            YautjaEyeColor.Copper => "copper",
+            YautjaEyeColor.Red => "red",
+            YautjaEyeColor.Jade => "jade",
+            YautjaEyeColor.Slate => "slate",
+            YautjaEyeColor.Black => "black",
+            _ => "gold",
         };
+        return $"cmu-yautja-profile-eye-color-{suffix}";
     }
 
     public static string GetDreadColorDisplayName(YautjaDreadColor dreadColor)
     {
-        return dreadColor switch
+        var suffix = dreadColor switch
         {
             YautjaDreadColor.Black => "black",
             YautjaDreadColor.DarkBrown => "dark brown",
@@ -869,24 +864,26 @@ public sealed partial class YautjaCharacterProfile
             YautjaDreadColor.Auburn => "auburn",
             YautjaDreadColor.Ash => "ash",
             YautjaDreadColor.Bone => "bone",
-            _ => "match skin",
+            _ => "match-skin",
         };
+        return $"cmu-yautja-profile-dread-color-{suffix.Replace(' ', '-')}";
     }
 
     public static string GetQuillStyleDisplayName(YautjaQuillStyle style)
     {
-        return style switch
+        var suffix = style switch
         {
-            YautjaQuillStyle.ShortThick => Loc.GetString("cmu-yautja-profile-quills-short-thick"),
-            YautjaQuillStyle.StraightThin => Loc.GetString("cmu-yautja-profile-quills-straight-thin"),
-            YautjaQuillStyle.LongTied => Loc.GetString("cmu-yautja-profile-quills-long-tied"),
-            YautjaQuillStyle.ShortThin => Loc.GetString("cmu-yautja-profile-quills-short-thin"),
-            YautjaQuillStyle.LongCurved => Loc.GetString("cmu-yautja-profile-quills-long-curved"),
-            YautjaQuillStyle.LongStraight => Loc.GetString("cmu-yautja-profile-quills-long-straight"),
-            YautjaQuillStyle.LongWide => Loc.GetString("cmu-yautja-profile-quills-long-wide"),
-            YautjaQuillStyle.ShortWide => Loc.GetString("cmu-yautja-profile-quills-short-wide"),
-            _ => Loc.GetString("cmu-yautja-profile-quills-standard"),
+            YautjaQuillStyle.ShortThick => "short-thick",
+            YautjaQuillStyle.StraightThin => "straight-thin",
+            YautjaQuillStyle.LongTied => "long-tied",
+            YautjaQuillStyle.ShortThin => "short-thin",
+            YautjaQuillStyle.LongCurved => "long-curved",
+            YautjaQuillStyle.LongStraight => "long-straight",
+            YautjaQuillStyle.LongWide => "long-wide",
+            YautjaQuillStyle.ShortWide => "short-wide",
+            _ => "standard",
         };
+        return $"cmu-yautja-profile-quill-{suffix}";
     }
 
     public static Color GetSkinToneColor(int index)
@@ -1116,11 +1113,36 @@ public sealed partial class YautjaCharacterProfile
 
     private static string GearDisplayName(YautjaGearMaterial material, string itemName, int style)
     {
-        return Loc.GetString(
-            "cmu-yautja-profile-pattern",
-            ("material", GetMaterialDisplayName(material)),
-            ("item", itemName),
-            ("style", style));
+        return $"cmu-yautja-profile-{itemName}-{MaterialKey(material)}-{style}";
+    }
+
+    private static string MaterialKey(YautjaGearMaterial material)
+    {
+        return material switch
+        {
+            YautjaGearMaterial.Bronze => "bronze",
+            YautjaGearMaterial.Silver => "silver",
+            YautjaGearMaterial.Crimson => "crimson",
+            YautjaGearMaterial.Bone => "bone",
+            _ => "ebony",
+        };
+    }
+
+    private static string BracerMaterialKey(YautjaBracerMaterial material)
+    {
+        return material switch
+        {
+            YautjaBracerMaterial.Retro => "retro",
+            YautjaBracerMaterial.Silver => "silver",
+            YautjaBracerMaterial.Bronze => "bronze",
+            YautjaBracerMaterial.Crimson => "crimson",
+            YautjaBracerMaterial.Bone => "bone",
+            YautjaBracerMaterial.Dragon => "dragon",
+            YautjaBracerMaterial.Swamp => "swamp",
+            YautjaBracerMaterial.Enforcer => "enforcer",
+            YautjaBracerMaterial.Collector => "collector",
+            _ => "ebony",
+        };
     }
 
     private static int Clamp(int value, int min, int max)

@@ -1,5 +1,6 @@
 using Content.Server._CMU14.Yautja;
 using Content.Shared._CMU14.Yautja;
+using Robust.Shared.Prototypes;
 
 namespace Content.IntegrationTests._CMU14.Yautja;
 
@@ -33,6 +34,30 @@ public sealed class YautjaRankSpawnTest
             Assert.That(policy.SpawnKind, Is.EqualTo(YautjaSpawnKind.HuntingGroundsYoungblood));
             Assert.That(policy.BypassSlotCap, Is.False);
         });
+    }
+
+    [Test]
+    public async Task HunterShipSpawnMarkersAreSeparatedByRankPool()
+    {
+        await using var pair = await PoolManager.GetServerClient();
+
+        await pair.Server.WaitAssertion(() =>
+        {
+            var prototypes = pair.Server.ResolveDependency<IPrototypeManager>();
+            var factory = pair.Server.EntMan.ComponentFactory;
+            var clan = prototypes.Index<EntityPrototype>("CMUHunterShipMarkerClanSpawn");
+            var youngblood = prototypes.Index<EntityPrototype>("CMUHunterShipMarkerPredatorSpawn");
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(clan.TryGetComponent<YautjaPredatorSpawnPointComponent>(out var clanPoint, factory), Is.True);
+                Assert.That(clanPoint!.Kind, Is.EqualTo(YautjaSpawnKind.HunterShipClan));
+                Assert.That(youngblood.TryGetComponent<YautjaPredatorSpawnPointComponent>(out var youngbloodPoint, factory), Is.True);
+                Assert.That(youngbloodPoint!.Kind, Is.EqualTo(YautjaSpawnKind.HuntingGroundsYoungblood));
+            });
+        });
+
+        await pair.CleanReturnAsync();
     }
 
     [Test]

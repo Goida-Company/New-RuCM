@@ -259,12 +259,13 @@
   - type: Item
     heldPrefix: combistick
     size: Large
+  - type: ItemThrowRange
+    range: 4
   - type: Clothing
     slots:
     - back
   - type: ItemToggle
     activated: true
-    toggleOnWield: false
     soundActivate:
       path: /Audio/_CMU14/Yautja/Weapons/WristBlades/wristblades_on.wav
     soundDeactivate:
@@ -354,6 +355,8 @@
   - type: Item
     heldPrefix: war_axe
     size: Large
+  - type: ItemThrowRange
+    range: 4
   - type: Clothing
     slots:
     - back
@@ -384,6 +387,8 @@
   - type: Item
     heldPrefix: ceremonial_dagger
     size: Tiny
+  - type: ItemThrowRange
+    range: 6
   - type: Clothing
     slots:
     - pocket
@@ -703,6 +708,8 @@
   - type: Item
     heldPrefix: duelling_club
     size: Normal
+  - type: ItemThrowRange
+    range: 7
   - type: MeleeWeapon
     damage:
       types:
@@ -735,6 +742,8 @@
   - type: Item
     heldPrefix: duelling_hatchet
     size: Small
+  - type: ItemThrowRange
+    range: 4
   - type: MeleeWeapon
     damage:
       types:
@@ -955,7 +964,6 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 1
-    autoRechargeTickInterval: 1
   - type: Wieldable
     wieldedInhandPrefix: plasma_rifle
   - type: WieldDelay
@@ -1046,7 +1054,6 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 1
-    autoRechargeTickInterval: 1
   - type: UniqueAction
   - type: Wieldable
     wieldedInhandPrefix: plasmacarbine
@@ -1264,7 +1271,6 @@
   - type: BatterySelfRecharger
     autoRecharge: true
     autoRechargeRate: 1
-    autoRechargeTickInterval: 1
   - type: UniqueAction
   - type: Wieldable
     wieldedInhandPrefix: plasma_pistol

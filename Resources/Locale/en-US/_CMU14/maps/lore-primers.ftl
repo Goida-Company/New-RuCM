@@ -1,0 +1,10 @@
+cmu-lore-primer-chances = Date 2182 - Chances Claim, a Weyland-Yutani administered frontier mining colony entangled in the middle of a horrible crime wave.
+cmu-lore-primer-shepherds-pride = Date 2180 - Shepherds' Pride, a wildlife reserve on the fringes of the Neroid Sector.
+cmu-lore-primer-stable-garrison = Date 2183 - Stable Garrison, a UA-controlled frontier world with a joint base and sizeable urban community.
+cmu-lore-primer-port-nereid = Date 2181 - Port Nereid, a valuable waterport, atmospheric processor and transit hub on the Neroid Sector frontier world LV-109, named "Elgin's Folley". Port Nereid is a joint-venture colony established by the United Americas Colonial Administration and Weyland-Yutani.
+cmu-lore-primer-corsat = Date 2181 - Corsat Station, a Weyland-Yutani-operated research and prison station.
+cmu-lore-primer-sorokyne = Date 2186 - Sorokyne Strata, a major Union of Progressive Peoples research outpost in the Neroid Sector.
+cmu-lore-primer-shivas-snowball = Date 2177 - Shivas' Snowball, a United Americas mining and research colony.
+cmu-lore-primer-kutjevo = Date 2181 - Kutjevo Biolab, a level-three biohazard containment and research facility operated by the Weyland-Yutani Corporation.
+cmu-lore-primer-fiorina = Date 2181 - Fiorina Prison. Privately owned and operated by the Weyland-Yutani Corporation, Fiorina 161 is a maximum-security prison for the most dangerous criminals in the system.
+cmu-lore-primer-hopes-retreat = Date 2181 - Tidally locked planet JE-1758 Ascanius, locally referred to as Hope's Retreat by colonists. Nominally under an ICSC charter, it hosts facilities of various allegiances, including the United Americas, Union of Progressive Peoples and Three-World Empire.

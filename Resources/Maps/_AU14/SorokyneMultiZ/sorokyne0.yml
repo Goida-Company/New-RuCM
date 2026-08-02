@@ -47999,7 +47999,7 @@ entities:
   - uid: 26392
     components:
     - type: Transform
-      pos: 183.5,110.5
+      pos: 49.5,14.5
       parent: 1
 - proto: AU14SpawnPointCivilianAmbassadorUPP
   entities:
@@ -210610,7 +210610,7 @@ entities:
     - type: MetaData
       name: Sorokyne Strata ground relay
     - type: Transform
-      pos: 183.5,110.5
+      pos: 49.5,14.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

@@ -16,6 +16,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
@@ -30,6 +31,7 @@ namespace Content.Server._CMU14.Yautja;
 public sealed partial class YautjaHuntConsoleSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLog = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private DialogSystem _dialog = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedDoorSystem _door = default!;
@@ -52,6 +54,7 @@ public sealed partial class YautjaHuntConsoleSystem : EntitySystem
         SubscribeLocalEvent<YautjaHuntConsoleComponent, YautjaHuntingGroundSelectedEvent>(OnHuntingGroundSelected);
         SubscribeLocalEvent<YautjaHuntConsoleComponent, YautjaHuntCallSelectedEvent>(OnHuntCallSelected);
         SubscribeLocalEvent<YautjaHuntConsoleComponent, YautjaHuntConsoleDialogCancelledEvent>(OnHuntDialogCancelled);
+        SubscribeLocalEvent<YautjaHuntPreyComponent, TakeGhostRoleEvent>(OnHuntPreyRoleTaken);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestartCleanup);
 
         SubscribeLocalEvent<YautjaHuntEscapeConsoleComponent, InteractHandEvent>(OnEscapeConsoleInteractHand);
@@ -65,6 +68,16 @@ public sealed partial class YautjaHuntConsoleSystem : EntitySystem
         _huntingGroundActivated = false;
         _nextHuntAt = TimeSpan.Zero;
         _nextBloodingAt = TimeSpan.Zero;
+    }
+
+    private void OnHuntPreyRoleTaken(Entity<YautjaHuntPreyComponent> ent, ref TakeGhostRoleEvent args)
+    {
+        var player = args.Player;
+        Timer.Spawn(TimeSpan.FromSeconds(10), () =>
+        {
+            if (!TerminatingOrDeleted(ent.Owner))
+                _audio.PlayEntity(ent.Comp.HuntBeginSound, player, ent.Owner);
+        });
     }
 
     private void OnInteractHand(Entity<YautjaHuntConsoleComponent> ent, ref InteractHandEvent args)
@@ -358,6 +371,8 @@ public sealed partial class YautjaHuntConsoleSystem : EntitySystem
                 continue;
 
             spawnedCount++;
+            if (!blooding)
+                EnsureComp<YautjaHuntPreyComponent>(spawned.Value);
             _transform.AttachToGridOrMap(spawned.Value);
             if (blooding)
             {

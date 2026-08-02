@@ -630,10 +630,13 @@ public sealed class YautjaPlasmaWeaponTest
                     null,
                     entMan.GetComponent<TransformComponent>(hunter).Coordinates,
                     entMan.GetComponent<TransformComponent>(caster).Coordinates);
+                var invisibility = entMan.EnsureComponent<EntityTurnInvisibleComponent>(hunter);
+                invisibility.Enabled = true;
+                invisibility.RestrictWeapons = true;
                 entMan.EventBus.RaiseLocalEvent(caster, ref linkedAttempt);
                 var casterComp = entMan.GetComponent<YautjaCasterComponent>(caster);
                 Assert.That(linkedAttempt.Cancelled, Is.False,
-                    $"The control caster has a CMSS13 source bracer, Yautja tech and enough source charge. " +
+                    $"The control caster has a CMSS13 source bracer, Yautja tech, enough source charge, and may fire while cloaked. " +
                     $"Message={linkedAttempt.Message ?? "<null>"}, " +
                     $"HasYautja={entMan.HasComponent<YautjaComponent>(hunter)}, " +
                     $"Source={stored.Bracer}, " +

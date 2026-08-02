@@ -34,6 +34,7 @@
   - type: Tag
     tags:
     - Knife
+    - RMCStraightRazor
     - RMCAttachmentBarrel
     - RMCM5Bayonet
   - type: CMBoneSaw
@@ -442,3 +443,6 @@
 
 - type: Tag
   id: RMCM2100Machete
+
+- type: Tag
+  id: RMCStraightRazor

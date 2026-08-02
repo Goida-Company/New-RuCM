@@ -132,12 +132,16 @@
   - type: YautjaSleepingHellhound
 
 - type: entity
-  parent: SpawnPointLatejoin
+  parent: CMSpawnPointJobBase
   id: CMUHunterShipMarkerClanSpawn
   name: Hunter ship clan spawn
   description: Spawn marker for Hunter Ship clan/admin testing.
   suffix: Hunter Ship admin/test spawn
   components:
+  - type: SpawnPoint
+    job_id: CMUYautjaHunter
+  - type: YautjaPredatorSpawnPoint
+    kind: HunterShipClan
   - type: YautjaRelayDestination
 
 - type: entity
@@ -150,6 +154,8 @@
   - type: SpawnPoint
     job_id: CMUYautjaHunter
   - type: YautjaRelayDestination
+  - type: YautjaPredatorSpawnPoint
+    kind: HuntingGroundsYoungblood
   - type: YautjaHuntSpawnPoint
     kind: Youngblood
 
@@ -171,7 +177,6 @@
     spawn: /Maps/_CMU14/Shuttles/hunter_shuttle.yml
     offset: -0.5,-0.5
     ignoreGridFill: true
-    clearTargetTiles: false
   - type: FTLSmashImmune
   - type: NoFTL
 

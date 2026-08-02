@@ -78,34 +78,6 @@ public sealed class YautjaWhitelistAccessTest
     }
 
     [Test]
-    public async Task HunterRemainsWhitelistGatedWhenGlobalRoleWhitelistIsDisabled()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
-        var db = pair.Server.ResolveDependency<IServerDbManager>();
-        var prototypes = pair.Server.ResolveDependency<IPrototypeManager>();
-        var jobWhitelist = pair.Server.ResolveDependency<JobWhitelistManager>();
-        var serverPlayers = pair.Server.ResolveDependency<IPlayerManager>();
-        var requirements = pair.Client.ResolveDependency<JobRequirementsManager>();
-        var hunter = prototypes.Index<JobPrototype>("CMUYautjaHunter");
-        var session = serverPlayers.Sessions.Single();
-
-        await pair.Server.WaitPost(() => pair.Server.CfgMan.SetCVar(CCVars.GameRoleWhitelist, false));
-        await db.SetYautjaWhitelistFlagsAsync(session.UserId.UserId, (int) YautjaWhitelistFlags.None);
-        await jobWhitelist.RefreshYautjaWhitelist(session.UserId);
-        await pair.RunTicksSync(20);
-
-        await pair.Server.WaitAssertion(() =>
-            Assert.That(jobWhitelist.IsAllowed(session, hunter.ID), Is.False));
-        await pair.Client.WaitAssertion(() =>
-        {
-            Assert.That(requirements.IsWhitelisted(hunter.ID), Is.False);
-            Assert.That(requirements.CanCustomizeWhitelistedJob(hunter.ID), Is.False);
-        });
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
     public async Task ClanAdminMenuWhitelistUpdateShowsClanlessTargetAndReachesClient()
     {
         await using var pair = await PoolManager.GetServerClient(new PoolSettings

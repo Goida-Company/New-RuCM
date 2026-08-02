@@ -59007,7 +59007,7 @@ entities:
   - uid: 82
     components:
     - type: Transform
-      pos: -4.5,49.5
+      pos: 40.5,-33.5
       parent: 1
 - proto: AU14SpawnPointCivilianCMBDeputy
   entities:
@@ -272329,7 +272329,7 @@ entities:
     - type: MetaData
       name: Port Nereid ground relay
     - type: Transform
-      pos: -4.5,49.5
+      pos: 40.5,-33.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

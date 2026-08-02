@@ -20,6 +20,7 @@ const maps = [
         name: "Yautja Jungle Moon",
         mapUid: 1,
         gridUid: 2,
+        ambientSoundCollection: "CMUYautjaHuntingGroundJungle",
       },
     },
     destinationId: "jungle_moon",
@@ -32,16 +33,18 @@ const maps = [
     outputs: {
       1: {
         file: "desert_moon.yml",
-        name: "Yautja Desert Moon",
-        mapUid: 1,
-        gridUid: 2,
-      },
-      2: {
-        file: "desert_moon_caves.yml",
         name: "Yautja Desert Moon Caves",
         mapUid: 1,
         gridUid: 2,
+        ambientSoundCollection: "CMUYautjaHuntingGroundCaves",
+      },
+      2: {
+        file: "desert_moon_caves.yml",
+        name: "Yautja Desert Moon",
+        mapUid: 1,
+        gridUid: 2,
         fillSourceAreaSpace: true,
+        ambientSoundCollection: "CMUYautjaHuntingGroundDesert",
       },
     },
     destinationId: "desert_moon",
@@ -212,6 +215,10 @@ function wallFor(entries) {
 
   if (!joined.includes("/turf/closed/wall"))
     return null;
+  // BYOND allows the preserve console and its source wall turf to share a cell.
+  // In Robust, the extra WallRock blocks interaction with the dense console.
+  if (joined.includes("/obj/structure/machinery/hunt_ground_escape"))
+    return null;
   if (joined.includes("/turf/closed/wall/cult/dark_temple"))
     return "RMCWallSandstoneTemple";
   if (joined.includes("/turf/closed/wall/strata_ice"))
@@ -226,6 +233,14 @@ function entitiesForCell(entries, mapConfig) {
     if (entry.startsWith("/obj/effect/landmark/yautja_young_teleport")) {
       entities.push({
         proto: mapConfig.youngDestinationProto,
+      });
+      entities.push({
+        proto: "CMUYautjaYoungbloodSpawn",
+        components: [
+          "    - type: YautjaHuntSpawnPoint",
+          "      kind: Youngblood",
+          `      destinationId: ${mapConfig.destinationId}`,
+        ],
       });
     } else if (entry.startsWith("/obj/effect/landmark/yautja_teleport")) {
       entities.push({
@@ -252,15 +267,24 @@ function entitiesForCell(entries, mapConfig) {
       entities.push({ proto: "CMUYautjaWristBlades" });
     } else if (entry.startsWith("/obj/item/clothing/mask/gas/yautja")) {
       entities.push({ proto: "CMUYautjaMask" });
+    } else if (entry.startsWith("/obj/structure/machinery/door/poddoor/yautja/hunting_grounds")) {
+      entities.push({
+        proto: "CMUYautjaHuntingGroundPreserveShutter",
+        rotation: /\bdir\s*=\s*4\b/.test(entry) ? "1.5707963267948966 rad" : null,
+      });
+    } else if (entry.startsWith("/obj/structure/machinery/hunt_ground_escape")) {
+      entities.push({ proto: "CMUYautjaHuntingGroundEscapeConsole" });
+    } else if (entry.startsWith("/obj/structure/blocker/preserve_edge")) {
+      entities.push({ proto: "CMUYautjaHuntingGroundPreserveEdge" });
     }
   }
 
   return entities;
 }
 
-function addEntity(grouped, proto, cell, components = null) {
-  const key = components ? `${proto}\n${components.join("\n")}` : proto;
-  const bucket = grouped.get(key) ?? { proto, components, entries: [] };
+function addEntity(grouped, proto, cell, components = null, rotation = null) {
+  const key = [proto, rotation, ...(components ?? [])].join("\n");
+  const bucket = grouped.get(key) ?? { proto, components, rotation, entries: [] };
   bucket.entries.push({ x: cell.x + 0.5, y: cell.y + 0.5 });
   grouped.set(key, bucket);
 }
@@ -336,6 +360,13 @@ function buildMapYaml(output, grid, grouped) {
   lines.push("    - type: GridTree");
   lines.push("    - type: MapLight");
   lines.push("      ambientLightColor: '#FFFFFFFF'");
+  if (output.ambientSoundCollection) {
+    lines.push("    - type: AmbientSound");
+    lines.push("      sound:");
+    lines.push(`        collection: ${output.ambientSoundCollection}`);
+    lines.push("      range: 512");
+    lines.push("      volume: -8");
+  }
   lines.push("    - type: Broadphase");
   lines.push("    - type: OccluderTree");
   lines.push(`  - uid: ${output.gridUid}`);
@@ -397,6 +428,8 @@ function buildMapYaml(output, grid, grouped) {
       lines.push(`  - uid: ${nextUid++}`);
       lines.push("    components:");
       lines.push("    - type: Transform");
+      if (bucket.rotation)
+        lines.push(`      rot: ${bucket.rotation}`);
       lines.push(`      pos: ${entry.x},${entry.y}`);
       lines.push(`      parent: ${output.gridUid}`);
       if (bucket.components) {
@@ -441,7 +474,7 @@ function convertMap(mapConfig) {
       addEntity(grouped, wall, cell);
 
     for (const entity of entitiesForCell(cell.entries, mapConfig))
-      addEntity(grouped, entity.proto, cell, entity.components);
+      addEntity(grouped, entity.proto, cell, entity.components, entity.rotation);
 
     grids.set(cell.z, grid);
     entities.set(cell.z, grouped);

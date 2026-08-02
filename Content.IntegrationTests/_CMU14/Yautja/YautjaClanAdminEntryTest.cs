@@ -4,8 +4,8 @@ using Content.Client.Administration.UI.CustomControls;
 using Content.Client.Administration.UI.Tabs.AdminTab;
 using Content.IntegrationTests.Pair;
 using Content.Server.Administration;
+using Content.Server.Administration.Commands;
 using Content.Server.Administration.Managers;
-using Content.Server.Administration.UI;
 using Content.Server.Database;
 using Content.Server.EUI;
 using Content.Server._CMU14.Yautja;
@@ -21,25 +21,33 @@ namespace Content.IntegrationTests._CMU14.Yautja;
 public sealed class YautjaClanAdminEntryTest
 {
     [Test]
-    public void ClanAdministrationCommandRequiresClanPermission()
+    public void EveryYautjaConsoleCommandRequiresClanPermission()
     {
-        var attributes = typeof(YautjaClanAdminCommand)
-            .GetCustomAttributes(typeof(AdminCommandAttribute), false)
-            .Cast<AdminCommandAttribute>()
-            .ToArray();
+        Type[] commandTypes =
+        [
+            typeof(YautjaClanAdminCommand),
+            typeof(YautjaClanInfoCommand),
+            typeof(YautjaPredatorAdminEditorCommand),
+            typeof(YautjaYoungbloodCallCommand),
+            typeof(YautjaClanSetMemberCommand),
+            typeof(YautjaClanCreateCommand),
+            typeof(YautjaClanWhitelistCommand),
+            typeof(YautjaRankCommand),
+            typeof(YautjaGetRankCommand),
+        ];
 
-        Assert.That(attributes, Has.Exactly(1).Items);
-        Assert.That(attributes[0].Flags, Is.EqualTo(AdminFlags.Clans));
+        foreach (var commandType in commandTypes)
+        {
+            var attributes = commandType
+                .GetCustomAttributes(typeof(AdminCommandAttribute), false)
+                .Cast<AdminCommandAttribute>()
+                .ToArray();
+
+            Assert.That(attributes, Has.Exactly(1).Items, commandType.Name);
+            Assert.That(attributes[0].Flags, Is.EqualTo(AdminFlags.Clans), commandType.Name);
+        }
+
         Assert.That(YautjaClanAdminEui.RequiredAdminFlag, Is.EqualTo(AdminFlags.Clans));
-    }
-
-    [TestCase(AdminFlags.Host, false)]
-    [TestCase(AdminFlags.Admin, false)]
-    [TestCase(AdminFlags.Clans, true)]
-    [TestCase(AdminFlags.Host | AdminFlags.Clans, true)]
-    public void ClanAdministrationButtonRequiresClanFlag(AdminFlags flags, bool expected)
-    {
-        Assert.That(CommandButton.HasRequiredAdminFlag(flags, AdminFlags.Clans), Is.EqualTo(expected));
     }
 
     [Test]
@@ -59,88 +67,12 @@ public sealed class YautjaClanAdminEntryTest
 
                 Assert.That(button, Is.Not.Null);
                 Assert.That(button!.Text, Is.EqualTo(localization.GetString("cmu-yautja-clan-admin-open")));
-                Assert.That(button.RequiredAdminFlag, Is.EqualTo(AdminFlags.Clans));
             }
             finally
             {
                 tab.DisposeAllChildren();
             }
         });
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
-    public async Task HostCanGrantClansPermissionWithoutGrantingOtherMissingFlags()
-    {
-        await using var pair = await PoolManager.GetServerClient(new PoolSettings
-        {
-            Connected = true,
-            Dirty = true,
-        });
-        var server = pair.Server;
-        var session = pair.Player!;
-        var db = server.ResolveDependency<IServerDbManager>();
-        var adminManager = (AdminManager) server.ResolveDependency<IAdminManager>();
-        var euiManager = server.ResolveDependency<EuiManager>();
-        var adminRecord = new Admin
-        {
-            UserId = session.UserId.UserId,
-            Flags = Flags(AdminFlags.Permissions | AdminFlags.Host),
-        };
-        const string allowedRankName = "Host Clans Permission Test";
-        const string deniedRankName = "Host Unrelated Permission Test";
-
-        try
-        {
-            await server.WaitPost(() => server.CfgMan.SetCVar(CCVars.ConsoleLoginLocal, false));
-            await db.AddAdminAsync(adminRecord);
-            await ReloadAdmin(pair, adminManager, session, AdminFlags.Permissions | AdminFlags.Host);
-
-            PermissionsEui? permissions = null;
-            await server.WaitPost(() =>
-            {
-                permissions = new PermissionsEui();
-                euiManager.OpenEui(permissions, session);
-            });
-            await server.WaitAssertion(() => Assert.That(permissions!.IsShutDown, Is.False));
-
-            await server.WaitPost(() => permissions!.HandleMessage(new PermissionsEuiMsg.AddAdminRank
-            {
-                Name = allowedRankName,
-                Flags = AdminFlags.Clans,
-            }));
-            await pair.RunTicksSync(20);
-
-            var (_, ranks) = await db.GetAllAdminAndRanksAsync();
-            var allowedRank = ranks.Single(rank => rank.Name == allowedRankName);
-            Assert.That(AdminFlagsHelper.NamesToFlags(allowedRank.Flags.Select(flag => flag.Flag)),
-                Is.EqualTo(AdminFlags.Clans));
-
-            await server.WaitPost(() => permissions!.HandleMessage(new PermissionsEuiMsg.AddAdminRank
-            {
-                Name = deniedRankName,
-                Flags = AdminFlags.Clans | AdminFlags.Ban,
-            }));
-            await pair.RunTicksSync(20);
-
-            var (_, ranksAfterDeniedAttempt) = await db.GetAllAdminAndRanksAsync();
-            Assert.That(ranksAfterDeniedAttempt.Any(rank => rank.Name == deniedRankName), Is.False);
-        }
-        finally
-        {
-            var (_, ranks) = await db.GetAllAdminAndRanksAsync();
-            foreach (var rank in ranks.Where(rank => rank.Name == allowedRankName || rank.Name == deniedRankName))
-            {
-                await db.RemoveAdminRankAsync(rank.Id);
-            }
-
-            if (await db.GetAdminDataForAsync(session.UserId) != null)
-                await db.RemoveAdminAsync(session.UserId);
-
-            await server.WaitPost(() =>
-                server.CfgMan.SetCVar(CCVars.ConsoleLoginLocal, CCVars.ConsoleLoginLocal.DefaultValue));
-        }
 
         await pair.CleanReturnAsync();
     }

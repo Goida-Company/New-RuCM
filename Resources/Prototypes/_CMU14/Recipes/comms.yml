@@ -1,7 +1,7 @@
 # field-built comms structures, raised from metal by engineering-trained personnel
 - type: rmcConstruction
   id: AU14CommsMastFieldBuild
-  name: field antenna mast
+  name: cmu-construction-field-antenna-mast
   prototype: AU14CommsMastField
   noRotate: true
   doAfterTime: 8

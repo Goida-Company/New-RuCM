@@ -5,10 +5,12 @@ using Content.Server.Roles.Jobs;
 using Content.Server.AU14.Round;
 using Content.Shared.Mind;
 using Content.Server.GameTicking;
+using Content.Server._CMU14.Yautja;
 using Content.Shared._RMC14.Rules;
 using Content.Shared.AU14.Util;
 using Content.Shared._CMU14.Threats;
 using Content.Shared.AU14.util;
+using Content.Shared._CMU14.Yautja;
 using Content.Shared.CharacterInfo;
 using Content.Shared.Inventory;
 using Content.Shared.Objectives;
@@ -31,6 +33,7 @@ public sealed partial class CharacterInfoSystem : EntitySystem
     [Dependency] private PlatoonSpawnRuleSystem _platoons = default!;
     [Dependency] private IPrototypeManager _prototypes = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private YautjaRankManager _yautjaRank = default!;
 
     private (int roundId, string? threatId) _knowledgeKey = (-1, null);
     private string? _roundKnowledgeLine;
@@ -79,6 +82,15 @@ public sealed partial class CharacterInfoSystem : EntitySystem
 
             // Get briefing
             briefing = _roles.MindGetBriefing(mindId);
+        }
+
+        // The character info panel must use the server-owned whitelist rank.
+        // A Yautja may be clanless, so the entity's ClanRank is not authoritative here.
+        if (HasComp<YautjaComponent>(entity) && jobId != "CMUYautjaBadBlood")
+        {
+            var youngbloodRole = jobId == "CMUYautjaYoungblood";
+            var rank = _yautjaRank.ResolveCached(args.SenderSession.UserId, youngbloodRole);
+            jobTitle = Loc.GetString(YautjaRankMetadata.For(rank).LocalizedName);
         }
 
         var isThreatRole = mind != null && IsThreatMind(mind);

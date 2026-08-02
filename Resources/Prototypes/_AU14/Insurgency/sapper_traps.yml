@@ -391,7 +391,7 @@
 # restrictions so a floor item can be placed anywhere) at a construction-skill-gated material cost.
 - type: rmcConstruction
   id: AU14SapperCraftTripwire
-  name: tripwire charge
+  name: insfor-sapper-recipe-tripwire
   prototype: AU14SapperTripwireTrap
   doAfterTime: 3
   materialCost: 2
@@ -402,7 +402,7 @@
 
 - type: rmcConstruction
   id: AU14SapperCraftShotgun
-  name: shotgun trap
+  name: insfor-sapper-recipe-shotgun
   prototype: AU14SapperShotgunTrap
   doAfterTime: 4
   materialCost: 3
@@ -413,7 +413,7 @@
 
 - type: rmcConstruction
   id: AU14SapperCraftIED
-  name: buried IED
+  name: insfor-sapper-recipe-ied
   prototype: AU14SapperIED
   doAfterTime: 6
   materialCost: 5
@@ -424,7 +424,7 @@
 
 - type: rmcConstruction
   id: AU14SapperCraftSnare
-  name: snare trap
+  name: insfor-sapper-recipe-snare
   prototype: AU14SapperSnareTrap
   doAfterTime: 3
   materialCost: 2
@@ -435,7 +435,7 @@
 
 - type: rmcConstruction
   id: AU14SapperCraftCamera
-  name: improvised spy camera
+  name: insfor-sapper-recipe-spy-camera
   prototype: AU14CLFSpyCamera
   doAfterTime: 5
   materialCost: 4
@@ -446,7 +446,7 @@
 
 - type: rmcConstruction
   id: AU14SapperCraftMonitor
-  name: CLF camera monitor
+  name: insfor-sapper-recipe-camera-monitor
   prototype: AU14CLFCameraMonitor
   noRotate: true
   doAfterTime: 6

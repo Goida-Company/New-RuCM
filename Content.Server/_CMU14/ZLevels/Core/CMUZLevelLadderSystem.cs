@@ -42,14 +42,16 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
             return;
 
         args.Handled = true;
-        StartClimb(ent, args.User, GetDefaultOffset(ent.Comp));
+
+        var user = args.User;
+        if (!TryGetDefaultMovementOffset(ent.Comp, out var offset))
+            return;
+
+        StartClimb(ent, user, offset);
     }
 
     private void StartClimb(Entity<CMUZLevelLadderComponent> ent, EntityUid user, int offset)
     {
-        if (!CanMove(ent.Comp, offset))
-            return;
-
         var delay = HasComp<GhostComponent>(user) ? TimeSpan.Zero : ent.Comp.Delay;
         var doAfter = new DoAfterArgs(EntityManager, user, delay, new CMUZLevelLadderDoAfterEvent(offset), ent, ent, ent)
         {
@@ -87,10 +89,6 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
 
         if (Transform(user).Anchored)
             args.Cancel();
-
-        if (args.DoAfter.Args.Event is not CMUZLevelLadderDoAfterEvent ladderEvent ||
-            !CanMove(ent.Comp, ladderEvent.Offset))
-            args.Cancel();
     }
 
     private void OnDoAfter(Entity<CMUZLevelLadderComponent> ent, ref CMUZLevelLadderDoAfterEvent args)
@@ -110,40 +108,62 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
             return;
         }
 
-        foreach (var offset in GetAvailableOffsets(ent.Comp))
+        if (ent.Comp.CanMoveUp)
         {
-            var climbOffset = offset;
             args.Verbs.Add(new AlternativeVerb
             {
-                Priority = 100,
-                Act = () => StartClimb(ent, user, climbOffset),
-                Text = Loc.GetString(climbOffset > 0
-                    ? "cmu-zlevel-ladder-climb-up"
-                    : "cmu-zlevel-ladder-climb-down"),
-            });
-        }
-
-        if (!HasComp<EyeComponent>(user))
-            return;
-
-        foreach (var offset in GetAvailableOffsets(ent.Comp))
-        {
-            var lookOffset = offset;
-            if (!TryGetLookCoordinates(ent, lookOffset, out _))
-                continue;
-
-            args.Verbs.Add(new AlternativeVerb
-            {
-                Priority = 100,
+                Priority = 110,
                 Act = () =>
                 {
                     if (CanWatchPopup(ent, user))
-                        ToggleLook(user, ent, lookOffset);
+                        StartClimb(ent, user, GetMovementOffset(ent.Comp, true));
                 },
-                Text = Loc.GetString(lookOffset > 0
-                    ? "cmu-zlevel-ladder-look-up"
-                    : "cmu-zlevel-ladder-look-down"),
+                Text = Loc.GetString("cmu-zlevel-ladder-climb-up"),
             });
+
+            if (HasComp<EyeComponent>(user) &&
+                TryGetLookCoordinates(ent, GetMovementOffset(ent.Comp, true), out _))
+            {
+                args.Verbs.Add(new AlternativeVerb
+                {
+                    Priority = 100,
+                    Act = () =>
+                    {
+                        if (CanWatchPopup(ent, user))
+                            ToggleLook(user, ent, GetMovementOffset(ent.Comp, true));
+                    },
+                    Text = Loc.GetString("cmu-zlevel-ladder-look-up"),
+                });
+            }
+        }
+
+        if (ent.Comp.CanMoveDown)
+        {
+            args.Verbs.Add(new AlternativeVerb
+            {
+                Priority = 110,
+                Act = () =>
+                {
+                    if (CanWatchPopup(ent, user))
+                        StartClimb(ent, user, GetMovementOffset(ent.Comp, false));
+                },
+                Text = Loc.GetString("cmu-zlevel-ladder-climb-down"),
+            });
+
+            if (HasComp<EyeComponent>(user) &&
+                TryGetLookCoordinates(ent, GetMovementOffset(ent.Comp, false), out _))
+            {
+                args.Verbs.Add(new AlternativeVerb
+                {
+                    Priority = 100,
+                    Act = () =>
+                    {
+                        if (CanWatchPopup(ent, user))
+                            ToggleLook(user, ent, GetMovementOffset(ent.Comp, false));
+                    },
+                    Text = Loc.GetString("cmu-zlevel-ladder-look-down"),
+                });
+            }
         }
     }
 
@@ -197,7 +217,7 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
     {
         if (TryComp(user, out CMUZLevelLadderWatchingComponent? existing))
         {
-            var sameLadder = existing.Ladder == ladder.Owner && existing.Offset == offset;
+            var sameLadder = existing.Ladder == ladder.Owner && existing.LookOffset == offset;
             CloseLook(user, existing);
 
             if (sameLadder)
@@ -216,9 +236,9 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
         var peekTarget = Spawn(null, coordinates);
         var watching = EnsureComp<CMUZLevelLadderWatchingComponent>(user);
         watching.Ladder = ladder;
-        watching.Offset = offset;
         watching.PeekTarget = peekTarget;
         watching.PreviousTarget = eye.Target;
+        watching.LookOffset = offset;
 
         _eye.SetTarget(user, peekTarget, eye);
     }
@@ -251,9 +271,9 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
         }
 
         watching.Ladder = null;
-        watching.Offset = 0;
         watching.PeekTarget = null;
         watching.PreviousTarget = null;
+        watching.LookOffset = 0;
     }
 
     private bool CanWatchPopup(Entity<CMUZLevelLadderComponent> ladder, EntityUid user)
@@ -262,6 +282,30 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
             return false;
 
         return true;
+    }
+
+    private bool TryGetDefaultMovementOffset(CMUZLevelLadderComponent ladder, out int offset)
+    {
+        if (ladder.CanMoveUp)
+        {
+            offset = GetMovementOffset(ladder, true);
+            return true;
+        }
+
+        if (ladder.CanMoveDown)
+        {
+            offset = GetMovementOffset(ladder, false);
+            return true;
+        }
+
+        offset = 0;
+        return false;
+    }
+
+    private static int GetMovementOffset(CMUZLevelLadderComponent ladder, bool up)
+    {
+        var magnitude = Math.Max(Math.Abs(ladder.Offset), 1);
+        return up ? magnitude : -magnitude;
     }
 
     private bool TryGetLookCoordinates(Entity<CMUZLevelLadderComponent> ladder, int offset, out MapCoordinates coordinates)
@@ -277,30 +321,5 @@ public sealed partial class CMUZLevelLadderSystem : EntitySystem
             _transform.GetWorldPosition(ladder),
             out coordinates,
             out _);
-    }
-
-    private static int GetDefaultOffset(CMUZLevelLadderComponent ladder)
-    {
-        var magnitude = Math.Max(1, Math.Abs(ladder.Offset));
-        var preferred = ladder.Offset >= 0 ? magnitude : -magnitude;
-        if (CanMove(ladder, preferred))
-            return preferred;
-
-        return ladder.CanMoveUp ? magnitude : -magnitude;
-    }
-
-    private static IEnumerable<int> GetAvailableOffsets(CMUZLevelLadderComponent ladder)
-    {
-        var magnitude = Math.Max(1, Math.Abs(ladder.Offset));
-        if (ladder.CanMoveUp)
-            yield return magnitude;
-
-        if (ladder.CanMoveDown)
-            yield return -magnitude;
-    }
-
-    private static bool CanMove(CMUZLevelLadderComponent ladder, int offset)
-    {
-        return offset > 0 ? ladder.CanMoveUp : offset < 0 && ladder.CanMoveDown;
     }
 }

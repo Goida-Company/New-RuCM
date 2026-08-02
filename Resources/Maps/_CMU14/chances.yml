@@ -175356,7 +175356,7 @@ entities:
     - type: MetaData
       name: Chances Claim ground relay
     - type: Transform
-      pos: -2.5,-8.5
+      pos: -62.5,92.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

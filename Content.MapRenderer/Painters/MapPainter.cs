@@ -166,7 +166,9 @@ namespace Content.MapRenderer.Painters
 
                 if (playerEntity.HasValue)
                 {
-                    sEntityManager.DeleteEntity(playerEntity.Value);
+                    // Keep the render-only player out of every grid without deleting its
+                    // child hierarchy while the client is applying entity states.
+                    xformSystem.DetachEntity(playerEntity.Value, xformQuery.GetComponent(playerEntity.Value));
                 }
 
                 if (_map is RenderMapPrototype)

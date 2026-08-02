@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Send Discord Embed
         env:
-          DISCORD_WEBHOOK_PR: ${{ secrets.DISCORD_WEBHOOK_PR }}
+          DISCORD_WEBHOOK_PR: ${{ secrets.DISCORD_WEBHOOK_PR || secrets.DISCORD_WEBHOOK_URL }}
           PR_TITLE: ${{ github.event.pull_request.title }}
           PR_URL: ${{ github.event.pull_request.html_url }}
           PR_AUTHOR: ${{ github.actor }}
@@ -24,6 +24,11 @@ jobs:
           import json
           import os
           import urllib.request
+
+          webhook = os.environ.get("DISCORD_WEBHOOK_PR", "").strip()
+          if not webhook:
+              print("Discord webhook is not configured; skipping notification.")
+              raise SystemExit(0)
 
           body = {
               "embeds": [
@@ -56,7 +61,7 @@ jobs:
           }
 
           request = urllib.request.Request(
-              os.environ["DISCORD_WEBHOOK_PR"],
+              webhook,
               data=json.dumps(body).encode("utf-8"),
               headers={"Content-Type": "application/json"},
               method="POST",

@@ -150,4 +150,19 @@ language-Binary-description = Машинный язык из единиц и н�
 language-Legalese-name = Канцелярит
 language-Legalese-description = Элитарный корпоративный жаргон, полный оговорок и дисклеймеров.
 
+language-Chinese-name = Китайский
+language-Chinese-description = Земной язык с тональной речью и сложными иероглифами.
+
+language-menu-tab-all = Все
+language-menu-tab-new = Новая вкладка
+language-menu-tab-new-tooltip = Новая вкладка
+language-menu-tab-new-button = + Новая вкладка
+language-menu-tab-rename = Переименовать
+language-menu-tab-rename-dialog = Переименовать вкладку
+language-menu-tab-delete = Удалить вкладку
+language-menu-tab-assign-tooltip = Добавить/убрать из вкладок
+language-menu-tab-in = В {$name}
+language-menu-no-languages = Языки не найдены.
+language-menu-search-placeholder = Поиск...
+language-menu-confirm = ОК
 

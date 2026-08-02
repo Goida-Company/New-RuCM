@@ -60,14 +60,11 @@ public sealed class YautjaClanInfoEui : BaseEui
         await _operationGate.WaitAsync();
         try
         {
-            if (_closed || IsShutDown)
+            if (_closed || IsShutDown || !await CanViewAsync())
                 return;
 
             try
             {
-                if (!await CanViewAsync())
-                    return;
-
                 switch (msg)
                 {
                     case YautjaClanInfoInitializeMessage:

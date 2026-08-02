@@ -167,6 +167,9 @@ public sealed partial class YautjaBracerMisuseDoAfterEvent : SimpleDoAfterEvent
 public sealed partial class YautjaHuntEscapeScanDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
+public sealed partial class YautjaPreserveEscapeDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
 public sealed partial class YautjaLeapDoAfterEvent : SimpleDoAfterEvent
 {
     [DataField]

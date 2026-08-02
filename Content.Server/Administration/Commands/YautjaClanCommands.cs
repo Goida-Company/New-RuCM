@@ -13,7 +13,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaClanSetMemberCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;
@@ -80,7 +80,7 @@ public sealed partial class YautjaClanSetMemberCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaClanCreateCommand : LocalizedCommands
 {
     [Dependency] private IServerDbManager _db = default!;
@@ -108,7 +108,7 @@ public sealed partial class YautjaClanCreateCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaClanWhitelistCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;

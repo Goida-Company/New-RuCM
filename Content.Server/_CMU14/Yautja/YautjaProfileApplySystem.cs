@@ -58,7 +58,8 @@ public sealed partial class YautjaProfileApplySystem : EntitySystem
         EntityUid uid,
         YautjaCharacterProfile yautjaProfile,
         YautjaRank? authoritativeRank = null,
-        YautjaProfileCapabilities? authoritativeCapabilities = null)
+        YautjaProfileCapabilities? authoritativeCapabilities = null,
+        bool equipProfileGear = true)
     {
         if (!TryComp(uid, out HumanoidAppearanceComponent? humanoid))
             return;
@@ -78,29 +79,33 @@ public sealed partial class YautjaProfileApplySystem : EntitySystem
 
         var yautja = EnsureComp<YautjaComponent>(uid);
         yautja.ClanRank = rank;
-        yautja.RankName = YautjaRankMetadata.For(rank).LocalizedName;
         Dirty(uid, yautja);
 
         var humanoidProfile = HumanoidCharacterProfile.DefaultWithSpecies("Yautja")
             .WithName(profile.Name)
             .WithAge(profile.Age)
-            .WithSex(Sex.Male)
-            .WithGender(Gender.Male)
+            .WithSex(profile.Sex)
+            .WithGender(profile.Gender)
             .WithCharacterAppearance(profile.Appearance);
 
         _humanoid.LoadProfile(uid, humanoidProfile, humanoid);
-        // YautjaStatsSystem schedules its normal random skin pass on startup.
-        // A player profile is authoritative and must not be replaced on the
-        // first server tick after the profile was applied.
-        yautja.SkinColorRandomized = true;
-        Dirty(uid, yautja);
         _meta.SetEntityName(uid, profile.Name);
 
-        ReplaceEquipped(uid, "outerClothing", profile.ArmorPrototype);
-        var mask = ReplaceEquipped(uid, "mask", profile.MaskPrototype);
-        ReplaceEquipped(uid, "shoes", profile.GreavesPrototype);
-        var bracer = ReplaceEquipped(uid, "gloves", profile.BracerPrototype);
-        var cape = ReplaceEquipped(uid, "back", profile.CapePrototype);
+        EntityUid? mask = null;
+        EntityUid? bracer = null;
+        EntityUid? cape = null;
+        if (equipProfileGear)
+        {
+            ReplaceEquipped(uid, "outerClothing", profile.ArmorPrototype);
+            mask = ReplaceEquipped(uid, "mask", profile.MaskPrototype);
+            ReplaceEquipped(uid, "shoes", profile.GreavesPrototype);
+            bracer = ReplaceEquipped(uid, "gloves", profile.BracerPrototype);
+            cape = ReplaceEquipped(uid, "back", profile.CapePrototype);
+        }
+        else if (_inventory.TryGetSlotEntity(uid, "gloves", out var equippedBracer))
+        {
+            bracer = equippedBracer;
+        }
 
         if (mask != null)
             ApplyMaskAccessory(mask.Value, profile);
@@ -297,8 +302,8 @@ public sealed partial class YautjaProfileApplySystem : EntitySystem
             }
             else
             {
-                bracerComp.CloakOnSound = new SoundPathSpecifier("/Audio/_CMU14/Yautja/pred_cloakon_modern.wav");
-                bracerComp.CloakOffSound = new SoundPathSpecifier("/Audio/_CMU14/Yautja/pred_cloakoff_modern.wav");
+                bracerComp.CloakOnSound = new SoundPathSpecifier("/Audio/_CMU14/Yautja/pred_cloakon_modern.ogg");
+                bracerComp.CloakOffSound = new SoundPathSpecifier("/Audio/_CMU14/Yautja/pred_cloakoff_modern.ogg");
             }
 
             Dirty(bracer, bracerComp);

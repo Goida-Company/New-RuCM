@@ -9,13 +9,13 @@
   "rsic": false,
   "states": [
     {
+      "name": "base"
+    },
+    {
       "name": "hooked"
     },
     {
       "name": "beakerlarge100"
-    },
-    {
-      "name": ""
     },
     {
       "name": "reagent100"

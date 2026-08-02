@@ -13,7 +13,7 @@
     guides:
     - RMCGuideRoleDrone
   - type: GhostRole
-    name: cmu-job-name-xeno-unknown
+    name: cm-job-name-xeno-larva
   - type: LarvaQueueable
   - type: Sprite
     sprite: _AU14/Mobs/Xenos/Larva/larva.rsi # AU14-Edit

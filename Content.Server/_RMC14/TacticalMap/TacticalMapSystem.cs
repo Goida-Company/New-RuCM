@@ -703,7 +703,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerUpdateCanvasMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapUpdateCanvasMsg args)
     {
         var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        if (!ent.Comp.AllowCanvas || !_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var lines = args.Lines;
@@ -936,7 +936,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerCreateLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapCreateLabelMsg args)
     {
         var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        if (!ent.Comp.AllowCanvas || !_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var time = _timing.CurTime;
@@ -953,7 +953,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerEditLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapEditLabelMsg args)
     {
         var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        if (!ent.Comp.AllowCanvas || !_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var time = _timing.CurTime;
@@ -970,7 +970,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerDeleteLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapDeleteLabelMsg args)
     {
         var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        if (!ent.Comp.AllowCanvas || !_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var time = _timing.CurTime;
@@ -987,7 +987,7 @@ public sealed partial class TacticalMapSystem : SharedTacticalMapSystem
     private void OnComputerMoveLabelMsg(Entity<TacticalMapComputerComponent> ent, ref TacticalMapMoveLabelMsg args)
     {
         var user = args.Actor;
-        if (!_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
+        if (!ent.Comp.AllowCanvas || !_skills.HasSkill(user, ent.Comp.Skill, ent.Comp.SkillLevel))
             return;
 
         var time = _timing.CurTime;

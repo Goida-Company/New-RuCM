@@ -10,7 +10,7 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaRankCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;
@@ -91,7 +91,7 @@ public sealed partial class YautjaRankCommand : LocalizedCommands
     }
 }
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaGetRankCommand : LocalizedCommands
 {
     [Dependency] private IPlayerLocator _playerLocator = default!;

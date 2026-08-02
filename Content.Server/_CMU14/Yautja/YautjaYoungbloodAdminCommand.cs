@@ -7,7 +7,7 @@ using Robust.Shared.Utility;
 
 namespace Content.Server._CMU14.Yautja;
 
-[AdminCommand(AdminFlags.Admin)]
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaYoungbloodCallCommand : IConsoleCommand
 {
     [Dependency] private IEntityManager _entities = default!;

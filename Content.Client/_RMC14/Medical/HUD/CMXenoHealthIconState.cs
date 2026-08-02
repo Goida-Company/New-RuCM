@@ -15,6 +15,9 @@ public static class CMXenoHealthIconState
         FixedPoint2? criticalThreshold,
         FixedPoint2? deadThreshold)
     {
+        if (state == MobState.Dead)
+            return null;
+
         if (state == MobState.Critical ||
             state == MobState.Alive && criticalThreshold is { } aliveCriticalThreshold && damage > aliveCriticalThreshold)
         {

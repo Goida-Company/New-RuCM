@@ -48928,7 +48928,7 @@ entities:
   - uid: 2186
     components:
     - type: Transform
-      pos: 68.5,46.5
+      pos: 23.5,30.5
       parent: 1
   - uid: 2187
     components:
@@ -131942,12 +131942,12 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 17586
+  - uid: 999002
     components:
     - type: MetaData
       name: Shivas Snowball ground relay
     - type: Transform
-      pos: 68.5,46.5
+      pos: 23.5,30.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

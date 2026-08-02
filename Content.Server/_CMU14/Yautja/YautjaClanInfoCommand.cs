@@ -1,8 +1,11 @@
+using Content.Server.Administration;
 using Content.Server.EUI;
+using Content.Shared.Administration;
 using Robust.Shared.Console;
 
 namespace Content.Server._CMU14.Yautja;
 
+[AdminCommand(AdminFlags.Clans)]
 public sealed partial class YautjaClanInfoCommand : LocalizedCommands
 {
     [Dependency] private EuiManager _eui = default!;

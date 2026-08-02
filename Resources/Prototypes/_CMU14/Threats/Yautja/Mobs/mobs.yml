@@ -18,11 +18,7 @@
     preset: CMUSkillPresetYautjaWarrior
   - type: Loadout
     prototypes:
-    - CMUYautjaHunterGear
-    - CMUYautjaHunterGearBronze
-    - CMUYautjaHunterGearSilver
-    - CMUYautjaHunterGearCrimson
-    - CMUYautjaHunterGearBone
+    - CMUYautjaHunterSpawnGear
   - type: HumanoidAppearance
     species: Yautja
     hideLayersOnEquip:
@@ -99,6 +95,30 @@
     emoteCooldown: 8
     hiddenFromChatWindow: true
   - type: MotionDetectorTracked
+
+- type: entity
+  parent: CMUMobYautja
+  id: CMUMobYautjaMilitaryCasteSoldier
+  name: Yautja Military Caste Soldier
+  suffix: Yautja, Military Caste, Event
+  components:
+  - type: YautjaMilitaryCaste
+    caste: Soldier
+  - type: Loadout
+    prototypes:
+    - CMUYautjaMilitaryCasteSoldierGear
+
+- type: entity
+  parent: CMUMobYautja
+  id: CMUMobYautjaMilitaryCasteEnforcer
+  name: Yautja Military Caste Enforcer
+  suffix: Yautja, Military Caste, Event
+  components:
+  - type: YautjaMilitaryCaste
+    caste: Enforcer
+  - type: Loadout
+    prototypes:
+    - CMUYautjaMilitaryCasteEnforcerGear
 
 - type: entity
   parent: CMUMobYautja
@@ -192,7 +212,7 @@
     - CMUYautjaBadBlood
   - type: Loadout
     prototypes:
-    - CMUYautjaBadBloodGear
+    - CMUYautjaBadBloodSpawnGear
 
 - type: entity
   save: false

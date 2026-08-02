@@ -612,7 +612,6 @@ public sealed partial class YautjaAttachmentSystem : EntitySystem
         if (!ent.Comp.Deployed)
             return;
 
-        TryRetractStoredGear(ent, args.Thrower);
         args.Cancelled = true;
     }
 

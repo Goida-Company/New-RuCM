@@ -49,6 +49,3 @@
   spawnlist: Tiles
   conditions:
   - !type:ZBuildAllowed
-  icon:
-    sprite: Objects/Tiles/tile.rsi
-    state: steel

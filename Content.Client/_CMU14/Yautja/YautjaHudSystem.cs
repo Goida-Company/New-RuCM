@@ -14,6 +14,7 @@ public sealed partial class YautjaHudSystem : EntitySystem
 
     private readonly Dictionary<YautjaMarkKind, StatusIconData> _icons = new();
     private readonly Dictionary<YautjaRank, StatusIconData> _rankIcons = new();
+    private readonly Dictionary<(YautjaMilitaryCaste Caste, bool Whitelist), StatusIconData> _militaryIcons = new();
     private StatusIconData? _bloodedThrallIcon;
     private bool _cached;
 
@@ -21,17 +22,31 @@ public sealed partial class YautjaHudSystem : EntitySystem
     {
         SubscribeLocalEvent<YautjaMarkComponent, GetStatusIconsEvent>(OnGetStatusIcons);
         SubscribeLocalEvent<YautjaComponent, GetStatusIconsEvent>(OnGetRankStatusIcons);
+        SubscribeLocalEvent<YautjaMilitaryCasteComponent, GetStatusIconsEvent>(OnGetMilitaryStatusIcons);
         SubscribeLocalEvent<YautjaFalconHudIconComponent, GetStatusIconsEvent>(OnFalconGetStatusIcons);
     }
 
     private void OnGetRankStatusIcons(Entity<YautjaComponent> ent, ref GetStatusIconsEvent args)
     {
+        if (HasComp<YautjaMilitaryCasteComponent>(ent.Owner))
+            return;
+
         if (!CanSeeYautjaRankIcon(ent.Owner))
             return;
 
         EnsureCached();
         var rank = Enum.IsDefined(ent.Comp.ClanRank) ? ent.Comp.ClanRank : YautjaRank.Blooded;
         if (_rankIcons.TryGetValue(rank, out var icon))
+            args.StatusIcons.Add(icon);
+    }
+
+    private void OnGetMilitaryStatusIcons(Entity<YautjaMilitaryCasteComponent> ent, ref GetStatusIconsEvent args)
+    {
+        if (!CanSeeYautjaRankIcon(ent.Owner))
+            return;
+
+        EnsureCached();
+        if (_militaryIcons.TryGetValue((ent.Comp.Caste, ent.Comp.WhitelistIcon), out var icon))
             args.StatusIcons.Add(icon);
     }
 
@@ -106,6 +121,11 @@ public sealed partial class YautjaHudSystem : EntitySystem
                 _rankIcons[rank] = icon;
         }
 
+        CacheMilitary(YautjaMilitaryCaste.Soldier, "CMUYautjaMilitarySoldierIcon");
+        CacheMilitary(YautjaMilitaryCaste.Enforcer, "CMUYautjaMilitaryEnforcerIcon");
+        CacheMilitary(YautjaMilitaryCaste.Soldier, "CMUYautjaMilitarySoldierWhitelistIcon", whitelist: true);
+        CacheMilitary(YautjaMilitaryCaste.Enforcer, "CMUYautjaMilitaryEnforcerWhitelistIcon", whitelist: true);
+
         var bloodedThrallId = new ProtoId<HealthIconPrototype>("CMUYautjaIconBloodedThrall");
         if (_prototypes.TryIndex(bloodedThrallId, out var bloodedThrall))
             _bloodedThrallIcon = bloodedThrall;
@@ -115,6 +135,12 @@ public sealed partial class YautjaHudSystem : EntitySystem
     {
         if (_prototypes.TryIndex(id, out var proto))
             _icons[kind] = proto;
+    }
+
+    private void CacheMilitary(YautjaMilitaryCaste caste, ProtoId<HealthIconPrototype> id, bool whitelist = false)
+    {
+        if (_prototypes.TryIndex(id, out var proto))
+            _militaryIcons[(caste, whitelist)] = proto;
     }
 
     private void AddIfPresent(IReadOnlyCollection<YautjaMarkKind> marks, List<StatusIconData> icons, YautjaMarkKind kind)

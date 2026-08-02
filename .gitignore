@@ -327,3 +327,6 @@ yaml-linter-stdout.txt
 pr1600_inline.json
 pr1600_issue.json
 pr1600_reviews.json
+
+# Local git worktrees
+.worktrees/

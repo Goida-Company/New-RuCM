@@ -4,6 +4,7 @@ using System.IO;
 using System.Numerics;
 using System.Reflection;
 using Content.Client.Popups;
+using Content.Client.CharacterInfo;
 using Content.Client.StatusIcon;
 using Content.Client.ContextMenu.UI;
 using Content.Client.UserInterface.Systems.Chat;
@@ -40,6 +41,7 @@ using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Humanoid.Markings;
 using Content.Shared.Chat.Prototypes;
+using Content.Shared.CharacterInfo;
 using Content.Shared.DoAfter;
 using Content.Shared.GameTicking;
 using Content.Shared.Hands.EntitySystems;
@@ -101,7 +103,6 @@ public sealed class YautjaPredatorRoleTest
             var entMan = server.EntMan;
             var stationSpawning = entMan.System<StationSpawningSystem>();
             var inventory = entMan.System<InventorySystem>();
-            var containers = entMan.System<SharedContainerSystem>();
 
             var yautjaAppearance = new HumanoidCharacterAppearance()
                 .WithSkinColor(new Color((byte) 56, (byte) 90, (byte) 48))
@@ -141,58 +142,19 @@ public sealed class YautjaPredatorRoleTest
             {
                 Assert.That(meta.EntityName, Is.EqualTo("Kainde Amedha"));
                 Assert.That(humanoid.Species, Is.EqualTo("Yautja"));
-                Assert.That(entMan.HasComponent<YautjaHudViewerComponent>(hunter), Is.True,
-                    "A spawned Hunter with the clan mask must have the HUD used to see Yautja ranks.");
+                Assert.That(entMan.HasComponent<YautjaHudViewerComponent>(hunter), Is.False,
+                    "Original CMSS13 Hunter spawn has no mask until the player uses the loadout vendor.");
                 Assert.That(humanoid.SkinColor, Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Green)));
                 Assert.That(humanoid.EyeColor,
                     Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Gold)));
                 Assert.That(humanoid.MarkingSet.Markings.Values.SelectMany(markings => markings),
                     Has.Exactly(1).Matches<Marking>(marking => marking.MarkingId == "CMUYautjaDreadlocksLongCurved"));
-                AssertEquippedPrototype(entMan, inventory, hunter, "outerClothing", "CMUYautjaClanArmorBronze3");
-                AssertEquippedPrototype(entMan, inventory, hunter, "mask", "CMUYautjaMaskPred12Bone");
-                AssertEquippedPrototype(entMan, inventory, hunter, "shoes", "CMUYautjaClanGreavesSilver2");
                 AssertEquippedPrototype(entMan, inventory, hunter, "gloves", "CMUYautjaBracerCrimson");
-                AssertEquippedPrototype(entMan, inventory, hunter, "back", "CMUYautjaCapeDamaged");
                 AssertEquippedPrototype(entMan, inventory, hunter, "ears", "CMUYautjaCommunicator");
-                AssertEquippedPrototype(entMan, inventory, hunter, "jumpsuit", "CMUYautjaBodyMesh");
-                AssertEquippedPrototype(entMan, inventory, hunter, "belt", "CMUYautjaHuntingPouch");
-                AssertEquippedPrototype(entMan, inventory, hunter, "pocket1", "CMUYautjaSmartDisc");
-                AssertEquippedPrototype(entMan, inventory, hunter, "pocket2", "CMUYautjaMedicompFull");
+                foreach (var slot in new[] { "ears2", "mask", "outerClothing", "shoes", "back", "jumpsuit", "belt", "pocket1", "pocket2" })
+                    Assert.That(inventory.TryGetSlotEntity(hunter, slot, out _), Is.False, slot);
                 Assert.That(inventory.TryGetSlotEntity(hunter, "id", out _), Is.False,
                     "The starter loadout must leave the id slot free for the bracer chip.");
-
-                Assert.That(inventory.TryGetSlotEntity(hunter, "belt", out var belt), Is.True);
-                var beltStorage = entMan.GetComponent<StorageComponent>(belt.Value);
-                Assert.That(beltStorage.Container.ContainedEntities.Select(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID),
-                    Is.EquivalentTo(new[]
-                    {
-                        "CMUYautjaHuntingTrap",
-                        "CMUYautjaHuntingTrap",
-                        "CMUYautjaPolishingRag",
-                        "CMUYautjaCleanserGelVial",
-                        "CMUYautjaRelayBeacon",
-                        "CMUYautjaToolbeltFilled",
-                        "CMUYautjaHoundObservationPad",
-                    }));
-
-                Assert.That(inventory.TryGetSlotEntity(hunter, "pocket2", out var medicomp), Is.True);
-                var medicompStorage = entMan.GetComponent<StorageComponent>(medicomp.Value);
-                Assert.That(medicompStorage.Container.ContainedEntities.Select(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID),
-                    Is.EquivalentTo(new[]
-                    {
-                        "CMUYautjaStabilizerGel",
-                        "CMUYautjaHealingGun",
-                        "CMUYautjaWoundClamp",
-                        "CMUYautjaAlienHealthAnalyzer",
-                        "CMUYautjaAutoInjector",
-                        "CMUYautjaAutoInjector",
-                        "CMUYautjaAutoInjector",
-                        "CMUYautjaHealingGel",
-                    }));
-                Assert.That(medicompStorage.Container.ContainedEntities
-                        .Where(uid => entMan.GetComponent<MetaDataComponent>(uid).EntityPrototype?.ID == "CMUYautjaHealingGel")
-                        .Sum(uid => entMan.GetComponent<StackComponent>(uid).Count),
-                    Is.EqualTo(6));
 
                 var idCards = new List<EntityUid>();
                 var idCardQuery = entMan.EntityQueryEnumerator<MetaDataComponent>();
@@ -204,16 +166,6 @@ public sealed class YautjaPredatorRoleTest
 
                 Assert.That(idCards, Has.Count.EqualTo(0),
                     "Yautja starter gear must not spawn a separate ID card before the bracer chip is deployed.");
-                Assert.That(inventory.TryGetSlotEntity(hunter, "back", out var equippedCape), Is.True);
-                Assert.That(entMan.GetComponent<YautjaCapeComponent>(equippedCape.Value).Color,
-                    Is.EqualTo(YautjaCharacterProfile.Default.CapeColor));
-
-                Assert.That(inventory.TryGetSlotEntity(hunter, "mask", out var mask), Is.True);
-                Assert.That(containers.TryGetContainer(mask.Value, "cmu-yautja-mask-accessory", out var maskAccessory), Is.True);
-                Assert.That(maskAccessory.ContainedEntities, Has.Count.EqualTo(1));
-                Assert.That(entMan.GetComponent<MetaDataComponent>(maskAccessory.ContainedEntities[0]).EntityPrototype?.ID,
-                    Is.EqualTo("CMUYautjaMaskAccessory02Bone"));
-
                 Assert.That(inventory.TryGetSlotEntity(hunter, "gloves", out var bracer), Is.True);
                 var bracerComp = entMan.GetComponent<YautjaBracerComponent>(bracer.Value);
                 var gearComp = entMan.GetComponent<YautjaGearContainerComponent>(bracer.Value);
@@ -245,62 +197,6 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
-    public async Task PredatorSpawnKeepsProfileColorsAfterYautjaStartup()
-    {
-        await using var pair = await PoolManager.GetServerClient();
-        var server = pair.Server;
-        var map = await pair.CreateTestMap();
-        EntityUid hunter = default;
-
-        try
-        {
-            var profile = YautjaCharacterProfile.Default
-                .WithName("Color Test Hunter")
-                .WithSkinColor(YautjaSkinColor.Blue)
-                .WithEyeColor(YautjaEyeColor.Slate)
-                .WithDreadColor(YautjaDreadColor.Bone)
-                .WithQuillStyle(YautjaQuillStyle.LongCurved);
-
-            await server.WaitPost(() =>
-            {
-                var spawning = server.EntMan.System<StationSpawningSystem>();
-                var normalProfile = HumanoidCharacterProfile.DefaultWithSpecies("Human")
-                    .WithYautjaProfile(profile);
-                hunter = spawning.SpawnPlayerMob(map.GridCoords, "CMUYautjaHunter", normalProfile, station: null);
-            });
-
-            await server.WaitRunTicks(2);
-
-            await server.WaitAssertion(() =>
-            {
-                var entMan = server.EntMan;
-                var humanoid = entMan.GetComponent<HumanoidAppearanceComponent>(hunter);
-                var quills = humanoid.MarkingSet.Markings.Values
-                    .SelectMany(markings => markings)
-                    .Single(marking => marking.MarkingId == profile.QuillMarkingId);
-
-                Assert.Multiple(() =>
-                {
-                    Assert.That(humanoid.SkinColor, Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Blue)));
-                    Assert.That(humanoid.EyeColor, Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Slate)));
-                    Assert.That(quills.MarkingColors.Single(),
-                        Is.EqualTo(YautjaCharacterProfile.GetDreadColorColor(YautjaDreadColor.Bone, humanoid.SkinColor)));
-                });
-            });
-        }
-        finally
-        {
-            await server.WaitAssertion(() =>
-            {
-                if (hunter != default && !server.EntMan.Deleted(hunter))
-                    server.EntMan.DeleteEntity(hunter);
-            });
-        }
-
-        await pair.CleanReturnAsync();
-    }
-
-    [Test]
     public async Task PredatorJobIsRoundPlayableWhitelistedYautjaRole()
     {
         await using var pair = await PoolManager.GetServerClient();
@@ -320,7 +216,7 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(job.Icon.ToString(), Is.EqualTo("CMUYautjaJobIcon"));
                 Assert.That(job.JobEntity, Is.EqualTo("CMUMobYautja"));
                 Assert.That(job.JobPreviewEntity?.ToString(), Is.EqualTo("CMUMobYautja"));
-                Assert.That(job.StartingGear?.ToString(), Is.EqualTo("CMUYautjaHunterGear"));
+                Assert.That(job.StartingGear?.ToString(), Is.EqualTo("CMUYautjaHunterSpawnGear"));
                 Assert.That(job.UsePlayerProfile, Is.False);
                 Assert.That(threatDepartment.Roles, Does.Contain("CMUYautjaHunter"));
             });
@@ -344,7 +240,7 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(hunter!.HideSpawnMenu, Is.False,
                     "CMUMobYautja must remain the visible direct F7 spawn prototype.");
                 Assert.That(hunter.Components.ContainsKey("Loadout"), Is.True,
-                    "The direct F7 hunter must retain its standard loadout and mask.");
+                    "The direct F7 hunter must retain its original-style minimal loadout.");
 
                 Assert.That(prototypes.TryIndex<EntityPrototype>("CMURandomHumanoidYautjaHunter", out var legacySpawner), Is.True);
                 Assert.That(legacySpawner!.HideSpawnMenu, Is.True,
@@ -358,7 +254,7 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
-    public async Task YautjaBracerDrainFailureUsesValidBoldMarkup()
+    public async Task YautjaPowerDrainFailurePopupsUsePlainText()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -368,12 +264,15 @@ public sealed class YautjaPredatorRoleTest
             var resources = server.ResolveDependency<IResourceManager>();
             foreach (var locale in new[] { "ru-RU", "en-US" })
             {
-                using var stream = resources.ContentFileRead(new ResPath($"/Locale/{locale}/_CMU14/yautja/yautja.ftl"));
+                var fileName = locale == "ru-RU" ? "runtime_extra.ftl" : "yautja.ftl";
+                using var stream = resources.ContentFileRead(new ResPath($"/Locale/{locale}/_CMU14/yautja/{fileName}"));
                 using var reader = new StreamReader(stream);
                 var text = reader.ReadToEnd();
 
-                Assert.That(text, Does.Contain("[bold]{$charge}/{$max}[/bold]"), locale);
-                Assert.That(text, Does.Contain("[bold]{$amount}[/bold]"), locale);
+                Assert.That(text, Does.Contain("{$charge}/{$max}"), locale);
+                Assert.That(text, Does.Contain("{$amount}"), locale);
+                Assert.That(text, Does.Not.Contain("[bold]"), locale);
+                Assert.That(text, Does.Not.Contain("[/bold]"), locale);
                 Assert.That(text, Does.Not.Contain("<bold>"), locale);
                 Assert.That(text, Does.Not.Contain("</bold>"), locale);
             }
@@ -407,7 +306,7 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(job.Icon.ToString(), Is.EqualTo("CMUYautjaJobIcon"));
                 Assert.That(job.JobEntity, Is.EqualTo("CMUMobYautjaBadBlood"));
                 Assert.That(job.JobPreviewEntity?.ToString(), Is.EqualTo("CMUMobYautjaBadBlood"));
-                Assert.That(job.StartingGear?.ToString(), Is.EqualTo("CMUYautjaBadBloodGear"));
+                Assert.That(job.StartingGear?.ToString(), Is.EqualTo("CMUYautjaBadBloodSpawnGear"));
                 Assert.That(job.UsePlayerProfile, Is.False);
             });
 
@@ -425,14 +324,9 @@ public sealed class YautjaPredatorRoleTest
                     "CMSS13 gates Bad Blood behavior on FACTION_YAUTJA_BADBLOOD.");
 
                 AssertEquippedPrototype(entMan, inventory, badBlood, "ears", "CMUYautjaBadBloodCommunicator");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "ears2", "CMUYautjaFalconDroneBadBlood");
                 AssertEquippedPrototype(entMan, inventory, badBlood, "gloves", "CMUYautjaBadBloodBracer");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "back", "CMUYautjaCloakPack");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "outerClothing", "CMUYautjaBadBloodArmorPatchwork");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "mask", "CMUYautjaMaskBadBloodPatchwork");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "shoes", "CMUYautjaBadBloodGreavesPatchwork");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "jumpsuit", "CMUYautjaBodyMeshScalable");
-                AssertEquippedPrototype(entMan, inventory, badBlood, "pocket2", "CMUYautjaMedicompSurvivor");
+                foreach (var slot in new[] { "ears2", "mask", "outerClothing", "shoes", "back", "jumpsuit", "belt", "pocket1", "pocket2", "id" })
+                    Assert.That(inventory.TryGetSlotEntity(badBlood, slot, out _), Is.False, slot);
 
                 Assert.That(inventory.TryGetSlotEntity(badBlood, "ears", out var communicator), Is.True);
                 Assert.That(containers.TryGetContainer(communicator.Value, EncryptionKeyHolderComponent.KeyContainerName, out var keySlots), Is.True);
@@ -678,7 +572,7 @@ public sealed class YautjaPredatorRoleTest
                 var remainingHunterSlots = hunterJobs.JobList["CMUYautjaHunter"];
                 var selectedYautjaProfile = YautjaCharacterProfile.Default
                     .WithName("Late Join Kainde Amedha")
-                    .WithSkinColor(YautjaSkinColor.Green)
+                    .WithSkinColor(YautjaSkinColor.Red)
                     .WithEyeColor(YautjaEyeColor.Gold)
                     .WithArmor(YautjaGearMaterial.Bronze, 3)
                     .WithStatus(YautjaProfileStatus.Normal)
@@ -716,7 +610,7 @@ public sealed class YautjaPredatorRoleTest
                         Assert.That(spawnedYautja.Profile.Name, Is.EqualTo(selectedYautjaProfile.Name));
                         Assert.That(spawnedHumanoid.Species, Is.EqualTo("Yautja"));
                         Assert.That(spawnedHumanoid.SkinColor,
-                            Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Green)));
+                            Is.EqualTo(YautjaCharacterProfile.GetSkinColorColor(YautjaSkinColor.Red)));
                         Assert.That(spawnedHumanoid.EyeColor,
                             Is.EqualTo(YautjaCharacterProfile.GetEyeColorColor(YautjaEyeColor.Gold)));
                         Assert.That(spawnedYautja.Profile.Status, Is.EqualTo(YautjaProfileStatus.Normal));
@@ -4784,6 +4678,16 @@ public sealed class YautjaPredatorRoleTest
                     .ToList();
                 Assert.That(maskedOtherStates, Does.Contain("leaderhud"),
                     "A Yautja with the mask HUD must see another Yautja's rank icon.");
+
+                entMan.EnsureComponent<EntityActiveInvisibleComponent>(otherTargetUid);
+                var leaderIcon = maskedOtherIcons.Single(icon =>
+                    icon.Icon is SpriteSpecifier.Rsi { RsiState: "leaderhud" });
+                Assert.That(
+                    entMan.System<StatusIconSystem>().IsVisible(
+                        (otherTargetUid, entMan.GetComponent<MetaDataComponent>(otherTargetUid)),
+                        leaderIcon),
+                    Is.True,
+                    "A masked Yautja must see another Yautja's rank icon while that Yautja is cloaked.");
             });
         }
         finally
@@ -4844,7 +4748,6 @@ public sealed class YautjaPredatorRoleTest
                     Assert.That(player.LocalEntity, Is.EqualTo(clientUid));
                     Assert.That(entMan.HasComponent<YautjaComponent>(clientUid), Is.True);
                     Assert.That(entMan.HasComponent<StatusIconComponent>(clientUid), Is.True);
-                    Assert.That(entMan.HasComponent<YautjaHudViewerComponent>(clientUid), Is.True);
                 });
 
                 var statusIcons = entMan.System<StatusIconSystem>();
@@ -4871,6 +4774,75 @@ public sealed class YautjaPredatorRoleTest
                 if (!entMan.Deleted(hunter))
                     entMan.DeleteEntity(hunter);
             });
+        }
+
+        await pair.CleanReturnAsync();
+    }
+
+    [Test]
+    public async Task YautjaCharacterInfoUsesWhitelistRankWithoutClanMembership()
+    {
+        await using var pair = await PoolManager.GetServerClient(new PoolSettings { Connected = true });
+        var server = pair.Server;
+        var client = pair.Client;
+        var map = await pair.CreateTestMap();
+        EntityUid hunter = default;
+        EntityUid? previousAttached = null;
+        string? displayedTitle = null;
+
+        var session = server.PlayerMan.Sessions.Single();
+        var db = server.ResolveDependency<IServerDbManager>();
+        var rankManager = server.ResolveDependency<YautjaRankManager>();
+        await db.SetYautjaWhitelistFlagsAsync(session.UserId.UserId, (int) YautjaWhitelistFlags.Yautja);
+        await db.SetYautjaRank(session.UserId.UserId, YautjaRank.Elite);
+        await rankManager.Refresh(session.UserId);
+
+        await server.WaitPost(() =>
+        {
+            var entMan = server.EntMan;
+            previousAttached = session.AttachedEntity;
+            var profile = HumanoidCharacterProfile.DefaultWithSpecies("Human")
+                .WithName("Whitelist Rank Hunter")
+                .WithYautjaProfile(YautjaCharacterProfile.Default.WithName("Whitelist Rank Hunter"));
+
+            hunter = entMan.System<StationSpawningSystem>().SpawnPlayerMob(
+                map.GridCoords,
+                "CMUYautjaHunter",
+                profile,
+                station: null,
+                authoritativeYautjaRank: YautjaRank.Blooded);
+            server.PlayerMan.SetAttachedEntity(session, hunter);
+        });
+
+        await pair.RunTicksSync(10);
+
+        try
+        {
+            await client.WaitPost(() =>
+            {
+                var info = client.EntMan.System<Content.Client.CharacterInfo.CharacterInfoSystem>();
+                info.OnCharacterUpdate += data => displayedTitle = data.Job;
+                info.RequestCharacterInfo();
+            });
+            await pair.ReallyBeIdle(10);
+
+            await client.WaitAssertion(() =>
+                Assert.That(
+                    displayedTitle,
+                    Is.EqualTo(Loc.GetString(YautjaRankMetadata.For(YautjaRank.Elite).LocalizedName)),
+                    "Shift+LMB character info must use the whitelist rank, not the Hunter job title."));
+        }
+        finally
+        {
+            await server.WaitPost(() =>
+            {
+                server.PlayerMan.SetAttachedEntity(session, previousAttached);
+                if (hunter != default && !server.EntMan.Deleted(hunter))
+                    server.EntMan.DeleteEntity(hunter);
+            });
+
+            await db.SetYautjaWhitelistFlagsAsync(session.UserId.UserId, (int) YautjaWhitelistFlags.None);
+            await rankManager.Refresh(session.UserId);
         }
 
         await pair.CleanReturnAsync();

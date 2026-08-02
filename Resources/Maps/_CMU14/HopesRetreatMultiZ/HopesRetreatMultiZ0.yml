@@ -126389,7 +126389,7 @@ entities:
   - uid: 9744
     components:
     - type: Transform
-      pos: 18.5,-48.5
+      pos: -6.5,-108.5
       parent: 1
 - proto: AU14SpawnPointCivilianAmbassadorICSC
   entities:
@@ -332905,12 +332905,12 @@ entities:
       parent: 1
 - proto: CMUYautjaGroundRelayDestination
   entities:
-  - uid: 39194
+  - uid: 76466
     components:
     - type: MetaData
       name: Hope's Retreat ground relay
     - type: Transform
-      pos: 18.5,-48.5
+      pos: -6.5,-108.5
       parent: 1
     - type: YautjaRelayDestination
       kind: Ground

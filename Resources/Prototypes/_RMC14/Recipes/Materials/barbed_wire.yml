@@ -1,7 +1,7 @@
 - type: rmcConstruction
   id: RMCRazorwireBuild
-  name: razorwire
-  prototype: rmc-construction-razor-wire # RuMC edit
+  name: rmc-construction-razor-wire
+  prototype: RMCBarricadeRazorwire
   doAfterTime: 2
   doAfterTimeMin: 1
   materialCost: 2

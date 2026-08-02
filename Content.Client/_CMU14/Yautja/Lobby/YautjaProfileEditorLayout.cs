@@ -25,10 +25,24 @@ public sealed record YautjaProfileEditorSummary(
     string Bracer,
     string Caster);
 
+public sealed record YautjaProfileEditorSelection(
+    YautjaUniqueSet Unique,
+    YautjaLegacySet Legacy,
+    YautjaGearMaterial ArmorMaterial,
+    int ArmorStyle,
+    YautjaGearMaterial MaskMaterial,
+    int MaskStyle,
+    YautjaGearMaterial GreavesMaterial,
+    int GreavesStyle,
+    YautjaCapeStyle CapeStyle,
+    YautjaBracerMaterial BracerMaterial,
+    YautjaBracerMaterial CasterMaterial);
+
 public static class YautjaProfileEditorLayout
 {
     public const int TechOptionSpacing = 6;
     public const int TechOptionBottomMargin = 12;
+    public const float HorizontalWorkAreaMinWidth = 750;
 
     public static IReadOnlyList<YautjaProfileEditorCategoryInfo> Categories { get; } =
     [
@@ -66,20 +80,37 @@ public static class YautjaProfileEditorLayout
 
     public static YautjaProfileEditorSummary BuildSummary(YautjaCharacterProfile profile)
     {
-        var set = profile.Unique != YautjaUniqueSet.None
-            ? YautjaCharacterProfile.GetUniqueDisplayName(profile.Unique)
-            : profile.Legacy != YautjaLegacySet.None
-                ? YautjaCharacterProfile.GetLegacyDisplayName(profile.Legacy)
+        var selection = GetSummarySelection(profile);
+        var set = selection.Unique != YautjaUniqueSet.None
+            ? YautjaCharacterProfile.GetUniqueDisplayName(selection.Unique)
+            : selection.Legacy != YautjaLegacySet.None
+                ? YautjaCharacterProfile.GetLegacyDisplayName(selection.Legacy)
                 : "—";
 
         return new YautjaProfileEditorSummary(
             set,
-            YautjaCharacterProfile.GetArmorStyleDisplayName(profile.ArmorMaterial, profile.ArmorStyle),
-            YautjaCharacterProfile.GetMaskStyleDisplayName(profile.MaskMaterial, profile.MaskStyle),
-            YautjaCharacterProfile.GetGreavesStyleDisplayName(profile.GreavesMaterial, profile.GreavesStyle),
-            YautjaCharacterProfile.GetCapeDisplayName(profile.CapeStyle),
-            YautjaCharacterProfile.GetBracerDisplayName(profile.BracerMaterial),
-            YautjaCharacterProfile.GetCasterDisplayName(profile.CasterMaterial));
+            YautjaCharacterProfile.GetArmorStyleDisplayName(selection.ArmorMaterial, selection.ArmorStyle),
+            YautjaCharacterProfile.GetMaskStyleDisplayName(selection.MaskMaterial, selection.MaskStyle),
+            YautjaCharacterProfile.GetGreavesStyleDisplayName(selection.GreavesMaterial, selection.GreavesStyle),
+            YautjaCharacterProfile.GetCapeDisplayName(selection.CapeStyle),
+            YautjaCharacterProfile.GetBracerDisplayName(selection.BracerMaterial),
+            YautjaCharacterProfile.GetCasterDisplayName(selection.CasterMaterial));
+    }
+
+    public static YautjaProfileEditorSelection GetSummarySelection(YautjaCharacterProfile profile)
+    {
+        return new YautjaProfileEditorSelection(
+            profile.Unique,
+            profile.Legacy,
+            profile.ArmorMaterial,
+            profile.ArmorStyle,
+            profile.MaskMaterial,
+            profile.MaskStyle,
+            profile.GreavesMaterial,
+            profile.GreavesStyle,
+            profile.CapeStyle,
+            profile.BracerMaterial,
+            profile.CasterMaterial);
     }
 
     public static bool IsCategoryActive(
@@ -99,5 +130,10 @@ public static class YautjaProfileEditorLayout
 
         var columns = (int) MathF.Floor((availableWidth + separation) / (cardWidth + separation));
         return Math.Clamp(columns, 1, preferredColumns);
+    }
+
+    public static bool ShouldStackWorkArea(float availableWidth)
+    {
+        return availableWidth < HorizontalWorkAreaMinWidth;
     }
 }

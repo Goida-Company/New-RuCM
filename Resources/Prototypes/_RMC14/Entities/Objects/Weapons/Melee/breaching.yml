@@ -37,6 +37,7 @@
       components:
         - Synth
   - type: RMCSynthItemRestriction
+    denyPopup: rmc-synth-item-too-heavy
   - type: Fixtures
     fixtures:
       fix1:
@@ -48,4 +49,3 @@
         - MobMask
         layer:
         - MobLayer
-    denyPopup: rmc-synth-item-too-heavy
