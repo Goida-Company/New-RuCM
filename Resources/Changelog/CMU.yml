@@ -19166,5 +19166,25 @@
   id: 552
   time: '2026-08-01T14:02:59.0000000+00:00'
   url: https://github.com/flex5hybrid/RussianCM/pull/372
+- author: TheMaiji
+  changes:
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B Yautja-\u043F\
+      \u0440\u043E\u0444\u0438\u043B\u044C, \u0440\u0430\u043D\u0433\u0438, \u043A\
+      \u043B\u0430\u043D\u044B, hunting grounds \u0438 Hunter Ship parity."
+    type: Add
+  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B CMSS13-\u0441\
+      \u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u044B\u0435 \u043C\u0435\u0434\
+      \u0438\u0446\u0438\u043D\u0441\u043A\u0438\u0435, plasma, wall vision \u0438\
+      \ self-destruct \u0441\u0438\u0441\u0442\u0435\u043C\u044B."
+    type: Add
+  - message: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B \u043B\u043E\u043A\
+      \u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F, \u043A\u0430\u0440\u0442\u044B\
+      , \u044D\u043A\u0438\u043F\u0438\u0440\u043E\u0432\u043A\u0430 \u0438 \u0442\
+      \u0435\u0441\u0442\u043E\u0432\u043E\u0435 \u043F\u043E\u043A\u0440\u044B\u0442\
+      \u0438\u0435 Yautja."
+    type: Fix
+  id: 553
+  time: '2026-08-02T11:28:51.0000000+00:00'
+  url: https://github.com/flex5hybrid/RussianCM/pull/368
 Name: CMU
 Order: -1
