@@ -425,11 +425,13 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
         if (hive.Comp.CurrentQueen == queen)
             return true;
 
+        var oldQueen = hive.Comp.CurrentQueen;
+
         hive.Comp.CurrentQueen = queen;
         Dirty(hive);
 
-        var ev = new XenoHiveQueenChangedEvent();
-        RaiseLocalEvent(hive.Owner, ref ev);
+        var ev = new XenoHiveQueenChangedEvent(oldQueen, queen);
+        RaiseLocalEvent(hive.Owner, ev, true);
         return true;
     }
 
@@ -443,6 +445,7 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
 
     private void ClearHiveQueen(Entity<HiveComponent> hive, bool died = false)
     {
+        var oldQueen = hive.Comp.CurrentQueen;
         hive.Comp.CurrentQueen = null;
 
         if (died)
@@ -454,8 +457,8 @@ public abstract partial class SharedXenoHiveSystem : EntitySystem
 
         Dirty(hive);
 
-        var ev = new XenoHiveQueenChangedEvent();
-        RaiseLocalEvent(hive.Owner, ref ev);
+        var ev = new XenoHiveQueenChangedEvent(oldQueen, null);
+        RaiseLocalEvent(hive.Owner, ev, true);
     }
 
     public bool HasHiveCore(Entity<HiveComponent> hive)

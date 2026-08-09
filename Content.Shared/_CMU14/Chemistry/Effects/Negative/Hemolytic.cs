@@ -23,9 +23,12 @@ public sealed partial class Hemolytic : RMCChemicalEffect
     private static readonly ProtoId<EmotePrototype> YawnEmote = "Yawn";
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=red]{PotencyPerSecond * 5}[/color] blood from the bloodstream.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 4}[/color] more blood to be removed from the bloodstream. Also causes gasping and yawning.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] oxygen damage.";
+        // RuMC edit start
+        return Loc.GetString("reagent-effect-guidebook-cmu-hemolytic",
+            ("removed", PotencyPerSecond * 5),
+            ("odRemoved", PotencyPerSecond * 4),
+            ("critOxygen", PotencyPerSecond * 5));
+        // RuMC edit end
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

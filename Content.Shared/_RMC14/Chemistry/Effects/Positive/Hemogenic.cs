@@ -19,14 +19,21 @@ public sealed partial class Hemogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        var baseText = $"Restores [color=green]{PotencyPerSecond}[/color]cl of blood while not hungry.\n" +
-                       $"Causes [color=red]{PotencyPerSecond}[/color] nutrient loss per second.\n" +
-                       $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
-                       $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] additional nutrient loss";
+        // RuMC edit start
+        var baseText = Loc.GetString("reagent-effect-guidebook-rmc-hemogenic",
+            ("restore", PotencyPerSecond),
+            ("loss", PotencyPerSecond),
+            ("odToxin", PotencyPerSecond),
+            ("critLoss", PotencyPerSecond * 5));
 
-        return ActualPotency > 3
-            ? $"Deals [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond * 2}[/color] airloss damage, and slows you down.\n{baseText}"
-            : baseText;
+        if (ActualPotency <= 3)
+            return baseText;
+
+        var prefix = Loc.GetString("reagent-effect-guidebook-rmc-hemogenic-prefix",
+            ("brute", PotencyPerSecond),
+            ("airloss", PotencyPerSecond * 2));
+        return $"{prefix}\n{baseText}";
+        // RuMC edit end
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

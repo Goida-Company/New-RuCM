@@ -14,7 +14,7 @@ public sealed partial class StabilizeTemperature : EntityEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the temperature of the body that it is in to {Stable} degrees, by {Change} degrees at a time";
+        return Loc.GetString("reagent-effect-guidebook-rmc-stabilize-temperature", ("stable", Stable), ("change", Change)); // RuMC edit
     }
 
     public override void Effect(EntityEffectBaseArgs args)

@@ -1,22 +1,35 @@
-ent-RMCL112SniperRifle = L112A2 обозначена стрелковая винтовка
-  .desc = L112A2 DMR — более модульная версия модели A1.
+# Оружие
+ent-RMCL112SniperRifleSuppressed = марксменская винтовка L112A1
+    .desc = Винтовка с интегрированным глушителем для солдат ИТМ. Использует патроны 7,7x56ммR.
+    .suffix = Глушитель
+ent-RMCL112SniperRifleSuppressedSH = {ent-RMCL112SniperRifleSuppressed}
+    .desc = {ent-RMCL112SniperRifleSuppressed.desc}
+    .suffix = Заряжена
 
-ent-RMCL112SniperRifleSuppressed = L112A1 обозначена стрелковой винтовкой
-  .desc = L112A1 DMR, принятый на вооружение Королевской морской пехоты TSE в связи с признанной потребностью в огневой мощи дальнего действия для разведки и секретных операций и разработанный в тандеме с патроном HESH калибра 7,7x56 ммR.
+ent-RMCL112SniperRifle = марксменская винтовка L112A2
+    .desc = Модульная версия винтовки L112A1 для солдат ИТМ. Использует патроны 7,7x56ммR.
+ent-RMCL112SniperRifleSH = {ent-RMCL112SniperRifle}
+    .desc = {ent-RMCL112SniperRifle.desc}
+    .suffix = Заряжена
 
-ent-RMCMagazineSniperL112 = Магазин L112 (7,7х56ммR)
-  .desc = Магазин на 25 патронов с закраиной 7,7х56 мм.
+# Магазины
+ent-RMCMagazineSniperL112 = магазин L112 (7,7x56ммR)
+    .desc = Магазин для винтовок L112 с патронами 7,7x56ммR.
 
-ent-RMCMagazineSniperL112SH = Магазин L112 с плоской головкой (7,7x56 ммR)
-  .desc = Магазин на 25 патронов с плоской головкой 7,7х56 мм.
+ent-RMCMagazineSniperL112SH = магазин L112 ЭКС (7,7x56ммR)
+    .desc = Магазин для винтовок L112 с экспансивными патронами 7,7x56ммR.
 
-ent-RMCCartridgeSniper77x56mmR = патрон (7,7х56ммR)
+# Патроны
+ent-RMCCartridgeSniper77x56mmR = патрон (7,7x56ммR)
+    .desc = Винтовочный патрон калибра 7,7x56ммR.
 
-ent-RMCCartridgeSniper77x56mmRSH = Патрон с плоской головкой (7,7x56 ммR)
+ent-RMCCartridgeSniper77x56mmRSH = патрон ЭКС (7,7x56ммR)
+    .desc = Винтовочный экспансивный патрон калибра 7,7x56ммR.
 
-ent-RMCBulletSniper77x56mmR = пуля (7,7х56ммR)
-  .desc = Если ты это видишь, ты, вероятно, мертв!
+# Пули
+ent-RMCBulletSniper77x56mmR = пуля (7,7x56ммR)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
 
-ent-RMCBulletSniper77x56mmRSH = пуля с плоской головкой (7,7x56 ммR)
-  .desc = Если ты это видишь, ты, вероятно, мертв!
+ent-RMCBulletSniper77x56mmRSH = пуля ЭКС (7,7x56ммR)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
 

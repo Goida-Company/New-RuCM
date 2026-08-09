@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: MiscCenterScreen
-  name: "Misc Announcement"
+  name: rmc-announcement-preset-misc
   target: All
   visibleInSettings: false
   showSprite: false

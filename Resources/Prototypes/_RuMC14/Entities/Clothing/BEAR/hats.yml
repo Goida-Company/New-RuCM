@@ -1,5 +1,5 @@
 - type: entity
-  parent: RMCBoonie
+  parent: RMCHeadCapFlippable
   id: RuMCBEARCapBlack
   name: cap BEAR
   description: Cap for BEAR PMC fighters. Built-in microphone and speaker for tactical communication.
@@ -8,9 +8,15 @@
     sprite: _RuMC14/Clothing/BEAR/hats/cap_black.rsi
   - type: Clothing
     sprite: _RuMC14/Clothing/BEAR/hats/cap_black.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RuMC14/Clothing/BEAR/hats/cap_black.rsi
+  - type: Foldable
+    unfoldVerbText: fold-strap-verb
+    foldVerbText: fold-unstrap-verb
 
 - type: entity
-  parent: RMCBoonie
+  parent: RMCHeadCapFlippable
   id: RuMCBEARCapBrown
   name: cap BEAR
   description: Cap for BEAR PMC fighters. Built-in microphone and speaker for tactical communication.
@@ -19,3 +25,9 @@
     sprite: _RuMC14/Clothing/BEAR/hats/cap_brown.rsi
   - type: Clothing
     sprite: _RuMC14/Clothing/BEAR/hats/cap_brown.rsi
+  - type: ItemCamouflage
+    camouflageVariations:
+      classic: _RuMC14/Clothing/BEAR/hats/cap_brown.rsi
+  - type: Foldable
+    unfoldVerbText: fold-strap-verb
+    foldVerbText: fold-unstrap-verb

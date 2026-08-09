@@ -378,11 +378,15 @@ cmd-options-help = Использование: options [tab]
 
 ui-options-accessability-header-visuals = Визуал
 ui-options-accessability-header-content = Контент
+ui-options-accessability-header-cmu = CMU
 
 ui-options-enable-color-name = Цветные имена персонажей
 ui-options-colorblind-friendly = Режим для дальтоников
 ui-options-reduced-motion = Уменьшить визуальные эффекты
 ui-options-screen-shake-intensity = Интенсивность тряски экрана
+ui-options-explosion-screen-shake-enabled = Тряска экрана от близких взрывов
+ui-options-explosion-screen-shake-ignore-far = Игнорировать взрывы дальше 25 клеток
+ui-options-firearm-screen-shake-enabled = Тряска экрана при стрельбе
 
 ui-options-chat-window-opacity = Непрозрачность окна чата
 ui-options-speech-bubble-text-opacity = Непрозрачность текста облачков речи

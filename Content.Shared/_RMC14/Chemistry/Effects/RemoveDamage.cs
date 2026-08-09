@@ -17,7 +17,7 @@ public sealed partial class RemoveDamage : EntityEffect
         if (!prototype.TryIndex(Group, out var type))
             return null;
 
-        return $"Removes all {type.LocalizedName} damage";
+        return Loc.GetString("reagent-effect-guidebook-rmc-remove-damage", ("group", type.LocalizedName)); // RuMC edit
     }
 
     public override void Effect(EntityEffectBaseArgs args)

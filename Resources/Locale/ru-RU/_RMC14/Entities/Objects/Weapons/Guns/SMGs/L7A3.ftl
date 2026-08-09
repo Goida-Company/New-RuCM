@@ -1,10 +1,16 @@
-ent-RMCWeaponSMGL7A3 = Пистолет-пулемет L7A3
-  .desc = RCM принял вариант пистолета-пулемета M63, модернизированный для улучшения веса, управляемости и точности.
+# Оружие
+ent-RMCWeaponSMGL7A3 = пистолет-пулемёт L7A3
+    .desc = Модернизация ПП M63 для королевских морпехов.
 
-ent-RMCMagazineSMGL7A3SquashHead = Головка для магазина L7A3 (9 мм)
+# Магазины
+ent-RMCMagazineSMGL7A3SquashHead = магазин L7A3 ЭКС (9мм)
+    .desc = Магазин для ПП L7A3 с экспансивными патронами 9мм.
 
-ent-RMCCartridgeSMG9mmSquashHead = 9-мм картридж с плоской головкой
+# Патроны
+ent-RMCCartridgeSMG9mmSquashHead = патрон ЭКС (9мм)
+  .desc = Пистолетный экспансивный патрон калибра 9мм.
 
-ent-RMCBulletSMG9mmSquashHead = 9 ммСквош-ГоловаПуля
-  .desc = Если ты это видишь, ты, вероятно, мертв!
+# Пули
+ent-RMCBulletSMG9mmSquashHead = пуля ЭКС (9мм)
+    .desc = Если ты это видишь, ты, вероятно, мертв!
 

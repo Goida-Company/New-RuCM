@@ -9,7 +9,11 @@
   startingGear: RMCGearProvostResponder
   icon: "CMJobIconEmpty"
   ranks:
-    CMURankProvostFaxResponder: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostFaxResponder:
+      entity: AU14ChevronProvostFaxResponder
+      requirements: []
   joinNotifyCrew: false
   supervisors: cm-job-supervisors-staff
   accessGroups:

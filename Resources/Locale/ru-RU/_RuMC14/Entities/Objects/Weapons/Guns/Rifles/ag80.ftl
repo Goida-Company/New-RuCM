@@ -3,5 +3,5 @@ ent-RuMCMagazineRifleAG80Tracer = магазин АГ80 ТРС (9,7x16мм)
     .suffix = РуМС
 
 ent-RuMCCartridgeRifle97x16mmTracer = патрон ТРС (9,7x16мм)
-    .desc = Трассирующий винтовочный патрон для автомата АГ80.
+    .desc = Трассирующий винтовочный патрон калибра 9,7x16мм для автомата АГ80.
     .suffix = РуМС

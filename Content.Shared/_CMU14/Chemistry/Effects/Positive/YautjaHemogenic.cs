@@ -26,6 +26,6 @@ public sealed partial class Yautjahemogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Restores [color=green]{PotencyPerSecond}[/color]cl of Yautja blood without draining nutrition.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-yautja-hemogenic", ("restore", PotencyPerSecond)); // RuMC edit
     }
 }

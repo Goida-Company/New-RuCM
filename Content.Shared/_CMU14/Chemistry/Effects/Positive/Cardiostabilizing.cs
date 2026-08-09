@@ -23,6 +23,6 @@ public sealed partial class Cardiostabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes the cardiac cycle and reduces pain during shock.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-cardiostabilizing"); // RuMC edit
     }
 }

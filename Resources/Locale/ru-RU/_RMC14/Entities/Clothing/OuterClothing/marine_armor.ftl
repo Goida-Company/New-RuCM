@@ -12,8 +12,24 @@ ent-CMArmorM35 = броня пиротехника M35
   .desc = Кастомный комплект брони M35, разработанный для использования пиротехниками КМП.
 ent-CMArmorM4 = броня морпеха схемы M4
   .desc = Хорошо доработанный и изготовленный гибрид сетки умного стрелка и пластин схемы M3. Прочная, но проворная, с местом для всех ваших подсумков.
-ent-CMArmorM3VLSynth = утилитарный жилет синтетика M3A1
-  .desc = Этот вариант повсеместного жилета схемы M3 был значительно модифицирован, чтобы стать сверхлёгким, обеспечивая нулевую защиту в обмен на максимальную мобильность и дополнительное хранение. Соответствует всем правилам для брони синтетиков.
+
+ent-CMArmorM3VLSynth = утилитарный жилет синтетика КМП
+    .desc = Облечённный вариант жилета специально для синтетиков КМП.
+ent-CMArmorM3VLSynthGray = {ent-CMArmorM3VLSynth} (ОА серый)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthDarkGray = {ent-CMArmorM3VLSynth} (ОА тёмно-серый)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthJungle = {ent-CMArmorM3VLSynth} (Джунгли)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthDesert = {ent-CMArmorM3VLSynth} (Пустыня)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthSnow = {ent-CMArmorM3VLSynth} (Снег)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthClassic = {ent-CMArmorM3VLSynth} (Классика)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+ent-CMArmorM3VLSynthUrban = {ent-CMArmorM3VLSynth} (Городской)
+    .desc = {ent-CMArmorM3VLSynth.desc}
+
 ent-CMArmorM3VLFlakVest = флак-жилет схемы M3-VL
   .desc = Комбинация стандартного небоевого баллистического жилета M3-VL и флак-куртки M70, этот элемент брони был распределён экипажам десантных кораблей, чтобы обезопасить их от угроз внешних и внутренних...
 ent-CMArmorM3VLBallistics = баллистический жилет схемы M3-VL

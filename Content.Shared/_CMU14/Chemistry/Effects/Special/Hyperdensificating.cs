@@ -10,8 +10,6 @@ public sealed partial class Hyperdensificating : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"" +
-               $"Overdoses\n" +
-               $"Critical overdoses";
+        return Loc.GetString("reagent-effect-guidebook-cmu-stub"); // RuMC edit
     }
 }

@@ -34,3 +34,13 @@ rmc-sentry-unanchor-is-on = {CAPITALIZE(THE($sentry))} is currently active. The 
 
 rmc-sentry-not-emergency = {CAPITALIZE(THE($deployer))} can only be activated in emergencies.
 rmc-sentry-deploy = You deploy {THE($spawned)}
+
+rmc-sentry-disassembled-with-wrench = It can be disassembled with a [color=cyan]wrench[/color].
+
+rmc-sentry-faction-set-with-multitool = Use a [color=cyan]multitool[/color] to assign or clear its faction.
+rmc-sentry-faction-dialog-title = Sentry configuration
+rmc-sentry-faction-assign = Assign to my faction
+rmc-sentry-faction-clear = Clear faction assignment
+rmc-sentry-faction-assigned = {CAPITALIZE(THE($sentry))} now belongs to your faction.
+rmc-sentry-faction-cleared = {CAPITALIZE(THE($sentry))}'s faction assignment has been cleared — it will not fire until reassigned.
+rmc-sentry-no-faction-set = {CAPITALIZE(THE($sentry))} doesn't have a faction assigned — use a multitool first to configure it.

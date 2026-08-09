@@ -1,5 +1,5 @@
-ui-options-header-rmc = РМЦ14
-ui-options-header-rmc-xeno = Ксеноморфы
+ui-options-header-rmc = RMC14
+
 ui-options-function-rmc-activate-attachable-barrel = Активировать ствольный модуль
 ui-options-function-rmc-activate-attachable-rail = Активировать направляющую
 ui-options-function-rmc-activate-attachable-stock = Активировать приклад
@@ -14,8 +14,11 @@ ui-options-function-cm-holster-primary = Достать основное
 ui-options-function-cm-holster-secondary = Достать второстепенное
 ui-options-function-cm-holster-tertiary = Достать третичное
 ui-options-function-cm-holster-quaternary = Достать четвертичное
+
+ui-options-header-rmc-xeno = Ксеноморфы
 ui-options-function-cm-xeno-wide-swing = Атака ксеноморфа (размашистая)
+ui-options-function-rmc-xeno-rest = Отдых ксеноморфа
 
-# Missing entries synced from en-US
-
-ui-options-function-rmc-xeno-rest = Ксенонид Отдых
+ui-options-function-smart-equip-uniform = Умная экипировка в форму
+ui-options-function-smart-equip-armor = Умная экипировка в броню
+ui-options-function-smart-equip-helmet = Умная экипировка в шлем

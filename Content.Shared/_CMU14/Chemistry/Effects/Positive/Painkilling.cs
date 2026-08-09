@@ -23,6 +23,6 @@ public sealed partial class Painkilling : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Reduces pain and pain-shock accumulation.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-painkilling"); // RuMC edit
     }
 }

@@ -51,6 +51,8 @@
         crate: AU14CrateGrenadesHighExplosiveUPP
       - cost: 700
         crate: AU14CrateGrenadesIncendiaryUPP
+      - cost: 1500
+        crate: RuMCCrateRG35F #TERMOBAR
       - cost: 5000
         crate: AU14CrateGrenadesSmokeUPP
       - cost: 4000
@@ -243,8 +245,14 @@
         crate: AU14CrateHJRA12
       - cost: 1200
         crate: AU14CrateOG60
+      - cost: 2500
+        crate: RuMCCrateAH12
+      - cost: 2500
+        crate: RuMCCrateVAL
       - cost: 1500
         crate: RuMCCrateRPG_36
+      - cost: 3500
+        crate: RuMCCrateRPG_36_T #TERMOBAR
       - cost: 3000
         crate: RuMCCrateRPO_Pchela
       - cost: 1000
@@ -277,6 +285,8 @@
         crate: AU14CrateHJRA12HERocket
       - cost: 1500
         crate: AU14CrateHJRA12EIIRocket
+      - cost: 2000
+        crate: RuMCCrateRPG_32 #TERMOBAR
       - cost: 400
         crate: AU14CrateMagazineType88
       - cost: 250

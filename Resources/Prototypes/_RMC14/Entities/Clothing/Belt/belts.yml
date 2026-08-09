@@ -1071,6 +1071,34 @@
       amount: 3
     - id: RMCWeaponRevolverSpearhead
 
+# RuMC edit start
+- type: entity
+  parent: RMCBeltHolsterRevolver
+  id: RMCBeltHolsterRevolverBlack
+  name: black M276 pattern general revolver holster rig
+  description: The M276 is the standard load-bearing equipment of the USCM. It consists of a modular belt with various clips. This version is finished in black, universal and adjustable for different revolvers, along with six small pouches for speedloaders.
+  components:
+  - type: Sprite
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    layers:
+    - state: icon
+    - sprite: _RMC14/Objects/Weapons/Guns/gun_underlays.rsi
+      state: m44r
+      map: [ "enum.CMHolsterLayers.Fill" ]
+      visible: false
+    - sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+      state: icon-front
+    - state: half
+      map: [ "openLayer" ]
+    - state: full
+      map: [ "closedLayer" ]
+  - type: Clothing
+    sprite: _RMC14/Objects/Clothing/Belt/holster_spearhead.rsi
+    slots:
+    - suitStorage
+    - belt
+# RuMC edit end
+
 - type: entity
   parent: RMCBeltHolsterRevolver
   id: RMCBeltHolsterRevolverZHNK72Fill

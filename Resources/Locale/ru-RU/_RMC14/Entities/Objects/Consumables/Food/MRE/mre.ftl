@@ -1,6 +1,13 @@
 ent-RMCBoxMREEmpty = коробка ИРП (x12)
     .desc = Коробка с ИРП. Питательно, но невкусно.
 
+ent-AU14BoxMREUPPEmpty = коробка ИРП СПН (x12)
+    .desc = Коробка с наборами продовольствия для бойцов Родины.
+
+ent-AU14BoxMREUPP = {ent-AU14BoxMREUPPEmpty}
+    .desc = {ent-AU14BoxMREUPPEmpty.desc}
+    .suffix = Заполненная
+
 ent-CMMREComponentBase = компонент ИРП
     .desc = Упаковка из Индивидуального Рациона Питания, собственность Морской Пехоты.
 

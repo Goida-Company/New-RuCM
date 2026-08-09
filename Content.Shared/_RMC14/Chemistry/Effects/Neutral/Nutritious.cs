@@ -12,7 +12,7 @@ public sealed partial class Nutritious : RMCChemicalEffect
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
         var updatedFactor = NutrimentFactor + ActualPotency;
-        return $"Restores [color=green]{updatedFactor * ActualPotency}[/color] nutrients to the body and satiates hunger";
+        return Loc.GetString("reagent-effect-guidebook-rmc-nutritious", ("amount", updatedFactor * ActualPotency)); // RuMC edit
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

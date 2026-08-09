@@ -1,75 +1,78 @@
-ent-RMCWeaponRifleL90A1 = Пехотный карабин Л90А1
-  .desc = Пехотный карабин L90A1.
+# Оружие
+ent-RMCWeaponRifleL90A1 = пехотный карабин L90A1
+    .desc = Стандартный пехотный карабин ИТМ. Использует патроны 7x43мм.
+ent-RMCWeaponRifleL90A1Filled = {ent-RMCWeaponRifleL90A1}
+    .desc = {ent-RMCWeaponRifleL90A1.desc}
+    .suffix = Заряжен
+ent-RMCWeaponRifleL90A1FilledSemiStripped = {ent-RMCWeaponRifleL90A1}
+    .desc = {ent-RMCWeaponRifleL90A1.desc}
+    .suffix = Без гранатомёта
 
-ent-RMCWeaponRifleL90A2 = Пехотный карабин Л90А2
-  .desc = Пехотный карабин L90A2.
+ent-RMCWeaponRifleL90A2 = пехотный карабин L90A2
+    .desc = Модернизированный пехотный карабин ИТМ. Использует патроны 7x43мм.
+ent-RMCWeaponRifleL90A2Filled = {ent-RMCWeaponRifleL90A2}
+    .desc = {ent-RMCWeaponRifleL90A2.desc}
+    .suffix = Заряжен
+ent-RMCWeaponRifleL90A2FilledSemiStripped = {ent-RMCWeaponRifleL90A2}
+    .desc = {ent-RMCWeaponRifleL90A2.desc}
+    .suffix = Без гранатомёта
+ent-RMCWeaponRifleL90A2Breacher = {ent-RMCWeaponRifleL90A2}
+    .desc = {ent-RMCWeaponRifleL90A2.desc}
+    .suffix = Штурмовой
 
 ent-RMCWeaponRifleL91SWS = L91 СВС
-  .desc = Система вспомогательного оружия L91 имеет значительно более длинный и тяжелый ствол, чем L90.
+    .desc = Модификация L90 с более тяжёлым стволом и сошками. Использует патроны 7x43мм.
+ent-RMCWeaponRifleL91SWSFilled = {ent-RMCWeaponRifleL91SWS}
+    .desc = {ent-RMCWeaponRifleL91SWS.desc}
+    .suffix = Заряжен
 
-ent-RMCMagazineRifleL90 = Магазин L90 (7х43мм)
-  .desc = Магазин на патроны 7х43 мм для винтовок модели L90.
+# Магазины
+ent-RMCMagazineRifleL90 = магазин L90 (7x43мм)
+    .desc = Магазин для винтовок L90 c патронами 7x43мм.
 
-ent-RMCMagazineRifleL90Drum = Барабанный магазин L90 (7х43 мм)
-  .desc = Барабанный магазин на патроны 7х43 мм для винтовок модели L90.
+ent-RMCMagazineRifleL90AP = магазин L90 ББ (7x43 мм)
+    .desc = Магазин для винтовок L90 c бронебойными патронами 7x43мм.
 
-ent-RMCMagazineRifleL90AP = Магазин L90 AP (7х43 мм)
-  .desc = Магазин бронебойных патронов 7х43 мм для использования в винтовках модели Л90.
+ent-RMCMagazineRifleL90HEAP = магазин L90 БФ (7x43 мм)
+    .desc = Магазин для винтовок L90 c бронебойно-фугасными патронами 7x43мм.
 
-ent-RMCMagazineRifleL90DrumAP = Барабанный магазин L90 AP (7х43 мм)
-  .desc = Барабанный магазин с бронебойными патронами 7х43 мм для использования в винтовках модели Л90.
+ent-RMCMagazineRifleL90Incendiary = магазин L90 ЗЖГ (7x43мм)
+    .desc = Магазин для винтовок L90 c зажигательными патронами 7x43мм.
 
-ent-RMCMagazineRifleL90HEAP = Магазин L90 HEAP (7х43 мм)
-  .desc = Магазин с патронами HEAP 7x43 мм для использования в винтовках модели L90.
+ent-RMCMagazineRifleL90Drum = барабанный магазин L90 (7x43 мм)
+    .desc = Барабанный магазин для винтовок L90 c патронами 7x43мм.
 
-ent-RMCMagazineRifleL90DrumHEAP = Барабанный магазин L90 HEAP (7х43 мм)
-  .desc = Барабанный магазин на патроны HEAP 7x43 мм для использования в винтовках модели L90.
+ent-RMCMagazineRifleL90DrumAP = барабанный магазин L90 ББ (7x43 мм)
+    .desc = Барабанный магазин для винтовок L90 c бронебойными патронами 7х43мм.
 
-ent-RMCMagazineRifleL90Incendiary = Зажигательный магазин Л90 (7х43мм)
-  .desc = Магазин с зажигательными патронами 7х43 мм для использования в винтовках модели L90.
+ent-RMCMagazineRifleL90DrumHEAP = барабанный магазин L90 БФ (7x43 мм)
+    .desc = Барабанный магазин для винтовок L90 c бронебойно-фугасными патронами 7x43мм.
 
-ent-RMCMagazineRifleL90DrumIncendiary = Магазин зажигательный барабанный Л90 (7х43мм)
-  .desc = Барабанный магазин с зажигательными патронами 7х43 мм для использования в винтовках модели L90.
+ent-RMCMagazineRifleL90DrumIncendiary = барабанный магазин L90 ЗЖГ (7x43мм)
+    .desc = Барабанный магазин для винтовок L90 c зажигательными патронами 7x43мм.
 
-ent-RMCCartridgeRifleL90 = патрон (7х43мм)
-  .desc = Винтовочный патрон 7х43 мм, предназначенный для винтовок модели L90.
+# Патроны
+ent-RMCCartridgeRifleL90 = патрон (7x43мм)
+    .desc = Винтовочный патрон 7x43 мм для винтовок модели L90.
 
-ent-RMCCartridgeRifleL90AP = AP-патрон (7х43 мм)
-  .desc = Винтовочный патрон 7х43 мм, предназначенный для винтовок модели L90.
+ent-RMCCartridgeRifleL90AP = патрон ББ (7x43 мм)
+    .desc = Бронебойный винтовочный патрон 7x43 мм для винтовок модели L90.
 
-ent-RMCCartridgeRifleL90HEAP = HEAP-картридж (7х43 мм)
-  .desc = Винтовочный патрон HEAP 7х43 мм, предназначенный для винтовок модели L90.
+ent-RMCCartridgeRifleL90HEAP = патрон БФ (7x43 мм)
+    .desc = Бронебойно-фугасный винтовочный патрон 7x43 мм для винтовок модели L90.
 
-ent-RMCCartridgeRifleL90Incendiary = зажигательный патрон (7х43мм)
-  .desc = Винтовочно-зажигательный патрон 7х43 мм, предназначенный для винтовок модели L90.
+ent-RMCCartridgeRifleL90Incendiary = патрон ЗЖГ (7x43мм)
+    .desc = Зажигательный винтовочный патрон 7x43 мм для винтовок модели L90.
 
-ent-RMCWeaponRifleL90A1Filled = Пехотный карабин Л90А1
-  .desc = Пехотный карабин L90A1. 
+# Пули
+ent-BulletRifle7x43mm = пуля (7x43мм)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
 
-ent-RMCWeaponRifleL90A1FilledSemiStripped = Пехотный карабин Л90А1
-  .desc = Пехотный карабин L90A1. 
+ent-BulletRifle7x43mmAP = пуля ББ (7x43мм)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
 
-ent-RMCWeaponRifleL90A2Filled = Пехотный карабин Л90А2
-  .desc = Пехотный карабин L90A2. 
+ent-BulletRifle7x43mmHEAP = пуля БФ (7x43мм)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
 
-ent-RMCWeaponRifleL90A2FilledSemiStripped = Пехотный карабин Л90А2
-  .desc = Пехотный карабин L90A2. 
-
-ent-RMCWeaponRifleL90A2Breacher = Пехотный карабин Л90А2
-  .desc = Пехотный карабин L90A2. 
-
-ent-RMCWeaponRifleL91SWSFilled = L91 СВС
-  .desc = Система вспомогательного оружия L91 имеет значительно более длинный и тяжелый ствол, чем L90. 
-
-ent-BulletRifle7x43mm = БазаBullet
-  .desc = Если ты это видишь, ты, вероятно, мертв!
-
-ent-BulletRifle7x43mmAP = БазаBullet
-  .desc = Если ты это видишь, ты, вероятно, мертв!
-
-ent-BulletRifle7x43mmHEAP = БазаBullet
-  .desc = Если ты это видишь, ты, вероятно, мертв!
-
-ent-BulletRifle7x43mmIncendiary = БазаBullet
-  .desc = Если ты это видишь, ты, вероятно, мертв!
-
+ent-BulletRifle7x43mmIncendiary = пуля ЗЖГ (7x43мм)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!

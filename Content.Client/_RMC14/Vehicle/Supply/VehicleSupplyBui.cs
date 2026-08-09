@@ -64,7 +64,9 @@ public sealed class VehicleSupplyBui : BoundUserInterface
             return;
 
         // RuMC edit start
-        var modeText = state.LiftMode?.ToString() ?? Loc.GetString("rmc-vehicle-supply-ui-no-lift");
+        var modeText = state.LiftMode is { } liftMode
+            ? Loc.GetString($"rmc-vehicle-supply-lift-mode-{liftMode}")
+            : Loc.GetString("rmc-vehicle-supply-ui-no-lift");
         var activeText = string.IsNullOrWhiteSpace(state.ActiveVehicleId)
             ? Loc.GetString("rmc-vehicle-supply-ui-none")
             : state.ActiveVehicleId;

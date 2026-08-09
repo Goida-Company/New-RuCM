@@ -30,6 +30,7 @@ using Content.Shared.Cargo.Components;
 using Content.Shared.Chasm;
 using Content.Shared.Coordinates;
 using Content.Shared.Database;
+using Content.Shared.Ghost; // RuMC edit
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
@@ -545,6 +546,11 @@ public sealed partial class RequisitionsSystem : SharedRequisitionsSystem
         {
             if (entity == elevator.Comp.Audio)
                 continue;
+
+            // RuMC edit start
+            if (HasComp<GhostComponent>(entity))
+                continue;
+            // RuMC edit end
 
             // Instead of blacklist, we use a whitelist to selectively control generated funds from selling
             // if (HasComp<CargoSellBlacklistComponent>(entity))

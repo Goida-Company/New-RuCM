@@ -75,8 +75,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: flashlight-on
-    actionName: Toggle Rail Flashlight
-    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+    actionName: rmc-attachable-action-name-toggle-rail-flashlight
+    actionDesc: rmc-attachable-action-desc-toggle-light-module
   - type: AttachableVisuals
     showActive: true
   - type: AttachableToggleableSimpleActivate
@@ -227,8 +227,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: sniperscope
-    actionName: Look through Scope
-    actionDesc: Scope in. If you're seeing this, someone forgot to set the description properly.
+    actionName: rmc-attachable-action-name-look-through-scope-default
+    actionDesc: rmc-attachable-action-desc-scope-default
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     requireWielding: true
@@ -254,8 +254,8 @@
     - RMCAttachmentS84xTelescopicScope
   - type: AttachableVisuals
   - type: AttachableToggleable
-    actionName: Look through the S8 4x Telescopic Scope
-    actionDesc: An AEGIS S8 telescopic eye piece. Fixed at 4x zoom.
+    actionName: rmc-attachable-action-name-s8-4x-scope
+    actionDesc: rmc-attachable-action-desc-s8-4x-scope
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -305,8 +305,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: slavicscope
-    actionName: Look through the 4x Telescopic Scope
-    actionDesc: A slavic scope. Fixed at 4x zoom.
+    actionName: rmc-attachable-action-name-slavic-scope
+    actionDesc: rmc-attachable-action-desc-slavic-scope
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -326,8 +326,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope
-    actionName: Look through the S4 2x Telescopic Mini-Scope
-    actionDesc: An AEGIS S4 telescoping eye piece. Fixed at a modest 2x zoom.
+    actionName: rmc-attachable-action-name-s4-2x-miniscope
+    actionDesc: rmc-attachable-action-desc-s4-2x-miniscope
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -376,8 +376,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope_fp9000
-    actionName: Look through the FP9000 2x telescopic mini-scope
-    actionDesc: Fixed at a modest 2x zoom.
+    actionName: rmc-attachable-action-name-fp9000-scope
+    actionDesc: rmc-attachable-action-desc-fixed-2x-zoom
   - type: AttachableToggleableSimpleActivate
 
 - type: entity
@@ -409,8 +409,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: miniscope-nsg23
-    actionName: Look through WeYa S4 2x Advanced Telescopic Mini-Scope
-    actionDesc: An AEGIS S4 telescoping eye piece, custom-tuned by WeYa scientists to be as ergonomic as possible.
+    actionName: rmc-attachable-action-name-weya-s4-2x-scope
+    actionDesc: rmc-attachable-action-desc-weya-s4-2x-scope
   - type: Scope
     zoomLevels:
     - zoom: 1
@@ -438,8 +438,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
-    actionName: Look through 2x Hunting Mini-Scope
-    actionDesc: This civilian-grade scope is a common sight on hunting rifles due to its cheap price and great optics. Fixed at a modest 2x zoom.
+    actionName: rmc-attachable-action-name-hunting-miniscope
+    actionDesc: rmc-attachable-action-desc-hunting-miniscope
 
 - type: entity
   parent: RMCAttachmentS42xTelescopicMiniscope
@@ -458,8 +458,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: huntingscope
-    actionName: Look through B8 Smart-Scope
-    actionDesc: Lets you see further and prevents firing when friendlies are in your line of fire.
+    actionName: rmc-attachable-action-name-b8-smart-scope
+    actionDesc: rmc-attachable-action-desc-scope-see-further-iff
   - type: AttachableIFF
     preventFriendlyFire: true
   - type: AttachableWeaponRangedMods
@@ -491,8 +491,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: m96s-scope
-    actionName: Look through M96S Integrated Scope
-    actionDesc: Lets you see further.
+    actionName: rmc-attachable-action-name-m96s-scope
+    actionDesc: rmc-attachable-action-desc-scope-see-further
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -540,8 +540,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: xm43e1_scope
-    actionName: Look through the XM43E1's Integrated Scope
-    actionDesc: Lets you see further.
+    actionName: rmc-attachable-action-name-xm43e1-scope
+    actionDesc: rmc-attachable-action-desc-scope-see-further
 
 - type: entity
   parent: RMCM96SIntegratedScope
@@ -559,8 +559,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: type88_scope
-    actionName: Look through the Type 88's Integrated Scope
-    actionDesc: Lets you see further.
+    actionName: rmc-attachable-action-name-type88-scope
+    actionDesc: rmc-attachable-action-desc-scope-see-further
 
 - type: entity
   parent: RMCM96SIntegratedScope
@@ -580,8 +580,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
       state: l112_scope
-    actionName: Look through the L112 Integrated Scope
-    actionDesc: Lets you see further.
+    actionName: rmc-attachable-action-name-l112-scope
+    actionDesc: rmc-attachable-action-desc-scope-see-further
 
 - type: entity
   parent: RMCAttachmentScopeBase
@@ -602,8 +602,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: d_boomslang-scope
-    actionName: Look through the XS-9 Scope
-    actionDesc: A mostly disabled XS-9, it still functions as a scope though.
+    actionName: rmc-attachable-action-name-xs9-scope
+    actionDesc: rmc-attachable-action-desc-xs9-scope
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -656,8 +656,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
       state: sasos
-    actionName: Look through SASOS
-    actionDesc: Lets you see further and shoot through your fellow marines without harming them.
+    actionName: rmc-attachable-action-name-sasos
+    actionDesc: rmc-attachable-action-desc-sasos
   - type: AttachableToggleableSimpleActivate
   - type: Scope
     zoomLevels:
@@ -700,8 +700,8 @@
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rail.rsi
       state: collisight
-    actionName: Look through collimator sight
-    actionDesc: Lets you see further and rain down explosives on the enemy without hitting your fellow Marines.
+    actionName: rmc-attachable-action-name-collimator-sight
+    actionDesc: rmc-attachable-action-desc-collimator-sight
   - type: Scope
     zoomLevels:
     - zoom: 1

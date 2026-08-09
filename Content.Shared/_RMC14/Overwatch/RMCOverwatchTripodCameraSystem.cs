@@ -50,7 +50,19 @@ public sealed class RMCOverwatchTripodCameraSystem : EntitySystem
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, ExaminedEvent>(OnExamined);
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, AttackedEvent>(OnAttacked);
         SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, CombatModeShouldHandInteractEvent>(OnCombatModeShouldHandInteract);
+        SubscribeLocalEvent<RMCOverwatchTripodCameraComponent, MapInitEvent>(OnMapInit); // RuMC edit
     }
+
+    // RuMC edit start
+    private void OnMapInit(Entity<RMCOverwatchTripodCameraComponent> ent, ref MapInitEvent args)
+    {
+        if (ent.Comp.Label == "Field Camera Tripod")
+        {
+            ent.Comp.Label = Loc.GetString("rmc-overwatch-tripod-camera-default-label");
+            Dirty(ent);
+        }
+    }
+    // RuMC edit end
 
     private void OnUseInHand(Entity<RMCOverwatchTripodCameraComponent> ent, ref UseInHandEvent args)
     {

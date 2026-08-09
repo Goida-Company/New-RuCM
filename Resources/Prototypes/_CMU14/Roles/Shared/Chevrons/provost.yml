@@ -1,0 +1,225 @@
+### Base
+- type: entity
+  parent: RMCArmbandBase
+  id: AU14ChevronProvostBase
+  abstract: true
+  suffix: Provost Rank Chevron
+  description: Military policing rank insignia. Serve the Lex. Enforce the Lex.
+
+### Enforcers
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostEnforcer
+  name: provost enforcer chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_nco
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_nco
+  - type: RankChanger
+    rank: CMURankProvostProvostEnforcer
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostTeamLeader
+  name: provost team leader chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_nco
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_nco
+  - type: RankChanger
+    rank: CMURankProvostProvostTeamLeader
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostAdvisor
+  name: provost advisor chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_snco
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_snco
+  - type: RankChanger
+    rank: CMURankProvostAdvisor
+    override: true
+
+### Specialists
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostCommSpec
+  name: provost communications specialist chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostSpcComms
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostSpecAgent
+  name: provost special agent chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostSpcAgent
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostMedicalSpec
+  name: provost medical specialist chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostSpcMedical
+    override: true
+
+### Fax Responder
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostFaxResponder
+  name: provost communications officer chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostFaxResponder
+    override: true
+
+### Inspection
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostInspector
+  name: provost inspector chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostInspector
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostChiefInspector
+  name: provost chief inspector chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostChiefInspector
+    override: true
+
+### The Marshalls arriwed
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostDeputyMarshall
+  name: provost deputy marshall chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_pvstofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_pvstofficer
+  - type: RankChanger
+    rank: CMURankProvostDeputyMarshal
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostMarshall
+  name: provost marshall chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_flagofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_flagofficer
+  - type: RankChanger
+    rank: CMURankProvostMarshal
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostMarshallSenior
+  name: provost senior marshall chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_flagofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_flagofficer
+  - type: RankChanger
+    rank: CMURankProvostSeniorMarshal
+    override: true
+
+- type: entity
+  parent: AU14ChevronProvostBase
+  id: AU14ChevronProvostMarshallSectorial
+  name: provost sectorial marshall chevron
+  components:
+  - type: Sprite
+    sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+    state: ranks_flagofficer
+  - type: UniformAccessory
+    playerSprite:
+      sprite: _AU14/Clothing/Accessory/Chevrons/universal.rsi
+      state: equipped-ranks_flagofficer
+  - type: RankChanger
+    rank: CMURankProvostSectorMarshal
+    override: true

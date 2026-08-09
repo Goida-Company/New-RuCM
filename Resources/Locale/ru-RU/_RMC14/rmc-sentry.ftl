@@ -72,4 +72,4 @@ rmc-sentry-faction-assign = Назначить моей фракции
 rmc-sentry-faction-clear = Очистить назначение фракции
 rmc-sentry-faction-assigned = {CAPITALIZE($sentry)} теперь принадлежит вашей фракции.
 rmc-sentry-faction-cleared = Назначение фракции {CAPITALIZE($sentry)} очищено — не будет стрелять, пока не будет переназначено.
-rmc-sentry-no-faction-set = {CAPITALIZE($sentry)} не назначена фракция — сначала используйте [color=cyan]мультитул[/color], чтобы настроить ее.
+rmc-sentry-no-faction-set = {CAPITALIZE($sentry)} не назначена фракция — сначала используйте мультитул, чтобы настроить её.

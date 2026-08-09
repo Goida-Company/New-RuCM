@@ -30,7 +30,7 @@ ent-RMCJumpsuitMarinePara = полевая форма королевского �
 
 ent-RMCJumpsuitMarineParaL88 = {ent-RMCJumpsuitMarinePara}
     .desc = {ent-RMCJumpsuitMarinePara.desc}
-    .suffix = Л88
+    .suffix = L88
 
 ent-RMCJumpsuitMarineParaPDW90 = {ent-RMCJumpsuitMarinePara}
     .desc = {ent-RMCJumpsuitMarinePara.desc}

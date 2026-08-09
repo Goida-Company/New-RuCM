@@ -159,8 +159,8 @@
     wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
-    actionName: Switch to the M203A4 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
+    actionName: rmc-attachable-action-name-m203a4-ugl
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-grenade-launcher
     icon:
       sprite: _AU14/Weapons/Guns/Attachments/hazops_under.rsi
       state: grenade

@@ -207,6 +207,7 @@ public sealed partial class RMCMagneticSystem : EntitySystem
         AddComp(args.Entity, new RMCMagneticItemComponent
         {
             MagnetizeToSlots = SlotFlags.NONE,
+            NeedsMagneticField = true, // RuMC edit
         }, true);
         AddComp(args.Entity, new RMCSlingPouchItemComponent
         {

@@ -26,5 +26,5 @@ rmc-job-name-spp-responder = Офицер связи СПН
 rmc-job-description-spp-responder = "Вы представляете Региональное командование СПН и отвечаете на адресованные ему факсы."
 rmc-job-name-tse-responder = Офицер связи ИТМ
 rmc-job-description-tse-responder = "Вы представляете Региональное командование ИТМ и отвечаете на адресованные ему факсы."
-rmc-job-name-cmb-responder = Офицер связи БКМ
+rmc-job-name-cmb-responder = Диспетчер БКМ
 rmc-job-description-cmb-responder = "Вы — диспетчер местного отделения БКМ. Отвечайте на факсы соответственно ситуации."

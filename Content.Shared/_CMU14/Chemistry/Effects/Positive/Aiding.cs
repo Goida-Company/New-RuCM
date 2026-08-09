@@ -21,6 +21,6 @@ public sealed partial class Aiding : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes reversible medical disabilities.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-aiding"); // RuMC edit
     }
 }

@@ -25,7 +25,7 @@ ent-RMCAttachmentRecoilCompensator = компенсатор отдачи
 ent-RMCAttachmentBarrelCharger = ствольный ускоритель
     .desc = Гиперпоточный удлинитель ствола, подходящий к дульному срезу большинства огнестрельных видов оружия. Значительно увеличивает урон снаряда ценой скорости стрельбы.
 
-ent-RMCAttachmentBarrelMar50 = ствол МАР-50
+ent-RMCAttachmentBarrelMar50 = ствол MAR-50
     .desc = Тяжёлый ствол лёгкого пулемёта.
 
 ent-RMCAttachmentExtendedBarrel = удлинённый ствол

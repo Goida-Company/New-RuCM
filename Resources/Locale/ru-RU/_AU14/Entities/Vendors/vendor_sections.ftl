@@ -149,6 +149,7 @@ au14-vendor-section-rto-packs = Рюкзаки-рации
 au14-vendor-section-materials = Материалы
 au14-vendor-section-tents = Палатки
 au14-vendor-section-flag = Флаг
+au14-vendor-section-melee-weapons = Холодное оружие
 
 au14-vendor-section-pump-shothun = Помповый дробовик
 au14-vendor-section-tactical-shothun = Тактический дробовик

@@ -33,6 +33,7 @@
     - AU14JobCivilianEthicsAndWellnessAdvisor
     - AU14JobThirdPartyLeader # There is no specific role for third-party medics, so they all get access.
     - AU14JobThirdPartyMember # There is no specific role for third-party medics, so they all get access.
+    - AU14JobCivilianColonySynthetic # RuMC edit
     hackable: true
     sections:
     - name: au14-vendor-section-general-medical-supplies
@@ -205,6 +206,7 @@
     - AU14JobCivilianEthicsAndWellnessAdvisor
     - AU14JobThirdPartyLeader # There is no specific role for third-party medics, so they all get access.
     - AU14JobThirdPartyMember # There is no specific role for third-party medics, so they all get access.
+    - AU14JobCivilianColonySynthetic # RuMC edit
     hackable: true
     sections:
     - name: au14-vendor-section-blood-packs

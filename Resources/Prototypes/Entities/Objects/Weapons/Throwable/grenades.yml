@@ -382,6 +382,11 @@
   name: cleanade
   description: Special grenade for janitors, releasing large cloud of space cleaner foam.
   components:
+  # RuMC edit start
+  - type: Tag
+    tags:
+    - USSBushGrenadeRestrictionExempt
+  # RuMC edit end
   - type: Sprite
     sprite: Objects/Weapons/Grenades/janitor.rsi
   - type: SmokeOnTrigger

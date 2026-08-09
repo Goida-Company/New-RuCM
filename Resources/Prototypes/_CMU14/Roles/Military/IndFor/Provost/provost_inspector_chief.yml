@@ -10,7 +10,11 @@
   whitelisted: true
   whitelistParent: RMCWhitelistHard
   ranks:
-    CMURankProvostChiefInspector: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostChiefInspector:
+      entity: AU14ChevronProvostChiefInspector
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

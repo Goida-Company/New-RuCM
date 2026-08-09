@@ -8,7 +8,11 @@
   playTimeTracker: CMJobProvostSpcMedic
   spawnMenuRoleName: Provost Spc Medic
   ranks:
-    CMURankProvostSpcMedical: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostSpcMedical:
+      entity: AU14ChevronProvostMedicalSpec
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

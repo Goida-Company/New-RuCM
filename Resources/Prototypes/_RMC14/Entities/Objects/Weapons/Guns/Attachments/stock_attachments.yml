@@ -33,7 +33,7 @@
   - type: AttachableToggleable
     activatePopupText: attachable-popup-activate-unfold
     deactivatePopupText: attachable-popup-deactivate-collapse
-    actionDesc: Extend the stock.
+    actionDesc: rmc-attachable-action-desc-extend-stock
   - type: AttachableWieldDelayMods
     modifiers: []
   - type: Appearance
@@ -107,7 +107,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m42a2_stocks/desert.rsi
       state: stock-on
-    actionName: Toggle M42A2 Collapsible Stock
+    actionName: rmc-attachable-action-name-m42a2-stock
   - type: AttachableSizeMods
     modifiers:
       - size: 1
@@ -509,7 +509,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/desert.rsi
       state: m54c-col-on
-    actionName: Toggle M41A Folding Stock
+    actionName: rmc-attachable-action-name-m41a-stock
   - type: AttachableSizeMods
     modifiers:
       - size: 1
@@ -581,7 +581,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/urban.rsi
       state: m54c-col-on
-    actionName: Toggle M41A/2 Folding Stock
+    actionName: rmc-attachable-action-name-m41a2-stock
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -607,7 +607,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
       state: m54c-col-on
-    actionName: Toggle M54C Folding Stock
+    actionName: rmc-attachable-action-name-m54c-stock
 
 - type: entity
   parent: RMCStockAttachmentCollapsibleBase
@@ -631,7 +631,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m13_folding_stocks/desert.rsi
       state: stock-on
-    actionName: Toggle M13 Folding Stock
+    actionName: rmc-attachable-action-name-m13-stock
   - type: AttachableSpeedMods
     modifiers:
     - conditions:
@@ -749,7 +749,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: m16-folding-on
-    actionName: Toggle Collapsible M16 Stock
+    actionName: rmc-attachable-action-name-m16-stock
   - type: Tag
     tags:
     - RMCAttachmentStock
@@ -832,7 +832,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smgstockcol-on
-    actionName: Toggle Submachinegun Folding Stock
+    actionName: rmc-attachable-action-name-smg-stock
   - type: AttachableSizeMods
     modifiers:
     - conditions:
@@ -889,7 +889,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: mp5_stock-on
-    actionName: Toggle Submachinegun Folding Stock
+    actionName: rmc-attachable-action-name-smg-stock
   - type: AttachableSizeMods
     modifiers:
     - conditions:
@@ -950,8 +950,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: smg-brace-on
-    actionName: Toggle Submachinegun Arm Brace
-    actionDesc: Lock the arm brace to your arm.
+    actionName: rmc-attachable-action-name-smg-arm-brace
+    actionDesc: rmc-attachable-action-desc-lock-arm-brace
   - type: AttachablePreventDropToggleable
   - type: AttachableSizeMods
     modifiers:
@@ -998,7 +998,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/stock.rsi
       state: 44stock-on
-    actionName: Toggle M44 Magnum Sharpshooter Stock
+    actionName: rmc-attachable-action-name-m44-stock
   - type: AttachableSizeMods
     modifiers:
     - size: 1
@@ -1218,7 +1218,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: ak4047_stock-on
-    actionName: Toggle AK-4047 Folding Stock
+    actionName: rmc-attachable-action-name-ak4047-stock
   - type: Tag
     tags:
     - RMCAttachmentStock

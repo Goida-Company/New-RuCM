@@ -2,7 +2,7 @@
   parent: CMJobBase
   id: AU14FORECONSynth
   whitelisted: true
-  whitelistParent: CMUJobSyntheticWhitelist
+  whitelistParent: RMCWhitelistMedium # RuMC edit
   isSynthetic: true
   roundSide: ThirdParty
   roundForce: FORECON
@@ -114,6 +114,7 @@
   components:
   - type: Threat
   - type: GhostTakeoverAvailable
+  - type: GhostRoleDespawn # RuMC edit
   - type: GhostRoleApplySpecial
     squad: SquadFORECON
   - type: GhostRole

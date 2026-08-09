@@ -1,3 +1,6 @@
+cmu-zombie-summoner-ghost-name = Zombie Summoner
+cmu-zombie-summoner-ghost-description = Regenerate points and spend them to summon zombies.
+
 cmu-zombie-summoner-title = Summon Zombies
 cmu-zombie-summoner-points = Points: {$points}/{$max}
 cmu-zombie-summoner-controlled = Controlled: {$count}/{$max}

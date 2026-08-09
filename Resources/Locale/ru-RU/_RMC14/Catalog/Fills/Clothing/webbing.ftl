@@ -53,7 +53,7 @@ ent-RMCWebbingSurgicalRCMFilled = {ent-RMCWebbingSurgicalRCM}
 
 ent-RMCWebbingHolsterBlackB92FS = {ent-RMCWebbingHolsterBlack}
     .desc = {ent-RMCWebbingHolsterBlack.desc}
-    .suffix = Заполнена, Б92ФС
+    .suffix = Заполнена, B92FS
 ent-RMCWebbingHolsterBlackM1984 = {ent-RMCWebbingHolsterBlack}
     .desc = {ent-RMCWebbingHolsterBlack.desc}
     .suffix = Заполнена, M1984

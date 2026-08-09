@@ -774,8 +774,8 @@ public sealed partial class AttachableToggleableSystem : EntitySystem
         if (exists)
             return;
 
-        _metaDataSystem.SetEntityName(actionId, ent.Comp.ActionName);
-        _metaDataSystem.SetEntityDescription(actionId, ent.Comp.ActionDesc);
+        _metaDataSystem.SetEntityName(actionId, Loc.GetString(ent.Comp.ActionName)); // RuMC edit
+        _metaDataSystem.SetEntityDescription(actionId, Loc.GetString(ent.Comp.ActionDesc)); // RuMC edit
 
         if (_actionsSystem.GetAction(actionId) is { } action)
         {

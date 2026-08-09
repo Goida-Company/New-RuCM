@@ -12,7 +12,7 @@ ent-RMCGunRackLPO80IncineratorFilled = {ent-RMCGunRackLPO80IncineratorEmpty}
     .desc = {ent-RMCGunRackLPO80IncineratorEmpty.desc}
     .suffix = Заполнена
 
-ent-RMCGunRackMAR50WallEmpty = стойка для пулемёта МАР-50
+ent-RMCGunRackMAR50WallEmpty = стойка для пулемёта MAR-50
     .desc = Стойка для лёгкого пулемёта.
     .suffix = Пустая
 ent-RMCGunRackMAR50WallFilled = {ent-RMCGunRackMAR50WallEmpty}

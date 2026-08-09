@@ -92,6 +92,7 @@
   name: Prodigy Yankee Support Synthetic (AU14, 3rd Party)
   components:
   - type: GhostTakeoverAvailable
+  - type: GhostRoleDespawn # RuMC edit
   - type: GhostRoleApplySpecial
     squad: SquadPARTY
   - type: GhostRole

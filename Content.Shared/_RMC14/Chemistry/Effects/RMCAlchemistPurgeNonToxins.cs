@@ -45,6 +45,6 @@ public sealed partial class RMCAlchemistPurgeNonToxins : EntityEffect
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Purges [color=red]{Amount}[/color] units of matching non-toxin chemicals per second.";
+        return Loc.GetString("reagent-effect-guidebook-rmc-alchemist-purge", ("amount", Amount)); // RuMC edit
     }
 }

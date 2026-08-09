@@ -59,13 +59,13 @@ public sealed partial class MutinySystem : SharedMutinySystem
         {
             Verb mutineer = new()
             {
-                Text = "Make mutineer",
+                Text = Loc.GetString("rmc-mutiny-verb-make-mutineer"), // RuMC edit
                 Category = VerbCategory.Antag,
                 Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/cm_job_icons.rsi"),
                     "hudmutineer"),
                 Act = () => { EnsureComp<MutineerComponent>(args.Target); },
                 Impact = LogImpact.High,
-                Message = "Make mutineer",
+                Message = Loc.GetString("rmc-mutiny-verb-make-mutineer"), // RuMC edit
             };
             args.Verbs.Add(mutineer);
         }
@@ -74,14 +74,14 @@ public sealed partial class MutinySystem : SharedMutinySystem
         {
             Verb leader = new()
             {
-                Text = "Make mutineer leader",
+                Text = Loc.GetString("rmc-mutiny-verb-make-mutineer-leader"), // RuMC edit
                 Category = VerbCategory.Antag,
                 // Use the regular mutineer icon for the admin verb until a unique leader icon exists
                 Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/_RMC14/Interface/cm_job_icons.rsi"),
                     "hudmutineerleader"),
                 Act = () => { EnsureComp<MutineerLeaderComponent>(args.Target); },
                 Impact = LogImpact.High,
-                Message = "Make mutineer leader",
+                Message = Loc.GetString("rmc-mutiny-verb-make-mutineer-leader"), // RuMC edit
             };
             args.Verbs.Add(leader);
         }

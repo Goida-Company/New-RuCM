@@ -31,7 +31,7 @@ rmc-overwatch-console-max-coordinates = Максимум 3 сохранённы�
 rmc-overwatch-console-fire = Огонь
 rmc-overwatch-console-confirm-fire = Подтвердить огневую задачу?
 rmc-overwatch-console-disabled-select-squad = ОВЕРВОТЧ ОТКЛЮЧЁН - ВЫБЕРИТЕ ОТРЯД
-rmc-overwatch-console-dashboard = Овервотч { $squadName } | Панель
+rmc-overwatch-console-dashboard = Овервотч {$squadName} | Панель
 rmc-overwatch-console-role-none = Нет
 rmc-overwatch-console-hide-marine = Скрыть морпеха
 rmc-overwatch-console-show-marine = Показать морпеха
@@ -48,7 +48,7 @@ rmc-overwatch-console-none = НЕТ
 rmc-overwatch-console-deployed = ВЫСАЖЕН
 rmc-overwatch-console-total-living = Всего/живых
 rmc-overwatch-console-total = ВСЕГО
-rmc-overwatch-console-operator = Оператор - { $operator }
+rmc-overwatch-console-operator = Оператор - {$operator}
 rmc-overwatch-console-shown-planetside = Показаны: на планете
 rmc-overwatch-console-shown-shipside = Показаны: на корабле
 rmc-overwatch-console-show-hidden = Показать скрытых
@@ -61,7 +61,7 @@ rmc-overwatch-console-no-crate-loaded = [color=red][bold][ ЯЩИК НЕ ЗАГ�
 rmc-overwatch-console-crate-loaded = [color=green][bold][ ЯЩИК ЗАГРУЖЕН ][/bold][/color]
 rmc-overwatch-console-ready = [color=green][bold][ ГОТОВО ][/bold][/color]
 rmc-overwatch-console-not-ready = [color=red][bold][ НЕ ГОТОВО ][/bold][/color]
-rmc-overwatch-console-cooldown = [color=#D3B400][bold][ ПЕРЕЗАРЯДКА - { $seconds } СЕК. ][/bold][/color]
+rmc-overwatch-console-cooldown = [color=#D3B400][bold][ ПЕРЕЗАРЯДКА - {$seconds} СЕК. ][/bold][/color]
 rmc-overwatch-console-no-warhead-loaded = [color=red][bold]Боеголовка не загружена[/bold][/color]
 
 # Transfer messages
@@ -69,12 +69,12 @@ rmc-overwatch-console-squad-selection = Выбор отряда
 rmc-overwatch-console-choose-marine-squad = Выберите новый отряд морпеха
 rmc-overwatch-console-cant-transfer-squad = Нельзя перевести морпеха в этот отряд!
 rmc-overwatch-console-marine-kia = Этот морпех погиб в бою.
-rmc-overwatch-console-marine-is-kia = { $marineName } погиб в бою.
-rmc-overwatch-console-transfer-aborted-squad-leader = Перевод отменён. В { $squadName } не может быть ещё одного командира отряда.
-rmc-overwatch-console-marine-already-in-squad = { $marineName } уже состоит в { $squadName }!
-rmc-overwatch-console-transfer-aborted-job = Перевод отменён. В { $squadName } не может быть ещё одного { $jobName }.
-rmc-overwatch-console-marine-transferred = { $marineName } переведён из отряда '{ $oldSquad }' в отряд '{ $newSquad }'. Запись внесена в личное дело.
-rmc-overwatch-console-you-transferred = Вас перевели в { $squadName }!
+rmc-overwatch-console-marine-is-kia = {$marineName} погиб в бою.
+rmc-overwatch-console-transfer-aborted-squad-leader = Перевод отменён. В {$squadName} не может быть ещё одного командира отряда.
+rmc-overwatch-console-marine-already-in-squad = {$marineName} уже состоит в {$squadName}!
+rmc-overwatch-console-transfer-aborted-job = Перевод отменён. В {$squadName} не может быть ещё одного {$jobName}.
+rmc-overwatch-console-marine-transferred = {$marineName} переведён из отряда '{$oldSquad}' в отряд '{$newSquad}'. Запись внесена в личное дело.
+rmc-overwatch-console-you-transferred = Вас перевели в {$squadName}!
 rmc-overwatch-console-transfer-marine-title = Перевод морпеха
 rmc-overwatch-console-choose-marine-transfer = Выберите морпеха для перевода
 
@@ -82,15 +82,15 @@ rmc-overwatch-console-choose-marine-transfer = Выберите морпеха �
 rmc-overwatch-console-pain-kicked-out = Боль выбила вас из консоли!
 
 # Squad message announcements
-rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Овервотч:[/bold] { $operatorName } передаёт: [font size=16][bold]{ $message }[/bold][/font][/color]
-rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]Сообщение отряду '{ $squadName }' отправлено: '{ $message }'.[/color][/bold]
+rmc-overwatch-console-announce-message = [color=#3C70FF][bold]Овервотч:[/bold] {$operatorName} передаёт: [font size=16][bold]{$message}[/bold][/font][/color]
+rmc-overwatch-console-squad-message-sent = [bold][color=#6685F5]Сообщение отряду '{$squadName}' отправлено: '{$message}'.[/color][/bold]
 
 # Squad leader promotion messages
-rmc-overwatch-console-marine-unfit-to-lead = { $marineName } не годится для командования!
-rmc-overwatch-console-marine-is-kia-exclamation = { $marineName } погиб в бою!
-rmc-overwatch-console-promoted-to-leader = Овервотч: вас назначили 'ВРИО КОМАНДИРА ОТРЯДА'{ $squadStr }. Ваша гарнитура получила доступ к командному каналу.
-rmc-overwatch-console-new-squad-leader-announce = Внимание: назначен новый командир отряда: { $leaderName }
-rmc-overwatch-console-new-squad-leader-popup = { $leaderName } теперь командует отрядом { $squadName }!
+rmc-overwatch-console-marine-unfit-to-lead = { $marineName} не годится для командования!
+rmc-overwatch-console-marine-is-kia-exclamation = {$marineName} погиб в бою!
+rmc-overwatch-console-promoted-to-leader = Овервотч: вас назначили 'ВРИО КОМАНДИРА ОТРЯДА'{$squadStr}. Ваша гарнитура получила доступ к командному каналу.
+rmc-overwatch-console-new-squad-leader-announce = Внимание: назначен новый командир отряда: {$leaderName}
+rmc-overwatch-console-new-squad-leader-popup = {$leaderName} теперь командует отрядом {$squadName}!
 
 # Squad objectives
 rmc-overwatch-console-objective-primary = [bold]Основная цель[/bold]
@@ -98,9 +98,27 @@ rmc-overwatch-console-objective-secondary = [bold]Вторичная цель[/b
 rmc-overwatch-console-objective-placeholder = Введите текст цели...
 rmc-overwatch-console-objective-update = Обновить
 rmc-overwatch-console-objective-cancel = Отменить
-rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Овервотч:[/bold] { $operatorName } [bold]обновил[/bold] { $objectiveType } отряда: [font size=16][bold]{ $objective }[/bold][/font][/color]
-rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Овервотч:[/bold] { $operatorName } [bold]отменил[/bold] { $objectiveType } отряда: [font size=16][bold]{ $objective }[/bold][/font][/color]
-rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{ $squadName }' обновил { $objectiveType }: '{ $objective }'.[/color][/bold]
-rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{ $squadName }' отменил { $objectiveType } '{ $objective }'.[/color][/bold]
+rmc-overwatch-console-announce-objective-updated = [color=#50ECA3][bold]Овервотч:[/bold] {$operatorName} [bold]обновил[/bold] {$objectiveType} отряда: [font size=16][bold]{$objective}[/bold][/font][/color]
+rmc-overwatch-console-announce-objective-cancelled = [color=#50ECA3][bold]Овервотч:[/bold] {$operatorName} [bold]отменил[/bold] {$objectiveType} отряда: [font size=16][bold]{$objective}[/bold][/font][/color]
+rmc-overwatch-console-objective-updated = [bold][color=#7FFFD4]'{$squadName}' обновил {$objectiveType}: '{$objective}'.[/color][/bold]
+rmc-overwatch-console-objective-cancelled = [bold][color=#7FFFD4]'{$squadName}' отменил {$objectiveType} '{$objective}'.[/color][/bold]
 rmc-overwatch-console-objectives = Цели вашего отряда:
-    { $objectives }
+    {$objectives}
+
+# Полевая камера
+rmc-overwatch-tripod-camera-default-label = полевая камера на треноге
+rmc-overwatch-tripod-camera-role = Камера на треноге
+rmc-overwatch-tripod-camera-active = Активна
+rmc-overwatch-tripod-camera-rename = Переименовать
+rmc-overwatch-tripod-camera-deploy = Развернуть
+rmc-overwatch-tripod-camera-pick-up = Поднять
+rmc-overwatch-tripod-camera-rename-prompt = Введите новое название для полевой камеры.
+rmc-overwatch-tripod-camera-renamed = Камера переименована в {$name}.
+rmc-overwatch-tripod-camera-deployed = Вы разворачиваете полевую камеру на треноге.
+rmc-overwatch-tripod-camera-picked-up = Вы поднимаете полевую камеру на треноге.
+rmc-overwatch-tripod-camera-invalid-location = Для установки полевой камеры на треноге нужен свободный участок пола.
+rmc-overwatch-tripod-camera-active-hand = Полевую камеру на треноге нужно держать в активной руке.
+rmc-overwatch-tripod-camera-collapsed = Полевая камера на треноге складывается.
+rmc-overwatch-tripod-camera-destroyed = Полевая камера на треноге уничтожена.
+rmc-overwatch-tripod-camera-examine-label = Надпись гласит: [color=cyan]{$label}[/color].
+rmc-overwatch-tripod-camera-examine-squad = В данный момент закреплена за отрядом: [color=cyan]{$squad}[/color].

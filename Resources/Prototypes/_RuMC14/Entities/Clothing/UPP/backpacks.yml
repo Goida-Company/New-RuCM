@@ -1,6 +1,6 @@
 - type: entity
-  parent: [RuMCUPPNavalInfantryBackpack1]
-  id: RuMCBackpackLightSPN
+  parent: [RuMCUPPNavalInfantryBackpack]
+  id: RuMCUPPNavalInfantryBackpackMedical
   name: UPP lightweight backpack
   description: Compact and lightweight backpack with an external strap. Perfect for quick raids. Has straps for a first aid kit.
   components:
@@ -37,7 +37,7 @@
 
 - type: entity
   parent: CMSatchel
-  id: RuMCUPPNavalInfantryBackpack1
+  id: RuMCUPPNavalInfantryBackpack
   name: UPP lightweight backpack
   description: My back hurts, my legs are tired, but at least I don't have to crawl to a dead enemy to get more ammunition. I have everything I need with me.
   components:
@@ -62,3 +62,12 @@
     maxItemSize: Large
     grid:
     - 0,0,24,1
+
+- type: entity
+  parent: CMSatchel
+  id: RuMCUPPNavalInfantrySatchel
+  name: UPP assault satchel
+  description: My back hurts, my legs are tired, but at least I don't have to crawl to a dead enemy to get more ammunition. I have everything I need with me.
+  components:
+  - type: Sprite
+    sprite: _RuMC14/Clothing/UPP/satchel/standard.rsi

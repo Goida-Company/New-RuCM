@@ -363,7 +363,7 @@ public sealed partial class BarricadeSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb
         {
-            Text = "Disassemble",
+            Text = Loc.GetString("rmc-entrenching-hesco-verb-disassemble"), // RuMC edit
             Act = () =>
             {
                 if (ent.Comp.Progress <= 0)

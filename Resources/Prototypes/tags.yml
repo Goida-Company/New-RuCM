@@ -1436,6 +1436,11 @@
 - type: Tag
   id: UraniumGlassShard
 
+# RuMC edit start
+- type: Tag
+  id: USSBushGrenadeRestrictionExempt
+# RuMC edit end
+
 - type: Tag
   id: UtilityBelt
 

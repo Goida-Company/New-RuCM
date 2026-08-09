@@ -16,4 +16,9 @@ rmc-vendor-points-token-wrong-vendor = {CAPITALIZE(THE($token))} does not fit in
 
 rmc-vendor-section-take-all = (TAKE ALL)
 rmc-vendor-section-take-one = (TAKE ONE)
-rmc-vendor-section-choose = (CHOOSE { $amount })
+rmc-vendor-section-choose = (CHOOSE {$amount})
+
+rmc-vendor-entry-mandatory = Mandatory: {$name}
+rmc-vendor-entry-recommended = Recommended: {$name}
+rmc-vendor-win-points = {$faction} Win Points: {$points}
+rmc-vendor-points-remaining = Points Remaining: {$points}

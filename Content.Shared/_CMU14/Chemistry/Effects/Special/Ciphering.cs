@@ -20,8 +20,7 @@ public sealed partial class Ciphering : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Does not have any known effects.\n" +
-               $"Does not have any known overdose effects.\n"; //fancy schmancy way of saying it doesn't have one
+        return Loc.GetString("reagent-effect-guidebook-cmu-ciphering"); // RuMC edit
     }
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)
     {

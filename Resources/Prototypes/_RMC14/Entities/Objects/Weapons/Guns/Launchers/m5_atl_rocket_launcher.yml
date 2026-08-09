@@ -83,6 +83,11 @@
   - type: Corrodible
     isCorrodible: false
   - type: RMCMagneticItem
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - CMUPathogenWalker
 
 - type: entity
   parent: [RMCBaseWeaponLauncher, RMCBaseAttachableHolder]
@@ -115,6 +120,11 @@
   - type: Corrodible
     isCorrodible: false
   - type: RMCMagneticItem
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - CMUPathogenWalker
 
 # 84mm HE
 - type: entity
@@ -128,7 +138,7 @@
     - RMCRocketAmmo84mm
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mm
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -154,7 +164,7 @@
     - CMURocketAmmo70mm
   - type: CartridgeAmmo
     proto: CMUProjectileRocket70mmHE
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/emblr.rsi
     layers:
@@ -325,7 +335,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -344,7 +354,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/emblr.rsi
     layers:
@@ -443,7 +453,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmWhitePhosphorus
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/m5spec.rsi
     layers:
@@ -462,7 +472,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmWhitePhosphorus
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/emblr.rsi
     layers:

@@ -4,7 +4,7 @@ ent-AUWeaponRifleM20A = импульсная винтовка M20a
 ent-AU14MagazineRifleM20A = магазин M20a (10x24 мм)
 
 ent-AU14CartridgeRifleM20A = патрон (10x24 мм)
-    .desc = Винтовочный патрон 10x24 мм.
+    .desc = Винтовочный патрон калибра 10x24 мм.
 
 ent-AU14BulletRifleM20A = пуля
     .desc = Если ты это видишь, ты, вероятно, мёртв!

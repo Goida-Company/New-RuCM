@@ -320,7 +320,7 @@
     iconActive:
       sprite: _AU14/Weapons/Guns/Attachments/upp_attachments.rsi
       state: ag80-col-on
-    actionName: Toggle AG80 Folding Stock
+    actionName: rmc-attachable-action-name-ag80-stock
   - type: AttachableSizeMods
     modifiers:
       - size: 1
@@ -430,8 +430,8 @@
     wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
-    actionName: Switch to the GP-45 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
+    actionName: rmc-attachable-action-name-gp45-ugl
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-grenade-launcher
     icon:
       sprite: _AU14/Weapons/Guns/Attachments/upp_attachments.rsi
       state: grenade-ag80

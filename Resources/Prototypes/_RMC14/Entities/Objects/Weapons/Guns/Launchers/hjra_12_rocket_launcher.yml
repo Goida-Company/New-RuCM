@@ -72,6 +72,11 @@
     rsi:
       sprite: _RMC14/Interface/MousePointer/explosive_mouse.rsi
       state: all
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - CMUPathogenWalker
 
 - type: entity
   id: RMCRocketHJRA12AT
@@ -84,7 +89,7 @@
     - RMCProjectileRocketHJRA12
   - type: CartridgeAmmo
     proto: RMCProjectileRocketHJRA12AT
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
@@ -109,7 +114,7 @@
     - RMCProjectileRocketHJRA12
   - type: CartridgeAmmo
     proto: RMCProjectileRocketHJRA12HE
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
@@ -134,7 +139,7 @@
     - RMCProjectileRocketHJRA12
   - type: CartridgeAmmo
     proto: RMCProjectileRocketHJRA12Incen
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
@@ -159,7 +164,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mmAntiArmor
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:
@@ -176,7 +181,7 @@
   components:
   - type: CartridgeAmmo
     proto: RMCProjectileRocket84mm
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
   - type: Sprite
     sprite: _RMC14/Objects/Weapons/Guns/Ammunition/Explosives/hjra.rsi
     layers:

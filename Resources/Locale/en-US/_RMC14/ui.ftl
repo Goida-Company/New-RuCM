@@ -127,6 +127,16 @@ rmc-ui-options-night-vision-color-yellow = Yellow
 rmc-ui-options-night-vision-color-red = Red
 rmc-ui-options-night-vision-color-blue = Blue
 
+rmc-announcement-preset-marine-command = Marine Command
+rmc-announcement-preset-marine-overwatch = Marine Overwatch
+rmc-announcement-preset-marine-command-default = Marine Command (Default)
+rmc-announcement-preset-marine-command-simplified = Marine Command (Simplified)
+rmc-announcement-preset-unknown-broadcast = Unknown Broadcast
+rmc-announcement-preset-evacuation-alert = Evacuation Alert
+rmc-announcement-preset-red-alert = Red Alert
+rmc-announcement-preset-xeno-queen = Xeno Queen
+rmc-announcement-preset-misc = Misc Announcement
+
 rmc-dialog-input-placeholder-default = Enter text
 rmc-dialog-input-placeholder-smart-check = More than 3 consecutive spaces will be trimmed
 

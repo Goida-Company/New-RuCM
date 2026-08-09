@@ -11,7 +11,7 @@ public sealed partial class RMCAlchemistPain : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Increases pain by [color=red]{PotencyPerSecond}[/color] per second.";
+        return Loc.GetString("reagent-effect-guidebook-rmc-alchemist-pain", ("amount", PotencyPerSecond)); // RuMC edit
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

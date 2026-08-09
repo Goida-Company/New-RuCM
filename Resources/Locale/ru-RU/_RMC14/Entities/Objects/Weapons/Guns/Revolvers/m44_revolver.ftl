@@ -1,14 +1,29 @@
-ent-RMCBulletRevolver44Marksman = пуля (.44 Снайперская)
-ent-CMBulletRevolver44 = пуля (.44)
-ent-RMCCartridgeRevolver44Marksman = патрон (.44)
-ent-RMCCartridgeRevolver44 = патрон (.44)
-ent-RMCSpeedLoader44Marksman = Снайперский спидлоадер М44 (.44)
-  .desc = Устройство для ускоренной зарядки револьвера, снаряженное снайперскими патронами.
-ent-RMCSpeedLoaderM44 = Спидлоадер М44 (.44)
-  .desc = Устройство для ускоренной зарядки револьвера.
-ent-RMCBaseSpeedLoader44 = Спидлоадер М44 (.44)
-ent-RMCWeaponRevolverM44 = боевой револьвер М44
-  .desc = Массивный револьвер, который иногда носят штурмовые подразделения и офицеры в Корпусе Морской Пехоты, а также сотрудники гражданских правоохранительных органов. Использует патроны .44 Magnum.
+# Оружие
+ent-RMCWeaponRevolverM44 = боевой револьвер M44
+    .desc = Массивный револьвер для офицеров КМП. Использует патроны .44 Магнум
+ent-RMCWeaponRevolverM44Empty = {ent-RMCWeaponRevolverM44}
+    .desc = {ent-RMCWeaponRevolverM44.desc}
 
-ent-RMCWeaponRevolverM44Empty = боевой револьвер М44
-  .desc = Массивный револьвер, который иногда носят штурмовые подразделения и офицеры в Корпусе Морской Пехоты, а также сотрудники гражданских правоохранительных органов. Использует патроны .44 Magnum.
+# Пули
+ent-RMCBulletRevolver44Marksman = пуля СНП(.44)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
+
+ent-CMBulletRevolver44 = пуля (.44)
+    .desc = Если ты это видишь, ты, вероятно, мёртв!
+
+# Патроны
+ent-RMCCartridgeRevolver44Marksman = патрон СНП(.44)
+    .desc = Снайперский револьверный патрон калибра .44.
+
+ent-RMCCartridgeRevolver44 = патрон (.44)
+    .desc = Револьверный патрон калибра .44.
+
+# Спидлоадеры
+ent-RMCSpeedLoader44Marksman = спидлоадер M44 СНП(.44)
+    .desc = Устройство для быстрой перезарядки револьвера, снаряженное снайперскими патронами.
+
+ent-RMCSpeedLoaderM44 = спидлоадер M44 (.44)
+    .desc = Устройство для быстрой перезарядки револьвера.
+
+ent-RMCBaseSpeedLoader44 = спидлоадер M44 (.44)
+

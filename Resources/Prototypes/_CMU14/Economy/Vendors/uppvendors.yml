@@ -90,14 +90,14 @@
         amount: 40
     - name: au14-vendor-section-backpack
       entries:
-      - id: RuMCBackpackLightSPN
+      - id: RuMCUPPNavalInfantrySatchel
         amount: 80
-      - id: RuMCUPPNavalInfantryBackpack1
-        amount: 30
-      - id: RuMCUPPNavalInfantryBackpackBig
+      - id: RuMCUPPNavalInfantryBackpack
         amount: 20
-      - id: RMCSatchelSPPWelder
-        amount: 5
+      - id: RuMCUPPNavalInfantryBackpackMedical
+        amount: 10
+      - id: RuMCUPPNavalInfantryBackpackBig
+        amount: 10
       - id: RMCScabbardShotgun
         amount: 3
       - id: RMCBackpackAmmo
@@ -547,7 +547,7 @@
     - name: au14-vendor-section-backpack
       choices: { CMUPlatoonAirCrewBackpack: 1 }
       entries:
-      - id: RuMCUPPNavalInfantryBackpack1
+      - id: RuMCUPPNavalInfantrySatchel
     - name: au14-vendor-section-belts
       choices: { CMUPlatoonAirCrewBelts: 1 }
       entries:
@@ -996,12 +996,27 @@
       takeOne: SquadSpecKit
       sharedSpecLimit: 1
       entries:
+      - id: RuMCMachineGunTachankaCase
+        giveSquadRoleName: au14-job-name-govforspecialist-pointmanUPP
+        givePrefix: au14-job-prefix-govforspecialist-pointmanUPP
+        isAppendSquadRoleName: false
+        isAppendPrefix: true
+      - id: RuMCGunAH12Case
+        giveSquadRoleName: au14-job-name-govforspecialist-pointmanUPP
+        givePrefix: au14-job-prefix-govforspecialist-pointmanUPP
+        isAppendSquadRoleName: false
+        isAppendPrefix: true
       - id: CMUType23ShotgunCase
         giveSquadRoleName: au14-job-name-govforspecialist-pointmanUPP
         givePrefix: au14-job-prefix-govforspecialist-pointmanUPP
         isAppendSquadRoleName: false
         isAppendPrefix: true
       - id: CMUDemoSpecEquipmentCaseUPP
+        giveSquadRoleName: au14-job-name-govforspecialist-heavyantitankUPP
+        givePrefix: au14-job-prefix-govforspecialist-heavyantitankUPP
+        isAppendSquadRoleName: false
+        isAppendPrefix: true
+      - id: RuMCKitUPPHATRPG32
         giveSquadRoleName: au14-job-name-govforspecialist-heavyantitankUPP
         givePrefix: au14-job-prefix-govforspecialist-heavyantitankUPP
         isAppendSquadRoleName: false
@@ -1067,10 +1082,13 @@
       choices:  { CMHandheldDefense : 1 }
       entries:
       - id: AU14CaseSentry
-      - id: AU14CaseSentryMini
-      - id: AU14CaseSentrySniper
+      - id: AU14CaseSentryFlamer
       - id: RMCM271A2BruteLauncherRigFilled
-    - name: au14-vendor-section-engineer-uniform
+    - name: Sentry Gun Upgrade Kit
+      entries:
+      - id: RMCEngineeringUpgrade
+        points: 10
+    - name: Engineer Uniform
       choices: { CMUPlatoonMedicalUniform: 1 }
       entries:
       - id: AU14JumpsuitEngiUPP
@@ -1210,7 +1228,7 @@
     - name: au14-vendor-section-backpack
       choices: { CMBackpack: 1 }
       entries:
-      - id: RuMCUPPNavalInfantryBackpack1
+      - id: RuMCUPPNavalInfantrySatchel
       - id: CMSatchelSecurity
     - name: au14-vendor-section-pouches
       choices: { RMCPouch: 2 }
@@ -1281,9 +1299,7 @@
         amount: 3
       - id: RMCWeaponShotgunType23
         amount: 3
-      - id: RuMCMachineGunTachankaCase
-        amount: 1
-      - id: RuMCGunAH12Case
+      - id: RuMCGunAH12Case_alt
         amount: 1
       - id: RuMCUTES-CCase
         amount: 1
@@ -1330,13 +1346,9 @@
       - id: RMCMagazineSMGType64
         amount: 200
       - id: RuMCMagazineTachanka
-        amount: 25
+        amount: 5
       - id: RuMCMagazineTracerTachanka
-        amount: 25
-      - id: RuMCMagazineTachankaLarge
-        amount: 1
-      - id: RuMCMagazineTachankaLargeTracer
-        amount: 1
+        amount: 5
     - name: au14-vendor-section-secondary-ammunition
       entries:
       - id: RMCMagazinePistolT73

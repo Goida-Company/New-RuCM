@@ -10,7 +10,7 @@ public sealed partial class CureDrugAllergyReaction : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Cures an ongoing allergic reaction, if any.";
+        return Loc.GetString("cmu-medical-cure-drug-allergy-guidebook"); // RuMC edit
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

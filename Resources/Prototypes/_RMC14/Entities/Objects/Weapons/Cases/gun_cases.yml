@@ -223,6 +223,32 @@
     - id: RMCSpeedLoaderRsh9
       amount: 6
 
+# RuMC edit start
+# Spearhead autorevolver
+- type: entity
+  parent: RMCGunCaseBase
+  id: RMCGunCaseRevolverSpearhead
+  name: Spearhead autorevolver case
+  description: A gun case containing a loaded CMB Spearhead autorevolver, two hollowpoint speed loaders, and four speed loaders.
+  components:
+  - type: Storage
+    maxItemSize: Huge
+    grid:
+    - 0,0,15,1
+    whitelist:
+      tags:
+      - RMCWeaponRevolverSpearhead
+      - RMCSpeedLoader357
+      - RMCSpeedLoader357Hollowpoint
+  - type: StorageFill
+    contents:
+    - id: RMCWeaponRevolverSpearhead
+    - id: RMCSpeedLoader357Hollowpoint
+      amount: 2
+    - id: RMCSpeedLoader357
+      amount: 4
+# RuMC edit end
+
 # HG-45 'Aguila' pistol
 - type: entity
   parent: RMCGunCaseBase

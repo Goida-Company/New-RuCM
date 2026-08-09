@@ -20,8 +20,8 @@
   - type: AttachableToggleable
     attachedOnly: true
     userOnly: true
-    actionName: Switch
-    actionDesc: Engage the switch, dumping the magazine as fast as the action cycles.
+    actionName: rmc-attachable-action-name-au14-switch
+    actionDesc: rmc-attachable-action-desc-au14-switch
     activatePopupText: au14-switch-on
     deactivatePopupText: au14-switch-off
   - type: AttachableWeaponRangedMods

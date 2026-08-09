@@ -1,5 +1,5 @@
-ent-RMCBoxSmallBase = пакет
+ent-RMCBoxSmallBase = базовая малая коробка
 
-ent-RMCBoxClaymoreMineFilled = Ящик для мины М20
-  .desc = Защищенный ящик с пятью противопехотными минами М20.
+ent-RMCBoxClaymoreMineFilled = коробка мин M20
+  .desc = Защищенный ящик с пятью противопехотными минами M20.
 

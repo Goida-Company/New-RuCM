@@ -403,7 +403,7 @@
   components:
   - type: CartridgeAmmo
     proto: VehicleProjectileRocket84mmAntiArmor
-    deleteOnSpawn: false
+    deleteOnSpawn: true # RuMC edit
 
 - type: entity
   parent: RMCProjectileRocket84mm

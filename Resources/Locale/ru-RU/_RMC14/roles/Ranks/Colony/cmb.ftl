@@ -1,5 +1,5 @@
-rank-RMCRankCMBDeputy = Заместитель БКМ
-  .prefix = Зам. БКМ
+rank-RMCRankCMBDeputy = Диспетчер БКМ
+  .prefix = Дисп. БКМ
 
 rank-RMCRankCMBMarshal = Маршал БКМ
   .prefix = Марш. БКМ

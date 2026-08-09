@@ -18,7 +18,7 @@ ent-RMCPouchMagazineFilledKT42 = подсумок для магазинов
 
 ent-RMCPouchMagazineFilledMAR40Ext = подсумок для магазинов
     .desc = Он может содержать магазины.
-    .suffix = МАР-40
+    .suffix = MAR-40
 
 ent-RMCPouchMagazineLargeMP5 = большой подсумок для магазинов
   .desc = Он может содержать много магазинов.

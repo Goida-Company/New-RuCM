@@ -228,13 +228,26 @@ public sealed partial class GridVehicleMoverSystem : EntitySystem
                 return false;
 
             ent.Comp.SyncedGrid = null;
-            ent.Comp.CurrentSpeed = 0f;
             ent.Comp.PushDirection = Vector2i.Zero;
             ent.Comp.IsCommittedToMove = false;
             ent.Comp.IsPushMove = false;
-            ent.Comp.IsMoving = false;
             _hardState[uid] = true;
             _movementAccumulator[uid] = 0f;
+
+            // RuMC edit start
+            if (HasComp<CMUVehicleZTraversalComponent>(uid))
+            {
+                WakeVehicleZPhysics(uid);
+            }
+
+            var preserveUngroundedFallMotion = ShouldPreserveVehicleZFallMotion(uid);
+            if (!preserveUngroundedFallMotion)
+            {
+                ent.Comp.CurrentSpeed = 0f;
+            }
+            ent.Comp.IsMoving = preserveUngroundedFallMotion && MathF.Abs(ent.Comp.CurrentSpeed) > MinVehicleSpeed;
+            // RuMC edit end
+
             Dirty(uid, ent.Comp);
             return true;
         }

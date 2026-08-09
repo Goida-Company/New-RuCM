@@ -11,6 +11,7 @@ public sealed partial class USSBushGrenadeRestrictionSystem : EntitySystem
 {
     private static readonly ProtoId<TagPrototype> GrenadeTag = "Grenade";
     private static readonly ProtoId<TagPrototype> HandGrenadeTag = "HandGrenade";
+    private static readonly ProtoId<TagPrototype> ExemptTag = "USSBushGrenadeRestrictionExempt"; // RuMC edit
     private const string USSBushGridName = "USSBush";
     private const string USSBushDisplayName = "USS George W. Bush";
 
@@ -46,6 +47,11 @@ public sealed partial class USSBushGrenadeRestrictionSystem : EntitySystem
 
     private bool IsGrenade(EntityUid uid)
     {
+        // RuMC edit start
+        if (_tag.HasTag(uid, ExemptTag))
+            return false;
+        // RuMC edit end
+
         return _tag.HasTag(uid, GrenadeTag) || _tag.HasTag(uid, HandGrenadeTag);
     }
 

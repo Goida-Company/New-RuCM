@@ -29,6 +29,6 @@ public sealed partial class Neuropeutic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Heals damaged brain tissue.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-neuropeutic"); // RuMC edit
     }
 }

@@ -27,7 +27,7 @@
 
 - type: entity
   parent: RMCGunCaseBase
-  id: RuMCMachineGunTachankaCase
+  id: RuMCMachineGunTachankaCase_alt
   name: Tachanka machine gun case
   description: Case for the Tachanka LMG.
   components:
@@ -49,9 +49,64 @@
 
 - type: entity
   parent: RMCGunCaseBase
+  id: RuMCMachineGunTachankaCase
+  name: Tachanka machine gun case
+  description: Case for the Tachanka LMG.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,7
+    whitelist:
+      tags:
+      - RuMCMachineGunTachanka
+      - RuMCMagazineTachanka
+      - RuMCMagazineTachankaLarge
+      - RuMCMagazineTachankaLargeTracer
+      - RuMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RuMCMachineGunTachanka
+    - id: RuMCUPPNavalInfantryBeltMachinegunner
+    - id: RuMCUPPNavalInfantryHeavyHelmet2
+    - id: RuMCUPPPouchDrum
+      amount: 2
+    - id: RuMCMagazineTachankaLarge
+      amount: 12
+    - id: RuMCMagazineTachankaLargeTracer
+      amount: 2
+
+- type: entity
+  parent: RMCGunCaseBase
   id: RuMCGunAH12Case
   name: AH12 gun case
   description: Case for the AH12 rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,7
+  - type: StorageFill
+    contents:
+    - id: RuMCRifleAH12
+    - id: RuMCUPPNavalInfantryBeltMachinegunner
+    - id: RuMCUPPNavalInfantryHeavyHelmet2
+    - id: RuMCUPPPouchDrum
+      amount: 2
+    - id: RuMCMagazineAH12Large
+      amount: 7
+    - id: RuMCMagazineAH12AP
+      amount: 4
+    - id: RuMCMagazineAH12Tracer
+      amount: 2
+    - id: RuMCMagazineAH12JHP
+      amount: 4
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCGunAH12Case_alt
+  name: AH12 gun case
+  description: Case for the AH12 rifle.
+  suffix: (mini)
   components:
   - type: Storage
     grid:
@@ -65,26 +120,161 @@
   - type: StorageFill
     contents:
     - id: RuMCRifleAH12
-    - id: RuMCUPPNavalInfantryBeltMachinegunner
     - id: RuMCUPPPouchDrum
     - id: RuMCMagazineAH12
     - id: RuMCMagazineAH12
     - id: RuMCMagazineAH12
     - id: RuMCMagazineAH12
     - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12
-    - id: RuMCMagazineAH12Large
-    - id: RuMCMagazineAH12AP
-    - id: RuMCMagazineAH12AP
     - id: RuMCMagazineAH12Tracer
     - id: RuMCMagazineAH12Tracer
     - id: RuMCMagazineAH12Tracer
-    - id: RuMCMagazineAH12Tracer
-    - id: RuMCMagazineAH12JHP
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCGunVALCase
+  name: VAL gun case
+  description: Case for the VAL rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,5
+    whitelist:
+      tags:
+      - RuMCRifleVAL
+      - RuMCMagazineVAL
+  - type: StorageFill
+    contents:
+    - id: RuMCRifleVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVALTracer
+    - id: RuMCMagazineVALTracer
+    - id: RuMCMagazineVALTracer
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+    - id: RuMCMagazineVALAP
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCGunVALCase_alt
+  name: VAL gun case
+  description: Case for the VAL rifle.
+  suffix: mini
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - RuMCRifleVAL
+      - RuMCMagazineVAL
+  - type: StorageFill
+    contents:
+    - id: RuMCRifleVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVAL
+    - id: RuMCMagazineVALTracer
+    - id: RuMCMagazineVALTracer
+    - id: RuMCMagazineVALTracer
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCGunAK13Case
+  name: AK13 gun case
+  description: Case for the AK13 rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - RuMCWeaponRifleAK13
+      - RuMCMagazineAK13
+      - RMCMagazineRifleAK4047
+      - RMCMagazineRifleAK4047AP
+  - type: StorageFill
+    contents:
+    - id: RuMCWeaponRifleAK13
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047
+    - id: RMCMagazineRifleAK4047AP
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCGunPP13MCase
+  name: PP13-M gun case
+  description: Case for the PP13-M rifle.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,13,1
+    whitelist:
+      tags:
+      - RuMCWeaponSMGPP13M
+      - RuMCMagazinePP13M
+  - type: StorageFill
+    contents:
+    - id: RuMCWeaponSMGsPP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13M
+    - id: RuMCMagazinePP13MAP
+
+- type: entity
+  parent: RMCKitBase
+  id: RuMCKitUPPHATRPG32
+  name: UPP Heavy Antitank Rifleman RPG32 Kit
+  components:
+  - type: Item
+    size: Ginormous
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,5
+  - type: Sprite
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: Icon
+    sprite: _RMC14/Objects/Storage/procase_mini.rsi
+  - type: StorageFill
+    contents:
+      - id: RuMCWeaponLauncherRPG32
+        amount: 1
+      - id: AU14SatchelDemoSpecUPP
+        amount: 2
+      - id: RMCRocketHJRA12AT
+        amount: 4
+      - id: RMCRocketHJRA12HE
+        amount: 7
+      - id: RMCRocketHJRA12Incen
+        amount: 4
+      - id: RuMCRocketRPG_Termobaric
+        amount: 3
 
 #- type: entity
 #  parent: RMCGunCaseBase

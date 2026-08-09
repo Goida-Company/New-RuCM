@@ -10,5 +10,5 @@ ent-RMCCrateBoxShellsShotgunFlechette = ящик патронов (100 шт; Ф�
 ent-RMCCrateBoxShellsShotgunBuckshot = ящик патронов (100 шт; Картечь)
     .desc = Ящик с боеприпасами.
 
-ent-RMCCrateBoxShellsShotgunSlugs = Ящик патронов (100 шт; Пули)
+ent-RMCCrateBoxShellsShotgunSlugs = ящик патронов (100 шт; Пули)
     .desc = Ящик с боеприпасами.

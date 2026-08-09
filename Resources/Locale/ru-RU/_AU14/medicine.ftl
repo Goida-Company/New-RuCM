@@ -12,6 +12,7 @@ cm-pill-contents-hepatocytin = Лечит повреждения печени.
 cm-pill-contents-pulmovine = Лечит повреждения лёгких.
 cm-pill-contents-nephronate = Лечит повреждения почек.
 cm-pill-contents-cardiocaine = Лечит повреждения сердца.
+cm-pill-contents-alkysine = Лечит повреждения мозга.
 cm-pill-contents-osteocalc = Лечит повреждения костей.
 
 rmc-ethylredoxrazine-container-label-text = ЭЛРЗ

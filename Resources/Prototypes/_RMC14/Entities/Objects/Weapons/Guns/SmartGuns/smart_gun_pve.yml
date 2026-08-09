@@ -245,8 +245,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_stock.rsi
       state: smartgun_harness
-    actionName: Toggle ML66A Heavy Support Gun Harness
-    actionDesc: Lock the harness to your rig.
+    actionName: rmc-attachable-action-name-ml66a-harness
+    actionDesc: rmc-attachable-action-desc-lock-harness
   - type: AttachablePreventDropToggleable
   - type: AttachableWeaponRangedMods
     modifiers:

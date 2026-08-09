@@ -8,7 +8,11 @@
   playTimeTracker: CMJobProvostSpcComms
   spawnMenuRoleName: Provost Spc Comms
   ranks:
-    CMURankProvostSpcComms: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostSpcComms:
+      entity: AU14ChevronProvostCommSpec
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

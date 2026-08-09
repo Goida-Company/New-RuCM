@@ -8,10 +8,10 @@ ent-RMCBeltGrenadeLargeFilled = {ent-RMCBeltGrenadeLarge}
 
 ent-RMCBeltSPPBrownHalfFill = {ent-RMCBeltSPPBrown}
     .desc = {ent-RMCBeltSPPBrown.desc}
-    .suffix = Част. заполнен, AK4047
+    .suffix = Част. заполнен, АК4047
 ent-AU14BeltMarineArmyUPPTDFilled = {ent-RMCBeltSPPBrown}
     .desc = {ent-RMCBeltSPPBrown.desc}
-    .suffix = Заполнен, AK4047
+    .suffix = Заполнен, АК4047
 
 ent-RMCM82FHolsterFilled = {ent-RMCM82FHolster}
     .desc = {ent-RMCM82FHolster.desc}
@@ -159,7 +159,7 @@ ent-RMCBeltSecurityWeYaFilled = {ent-RMCBeltSecurityWeYa}
 
 ent-AU14BeltHolsterPistolFilledB92FS = {ent-RMCBeltHolsterPistol}
     .desc = {ent-RMCBeltHolsterPistol.desc}
-    .suffix = Заполнен, Б92ФС
+    .suffix = Заполнен, B92FS
 ent-RMCM1984BeltFilled = {ent-RMCBeltHolsterPistol}
     .desc = {ent-RMCBeltHolsterPistol.desc}
     .suffix = Заполнен, M1984

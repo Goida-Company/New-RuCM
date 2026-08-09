@@ -1,18 +1,19 @@
-ent-RMCWeaponRifleL88A1 = Винтовка буллпап L88A1
-  .desc = L88A1 — это стандартная винтовка парамаринских полков RCM, первая итерация в серии инновационных винтовок, предлагающая легкий, точный и надежный вариант для вооруженных сил TSE.
+# Оружие
+ent-RMCWeaponRifleL88A1 = боевая винтовка L88A1
+    .desc = Стандартная винтовка элитных десантников ИТМ. Использует патроны 10x24мм.
+ent-RMCWeaponRifleL88A1Filled = {ent-RMCWeaponRifleL88A1}
+    .desc = {ent-RMCWeaponRifleL88A1.desc}
+    .suffix = Заряжена
 
-ent-RMCWeaponRifleL88A2 = Винтовка буллпап L88A2
-  .desc = L88A2 — вторая версия винтовок серии L88.
+ent-RMCWeaponRifleL88A2 = боевая винтовка L88A2
+    .desc = Вторая версия винтовки L88A1 для элитных десантников ИТМ. Использует патроны 10x24мм.
+ent-RMCWeaponRifleL88A2Filled = {ent-RMCWeaponRifleL88A2}
+    .desc = {ent-RMCWeaponRifleL88A2.desc}
 
-ent-RMCMagazineRifleL88 = Магазин L88 (10х24мм)
-  .desc = Магазин на патроны 10х24 мм для винтовок модели L88.
+# Магазины
+ent-RMCMagazineRifleL88 = магазин L88 (10x24мм)
+    .desc = Магазин на патроны 10x24 мм для винтовок L88.
 
-ent-RMCMagazineRifleL88AP = Магазин L88 AP (10х24мм)
-  .desc = Магазин бронебойных патронов 10х24 мм для использования в винтовках модели Л88.
-
-ent-RMCWeaponRifleL88A1Filled = Винтовка буллпап L88A1
-  .desc = L88A1 — это стандартная винтовка парамаринских полков RCM, первая итерация в серии инновационных винтовок, предлагающая легкий, точный и надежный вариант для вооруженных сил TSE.
-
-ent-RMCWeaponRifleL88A2Filled = Винтовка буллпап L88A2
-  .desc = L88A2 — вторая версия винтовок серии L88. 
+ent-RMCMagazineRifleL88AP = магазин L88 ББ (10x24мм)
+    .desc = Магазин бронебойных патронов 10x24 мм для винтовок L88.
 

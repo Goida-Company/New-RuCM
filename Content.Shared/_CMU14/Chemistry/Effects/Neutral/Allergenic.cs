@@ -14,7 +14,7 @@ public sealed partial class Allergenic : RMCChemicalEffect
 {
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return "Triggers an ongoing allergic reaction in entities allergic to this reagent, until treated with naloxone.";
+        return Loc.GetString("cmu-medical-allergenic-guidebook"); // RuMC edit
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

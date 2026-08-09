@@ -32,6 +32,7 @@
       entries:
       - id: CMBeltSecurityMarshalFilled
       - id: RMCBeltHolsterPistolTSE
+      - id: RMCBeltHolsterRevolverBlack # RuMC edit
     - name: au14-vendor-section-bag
       choices: { CMUCMBDutyStorageBag: 1 }
       entries:
@@ -63,6 +64,7 @@
       entries:
       - id: RMCGunCasePistolM1984
       - id: AU14GunCasePistolHG45
+      - id: RMCGunCaseRevolverSpearhead # RuMC edit
     - name: au14-vendor-section-restraining-gear
       entries:
       - id: RMCHandcuffs

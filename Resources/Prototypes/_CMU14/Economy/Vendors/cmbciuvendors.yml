@@ -359,7 +359,6 @@
     # - id: AU14PillCanisterImidazoline
     - name: au14-vendor-section-limited-injector-medications
       choices: { CMUPlatoonMedicalLimitedMedicationsInjectors: 6 }
-      takeAll: CMULimitedPills
       entries:
       - id: AU14MeraBicAutoInjector
       - id: AU14KeloDermAutoInjector
@@ -1046,6 +1045,8 @@
       entries:
       - id: RMCMagazineRifleM16
         amount: 200
+      - id: CMUMagazineRifleM16Extended
+        amount: 20
       - id: CMMagazineSMGMP5
         amount: 200
       - id: RMCMagazineSMGPDW90

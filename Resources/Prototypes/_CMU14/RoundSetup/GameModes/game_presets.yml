@@ -18,6 +18,7 @@
   - AUPlanetCorsatStation
   - AUPlanetSorokyne
   - AUPlanetStableGarrison
+  - CMUPlanetStableGarrisonRedux
   - AUPlanetTrijent
   - CMUPlanetLament
   - CMUPlanetHopesRetreat
@@ -37,11 +38,16 @@
   description: au14-preset-insurgency-description # RuMC edit
   minPlayers: 35
   requiresGovforVote: true
+  thirdPartyAutoSpawn: true
+  thirdPartyInterval: 3600
+  thirdPartyRatio: 0.15
+  maxThirdParties: 3
   supportedPlanets:
     - AUPlanetShepherdsPride
    # - AUPlanetLV327
     - CMUPlanetLament
     - AUPlanetStableGarrison
+    - CMUPlanetStableGarrisonRedux
     #- AUPlanetLV747
     #- AUPlanetSorokyne
     #- AuPlanetChances
@@ -56,7 +62,9 @@
 
 - type: gamePreset
   id: DistressSignal
-  name: au14-preset-distresssignal-title # RuMC edit
+  alias:
+  - distresssignal
+  name: au14-preset-distresssignal-title
   showInVote: true
   description: au14-preset-distresssignal-description # RuMC edit
   requiresGovforVote: true
@@ -90,6 +98,7 @@
     - AUPlanetShepherdsPride
 #    - AUPlanetLV327
     - AUPlanetStableGarrison
+    - CMUPlanetStableGarrisonRedux
     - CMUPlanetLament
 #    - AUPlanetSorokyne
 #    - AuPlanetChances

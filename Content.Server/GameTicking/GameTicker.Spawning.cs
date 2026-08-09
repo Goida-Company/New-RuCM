@@ -244,6 +244,7 @@ namespace Content.Server.GameTicking
             bool force)
         {
             _distressSignal.TheHive = _hive.CreateHive("xenonid hive", "CMXenoHive");
+            _hive.CreateHive("Mycelial Confluence", "CMUPathogenHive");
 
             // For presets without CMDistressSignalRule (e.g. AU14 DistressSignal), the planet map
             // has already been loaded by LoadMaps and CMDistressSignalRuleSystem.OnRulePlayerSpawning
@@ -556,6 +557,24 @@ namespace Content.Server.GameTicking
                         catch (Exception thirdPartyEx)
                         {
                             Log.Error($"StartThirdPartySpawning threw — round will continue without third-party spawn. {thirdPartyEx}");
+                        }
+                    }
+                    else if (_auRoundSystem.SelectedPreset is { ThirdPartyAutoSpawn: true } presetSchedule)
+                    {
+                        if (_sawmill.Level <= LogLevel.Debug)
+                        {
+                            int roundstartThirdParties = _auRoundSystem.SelectedThirdParties.Count(party => party.RoundStart);
+                            _sawmill.Debug(
+                                $"[RoundStart] Starting preset-owned third-party spawning for '{presetSchedule.ID}'; selectedThirdParties={_auRoundSystem.SelectedThirdParties.Count}, roundstartThirdParties={roundstartThirdParties}, intervalSeconds={presetSchedule.ThirdPartyInterval}.");
+                        }
+
+                        try
+                        {
+                            _thirdParty.StartThirdPartySpawning(presetSchedule, assignedJobs);
+                        }
+                        catch (Exception thirdPartyEx)
+                        {
+                            Log.Error($"Preset-owned StartThirdPartySpawning threw — round will continue without third-party spawns. {thirdPartyEx}");
                         }
                     }
                     else

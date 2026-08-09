@@ -401,6 +401,11 @@
   description: A wardrobe containing all the clothes and supplies a COS would ever need.
   suffix: Civ
   components:
+  # RuMC edit start
+  - type: AccessReader
+    access:
+    - [ "RMCAccessSynth" ]
+  # RuMC edit end
   - type: Sprite
     sprite: _AU14/Structures/Vendors/assortedequipment.rsi
     layers:

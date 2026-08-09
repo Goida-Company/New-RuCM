@@ -5,7 +5,7 @@
   description: Cor... I don't think you can put that one back on.
   components:
   - type: Sprite
-    sprite: _RuMC14/Objects/Weapons/Guns/Attachments/rumc_VAL_barrel.rsi
+    sprite: _RuMC14/Objects/Weapons/Guns/Attachments/Barrel/rumc_VAL_barrel.rsi
     state: suppressor_VAL
   - type: Tag
     tags:
@@ -25,7 +25,7 @@
   description: Cor... I don't think you can put that one back on.
   components:
   - type: Sprite
-    sprite: _RuMC14/Objects/Weapons/Guns/Attachments/rumc_AH_barrel.rsi
+    sprite: _RuMC14/Objects/Weapons/Guns/Attachments/Barrel/rumc_AH_barrel.rsi
     state: suppressor_AH
   - type: Tag
     tags:

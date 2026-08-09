@@ -209,8 +209,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: Switch to the U7 underbarrel shotgun
-    actionDesc: Switch to using the underbarrel shotgun.
+    actionName: rmc-attachable-action-name-u7-shotgun
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-shotgun
     icon:
       sprite: _AU14/Weapons/Guns/Attachments/under.rsi
       state: masterkeyicon

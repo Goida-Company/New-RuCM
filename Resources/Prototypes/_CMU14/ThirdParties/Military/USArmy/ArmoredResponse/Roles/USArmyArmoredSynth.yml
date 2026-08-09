@@ -6,7 +6,7 @@
   playTimeTracker: AU14JobUSArmySynth
   basePlaytimeTracker: true
   whitelisted: true
-  whitelistParent: CMUJobSyntheticWhitelist
+  whitelistParent: RMCWhitelistMedium # RuMC edit
   isSynthetic: true
   hidden: true
 
@@ -118,6 +118,7 @@
   name: US Army Synthetic (ERT)
   components:
   - type: GhostTakeoverAvailable
+  - type: GhostRoleDespawn # RuMC edit
   - type: GhostRoleApplySpecial
     squad: AU14SquadUSArmy32nd
   - type: GhostRole

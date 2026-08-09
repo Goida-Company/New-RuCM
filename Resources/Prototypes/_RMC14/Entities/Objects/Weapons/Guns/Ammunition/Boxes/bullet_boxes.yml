@@ -348,7 +348,7 @@
       map: [ "enum.BulletBoxLayers2.Fill" ]
       color: "#ffc000"
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleL90
+    bulletType: CMUBoxBulletsRifleSLR # RuMC edit
 
 - type: entity
   parent: RMCBoxBulletsRifleL90
@@ -356,7 +356,7 @@
   suffix: Empty
   components:
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleL90
+    bulletType: CMUBoxBulletsRifleSLR # RuMC edit
     amount: 0
 
 # -- AP 7x43mm Rifle Ammunition Box --
@@ -380,7 +380,7 @@
       map: [ "enum.BulletBoxLayers2.Fill" ]
       color: "#318b11"
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleL90AP
+    bulletType: CMUBoxBulletsRifleSLRAP # RuMC edit
 
 - type: entity
   parent: RMCBoxBulletsRifleL90AP
@@ -388,7 +388,7 @@
   suffix: Empty
   components:
   - type: BulletBox
-    bulletType: RMCBoxBulletsRifleL90AP
+    bulletType: CMUBoxBulletsRifleSLRAP # RuMC edit
     amount: 0
 
 # -- REG 8.88x51mm Rifle Ammunition Box --

@@ -476,8 +476,8 @@
     icon:
       sprite: _AU14/Weapons/Guns/Attachments/commando_4xscope.rsi
       state: staticscope
-    actionName: Look through the 4x Telescopic Scope
-    actionDesc: Price, have wind speed and Coriolis effect in mind. Fixed at 4x zoom.
+    actionName: rmc-attachable-action-name-slavic-scope
+    actionDesc: rmc-attachable-action-desc-l90m-scope
 
 - type: entity
   parent: RMCAttachmentU7UnderbarrelShotgun
@@ -504,8 +504,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: Switch to the underbarrel shotgun
-    actionDesc: Switch to using the underbarrel shotgun.
+    actionName: rmc-attachable-action-name-l90b-shotgun
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-shotgun
     icon:
       sprite: _AU14/Weapons/Guns/Attachments/commando_under.rsi
       state: masterkey

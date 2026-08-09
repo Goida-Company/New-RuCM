@@ -24,5 +24,30 @@ ent-CMFirstAidO2KitFilled = аптечка первой помощи при ги
 ent-CMBurnAidKitFilled = аптечка первой помощи при ожогах
   .desc = Это экстренный медицинский набор на случай, когда боезапас дропшипа самовозгорается. При наличии медицинской подготовки её можно поместить в рюкзак.
 ent-CMFirstAidKitSurgeryFilled = базовый набор для полевой хирургии
+
 ent-CMFirstAidKitFilled = аптечка первой помощи
-  .desc = Это экстренный медицинский набор для серьёзных травм. При наличии медицинской подготовки её можно поместить в рюкзак.
+    .desc = Медицинский набор для серьёзных травм.
+ent-CMFirstAidKitFilledRobust = {ent-CMFirstAidKit}
+    .desc = {ent-CMFirstAidKit.desc}
+    .suffix = Заполнена, Улучшенная
+
+ent-RMCStandardAidKitPVE = аптечка
+    .desc = Аптечка, обычно содержащая необходимые медикаменты для использования в полевых условиях.
+     .suffix = PVE
+ent-RMCStandardAidKitFilledPVE = {ent-RMCStandardAidKitPVE}
+    .desc = {ent-RMCStandardAidKitPVE.desc}
+    .suffix = Заполнена, PVE
+
+ent-RMCBruteAidKitPVE = аптечка
+    .desc = Аптечка, содержащая снаряжение для лечения физических травм в полевых условиях.
+    .suffix = PVE
+ent-RMCBruteAidKitFilledPVE = {ent-RMCBruteAidKitPVE}
+    .desc = {ent-RMCBruteAidKitPVE.desc}
+    .suffix = Заполнена, PVE
+
+ent-RMCBurnAidKitPVE = аптечка
+    .desc = Аптечка, содержащая снаряжение для лечения ожогов в полевых условиях.
+    .suffix = PVE
+ent-RMCBurnAidKitFilledPVE = {ent-RMCBurnAidKitPVE}
+    .desc = {ent-RMCBurnAidKitPVE.desc}
+    .suffix = Заполнена, PVE

@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: XenoQueen
-  name: "Xeno Queen"
+  name: rmc-announcement-preset-xeno-queen
   description: "Queen psychic directive announcements"
   target: Xenos
   showSprite: false

@@ -7,8 +7,8 @@
   components:
   - type: GhostTakeoverAvailable
   - type: GhostRole
-    name: Zombie Summoner
-    description: Regenerate points and spend them to summon zombies.
+    name: cmu-zombie-summoner-ghost-name
+    description: cmu-zombie-summoner-ghost-description
     makeSentient: true
     allowSpeech: true
     allowMovement: true

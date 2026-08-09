@@ -45,5 +45,11 @@ public sealed partial class HealOrganEffect : EntityEffect
     }
 
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
-        => Loc.GetString("cmu-medical-heal-organ-guidebook", ("organ", OrganComponent), ("amount", Amount));
+    // RuMC edit start
+    {
+        var organKey = $"cmu-medical-organ-name-{OrganComponent}";
+        var organName = Loc.TryGetString(organKey, out var localized) ? localized : OrganComponent;
+        return Loc.GetString("cmu-medical-heal-organ-guidebook", ("organ", organName), ("amount", Amount));
+    }
+    // RuMC edit end
 }

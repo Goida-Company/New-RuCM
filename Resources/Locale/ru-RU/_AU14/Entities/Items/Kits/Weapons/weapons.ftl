@@ -58,7 +58,7 @@ ent-AU14KitWeaponType74 = кейс для пистолета Тип 74
 ent-AU14KitWeaponType73 = кейс для пистолета Тип 73
     .desc = Оружейный кейс.
 
-ent-AU14KitWeaponAG80 = кейс для винтовки AG80
+ent-AU14KitWeaponAG80 = кейс для винтовки АГ80
     .desc = Оружейный кейс.
 
 ent-AU14KitWeaponM41AMK1 = кейс для винтовки M41A MK1
@@ -88,13 +88,13 @@ ent-AU14KitWeaponABR40Civ = кейс для охотничьей винтовк�
 ent-AU14KitWeaponM48A4 = кейс для пистолета M48A4
     .desc = Оружейный кейс.
 
-ent-AU14KitWeaponMar30 = кейс для карабина МАР-30
+ent-AU14KitWeaponMar30 = кейс для карабина MAR-30
     .desc = Оружейный кейс.
 
-ent-AU14GunCaseRifleMar30 = кейс для карабина МАР-30
+ent-AU14GunCaseRifleMar30 = кейс для карабина MAR-30
     .desc = Оружейный кейс.
 
-ent-AU14KitWeaponMar40 = кейс для штурмовой винтовки МАР-40
+ent-AU14KitWeaponMar40 = кейс для штурмовой винтовки MAR-40
     .desc = Оружейный кейс.
     .suffix = Тактикульная
 

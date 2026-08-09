@@ -83,7 +83,7 @@
     - CMFolderBlack
     - CMPaperBin30
   inhand:
-  - AU14BriefcaseLawBundle
+  - AU14BriefcaseArbiterBundle # RuMC edit
 
 - type: entity
   parent: CMSpawnPointJobBase

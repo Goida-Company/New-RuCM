@@ -30,6 +30,6 @@ public sealed partial class Organstabilizing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Stabilizes internal organ damage symptoms.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-organ-stabilizing"); // RuMC edit
     }
 }

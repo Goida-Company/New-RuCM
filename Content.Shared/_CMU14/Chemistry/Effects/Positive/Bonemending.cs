@@ -34,6 +34,6 @@ public sealed partial class Bonemending : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Accelerates recovery of correctly positioned fractures.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-bonemending"); // RuMC edit
     }
 }

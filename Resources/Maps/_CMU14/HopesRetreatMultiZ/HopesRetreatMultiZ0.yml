@@ -136565,6 +136565,9 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Hope's Retreat Administration Office
+      groups:
+      - military-command
+      - marshal-bureau
   - uid: 51054
     components:
     - type: Transform
@@ -136642,6 +136645,8 @@ entities:
       parent: 1
     - type: FaxMachine
       name: Hope's Retreat Security Office
+      groups:
+      - marshal-bureau
   - uid: 76459
     components:
     - type: Transform
@@ -136672,6 +136677,8 @@ entities:
     - type: FaxMachine
       name: Fort Beauregard Command Center
       notifyAdmins: True
+      groups:
+      - military-command
   - uid: 76465
     components:
     - type: Transform
@@ -174482,7 +174489,7 @@ entities:
     - type: Transform
       pos: 117.5,93.5
       parent: 1
-- proto: fetchobjectivemarkergenericspawnpoint
+- proto: fetchgenericmarker
   entities:
   - uid: 545
     components:

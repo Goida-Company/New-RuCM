@@ -980,7 +980,9 @@
         amount: 30
       - id: RMCWeaponSMGM63B2
         amount: 20
-    - name: au14-vendor-section-standard-secondaries
+      - id: RMCWeaponRifleSSG45NoLockStripped
+        amount: 20
+    - name: standard issue secondaries
       entries:
       - id: RMCWeaponPistolM77Empty
         amount: 30
@@ -990,7 +992,7 @@
         amount: 8
       - id: AU14WeaponRifleF44AA
         amount: 1
-      - id: RMCWeaponRifleSSG45
+      - id: RMCWeaponRifleSSG45NoLock
         amount: 3
       - id: WeaponShotgunM890
         amount: 3

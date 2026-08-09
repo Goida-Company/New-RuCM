@@ -9,6 +9,7 @@ cm-xeno-construction-failed-select-structure = Сначала выберите �
 cm-xeno-construction-failed-requires-support = {CAPITALIZE($choice)} нужно строить рядом со стеной или смоляной дверью.
 rmc-xeno-construction-remote-failed-need-line-of-sight = Нужно видеть место строительства!
 rmc-xeno-construction-remote-failed-need-on-weeds = Нужно стоять на сорняках для связи со смолой.
+rmc-resin-whisperer-verb-open-door = Открыть дверь
 rmc-xeno-construction-remote-construct = Направляем плазму в сорняки, формируя конструкцию!
 rmc-xeno-construction-remote-open-door = Дистанционно открываем смоляную дверь.
 rmc-xeno-construction-remote-close-door = Дистанционно закрываем смоляную дверь.

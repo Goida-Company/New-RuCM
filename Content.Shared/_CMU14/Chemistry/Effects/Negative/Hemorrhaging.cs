@@ -27,9 +27,12 @@ public sealed partial class Hemorrhaging : RMCChemicalEffect
     private static readonly ProtoId<DamageTypePrototype> BluntType = "Blunt";
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Has a [color=red]{PotencyPerSecond * 5}%[/color] chance to cause internal bleeding in a random limb.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 0.5}[/color] damage to happen to a random organ.\n" +
-               $"Critical overdoses have a [color=red]{PotencyPerSecond * 10}%[/color] chance to cause internal bleeding in all limbs.";
+        // RuMC edit start
+        return Loc.GetString("reagent-effect-guidebook-cmu-hemorrhaging",
+            ("bleedChance", PotencyPerSecond * 5),
+            ("odDamage", PotencyPerSecond * 0.5),
+            ("critChance", PotencyPerSecond * 10));
+        // RuMC edit end
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

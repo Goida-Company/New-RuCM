@@ -23,6 +23,6 @@ public sealed partial class Curing : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Cures active infections and microbiological agents.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-curing"); // RuMC edit
     }
 }

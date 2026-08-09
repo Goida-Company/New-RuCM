@@ -4,8 +4,8 @@ ent-AU14WeaponPistolM50HAZOPS = пистолет M50 «Белоголовый о
 ent-AU14MagazinePistolM50 = магазин пистолета M50 «Белоголовый орлан» (.50 JP)
     .desc = Пистолетный магазин.
 
-ent-AU14CartridgePistol50JP = .50 JP
-    .desc = Пистолетная пуля калибра .50 JP.
+ent-AU14CartridgePistol50JP = патрон (.50 JP)
+    .desc = Пистолетный патрон калибра .50 JP.
 
 ent-CMBulletPistol50JP = реактивная пуля .50 AE
     .desc = Если ты это видишь, ты, вероятно, мёртв!

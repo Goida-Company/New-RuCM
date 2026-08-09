@@ -118,6 +118,11 @@
           state: sniper_toggle_laser_off
   - type: RMCGunChamber
     enabled: false
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - Xeno
+      - CMUPathogenWalker
 
 - type: entity
   parent: RMCWeaponSniperM707Vulture
@@ -313,8 +318,8 @@
     iconActive:
       sprite: _RMC14/Actions/marine_sniper_actions.rsi
       state: unzoom_scope
-    actionName: M707 Vulture Scope
-    actionDesc: Use the Vulture's integrated scope.
+    actionName: rmc-attachable-action-name-vulture-scope
+    actionDesc: rmc-attachable-action-desc-vulture-scope
   - type: Scope
     scopingToggleAction: null
     cycleZoomLevelAction: RMCActionVultureCycleZoomLevel
@@ -358,8 +363,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: vulture_bipod-on
-    actionName: Deploy Heavy Bipod
-    actionDesc: Deploy the bipod and brace the Vulture for firing.
+    actionName: rmc-attachable-action-name-vulture-bipod
+    actionDesc: rmc-attachable-action-desc-vulture-bipod
   - type: AttachableVisuals
     suffix: ""
     showActive: true

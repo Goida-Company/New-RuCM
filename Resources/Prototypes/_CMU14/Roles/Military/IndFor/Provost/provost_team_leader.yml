@@ -8,7 +8,11 @@
   playTimeTracker: CMJobProvostTeamLeader
   spawnMenuRoleName: Provost Team Leader
   ranks:
-    CMURankProvostProvostTeamLeader: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostProvostTeamLeader:
+      entity: AU14ChevronProvostTeamLeader
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

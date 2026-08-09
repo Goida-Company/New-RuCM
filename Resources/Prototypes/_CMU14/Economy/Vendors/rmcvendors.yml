@@ -425,13 +425,14 @@
       - id: RMCPouchFirstAidPills
     - name: au14-vendor-section-headgear
       entries:
-      - id: CMArmorHelmetM10Medic
+      - id: AU14HeadHelmetRMCMedic
         amount: 9
     - name: au14-vendor-section-medical-storage
       choices: { CMUPlatoonMedicalStorage: 1 }
       entries:
       - id: AU14BeltMedicBagRMC
-    - name: au14-vendor-section-backpack
+      - id: AU14BeltMedicalRMC
+    - name: Medical Backpacks
       entries:
       - id: AU14CorpsmanBackpackRMC
         amount: 9
@@ -1168,10 +1169,12 @@
       choices:  { CMHandheldDefense : 1 }
       entries:
       - id: AU14CaseSentry
-      - id: AU14CaseSentryMini
-      - id: AU14CaseSentrySniper
-      - id: RMCM271A2BruteLauncherRigFilled
-    - name: au14-vendor-section-tool-storage
+      - id: AU14CaseSentryFlamer
+    - name: Sentry Gun Upgrade Kit
+      entries:
+      - id: RMCEngineeringUpgrade
+        points: 10
+    - name: Tool Storage
       choices: { CMUCTToolStorage: 1 }
       entries:
       - id: AU14BeltUtilityCombatRMCFilled
@@ -1501,6 +1504,12 @@
         amount: 1
       - id: RMCTentUNMCExtendedMessFolded
         amount: 1
+    # RuMC edit start
+    - name: au14-vendor-section-melee-weapons
+      entries:
+      - id: RMCScabbardKatanaFilled
+        amount: 2
+    # RuMC edit end
 
 - type: entity
   parent: ColMarTechBase

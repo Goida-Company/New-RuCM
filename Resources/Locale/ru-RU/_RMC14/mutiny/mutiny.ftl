@@ -18,6 +18,9 @@ mutineer-leader-status-removed = Вы больше не лидер мятежа.
 
 mutineer-invite-title = Приглашение на мятеж
 
-mutineer-invite-accept = Присоединяйтесь
+mutineer-invite-accept = Присоединиться
 
-mutineer-invite-deny = Снижение
+mutineer-invite-deny = Отклонить
+
+rmc-mutiny-verb-make-mutineer = Сделать мятежником
+rmc-mutiny-verb-make-mutineer-leader = Сделать лидером мятежников

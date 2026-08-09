@@ -1644,7 +1644,7 @@ public sealed partial class VehicleSupplySystem : EntitySystem
         {
             var options = new List<VehicleSupplyLoadoutOptionState>
             {
-                new(string.Empty, "None")
+                new(string.Empty, Loc.GetString("rmc-vehicle-supply-option-none")) // RuMC edit
             };
 
             foreach (var option in category.Options)
@@ -1673,6 +1673,11 @@ public sealed partial class VehicleSupplySystem : EntitySystem
 
     private string GetLoadoutCategoryName(VehicleSupplyLoadoutCategory category)
     {
+        // RuMC edit start
+        var key = $"rmc-vehicle-supply-category-{category.Id}";
+        if (Loc.TryGetString(key, out var loc))
+            return loc;
+        // RuMC edit end
         if (!string.IsNullOrWhiteSpace(category.Name))
             return category.Name;
 
@@ -1687,6 +1692,11 @@ public sealed partial class VehicleSupplySystem : EntitySystem
 
     private string GetLoadoutOptionName(VehicleSupplyLoadoutOption option)
     {
+        // RuMC edit start
+        var key = $"rmc-vehicle-supply-option-{option.Id}";
+        if (Loc.TryGetString(key, out var loc))
+            return loc;
+        // RuMC edit end
         if (!string.IsNullOrWhiteSpace(option.Name))
             return option.Name;
 
@@ -1778,6 +1788,11 @@ public sealed partial class VehicleSupplySystem : EntitySystem
 
     private string GetEntryName(VehicleSupplyEntry entry)
     {
+        // RuMC edit start
+        var key = $"rmc-vehicle-supply-name-{entry.Vehicle.Id}";
+        if (Loc.TryGetString(key, out var loc))
+            return loc;
+        // RuMC edit end
         if (!string.IsNullOrWhiteSpace(entry.Name))
             return entry.Name;
 

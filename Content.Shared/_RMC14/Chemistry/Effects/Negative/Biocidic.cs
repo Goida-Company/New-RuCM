@@ -12,9 +12,12 @@ public sealed partial class Biocidic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Deals [color=red]{PotencyPerSecond}[/color] brute damage.\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond * 2}[/color] brute damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond * 5}[/color] brute damage";
+        // RuMC edit start
+        return Loc.GetString("reagent-effect-guidebook-rmc-biocidic",
+            ("damage", PotencyPerSecond),
+            ("overdose", PotencyPerSecond * 2),
+            ("critical", PotencyPerSecond * 5));
+        // RuMC edit end
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

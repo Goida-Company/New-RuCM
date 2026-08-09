@@ -138,10 +138,10 @@ public sealed partial class AttachableToggleableComponent : Component
     public string ActionId = "CMActionToggleAttachable";
 
     [DataField, AutoNetworkedField]
-    public string ActionName = "Toggle Attachable";
+    public LocId ActionName = "rmc-attachable-toggle-action-name-default"; // RuMC edit
 
     [DataField, AutoNetworkedField]
-    public string ActionDesc = "Toggle an attachable. If you're seeing this, someone forgot to set the description properly.";
+    public LocId ActionDesc = "rmc-attachable-toggle-action-desc-default"; // RuMC edit
 
     [DataField, AutoNetworkedField]
     public EntityWhitelist? ActionsToRelayWhitelist;

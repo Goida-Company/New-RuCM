@@ -7,7 +7,11 @@
   startingGear: CMUGearProvostMarshal
   playTimeTracker: CMJobProvostMarshal
   ranks:
-    CMURankProvostMarshal: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostMarshal:
+      entity: AU14ChevronProvostMarshall
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

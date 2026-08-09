@@ -1,10 +1,19 @@
-ent-RMCSmokeChemical = курить
-ent-RMCChemicalPayloadWeedkiller = полезная нагрузка гербицида
+ent-RMCSmokeChemical = химический дым
+
+ent-RMCChemicalPayloadWeedkiller = заряд с химикатами от сорняков
+    .desc = Заряд для гранаты, который содержит реагенты для борьбы с сорняками.
+
 ent-RMCGrenadeCustomWeedkiller = граната от сорняков
-  .desc = Используется для очистки больших площадей от инвазивных видов растений. 
-ent-RMCChemicalPayloadMetalFoam = полезная нагрузка из металлической пены
-  .desc = Химическая полезная нагрузка. 
+    .desc = Граната с химикатами для борьбы с сорняками. Лучше не вдыхать эти реагенты.
+
+ent-RMCChemicalPayloadMetalFoam = заряд с металлической пеной.
+    .desc = Заряд для гранаты, содержащий металлическую пену.
+
 ent-RMCGrenadeCustomMetalFoam = металлопенная граната
-  .desc = Используется для аварийной герметизации воздушных нарушений.
-ent-RMCCustomGrenade = пользовательская граната
-  .desc = Изготовленная на заказ химическая граната в корпусе М40. 
+    .desc = Используется для аварийной герметизации пробоин.
+
+ent-RMCCustomGrenade = настраиваемая граната
+    .desc = Изготовленная на заказ химическая граната калибра 30мм. Можно установить заряд в неё.
+
+ent-RMCGrenadeMFHS = металлопенная граната M40
+    .desc = {ent-RMCGrenadeCustomMetalFoam.desc}

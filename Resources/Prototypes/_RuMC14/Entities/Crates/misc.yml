@@ -22,6 +22,27 @@
 
 - type: entity
   parent: RMCCrateWeapons
+  id: RuMCCrateAH12
+  name: contains the AH12
+  components:
+  - type: StorageFill
+    contents:
+    - id: RuMCGunAH12Case
+      amount: 1
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RuMCCrateVAL
+  name: contains the VAL
+  components:
+  - type: StorageFill
+    contents:
+    - id: RuMCGunVALCase
+      amount: 1
+
+
+- type: entity
+  parent: RMCCrateWeapons
   id: RuMCCrateRPG_36
   name: contains the RPG-36.
   components:
@@ -39,6 +60,36 @@
     contents:
     - id: RuMCWeaponLauncherDisposableFoldedIncen
       amount: 4
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RuMCCrateRPG_36_T
+  name: contains the RPG-36-T.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RuMCWeaponLauncherDisposableTermobaricFolded
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RuMCCrateRPG_32
+  name: contains the termobaric rocket for RPG-32.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RuMCRocketRPG_Termobaric
+      amount: 4
+
+- type: entity
+  parent: RMCCrateWeapons
+  id: RuMCCrateRG35F
+  name: contains the termobaric grenade RG35F.
+  components:
+  - type: StorageFill
+    contents:
+    - id: RuMCPacketGrenadeTermobaricUPPFilled
+      amount: 1
 
 - type: entity
   parent: RMCCrateWeapons

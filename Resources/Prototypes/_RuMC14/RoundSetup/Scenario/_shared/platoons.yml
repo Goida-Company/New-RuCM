@@ -1,0 +1,5 @@
+- type: roundGroup
+  id: OpforBearPlatoonRoundGroup
+  kind: Platoon
+  sourcePrototypeId: BEAR
+  groupId: OpforPlatoon:BEAR

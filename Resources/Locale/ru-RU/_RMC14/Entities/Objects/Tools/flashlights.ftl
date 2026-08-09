@@ -25,5 +25,9 @@ ent-RMCFlashlight = фонарик
 ent-RMCBoxFlashlightsEmpty = коробка фонарей (x8)
     .desc = Коробка фонарей, чтобы скрасить твой день!
 
+ent-RMCBoxFlashlights = {ent-RMCBoxFlashlightsEmpty}
+    .desc = {ent-RMCBoxFlashlightsEmpty.desc}
+    .suffix = Заполненная
+
 ent-RMCLampGreen = настольная лампа
     .desc = Классическая настольная лампа с зелёным абажуром.

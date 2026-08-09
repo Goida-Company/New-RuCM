@@ -47,6 +47,6 @@
 - type: entity
   parent: MobStatusEffectBase
   id: StatusEffectSeeingRainbow
-  name: status-effect-seeing-rainbow  RuMC edit
+  name: status-effect-seeing-rainbow # RuMC edit
   components:
   - type: SeeingRainbowsStatusEffect

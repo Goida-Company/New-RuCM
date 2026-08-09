@@ -1,0 +1,9 @@
+ui-options-header-cmu-emotes = Эмоции
+ui-options-function-cmu-emote-slot1 = Ячейка эмоции 1
+ui-options-function-cmu-emote-slot2 = Ячейка эмоции 2
+ui-options-function-cmu-emote-slot3 = Ячейка эмоции 3
+ui-options-function-cmu-emote-slot4 = Ячейка эмоции 4
+ui-options-function-cmu-emote-slot5 = Ячейка эмоции 5
+ui-options-function-cmu-emote-slot6 = Ячейка эмоции 6
+ui-options-function-cmu-emote-slot7 = Ячейка эмоции 7
+ui-options-function-cmu-emote-slot8 = Ячейка эмоции 8

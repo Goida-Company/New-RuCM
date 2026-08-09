@@ -13,3 +13,7 @@ ent-VehicleAPCCommand = {ent-VehicleAPC}
 ent-VehicleAPCMed = {ent-VehicleAPC}
     .desc = {ent-VehicleAPC.desc}
     .suffix = Техника, БТР, Медицинский
+
+ent-VehicleAPCPMC = БТР Ве-Ю
+    .desc = Бронетранспортёр, эксплуатируемый наёмниками Ве-Ю.
+    .suffix = Техника, БТР, Ве-Ю

@@ -1,4 +1,4 @@
-﻿cm-ui-rmc14 = РМЦ14
+﻿cm-ui-rmc14 = RMC14
 
 rmc-ui-options-cassettes-volume = Громкость кассет
 rmc-ui-options-hijack-song-volume = Громкость музыки захвата
@@ -128,6 +128,24 @@ rmc-ui-options-announcements-style-disabled = Отключён
 rmc-ui-options-announcements-style-per-announcement = Стиль объявлений по источникам
 
 rmc-ui-options-announcements-style-inherit = Использовать глобальные настройки
+
+rmc-ui-options-night-vision-color = Цвет визора прибора ночного видения
+rmc-ui-options-night-vision-color-green = Зелёный
+rmc-ui-options-night-vision-color-orange = Оранжевый
+rmc-ui-options-night-vision-color-white = Белый
+rmc-ui-options-night-vision-color-yellow = Жёлтый
+rmc-ui-options-night-vision-color-red = Красный
+rmc-ui-options-night-vision-color-blue = Синий
+
+rmc-announcement-preset-marine-command = Командование морпехов
+rmc-announcement-preset-marine-overwatch = Наблюдение
+rmc-announcement-preset-marine-command-default = Командование морпехов (по умолчанию)
+rmc-announcement-preset-marine-command-simplified = Командование морпехов (упрощённый)
+rmc-announcement-preset-unknown-broadcast = Неизвестная трансляция
+rmc-announcement-preset-evacuation-alert = Тревога эвакуации
+rmc-announcement-preset-red-alert = Красная тревога
+rmc-announcement-preset-xeno-queen = Королева ксено
+rmc-announcement-preset-misc = Прочие объявления
 
 rmc-dialog-confirm-yes = Да
 rmc-dialog-confirm-no = Нет

@@ -11,7 +11,6 @@ using Content.IntegrationTests.Pair;
 using Content.Server.GameTicking;
 using Robust.Client.GameObjects;
 using Robust.Server.GameObjects;
-using Robust.Server.Player;
 using Robust.Shared.ContentPack;
 using Robust.Shared.EntitySerialization;
 using Robust.Shared.EntitySerialization.Systems;
@@ -69,6 +68,8 @@ namespace Content.MapRenderer.Painters
                         DeserializationOptions =
                         {
                             LogOrphanedGrids = false,
+                            LogInvalidEntities = false,
+                            InitializeMaps = true,
                         },
                     };
 
@@ -147,7 +148,6 @@ namespace Content.MapRenderer.Painters
             var server = _pair.Server;
 
             var sEntityManager = server.ResolveDependency<IServerEntityManager>();
-            var sPlayerManager = server.ResolveDependency<IPlayerManager>();
 
             var entityManager = server.ResolveDependency<IEntityManager>();
             var mapSys = entityManager.System<SharedMapSystem>();
@@ -162,15 +162,6 @@ namespace Content.MapRenderer.Painters
 
             await server.WaitPost(() =>
             {
-                var playerEntity = sPlayerManager.Sessions.Single().AttachedEntity;
-
-                if (playerEntity.HasValue)
-                {
-                    // Keep the render-only player out of every grid without deleting its
-                    // child hierarchy while the client is applying entity states.
-                    xformSystem.DetachEntity(playerEntity.Value, xformQuery.GetComponent(playerEntity.Value));
-                }
-
                 if (_map is RenderMapPrototype)
                 {
                     var mapId = sEntityManager.System<GameTicker>().DefaultMap;

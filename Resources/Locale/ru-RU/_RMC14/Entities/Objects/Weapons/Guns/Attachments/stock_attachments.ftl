@@ -1,19 +1,19 @@
 ent-RMCAttachmentAK4047StockCollapsible = складной приклад AK-4047
     .desc = Совместим с серией AK-4047. Уменьшает отдачу и улучшает точность, но за счёт ухудшения эргономики.
 
-ent-RMCAttachmentL83A3Stock = цельный приклад Л83A3
-    .desc = Интегрирован в Л83A3.
+ent-RMCAttachmentL83A3Stock = цельный приклад L83A3
+    .desc = Интегрирован в L83A3.
 
-ent-RMCAttachmentL24BStock = цельный приклад Л24Б
-    .desc = Интегрирован в Л24Б.
+ent-RMCAttachmentL24BStock = цельный приклад L24B
+    .desc = Интегрирован в L24B.
 
-ent-RMCAttachmentL24Stock = цельный приклад Л24
-    .desc = Интегрирован в Л24.
+ent-RMCAttachmentL24Stock = цельный приклад L24
+    .desc = Интегрирован в L24.
 
 ent-RMCAttachmentM54CE2Stock = цельный приклад M54CE2
     .desc = Интегрирован в M54CE2.
 
-ent-RMCAttachmentL83A2Stock = цельный приклад Л83А2
+ent-RMCAttachmentL83A2Stock = цельный приклад L83A2
     .desc = Интегрирован в L83A2.
 
 ent-RMCAttachmentHuntingStock = приклад Басира-Армстронг

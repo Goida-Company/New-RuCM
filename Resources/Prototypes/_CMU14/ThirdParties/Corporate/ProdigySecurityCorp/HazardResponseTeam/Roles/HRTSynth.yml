@@ -94,6 +94,7 @@
   name: Синтетик поддержки HRT Prodigy (AU14, третья сторона)
   components:
   - type: GhostTakeoverAvailable
+  - type: GhostRoleDespawn # RuMC edit
   - type: GhostRoleApplySpecial
     squad: SquadPARTS
   - type: GhostRole

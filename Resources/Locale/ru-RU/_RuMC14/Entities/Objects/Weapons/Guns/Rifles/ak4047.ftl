@@ -3,5 +3,5 @@ ent-RuMCMagazineRifleAK4047Tracer = магазин АК4047 ТРС (10x24мм)
     .suffix = РуМС
 
 ent-RuMCCartridgeRifle10x24Tracer = патрон ТРС (10x24мм)
-    .desc = Винтовочный трассирующий патрон 10x24мм.
+    .desc = Трассирующий винтовочный патрон калибра 10x24мм.
     .suffix = РуМС

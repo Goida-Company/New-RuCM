@@ -46,6 +46,14 @@ ent-RCDAmmo = картридж РСУ
 ent-Shovel = лопата
     .desc = Большой инструмент для копания и перемещения грунта.
 
+ent-RMCShovel = {ent-Shovel}
+    .desc = {ent-Shovel.desc}
+    .suffix = RMC
+
+ent-AU14ToolShovel = {ent-Shovel}
+    .desc = {ent-Shovel.desc}
+    .suffix = AU14
+
 ent-Omnitool = омнитул
     .desc = Лучший друг дрона.
 

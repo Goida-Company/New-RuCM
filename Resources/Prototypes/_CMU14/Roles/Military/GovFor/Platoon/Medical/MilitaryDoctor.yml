@@ -50,6 +50,7 @@
     shoes: CMBootsBlackFilled
     ears: AU14HeadsetGovforAuxiliary
     ears2: RMCM5CameraGear
+    back: CMSatchelMarine # RuMC edit
   inhand:
     - AU14StampMO
 

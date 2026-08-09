@@ -4,7 +4,7 @@ ent-AU14SmartGunUPP = смартган РВС-37 «Каньон»
 ent-AU14MagazineSmartGunUPP = барабанный магазин РВС-37 (12,7x40 мм)
     .desc = Стандартный магазин для смартганов СПН.
 
-ent-AU14CartridgeSmartGun127x40mm = пуля (12,7x40 мм)
+ent-AU14CartridgeSmartGun127x40mm = патрон (12,7x40 мм)
     .desc = Если ты это видишь, ты, вероятно, мёртв!
 
 ent-AU14PowerCellSmartgunUPP = аккумулятор ГБ-12-У3

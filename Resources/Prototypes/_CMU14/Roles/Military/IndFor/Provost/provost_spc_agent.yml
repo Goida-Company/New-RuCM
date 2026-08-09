@@ -8,7 +8,11 @@
   playTimeTracker: CMJobProvostSpcAgent
   spawnMenuRoleName: Provost Spc Agent
   ranks:
-    CMURankProvostSpcAgent: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostSpcAgent:
+      entity: AU14ChevronProvostSpecAgent
+      requirements: []
   roundComponents:
   - type: Skills
     skills:

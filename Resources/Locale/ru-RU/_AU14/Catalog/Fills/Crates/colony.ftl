@@ -64,10 +64,10 @@ ent-AU14CrateBoxM44SL = ящик спидлоадеров M44 (x7 спидлоа
 ent-AU14CrateBoxM44SLM = ящик спидлоадеров M44 Marksman (x7 спидлоадеров M44 Marksman)
     .desc = {ent-RMCCrateBase.desc}
 
-ent-AU14CrateBoxRSH9 = ящик револьвера RSh-9 (x1 револьвер RSh-9, x4 спидлоадера RSh-9, x1 навесной фонарик)
+ent-AU14CrateBoxRSH9 = ящик револьвера РШ-9 (x1 револьвер РШ-9, x4 спидлоадера РШ-9, x1 навесной фонарик)
     .desc = {ent-RMCCrateBase.desc}
 
-ent-AU14CrateBoxRSH9SL = ящик спидлоадеров RSh-9 (x7 спидлоадеров RSh-9)
+ent-AU14CrateBoxRSH9SL = ящик спидлоадеров РШ-9 (x7 спидлоадеров РШ-9)
     .desc = {ent-RMCCrateBase.desc}
 
 ent-AU14CrateBoxTPR23B = ящик пистолета TPR23B (x1 пистолет TPR23B, x4 магазина M4A3)

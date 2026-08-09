@@ -28,3 +28,36 @@
       - id: CMStampDenied
       - id: CMClipboard
       - id: CMUUniversalPaperTool
+
+
+## RuMC Fixes
+- type: entity
+  parent: RMCBriefcase 
+  id: AU14BriefcaseArbiterBundle # RuMC edit
+  name: Arbiter's law bundle
+  description: "A sturdy brown briefcase containing the complete legal library of the colony: the Colonial Civil Code (the Blue Book), the UCMJ (the Devil's Red Book), the SOP, and bureaucratic legal weaponry."
+  components:
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,20,1
+    whitelist:
+      tags:
+        - Book
+        - Document
+        - Write
+        - Paper
+        - Folder
+        - Stamp
+  - type: StorageFill
+    contents:
+      - id: AU14GuidebookLawMarine
+      - id: AU14GuidebookLawColonial
+      - id: AU14GuidebookSOP
+      - id: CMPenFountain
+      - id: AU14StampOrbitalArb
+      - id: CMFolderBlue
+      - id: CMStampApproved
+      - id: CMStampDenied
+      - id: CMClipboard
+      - id: CMUUniversalPaperTool

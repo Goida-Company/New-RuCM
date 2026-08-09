@@ -164,7 +164,7 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/m54_stocks/snow.rsi
       state: m54c-col-on
-    actionName: Toggle F44AA Folding Stock
+    actionName: rmc-attachable-action-name-f44aa-stock
   - type: AttachableSizeMods
     modifiers:
       - size: 1

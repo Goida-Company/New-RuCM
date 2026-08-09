@@ -68,7 +68,7 @@
 - type: entity
   parent: [RMCArmorM4PMCNoLight, RMCBaseMarineArmorLight]
   id: CMArmorM4PMCCorporate
-  name: M1 pattern corporate security armor
+  name: M4 pattern corporate security armor # RuMC edit
   description: A basic vest with a We-Yu badge on the right breast. This is commonly worn by low-level guards protecting We-Yu facilities.
   suffix: ""
   components:

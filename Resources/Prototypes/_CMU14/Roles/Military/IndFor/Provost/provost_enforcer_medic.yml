@@ -8,7 +8,11 @@
   playTimeTracker: CMJobProvostEnforcer
   spawnMenuRoleName: Provost Enforcer (Medic)
   ranks:
-    CMURankProvostProvostEnforcer: []
+    RMCRankCivilian: []
+  chevrons:
+    CMURankProvostProvostEnforcer:
+      entity: AU14ChevronProvostEnforcer
+      requirements: []
   roundComponents:
   - type: Skills
     skills:
@@ -18,6 +22,8 @@
       RMCSkillFireman: 2
       RMCSkillMeleeWeapons: 1
       RMCSkillPolice: 2
+      RMCSkillSurgery: 3
+      RMCSkillMedical: 3
   - type: JobPrefix
     prefix: cmu-job-prefix-provost-enforcer-medic
 

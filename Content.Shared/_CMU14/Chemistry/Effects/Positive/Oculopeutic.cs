@@ -33,6 +33,6 @@ public sealed partial class Oculopeutic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Heals eye damage and reduces blindness.";
+        return Loc.GetString("reagent-effect-guidebook-cmu-oculopeutic"); // RuMC edit
     }
 }

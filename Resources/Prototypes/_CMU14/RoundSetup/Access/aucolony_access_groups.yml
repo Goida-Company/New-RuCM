@@ -47,6 +47,13 @@
   - CMAccessColonyChem
   - CMAccessMedical
 
+# RuMC edit start
+- type: accessGroup
+  id: auColonySynth
+  tags:
+  - RMCAccessSynth
+# RuMC edit end
+
 - type: accessGroup
   id: aunews
   tags:

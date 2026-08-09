@@ -54,7 +54,7 @@ ent-RuMCUPPPouchIFAK = подсумок-аптечка ПМ-61
     .desc = Полевой медицинский подсумок.
     .suffix = РуМС, СПН
 ent-RuMCUPPPouchIFAKFill = {ent-RuMCUPPPouchIFAK}
-    .desc = {ent-RuMCUPPPouchIFAK}
+    .desc = {ent-RuMCUPPPouchIFAK.desc}
     .suffix = РуМС, СПН, Заполнен
 
 ent-RuMCUPPPouchFlare = подсумпок для сигнальных ракет ПМ-44

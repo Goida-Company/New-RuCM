@@ -81,7 +81,11 @@ public sealed partial class VehicleSupplyWindow : FancyWindow
             return;
         }
 
-        PreviewTitle.Text = preview.VehicleId;
+        // RuMC edit start
+        PreviewTitle.Text = Loc.TryGetString($"rmc-vehicle-supply-name-{preview.VehicleId}", out var previewName)
+            ? previewName
+            : preview.VehicleId;
+        // RuMC edit end
         VehiclePreview.SetPrototype(preview.VehicleId);
         VehiclePreview.OverrideDirection = Direction.South;
 

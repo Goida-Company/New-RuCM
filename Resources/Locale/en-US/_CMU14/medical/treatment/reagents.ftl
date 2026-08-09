@@ -1,7 +1,15 @@
-cmu-medical-heal-organ-guidebook            = Heals { $amount } HP per cycle on the patient's { $organ }.
-cmu-medical-pain-suppression-guidebook       = Suppresses { $percent }% of pain accumulation, masks { $tiers } pain tier(s), and adds { $decay } pain/sec decay for { $seconds } seconds per unit. Effect weakens by { $decrease } per max-pain fraction; non-additive profiles keep the strongest active profile.
-cmu-medical-bone-regen-boost-guidebook       = Multiplies bone healing rate by { $multiplier } while active.
-cmu-medical-restart-heart-guidebook          = { $chance }% chance per cycle to restart a stopped heart (only on hearts that are not yet at the Dead stage).
+cmu-medical-heal-organ-guidebook            = Heals { $amount } HP per cycle on the patient's { $organ }
+cmu-medical-pain-suppression-guidebook       = Suppresses { $percent }% of pain accumulation, masks { $tiers } pain tier(s), and adds { $decay } pain/sec decay for { $seconds } seconds per unit. Effect weakens by { $decrease } per max-pain fraction; non-additive profiles keep the strongest active profile
+cmu-medical-bone-regen-boost-guidebook       = Multiplies bone healing rate by { $multiplier } while active
+cmu-medical-restart-heart-guidebook          = { $chance }% chance per cycle to restart a stopped heart (only on hearts that are not yet at the Dead stage)
+cmu-medical-allergenic-guidebook             = Triggers an ongoing allergic reaction in entities allergic to this reagent, until treated with naloxone
+cmu-medical-cure-drug-allergy-guidebook      = Cures an ongoing allergic reaction, if any
+
+cmu-medical-organ-name-Liver                 = liver
+cmu-medical-organ-name-Lungs                 = lungs
+cmu-medical-organ-name-Kidneys               = kidneys
+cmu-medical-organ-name-Heart                 = heart
+cmu-medical-organ-name-Brain                 = brain
 
 cmu-medical-defib-no-heart                   = No heart detected in patient.
 cmu-medical-defib-heart-destroyed            = Heart is destroyed; cannot revive.

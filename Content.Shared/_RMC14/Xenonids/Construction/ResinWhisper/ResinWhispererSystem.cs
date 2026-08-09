@@ -39,7 +39,7 @@ public sealed partial class ResinWhispererSystem : EntitySystem
         var user = args.User;
         args.Verbs.Add(new AlternativeVerb()
         {
-            Text = "Open Door",
+            Text = Loc.GetString("rmc-resin-whisperer-verb-open-door"), // RuMC edit
             Impact = LogImpact.Low,
             Act = () =>
             {

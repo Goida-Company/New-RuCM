@@ -8,5 +8,6 @@ cm-entrenching-begin-hesco-fill = You begin packing dirt into the HESCO basket
 cm-entrenching-begin-hesco-raise = You begin raising the HESCO basket higher
 cm-entrenching-hesco-armed-disassemble = The HESCO basket is ready to be disassembled with an entrenching tool
 cm-entrenching-begin-hesco-disassemble = You begin taking the HESCO basket apart
+rmc-entrenching-hesco-verb-disassemble = Disassemble
 
 barricade-anchored-too-close = This is too close to the nearby {$barricade}.

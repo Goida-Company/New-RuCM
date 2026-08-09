@@ -1,6 +1,6 @@
 - type: announcementPreset
   id: CLF
-  name: "Unknown Broadcast"
+  name: rmc-announcement-preset-unknown-broadcast
   description: "Unknown encrypted transmission"
   target: All
   visibleInSettings: false

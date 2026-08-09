@@ -105,6 +105,38 @@
     baseDelay: 0.22
   - type: GunRequiresWield
 
+- type: entity
+  parent: RuMCRifleAH12
+  id: RuMCRifleAH12Tactical
+  suffix: Tactical
+  components:
+  - type: AttachableHolder
+    slots:
+      rmc-aslot-barrel:
+        locked: true
+        startingAttachable: RuMCAttachmentSuppressorAH12
+        whitelist:
+          tags:
+          - RuMCAttachmentSuppressorAH12
+      rmc-aslot-rail:
+        startingAttachable: RMCAttachmentS6ReflexSight
+        whitelist:
+          tags:
+          - RMCAttachmentRailFlashlight
+          - RMCAttachmentMagneticHarness
+          - RMCAttachmentS5RedDotSight
+          - RMCAttachmentS6ReflexSight
+          - RMCAttachmentS84xTelescopicScope
+          - RMCAttachmentS42xTelescopicMiniscope
+      rmc-aslot-underbarrel:
+        startingAttachable: RMCAttachmentVerticalGrip
+        whitelist:
+          tags:
+          - RMCAttachmentAngledGrip
+          - RMCAttachmentGyroscopicStabilizer
+          - RMCAttachmentLaserSight
+          - RMCAttachmentVerticalGrip
+
 # Magazines
 
 - type: entity

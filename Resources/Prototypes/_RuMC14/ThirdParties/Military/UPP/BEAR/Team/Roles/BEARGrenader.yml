@@ -1,0 +1,135 @@
+- type: job
+  parent: CMJobBase
+  id: RuMCUPPBEARGrenader
+  roundSide: ThirdParty
+  roundForce: BEAR
+  roundRole: RuMCUPPBEARGrenader
+  roundComponents:
+  - type: TacticalMapIcon
+    icon:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: upp_spec
+  - type: AssignSquad
+    whitelist:
+      tags:
+      - RuMCSquadBEAR
+  - type: Skills
+    skills:
+      RMCSkillCqc: 1
+      RMCSkillEngineer: 4
+      RMCSkillConstruction: 3
+      RMCSkillFirearms: 2
+      RMCSkillMedical: 1
+      RMCSkillMeleeWeapons: 1
+      RMCSkillPolice: 2
+      RMCSkillFireman: 2
+      RMCSkillPowerLoader: 1
+      RMCSkillVehicles: 2
+      RMCSkillJtac: 3
+      RMCSkillEndurance: 2
+  - type: EquipEntityPreset
+    preset: RuMCBEARPreset
+  - type: JobPrefix
+    prefix: au-14-job-prefix-rmcrrt-commander
+  - type: MarineOrders
+  - type: RMCTrackable
+  - type: RMCPointing
+  - type: Language
+    spokenLanguages:
+    - Polish
+    - English
+    - Russian
+    - Spanish
+    - Mandarin
+    - German
+    - TacticalSignLanguage
+    understoodLanguages:
+    - Polish
+    - English
+    - Russian
+    - Spanish
+    - Mandarin
+    - German
+    - TacticalSignLanguage
+    currentLanguage: Russian
+    defaultLanguage: Russian
+
+  name: BEAR Grenadier
+  description: BEAR Grenadier
+  playTimeTracker: RuMCJobUPPBEARGrenader
+  ranks:
+    RMCRankCivilian: []
+  chevrons:
+    UPP_SeniorSergeant:
+      entity: AU14ChevronUPPNISeniorSergeant
+      requirements:
+      - !type:RoleTimeRequirement
+        role: RuMCJobUPPBEARGrenader
+        time: 36000 # 10 hours
+    UPP_Sergeant:
+      entity: AU14ChevronUPPNISergeant
+      requirements:
+      - !type:RoleTimeRequirement
+        role: RuMCJobUPPBEARGrenader
+        time: 18000 # 5 hours
+    UPP_Plutonowy:
+      entity: AU14ChevronUPPNIPlutonowy
+      requirements: []
+  spawnMenuRoleName: BEAR Grenadier
+  startingGear: RuMCGearUPPBEARGrenader
+  greeting: Вы член секретного спецподразделения ЧВК «Медведи» (BEAR) при СПН! Существование связи между BEAR и СПН строжайше секретно. Никто не должен знать, кто вы и что вы здесь делаете. Вы дружественны к СПН. Враждебны к ЧВК VAI и ЧВК We-Y. Работайте скрытно. Выполняйте задачи. Не оставляйте следов.
+  icon: "RuMCJobIconUPPBEARGrenader"
+  joinNotifyCrew: false
+  supervisors: au14-job-supervisors-govfor
+  accessGroups:
+  - AU14GovforCommand
+  hidden: false
+
+- type: entity
+  parent: RuMCBaseMobSpeciesOrganicUPPBEAR
+  id: RuMCJobUPPBEARGrenader
+  name: BEAR Grenadier
+  components:
+  - type: EquipEntityPreset
+    preset: RuMCBEARPreset
+  - type: GhostTakeoverAvailable
+  - type: GhostRoleApplySpecial
+    squad: RuMCSquadBEAR
+  - type: GhostRole
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: BEAR Grenadier
+    description: Fortification assault specialist. Armed with the RPG-32 with thermobaric rounds. Destroys cover, vehicles, and infantry groups. Operates under the cover of the machine gunner.
+    job: RuMCUPPBEARGrenader
+    raffle:
+      settings: short
+
+- type: startingGear
+  parent: RuMCGearUPPBEARbase
+  id: RuMCGearUPPBEARGrenader
+  equipment:
+    id: RuCMIDCardUPPBEARGrenader
+    ears: RuMCHeadsetBEAR
+    back: AU14SatchelDemoSpecUPP
+  storage:
+    back:
+    - RuMCRocketRPG_Termobaric
+    - RuMCRocketRPG_Termobaric
+    - RuMCRocketRPG_Termobaric
+    - RuMCRocketRPG_Termobaric
+    - RMCRocketHJRA12HE
+    - RMCRocketHJRA12HE
+    - RMCRocketHJRA12HE
+  inhand:
+    - RuMCWeaponLauncherRPG32
+
+- type: jobIcon
+  parent: CMJobIconBase
+  id: RuMCJobIconUPPBEARGrenader
+  icon:
+    sprite: _RMC14/Interface/cm_job_icons.rsi
+    state: upp_spec
+
+- type: playTimeTracker
+  id: RuMCJobUPPBEARGrenader

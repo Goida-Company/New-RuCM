@@ -1,29 +1,38 @@
-rank-RMCRankProvostSectorMarshal = Маршал сектора
+rank-CMURankProvostSectorMarshal = Провост-Маршал сектора
   .prefix = Маршал сект.
 
-rank-RMCRankProvostSeniorMarshal = Старший маршал
+rank-CMURankProvostSeniorMarshal = Старший Провост-Маршал
   .prefix = Ст. Маршал
 
-rank-RMCRankProvostMarshal = Маршал
+rank-CMURankProvostMarshal = Провост-Маршал
   .prefix = Маршал
 
-rank-RMCRankProvostDeputyMarshal = Заместитель маршала
+rank-CMURankProvostDeputyMarshal = Заместитель Провост-Маршала
   .prefix = Зам. Марш.
 
-rank-RMCRankProvostChiefInspector = Главный инспектор
+rank-CMURankProvostChiefInspector = Главный инспектор Провоста
   .prefix = Гл. Инсп.
 
-rank-RMCRankProvostInspector = Инспектор провоста
+rank-CMURankProvostInspector = Инспектор Провоста
   .prefix = Инсп.
 
-rank-RMCRankProvostCommunicationsOfficer = Офицер связи
+rank-CMURankProvostFaxResponder = Офицер связи Провоста
   .prefix = Оф. Св.
 
-rank-RMCRankProvostAdvisor = Сержант-майор
+rank-CMURankProvostAdvisor = Сержант-майор
   .prefix = Серж-майор
 
-rank-RMCRankProvostProvostTeamLeader = Мастер-сержант
+rank-CMURankProvostProvostTeamLeader = Мастер-сержант
   .prefix = Маст-Серж.
 
-rank-RMCRankProvostProvostEnforcer = Штаб-сержант
+rank-CMURankProvostProvostEnforcer = Штаб-сержант
   .prefix = Штаб-серж.
+
+rank-CMURankProvostSpcComms = Специалист по связи
+  .prefix = Спец. по св.
+
+rank-CMURankProvostSpcAgent = Специальный агент
+  .prefix = Спецагент
+
+rank-CMURankProvostSpcMedical = Медицинский специалист
+  .prefix = Мед. спец.

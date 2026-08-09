@@ -75,8 +75,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: bipod-on
-    actionName: Deploy Bipod
-    actionDesc: Deploy the bipod and get into a firing position.
+    actionName: rmc-attachable-action-name-bipod
+    actionDesc: rmc-attachable-action-desc-bipod
   - type: AttachableVisuals
     showActive: true
   - type: AttachableTemporarySpeedMods
@@ -134,14 +134,6 @@
           tags:
           - RMCWeaponLMGM60
       fireDelayFlat: -0.060
-    # RuMC edit start
-    - conditions:
-        activeOnly: true
-        whitelist:
-          tags:
-          - AU14WeaponRifleKramerLSW
-      fireDelayFlat: 0.0568
-    # RuMC edit end
 
 - type: entity
   parent: RMCUnderAttachmentBase
@@ -327,8 +319,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: Switch to the underbarrel flare gun
-    actionDesc: Switch to using the underbarrel flare gun.
+    actionName: rmc-attachable-action-name-flare-gun
+    actionDesc: rmc-attachable-action-desc-switch-flare-gun
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: flaregun
@@ -389,8 +381,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
       params:
         volume: -2
-    actionName: Switch to the mini flamethrower.
-    actionDesc: Switch to using the mini flamethrower.
+    actionName: rmc-attachable-action-name-mini-flamethrower
+    actionDesc: rmc-attachable-action-desc-switch-mini-flamethrower
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: flamethrower
@@ -477,8 +469,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg
       params:
         volume: -2
-    actionName: Switch to the U7 underbarrel shotgun
-    actionDesc: Switch to using the underbarrel shotgun.
+    actionName: rmc-attachable-action-name-u7-shotgun
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-shotgun
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: masterkey
@@ -531,8 +523,8 @@
       path: /Audio/_RMC14/Attachable/gun_u7_activate.ogg # TODO RMC14
       params:
         volume: -2
-    actionName: Switch to the underbarrel extinguisher.
-    actionDesc: Switch to using the underbarrel extinguisher.
+    actionName: rmc-attachable-action-name-extinguisher
+    actionDesc: rmc-attachable-action-desc-switch-extinguisher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: extinguisher
@@ -651,8 +643,8 @@
     wieldedUseOnly: true
     activatePopupText: attachable-popup-switch-to-generic
     deactivatePopupText: attachable-popup-switch-from-generic
-    actionName: Switch to the U1 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
+    actionName: rmc-attachable-action-name-u1-ugl
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-grenade-launcher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade
@@ -696,7 +688,7 @@
           True: { state: grenade-mk1-open }
           False: { state: grenade-mk1 }
   - type: AttachableToggleable
-    actionName: Switch to the MK1 Underslung Grenade Launcher
+    actionName: rmc-attachable-action-name-mk1-ugl
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-mk1
@@ -739,7 +731,7 @@
           True: { state: grenade-m203-open }
           False: { state: grenade-m203 }
   - type: AttachableToggleable
-    actionName: Switch to the MK1 Underslung Grenade Launcher
+    actionName: rmc-attachable-action-name-mk1-ugl
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: grenade-m203
@@ -854,8 +846,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: flashgrip-on
-    actionName: Activate Underbarrel Flashlight Grip
-    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+    actionName: rmc-attachable-action-name-underbarrel-flashlight-grip
+    actionDesc: rmc-attachable-action-desc-toggle-light-module
   - type: AttachableVisuals
     showActive: true
   - type: AttachableToggleableSimpleActivate
@@ -898,8 +890,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/under.rsi
       state: laserlight-on
-    actionName: Activate Laser-Light Module
-    actionDesc: Can be toggled on and off. A better light source than standard M3 pattern armor lights.
+    actionName: rmc-attachable-action-name-laser-light-module
+    actionDesc: rmc-attachable-action-desc-toggle-light-module
   - type: AttachableWeaponRangedMods
     modifiers:
     - accuracyAddMult: 0.05
@@ -932,8 +924,8 @@
     iconActive:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: bipod-l91-on
-    actionName: Deploy Bipod
-    actionDesc: Deploy the bipod and get into a firing position.
+    actionName: rmc-attachable-action-name-bipod
+    actionDesc: rmc-attachable-action-desc-bipod
   - type: AttachableWeaponMeleeMods
     modifiers:
     - bonusDamage:
@@ -969,8 +961,8 @@
           True: { state: grenade-l90-open }
           False: { state: grenade-l90 }
   - type: AttachableToggleable
-    actionName: Switch to the L90U3 Grenade Launcher
-    actionDesc: Switch to using the underbarrel grenade launcher.
+    actionName: rmc-attachable-action-name-l90u3-ugl
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-grenade-launcher
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: grenade-l90
@@ -996,8 +988,8 @@
     - RMCAttachmentUnderbarrel
     - RMCAttachmentL90UBS
   - type: AttachableToggleable
-    actionName: Switch to the L90U1 underbarrel shotgun
-    actionDesc: Switch to using the underbarrel shotgun.
+    actionName: rmc-attachable-action-name-l90u1-shotgun
+    actionDesc: rmc-attachable-action-desc-switch-underbarrel-shotgun
     icon:
       sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_under.rsi
       state: ubs-l90

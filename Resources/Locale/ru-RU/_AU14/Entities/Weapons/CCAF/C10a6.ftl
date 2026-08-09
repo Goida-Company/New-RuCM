@@ -4,7 +4,7 @@ ent-AUWeaponRifleC10A6BR = C10A6-BR «Сандог»
 ent-AU14MagazineRifleC10A6BR = магазин C10A6BR (.25 ACP)
 
 ent-AU14CartridgeRifleC10A6BR = патрон (.25 ACP)
-    .desc = Пистолетный патрон .25 ACP.
+    .desc = Пистолетный патрон калибра .25 ACP.
 
 ent-AU14BulletRifleC10A6BR = пуля
     .desc = Если ты это видишь, ты, вероятно, мёртв!

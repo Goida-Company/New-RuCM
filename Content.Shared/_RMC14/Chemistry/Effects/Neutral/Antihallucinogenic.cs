@@ -23,9 +23,13 @@ public sealed partial class Antihallucinogenic : RMCChemicalEffect
 
     protected override string ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
-        return $"Removes [color=green]2.5[/color] units of Mindbreaker Toxin and Space Drugs from the bloodstream. It also stabilizes perceptive abnormalities such as hallucinations\n" +
-               $"Overdoses cause [color=red]{PotencyPerSecond}[/color] toxin damage.\n" +
-               $"Critical overdoses cause [color=red]{PotencyPerSecond}[/color] brute, [color=red]{PotencyPerSecond}[/color] burn, and [color=red]{PotencyPerSecond * 3}[/color] toxin damage";
+        // RuMC edit start
+        return Loc.GetString("reagent-effect-guidebook-rmc-antihallucinogenic",
+            ("odToxin", PotencyPerSecond),
+            ("critBrute", PotencyPerSecond),
+            ("critBurn", PotencyPerSecond),
+            ("critToxin", PotencyPerSecond * 3));
+        // RuMC edit end
     }
 
     protected override void Tick(DamageableSystem damageable, FixedPoint2 potency, EntityEffectReagentArgs args)

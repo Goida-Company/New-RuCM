@@ -297,7 +297,7 @@ public sealed partial class AttachableHolderSystem : EntitySystem
 
                     var verb = new EquipmentVerb()
                     {
-                        Text = toggleableComponent.ActionName,
+                        Text = Loc.GetString(toggleableComponent.ActionName), // RuMC edit
                         IconEntity = GetNetEntity(contained),
                         Act = () =>
                         {
