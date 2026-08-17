@@ -759,15 +759,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: Transform
-  - type: UserInterface
-    interfaces:
-      enum.RMCCameraUiKey.Key:
-        type: RMCCameraBui
-  - type: RMCCameraComputer
-    protoIds:
-    - CMUMobYautjaHellhound
-    title: cmu-yautja-houndpad-interface-title
-    viewportSize: 672, 480
 
 - type: entity
   parent: BaseItem
