@@ -26,6 +26,10 @@ au14-job-prefix-mobboss = MOB
 au14-job-name-mobgoon= Mob Goon
 au14-job-description-mobgoon = You're a soldier in local crime syndicate, listen to the boss
 
+au14-job-name-drugsmuggler = Drug Smuggler
+au14-job-description-drugsmuggler = You barely made it out as the CMB raided your old drug lab, luckily you managed to escape with some of the product and they didnt catch your name. Time to try again.
+au14-ghostrole-name-drugdealer-criminal = Drug Dealer (Criminal)
+
 au14-job-name-wyguard = Security Officer
 au14-job-description-wyguard= You're corporate security hired by Weyland-Yutani. Listen to and protect the employees and company assets
 au14-job-prefix-wyguard = WYSEC

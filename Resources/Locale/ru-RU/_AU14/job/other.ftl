@@ -28,6 +28,10 @@ au14-job-name-mobgoon = Солдат мафии
 au14-job-description-mobgoon = Вы — солдат местного преступного синдиката, слушайтесь босса.
 AU14JobMobGoon = Солдат мафии
 
+au14-job-name-drugsmuggler = Наркоторговец
+au14-job-description-drugsmuggler = Вы едва успели сбежать, когда БКМ накрыло вашу старую нарколабораторию. К счастью, вам удалось уйти с частью товара. Пора начинать заново.
+au14-ghostrole-name-drugdealer-criminal = Наркоторговец
+
 au14-job-name-wyguard = Офицер безопасности
 au14-job-description-wyguard = Вы — корпоративный сотрудник безопасности, нанятый Вейланд-Ютани. Защищайте сотрудников и активы компании.
 au14-job-prefix-wyguard = ОХРВЮ
