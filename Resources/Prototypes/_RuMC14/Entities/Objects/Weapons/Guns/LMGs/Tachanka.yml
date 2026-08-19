@@ -45,14 +45,14 @@
     recoilUnwielded: 0
     scatterWielded: 1
     scatterUnwielded: 1
-    baseFireRate: 4
+    baseFireRate: 8
     modifiers:
       FullAuto:
         fireDelay: 0.02
-        maxScatterModifier: 12
-        shotsToMaxScatter: 4
+        maxScatterModifier: 80
+        shotsToMaxScatter: 2
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 0.8
+    accuracyMultiplier: 0.9
     accuracyMultiplierUnwielded: 0.65
   - type: ItemSlots
     slots:
@@ -72,17 +72,11 @@
   - type: AttachableHolder
     slots:
       rmc-aslot-rail:
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
           - RMCAttachmentMagneticHarness
-          - RMCAttachmentS5RedDotSight
-          - RMCAttachmentS6ReflexSight
-      rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentBipod
-        whitelist:
-          tags:
-          - RMCAttachmentBipod
   - type: AttachableHolderVisuals
     offsets:
       rmc-aslot-rail: 0, 0.1
@@ -99,7 +93,7 @@
     medium: 0.8
     heavy: 0.75
   - type: WieldDelay
-    baseDelay: 0.5
+    baseDelay: 0.9
   - type: GunRequiresWield
 
 # Magazines

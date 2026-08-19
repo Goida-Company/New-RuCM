@@ -27,7 +27,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RuMCGunAH12Case
+    - id: RuMCGunAH12Case_alt
       amount: 1
 
 - type: entity
@@ -37,7 +37,7 @@
   components:
   - type: StorageFill
     contents:
-    - id: RuMCGunVALCase
+    - id: RuMCGunVALCase_alt
       amount: 1
 
 

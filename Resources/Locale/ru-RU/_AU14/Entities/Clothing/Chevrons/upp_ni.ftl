@@ -1,101 +1,101 @@
-ent-AU14ChevronUPPNIBase = лычка морской пехоты СПН
-    .desc = Лычка морской пехоты Союза Прогрессивных Народов. Надевая его, вы чувствуете гордость.
+ent-AU14ChevronUPPNIBase = погоны морской пехоты СПН
+    .desc = погоны морской пехоты Союза Прогрессивных Народов. Надевая его, вы чувствуете гордость.
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIPrivate = лычка рядового
+ent-AU14ChevronUPPNIPrivate = погоны рядового
     .desc = { ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIGefreiter = лычка ефрейтора
+ent-AU14ChevronUPPNIGefreiter = погоны ефрейтора
     .desc = { ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISeniorGefreiter = лычка старшего ефрейтора
+ent-AU14ChevronUPPNISeniorGefreiter = погоны старшего ефрейтора
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNICorporal = лычка капрала
+ent-AU14ChevronUPPNICorporal = погоны младший сержант
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIPlutonowy = лычка взводного
+ent-AU14ChevronUPPNIPlutonowy = погоны сержанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISergeant = лычка сержанта
+ent-AU14ChevronUPPNISergeant = погоны старшего сержанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISeniorSergeant = лычка старшего сержанта
+ent-AU14ChevronUPPNISeniorSergeant = погоны старшины
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIFirstSergeant = лычка первого сержанта
+ent-AU14ChevronUPPNIFirstSergeant = погоны первого сержанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISergeantSergeant = лычка сержант-майора
+ent-AU14ChevronUPPNISergeantSergeant = погоны сержант-майора
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIWarrantOfficer = лычка прапорщика
+ent-AU14ChevronUPPNIWarrantOfficer = погоны прапорщика
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISeniorWarrantOfficer = лычка старшего прапорщика
+ent-AU14ChevronUPPNISeniorWarrantOfficer = погоны старшего прапорщика
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNICommisar = лычка комиссара
+ent-AU14ChevronUPPNICommisar = погоны комиссара
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISeniorCommisar = лычка старшего комиссара
+ent-AU14ChevronUPPNISeniorCommisar = погоны старшего комиссара
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIJuniorLieutenant = лычка младшего лейтенанта
+ent-AU14ChevronUPPNIJuniorLieutenant = погоны младшего лейтенанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNILieutenant = лычка лейтенанта
+ent-AU14ChevronUPPNILieutenant = погоны лейтенанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNISeniorLieutenant = лычка старшего лейтенанта
+ent-AU14ChevronUPPNISeniorLieutenant = погоны старшего лейтенанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNICaptain = лычка капитана
+ent-AU14ChevronUPPNICaptain = погоны капитана
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIMajor = лычка майора
+ent-AU14ChevronUPPNIMajor = погоны майора
     .desc = {ent-AU14ChevronUPPNIBase.desc}
 
-ent-AU14ChevronUPPNIJuniorColonel = лычка подполковника
-    .desc = {ent-AU14ChevronUPPNIBase.desc}
-    .suffix = Морская пехота
-
-ent-AU14ChevronUPPNIColonel = лычка полковника
+ent-AU14ChevronUPPNIJuniorColonel = погоны подполковника
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIBrigadierGeneral = лычка генерал-бригадира
+ent-AU14ChevronUPPNIColonel = погоны полковника
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIDivisionalGeneral = лычка генерал-майора
+ent-AU14ChevronUPPNIBrigadierGeneral = погоны генерал-майора
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIGeneralOfTheBranch = лычка генерала рода войск
+ent-AU14ChevronUPPNIDivisionalGeneral = погоны генерал-лейтенанта
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота
 
-ent-AU14ChevronUPPNIMarshal = лычка маршала СПН
+ent-AU14ChevronUPPNIGeneralOfTheBranch = погоны генерал-полковника
+    .desc = {ent-AU14ChevronUPPNIBase.desc}
+    .suffix = Морская пехота
+
+ent-AU14ChevronUPPNIMarshal = погоны маршала СПН
     .desc = {ent-AU14ChevronUPPNIBase.desc}
 
-ent-AU14ChevronUPPNIChairmanMilitaryCouncil = лычка председателя военного совета
+ent-AU14ChevronUPPNIChairmanMilitaryCouncil = погоны председателя военного совета
     .desc = {ent-AU14ChevronUPPNIBase.desc}
     .suffix = Морская пехота

@@ -1,30 +1,44 @@
 au14-department-colony-mapspecific = Зависит от карты
 au14-department-colony-mapspecific-description = Роли, доступные только на определённых картах. Наведите курсор на название роли, чтобы увидеть доступность.
+
 au14-department-prometheus = Прометей
 au14-department-prometheus-description = Роли, доступные только в режиме «Прометей»
+
 au14-department-prison = Тюрьма
-au14-department-prison-description = Роли, доступные только в тюремном режиме
+au14-department-prison-description = Роли, доступные только в режиме "Тюрьма"
+
 au14-department-isolation = Изоляция
 au14-department-isolation-description = Роли, доступные только в режиме «Изоляция»
+
 au14-job-name-securityandroid = Охранный андроид
 au14-job-description-securityandroid = Вы — модифицированный нелегальный боевой синтетик созданный конгломератом Сигсон для охраны корпоративных объектов. Выполняй свои охранные функции и в крайнем случае применяй огнестрельное оружие(Требует навыков  высокой ролевой игры).
+
+au14-job-name-timesharessalesman = Туристический агент
+au14-job-description-timesharessalesman = Вы - туристический агент, отправленный на фронтир продавать туристические путёвки.
+
 au14-department-weyu = Ве-Ю
 au14-department-wyu-description = Должности в составе Вейланд-Ютани
+
 au14-job-name-mobboss = Дон мафии
 au14-job-description-mobboss = Вы — лидер местного преступного синдиката, обеспечьте достижение целей вашей семьи.
 au14-job-prefix-mobboss = ДОН
 AU14JobMobBoss = Дон мафии
+
 au14-job-name-mobgoon = Солдат мафии
 au14-job-description-mobgoon = Вы — солдат местного преступного синдиката, слушайтесь босса.
 AU14JobMobGoon = Солдат мафии
+
 au14-job-name-wyguard = Офицер безопасности
-au14-job-description-wyguard = Вы — корпоративный охранник, нанятый Вейланд-Ютани. Слушайтесь и защищайте сотрудников и активы компании.
-au14-job-prefix-wyguard = ОХРВЯ
+au14-job-description-wyguard = Вы — корпоративный сотрудник безопасности, нанятый Вейланд-Ютани. Защищайте сотрудников и активы компании.
+au14-job-prefix-wyguard = ОХРВЮ
 AU14JobWYGuard = Офицер безопасности
+
 au14-department-third-party = Третья сторона
 au14-department-third-party-description = Выберите эту роль, чтобы играть за третью сторону
+
 au14-department-threat = Угроза
 au14-department-threat-description = Выберите эту роль, чтобы играть за угрозу
+
 au14-cmbinvestigate-rules = Вы — сотрудник правоохранительных органов. Расследуйте территорию. Вы нейтральны, если только на вас не нападут.
 au14-lacncommandosniper-rules = Вы были переданы ЛАКФ в распоряжение Объединённого командования Соединённых Америк для специальной миссии на этой планете, детали которой вам не разглашались. Вам приказано расследовать территорию и доложить местному командованию ГОВФОР. Вы дружественны ГОВФОР и нейтральны к гражданским.
 au14-uacglostthreat-rules = Вы — третья сторона правительственных сил! Вы дружественны силам ГОВФОР и нейтральны к гражданским. Эта угроза требует немного более высокого уровня отыгрыша, чем другие! Пожалуйста, имейте это в виду.
@@ -47,7 +61,7 @@ au-14-job-name-papthirdparty-investigator = Следователь ПАП
 au-14-job-prefix-papthirdparty-investigator = След ПАП
 au14-papthirdparty-description = Вы — часть следственной группы ПАП. Вас вызвали в колонию для расследования. Вы не в курсе ситуации. Расследуйте.
 au-14-job-name-papthirdparty-captain = Старший следователь ПАП
-au-14-job-prefix-papthirdparty-captain = СтСлед ПАП
+au-14-job-prefix-papthirdparty-captain = Ст. След ПАП
 au-14-job-name-papthirdparty-observer = Следователь по правам человека в межзвёздном пространстве
 au14-papthirdparty-description-observer = Благодаря упорной работе вам удалось попасть на фронтир вместе со следственной группой ПАП, чтобы документировать и фиксировать любые зверства, которые могут происходить в этом тёмном секторе космоса. Отчасти это пиар-ход, но это важная работа. В экстренной ситуации вы также можете оказывать медицинскую помощь нуждающимся.
 au-14-job-prefix-papthirdparty-observer = След ПАП

@@ -98,7 +98,7 @@
     - RMCProjectileRocketHJRA12
   - type: CartridgeAmmo
     proto: RuMCProjectileRocketRPG36_Termobaric
-    deleteOnSpawn: false
+    deleteOnSpawn: true #Да, иначе никак
   - type: Sprite
     sprite: _RuMC14/Objects/Weapons/Guns/RocketLaunchers/RPG32/rpg_rocket.rsi
     layers:

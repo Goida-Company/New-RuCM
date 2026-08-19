@@ -247,12 +247,25 @@
     - id: RuMCArmorGarbCrotchPadBEAR
 
 - type: entity
+  parent: AU14WebbingDropPouchUPP
+  id: RuMCWebbingDropPouchBEARFull
+  name: BEAR marine drop pouch
+  description: A convenient pouch to carry loose items around.
+  components:
+    - type: StorageFill
+      contents:
+      - id: RuMCirpUPP
+      - id: RuMCirpUPP
+      - id: CMBicaridineAutoInjector
+      - id: AU14HemostaticGauzePacket
+
+- type: entity
   parent: RuMCUniformBEAR
   id: RuMCUniformBEARFull
   suffix: RuMC, FULL, BEAR
   components:
   - type: WebbingClothing
-    startingWebbing: AU14WebbingMagazine
+    startingWebbing: RuMCWebbingDropPouchBEARFull
 
 - type: entity
   parent: RuMCUniformBEAR_Black
@@ -260,7 +273,7 @@
   suffix: RuMC, FULL, BEAR
   components:
   - type: WebbingClothing
-    startingWebbing: AU14WebbingMagazine
+    startingWebbing: RuMCWebbingDropPouchBEARFull
 
 - type: entity
   parent: RuMCUniformBEAR_Gray
@@ -268,7 +281,7 @@
   suffix: RuMC, FULL, BEAR
   components:
   - type: WebbingClothing
-    startingWebbing: AU14WebbingMagazine
+    startingWebbing: RuMCWebbingDropPouchBEARFull
 
 - type: entity
   parent: RuMCBEARInfantryHelmet
@@ -293,6 +306,7 @@
     containers:
       key_slots:
       - CMEncryptionKeyColony
+      - AU14EncryptionKeyUPPAmb
   - type: RMCHeadset
     channels:
     - UPPSOF
@@ -313,6 +327,28 @@
     pocket2: RuMCUPPPouchIFAKFill
     back: RuMCUPPNavalInfantrySatchel
     ears2: RMCM5CameraGear
+
+- type: startingGear
+  id: RuMCGearUPPBEARbaseLigth
+  equipment:
+    outerClothing: RuMCArmorLightBEARFull
+    mask: CMMaskCoif
+    #eyes:
+    pocket2: RuMCUPPPouchIFAKFill
+    back: RuMCUPPNavalInfantrySatchel
+    ears2: RMCM5CameraGear
+
+- type: startingGear
+  id: RuMCGearUPPBEARbaseHeavy
+  equipment:
+    outerClothing: RuMCArmorHeavyBEARFull
+    mask: CMMaskCoif
+    #eyes:
+    pocket2: RuMCUPPPouchIFAKFill
+    back: RuMCUPPNavalInfantryBackpackBig
+    ears2: RMCM5CameraGear
+
+#reandom preset
 
 - type: entity
   id: RuMCBEARPreset
@@ -339,8 +375,8 @@
       - [ RuMCInfantryHelmetBEARFull, RMCBootsSPP, AU14PVEHandsInsulatedBlackMarine ]
       - [ RuMCBEARInfantryHelmet, RMCBootsSPP, CMHandsBrown ]
     randomWeapon:
-    - [ RuMCRifleAH12Tactical, RuMCUniformBEAR_Black, RuMCBeltMagazineAHBEARFull, RuMCPouchMagazineAHBEARFull, ]
-    - [ RuMCRifleVALTactical, RuMCUniformBEAR_Black,RuMCBeltMagazineVALBEARFull, RuMCPouchMagazineVALBEARFull, ]
+    - [ RuMCRifleAH12Tactical, RuMCUniformBlackBEARFull, RuMCBeltMagazineAHBEARFull, RuMCPouchMagazineAHBEARFull, ]
+    - [ RuMCRifleVALTactical, RuMCUniformBlackBEARFull,RuMCBeltMagazineVALBEARFull, RuMCPouchMagazineVALBEARFull, ]
     - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformGrayBEARFull,RuMCBeltMagazinePP13BEARFull,  RuMCPouchMagazinePP13BEARFull, ]
     - [ RuMCWeaponRifleAK13Tactical, RuMCUniformBEARFull,RuMCBeltMagazineBEARFull, RuMCPouchMagazineBEARFull, ]
     - [ RuMCWeaponRifleAK13Tactical_alt1, RuMCUniformGrayBEARFull,RuMCBeltMagazineBEARFull, RuMCPouchMagazineBEARFull, ]
@@ -372,12 +408,12 @@
       - [ RuMCInfantryHelmetBEARFull, RMCBootsSPP, AU14PVEHandsInsulatedBlackMarine ]
       - [ RuMCBEARInfantryHelmet, RMCBootsSPP, CMHandsBrown ]
     randomWeapon:
-    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformBlackBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull, ]
-    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformBlackBEARFull,RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull, ]
-    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformGrayBEARFull,RuMCUPPNavalInfantryBeltMachinegunnerFull,  RuMCUPPPouchDrumFull, ]
-    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformGrayBEARFull,RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull, ]
-    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformBEARFull,RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull, ]
-    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformBEARFull,RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull, ]
+    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformBlackBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull ]
+    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformBlackBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull ]
+    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformGrayBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull,  RuMCUPPPouchDrumFull ]
+    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformGrayBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull ]
+    - [ RuMCMachineGunPKP_MSTactical, RuMCUniformBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull ]
+    - [ RuMCMachineGunPKP_MSTactical_alt, RuMCUniformBEARFull, RuMCUPPNavalInfantryBeltMachinegunnerFull, RuMCUPPPouchDrumFull ]
     tryEquipRandomWeapon: true
 
 - type: entity
@@ -405,10 +441,10 @@
       - [ RuMCInfantryHelmetBEARFull, RMCBootsSPP, AU14PVEHandsInsulatedBlackMarine, RMCGlassesMedicalHUDGlasses ]
       - [ RuMCBEARInfantryHelmet, RMCBootsSPP, CMHandsBrown, RMCGlassesMedicalHUDGlasses ]
     randomWeapon:
-    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformBEAR_Black, CMBeltMedicBag, RuMCPouchMagazinePP13BEARFull ]
-    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformBEAR_Black, CMBeltMedicBag, RuMCPouchMagazinePP13BEARFull ]
-    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformGrayBEARFull, CMBeltMedicBag,  RuMCPouchMagazinePP13BEARFull ]
-    - [ RuMCWeaponRifleAK13Tactical, RuMCUniformBEARFull, CMBeltMedicBag, RuMCPouchMagazineBEARFull ]
-    - [ RuMCWeaponRifleAK13Tactical_alt1, RuMCUniformGrayBEARFull, CMBeltMedicBag, RuMCPouchMagazineBEARFull ]
-    - [ RuMCWeaponRifleAK13Tactical_alt2, RuMCUniformBEARFull, CMBeltMedicBag, RuMCPouchMagazineBEARFull ]
+    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformBlackBEARFull, AU14BeltMedicBagProdigyFilled, RuMCPouchMagazinePP13BEARFull ]
+    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformBlackBEARFull, AU14BeltMedicBagProdigyFilled, RuMCPouchMagazinePP13BEARFull ]
+    - [ RuMCWeaponSMGsPP13MTactical, RuMCUniformGrayBEARFull, AU14BeltMedicBagProdigyFilled,  RuMCPouchMagazinePP13BEARFull ]
+    - [ RuMCWeaponRifleAK13Tactical, RuMCUniformBEARFull, AU14BeltMedicBagProdigyFilled, RuMCPouchMagazineBEARFull ]
+    - [ RuMCWeaponRifleAK13Tactical_alt1, RuMCUniformGrayBEARFull, AU14BeltMedicBagProdigyFilled, RuMCPouchMagazineBEARFull ]
+    - [ RuMCWeaponRifleAK13Tactical_alt2, RuMCUniformBEARFull, AU14BeltMedicBagProdigyFilled, RuMCPouchMagazineBEARFull ]
     tryEquipRandomWeapon: true

@@ -27,6 +27,39 @@
 
 - type: entity
   parent: RMCGunCaseBase
+  id: RuMCUTESCCase_GROZA
+  name: UTES-C heavy machine gun case
+  description: Case for the UTES-C HMG. Contains the gun and 8 magazines.
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,5
+    whitelist:
+      tags:
+      - UTES-CMount
+      - RuMCMagazineUTES-C
+      - RuMCMagazineUTES-CTracter
+      - RMCSkillPamphlet
+      - RuMCMachineGunnerRig
+  - type: StorageFill
+    contents:
+    - id: RuMCPamphletHeavyMachineGunner
+    - id: RuMCUTES-CMount
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-C
+    - id: RuMCMagazineUTES-CTracter
+    - id: RuMCMagazineUTES-CTracter
+    - id: RuMCMagazineUTES-CTracter
+
+- type: entity
+  parent: RMCGunCaseBase
   id: RuMCMachineGunTachankaCase_alt
   name: Tachanka machine gun case
   description: Case for the Tachanka LMG.
@@ -64,6 +97,8 @@
       - RuMCMagazineTachankaLarge
       - RuMCMagazineTachankaLargeTracer
       - RuMCMachineGunnerRig
+      - RMCHelmetWelding
+      - RuMCUPPPouchDrum
   - type: StorageFill
     contents:
     - id: RuMCMachineGunTachanka
@@ -72,9 +107,37 @@
     - id: RuMCUPPPouchDrum
       amount: 2
     - id: RuMCMagazineTachankaLarge
-      amount: 12
+      amount: 14
     - id: RuMCMagazineTachankaLargeTracer
+      amount: 9
+
+- type: entity
+  parent: RMCGunCaseBase
+  id: RuMCSniperRifleSVAROGCase
+  name: SVAROG sniper rifle case
+  description: Case for the sniper rifle SVAROG
+  components:
+  - type: Storage
+    maxItemSize: Ginormous
+    grid:
+    - 0,0,13,7
+  - type: StorageFill
+    contents:
+    - id: RMCVisorNightVision
+    - id: CMBackpackSniper
+    - id: RuMcSniperRifleSVAROG
+    - id: RuMCUPPNavalInfantryHeavyHelmet2
+    - id: RuMCUPPPouchMagazineLarge
       amount: 2
+    - id: RuMcMagazineSniperRifleSVAROG
+      amount: 8
+    - id: RuMcMagazineSniperRifleSVAROGIncendiary
+      amount: 4
+    - id: RuMcMagazineSniperRifleSVAROGFlak
+      amount: 4
+    - id: AU14KitSpotter
+    - id: RMCVultureSpotterTripod
+    - id: RMCVultureSpotterScope
 
 - type: entity
   parent: RMCGunCaseBase

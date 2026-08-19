@@ -13,6 +13,9 @@ au14-department-isolation-description = Roles limited to use on the Isolation ga
 au14-job-name-securityandroid = Security Android
 au14-job-description-securityandroid = You are a modified, illegal combat synthetic created by the Sigson conglomerate to guard corporate facilities. Perform your security duties and, in extreme cases, use firearms. (Requires advanced role-playing skills.)
 
+au14-job-name-timesharessalesman = Timeshares Salesperson
+au14-job-description-timesharessalesman = You are a timeshares salesperson sent to the frontier to sell vacation packages. You travel from colony to colony trying to convince people to buy into shared properties.
+
 au14-department-weyu = We-Yu
 au14-department-wyu-description = Jobs part of Weyland Yutani
 

@@ -119,7 +119,7 @@
           tags:
           - RuMCAttachmentSuppressorAH12
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -129,7 +129,7 @@
           - RMCAttachmentS84xTelescopicScope
           - RMCAttachmentS42xTelescopicMiniscope
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentVerticalGrip
+        startingAttachable: RMCAttachmentAngledGrip
         whitelist:
           tags:
           - RMCAttachmentAngledGrip

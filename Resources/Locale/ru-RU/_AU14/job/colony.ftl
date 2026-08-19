@@ -224,9 +224,9 @@ au14-job-name-civilianambassadorupp = Посол СПН
 au14-job-description-civilianambassadorupp = Руководи дипломатической миссией СПН в колонии.
 au14-job-prefix-civilianambassadorupp = Пос. СПН
 
-au14-job-name-civilianambassadorua = Посол США
-au14-job-description-civilianambassadorua = Руководи дипломатической миссией США в колонии.
-au14-job-prefix-civilianambassadorua = Пос. США
+au14-job-name-civilianambassadorua = Посол ОА
+au14-job-description-civilianambassadorua = Руководи дипломатической миссией ОА в колонии.
+au14-job-prefix-civilianambassadorua = Пос. ОА
 
 au14-job-name-civilianambassadortwe = Посол ИТМ
 au14-job-description-civilianambassadortwe = Руководи дипломатической миссией ИТМ в колонии.

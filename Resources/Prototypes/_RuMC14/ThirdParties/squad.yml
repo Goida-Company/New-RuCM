@@ -1,0 +1,27 @@
+- type: entity
+  parent: SquadBase
+  id: RuMC14SquadBEAR
+  name: BEAR PMC
+  components:
+  - type: SquadTeam
+    color: "#1f0e0f"
+    #blacklistedSquadArmor:
+    #- Helmet
+    #- Goggles
+    #- Armor
+    #- Gloves
+    radio: UPPSOF
+    minimapBackground:
+      sprite: /Textures/_RMC14/Interface/map_blips.rsi
+      state: background_spp_alpha
+    leaderIcon:
+      sprite: _RMC14/Interface/cm_job_icons.rsi
+      state: upp_lt
+    canSupplyDrop: false
+    group: BEAR
+  - type: Tag
+    tags:
+    - RuMC14SquadBEAR
+
+- type: Tag
+  id: RuMC14SquadBEAR

@@ -28,9 +28,9 @@
         amount: 40
     - name: au14-vendor-section-gloves
       entries:
-      - id: RMCHandsBlack
+      - id: AU14PVEHandsInsulatedBlackMarine # RuMC edit
         amount: 40
-      - id: CMHandsBrown
+      - id: RMCHandsVeteranInsulated # RuMC edit
         amount: 20
     - name: au14-vendor-section-webbings
       entries:
@@ -50,7 +50,7 @@
         amount: 40
       - id: AU14UPPPatrolCap
         amount: 20
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
         amount: 15
       - id: AU14UPPBoonie
         amount: 15
@@ -222,9 +222,9 @@
     sections:
     - name: au14-vendor-section-food
       entries:
-      - id: AU14MREUPP
+      - id: RuMCirpUPP
         amount: 60
-      - id: AU14BoxMREUPP
+      - id: RuMCBoxIRPUPP
         amount: 10
     - name: au14-vendor-section-medical-supplies
       entries:
@@ -535,7 +535,7 @@
       - id: AU14UPPPatrolCap
       - id: AU14UPPBoonie
       - id: AU14UPPUshanka
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
     - name: au14-vendor-section-webbings
       choices: { CMUPlatoonAirCrewWebbings: 1 }
       entries:
@@ -713,7 +713,7 @@
       entries:
       - id: CMHeadCapSPPPeaked
         amount: 5
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
         amount: 5
       - id: CMHeadCapSPPUshankaCivilian
         amount: 10
@@ -784,7 +784,7 @@
     - name: au14-vendor-section-headgear
       choices: { CMHelmet: 1 }
       entries:
-      - id: RuMCUPPNavalInfantryHeavyHelmet
+      - id: RuMCUPPNavalInfantryHeavyHelmet2
     - name: au14-vendor-section-firearm-system
       choices: { CMUPlatoonMG: 1 }
       entries:
@@ -821,7 +821,7 @@
     - name: au14-vendor-section-apparel
       choices: { CMHat: 1 }
       entries:
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
     - name: au14-vendor-section-headgear
       choices: { CMHelmet: 1 }
       entries:
@@ -856,7 +856,7 @@
     - name: Apparel
       choices: { CMHat: 1 }
       entries:
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
     - name: Squad Leader Essentials
       takeAll: CMStandard
       entries:
@@ -1022,6 +1022,11 @@
         isAppendSquadRoleName: false
         isAppendPrefix: true
       - id: AU14KitUPPMarksmanType88
+        giveSquadRoleName: au14-job-name-govforspecialist-marksmanUPP
+        givePrefix: au14-job-prefix-govforspecialist-marksmanUPP
+        isAppendSquadRoleName: false
+        isAppendPrefix: true
+      - id: RuMCSniperRifleSVAROGCase
         giveSquadRoleName: au14-job-name-govforspecialist-marksmanUPP
         givePrefix: au14-job-prefix-govforspecialist-marksmanUPP
         isAppendSquadRoleName: false
@@ -1248,6 +1253,7 @@
       entries:
       - id: AU14ClothingOuterStraitjacket
         amount: 5 # TODO: bandaid - remove after mappers have placed this
+      - id: RMCMegaphone
 
 - type: entity
   parent: ColMarTechCargo
@@ -1299,8 +1305,6 @@
         amount: 3
       - id: RMCWeaponShotgunType23
         amount: 3
-      - id: RuMCGunAH12Case_alt
-        amount: 1
       - id: RuMCUTES-CCase
         amount: 1
     - name: au14-vendor-section-primary-ammunition
@@ -1345,10 +1349,6 @@
         amount: 25
       - id: RMCMagazineSMGType64
         amount: 200
-      - id: RuMCMagazineTachanka
-        amount: 5
-      - id: RuMCMagazineTracerTachanka
-        amount: 5
     - name: au14-vendor-section-secondary-ammunition
       entries:
       - id: RMCMagazinePistolT73
@@ -1476,9 +1476,9 @@
     - name: au14-vendor-section-headgear
       entries:
       - id: RuMCUPPNavalInfantryHeavyHelmet
-        amount: 4
-      - id: RuMCUPPNavalInfantryHeavyHelmet2
         amount: 2
+      - id: RuMCUPPNavalInfantryHeavyHelmet2
+        amount: 4
     - name: au14-vendor-section-rto-packs
       entries:
       - id: AU14BackpackRTOPackJungle
@@ -1544,7 +1544,7 @@
       entries:
       - id: AU14UPPPatrolCap
         amount: 20
-      - id: CMHeadCapSPPBeret
+      - id: RuMCHeadBeretMarien
         amount: 15
       - id: AU14UPPBoonie
         amount: 15

@@ -2,7 +2,7 @@
   parent: CMIDCardBase
   categories: [ HideSpawnMenu ]
   id: RuCMIDCardUPPBEARCommander
-  name: UPP BEAR Commander ID card
+  name: PMC BEAR Commander ID card
   components:
   - type: PresetIdCard
     job: RuMCUPPBEARCommander
@@ -14,7 +14,7 @@
   parent: CMIDCardBase
   id: RuCMIDCardUPPBEARMachinegunner
   categories: [ HideSpawnMenu ]
-  name: UPP BEAR Machinegunner ID card
+  name: PMC BEAR Machinegunner ID card
   components:
   - type: PresetIdCard
     job: RuMCUPPBEARMachinegunner
@@ -26,7 +26,7 @@
   parent: CMIDCardBase
   id: RuCMIDCardUPPBEARRifleman
   categories: [ HideSpawnMenu ]
-  name: UPP BEAR Rifleman ID card
+  name: PMC BEAR Rifleman ID card
   components:
   - type: PresetIdCard
     job: RuMCUPPBEARRifleman
@@ -38,7 +38,7 @@
   parent: CMIDCardBase
   id: RuCMIDCardUPPBEARGrenader
   categories: [ HideSpawnMenu ]
-  name: UPP BEAR Grenader ID card
+  name: PMC BEAR Grenader ID card
   components:
   - type: PresetIdCard
     job: RuMCUPPBEARGrenader
@@ -50,7 +50,7 @@
   parent: CMIDCardBase
   id: RuCMIDCardUPPBEARMedic
   categories: [ HideSpawnMenu ]
-  name: UPP BEAR Medic ID card
+  name: PMC BEAR Medic ID card
   components:
   - type: PresetIdCard
     job: RuMCUPPBEARMedic

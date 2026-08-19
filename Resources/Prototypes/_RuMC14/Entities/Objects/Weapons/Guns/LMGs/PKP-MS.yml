@@ -39,19 +39,19 @@
   - type: RMCSelectiveFire
     baseFireModes:
     - FullAuto
-    recoilWielded: 0.5
-    recoilUnwielded: 2
-    scatterWielded: 2.5
-    scatterUnwielded: 4
-    baseFireRate: 5.45
+    recoilUnwielded: 5
+    scatterWielded: 10
+    scatterUnwielded: 22
+    baseFireRate: 5
     modifiers:
       FullAuto:
-        fireDelay: 0.018
-        maxScatterModifier: 8
-        shotsToMaxScatter: 6
+        maxScatterModifier: 15
+        useBurstScatterMult: true
+        unwieldedScatterMultiplier: 2
+        shotsToMaxScatter: 25
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 0.9
-    accuracyMultiplierUnwielded: 0.55
+    accuracyMultiplier: 1
+    accuracyMultiplierUnwielded: 0.5
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -64,7 +64,7 @@
           tags:
           - RuMCMagazinePKP_MS
   - type: GunDamageModifier
-    multiplier: 1.05
+    multiplier: 1
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -93,7 +93,7 @@
           - RuMCAttachmentAK13StockCollapsible
           - RuMCAttachmentPKPStockCollapsible
       rmc-aslot-underbarrel:
-        startingAttachable: RMCAttachmentBipod
+        #startingAttachable: RMCAttachmentBipod
         whitelist:
           tags:
           - RMCAttachmentAngledGrip
@@ -117,7 +117,12 @@
     - RuMCWeaponLMGPKP_MS
     - RMCWeaponLMGQYJ72
   - type: WieldDelay
-    baseDelay: 0.65
+    baseDelay: 1.9
+  - type: WieldableSpeedModifiers
+    base: 0.5
+    light: 0.69
+    medium: 0.75
+    heavy: 0.806
   - type: GunRequiresWield
 
 - type: entity
@@ -137,7 +142,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -186,7 +191,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight

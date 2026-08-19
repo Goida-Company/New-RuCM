@@ -40,22 +40,21 @@
     - SemiAuto
     - FullAuto
     recoilUnwielded: 3
-    scatterWielded: 2.5
-    scatterUnwielded: 9
-    baseFireRate: 6
-    burstScatterMult: 1
+    scatterWielded: 3.5
+    scatterUnwielded: 10
+    baseFireRate: 5
     modifiers:
       FullAuto:
-        maxScatterModifier: 10
+        maxScatterModifier: 8
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 5
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 13
+        Blunt: 15
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.35
-    accuracyMultiplierUnwielded: 0.55
+    accuracyMultiplier: 1.5
+    accuracyMultiplierUnwielded: 0.65
   - type: ItemSlots
     slots:
       gun_magazine:
@@ -111,7 +110,7 @@
     medium: 0.8
     heavy: 0.77
   - type: WieldDelay
-    baseDelay: 0.12
+    baseDelay: 0.22
   - type: GunRequiresWield
 
 - type: entity
@@ -128,7 +127,7 @@
           tags:
           - RuMCAttachmentSuppressorVAL
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight

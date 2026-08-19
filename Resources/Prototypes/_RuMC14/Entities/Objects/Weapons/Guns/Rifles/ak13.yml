@@ -32,25 +32,25 @@
     - SemiAuto
     - Burst
     - FullAuto
-    recoilUnwielded: 3.5
+    recoilUnwielded: 2
     scatterWielded: 3.8
     scatterUnwielded: 10
-    baseFireRate: 5
+    baseFireRate: 4.05
     burstScatterMult: 1
     modifiers:
       Burst:
-        fireDelay: 0.035
-        maxScatterModifier: 15
+        fireDelay: 0.065
+        maxScatterModifier: 6
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 6
       FullAuto:
-        maxScatterModifier: 3
+        maxScatterModifier: 9
         useBurstScatterMult: true
         unwieldedScatterMultiplier: 2
         shotsToMaxScatter: 4
   - type: RMCWeaponAccuracy
-    accuracyMultiplier: 1.35
+    accuracyMultiplier: 1.6
     accuracyMultiplierUnwielded: 0.6
   - type: ItemSlots
     slots:
@@ -68,7 +68,7 @@
           - RMCMagazineRifleAK4047HEAP
           - RuMCMagazineAK13
   - type: GunDamageModifier
-    multiplier: 1.15
+    multiplier: 1.25
   - type: AttachableHolder
     slots:
       rmc-aslot-barrel:
@@ -121,7 +121,6 @@
     - RuMCWeaponRifleAK13
   - type: WieldDelay
     baseDelay: 0.22
-  - type: GunRequiresWield
 
 - type: entity
   parent: RuMCWeaponRifleAK13
@@ -139,7 +138,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -187,7 +186,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight
@@ -235,7 +234,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS5RedDotSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight

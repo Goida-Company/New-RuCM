@@ -135,7 +135,7 @@
           - RMCAttachmentSuppressor
           - RMCM5Bayonet
       rmc-aslot-rail:
-        startingAttachable: RMCAttachmentS6ReflexSight
+        startingAttachable: AU14AttachmentTwoPointSling
         whitelist:
           tags:
           - RMCAttachmentRailFlashlight

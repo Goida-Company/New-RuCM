@@ -68,7 +68,6 @@ namespace Content.Shared.Interaction
         [Dependency] private RotateToFaceSystem _rotateToFaceSystem = default!;
         [Dependency] private SharedContainerSystem _containerSystem = default!;
         [Dependency] private SharedMapSystem _map = default!;
-        [Dependency] private IMapManager _mapManager = default!; // RuMC edit
         [Dependency] private SharedPhysicsSystem _broadphase = default!;
         [Dependency] private SharedTransformSystem _transform = default!;
         [Dependency] private SharedVerbSystem _verbSystem = default!;
@@ -1006,22 +1005,22 @@ namespace Content.Shared.Interaction
                     ignoreAnchored = angleDelta < wallMount.Arc / 2 || Math.Tau - angleDelta < wallMount.Arc / 2;
                 }
 
-                if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid)) // RuMC edit
-                {
-                    ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
-                    var lookupResults = new HashSet<EntityUid>();
-                    _lookup.GetEntitiesInRange(targetCoords.MapId, targetCoords.Position, 0.2f, lookupResults);
-                    foreach (var ent in lookupResults)
-                    {
-                        if (!TryComp(ent, out TransformComponent? xform) ||
-                            !xform.Anchored)
-                        {
-                            continue;
-                        }
+                // if (ignoreAnchored && _mapManager.TryFindGridAt(targetCoords, out var gridUid, out var grid)) // RuMC edit
+                // {
+                //     ignored.UnionWith(_map.GetAnchoredEntities((gridUid, grid), targetCoords));
+                //     var lookupResults = new HashSet<EntityUid>();
+                //     _lookup.GetEntitiesInRange(targetCoords.MapId, targetCoords.Position, 0.2f, lookupResults);
+                //     foreach (var ent in lookupResults)
+                //     {
+                //         if (!TryComp(ent, out TransformComponent? xform) ||
+                //             !xform.Anchored)
+                //         {
+                //             continue;
+                //         }
 
-                        ignored.Add(ent);
-                    }
-                }
+                //         ignored.Add(ent);
+                //     }
+                // }
             }
 
             Ignored combinedPredicate = e => e == target || (predicate?.Invoke(e) ?? false) || ignored.Contains(e);
