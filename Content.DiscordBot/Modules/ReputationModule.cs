@@ -14,9 +14,12 @@ public sealed class ReputationModule(
     private const double MinimumTrustDisplayEvidence = 1.0;
 
     [SlashCommand("профиль", "Показать репутацию, игровую активность и доверие по направлениям")]
-    public Task ProfileAsync() => ExecuteAsync(async () =>
+    public Task ProfileAsync(
+        [Summary("пользователь", "Пользователь, чью репутацию показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var profile = await reputation.GetProfileAsync(user.Id);
         var selectedPaths = profile.Paths.Select(value => value.Track).ToHashSet(StringComparer.Ordinal);
         var pathText = profile.Paths.Count == 0
@@ -82,9 +85,12 @@ public sealed class ReputationModule(
     });
 
     [SlashCommand("прогресс", "Показать прогресс автоматической квалификации по выбранным путям")]
-    public Task ProgressAsync() => ExecuteAsync(async () =>
+    public Task ProgressAsync(
+        [Summary("пользователь", "Пользователь, чей прогресс квалификации показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var rows = await selection.QualificationProgressAsync(user.Id);
         if (rows.Count == 0)
         {
@@ -144,7 +150,7 @@ public sealed class ReputationModule(
         }
 
         var embed = new EmbedBuilder()
-            .WithTitle("Прогресс квалификации")
+            .WithTitle($"Прогресс квалификации • {discordUser.Username}")
             .WithDescription(
                 "Квалификация повышается только когда одновременно выполнены консервативная 90% граница, " +
                 "effective evidence и минимальное число завершённых обязанностей. Однотипные действия имеют убывающий вес `1/√n` в пределах одного дня; устойчивые действия в разные дни снова получают полный базовый вес. " +
@@ -157,9 +163,12 @@ public sealed class ReputationModule(
     });
 
     [SlashCommand("история", "Показать последние статистические события репутации")]
-    public Task HistoryAsync() => ExecuteAsync(async () =>
+    public Task HistoryAsync(
+        [Summary("пользователь", "Пользователь, чью историю репутации показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var rows = await history.GetAsync(user.Id, 25);
         var description = rows.Count == 0
             ? "Значимых репутационных наблюдений пока нет. Игровая активность всё равно участвует в базовой оценке."
@@ -180,7 +189,7 @@ public sealed class ReputationModule(
         if (description.Length > 3900)
             description = description[..3900] + "…";
         await RespondAsync(embed: new EmbedBuilder()
-            .WithTitle("История репутации")
+            .WithTitle($"История репутации • {discordUser.Username}")
             .WithDescription(description)
             .WithColor(Color.DarkBlue)
             .WithFooter("Архивные события старой системы сохраняются для аудита, но не входят в Reputation v2. Вес актуальных событий уменьшается со временем; серьёзные ошибки реабилитируются устойчивым хорошим поведением.")
