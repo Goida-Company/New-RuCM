@@ -141,6 +141,12 @@ public sealed class GovernanceAHelpQueueEui : BaseEui
                         _error = Loc.GetString(notesError);
                     break;
                 }
+                case GovernanceAHelpQueueAction.TeleportToReporter:
+                    await TeleportToTicketPartyAsync(message.TicketId, false);
+                    break;
+                case GovernanceAHelpQueueAction.TeleportToIncidentTarget:
+                    await TeleportToTicketPartyAsync(message.TicketId, true);
+                    break;
                 case GovernanceAHelpQueueAction.EscalateToCourt:
                 {
                     var courtError = await _system.EscalateIncidentToCourtAsync(
@@ -171,6 +177,36 @@ public sealed class GovernanceAHelpQueueEui : BaseEui
         {
             _busy = false;
         }
+    }
+
+    private async Task TeleportToTicketPartyAsync(long ticketId, bool incidentTarget)
+    {
+        var queue = await _system.GetQueueAsync(Player);
+        var ticket = queue.SingleOrDefault(value => value.Id == ticketId && value.ClaimedByMe);
+        if (ticket == null)
+        {
+            _error = Loc.GetString("governance-ahelp-teleport-not-owned");
+            return;
+        }
+
+        var targetUserId = ticket.ReporterUserId;
+        if (incidentTarget)
+        {
+            var incident = await _system.GetIncidentAsync(Player, ticketId);
+            if (incident == null)
+            {
+                _error = Loc.GetString("governance-ahelp-teleport-no-target");
+                return;
+            }
+
+            targetUserId = incident.TargetUserId;
+        }
+
+        var teleported = await IoCManager.Resolve<IEntityManager>()
+            .System<GovernanceDutyVerbSystem>()
+            .TeleportResponderToPlayerAsync(Player, targetUserId);
+        if (!teleported)
+            _error = Loc.GetString("governance-ahelp-teleport-unavailable");
     }
 
     private async Task RunIncidentActionAsync(
