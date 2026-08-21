@@ -29,7 +29,7 @@ public sealed record GovernanceAHelpActionExecutionResult(
 /// This system does not depend on BwoinkSystem: messages, assignment and status live in PostgreSQL
 /// and are presented directly through Governance EUIs.
 /// </summary>
-public sealed class GovernanceAHelpSystem : EntitySystem
+public sealed partial class GovernanceAHelpSystem : EntitySystem
 {
     [Dependency] private readonly IChatManager _chat = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
@@ -258,80 +258,20 @@ public sealed class GovernanceAHelpSystem : EntitySystem
             return "governance-ahelp-records-access-denied";
 
         targetQuery = targetQuery.Trim();
-        if (string.IsNullOrWhiteSpace(targetQuery))
-            return "governance-ahelp-notes-target-required";
 
-        Guid targetId;
-        if (Guid.TryParse(targetQuery, out var parsed))
-        {
-            targetId = parsed;
-        }
-        else
-        {
-            var located = await _locator.LookupIdByNameAsync(targetQuery);
-            if (located == null)
-                return "governance-ahelp-notes-target-not-found";
-            targetId = located.UserId;
-        }
+        var located = await _locator.LookupIdByNameOrIdAsync(targetQuery);
+        if (located == null)
+            return "governance-ahelp-notes-target-not-found";
 
-        var notes = new AdminNotesEui(governanceDutyReadOnly: true);
-        _euis.OpenEui(notes, player);
-        await notes.ChangeNotedPlayer(targetId);
-
+        _euis.OpenEui(new AdminNotesEui(located.UserId, governanceDutyAccess: true), player);
         await _governance.AuditAsync(
             "moderation.notes.opened",
             player.UserId,
-            new NetUserId(targetId),
+            located.UserId,
             "duty_session",
             authorization.Duty.Id.ToString(),
-            new { round_id = _ticker.RoundId, access = "full_read" });
+            new { round_id = _ticker.RoundId, target = located.UserId.ToString() });
         return null;
-    }
-
-    public async Task<string?> EscalateIncidentToCourtAsync(
-        ICommonSession player,
-        long ticketId,
-        string reason)
-    {
-        if (!await CanUseResponderAsync(player))
-            return "governance-ahelp-court-access-denied";
-
-        reason = reason.Trim();
-        if (reason.Length is < 10 or > 1500)
-            return "governance-ahelp-court-reason-invalid";
-
-        var incident = await GetIncidentAsync(player, ticketId);
-        if (incident == null)
-            return "governance-ahelp-action-no-incident";
-
-        var court = await _database.EscalateGovernanceIncidentToCourtAsync(
-            ticketId,
-            player.UserId,
-            _ticker.RoundId,
-            reason);
-        if (court == null)
-            return "governance-ahelp-court-create-failed";
-
-        await RefreshResponderEuisAsync();
-        return null;
-    }
-
-    public async Task<IReadOnlyList<GovernanceIncidentActionInfo>> GetIncidentActionsAsync(
-        ICommonSession player,
-        long incidentId)
-    {
-        if (!await CanUseResponderAsync(player))
-            return [];
-
-        return await _database.GetGovernanceIncidentActionsAsync(incidentId, player.UserId, _ticker.RoundId);
-    }
-
-    public async Task<IReadOnlyList<GovernanceIncidentActionInfo>> GetPendingActionApprovalsAsync(ICommonSession player)
-    {
-        if (!await CanUseResponderAsync(player))
-            return [];
-
-        return await _database.GetGovernancePendingActionApprovalsAsync(player.UserId, _ticker.RoundId);
     }
 
     public async Task<GovernanceAHelpActionExecutionResult> ProposeIncidentActionAsync(
@@ -344,52 +284,42 @@ public sealed class GovernanceAHelpSystem : EntitySystem
         if (!await CanUseResponderAsync(player))
             return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-access-denied", []);
 
-        var incident = await GetIncidentAsync(player, ticketId);
-        if (incident == null)
-            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-no-incident", []);
-        if (incident.CourtCaseId != null)
-            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-court-escalated", []);
-
-        if (actionType is not ("freeze" or "round_remove" or "request_explanation" or "view_logs"))
+        if (actionType is not ("freeze" or "round_remove"))
             return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-invalid", []);
 
         reason = reason.Trim();
         if (reason.Length is < 10 or > 512)
             return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-reason-invalid", []);
 
-        var capability = $"moderation.{actionType}";
-        if (await _governance.AuthorizeAsync(player.UserId, _ticker.RoundId, capability) == null)
-            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-access-denied", []);
+        if (actionType == "freeze" && durationSeconds is < 1 or > 120)
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-freeze-duration-invalid", []);
 
-        if (actionType == "freeze")
-        {
-            var maxSeconds = Math.Clamp(_cfg.GetCVar(CCCVars.GovernanceFreezeMaxSeconds), 1, 120);
-            if (durationSeconds is null || durationSeconds < 1 || durationSeconds > maxSeconds)
-                return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-freeze-duration-invalid", []);
-        }
-        else
-        {
-            durationSeconds = null;
-        }
+        var incident = await _database.GetGovernanceAHelpIncidentAsync(ticketId, player.UserId, _ticker.RoundId);
+        if (incident == null)
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-no-incident", []);
+        if (incident.CourtCaseId != null)
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-court-escalated", []);
 
-        short requiredApprovals = actionType == "round_remove" ? (short) 2 : (short) 1;
-        var action = await _database.ProposeGovernanceIncidentActionAsync(
+        var result = await _database.CreateGovernanceModerationActionAsync(
             incident.Id,
             player.UserId,
+            incident.TargetUserId,
             _ticker.RoundId,
             actionType,
             reason,
-            durationSeconds,
-            requiredApprovals);
-        if (action == null)
+            durationSeconds);
+        if (result == null)
             return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-create-failed", []);
 
-        GovernanceAHelpActionExecutionResult execution = GovernanceAHelpActionExecutionResult.Success;
-        if (action.Status == "approved")
-            execution = await ExecuteApprovedActionAsync(player, action);
+        if (result.Status == "approved")
+        {
+            var execution = await ExecuteModerationActionAsync(player, result);
+            if (execution != null)
+                return execution;
+        }
 
         await RefreshResponderEuisAsync();
-        return execution;
+        return GovernanceAHelpActionExecutionResult.Success;
     }
 
     public async Task<GovernanceAHelpActionExecutionResult> ReviewIncidentActionAsync(
@@ -397,162 +327,117 @@ public sealed class GovernanceAHelpSystem : EntitySystem
         long actionId,
         string decision)
     {
-        if (!await CanUseResponderAsync(player) || decision is not ("approve" or "reject"))
-            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-review-failed", []);
+        if (!await CanUseResponderAsync(player))
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-access-denied", []);
 
-        var action = await _database.ReviewGovernanceIncidentActionAsync(
+        var result = await _database.ReviewGovernanceModerationActionAsync(
             actionId,
             player.UserId,
             _ticker.RoundId,
             decision);
-        if (action == null)
+        if (result == null)
             return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-review-failed", []);
 
-        GovernanceAHelpActionExecutionResult execution = GovernanceAHelpActionExecutionResult.Success;
-        if (action.Status == "approved")
-            execution = await ExecuteApprovedActionAsync(player, action);
+        if (result.Status == "approved")
+        {
+            var execution = await ExecuteModerationActionAsync(player, result);
+            if (execution != null)
+                return execution;
+        }
 
         await RefreshResponderEuisAsync();
-        return execution;
+        return GovernanceAHelpActionExecutionResult.Success;
     }
 
-    private async Task<GovernanceAHelpActionExecutionResult> ExecuteApprovedActionAsync(
-        ICommonSession executor,
-        GovernanceIncidentActionInfo action)
+    private async Task<GovernanceAHelpActionExecutionResult?> ExecuteModerationActionAsync(
+        ICommonSession player,
+        GovernanceModerationActionInfo action)
     {
-        if (!_players.TryGetSessionById(action.TargetUserId, out var target))
-            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-target-unavailable", []);
-
-        var system = EntityManager.System<GovernanceSystem>();
-        switch (action.ActionType)
+        if (!_players.TryGetSessionById(action.TargetUserId, out var target) ||
+            target.AttachedEntity is not { } targetEntity ||
+            player.AttachedEntity is not { } actorEntity)
         {
-            case "request_explanation":
-            {
-                var result = await system.TryRequestExplanationAsync(executor, target, action.Id, action.Reason);
-                return result.Allowed
-                    ? GovernanceAHelpActionExecutionResult.Success
-                    : new GovernanceAHelpActionExecutionResult("governance-ahelp-action-execution-failed", []);
-            }
-            case "view_logs":
-            {
-                var result = await system.TryViewLogsAsync(executor, target, action.Id);
-                return result.Allowed
-                    ? new GovernanceAHelpActionExecutionResult(null, result.Logs)
-                    : new GovernanceAHelpActionExecutionResult("governance-ahelp-action-execution-failed", []);
-            }
-            case "freeze":
-            {
-                var result = await system.TryFreezeAsync(
-                    executor,
-                    target,
-                    action.DurationSeconds ?? 0,
-                    action.Id,
-                    action.Reason);
-                return result.Allowed
-                    ? GovernanceAHelpActionExecutionResult.Success
-                    : new GovernanceAHelpActionExecutionResult("governance-ahelp-action-execution-failed", []);
-            }
-            case "round_remove":
-            {
-                var result = await system.TryRoundRemoveAsync(executor, target, action.Id, action.Reason);
-                return result.Allowed
-                    ? GovernanceAHelpActionExecutionResult.Success
-                    : new GovernanceAHelpActionExecutionResult("governance-ahelp-action-execution-failed", []);
-            }
-            default:
-                return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-invalid", []);
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-target-unavailable", []);
         }
+
+        var result = await EntityManager.System<GovernanceEventActionSystem>().ExecuteModerationActionAsync(
+            player,
+            actorEntity,
+            target,
+            targetEntity,
+            action);
+        if (!result)
+            return new GovernanceAHelpActionExecutionResult("governance-ahelp-action-execution-failed", []);
+
+        await RefreshResponderEuisAsync();
+        return null;
     }
 
-    public Task<GovernanceAHelpPlayerTicketInfo?> GetPlayerTicketAsync(ICommonSession player)
+    public async Task<IReadOnlyList<GovernanceModerationActionInfo>> GetIncidentActionsAsync(
+        ICommonSession player,
+        long ticketId)
     {
-        return _database.GetGovernanceAHelpPlayerTicketAsync(player.UserId, _ticker.RoundId);
+        if (!await CanUseResponderAsync(player))
+            return [];
+
+        return await _database.GetGovernanceAHelpIncidentActionsAsync(ticketId, player.UserId, _ticker.RoundId);
     }
 
-    public Task<IReadOnlyList<GovernanceAHelpModernTranscriptLine>> GetPlayerTranscriptAsync(ICommonSession player)
+    public async Task<IReadOnlyList<GovernancePendingModerationApprovalInfo>> GetPendingActionApprovalsAsync(
+        ICommonSession player)
     {
-        return _database.GetGovernanceAHelpPlayerTranscriptAsync(player.UserId, _ticker.RoundId);
+        if (!await CanUseResponderAsync(player))
+            return [];
+
+        return await _database.GetGovernancePendingModerationApprovalsAsync(player.UserId, _ticker.RoundId);
     }
 
-    public async Task<bool> SendPlayerMessageAsync(ICommonSession player, string text)
+    public async Task<string?> EscalateIncidentToCourtAsync(ICommonSession player, long ticketId, string reason)
     {
-        if (!_governance.Enabled || _ticker.RoundId <= 0 || string.IsNullOrWhiteSpace(text))
-            return false;
+        if (!await CanUseResponderAsync(player))
+            return "governance-ahelp-court-access-denied";
 
-        var ticketId = await _database.SendGovernanceAHelpPlayerMessageAsync(
+        reason = reason.Trim();
+        if (reason.Length is < 10 or > 1500)
+            return "governance-ahelp-court-reason-invalid";
+
+        var result = await _database.EscalateGovernanceAHelpIncidentToCourtAsync(
+            ticketId,
             player.UserId,
             _ticker.RoundId,
-            text);
-        if (ticketId == null)
-            return false;
+            reason);
+        if (result == null)
+            return "governance-ahelp-court-create-failed";
 
-        await RefreshPlayerEuisAsync(player.UserId);
         await RefreshResponderEuisAsync();
-
-        var responderId = await _database.GetGovernanceAHelpResponderAsync(player.UserId, _ticker.RoundId);
-        if (responderId != null && _players.TryGetSessionById(responderId.Value, out var responderSession))
-        {
-            var preview = text.Trim();
-            if (preview.Length > 160)
-                preview = preview[..160] + "…";
-            RaiseNetworkEvent(
-                new GovernanceAHelpResponderReplyReceived(ticketId.Value, player.Name, preview),
-                responderSession);
-        }
-
-        return true;
-    }
-
-    public async Task<bool> ResolveByPlayerAsync(ICommonSession player)
-    {
-        if (!_governance.Enabled || _ticker.RoundId <= 0)
-            return false;
-
-        var resolved = await _database.ResolveGovernanceAHelpByReporterAsync(player.UserId, _ticker.RoundId);
-        if (resolved)
-        {
-            await RefreshPlayerEuisAsync(player.UserId);
-            await RefreshResponderEuisAsync();
-        }
-
-        return resolved;
-    }
-
-    public void RegisterResponderEui(GovernanceAHelpQueueEui eui)
-    {
-        _responderEuis.Add(eui);
-    }
-
-    public void UnregisterResponderEui(GovernanceAHelpQueueEui eui)
-    {
-        _responderEuis.Remove(eui);
-    }
-
-    public void RegisterPlayerEui(NetUserId userId, GovernanceAHelpPlayerEui eui)
-    {
-        if (!_playerEuis.TryGetValue(userId, out var euis))
-        {
-            euis = new HashSet<GovernanceAHelpPlayerEui>();
-            _playerEuis[userId] = euis;
-        }
-
-        euis.Add(eui);
-    }
-
-    public void UnregisterPlayerEui(NetUserId userId, GovernanceAHelpPlayerEui eui)
-    {
-        if (!_playerEuis.TryGetValue(userId, out var euis))
-            return;
-
-        euis.Remove(eui);
-        if (euis.Count == 0)
-            _playerEuis.Remove(userId);
+        return null;
     }
 
     public async Task RefreshResponderEuisAsync()
     {
         foreach (var eui in _responderEuis.ToArray())
             await eui.RefreshFromSystemAsync();
+    }
+
+    public void RegisterResponderEui(GovernanceAHelpQueueEui eui) => _responderEuis.Add(eui);
+    public void UnregisterResponderEui(GovernanceAHelpQueueEui eui) => _responderEuis.Remove(eui);
+
+    private async Task RefreshTicketReporterAsync(long ticketId, ICommonSession? responder = null)
+    {
+        var ticket = await _database.GetGovernanceAHelpTicketAsync(ticketId);
+        if (ticket == null)
+            return;
+
+        await RefreshPlayerEuisAsync(ticket.ReporterUserId);
+        if (_players.TryGetSessionById(ticket.ReporterUserId, out var reporter))
+        {
+            RaiseNetworkEvent(
+                new GovernanceAHelpResponderReplyReceived(
+                    ticket.Id,
+                    responder?.Name ?? string.Empty,
+                    ticket.Summary.Length > 160 ? ticket.Summary[..160] + "…" : ticket.Summary),
+                reporter);
+        }
     }
 
     public async Task RefreshPlayerEuisAsync(NetUserId userId)
@@ -564,11 +449,19 @@ public sealed class GovernanceAHelpSystem : EntitySystem
             await eui.RefreshFromSystemAsync();
     }
 
-    private async Task RefreshTicketReporterAsync(long ticketId, ICommonSession responder)
+    public void RegisterPlayerEui(NetUserId userId, GovernanceAHelpPlayerEui eui)
     {
-        var queue = await _database.GetGovernanceAHelpQueueAsync(responder.UserId, _ticker.RoundId);
-        var ticket = queue.SingleOrDefault(value => value.Id == ticketId);
-        if (ticket != null)
-            await RefreshPlayerEuisAsync(ticket.ReporterUserId);
+        if (!_playerEuis.TryGetValue(userId, out var euis))
+            _playerEuis[userId] = euis = new HashSet<GovernanceAHelpPlayerEui>();
+        euis.Add(eui);
+    }
+
+    public void UnregisterPlayerEui(NetUserId userId, GovernanceAHelpPlayerEui eui)
+    {
+        if (!_playerEuis.TryGetValue(userId, out var euis))
+            return;
+        euis.Remove(eui);
+        if (euis.Count == 0)
+            _playerEuis.Remove(userId);
     }
 }
