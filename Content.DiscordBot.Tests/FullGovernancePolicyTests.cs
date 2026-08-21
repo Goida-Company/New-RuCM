@@ -33,6 +33,14 @@ public sealed class FullGovernancePolicyTests
         Assert.Throws<CourtRuleException>(() => CommunityCourtService.NormalizeGameNickname(new string('x', 65)));
     }
 
+    [TestCase(null, true)]
+    [TestCase(0L, true)]
+    [TestCase(123456789L, false)]
+    public void CourtDefenseIsSkippedOnlyWithoutDiscordLink(long? discordUserId, bool expected)
+    {
+        Assert.That(CourtFilingService.ShouldSkipDefense(discordUserId), Is.EqualTo(expected));
+    }
+
     [TestCase(ModerationReviewOutcomes.Correct, 100, 100)]
     [TestCase(ModerationReviewOutcomes.ReasonableButWrong, 85, 100)]
     [TestCase(ModerationReviewOutcomes.ProceduralError, 60, 35)]
