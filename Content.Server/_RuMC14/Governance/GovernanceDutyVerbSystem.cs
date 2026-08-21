@@ -5,6 +5,8 @@ using Content.Server.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Verbs;
 using Robust.Server.GameObjects;
+using Robust.Server.Player;
+using Robust.Shared.Enums;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -21,6 +23,7 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
     [Dependency] private readonly IServerDbManager _database = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly GovernanceManager _governance = default!;
+    [Dependency] private readonly IPlayerManager _players = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -58,7 +61,7 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
         {
             Text = Loc.GetString("governance-duty-verb-teleport-to"),
             Category = VerbCategory.Admin,
-            Act = () => _ = TeleportToAsync(actor.PlayerSession, args.User, args.Target, targetUserId, targetName),
+            Act = () => _ = TeleportResponderToPlayerAsync(actor.PlayerSession, targetUserId),
         });
 
         args.Verbs.Add(new Verb
@@ -69,23 +72,36 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
         });
     }
 
-    private async Task TeleportToAsync(
-        ICommonSession responder,
-        EntityUid responderEntity,
-        EntityUid targetEntity,
-        NetUserId targetUserId,
-        string targetName)
+    /// <summary>
+    /// Shared server-authoritative implementation used by both the entity verb and AHelp workspace.
+    /// The target is resolved from a server-side NetUserId; clients never provide coordinates.
+    /// </summary>
+    public async Task<bool> TeleportResponderToPlayerAsync(ICommonSession responder, NetUserId targetUserId)
     {
-        if (_ticker.RoundId <= 0 || !HasComp<GhostComponent>(responderEntity))
-            return;
+        if (_ticker.RoundId <= 0 ||
+            responder.AttachedEntity is not { } responderEntity ||
+            !HasComp<GhostComponent>(responderEntity) ||
+            !_players.TryGetSessionById(targetUserId, out var targetSession) ||
+            targetSession.Status is not (SessionStatus.Connected or SessionStatus.InGame) ||
+            targetSession.AttachedEntity is not { } targetEntity ||
+            Deleted(targetEntity) ||
+            Deleted(responderEntity))
+        {
+            return false;
+        }
 
         var authorization = await _governance.AuthorizeAsync(responder.UserId, _ticker.RoundId, "moderation.ahelp");
-        if (authorization == null || Deleted(targetEntity) || Deleted(responderEntity))
-            return;
+        if (authorization == null ||
+            Deleted(targetEntity) ||
+            Deleted(responderEntity) ||
+            !HasComp<GhostComponent>(responderEntity))
+        {
+            return false;
+        }
 
         var coordinates = _transform.GetMapCoordinates(targetEntity);
         if (coordinates.MapId == MapId.Nullspace)
-            return;
+            return false;
 
         _transform.SetMapCoordinates(responderEntity, coordinates);
         await _governance.AuditAsync(
@@ -94,7 +110,8 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
             targetUserId,
             "duty_session",
             authorization.Duty.Id.ToString(),
-            new { round_id = _ticker.RoundId, target_name = targetName });
+            new { round_id = _ticker.RoundId, target_name = targetSession.Name });
+        return true;
     }
 
     private async Task TeleportHereAsync(
