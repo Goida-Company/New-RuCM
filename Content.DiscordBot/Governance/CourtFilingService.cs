@@ -5,13 +5,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Content.DiscordBot.Governance;
 
+public sealed record CourtFilingResult(
+    GovernanceCourtCase CourtCase,
+    bool DefenseSkippedBecauseDefendantHasNoDiscord);
+
 public sealed class CourtFilingService(
     GovernanceIdentityService identities,
     Func<GovernanceDbContext> governanceFactory,
     Func<ServerDbContext> gameFactory,
     CourtPolicy policy)
 {
-    public async Task<GovernanceCourtCase> FileByGameNicknameAsync(
+    public async Task<CourtFilingResult> FileByGameNicknameAsync(
         ulong claimantDiscordId,
         string defendantGameNickname,
         int roundId,
@@ -33,6 +37,7 @@ public sealed class CourtFilingService(
 
         await ValidateRoundAsync(roundId, claimant.Ss14UserId, defendant.Ss14UserId);
         var now = DateTime.UtcNow;
+        var defenseSkipped = ShouldSkipDefense(defendant.DiscordUserId);
         await using var governance = governanceFactory();
         await using var transaction = await governance.Database.BeginTransactionAsync(IsolationLevel.Serializable);
         var courtCase = governance.CourtCases.Add(new GovernanceCourtCase
@@ -41,7 +46,7 @@ public sealed class CourtFilingService(
             DefendantUserId = defendant.Id,
             RoundId = roundId,
             Summary = summary,
-            Status = CourtStatuses.Defense,
+            Status = defenseSkipped ? CourtStatuses.AwaitingJury : CourtStatuses.Defense,
             FiledAt = now,
             DefenseDeadline = now + policy.DefensePeriod,
         }).Entity;
@@ -84,13 +89,34 @@ public sealed class CourtFilingService(
             {
                 round_id = roundId,
                 defendant_user_id = defendant.Id,
-                defendant_discord_linked = defendant.DiscordUserId is > 0,
+                defendant_discord_linked = !defenseSkipped,
+                defense_skipped = defenseSkipped,
             }),
         });
+        if (defenseSkipped)
+        {
+            governance.AuditEvents.Add(new GovernanceAuditEvent
+            {
+                EventType = "court.defense_skipped_unlinked_defendant",
+                ActorType = "system",
+                TargetType = "ss14_user",
+                TargetId = defendant.Ss14UserId.ToString(),
+                EntityType = "court_case",
+                EntityId = courtCase.Id.ToString(),
+                CreatedAt = now,
+                Payload = JsonSerializer.Serialize(new
+                {
+                    defendant_user_id = defendant.Id,
+                    reason = "discord_not_linked",
+                }),
+            });
+        }
         await governance.SaveChangesAsync();
         await transaction.CommitAsync();
-        return courtCase;
+        return new CourtFilingResult(courtCase, defenseSkipped);
     }
+
+    public static bool ShouldSkipDefense(long? defendantDiscordUserId) => defendantDiscordUserId is not > 0;
 
     private async Task ValidateRoundAsync(int roundId, Guid claimant, Guid defendant)
     {
