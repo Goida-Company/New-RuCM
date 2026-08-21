@@ -43,7 +43,7 @@ public sealed partial class ChatUIController
             return;
 
         var canSend = CanSendChannels | ChatSelectChannel.Admin;
-        var filterable = FilterableChannels | ChatChannel.Admin | ChatChannel.AdminAlert | ChatChannel.AdminChat;
+        var filterable = FilterableChannels | ChatChannel.AdminChat;
         var selectable = SelectableChannels | ChatSelectChannel.Admin;
 
         var canSendChanged = canSend != CanSendChannels;

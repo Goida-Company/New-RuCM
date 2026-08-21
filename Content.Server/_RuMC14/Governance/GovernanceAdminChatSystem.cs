@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Content.Server._RMC14.Discord;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -76,13 +75,12 @@ public sealed class GovernanceAdminChatSystem : EntitySystem
         if (_chat.HandleRateLimit(player) != RateLimitStatus.Allowed)
             return;
 
-        if (message.Length > _config.GetCVar(CCVars.ChatMaxMessageLength))
+        var maxLength = _config.GetCVar(CCVars.ChatMaxMessageLength);
+        if (message.Length > maxLength)
         {
             _chat.DispatchServerMessage(
                 player,
-                Loc.GetString(
-                    "chat-manager-max-message-length-exceeded-message",
-                    ("limit", _config.GetCVar(CCVars.ChatMaxMessageLength))));
+                Loc.GetString("chat-manager-max-message-length-exceeded-message", ("limit", maxLength)));
             return;
         }
 
@@ -120,6 +118,30 @@ public sealed class GovernanceAdminChatSystem : EntitySystem
 
         _discordLink.SendMessage(message, player.Name, ChatChannel.AdminChat);
         _adminLogger.Add(LogType.Chat, $"Admin chat from {player:Player}: {message}");
+    }
+
+    public void SendHookAdmin(string sender, string message)
+    {
+        var wrappedMessage = Loc.GetString(
+            "chat-manager-send-hook-admin-wrap-message",
+            ("senderName", sender),
+            ("message", FormattedMessage.EscapeText(message)));
+
+        foreach (var recipient in GetRecipients())
+        {
+            _chat.ChatMessageToOne(
+                ChatChannel.AdminChat,
+                message,
+                wrappedMessage,
+                default,
+                false,
+                recipient.Channel,
+                recordReplay: false,
+                audioPath: _netConfig.GetClientCVar(recipient.Channel, CCVars.AdminChatSoundPath),
+                audioVolume: _netConfig.GetClientCVar(recipient.Channel, CCVars.AdminChatSoundVolume));
+        }
+
+        _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Hook admin from {sender}: {message}");
     }
 
     public bool CanUseAdminChat(ICommonSession player)
