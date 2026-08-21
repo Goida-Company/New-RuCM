@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Content.Server.Chat.Managers;
+using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Shared.Ghost;
 using Content.Shared.Verbs;
@@ -15,6 +17,8 @@ namespace Content.Server._RuMC14.Governance;
 /// </summary>
 public sealed class GovernanceDutyVerbSystem : EntitySystem
 {
+    [Dependency] private readonly IChatManager _chat = default!;
+    [Dependency] private readonly IServerDbManager _database = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly GovernanceManager _governance = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -56,6 +60,13 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
             Category = VerbCategory.Admin,
             Act = () => _ = TeleportToAsync(actor.PlayerSession, args.User, args.Target, targetUserId, targetName),
         });
+
+        args.Verbs.Add(new Verb
+        {
+            Text = Loc.GetString("governance-duty-verb-teleport-here"),
+            Category = VerbCategory.Admin,
+            Act = () => _ = TeleportHereAsync(actor.PlayerSession, args.User, args.Target, targetUserId, targetName),
+        });
     }
 
     private async Task TeleportToAsync(
@@ -84,5 +95,65 @@ public sealed class GovernanceDutyVerbSystem : EntitySystem
             "duty_session",
             authorization.Duty.Id.ToString(),
             new { round_id = _ticker.RoundId, target_name = targetName });
+    }
+
+    private async Task TeleportHereAsync(
+        ICommonSession responder,
+        EntityUid responderEntity,
+        EntityUid targetEntity,
+        NetUserId targetUserId,
+        string targetName)
+    {
+        if (_ticker.RoundId <= 0 || !HasComp<GhostComponent>(responderEntity) || responder.UserId == targetUserId)
+            return;
+
+        var authorization = await _governance.AuthorizeAsync(responder.UserId, _ticker.RoundId, "moderation.ahelp");
+        if (authorization == null || Deleted(targetEntity) || Deleted(responderEntity))
+            return;
+
+        var coordinates = _transform.GetMapCoordinates(responderEntity);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
+        // Bringing a player to a responder is materially more intrusive than moving the observer.
+        // Persist the live incident first and fail closed if Governance cannot record it.
+        var incidentId = await _database.CreateGovernanceDutyTeleportIncidentAsync(
+            responder.UserId,
+            targetUserId,
+            _ticker.RoundId);
+        if (incidentId == null)
+        {
+            _chat.DispatchServerMessage(responder, Loc.GetString("governance-duty-teleport-here-failed"));
+            return;
+        }
+
+        if (Deleted(targetEntity) || Deleted(responderEntity) || !HasComp<GhostComponent>(responderEntity))
+            return;
+
+        coordinates = _transform.GetMapCoordinates(responderEntity);
+        if (coordinates.MapId == MapId.Nullspace)
+            return;
+
+        _transform.SetMapCoordinates(targetEntity, coordinates);
+        await _governance.AuditAsync(
+            "moderation.teleport_player_to_self",
+            responder.UserId,
+            targetUserId,
+            "live_incident",
+            incidentId.Value.ToString(),
+            new
+            {
+                round_id = _ticker.RoundId,
+                target_name = targetName,
+                duty_id = authorization.Duty.Id,
+                incident_id = incidentId.Value,
+            });
+
+        _chat.DispatchServerMessage(
+            responder,
+            Loc.GetString(
+                "governance-duty-teleport-here-success",
+                ("target", targetName),
+                ("incident", incidentId.Value)));
     }
 }
