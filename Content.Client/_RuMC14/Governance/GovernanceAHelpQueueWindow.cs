@@ -41,6 +41,8 @@ public sealed class GovernanceAHelpQueueWindow : DefaultWindow
     private readonly Button _fullLogs;
     private readonly Button _reporterNotes;
     private readonly Button _targetNotes;
+    private readonly Button _teleportReporter;
+    private readonly Button _teleportTarget;
 
     private IReadOnlyList<GovernanceAHelpQueueItem> _tickets = [];
     private long _selectedTicketId;
@@ -254,6 +256,20 @@ public sealed class GovernanceAHelpQueueWindow : DefaultWindow
             SeparationOverride = 5,
             HorizontalExpand = true,
         };
+        _teleportReporter = new Button
+        {
+            Text = Loc.GetString("governance-ahelp-teleport-reporter"),
+            HorizontalExpand = true,
+            ClipText = true,
+        };
+        _teleportReporter.OnPressed += _ => TeleportTo(GovernanceAHelpQueueAction.TeleportToReporter);
+        _teleportTarget = new Button
+        {
+            Text = Loc.GetString("governance-ahelp-teleport-target"),
+            HorizontalExpand = true,
+            ClipText = true,
+        };
+        _teleportTarget.OnPressed += _ => TeleportTo(GovernanceAHelpQueueAction.TeleportToIncidentTarget);
         _reporterNotes = new Button
         {
             Text = Loc.GetString("governance-ahelp-tool-reporter-notes"),
@@ -268,6 +284,8 @@ public sealed class GovernanceAHelpQueueWindow : DefaultWindow
             ClipText = true,
         };
         _targetNotes.OnPressed += _ => OpenTargetNotes();
+        contextButtons.AddChild(_teleportReporter);
+        contextButtons.AddChild(_teleportTarget);
         contextButtons.AddChild(_reporterNotes);
         contextButtons.AddChild(_targetNotes);
         investigation.AddChild(contextButtons);
@@ -692,6 +710,13 @@ public sealed class GovernanceAHelpQueueWindow : DefaultWindow
         ActionRequested?.Invoke(GovernanceAHelpQueueAction.EscalateToCourt, _selectedTicketId, reason, null);
     }
 
+    private void TeleportTo(GovernanceAHelpQueueAction action)
+    {
+        if (_selectedTicketId == 0)
+            return;
+        ActionRequested?.Invoke(action, _selectedTicketId, null, null);
+    }
+
     private void OpenReporterNotes()
     {
         var selected = _tickets.FirstOrDefault(ticket => ticket.Id == _selectedTicketId);
@@ -738,6 +763,8 @@ public sealed class GovernanceAHelpQueueWindow : DefaultWindow
         _resolve.Disabled = !mine;
         _reply.Editable = canReply;
         _send.Disabled = !canReply;
+        _teleportReporter.Disabled = !mine;
+        _teleportTarget.Disabled = !mine || _incidentId == 0;
         _reporterNotes.Disabled = selected == null;
         _targetNotes.Disabled = !mine || _incidentId == 0;
 

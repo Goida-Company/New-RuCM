@@ -10,6 +10,7 @@ namespace Content.Client._RuMC14.Governance;
 public sealed class GovernanceDutyInviteEui : BaseEui
 {
     private GovernanceDutyInviteWindow? _window;
+    private GovernanceDutyInviteEuiState? _state;
     private bool _responded;
 
     public override void Opened()
@@ -21,6 +22,9 @@ public sealed class GovernanceDutyInviteEui : BaseEui
         _window.DeclineButton.OnPressed += _ => Respond(GovernanceDutyInviteChoice.Decline);
         _window.RecuseButton.OnPressed += _ => Respond(GovernanceDutyInviteChoice.Recuse);
         _window.OnClose += OnWindowClosed;
+
+        ApplyState();
+
         IoCManager.Resolve<IClyde>().RequestWindowAttention();
         _window.OpenCentered();
     }
@@ -39,16 +43,25 @@ public sealed class GovernanceDutyInviteEui : BaseEui
     public override void HandleState(EuiStateBase state)
     {
         base.HandleState(state);
-        if (state is GovernanceDutyInviteEuiState invitation)
-        {
-            _window?.UpdateInvitation(
-                invitation.Kind,
-                invitation.EntityId,
-                invitation.ExpiresAt,
-                invitation.AcceptReward,
-                invitation.DeclinePenalty,
-                invitation.ExpiryPenalty);
-        }
+        if (state is not GovernanceDutyInviteEuiState invitation)
+            return;
+
+        _state = invitation;
+        ApplyState();
+    }
+
+    private void ApplyState()
+    {
+        if (_window == null || _state == null)
+            return;
+
+        _window.UpdateInvitation(
+            _state.Kind,
+            _state.EntityId,
+            _state.ExpiresAt,
+            _state.AcceptReward,
+            _state.DeclinePenalty,
+            _state.ExpiryPenalty);
     }
 
     private void Respond(GovernanceDutyInviteChoice choice)

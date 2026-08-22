@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Reflection;
 using Content.DiscordBot.Modules;
 using Content.DiscordBot.Governance;
@@ -75,13 +75,18 @@ public sealed class CommandHandler(
 
             try
             {
+                // Court threads are the deliberate exception to the read-only Governance ACL:
+                // Discord must allow thread messages so claimant/defendant can speak there.
+                // GovernanceDiscordConversationCoordinator still deletes messages from everyone
+                // except the two parties while the defense stage is open.
+                var allowCourtThreadMessages = channelId == config.CourtChannel;
                 var everyone = socketGuild.EveryoneRole;
                 var everyoneCurrent = channel.GetPermissionOverwrite(everyone) ?? OverwritePermissions.InheritAll;
                 var everyoneReadOnly = everyoneCurrent.Modify(
                     sendMessages: PermValue.Deny,
                     createPublicThreads: PermValue.Deny,
                     createPrivateThreads: PermValue.Deny,
-                    sendMessagesInThreads: PermValue.Deny);
+                    sendMessagesInThreads: allowCourtThreadMessages ? PermValue.Allow : PermValue.Deny);
                 if (!everyoneCurrent.Equals(everyoneReadOnly))
                     await channel.AddPermissionOverwriteAsync(everyone, everyoneReadOnly);
 
@@ -98,11 +103,14 @@ public sealed class CommandHandler(
                 if (!botCurrent.Equals(botWritable))
                     await channel.AddPermissionOverwriteAsync(bot, botWritable);
 
-                await Logger.Info($"Governance Discord channel '{channel.Name}' ({channel.Id}) configured read-only for regular members.");
+                var mode = allowCourtThreadMessages
+                    ? "read-only outside threads; court thread messages enabled"
+                    : "read-only for regular members";
+                await Logger.Info($"Governance Discord channel '{channel.Name}' ({channel.Id}) configured {mode}.");
             }
             catch (Exception exception)
             {
-                await Logger.Error($"Could not configure read-only Governance permissions for channel {channelId}", exception);
+                await Logger.Error($"Could not configure Governance permissions for channel {channelId}", exception);
             }
         }
     }
@@ -117,8 +125,8 @@ public sealed class CommandHandler(
 
     private async Task HandleCommandAsync(SocketMessage messageParam)
     {
-        // Governance channels are read-only at the Discord permission layer. Do not delete
-        // messages after the fact: preventing them is deterministic and leaves no ACL race.
+        // Governance parent channels are read-only. Court threads are intentionally writable at
+        // the Discord permission layer and are filtered by GovernanceDiscordConversationCoordinator.
         var message = messageParam as SocketUserMessage;
         if (message == null || message.Author.IsBot)
             return;
@@ -251,10 +259,8 @@ public sealed class CommandHandler(
                 {
                     tiers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
                     var tier = tiers[0];
-                    discord!.LinkedAccount.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron
-                    {
-                        PlayerId = discord.LinkedAccount.PlayerId,
-                    }).Entity;
+                    discord!.LinkedAccount.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = discord.LinkedAccount.PlayerId })
+                        .Entity;
                     discord.LinkedAccount.Player.Patron.TierId = tier.Id;
                 }
 

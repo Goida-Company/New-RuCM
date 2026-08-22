@@ -1,6 +1,8 @@
 using Content.DiscordBot.Governance;
+using Content.Server.Database;
 using Discord;
 using Discord.Interactions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Content.DiscordBot.Modules;
 
@@ -9,14 +11,19 @@ public sealed class ReputationModule(
     GovernanceCommunityService community,
     ReputationService reputation,
     ReputationHistoryService history,
-    CandidateSelectionService selection) : InteractionModuleBase<SocketInteractionContext>
+    CandidateSelectionService selection,
+    Func<GovernanceDbContext> governanceFactory,
+    Func<ServerDbContext> gameFactory) : InteractionModuleBase<SocketInteractionContext>
 {
     private const double MinimumTrustDisplayEvidence = 1.0;
 
     [SlashCommand("профиль", "Показать репутацию, игровую активность и доверие по направлениям")]
-    public Task ProfileAsync() => ExecuteAsync(async () =>
+    public Task ProfileAsync(
+        [Summary("пользователь", "Пользователь, чью репутацию показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var profile = await reputation.GetProfileAsync(user.Id);
         var selectedPaths = profile.Paths.Select(value => value.Track).ToHashSet(StringComparer.Ordinal);
         var pathText = profile.Paths.Count == 0
@@ -31,9 +38,7 @@ public sealed class ReputationModule(
             var evidence = posterior?.EvidenceWeight ?? 0.0;
             var pathState = selectedPaths.Contains(track) ? string.Empty : " • путь не выбран";
             if (posterior == null || evidence < MinimumTrustDisplayEvidence)
-            {
                 return $"• **{TrackName(track)}** — недостаточно данных; вес свидетельств {evidence:F1}{pathState}";
-            }
 
             return $"• **{TrackName(track)}** — {posterior.Score}/1000; нижняя 90% граница {posterior.LowerBound:P0}; " +
                    $"вес свидетельств {evidence:F1}{pathState}";
@@ -82,9 +87,12 @@ public sealed class ReputationModule(
     });
 
     [SlashCommand("прогресс", "Показать прогресс автоматической квалификации по выбранным путям")]
-    public Task ProgressAsync() => ExecuteAsync(async () =>
+    public Task ProgressAsync(
+        [Summary("пользователь", "Пользователь, чей прогресс квалификации показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var rows = await selection.QualificationProgressAsync(user.Id);
         if (rows.Count == 0)
         {
@@ -144,7 +152,7 @@ public sealed class ReputationModule(
         }
 
         var embed = new EmbedBuilder()
-            .WithTitle("Прогресс квалификации")
+            .WithTitle($"Прогресс квалификации • {discordUser.Username}")
             .WithDescription(
                 "Квалификация повышается только когда одновременно выполнены консервативная 90% граница, " +
                 "effective evidence и минимальное число завершённых обязанностей. Однотипные действия имеют убывающий вес `1/√n` в пределах одного дня; устойчивые действия в разные дни снова получают полный базовый вес. " +
@@ -157,9 +165,12 @@ public sealed class ReputationModule(
     });
 
     [SlashCommand("история", "Показать последние статистические события репутации")]
-    public Task HistoryAsync() => ExecuteAsync(async () =>
+    public Task HistoryAsync(
+        [Summary("пользователь", "Пользователь, чью историю репутации показать")]
+        IUser? target = null) => ExecuteAsync(async () =>
     {
-        var user = await community.RequireUserAsync(Context.User.Id);
+        var discordUser = target ?? Context.User;
+        var user = await community.RequireUserAsync(discordUser.Id);
         var rows = await history.GetAsync(user.Id, 25);
         var description = rows.Count == 0
             ? "Значимых репутационных наблюдений пока нет. Игровая активность всё равно участвует в базовой оценке."
@@ -180,11 +191,69 @@ public sealed class ReputationModule(
         if (description.Length > 3900)
             description = description[..3900] + "…";
         await RespondAsync(embed: new EmbedBuilder()
-            .WithTitle("История репутации")
+            .WithTitle($"История репутации • {discordUser.Username}")
             .WithDescription(description)
             .WithColor(Color.DarkBlue)
             .WithFooter("Архивные события старой системы сохраняются для аудита, но не входят в Reputation v2. Вес актуальных событий уменьшается со временем; серьёзные ошибки реабилитируются устойчивым хорошим поведением.")
             .Build(), ephemeral: true);
+    });
+
+    [SlashCommand("топ", "Показать игроков с самой высокой общей репутацией")]
+    public Task TopAsync(
+        [Summary("количество", "Сколько мест показать")]
+        [Choice("5", 5)]
+        [Choice("10", 10)]
+        [Choice("20", 20)] int limit = 10) => ExecuteAsync(async () =>
+    {
+        await using var governance = governanceFactory();
+        var rows = await (
+            from snapshot in governance.ReputationSnapshots.AsNoTracking()
+            join user in governance.Users.AsNoTracking() on snapshot.UserId equals user.Id
+            where snapshot.Track == ReputationTracks.General && !user.IsGovernanceSuspended
+            orderby snapshot.Score descending, snapshot.LowerBound descending, snapshot.EvidenceWeight descending
+            select new
+            {
+                user.Ss14UserId,
+                snapshot.Score,
+                snapshot.LowerBound,
+                snapshot.EvidenceWeight,
+            })
+            .Take(limit)
+            .ToListAsync();
+
+        if (rows.Count == 0)
+        {
+            await RespondAsync("Рейтинг пока пуст: ещё нет рассчитанных снимков общей репутации.", ephemeral: true);
+            return;
+        }
+
+        var userIds = rows.Select(value => value.Ss14UserId).ToArray();
+        await using var game = gameFactory();
+        var names = await game.Player.AsNoTracking()
+            .Where(value => userIds.Contains(value.UserId))
+            .Select(value => new { value.UserId, value.LastSeenUserName })
+            .ToDictionaryAsync(value => value.UserId, value => value.LastSeenUserName);
+
+        var lines = rows.Select((row, index) =>
+        {
+            var place = index switch
+            {
+                0 => "🥇",
+                1 => "🥈",
+                2 => "🥉",
+                _ => $"**{index + 1}.**",
+            };
+            var name = names.GetValueOrDefault(row.Ss14UserId, row.Ss14UserId.ToString());
+            return $"{place} **{name}** — **{row.Score}/1000** • LB90 {row.LowerBound:P0} • evidence {row.EvidenceWeight:F1}";
+        });
+
+        var embed = new EmbedBuilder()
+            .WithTitle($"Топ-{rows.Count} по общей репутации")
+            .WithDescription(string.Join("\n", lines))
+            .WithColor(Color.Gold)
+            .WithFooter("RUCM Community Governance • при равном score выше LB90, затем evidence • отстранённые пользователи не отображаются")
+            .Build();
+        await RespondAsync(embed: embed);
     });
 
     private async Task ExecuteAsync(Func<Task> action)

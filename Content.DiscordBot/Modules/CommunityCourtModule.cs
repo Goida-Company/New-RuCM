@@ -26,9 +26,29 @@ public sealed class CommunityCourtModule(
         {
             EnsureEnabled();
             var evidence = attachment?.Url ?? evidenceUrl ?? string.Empty;
-            var courtCase = await filing.FileByGameNicknameAsync(Context.User.Id, defendant, round, summary, evidence);
-            await discord.EnsureCaseThreadAsync(courtCase);
-            await FollowupAsync($"Жалоба зарегистрирована как дело №{courtCase.Id}.", ephemeral: true);
+            var filingResult = await filing.FileByGameNicknameAsync(Context.User.Id, defendant, round, summary, evidence);
+            var courtCase = filingResult.CourtCase;
+            var thread = await discord.EnsureCaseThreadAsync(courtCase);
+
+            if (filingResult.DefenseSkippedBecauseDefendantHasNoDiscord)
+            {
+                await thread.SendMessageAsync(embed: new EmbedBuilder()
+                    .WithTitle("Стадия защиты пропущена")
+                    .WithDescription(
+                        "Ответчик найден по SS14, но его SS14-аккаунт не связан с Discord. " +
+                        "Получить защиту через Discord невозможно, поэтому дело сразу переведено к формированию коллегии присяжных.")
+                    .WithColor(Color.Orange)
+                    .WithCurrentTimestamp()
+                    .Build());
+
+                // Do not wait for the next scheduler tick: select/notify the jury immediately.
+                await discord.ProcessOnceAsync();
+            }
+
+            var suffix = filingResult.DefenseSkippedBecauseDefendantHasNoDiscord
+                ? " Ответчик не привязал Discord; стадия защиты пропущена."
+                : string.Empty;
+            await FollowupAsync($"Жалоба зарегистрирована как дело №{courtCase.Id}.{suffix}", ephemeral: true);
         });
     }
 
