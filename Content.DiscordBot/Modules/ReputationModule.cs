@@ -11,9 +11,7 @@ public sealed class ReputationModule(
     GovernanceCommunityService community,
     ReputationService reputation,
     ReputationHistoryService history,
-    CandidateSelectionService selection,
-    Func<GovernanceDbContext> governanceFactory,
-    Func<ServerDbContext> gameFactory) : InteractionModuleBase<SocketInteractionContext>
+    CandidateSelectionService selection) : InteractionModuleBase<SocketInteractionContext>
 {
     private const double MinimumTrustDisplayEvidence = 1.0;
 
@@ -205,34 +203,13 @@ public sealed class ReputationModule(
         [Choice("10", 10)]
         [Choice("20", 20)] int limit = 10) => ExecuteAsync(async () =>
     {
-        await using var governance = governanceFactory();
-        var rows = await (
-            from snapshot in governance.ReputationSnapshots.AsNoTracking()
-            join user in governance.Users.AsNoTracking() on snapshot.UserId equals user.Id
-            where snapshot.Track == ReputationTracks.General && !user.IsGovernanceSuspended
-            orderby snapshot.Score descending, snapshot.LowerBound descending, snapshot.EvidenceWeight descending
-            select new
-            {
-                user.Ss14UserId,
-                snapshot.Score,
-                snapshot.LowerBound,
-                snapshot.EvidenceWeight,
-            })
-            .Take(limit)
-            .ToListAsync();
+        var rows = await community.GetReputationLeaderboardAsync(limit);
 
         if (rows.Count == 0)
         {
             await RespondAsync("Рейтинг пока пуст: ещё нет рассчитанных снимков общей репутации.", ephemeral: true);
             return;
         }
-
-        var userIds = rows.Select(value => value.Ss14UserId).ToArray();
-        await using var game = gameFactory();
-        var names = await game.Player.AsNoTracking()
-            .Where(value => userIds.Contains(value.UserId))
-            .Select(value => new { value.UserId, value.LastSeenUserName })
-            .ToDictionaryAsync(value => value.UserId, value => value.LastSeenUserName);
 
         var lines = rows.Select((row, index) =>
         {
@@ -243,8 +220,7 @@ public sealed class ReputationModule(
                 2 => "🥉",
                 _ => $"**{index + 1}.**",
             };
-            var name = names.GetValueOrDefault(row.Ss14UserId, row.Ss14UserId.ToString());
-            return $"{place} **{name}** — **{row.Score}/1000** • LB90 {row.LowerBound:P0} • evidence {row.EvidenceWeight:F1}";
+            return $"{place} **{row.Name}** — **{row.Score}/1000** • LB90 {row.LowerBound:P0} • evidence {row.EvidenceWeight:F1}";
         });
 
         var embed = new EmbedBuilder()
