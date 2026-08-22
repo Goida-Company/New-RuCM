@@ -12,6 +12,11 @@ public sealed record CourtPlayerHistoryEntry(
     string Kind,
     string Message);
 
+public sealed record CourtDefendantHistory(
+    Guid DefendantSs14UserId,
+    string DefendantName,
+    IReadOnlyList<CourtPlayerHistoryEntry> Entries);
+
 public sealed record CourtSourceMaterial(
     long IncidentId,
     long AHelpTicketId,
