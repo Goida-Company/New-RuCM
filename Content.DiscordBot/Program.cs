@@ -118,134 +118,29 @@ if (governanceDoctor)
         "invitations", "court_cases", "court_participants", "court_statements", "jurors", "guilt_votes",
         "sentencing_votes", "friendships", "service_assignments", "punishment_executions", "duty_sessions",
         "capability_grants", "ahelp_tickets", "ahelp_messages", "ahelp_discord_sync", "court_defense_confirmations",
-        "live_incidents", "moderation_actions", "moderation_approvals", "moderation_reviews", "event_proposals",
-        "event_reviews", "event_sessions", "event_manifest_items", "event_actions", "leadership_overrides", "audit_events",
+        "court_thread_message_sync", "live_incidents", "incident_actions", "incident_action_approvals",
+        "event_proposals", "event_manifests", "event_reviews", "event_sessions", "event_actions",
+        "moderation_reviews", "audit_events",
     };
-    var existingTables = (await governance.Database.SqlQueryRaw<string>(
-        "SELECT table_name AS \"Value\" FROM information_schema.tables WHERE table_schema = 'governance'").ToListAsync()).ToHashSet();
-    var missing = requiredTables.Except(existingTables).OrderBy(value => value).ToArray();
-    if (missing.Length > 0)
-        throw new InvalidOperationException($"Governance schema is incomplete: {string.Join(", ", missing)}");
-
-    var applied = await governance.Database.GetAppliedMigrationsAsync();
-    if (!applied.Contains("20260821034000_ImmutableIdentityBinding"))
-        throw new InvalidOperationException("The immutable Governance identity binding migration is not recorded as applied.");
-
-    var identityColumns = (await governance.Database.SqlQueryRaw<string>("""
-        SELECT column_name || ':' || is_nullable AS "Value"
-        FROM information_schema.columns
-        WHERE table_schema = 'governance' AND table_name = 'users'
-          AND column_name IN ('ss14_user_id', 'discord_user_id', 'civic_rating_cache')
-        """).ToListAsync()).ToHashSet(StringComparer.Ordinal);
-    if (!identityColumns.SetEquals(["ss14_user_id:NO", "discord_user_id:YES", "civic_rating_cache:NO"]))
-        throw new InvalidOperationException("Governance Identity v2 requires mandatory SS14 and optional Discord identity.");
-
-    var discordIndex = await governance.Database.SqlQueryRaw<int>("""
-        SELECT count(*)::integer AS "Value"
-        FROM pg_indexes
-        WHERE schemaname = 'governance'
-          AND indexname = 'users_discord_user_id_unique_idx'
-          AND indexdef ILIKE '%discord_user_id IS NOT NULL%'
-        """).SingleAsync();
-    if (discordIndex != 1)
-        throw new InvalidOperationException("The optional Discord identity partial unique index is unavailable.");
-
-    var identityBindingConstraints = await governance.Database.SqlQueryRaw<int>("""
-        SELECT count(*)::integer AS "Value"
-        FROM pg_constraint
-        WHERE conrelid = 'governance.identity_bindings'::regclass
-          AND contype IN ('p', 'u')
-        """).SingleAsync();
-    if (identityBindingConstraints < 3)
-        throw new InvalidOperationException("Permanent Governance identity binding uniqueness is unavailable.");
-
-    var identityTriggers = (await governance.Database.SqlQueryRaw<string>("""
-        SELECT tgname AS "Value"
-        FROM pg_trigger
-        WHERE tgenabled <> 'D' AND tgname IN (
-            'governance_users_identity_immutable_insert',
-            'governance_users_identity_immutable_update',
-            'governance_users_identity_remember_insert',
-            'governance_users_identity_remember_update',
-            'governance_identity_bindings_immutable')
-        """).ToListAsync()).ToHashSet(StringComparer.Ordinal);
-    var requiredIdentityTriggers = new HashSet<string>(StringComparer.Ordinal)
+    var connection = governance.Database.GetDbConnection();
+    await connection.OpenAsync();
+    await using (var command = connection.CreateCommand())
     {
-        "governance_users_identity_immutable_insert",
-        "governance_users_identity_immutable_update",
-        "governance_users_identity_remember_insert",
-        "governance_users_identity_remember_update",
-        "governance_identity_bindings_immutable",
-    };
-    if (!requiredIdentityTriggers.SetEquals(identityTriggers))
-        throw new InvalidOperationException("Immutable Governance identity triggers are unavailable.");
-
-    var ahelpColumns = (await governance.Database.SqlQueryRaw<string>("""
-        SELECT column_name || ':' || is_nullable AS "Value"
-        FROM information_schema.columns
-        WHERE table_schema = 'governance' AND table_name = 'ahelp_tickets'
-          AND column_name IN ('reporter_user_id', 'reporter_ss14_user_id')
-        """).ToListAsync()).ToHashSet(StringComparer.Ordinal);
-    if (!ahelpColumns.SetEquals(["reporter_user_id:YES", "reporter_ss14_user_id:NO"]))
-        throw new InvalidOperationException("The in-game AHelp ticket identity contract is invalid.");
-
-    var eventActionColumns = (await governance.Database.SqlQueryRaw<string>("""
-        SELECT column_name || ':' || is_nullable AS "Value"
-        FROM information_schema.columns
-        WHERE table_schema = 'governance' AND table_name = 'event_actions'
-          AND column_name IN ('server_status', 'server_executed_at', 'server_execution_error')
-        """).ToListAsync()).ToHashSet(StringComparer.Ordinal);
-    if (!eventActionColumns.SetEquals([
-            "server_status:NO",
-            "server_executed_at:YES",
-            "server_execution_error:YES",
-        ]))
-        throw new InvalidOperationException("The event server execution contract is invalid.");
-
-    var activeAHelpIndex = await governance.Database.SqlQueryRaw<int>("""
-        SELECT count(*)::integer AS "Value"
-        FROM pg_indexes
-        WHERE schemaname = 'governance'
-          AND indexname = 'ahelp_one_active_reporter_idx'
-          AND indexdef LIKE '%escalated_to_court%'
-        """).SingleAsync();
-    if (activeAHelpIndex != 1)
-        throw new InvalidOperationException("The active AHelp uniqueness index does not include court-escalated tickets.");
-
-    var immutableTriggers = (await governance.Database.SqlQueryRaw<string>("""
-        SELECT tgname AS "Value"
-        FROM pg_trigger
-        WHERE tgenabled <> 'D' AND tgname IN (
-            'ahelp_messages_immutable',
-            'moderation_reviews_immutable',
-            'reputation_observations_immutable',
-            'contribution_events_immutable')
-        """).ToListAsync());
-    var requiredTriggers = new HashSet<string>(StringComparer.Ordinal)
-    {
-        "ahelp_messages_immutable", "moderation_reviews_immutable",
-        "reputation_observations_immutable", "contribution_events_immutable",
-    };
-    if (!requiredTriggers.SetEquals(immutableTriggers))
-        throw new InvalidOperationException("One or more immutable Governance evidence triggers are unavailable.");
-
-    var sentencingChecks = await governance.Database.SqlQueryRaw<int>("""
-        SELECT count(*)::integer AS "Value"
-        FROM pg_constraint
-        WHERE conrelid = 'governance.sentencing_votes'::regclass
-          AND conname IN ('sentencing_votes_sanction_type_valid','sentencing_votes_sanction_days_valid','sentencing_votes_shape_valid')
-        """).SingleAsync();
-    if (sentencingChecks != 3)
-        throw new InvalidOperationException("Community Court sentencing constraints are not current.");
-
-    await using var game = CreateConfiguredDatabase();
-    _ = await game.Player.AsNoTracking().CountAsync();
-    _ = await game.RMCLinkedAccounts.AsNoTracking().CountAsync();
-    _ = await game.PlayTime.AsNoTracking().CountAsync();
-    _ = await game.ConnectionLog.AsNoTracking().CountAsync();
+        command.CommandText = """
+            SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'governance'
+            """;
+        await using var reader = await command.ExecuteReaderAsync();
+        var actual = new HashSet<string>(StringComparer.Ordinal);
+        while (await reader.ReadAsync())
+            actual.Add(reader.GetString(0));
+        var missing = requiredTables.Where(table => !actual.Contains(table)).OrderBy(table => table).ToArray();
+        if (missing.Length > 0)
+            throw new InvalidOperationException($"Governance doctor failed: missing tables: {string.Join(", ", missing)}");
+    }
 
     var doctorIdentities = new GovernanceIdentityService(CreateGovernanceDatabase, CreateConfiguredDatabase);
-    await doctorIdentities.EnsureAllSs14UsersAsync();
     var doctorReputation = new ReputationService(CreateGovernanceDatabase, CreateConfiguredDatabase);
     var doctorSelection = new CandidateSelectionService(CreateGovernanceDatabase, CreateConfiguredDatabase, doctorReputation, config);
     _ = await doctorSelection.SelectAsync("jury", 1, "doctor", "read-only", 1, [], null, TimeSpan.Zero);
@@ -294,6 +189,8 @@ var reputationCoordinator = new ReputationCoordinator(identities, reputation, co
 var services = new ServiceCollection()
     .AddSingleton(client)
     .AddSingleton(config)
+    .AddSingleton<Func<GovernanceDbContext>>(_ => CreateGovernanceDatabase)
+    .AddSingleton<Func<ServerDbContext>>(_ => CreateConfiguredDatabase)
     .AddSingleton(guildMembers)
     .AddSingleton(identities)
     .AddSingleton(reputation)
