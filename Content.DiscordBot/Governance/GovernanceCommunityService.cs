@@ -13,6 +13,13 @@ public sealed record GovernanceProfile(
     bool Suspended,
     IReadOnlyDictionary<string, short> Qualifications);
 
+public sealed record GovernanceReputationLeaderboardEntry(
+    Guid Ss14UserId,
+    string Name,
+    int Score,
+    double LowerBound,
+    double EvidenceWeight);
+
 public sealed class GovernanceCommunityService(
     GovernanceIdentityService identities,
     Func<GovernanceDbContext> governanceFactory,
@@ -41,6 +48,43 @@ public sealed class GovernanceCommunityService(
             .ToDictionaryAsync(value => value.Track, value => value.Level);
         return new GovernanceProfile(user.Id, user.Ss14UserId, user.DiscordUserId, name, user.CivicRatingCache,
             user.IsGovernanceSuspended, qualifications);
+    }
+
+    public async Task<IReadOnlyList<GovernanceReputationLeaderboardEntry>> GetReputationLeaderboardAsync(int limit)
+    {
+        limit = Math.Clamp(limit, 1, 20);
+        await using var governance = governanceFactory();
+        var rows = await (
+            from snapshot in governance.ReputationSnapshots.AsNoTracking()
+            join user in governance.Users.AsNoTracking() on snapshot.UserId equals user.Id
+            where snapshot.Track == ReputationTracks.General && !user.IsGovernanceSuspended
+            orderby snapshot.Score descending, snapshot.LowerBound descending, snapshot.EvidenceWeight descending
+            select new
+            {
+                user.Ss14UserId,
+                snapshot.Score,
+                snapshot.LowerBound,
+                snapshot.EvidenceWeight,
+            })
+            .Take(limit)
+            .ToListAsync();
+
+        if (rows.Count == 0)
+            return [];
+
+        var userIds = rows.Select(value => value.Ss14UserId).ToArray();
+        await using var game = gameFactory();
+        var names = await game.Player.AsNoTracking()
+            .Where(value => userIds.Contains(value.UserId))
+            .Select(value => new { value.UserId, value.LastSeenUserName })
+            .ToDictionaryAsync(value => value.UserId, value => value.LastSeenUserName);
+
+        return rows.Select(row => new GovernanceReputationLeaderboardEntry(
+            row.Ss14UserId,
+            names.GetValueOrDefault(row.Ss14UserId, row.Ss14UserId.ToString()),
+            row.Score,
+            row.LowerBound,
+            row.EvidenceWeight)).ToArray();
     }
 
     public async Task<string> RequestFriendshipAsync(ulong requesterDiscordId, ulong friendDiscordId)
