@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using System.Reflection;
 using Content.DiscordBot.Modules;
+using Content.DiscordBot.Governance;
 using Content.Server.Database;
 using Discord;
 using Discord.Commands;
@@ -10,7 +11,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Content.DiscordBot;
 
-public sealed class CommandHandler(DiscordSocketClient client, CommandService commands, InteractionService interaction, ServerDbContext db, ulong guild)
+public sealed class CommandHandler(
+    DiscordSocketClient client,
+    CommandService commands,
+    InteractionService interaction,
+    Func<ServerDbContext> databaseFactory,
+    GovernanceIdentityService identities,
+    DiscordGuildMemberCache guildMembers,
+    IServiceProvider services,
+    ulong guild)
 {
     private ImmutableDictionary<ulong, RMCPatronTier>? _patronTiers;
     private ImmutableArray<RMCPatronTier> _tierPriority;
@@ -20,6 +29,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
 
     public async Task InstallCommandsAsync()
     {
+        await using var db = databaseFactory();
         var patronTiers = await db.RMCPatronTiers.ToListAsync();
         _tierPriority = [..patronTiers.OrderBy(t => t.Priority)];
         _patronTiers = patronTiers.ToImmutableDictionary(t => t.DiscordRole, t => t);
@@ -27,41 +37,106 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
         client.MessageReceived += HandleCommandAsync;
         client.ButtonExecuted += HandleButtonAsync;
         client.ModalSubmitted += HandleModalAsync;
-        await commands.AddModulesAsync(Assembly.GetEntryAssembly(), null);
+        client.InteractionCreated += HandleInteractionAsync;
+        client.Ready += RegisterInteractionsAsync;
+        await commands.AddModulesAsync(Assembly.GetEntryAssembly(), services);
+        await interaction.AddModulesAsync(Assembly.GetEntryAssembly(), services);
 
         interaction.AddModalInfo<LinkAccountModal>();
 
         _refreshPatronsTask = Task.Run(async () => await RefreshPatrons());
     }
 
+    private async Task RegisterInteractionsAsync()
+    {
+        await interaction.RegisterCommandsToGuildAsync(guild, true);
+        await ConfigureGovernanceChannelPermissionsAsync();
+        await Logger.Info($"Registered Discord interactions in guild {guild}.");
+    }
+
+    private async Task ConfigureGovernanceChannelPermissionsAsync()
+    {
+        if (services.GetService(typeof(Config)) is not Config config)
+            return;
+
+        var socketGuild = client.GetGuild(guild);
+        if (socketGuild == null)
+            return;
+
+        var channelIds = new[] { config.CourtChannel, config.GovernanceChannel }
+            .Where(value => value != 0)
+            .Distinct()
+            .ToArray();
+
+        foreach (var channelId in channelIds)
+        {
+            if (client.GetChannel(channelId) is not SocketGuildChannel channel)
+                continue;
+
+            try
+            {
+                var everyone = socketGuild.EveryoneRole;
+                var everyoneCurrent = channel.GetPermissionOverwrite(everyone) ?? OverwritePermissions.InheritAll;
+                var everyoneReadOnly = everyoneCurrent.Modify(
+                    sendMessages: PermValue.Deny,
+                    createPublicThreads: PermValue.Deny,
+                    createPrivateThreads: PermValue.Deny,
+                    sendMessagesInThreads: PermValue.Deny);
+                if (!everyoneCurrent.Equals(everyoneReadOnly))
+                    await channel.AddPermissionOverwriteAsync(everyone, everyoneReadOnly);
+
+                var bot = socketGuild.CurrentUser;
+                var botCurrent = channel.GetPermissionOverwrite(bot) ?? OverwritePermissions.InheritAll;
+                var botWritable = botCurrent.Modify(
+                    sendMessages: PermValue.Allow,
+                    embedLinks: PermValue.Allow,
+                    attachFiles: PermValue.Allow,
+                    manageThreads: PermValue.Allow,
+                    createPublicThreads: PermValue.Allow,
+                    createPrivateThreads: PermValue.Allow,
+                    sendMessagesInThreads: PermValue.Allow);
+                if (!botCurrent.Equals(botWritable))
+                    await channel.AddPermissionOverwriteAsync(bot, botWritable);
+
+                await Logger.Info($"Governance Discord channel '{channel.Name}' ({channel.Id}) configured read-only for regular members.");
+            }
+            catch (Exception exception)
+            {
+                await Logger.Error($"Could not configure read-only Governance permissions for channel {channelId}", exception);
+            }
+        }
+    }
+
+    private async Task HandleInteractionAsync(SocketInteraction socketInteraction)
+    {
+        var context = new SocketInteractionContext(client, socketInteraction);
+        var result = await interaction.ExecuteCommandAsync(context, services);
+        if (!result.IsSuccess && result.Error != InteractionCommandError.UnknownCommand)
+            await Logger.Info($"Interaction failed for {socketInteraction.User.Id}: {result.ErrorReason}");
+    }
+
     private async Task HandleCommandAsync(SocketMessage messageParam)
     {
-        // Don't process the command if it was a system message
+        // Governance channels are read-only at the Discord permission layer. Do not delete
+        // messages after the fact: preventing them is deterministic and leaves no ACL race.
         var message = messageParam as SocketUserMessage;
-        if (message == null)
+        if (message == null || message.Author.IsBot)
             return;
 
-        // Create a number to track where the prefix ends and the command begins
         var argPos = 0;
-
-        // Determine if the message is a command based on the prefix and make sure no bots trigger commands
         if (!(message.HasCharPrefix('!', ref argPos) ||
-            message.HasMentionPrefix(client.CurrentUser, ref argPos)) ||
-            message.Author.IsBot)
+            message.HasMentionPrefix(client.CurrentUser, ref argPos)))
             return;
 
-        // Create a WebSocket-based command context based on the message
         var context = new SocketCommandContext(client, message);
-
-        // Execute the command with the command context we just created.
         var result = await commands.ExecuteAsync(context, argPos, null);
         if (!result.IsSuccess)
         {
-            var reason = result.ErrorReason ?? "Unknown command error";
+            var reason = result.ErrorReason ?? "неизвестная ошибка команды";
             await Logger.Info($"Command '{message.Content}' failed for {message.Author.Username}: {reason}");
 
             if (result.Error != CommandError.UnknownCommand)
-                await context.Channel.SendMessageAsync($"Command failed: {reason}");
+                await context.Channel.SendMessageAsync($"Команда не выполнена: {reason}");
         }
     }
 
@@ -77,6 +152,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
 
     private async Task HandleModalAsync(SocketModal modal)
     {
+        await using var db = databaseFactory();
         switch (modal.Data.CustomId)
         {
             case "link-ss14-account":
@@ -90,11 +166,13 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                 await modal.DeferAsync(true);
                 if (!Guid.TryParse(codeStr, out var code))
                 {
-                    await modal.FollowupAsync($"{codeStr} isn't a valid code! Get one in-game from the lobby at the top left of the screen.", ephemeral: true);
+                    await modal.FollowupAsync(
+                        $"`{codeStr}` — некорректный код привязки. Получите новый код в лобби игры и повторите попытку.",
+                        ephemeral: true);
+                    break;
                 }
 
-                var author = modal.User;
-                var authorId = author.Id;
+                var authorId = modal.User.Id;
                 var discord = await db.RMCDiscordAccounts
                     .Include(d => d.LinkedAccount)
                     .ThenInclude(l => l.Player)
@@ -107,56 +185,108 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
 
                 if (codes == null)
                 {
-                    await modal.FollowupAsync($"No player found with code {codeStr}, join the game server and get another code before trying again, or ask for help in another channel.", ephemeral: true);
+                    await modal.FollowupAsync(
+                        "Код привязки не найден. Зайдите на игровой сервер, получите новый код в лобби и повторите попытку.",
+                        ephemeral: true);
                     break;
                 }
 
                 if (codes.CreationTime < DateTime.UtcNow.Subtract(TimeSpan.FromDays(1)))
                 {
-                    await modal.FollowupAsync($"Code {codeStr} were generated too long ago, join the game server and get another code before trying again.", ephemeral: true);
+                    await modal.FollowupAsync(
+                        "Срок действия кода привязки истёк. Получите новый код в лобби игры.",
+                        ephemeral: true);
+                    break;
                 }
 
-                if (discord?.LinkedAccount is { } linked)
+                var targetPlayerId = codes.Player.UserId;
+                if (discord?.LinkedAccount is { } currentDiscordLink && currentDiscordLink.PlayerId != targetPlayerId)
                 {
-                    if (linked.Player.Patron is { } patron)
-                        db.RMCPatrons.Remove(patron);
-
-                    linked.Player.Patron = null;
-                    db.RMCLinkedAccounts.Remove(linked);
+                    await modal.FollowupAsync(
+                        $"Ваш Discord уже связан с SS14-аккаунтом **{currentDiscordLink.Player.LastSeenUserName}**. Перепривязка запрещена.",
+                        ephemeral: true);
+                    break;
                 }
 
-                discord ??= db.RMCDiscordAccounts.Add(new RMCDiscordAccount { Id = authorId }).Entity;
-                discord.LinkedAccount = db.RMCLinkedAccounts.Add(new RMCLinkedAccount { Discord = discord }).Entity;
-                discord.LinkedAccount.Player = codes.Player;
+                var currentPlayerLink = await db.RMCLinkedAccounts.AsNoTracking()
+                    .SingleOrDefaultAsync(value => value.PlayerId == targetPlayerId);
+                if (currentPlayerLink != null && currentPlayerLink.DiscordId != authorId)
+                {
+                    await modal.FollowupAsync(
+                        "Этот SS14-аккаунт уже связан с другим Discord. Перепривязка запрещена.",
+                        ephemeral: true);
+                    break;
+                }
 
-                var roles = (await client.Rest.GetGuildUserAsync(guildId, authorId))?.RoleIds.ToArray() ?? [];
+                try
+                {
+                    // Permanent Governance identity is checked before any game-database mutation.
+                    await identities.ValidatePermanentLinkAsync(targetPlayerId, authorId);
+                }
+                catch (CourtRuleException exception)
+                {
+                    await modal.FollowupAsync(exception.Message, ephemeral: true);
+                    break;
+                }
+
+                var createdLink = false;
+                if (discord?.LinkedAccount == null)
+                {
+                    discord ??= db.RMCDiscordAccounts.Add(new RMCDiscordAccount { Id = authorId }).Entity;
+                    discord.LinkedAccount = db.RMCLinkedAccounts.Add(new RMCLinkedAccount { Discord = discord }).Entity;
+                    discord.LinkedAccount.Player = codes.Player;
+                    createdLink = true;
+                }
+
+                var memberLookup = await guildMembers.LookupAsync(authorId);
+                var roles = memberLookup.User?.RoleIds.ToArray() ?? [];
                 var tiers = await db.RMCPatronTiers
                     .Where(t => roles.Contains(t.DiscordRole))
                     .ToListAsync();
                 if (tiers.Count == 0)
                 {
-                    discord.LinkedAccount.Player.Patron = null;
+                    discord!.LinkedAccount.Player.Patron = null;
                 }
                 else
                 {
                     tiers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
                     var tier = tiers[0];
-                    discord.LinkedAccount.Player.Patron = db.RMCPatrons.Add(new RMCPatron { Tier = tier }).Entity;
-                    discord.LinkedAccount.Player.Patron.Tier = tier;
+                    discord!.LinkedAccount.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron
+                    {
+                        PlayerId = discord.LinkedAccount.PlayerId,
+                    }).Entity;
+                    discord.LinkedAccount.Player.Patron.TierId = tier.Id;
                 }
 
-                db.RMCLinkedAccountLogs.Add(new RMCLinkedAccountLogs
+                if (createdLink)
                 {
-                    Discord = discord,
-                    Player = discord.LinkedAccount.Player,
-                });
+                    db.RMCLinkedAccountLogs.Add(new RMCLinkedAccountLogs
+                    {
+                        Discord = discord!,
+                        Player = discord!.LinkedAccount.Player,
+                    });
+                }
 
                 db.ChangeTracker.DetectChanges();
                 await db.SaveChangesAsync();
+                try
+                {
+                    await identities.SyncLinkedAccountAsync(targetPlayerId, authorId);
+                }
+                catch (CourtRuleException exception)
+                {
+                    await Logger.Error(
+                        $"Governance identity synchronization rejected game link Discord {authorId} -> SS14 {targetPlayerId}",
+                        exception);
+                    await modal.FollowupAsync(
+                        "Игровая связь сохранена, но проверка Governance обнаружила конфликт постоянной идентичности. Обратитесь к руководству; автоматическая перепривязка не выполнялась.",
+                        ephemeral: true);
+                    break;
+                }
 
-                var msg = $"Linked SS14 account with name {codes.Player.LastSeenUserName}";
+                var msg = $"SS14-аккаунт **{codes.Player.LastSeenUserName}** успешно связан с вашим Discord. Эта связь постоянная и не может быть перепривязана к другому аккаунту.";
                 if (codes.Player.Patron != null)
-                    msg += $" and tier {codes.Player.Patron.Tier.Name}";
+                    msg += $" Уровень поддержки: **{codes.Player.Patron.Tier.Name}**.";
 
                 await modal.FollowupAsync(msg, ephemeral: true);
                 break;
@@ -169,6 +299,7 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
         {
             try
             {
+                await using var db = databaseFactory();
                 var patrons = await db.RMCLinkedAccounts
                     .Include(l => l.Player)
                     .ThenInclude(p => p.Patron)
@@ -179,7 +310,11 @@ public sealed class CommandHandler(DiscordSocketClient client, CommandService co
                 {
                     try
                     {
-                        var user = await client.Rest.GetGuildUserAsync(guild, linked.DiscordId);
+                        var lookup = await guildMembers.LookupAsync(linked.DiscordId);
+                        if (!lookup.IsDefinitive)
+                            continue;
+
+                        var user = lookup.User;
                         if (user == null)
                         {
                             if (linked.Player.Patron != null)

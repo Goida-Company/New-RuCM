@@ -1,7 +1,7 @@
-rmc-staff-help-window-title = Помощь администраторов и менторов
+rmc-staff-help-window-title = Центр помощи
 
-rmc-staff-help-admin-button = Помощь администратора
-rmc-staff-help-admin-description = Для сообщений о нарушениях или вопросов по правилам
+rmc-staff-help-admin-button = Центр поддержки
+rmc-staff-help-admin-description = Для сообщений о нарушениях, проблемах в раунде и вопросов по правилам. Обращение получит дежурный сообщества.
 
 rmc-staff-help-mentor-button = Помощь ментора
 rmc-staff-help-mentor-description = Для вопросов об игровых механиках

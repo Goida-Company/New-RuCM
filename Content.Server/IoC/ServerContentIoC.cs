@@ -8,6 +8,7 @@ using Content.Server._RMC14.Discord;
 using Content.Server._RMC14.LinkAccount;
 using Content.Server._RMC14.Mentor;
 using Content.Server._RMC14.PlayTimeTracking;
+using Content.Server._RuMC14.Governance;
 using Content.Server.Administration;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
@@ -112,6 +113,7 @@ namespace Content.Server.IoC
 
             // RuCM
             IoCManager.Register<PlaytimeApi>();
+            IoCManager.Register<GovernanceManager>();
         }
     }
 }

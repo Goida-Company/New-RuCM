@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Content.Server._RuMC14.Governance;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
@@ -24,8 +25,10 @@ public sealed partial class AdminLogsEui : BaseEui
     [Dependency] private ILogManager _logManager = default!;
     [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private IEntityManager _e = default!;
+    [Dependency] private GovernanceManager _governance = default!;
 
     private readonly ISawmill _sawmill;
+    private readonly bool _governanceDutyAccess;
 
     private int _clientBatchSize;
     private bool _isLoading = true;
@@ -37,8 +40,13 @@ public sealed partial class AdminLogsEui : BaseEui
     private readonly DefaultObjectPool<List<SharedAdminLog>> _adminLogListPool =
         new(new ListPolicy<SharedAdminLog>());
 
-    public AdminLogsEui()
+    public AdminLogsEui() : this(false)
     {
+    }
+
+    public AdminLogsEui(bool governanceDutyAccess)
+    {
+        _governanceDutyAccess = governanceDutyAccess;
         IoCManager.InjectDependencies(this);
 
         _sawmill = _logManager.GetSawmill(AdminLogManager.SawmillId);
@@ -58,9 +66,16 @@ public sealed partial class AdminLogsEui : BaseEui
     {
         base.Opened();
 
+        if (!await CanViewAsync())
+        {
+            Close();
+            return;
+        }
+
         _adminManager.OnPermsChanged += OnPermsChanged;
 
-        var roundId = _filter.Round ?? CurrentRoundId;
+        var roundId = _governanceDutyAccess ? CurrentRoundId : _filter.Round ?? CurrentRoundId;
+        _filter.Round = roundId;
         await LoadFromDb(roundId);
     }
 
@@ -71,7 +86,7 @@ public sealed partial class AdminLogsEui : BaseEui
 
     private void OnPermsChanged(AdminPermsChangedEventArgs args)
     {
-        if (args.Player == Player && !_adminManager.HasAdminFlag(Player, AdminFlags.Logs))
+        if (args.Player == Player && !_governanceDutyAccess && !_adminManager.HasAdminFlag(Player, AdminFlags.Logs))
         {
             Close();
         }
@@ -87,17 +102,16 @@ public sealed partial class AdminLogsEui : BaseEui
             };
         }
 
-        var state = new AdminLogsEuiState(CurrentRoundId, _players, _roundLogs);
-
-        return state;
+        return new AdminLogsEuiState(CurrentRoundId, _players, _roundLogs);
     }
 
     public override async void HandleMessage(EuiMessageBase msg)
     {
         base.HandleMessage(msg);
 
-        if (!_adminManager.HasAdminFlag(Player, AdminFlags.Logs))
+        if (!await CanViewAsync())
         {
+            Close();
             return;
         }
 
@@ -112,7 +126,9 @@ public sealed partial class AdminLogsEui : BaseEui
                 _filter = new LogFilter
                 {
                     CancellationToken = _logSendCancellation.Token,
-                    Round = request.RoundId,
+                    // Temporary Governance capabilities are scoped to the current round. Never trust
+                    // a client-supplied historical round id for a Duty responder.
+                    Round = _governanceDutyAccess ? CurrentRoundId : request.RoundId,
                     Search = request.Search,
                     Types = request.Types,
                     Impacts = request.Impacts,
@@ -150,6 +166,17 @@ public sealed partial class AdminLogsEui : BaseEui
             types);
 
         SendMessage(message);
+    }
+
+    private async Task<bool> CanViewAsync()
+    {
+        if (_adminManager.HasAdminFlag(Player, AdminFlags.Logs))
+            return true;
+
+        if (!_governanceDutyAccess || CurrentRoundId <= 0)
+            return false;
+
+        return await _governance.AuthorizeAsync(Player.UserId, CurrentRoundId, "moderation.view_logs") != null;
     }
 
     private async void SendLogs(bool replace)

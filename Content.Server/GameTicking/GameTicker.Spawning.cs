@@ -660,6 +660,15 @@ namespace Content.Server.GameTicking
             if (DummyTicker)
                 return;
 
+            // A governance responder cannot participate in the same round while on duty.
+            // The database-backed manager populates this cache on connection and every capability check.
+            if (_governance.HasActiveDuty(player.UserId, RoundId))
+            {
+                _chatManager.DispatchServerMessage(player, Loc.GetString("governance-duty-observer-only"));
+                JoinAsObserver(player);
+                return;
+            }
+
             if (IsThreatVoteRoundJoinBlocked(player))
                 return;
 

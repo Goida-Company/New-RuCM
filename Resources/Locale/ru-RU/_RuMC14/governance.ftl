@@ -1,0 +1,83 @@
+cmd-governance-player-only = Эта команда доступна только подключённому игроку.
+cmd-governance-status-description = Показывает активную смену RUCM Community Governance.
+cmd-governance-status-help = Использование: {$command}
+cmd-governance-status-inactive = Активная DutySession для текущего раунда не найдена.
+cmd-governance-status-active = DutySession #{$session} активна для раунда #{$round} до {$expires}.
+
+cmd-governance-freeze-description = Временно замораживает игрока в рамках активного инцидента Governance.
+cmd-governance-freeze-help = Использование: {$command} <игрок|UUID> <1-120 секунд> <action-id> <причина>
+cmd-governance-freeze-denied = Действие отклонено сервером: {$reason}
+cmd-governance-freeze-success = {$target} заморожен на {$seconds} с. Одобренное действие: {$incident}.
+cmd-governance-round-remove-description = Удаляет игрока до конца раунда по одобренному действию Governance.
+cmd-governance-round-remove-help = Использование: {$command} <игрок|UUID> <action-id> <причина>
+cmd-governance-round-remove-success = {$target} удалён до конца раунда. Одобренное действие: {$action}.
+
+governance-duty-observer-only = Активная смена Community Governance допускает участие в раунде только наблюдателем.
+governance-duty-invite-title = Общественное дежурство RUCM
+governance-duty-invite-description = На раунд #{$round} требуется общественный дежурный. Дежурство доступно только наблюдателю и выдаёт временные ограниченные полномочия до конца смены. Сам ответ на приглашение не влияет на репутацию; учитывается только выполнение или срыв уже принятой обязанности. Ответьте до {$expires}.
+governance-duty-invite-accept = Согласиться
+governance-duty-invite-decline = Отказаться
+governance-duty-invite-recuse = Недоступен / самоотвод
+governance-duty-response-accepted = Дежурство принято. Временные полномочия активированы.
+governance-duty-response-declined = Вы отказались от дежурства. Ответ на приглашение не влияет на репутацию.
+governance-duty-response-recused = Самоотвод принят. Ответ на приглашение не влияет на репутацию; система выберет замену.
+governance-duty-response-expired = Срок приглашения истёк. Неответ на приглашение не влияет на репутацию.
+governance-duty-response-handled = Это приглашение уже было обработано.
+governance-duty-response-invalid = Приглашение больше недействительно или Governance недоступна.
+governance-duty-response-observer-required = Принять дежурство можно только находясь наблюдателем.
+governance-jury-invite-title = Приглашение в присяжные RUCM
+governance-jury-invite-description = Вы выбраны кандидатом в присяжные по делу #{$case}. Само дело и доказательства доступны в публичном Discord-треде. Ответ на приглашение не влияет на репутацию; учитывается только выполнение или срыв уже принятой обязанности. Ответьте до {$expires}. После ответа бот автоматически продолжит дело в Discord.
+governance-jury-response-accepted = Вы согласились стать присяжным. Ответ передан в Discord.
+governance-jury-response-declined = Вы отказались от судейства. Ответ передан в Discord; репутация не меняется.
+governance-jury-response-recused = Самоотвод принят. Репутация не меняется; бот выберет замену.
+governance-jury-response-expired = Срок приглашения в присяжные истёк. Репутация не меняется.
+governance-jury-response-handled = Это приглашение в присяжные уже было обработано.
+governance-jury-response-invalid = Приглашение в присяжные больше недействительно или Governance недоступна.
+governance-denial-disabled = система Governance отключена
+governance-denial-invalid-input = некорректный incident-id или текст причины
+governance-denial-not-on-duty = нет активной DutySession или capability moderation.freeze
+governance-denial-not-observer = исполнитель должен находиться в режиме наблюдателя
+governance-denial-self-target = нельзя применить действие к себе
+governance-denial-invalid-duration = длительность выходит за разрешённые пределы
+governance-denial-target-unavailable = цель недоступна или не имеет игрового тела
+governance-denial-already-frozen = цель уже заморожена другим механизмом
+governance-denial-action-not-approved = действие отсутствует, не набрало кворум либо не соответствует цели и раунду
+governance-denial-unknown = неизвестная ошибка проверки полномочий
+
+cmd-governance-ahelp-description = Открывает очередь AHelp для активного дежурного сообщества.
+cmd-governance-ahelp-help = Использование: {$command}
+governance-ahelp-title = Дежурство RUCM — очередь обращений
+governance-ahelp-header = [bold][color=#6fa8dc]ЦЕНТР ОБРАЩЕНИЙ[/color][/bold]
+governance-ahelp-description = [color=#a0a0a0]Открытые обращения видны всем дежурным. После принятия обращение закрепляется за одним исполнителем. Выберите карточку слева — вводить номер вручную больше не нужно.[/color]
+governance-ahelp-counter = В очереди: {$count}
+governance-ahelp-list-title = ОЧЕРЕДЬ
+governance-ahelp-details-title = КАРТОЧКА ОБРАЩЕНИЯ
+governance-ahelp-select-ticket = Выберите обращение из очереди.
+governance-ahelp-ticket-card = #{$id} • {$reporter} • {$status} • {$time} {$summary}
+governance-ahelp-ticket-details = [bold]AHelp #{$id}[/bold] [color=#8ab4f8]Заявитель:[/color] {$reporter} [color=#8ab4f8]Статус:[/color] {$status} [color=#8ab4f8]Создан:[/color] {$time} [bold]Сообщение[/bold] {$summary}
+governance-ahelp-ticket-placeholder = Номер AHelp
+governance-ahelp-refresh = Обновить
+governance-ahelp-claim = Взять обращение
+governance-ahelp-open = Открыть чат
+governance-ahelp-waiting = Ожидаю ответа
+governance-ahelp-resolve = Завершить
+governance-ahelp-empty = [color=#8a8a8a]Сейчас нет открытых обращений или AHelp, закреплённых за вами.[/color]
+governance-ahelp-status-open = ОТКРЫТ
+governance-ahelp-status-mine = ВАШ
+governance-ahelp-ticket-invalid = Укажите корректный номер AHelp.
+governance-ahelp-claim-failed = AHelp уже взят, закрыт или недоступен в этой смене.
+governance-ahelp-open-failed = Открыть можно только взятый вами AHelp текущего раунда.
+governance-ahelp-status-failed = Изменить состояние может только назначенный дежурный.
+governance-ahelp-unavailable = Очередь AHelp временно недоступна. Попробуйте обновить её позже.
+governance-ahelp-access-denied = Очередь AHelp доступна только активному дежурному-наблюдателю.
+governance-ahelp-new-alert = [Дежурство RUCM] Новый AHelp #{$ticket} от {$reporter}. Открытых обращений: {$count}. Используйте governance_ahelp.
+governance-explanation-message = [bold]Дежурный сообщества {$responder} запросил у вас объяснение[/bold] (действие №{$action}). Ответьте в этом AHelp. Причина: {$reason}
+cmd-governance-explanation-description = Отправляет игроку утверждённый запрос объяснения через AHelp.
+cmd-governance-explanation-help = Использование: {$command} <игрок|UUID> <action-id> <причина>
+cmd-governance-explanation-denied = Запрос объяснения отклонён: {$reason}
+cmd-governance-explanation-success = Игроку {$target} отправлен запрос объяснения по действию №{$action}.
+cmd-governance-logs-description = Показывает до 100 логов текущего раунда по игроку для утверждённого действия.
+cmd-governance-logs-help = Использование: {$command} <игрок|UUID> <action-id>
+cmd-governance-logs-denied = Доступ к логам отклонён: {$reason}
+cmd-governance-logs-header = Логи игрока {$target}: {$count} записей (не более 100).
+governance-denial-ahelp-unavailable = AHelp игрока уже закреплён за другим дежурным или недоступен

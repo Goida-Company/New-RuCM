@@ -1,6 +1,6 @@
-rmc-staff-help-window-title = Admin and Mentor Help
-rmc-staff-help-admin-description = For reporting issues with another player to an admin, or asking about the rules
-rmc-staff-help-admin-button = Admin Help
+rmc-staff-help-window-title = Help Center
+rmc-staff-help-admin-description = For rule questions, round issues, or reporting violations. Your ticket will be handled by an on-duty community responder.
+rmc-staff-help-admin-button = Support Center
 rmc-staff-help-mentor-description = For asking questions about the game
 rmc-staff-help-mentor-button = Mentor Help
 

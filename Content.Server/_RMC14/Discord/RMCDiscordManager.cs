@@ -78,7 +78,12 @@ public sealed partial class RMCDiscordManager : IPostInjectInit
     {
         _client = new DiscordSocketClient(new DiscordSocketConfig
         {
-            GatewayIntents = GatewayIntents.All,
+            // This bridge only needs guild channel messages and their content. Requesting
+            // GatewayIntents.All also asks Discord for privileged member/presence intents and
+            // causes a 4014 close when those unrelated intents are not enabled for the bot.
+            GatewayIntents = GatewayIntents.Guilds |
+                             GatewayIntents.GuildMessages |
+                             GatewayIntents.MessageContent,
         });
         _client.Log += Log;
         _client.MessageReceived += OnDiscordMessageReceived;

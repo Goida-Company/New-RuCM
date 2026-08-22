@@ -112,5 +112,61 @@ public sealed class CCCVars : CVars
     public static readonly CVarDef<string> PlaytimeApiAllowedIP =
         CVarDef.Create("playtime.allowed_ip", "", CVar.SERVERONLY | CVar.CONFIDENTIAL);
 
+    /// <summary>
+    /// Enables the in-game RUCM Community Governance enforcement boundary.
+    /// Requires the main database engine to be PostgreSQL and the governance schema to be installed.
+    /// </summary>
+    public static readonly CVarDef<bool> GovernanceEnabled =
+        CVarDef.Create("governance.enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Enables physical execution of Event Governance actions on the game server.
+    /// Intentionally disabled by default while the event workflow is deferred from production acceptance.
+    /// </summary>
+    public static readonly CVarDef<bool> GovernanceEventEnabled =
+        CVarDef.Create("governance.event_enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Maximum duration of a temporary governance freeze.
+    /// </summary>
+    public static readonly CVarDef<int> GovernanceFreezeMaxSeconds =
+        CVarDef.Create("governance.freeze_max_seconds", 120, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Number of simultaneous community responders requested for an active round.
+    /// </summary>
+    public static readonly CVarDef<int> GovernanceDutyTargetResponders =
+        CVarDef.Create("governance.duty_target_responders", 1, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Interval between server-side duty staffing and open AHelp checks.
+    /// Kept short because this is also the responder notification latency.
+    /// </summary>
+    public static readonly CVarDef<int> GovernanceDutyCheckSeconds =
+        CVarDef.Create("governance.duty_check_seconds", 10, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Time an in-game duty invitation remains open.
+    /// </summary>
+    public static readonly CVarDef<int> GovernanceDutyInviteSeconds =
+        CVarDef.Create("governance.duty_invite_seconds", 90, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
+    /// Maximum lifetime of an accepted duty session. Round end always closes it sooner.
+    /// </summary>
+    public static readonly CVarDef<int> GovernanceDutySessionMinutes =
+        CVarDef.Create("governance.duty_session_minutes", 240, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    // Legacy compatibility only. Reputation v2 deliberately treats invitation accept/decline/expiry
+    // as neutral, and the server always passes zero to the old ledger API.
+    public static readonly CVarDef<int> GovernanceDutyAcceptReward =
+        CVarDef.Create("governance.duty_accept_reward", 0, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> GovernanceDutyDeclinePenalty =
+        CVarDef.Create("governance.duty_decline_penalty", 0, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    public static readonly CVarDef<int> GovernanceDutyExpiryPenalty =
+        CVarDef.Create("governance.duty_expiry_penalty", 0, CVar.SERVERONLY | CVar.ARCHIVE);
+
 #endregion
 }

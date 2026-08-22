@@ -1,4 +1,6 @@
 using System.Linq;
+using Content.Server._RuMC14.Governance;
+using Content.Server.Administration.Managers;
 using Content.Server.Administration.Notes;
 using Content.Shared.Administration;
 using Robust.Server.Player;
@@ -6,9 +8,10 @@ using Robust.Shared.Console;
 
 namespace Content.Server.Administration.Commands;
 
-[AdminCommand(AdminFlags.ViewNotes)]
+[AnyCommand]
 public sealed partial class OpenAdminNotesCommand : LocalizedCommands
 {
+    [Dependency] private IAdminManager _admins = default!;
     [Dependency] private IAdminNotesManager _adminNotes = default!;
     [Dependency] private IPlayerLocator _locator = default!;
 
@@ -24,15 +27,28 @@ public sealed partial class OpenAdminNotesCommand : LocalizedCommands
             return;
         }
 
-        Guid notedPlayer;
+        if (!_admins.HasAdminFlag(player, AdminFlags.ViewNotes))
+        {
+            if (args.Length != 1)
+            {
+                shell.WriteError(Loc.GetString("cmd-adminnotes-args-error"));
+                return;
+            }
 
+            var governance = IoCManager.Resolve<IEntityManager>().System<GovernanceAHelpSystem>();
+            var error = await governance.OpenPlayerNotesAsync(player, args[0]);
+            if (error != null)
+                shell.WriteError(Loc.GetString(error));
+            return;
+        }
+
+        Guid notedPlayer;
         switch (args.Length)
         {
             case 1 when Guid.TryParse(args[0], out notedPlayer):
                 break;
             case 1:
                 var dbGuid = await _locator.LookupIdByNameAsync(args[0]);
-
                 if (dbGuid == null)
                 {
                     shell.WriteError(Loc.GetString("cmd-adminnotes-wrong-target", ("user", args[0])));

@@ -1,4 +1,5 @@
 using Content.Server._RMC14.Rules;
+using Content.Server._RuMC14.Governance;
 using Content.Server.Administration.Logs;
 using Content.Server.Administration.Managers;
 using Content.Server._CMU14.Round.Objectives;
@@ -69,6 +70,7 @@ namespace Content.Server.GameTicking
         [Dependency] private SharedRoleSystem _roles = default!;
         [Dependency] private ServerDbEntryManager _dbEntryManager = default!;
         [Dependency] private CMDistressSignalRuleSystem _distressSignal = default!;
+        [Dependency] private GovernanceManager _governance = default!;
         [Dependency] private ObjectiveControlSystem _auobjectivesystem = default!;
         [ViewVariables] private bool _initialized;
         [ViewVariables] private bool _postInitialized;

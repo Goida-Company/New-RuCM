@@ -330,3 +330,4 @@ pr1600_reviews.json
 
 # Local git worktrees
 .worktrees/
+.env

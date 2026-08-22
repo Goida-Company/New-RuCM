@@ -4,10 +4,10 @@ namespace Content.DiscordBot.Modules;
 
 public class LinkAccountModal : IModal
 {
-    public string Title => "Link SS14 account";
+    public string Title => "Привязка аккаунта SS14";
 
-    [InputLabel("SS14 Linking Code (top left in the lobby)")]
+    [InputLabel("Код привязки SS14")]
     [RequiredInput]
-    [ModalTextInput("account_code")]
+    [ModalTextInput("account_code", placeholder: "Код отображается в левом верхнем углу лобби")]
     public string Code { get; set; } = string.Empty;
 }

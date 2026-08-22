@@ -1,5 +1,7 @@
+using Content.Server._RuMC14.Governance;
 using Content.Server.Administration.Managers;
 using Content.Server.EUI;
+using Content.Server.GameTicking;
 using Content.Shared.Administration.Notes;
 using Content.Shared.Database;
 using Content.Shared.Eui;
@@ -16,9 +18,18 @@ public sealed partial class AdminNotesEui : BaseEui
     [Dependency] private IAdminManager _admins = default!;
     [Dependency] private IAdminNotesManager _notesMan = default!;
     [Dependency] private IPlayerLocator _locator = default!;
+    [Dependency] private IEntityManager _entityManager = default!;
+    [Dependency] private GovernanceManager _governance = default!;
 
-    public AdminNotesEui()
+    private readonly bool _governanceDutyReadOnly;
+
+    public AdminNotesEui() : this(false)
     {
+    }
+
+    public AdminNotesEui(bool governanceDutyReadOnly)
+    {
+        _governanceDutyReadOnly = governanceDutyReadOnly;
         IoCManager.InjectDependencies(this);
     }
 
@@ -30,6 +41,12 @@ public sealed partial class AdminNotesEui : BaseEui
     public override async void Opened()
     {
         base.Opened();
+
+        if (!await CanViewAsync())
+        {
+            Close();
+            return;
+        }
 
         _admins.OnPermsChanged += OnPermsChanged;
         _notesMan.NoteAdded += NoteModified;
@@ -52,15 +69,26 @@ public sealed partial class AdminNotesEui : BaseEui
         return new AdminNotesEuiState(
             NotedPlayerName,
             Notes,
-            _notesMan.CanCreate(Player) && HasConnectedBefore,
-            _notesMan.CanDelete(Player),
-            _notesMan.CanEdit(Player)
+            !_governanceDutyReadOnly && _notesMan.CanCreate(Player) && HasConnectedBefore,
+            !_governanceDutyReadOnly && _notesMan.CanDelete(Player),
+            !_governanceDutyReadOnly && _notesMan.CanEdit(Player)
         );
     }
 
     public override async void HandleMessage(EuiMessageBase msg)
     {
         base.HandleMessage(msg);
+
+        if (!await CanViewAsync())
+        {
+            Close();
+            return;
+        }
+
+        // A Governance duty responder receives the complete notes history, including bans and
+        // watchlists, but may not mutate permanent moderation records through this temporary role.
+        if (_governanceDutyReadOnly)
+            return;
 
         switch (msg)
         {
@@ -114,8 +142,29 @@ public sealed partial class AdminNotesEui : BaseEui
 
     public async Task ChangeNotedPlayer(Guid notedPlayer)
     {
+        if (!await CanViewAsync())
+        {
+            Close();
+            return;
+        }
+
         NotedPlayer = notedPlayer;
         await LoadFromDb();
+    }
+
+    private async Task<bool> CanViewAsync()
+    {
+        if (_notesMan.CanView(Player))
+            return true;
+
+        if (!_governanceDutyReadOnly)
+            return false;
+
+        var roundId = _entityManager.System<GameTicker>().RoundId;
+        if (roundId <= 0)
+            return false;
+
+        return await _governance.AuthorizeAsync(Player.UserId, roundId, "moderation.view_logs") != null;
     }
 
     private void NoteModified(SharedAdminNote note)
@@ -154,7 +203,7 @@ public sealed partial class AdminNotesEui : BaseEui
             return;
         }
 
-        if (!_notesMan.CanView(Player))
+        if (!_governanceDutyReadOnly && !_notesMan.CanView(Player))
         {
             Close();
         }

@@ -1,11 +1,12 @@
 using Content.Shared.Guidebook;
+using Robust.Shared.Player;
 
 namespace Content.Client.Guidebook;
 
 /// <summary>
 /// Client system for storing and retrieving values extracted from entity prototypes
 /// for display in the guidebook (<see cref="RichText.ProtodataTag"/>).
-/// Requests data from the server on <see cref="Initialize"/>.
+/// Requests data from the server once the local player is attached.
 /// Can also be pushed new data when the server reloads prototypes.
 /// </summary>
 public sealed class GuidebookDataSystem : EntitySystem
@@ -17,8 +18,13 @@ public sealed class GuidebookDataSystem : EntitySystem
         base.Initialize();
 
         SubscribeNetworkEvent<UpdateGuidebookDataEvent>(OnServerUpdated);
+        SubscribeLocalEvent<LocalPlayerAttachedEvent>(OnPlayerAttached);
+    }
 
-        // Request data from the server
+    private void OnPlayerAttached(LocalPlayerAttachedEvent ev)
+    {
+        // Entity systems can initialize while the client is still completing its network join.
+        // Wait for the local player attachment before requesting server-owned guidebook data.
         RaiseNetworkEvent(new RequestGuidebookDataEvent());
     }
 
