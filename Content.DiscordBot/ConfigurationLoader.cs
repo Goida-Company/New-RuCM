@@ -45,7 +45,19 @@ public static class ConfigurationLoader
         config.CourtEnabled = Bool("COURT_ENABLED") ?? config.CourtEnabled;
         config.CourtTestMode = Bool("COURT_TEST_MODE") ?? config.CourtTestMode;
         config.CourtSchedulerSeconds = Int("COURT_SCHEDULER_SECONDS") ?? config.CourtSchedulerSeconds;
-        config.CourtComplaintWindowHours = Int("COURT_COMPLAINT_WINDOW_HOURS") ?? config.CourtComplaintWindowHours;
+
+        var complaintWindowDays = Int("COURT_COMPLAINT_WINDOW_DAYS");
+        if (complaintWindowDays is { } days)
+        {
+            if (days <= 0)
+                throw new ArgumentOutOfRangeException("COURT_COMPLAINT_WINDOW_DAYS", "Court complaint window must be positive.");
+            config.CourtComplaintWindowHours = checked(days * 24);
+        }
+        else
+        {
+            config.CourtComplaintWindowHours = Int("COURT_COMPLAINT_WINDOW_HOURS") ?? config.CourtComplaintWindowHours;
+        }
+
         config.CourtDefenseHours = Int("COURT_DEFENSE_HOURS") ?? config.CourtDefenseHours;
         config.CourtVoteHours = Int("COURT_VOTE_HOURS") ?? config.CourtVoteHours;
         config.CourtInvitationHours = Int("COURT_JUROR_RESPONSE_HOURS") ?? config.CourtInvitationHours;
