@@ -29,6 +29,18 @@ public sealed class GovernanceManager : IPostInjectInit
         _players.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
+    public bool HasActiveDuty(NetUserId userId)
+    {
+        if (!Enabled || !_duty.TryGetValue(userId, out var duty))
+            return false;
+
+        if (duty.ExpiresAt > DateTimeOffset.UtcNow)
+            return true;
+
+        _duty.TryRemove(userId, out _);
+        return false;
+    }
+
     public bool HasActiveDuty(NetUserId userId, int roundId)
     {
         if (!Enabled || !_duty.TryGetValue(userId, out var duty))
