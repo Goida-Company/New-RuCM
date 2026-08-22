@@ -57,9 +57,10 @@ public sealed record CourtPolicy(
         if (config.CourtDecisionThreshold < 2 || config.CourtDecisionThreshold > config.CourtJurySize)
             throw new ArgumentOutOfRangeException(nameof(config.CourtDecisionThreshold), "Court decision threshold is invalid.");
 
+        var defenseHours = Math.Clamp(config.CourtDefenseHours, 1, 24);
         return new CourtPolicy(
             TimeSpan.FromHours(config.CourtComplaintWindowHours),
-            TimeSpan.FromHours(config.CourtDefenseHours),
+            TimeSpan.FromHours(defenseHours),
             TimeSpan.FromHours(config.CourtVoteHours),
             TimeSpan.FromHours(config.CourtInvitationHours),
             config.CourtJurySize,

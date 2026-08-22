@@ -34,6 +34,10 @@ public sealed class RetireSupportServicePath : Migration
             DELETE FROM governance.reputation_snapshots
             WHERE track = 'support';
 
+            -- The path DELETE/UPDATE operations above can queue deferred constraint-trigger events.
+            -- PostgreSQL refuses ALTER TABLE while such events are pending, so flush them first.
+            SET CONSTRAINTS ALL IMMEDIATE;
+
             ALTER TABLE governance.service_paths
                 DROP CONSTRAINT IF EXISTS service_paths_active_track_check;
             ALTER TABLE governance.service_paths

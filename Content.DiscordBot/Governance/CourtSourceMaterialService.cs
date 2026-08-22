@@ -51,6 +51,33 @@ public sealed class CourtSourceMaterialService(
         await command.ExecuteNonQueryAsync();
     }
 
+    public async Task<CourtDefendantHistory?> GetDefendantHistoryAsync(long caseId)
+    {
+        Guid defendantId;
+        await using (var governance = governanceFactory())
+        {
+            var row = await governance.CourtCases.AsNoTracking()
+                .Where(value => value.Id == caseId)
+                .Join(
+                    governance.Users.AsNoTracking(),
+                    courtCase => courtCase.DefendantUserId,
+                    user => user.Id,
+                    (_, user) => new { user.Ss14UserId })
+                .SingleOrDefaultAsync();
+            if (row == null)
+                return null;
+            defendantId = row.Ss14UserId;
+        }
+
+        await using var game = gameFactory();
+        var defendantName = await game.Player.AsNoTracking()
+            .Where(player => player.UserId == defendantId)
+            .Select(player => player.LastSeenUserName)
+            .SingleOrDefaultAsync() ?? defendantId.ToString();
+        var history = await LoadPlayerHistoryAsync(game, defendantId);
+        return new CourtDefendantHistory(defendantId, defendantName, history);
+    }
+
     public async Task<CourtSourceMaterial?> GetAsync(long caseId)
     {
         long incidentId;
@@ -129,6 +156,24 @@ public sealed class CourtSourceMaterialService(
             value.Body,
             value.Sender != claimantId)).ToArray();
 
+        var history = await LoadPlayerHistoryAsync(game, defendantId);
+
+        return new CourtSourceMaterial(
+            incidentId,
+            ticketId,
+            claimantId,
+            claimantName,
+            defendantId,
+            defendantName,
+            characterName,
+            transcript,
+            history);
+    }
+
+    private static async Task<IReadOnlyList<CourtPlayerHistoryEntry>> LoadPlayerHistoryAsync(
+        ServerDbContext game,
+        Guid defendantId)
+    {
         var history = new List<CourtPlayerHistoryEntry>();
 
         var notes = await game.AdminNotes.AsNoTracking()
@@ -171,16 +216,7 @@ public sealed class CourtSourceMaterialService(
             $"JobBan {ban.RoleId} • {ban.Severity}" + (ban.ExpirationTime == null ? " • бессрочный" : $" • до {ban.ExpirationTime:yyyy-MM-dd HH:mm} UTC"),
             ban.Reason)));
 
-        return new CourtSourceMaterial(
-            incidentId,
-            ticketId,
-            claimantId,
-            claimantName,
-            defendantId,
-            defendantName,
-            characterName,
-            transcript,
-            history.OrderBy(value => value.CreatedAt).ToArray());
+        return history.OrderBy(value => value.CreatedAt).ToArray();
     }
 
     private static async Task EnsureOpenAsync(DbConnection connection)

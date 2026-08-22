@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._RuMC14.Governance;
+using Content.Shared._RuMC14.Governance;
 using Content.Shared.CCVar;
 using Npgsql;
 using NpgsqlTypes;
@@ -261,6 +262,8 @@ public sealed partial class ServerDbManager
             return Array.Empty<GovernanceDutyInvitation>();
         }
 
+        var dutyCooldownHours = Math.Max(0, _cfg.GetCVar(GovernanceCVars.DutyCooldownHours));
+
         await using var connection = CreateGovernanceConnection();
         await connection.OpenAsync(cancel);
         await using var transaction = await connection.BeginTransactionAsync(cancel);
@@ -460,7 +463,7 @@ public sealed partial class ServerDbManager
                            AND NOT EXISTS (
                                SELECT 1 FROM governance.service_assignments AS assignment
                                WHERE assignment.user_id = users.id AND assignment.track = 'moderation'
-                                 AND assignment.assigned_at > now() - interval '24 hours'
+                                 AND assignment.assigned_at > now() - make_interval(hours => @duty_cooldown_hours)
                            )
                            AND NOT EXISTS (
                                SELECT 1 FROM governance.invitations AS invitation
@@ -491,6 +494,7 @@ public sealed partial class ServerDbManager
                 NpgsqlDbType.Array | NpgsqlDbType.Uuid,
                 onlineIds);
             select.Parameters.AddWithValue("round_id_text", roundId.ToString());
+            select.Parameters.AddWithValue("duty_cooldown_hours", dutyCooldownHours);
             select.Parameters.AddWithValue("slots", slots);
             await using var reader = await select.ExecuteReaderAsync(cancel);
             while (await reader.ReadAsync(cancel))
@@ -725,7 +729,7 @@ public sealed partial class ServerDbManager
         }
 
         // Rotation cooldown starts only after the candidate actually accepts and begins service.
-        // Declines, recuses, delivery failures and expired invitations must not consume the 24h slot.
+        // Declines, recuses, delivery failures and expired invitations do not consume the cooldown.
         await using (var assignment = new NpgsqlCommand(
                          """
                          INSERT INTO governance.service_assignments(

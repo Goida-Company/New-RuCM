@@ -1,3 +1,4 @@
+using System.Text;
 using Content.DiscordBot.Governance;
 using Discord;
 using Discord.Interactions;
@@ -10,6 +11,7 @@ public sealed class CommunityCourtModule(
     CourtFilingService filing,
     CourtPunishmentService punishments,
     CourtDiscordCoordinator discord,
+    CourtSourceMaterialService materials,
     CourtTestAccountLinkingService testLinks,
     Config config) : InteractionModuleBase<SocketInteractionContext>
 {
@@ -26,9 +28,36 @@ public sealed class CommunityCourtModule(
         {
             EnsureEnabled();
             var evidence = attachment?.Url ?? evidenceUrl ?? string.Empty;
-            var courtCase = await filing.FileByGameNicknameAsync(Context.User.Id, defendant, round, summary, evidence);
-            await discord.EnsureCaseThreadAsync(courtCase);
-            await FollowupAsync($"Жалоба зарегистрирована как дело №{courtCase.Id}.", ephemeral: true);
+            var filingResult = await filing.FileByGameNicknameAsync(Context.User.Id, defendant, round, summary, evidence);
+            var courtCase = filingResult.CourtCase;
+            var thread = await discord.EnsureCaseThreadAsync(courtCase);
+
+            var history = await materials.GetDefendantHistoryAsync(courtCase.Id);
+            if (history != null)
+            {
+                await PublishDefendantHistoryAsync(thread, history);
+                await materials.MarkMaterialsPublishedAsync(courtCase.Id);
+            }
+
+            if (filingResult.DefenseSkippedBecauseDefendantHasNoDiscord)
+            {
+                await thread.SendMessageAsync(embed: new EmbedBuilder()
+                    .WithTitle("Стадия защиты пропущена")
+                    .WithDescription(
+                        "Ответчик найден по SS14, но его SS14-аккаунт не связан с Discord. " +
+                        "Получить защиту через Discord невозможно, поэтому дело сразу переведено к формированию коллегии присяжных.")
+                    .WithColor(Color.Orange)
+                    .WithCurrentTimestamp()
+                    .Build());
+
+                // Do not wait for the next scheduler tick: select/notify the jury immediately.
+                await discord.ProcessOnceAsync();
+            }
+
+            var suffix = filingResult.DefenseSkippedBecauseDefendantHasNoDiscord
+                ? " Ответчик не привязал Discord; стадия защиты пропущена."
+                : string.Empty;
+            await FollowupAsync($"Жалоба зарегистрирована как дело №{courtCase.Id}.{suffix}", ephemeral: true);
         });
     }
 
@@ -184,6 +213,57 @@ public sealed class CommunityCourtModule(
             await discord.ProcessOnceAsync();
             await FollowupAsync($"{result} Выполнен проход планировщика: подходящим присяжным должны быть отправлены приглашения.", ephemeral: true);
         });
+    }
+
+    private static async Task PublishDefendantHistoryAsync(
+        IThreadChannel thread,
+        CourtDefendantHistory history)
+    {
+        var chunks = new List<string>();
+        var buffer = new StringBuilder();
+        foreach (var entry in history.Entries)
+        {
+            var line = $"**{entry.CreatedAt.ToLocalTime():dd.MM.yyyy HH:mm} • {EscapeDiscord(entry.Kind)}**\n{EscapeDiscord(entry.Message)}";
+            if (line.Length > 3400)
+                line = line[..3400] + "…";
+            if (buffer.Length > 0 && buffer.Length + line.Length + 2 > 3800)
+            {
+                chunks.Add(buffer.ToString());
+                buffer.Clear();
+            }
+            if (buffer.Length > 0)
+                buffer.Append("\n\n");
+            buffer.Append(line);
+        }
+
+        if (buffer.Length > 0)
+            chunks.Add(buffer.ToString());
+        if (chunks.Count == 0)
+            chunks.Add("У ответчика нет сохранённых заметок, watchlist-записей или отображаемых банов.");
+
+        for (var index = 0; index < chunks.Count; index++)
+        {
+            var title = $"История ответчика • {EscapeDiscord(history.DefendantName)}";
+            if (chunks.Count > 1)
+                title += $" • {index + 1}/{chunks.Count}";
+            await thread.SendMessageAsync(embed: new EmbedBuilder()
+                .WithTitle(title)
+                .WithDescription(chunks[index])
+                .WithColor(Color.DarkGrey)
+                .Build());
+        }
+    }
+
+    private static string EscapeDiscord(string value)
+    {
+        return value
+            .Replace("\\", "\\\\", StringComparison.Ordinal)
+            .Replace("*", "\\*", StringComparison.Ordinal)
+            .Replace("_", "\\_", StringComparison.Ordinal)
+            .Replace("`", "\\`", StringComparison.Ordinal)
+            .Replace("~", "\\~", StringComparison.Ordinal)
+            .Replace("|", "\\|", StringComparison.Ordinal)
+            .Replace("@", "@\u200B", StringComparison.Ordinal);
     }
 
     private async Task ExecuteAsync(Func<Task> action)

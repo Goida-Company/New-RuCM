@@ -22,6 +22,8 @@ public enum GovernanceAHelpQueueAction
     RejectModerationAction,
     OpenFullLogs,
     OpenPlayerNotes,
+    TeleportToReporter,
+    TeleportToIncidentTarget,
     EscalateToCourt,
 }
 

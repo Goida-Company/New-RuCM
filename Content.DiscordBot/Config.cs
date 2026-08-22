@@ -18,7 +18,7 @@ public sealed class Config
 
     public int CourtComplaintWindowHours { get; set; } = 72;
 
-    public int CourtDefenseHours { get; set; } = 48;
+    public int CourtDefenseHours { get; set; } = 24;
 
     public int CourtVoteHours { get; set; } = 48;
 
