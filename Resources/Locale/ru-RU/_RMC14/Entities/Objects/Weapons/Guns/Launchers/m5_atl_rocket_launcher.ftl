@@ -1,5 +1,5 @@
 # Оружие
-ent-RMCWeaponLauncherM5ATL = гранатомёт М5-ATL
+ent-RMCWeaponLauncherM5ATL = гранатомёт M5-ATL
     .desc = M5 Anti-Tank Launcher — мощное противотанковое пехотное оружие. Эффективная дальность оставляет желать лучшего
 
 ent-CMUWeaponLauncherEMBLR = зенитный комлекс Fliegerfaust
