@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Server._RuMC14.Governance;
+using Content.Shared._RuMC14.Governance;
 using Content.Shared.CCVar;
 using Npgsql;
 using NpgsqlTypes;
@@ -51,6 +52,7 @@ public sealed partial class ServerDbManager
 
         var onlineIds = onlineObservers.Select(value => value.UserId).ToArray();
         var roundIdText = roundId.ToString();
+        var dutyCooldownHours = Math.Max(0, _cfg.GetCVar(GovernanceCVars.DutyCooldownHours));
         await using var connection = CreateGovernanceConnection();
         await connection.OpenAsync(cancel);
 
@@ -131,7 +133,7 @@ public sealed partial class ServerDbManager
                                SELECT 1 FROM governance.service_assignments AS assignment
                                WHERE assignment.user_id = users.id
                                  AND assignment.track = 'moderation'
-                                 AND assignment.assigned_at > now() - interval '24 hours'
+                                 AND assignment.assigned_at > now() - make_interval(hours => @duty_cooldown_hours)
                            )
                            AND NOT EXISTS (
                                SELECT 1 FROM governance.invitations AS invitation
@@ -165,6 +167,7 @@ public sealed partial class ServerDbManager
                 NpgsqlDbType.Array | NpgsqlDbType.Uuid,
                 onlineIds);
             select.Parameters.AddWithValue("round_id_text", roundIdText);
+            select.Parameters.AddWithValue("duty_cooldown_hours", dutyCooldownHours);
             await using var reader = await select.ExecuteReaderAsync(cancel);
             while (await reader.ReadAsync(cancel))
             {
