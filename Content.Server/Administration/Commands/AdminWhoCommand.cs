@@ -2,7 +2,6 @@ using System.Linq;
 using System.Text;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
-using Content.Server.GameTicking;
 using Content.Server._RuMC14.Governance;
 using Content.Shared.Administration;
 using Robust.Server.Player;
@@ -17,7 +16,6 @@ public sealed partial class AdminWhoCommand : LocalizedCommands
     [Dependency] private IAfkManager _afkManager = default!;
     [Dependency] private IAdminManager _adminManager = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private GovernanceManager _governance = default!;
 
     public override string Command => "adminwho";
@@ -63,7 +61,7 @@ public sealed partial class AdminWhoCommand : LocalizedCommands
         }
 
         var dutyResponders = _playerManager.Sessions
-            .Where(player => _governance.HasActiveDuty(player.UserId, _ticker.RoundId))
+            .Where(player => _governance.HasActiveDuty(player.UserId))
             .Where(player =>
             {
                 var adminData = _adminManager.GetAdminData(player);
