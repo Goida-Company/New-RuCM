@@ -63,3 +63,7 @@ ent-RuMCUniformBlackBEARFull = {ent-RuMCUniformBEAR_Black}
 ent-RuMCUniformGrayBEARFull = {ent-RuMCUniformBEAR_Gray}
     .desc = {ent-RuMCUniformBEAR_Gray.desc}
     .suffix = РуМС, Серая, РПС
+
+ent-RuMCWebbingDropPouchBEARFull = {ent-AU14WebbingDropPouchUPP}
+    .desc = {ent-AU14WebbingDropPouchUPP.desc}
+    .suffix = РуМС, Заполнен
