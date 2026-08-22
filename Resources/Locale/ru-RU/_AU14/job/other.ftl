@@ -222,6 +222,11 @@ au14-pmcparty-greeting =
     Вейланд-Ютани — строим лучшие миры.
 au14-job-name-wypmc = ЧВК
 au14-job-name-wypmc-engineer = Боевой инженер ЧВК
+au14-job-name-wypmc-leader = Лидер ЧВК
+au14-job-name-wypmc-medic = Боевой санитар ЧВК
+au14-job-name-wypmc-contractor = Контрактник ЧВК
+au14-job-name-wypmc-sniper = Снайпер ЧВК
+au14-job-name-wypmc-smartgunner = Оператор смартгана ЧВК
 
 au14-ipie-lawyer-description = Вы — юрист по защите интеллектуальной собственности корпорации Вейланд-Ютани. Защищайте права корпорации!
 au14-ipie-lawyer-greeting =
