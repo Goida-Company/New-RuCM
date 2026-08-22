@@ -15,3 +15,24 @@ ent-AU14CrateBlackfootdoorgunAmmo = ящик патронов для борто�
 
 ent-AU14CrateBlackfootflareAmmo = ящик сигнальных ракет Чёрноступа (x3 коробки сигнальных ракет)
     .desc = {ent-RMCCrateAmmo.desc}
+
+ent-AU14CrateM4PMCCorporateArmorSet = ящик брони и шлемов корпоративной безопасности Ве-Ю M4 (x2 комплекта)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateM4PMCCorporateLeadArmorSet = ящик брони и шлемов лидера охраны Ве-Ю M4 (x2 комплекта)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateRMCPouchMagazineLargePMC = ящик больших подсумков для магазинов ЧВК (x2)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateRMCBootsPMCFilled = ящик ботинок ЧВК (x2)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateHandsVeteranPMC = ящик перчаток ЧВК Ве-Ю (x2)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateRMCPouchMedkitPMC = ящик подсумков-аптечек ЧВК (x2)
+    .desc = {ent-RMCCrateBase.desc}
+
+ent-AU14CrateRMCPouchFirstAidPMC = ящик подсумков-аптечек ЧВК (x2)
+    .desc = {ent-RMCCrateBase.desc}
