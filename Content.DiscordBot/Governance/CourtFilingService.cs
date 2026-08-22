@@ -48,7 +48,7 @@ public sealed class CourtFilingService(
             Summary = summary,
             Status = defenseSkipped ? CourtStatuses.AwaitingJury : CourtStatuses.Defense,
             FiledAt = now,
-            DefenseDeadline = now + policy.DefensePeriod,
+            DefenseDeadline = defenseSkipped ? now : now + policy.DefensePeriod,
         }).Entity;
         await governance.SaveChangesAsync();
         governance.CourtStatements.Add(new GovernanceCourtStatement
@@ -132,7 +132,7 @@ public sealed class CourtFilingService(
         if (endedAt == null)
             throw new CourtRuleException("Раунд не найден или ещё не завершён.");
         if (DateTime.UtcNow - endedAt.Value.ToUniversalTime() > policy.ComplaintWindow)
-            throw new CourtRuleException("После окончания раунда прошло больше допустимого срока.");
+            throw new CourtRuleException($"Срок подачи жалобы истёк. Жалобу можно подать в течение {policy.ComplaintWindow.TotalHours:F0} часов после окончания раунда.");
         var participants = await game.Round.AsNoTracking().Where(value => value.Id == roundId)
             .SelectMany(value => value.Players)
             .CountAsync(value => value.UserId == claimant || value.UserId == defendant);
