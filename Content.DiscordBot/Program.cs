@@ -288,6 +288,7 @@ var events = new EventGovernanceService(CreateGovernanceDatabase, community, sel
 var eventStatus = new EventGovernanceStatusService(CreateGovernanceDatabase);
 var guildMembers = new DiscordGuildMemberCache(client, config.Guild);
 var coordinator = new CourtDiscordCoordinator(client, court, courtMaterials, punishments, events, moderation, config, guildMembers);
+var courtScheduler = new CourtSchedulerCoordinator(client, coordinator, CreateGovernanceDatabase, config);
 var conversations = new GovernanceDiscordConversationCoordinator(client, CreateGovernanceDatabase, config);
 var moderationTrustCoordinator = new ModerationTrustCoordinator(client, moderationTrust, court, config, guildMembers);
 var reputationCoordinator = new ReputationCoordinator(identities, reputation, config);
@@ -310,6 +311,7 @@ var services = new ServiceCollection()
     .AddSingleton(events)
     .AddSingleton(eventStatus)
     .AddSingleton(coordinator)
+    .AddSingleton(courtScheduler)
     .AddSingleton(conversations)
     .AddSingleton(moderationTrustCoordinator)
     .AddSingleton(reputationCoordinator)
@@ -338,7 +340,7 @@ AppDomain.CurrentDomain.ProcessExit += (_, _) =>
 };
 
 await handler.InstallCommandsAsync();
-var scheduler = Task.Run(() => coordinator.RunSchedulerAsync(shutdown.Token));
+var scheduler = Task.Run(() => courtScheduler.RunSchedulerAsync(shutdown.Token));
 var conversationScheduler = Task.Run(() => conversations.RunSchedulerAsync(shutdown.Token));
 var moderationTrustScheduler = Task.Run(() => moderationTrustCoordinator.RunSchedulerAsync(shutdown.Token));
 var reputationScheduler = Task.Run(() => reputationCoordinator.RunSchedulerAsync(shutdown.Token));

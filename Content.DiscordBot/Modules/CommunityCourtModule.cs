@@ -11,6 +11,7 @@ public sealed class CommunityCourtModule(
     CourtFilingService filing,
     CourtPunishmentService punishments,
     CourtDiscordCoordinator discord,
+    CourtSchedulerCoordinator courtScheduler,
     CourtSourceMaterialService materials,
     CourtTestAccountLinkingService testLinks,
     Config config) : InteractionModuleBase<SocketInteractionContext>
@@ -50,8 +51,8 @@ public sealed class CommunityCourtModule(
                     .WithCurrentTimestamp()
                     .Build());
 
-                // Do not wait for the next scheduler tick: select/notify the jury immediately.
-                await discord.ProcessOnceAsync();
+                // Do not wait for the next scheduler tick: recover/announce/select the jury immediately.
+                await courtScheduler.ProcessOnceAsync();
             }
 
             var suffix = filingResult.DefenseSkippedBecauseDefendantHasNoDiscord
@@ -210,7 +211,7 @@ public sealed class CommunityCourtModule(
         {
             EnsureEnabled();
             var result = await testLinks.ExpireDefenseAsync(caseId, Context.User.Id);
-            await discord.ProcessOnceAsync();
+            await courtScheduler.ProcessOnceAsync();
             await FollowupAsync($"{result} Выполнен проход планировщика: подходящим присяжным должны быть отправлены приглашения.", ephemeral: true);
         });
     }
