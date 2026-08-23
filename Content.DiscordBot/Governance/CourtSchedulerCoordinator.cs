@@ -12,6 +12,7 @@ public sealed class CourtSchedulerCoordinator(
     Config config)
 {
     private const string DefenseRecoveredEvent = "court.defense_skipped_no_discord_recovered";
+    private const string DefenseDeadlineRecoveredEvent = "court.defense_deadline_recovered";
     private const string JurySearchNotifiedEvent = "court.jury_search_notified";
 
     public async Task RunSchedulerAsync(CancellationToken cancellationToken)
@@ -42,15 +43,65 @@ public sealed class CourtSchedulerCoordinator(
         // Notify cases that are already waiting before the normal pass starts selecting candidates.
         await PublishJurySearchNoticesAsync();
 
-        // The normal pass synchronizes linked accounts first, so recovery below uses fresh Discord identity data.
+        // Older cases may still contain a defense deadline created when the configured period was longer.
+        // Cap them to the current policy before the normal deadline processor runs.
+        await RecoverLegacyDefenseDeadlinesAsync();
+
+        // The normal pass synchronizes linked accounts first and advances any newly expired defense cases.
         await discord.ProcessOnceAsync();
 
+        // Use the fresh identity state from the normal pass to skip defense when the defendant has no Discord.
         var recovered = await RecoverUnreachableDefendantsAsync();
         await PublishJurySearchNoticesAsync();
 
         // Recovered cases have just moved to AwaitingJury; select and notify candidates immediately.
         if (recovered > 0)
             await discord.ProcessOnceAsync();
+    }
+
+    private async Task<int> RecoverLegacyDefenseDeadlinesAsync()
+    {
+        var now = DateTime.UtcNow;
+        var defensePeriod = TimeSpan.FromHours(Math.Clamp(config.CourtDefenseHours, 1, 24));
+        await using var governance = governanceFactory();
+        await using var transaction = await governance.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable);
+
+        var defenseCases = await governance.CourtCases
+            .Where(value => value.Status == CourtStatuses.Defense)
+            .ToListAsync();
+        var recovered = 0;
+
+        foreach (var courtCase in defenseCases)
+        {
+            var allowedDeadline = courtCase.FiledAt + defensePeriod;
+            if (courtCase.DefenseDeadline <= allowedDeadline)
+                continue;
+
+            var previousDeadline = courtCase.DefenseDeadline;
+            courtCase.DefenseDeadline = allowedDeadline;
+            courtCase.Version++;
+            recovered++;
+
+            governance.AuditEvents.Add(new GovernanceAuditEvent
+            {
+                EventType = DefenseDeadlineRecoveredEvent,
+                ActorType = "system",
+                EntityType = "court_case",
+                EntityId = courtCase.Id.ToString(),
+                CreatedAt = now,
+                Payload = JsonSerializer.Serialize(new
+                {
+                    previous_deadline = previousDeadline,
+                    recovered_deadline = allowedDeadline,
+                    defense_hours = defensePeriod.TotalHours,
+                    already_expired = allowedDeadline <= now,
+                }),
+            });
+        }
+
+        await governance.SaveChangesAsync();
+        await transaction.CommitAsync();
+        return recovered;
     }
 
     private async Task<int> RecoverUnreachableDefendantsAsync()
