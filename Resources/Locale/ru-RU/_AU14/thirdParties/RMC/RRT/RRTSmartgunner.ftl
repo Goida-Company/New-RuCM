@@ -1,3 +1,8 @@
 ent-AU14JobRMCRRTSmartgunner-name = Урист Ц.М. МакХэндс
-ent-AU14IDCardRMCRRTSmartgunner-name = ID-карта смартганнера БР КМП ИТМ
-ent-AU14IDCardRMCRRTSmartgunner-desc = Кусочек закодированного компрессированного стекловолокна. Используется для идентификации и контроля доступа.
+
+ent-AU14JobRMCRRTSmartgunner = пулемётчик ГБР ИТМ
+    .desc = Спавнер пулемётчика группы быстрого реагирования ИТМ.
+    .suffix = Роль призрака
+
+ent-AU14IDCardRMCRRTSmartgunner = ID-карта пулемётчика ГБР ИТМ
+    .desc = {ent-AU14IDCardBaseCivilianNoIFF.desc}
