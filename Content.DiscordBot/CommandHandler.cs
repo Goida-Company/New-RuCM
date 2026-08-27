@@ -25,6 +25,15 @@ public sealed class CommandHandler(
     private ImmutableArray<RMCPatronTier> _tierPriority;
     private Task? _refreshPatronsTask;
 
+    private sealed record LinkedPatronSnapshot(Guid PlayerId, ulong DiscordId, string PlayerName);
+    private sealed record PatronRefreshDecision(
+        Guid PlayerId,
+        ulong DiscordId,
+        string PlayerName,
+        string? DiscordUsername,
+        int? TierId,
+        string? TierName);
+
     public int Running = 1;
 
     public async Task InstallCommandsAsync()
@@ -184,11 +193,9 @@ public sealed class CommandHandler(
                 var discord = await db.RMCDiscordAccounts
                     .Include(d => d.LinkedAccount)
                     .ThenInclude(l => l.Player)
-                    .ThenInclude(p => p.Patron)
                     .FirstOrDefaultAsync(a => a.Id == authorId);
                 var codes = await db.RMCLinkingCodes
                     .Include(l => l.Player)
-                    .ThenInclude(player => player.Patron)
                     .FirstOrDefaultAsync(p => p.Code == code);
 
                 if (codes == null)
@@ -247,21 +254,20 @@ public sealed class CommandHandler(
                 }
 
                 var memberLookup = await guildMembers.LookupAsync(authorId);
-                var roles = memberLookup.User?.RoleIds.ToArray() ?? [];
-                var tiers = await db.RMCPatronTiers
-                    .Where(t => roles.Contains(t.DiscordRole))
-                    .ToListAsync();
-                if (tiers.Count == 0)
+                RMCPatronTier? selectedTier = null;
+                if (memberLookup.IsDefinitive)
                 {
-                    discord!.LinkedAccount.Player.Patron = null;
+                    var roles = memberLookup.User?.RoleIds.ToArray() ?? [];
+                    selectedTier = await db.RMCPatronTiers
+                        .Where(t => roles.Contains(t.DiscordRole))
+                        .OrderBy(t => t.Priority)
+                        .FirstOrDefaultAsync();
                 }
                 else
                 {
-                    tiers.Sort((a, b) => a.Priority.CompareTo(b.Priority));
-                    var tier = tiers[0];
-                    discord!.LinkedAccount.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = discord.LinkedAccount.PlayerId })
-                        .Entity;
-                    discord.LinkedAccount.Player.Patron.TierId = tier.Id;
+                    await Logger.Info(
+                        $"[WARNING] Skipping patron update while linking discord id {authorId} " +
+                        $"to player id {targetPlayerId}: Discord lookup was not definitive.");
                 }
 
                 if (createdLink)
@@ -273,8 +279,19 @@ public sealed class CommandHandler(
                     });
                 }
 
-                db.ChangeTracker.DetectChanges();
-                await db.SaveChangesAsync();
+                await using (var transaction = await db.Database.BeginTransactionAsync())
+                {
+                    db.ChangeTracker.DetectChanges();
+                    await db.SaveChangesAsync();
+                    if (memberLookup.IsDefinitive)
+                    {
+                        if (selectedTier == null)
+                            await RMCPatronPersistence.RemoveAsync(db, targetPlayerId);
+                        else
+                            await RMCPatronPersistence.SetTierAsync(db, targetPlayerId, selectedTier.Id);
+                    }
+                    await transaction.CommitAsync();
+                }
                 try
                 {
                     await identities.SyncLinkedAccountAsync(targetPlayerId, authorId);
@@ -291,8 +308,8 @@ public sealed class CommandHandler(
                 }
 
                 var msg = $"SS14-аккаунт **{codes.Player.LastSeenUserName}** успешно связан с вашим Discord. Эта связь постоянная и не может быть перепривязана к другому аккаунту.";
-                if (codes.Player.Patron != null)
-                    msg += $" Уровень поддержки: **{codes.Player.Patron.Tier.Name}**.";
+                if (selectedTier != null)
+                    msg += $" Уровень поддержки: **{selectedTier.Name}**.";
 
                 await modal.FollowupAsync(msg, ephemeral: true);
                 break;
@@ -305,55 +322,53 @@ public sealed class CommandHandler(
         {
             try
             {
-                await using var db = databaseFactory();
-                var patrons = await db.RMCLinkedAccounts
-                    .Include(l => l.Player)
-                    .ThenInclude(p => p.Patron)
-                    .ThenInclude(p => p!.Tier)
-                    .ToListAsync();
+                List<LinkedPatronSnapshot> patrons;
+                await using (var readDb = databaseFactory())
+                {
+                    patrons = await readDb.RMCLinkedAccounts
+                        .AsNoTracking()
+                        .Select(linked => new LinkedPatronSnapshot(
+                            linked.PlayerId,
+                            linked.DiscordId,
+                            linked.Player.LastSeenUserName))
+                        .ToListAsync();
+                }
 
+                var decisions = new List<PatronRefreshDecision>();
                 foreach (var linked in patrons)
                 {
                     try
                     {
                         var lookup = await guildMembers.LookupAsync(linked.DiscordId);
                         if (!lookup.IsDefinitive)
+                        {
+                            await Logger.Info(
+                                $"[WARNING] Skipping patron refresh for discord id {linked.DiscordId} " +
+                                $"and player id {linked.PlayerId}: Discord lookup was not definitive.");
                             continue;
+                        }
 
                         var user = lookup.User;
                         if (user == null)
                         {
-                            if (linked.Player.Patron != null)
-                            {
-                                linked.Player.Patron = null;
-                                await Logger.Info($"Removed patron {linked.DiscordId}:{linked.Player.LastSeenUserName}");
-                            }
-
+                            decisions.Add(new PatronRefreshDecision(
+                                linked.PlayerId,
+                                linked.DiscordId,
+                                linked.PlayerName,
+                                null,
+                                null,
+                                null));
                             continue;
                         }
 
-                        var isPatron = false;
-                        foreach (var tier in _tierPriority)
-                        {
-                            if (user.RoleIds.Contains(tier.DiscordRole))
-                            {
-                                isPatron = true;
-                                if (linked.Player.Patron?.Tier.DiscordRole == tier.DiscordRole)
-                                    break;
-
-                                linked.Player.Patron ??= db.RMCPatrons.Add(new RMCPatron { PlayerId = linked.PlayerId })
-                                    .Entity;
-                                linked.Player.Patron.TierId = tier.Id;
-                                await Logger.Info($"Updated patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName} with tier {tier.Name}");
-                                break;
-                            }
-                        }
-
-                        if (!isPatron && linked.Player.Patron != null)
-                        {
-                            linked.Player.Patron = null;
-                            await Logger.Info($"Removed patron {user.Username}:{linked.DiscordId}:{linked.Player.LastSeenUserName}");
-                        }
+                        var tier = _tierPriority.FirstOrDefault(value => user.RoleIds.Contains(value.DiscordRole));
+                        decisions.Add(new PatronRefreshDecision(
+                            linked.PlayerId,
+                            linked.DiscordId,
+                            linked.PlayerName,
+                            user.Username,
+                            tier?.Id,
+                            tier?.Name));
                     }
                     catch (Exception e)
                     {
@@ -361,13 +376,50 @@ public sealed class CommandHandler(
                     }
                 }
 
-                await db.SaveChangesAsync();
-                await Task.Delay(60000);
+                var changes = new List<PatronRefreshDecision>();
+                await using (var writeDb = databaseFactory())
+                await using (var transaction = await writeDb.Database.BeginTransactionAsync())
+                {
+                    foreach (var decision in decisions)
+                    {
+                        var changed = decision.TierId == null
+                            ? await RMCPatronPersistence.RemoveAsync(writeDb, decision.PlayerId)
+                            : await RMCPatronPersistence.SetTierAsync(
+                                writeDb,
+                                decision.PlayerId,
+                                decision.TierId.Value);
+                        if (changed)
+                            changes.Add(decision);
+                    }
+
+                    await transaction.CommitAsync();
+                }
+
+                foreach (var change in changes)
+                {
+                    if (change.TierId != null)
+                    {
+                        await Logger.Info(
+                            $"Updated patron {change.DiscordUsername}:{change.DiscordId}:{change.PlayerName} " +
+                            $"with tier {change.TierName}");
+                    }
+                    else if (change.DiscordUsername == null)
+                    {
+                        await Logger.Info($"Removed patron {change.DiscordId}:{change.PlayerName}");
+                    }
+                    else
+                    {
+                        await Logger.Info(
+                            $"Removed patron {change.DiscordUsername}:{change.DiscordId}:{change.PlayerName}");
+                    }
+                }
             }
             catch (Exception e)
             {
                 await Logger.Error("Error refreshing patrons", e);
             }
+
+            await Task.Delay(60000);
         }
     }
 }
