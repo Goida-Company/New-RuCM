@@ -1,7 +1,7 @@
 - type: entity
   parent: RMCCrateAmmo
   id: RuMCCrateAU14FrameBackpackRMC
-  name: Frame backpack (x2 frame backpacl)
+  name: Frame backpack (x2 frame backpack)
   components:
   - type: StorageFill
     contents:
