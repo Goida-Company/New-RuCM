@@ -1,4 +1,3 @@
-using Content.Server._RuMC14.Governance;
 using Content.Server.Chat.Managers;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -13,7 +12,6 @@ public sealed partial class DiscordChatLink : IPostInjectInit
     [Dependency] private DiscordLink _discordLink = default!;
     [Dependency] private IConfigurationManager _configurationManager = default!;
     [Dependency] private IChatManager _chatManager = default!;
-    [Dependency] private IEntitySystemManager _systems = default!;
     [Dependency] private ITaskManager _taskManager = default!;
     [Dependency] private ILogManager _logManager = default!;
 
@@ -73,8 +71,7 @@ public sealed partial class DiscordChatLink : IPostInjectInit
         }
         else if (message.ChannelId == _adminChannelId)
         {
-            _taskManager.RunOnMainThread(() =>
-                _systems.GetEntitySystem<GovernanceAdminChatSystem>().SendHookAdmin(message.Author.Username, contents));
+            _taskManager.RunOnMainThread(() => _chatManager.SendHookAdmin(message.Author.Username, contents));
         }
     }
 

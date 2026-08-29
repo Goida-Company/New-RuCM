@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
 using Content.Server.Database;
-using Content.Server._RuMC14.Governance;
 using Content.Server.Discord;
 using Content.Server.GameTicking;
 using Content.Server.Players.RateLimiting;
 using Content.Shared.Administration;
-using Content.Shared._RuMC14.Governance;
 using Content.Shared.CCVar;
-using Content.Shared.Corvax.CCCVars;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
 using Content.Shared.Players.RateLimiting;
@@ -310,7 +307,7 @@ namespace Content.Server.Administration.Systems
             _relayMessages.Clear();
         }
 
-        private async void OnClientTypingUpdated(BwoinkClientTypingUpdated msg, EntitySessionEventArgs args)
+        private void OnClientTypingUpdated(BwoinkClientTypingUpdated msg, EntitySessionEventArgs args)
         {
             if (_typingUpdateTimestamps.TryGetValue(args.SenderSession.UserId, out var tuple) &&
                 tuple.Typing == msg.Typing &&
@@ -323,22 +320,7 @@ namespace Content.Server.Administration.Systems
 
             // Non-admins can only ever type on their own ahelp, guard against fake messages
             var isAdmin = _adminManager.GetAdminData(args.SenderSession)?.HasFlag(AdminFlags.Adminhelp) ?? false;
-            var isGovernanceResponder = false;
-            try
-            {
-                isGovernanceResponder = !isAdmin && msg.Channel != args.SenderSession.UserId &&
-                    _config.GetCVar(CCCVars.GovernanceEnabled) &&
-                    _gameTicker.RunLevel == GameRunLevel.InRound &&
-                    await _dbManager.AuthorizeGovernanceAHelpChannelAsync(
-                        args.SenderSession.UserId,
-                        msg.Channel,
-                        _gameTicker.RoundId);
-            }
-            catch (Exception exception)
-            {
-                _sawmill.Error($"Could not authorize Governance AHelp typing update: {exception}");
-            }
-            var channel = isAdmin || isGovernanceResponder ? msg.Channel : args.SenderSession.UserId;
+            var channel = isAdmin ? msg.Channel : args.SenderSession.UserId;
             var update = new BwoinkPlayerTypingUpdated(channel, args.SenderSession.Name, msg.Typing);
 
             foreach (var admin in GetTargetAdmins())
@@ -347,22 +329,6 @@ namespace Content.Server.Administration.Systems
                     continue;
 
                 RaiseNetworkEvent(update, admin);
-            }
-
-            try
-            {
-                if (_config.GetCVar(CCCVars.GovernanceEnabled) &&
-                    _gameTicker.RunLevel == GameRunLevel.InRound)
-                {
-                    var responderId = await _dbManager.GetGovernanceAHelpResponderAsync(channel, _gameTicker.RoundId);
-                    if (responderId != null && responderId != args.SenderSession.UserId &&
-                        _playerManager.TryGetSessionById(responderId.Value, out var responder))
-                        RaiseNetworkEvent(update, responder);
-                }
-            }
-            catch (Exception exception)
-            {
-                _sawmill.Error($"Could not route Governance AHelp typing update: {exception}");
             }
         }
 
@@ -665,7 +631,7 @@ namespace Content.Server.Administration.Systems
             }
         }
 
-        protected override async void OnBwoinkTextMessage(BwoinkTextMessage message, EntitySessionEventArgs eventArgs)
+        protected override void OnBwoinkTextMessage(BwoinkTextMessage message, EntitySessionEventArgs eventArgs)
         {
             base.OnBwoinkTextMessage(message, eventArgs);
             _activeConversations[message.UserId] = DateTime.Now;
@@ -676,24 +642,7 @@ namespace Content.Server.Administration.Systems
             var personalChannel = senderSession.UserId == message.UserId;
             var senderAdmin = _adminManager.GetAdminData(senderSession);
             var senderAHelpAdmin = senderAdmin?.HasFlag(AdminFlags.Adminhelp) ?? false;
-            var governanceEnabled = _config.GetCVar(CCCVars.GovernanceEnabled) &&
-                                    _gameTicker.RunLevel == GameRunLevel.InRound;
-            var senderGovernanceResponder = false;
-            if (governanceEnabled && !personalChannel && !message.AdminOnly)
-            {
-                try
-                {
-                    senderGovernanceResponder = await _dbManager.AuthorizeGovernanceAHelpChannelAsync(
-                        senderSession.UserId,
-                        message.UserId,
-                        _gameTicker.RoundId);
-                }
-                catch (Exception exception)
-                {
-                    _sawmill.Error($"Could not authorize Governance AHelp reply: {exception}");
-                }
-            }
-            var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin || senderGovernanceResponder;
+            var authorized = personalChannel && !message.AdminOnly || senderAHelpAdmin;
             if (!authorized)
             {
                 // Unauthorized bwoink (log?)
@@ -702,22 +651,6 @@ namespace Content.Server.Administration.Systems
 
             if (_rateLimit.CountAction(eventArgs.SenderSession, RateLimitKey) != RateLimitStatus.Allowed)
                 return;
-
-            if (governanceEnabled && !message.AdminOnly)
-            {
-                try
-                {
-                    await _dbManager.RecordGovernanceAHelpMessageAsync(
-                        message.UserId,
-                        senderSession.UserId,
-                        _gameTicker.RoundId,
-                        message.Text);
-                }
-                catch (Exception exception)
-                {
-                    _sawmill.Error($"Could not persist Governance AHelp message: {exception}");
-                }
-            }
 
             var escapedText = FormattedMessage.EscapeText(message.Text);
 
@@ -753,22 +686,7 @@ namespace Content.Server.Administration.Systems
 
             LogBwoink(msg);
 
-            var admins = GetTargetAdmins().ToList();
-
-            if (governanceEnabled)
-            {
-                try
-                {
-                    var responderId = await _dbManager.GetGovernanceAHelpResponderAsync(message.UserId, _gameTicker.RoundId);
-                    if (responderId != null && _playerManager.TryGetSessionById(responderId.Value, out var responder) &&
-                        admins.All(channel => channel.UserId != responder.UserId))
-                        admins.Add(responder.Channel);
-                }
-                catch (Exception exception)
-                {
-                    _sawmill.Error($"Could not route Governance AHelp message: {exception}");
-                }
-            }
+            var admins = GetTargetAdmins();
 
             // Notify all admins
             foreach (var channel in admins)
@@ -856,53 +774,6 @@ namespace Content.Server.Administration.Systems
             var systemText = Loc.GetString("bwoink-system-starmute-message-no-other-users");
             var starMuteMsg = new BwoinkTextMessage(message.UserId, SystemUserId, systemText);
             RaiseNetworkEvent(starMuteMsg, senderSession.Channel);
-        }
-
-        public void OpenGovernanceAHelp(
-            ICommonSession responder,
-            NetUserId reporter,
-            IReadOnlyList<GovernanceAHelpTranscriptLine> transcript)
-        {
-            RaiseNetworkEvent(new GovernanceAHelpAccessUpdated(true), responder);
-            foreach (var line in transcript)
-            {
-                var text = $"{FormattedMessage.EscapeText(line.SenderName)}: {FormattedMessage.EscapeText(line.Body)}";
-                RaiseNetworkEvent(new BwoinkTextMessage(
-                    reporter,
-                    line.SenderUserId,
-                    text,
-                    line.CreatedAt.LocalDateTime,
-                    playSound: false), responder);
-            }
-            RaiseNetworkEvent(new GovernanceAHelpOpenChannel(reporter), responder);
-        }
-
-        public void SendGovernanceExplanationRequest(
-            ICommonSession responder,
-            ICommonSession target,
-            long actionId,
-            string reason)
-        {
-            var text = Loc.GetString(
-                "governance-explanation-message",
-                ("responder", FormattedMessage.EscapeText(responder.Name)),
-                ("action", actionId),
-                ("reason", FormattedMessage.EscapeText(reason)));
-            var message = new BwoinkTextMessage(
-                target.UserId,
-                SystemUserId,
-                text,
-                DateTime.Now,
-                playSound: true);
-            RaiseNetworkEvent(message, target);
-            RaiseNetworkEvent(new BwoinkTextMessage(
-                target.UserId,
-                SystemUserId,
-                text,
-                message.SentAt,
-                playSound: false), responder);
-            RaiseNetworkEvent(new GovernanceAHelpAccessUpdated(true), responder);
-            RaiseNetworkEvent(new GovernanceAHelpOpenChannel(target.UserId), responder);
         }
 
         private IList<INetChannel> GetNonAfkAdmins()
