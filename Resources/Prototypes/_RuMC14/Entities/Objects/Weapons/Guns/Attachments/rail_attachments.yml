@@ -61,7 +61,7 @@
   description: The rifle's about as useful as you are now, you wanker. Put it back on.
   components:
   - type: Sprite
-    sprite: _RMC14/Objects/Weapons/Guns/Attachments/rmc_rail.rsi
+    sprite: _RuMC14/Objects/Weapons/Guns/Attachments/Rail/rumc_FAL_rail.rsi
     state: fal_scope
   - type: AttachableVisuals
     suffix: ""
