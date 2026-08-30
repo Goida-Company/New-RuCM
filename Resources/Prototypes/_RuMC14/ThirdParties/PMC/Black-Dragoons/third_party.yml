@@ -66,7 +66,7 @@
 - type: thirdParty
   id: Grunts_Black_Dragoons
   announceAsSurvivors: true
-  partyspawn: BEARSpawnAlt2
+  partyspawn: GruntsSpawn
   whitelistedgamemodes:
     - insurgency
     - colonyfall
