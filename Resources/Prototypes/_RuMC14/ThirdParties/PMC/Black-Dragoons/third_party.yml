@@ -11,7 +11,7 @@
   spawnTogether: true
 
 - type: thirdParty
-  id: Bulwark_Black-Dragoons
+  id: Bulwark_Black_Dragoons
   announceAsSurvivors: true
   partyspawn: BulwarkSpawn
   whitelistedgamemodes:
@@ -39,7 +39,7 @@
   spawnTogether: true
 
 - type: thirdParty
-  id:  Sentinels_Black-Dragoons
+  id:  Sentinels_Black_Dragoons
   announceAsSurvivors: true
   partyspawn: SentinelsSpawn
   whitelistedgamemodes:
@@ -64,7 +64,7 @@
   spawnTogether: true
 
 - type: thirdParty
-  id: Grunts_Black-Dragoons
+  id: Grunts_Black_Dragoons
   announceAsSurvivors: true
   partyspawn: BEARSpawnAlt2
   whitelistedgamemodes:
