@@ -105,3 +105,7 @@ ent-RuMCCrateMagazineRifleType71 = {ent-RMCCrateWeapons}
 ent-RuMCCrateMagazineRifleType71AP = {ent-RMCCrateWeapons}
     .desc = Содержит ящик, в котором магазины Тип 71 с бронебойными патронами.
     .suffix = РуМС
+
+ent-RuMCCrateAU14FrameBackpackRMC = ящик с каркасными рюкзаками ИТМ (x2)
+    .desc = Содержит ящик каркасных рюкзаков ИТМ
+    .suffix = РуМС
