@@ -18,3 +18,5 @@ cmu14-third-party-name-icrc-relief = Red Cross Relief Party
 cmu14-third-party-name-wypmc = We-Yu PMC Party
 cmu14-third-party-name-wyht = We-Yu Hazard Transport
 cmu14-third-party-name-ipie-synth = IPIE Legal Team (Synthetic)
+
+cmu14-third-party-name-liquidators = UPP Liquidators
