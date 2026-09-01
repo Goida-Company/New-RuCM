@@ -1,13 +1,14 @@
-using Content.Server._RuMC14.Governance;
+using Content.Server.Administration;
+using Content.Server.Chat.Managers;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 
 namespace Content.Server.Chat.Commands
 {
-    [AnyCommand]
+    [AdminCommand(AdminFlags.Adminchat)]
     internal sealed partial class AdminChatCommand : LocalizedCommands
     {
-        [Dependency] private IEntitySystemManager _systems = default!;
+        [Dependency] private IChatManager _chatManager = default!;
 
         public override string Command => "asay";
 
@@ -28,7 +29,7 @@ namespace Content.Server.Chat.Commands
             if (string.IsNullOrEmpty(message))
                 return;
 
-            _systems.GetEntitySystem<GovernanceAdminChatSystem>().TrySendAdminChat(player, message);
+            _chatManager.TrySendOOCMessage(player, message, OOCChatType.Admin);
         }
     }
 }

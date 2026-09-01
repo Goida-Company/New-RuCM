@@ -26,6 +26,10 @@ au14-job-prefix-mobboss = MOB
 au14-job-name-mobgoon= Mob Goon
 au14-job-description-mobgoon = You're a soldier in local crime syndicate, listen to the boss
 
+au14-job-name-drugsmuggler = Drug Smuggler
+au14-job-description-drugsmuggler = You barely made it out as the CMB raided your old drug lab, luckily you managed to escape with some of the product and they didnt catch your name. Time to try again.
+au14-ghostrole-name-drugdealer-criminal = Drug Dealer (Criminal)
+
 au14-job-name-wyguard = Security Officer
 au14-job-description-wyguard= You're corporate security hired by Weyland-Yutani. Listen to and protect the employees and company assets
 au14-job-prefix-wyguard = WYSEC
@@ -270,6 +274,11 @@ au14-pmcparty-greeting = You are a part of Weyland-Yutani PMC party!
     Weyland-Yutani - building better worlds.
 au14-job-name-wypmc = Private Military Contractor
 au14-job-name-wypmc-engineer = PMC Combat Engineer
+au14-job-name-wypmc-leader = PMC Leader
+au14-job-name-wypmc-medic = PMC Combat Lifesaver
+au14-job-name-wypmc-contractor = PMC Contractor
+au14-job-name-wypmc-sniper = PMC Sniper
+au14-job-name-wypmc-smartgunner = PMC Smartgun Operator
 
 au14-ipie-lawyer-description = You are Intelectual Property Infringement Enforcement Lawyer of Weyland-Yutani Corporation. Defend Corporation's rights!
 au14-ipie-lawyer-greeting = You are Intelectual Property Infringement Enforcement Lawyer of Weyland-Yutani Corporation.

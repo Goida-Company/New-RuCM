@@ -16,6 +16,10 @@ ent-RuMCUTES-CCase = кейс для пулемёта УТЁС-С
     .desc = Оружейный кейс.
     .suffix = РуМС
 
+ent-RuMCUTESCCase_GROZA = {ent-RuMCUTES-CCase}
+    .desc = {ent-RuMCUTES-CCase.desc}
+    .suffix = РуМС, Гроза
+
 ent-RuMCGunAK13Case = кейс штурмовой винтовки АК-13
     .desc = Кейс для винтовки АК-13.
     .suffix = РуМС
@@ -34,4 +38,8 @@ ent-RuMCGunVALCase_alt = {ent-RuMCGunVALCase}
 
 ent-RuMCKitUPPHATRPG32 = набор тяжёлого гранатомётчика СПН РПГ-32
     .desc = Обычная коробка.
+    .suffix = РуМС
+
+ent-RuMCSniperRifleSVAROGCase = кейс снайперской винтовки «СВАРОГ»
+    .desc = Кейс для снайперской винтовки «СВАРОГ».
     .suffix = РуМС

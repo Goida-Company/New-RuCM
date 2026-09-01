@@ -19,3 +19,5 @@ cmu14-third-party-name-wypmc = Наёмники Ве-Ю
 cmu14-third-party-name-wyht = Транспорт опасных грузов Ве-Ю
 
 cmu14-third-party-name-ipie-synth = Юридическая группа Ве-Ю (синтетик)
+
+cmu14-third-party-name-liquidators = Отряд ликвидаторов СПН

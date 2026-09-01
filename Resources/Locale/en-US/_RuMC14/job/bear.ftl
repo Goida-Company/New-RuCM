@@ -23,3 +23,15 @@ au-14-job-prefix-bear-grenadier = GRN
 au-14-job-prefix-bear-machinegunner = MG
 au-14-job-prefix-bear-medic = MED
 au-14-job-prefix-bear-rifleman = RFL
+
+rumc-job-callsign-bear-commander-groza = GROZA Squad Leader
+rumc-job-callsign-bear-machinegunner-groza = GROZA Machine Gunner
+rumc-job-callsign-bear-medic-groza = GROZA Medic
+rumc-job-callsign-bear-rifleman-groza = GROZA Rifleman
+rumc-ghostrole-description-bear-machinegunner-groza = Fire support operator in the PMC "BEAR". Armed with a UTES-C machine gun. The task is to suppress enemy firing points and hold positions.
+
+rumc-job-greeting-bear = You are a member of the secret special unit PMC "BEAR" under the UPP! The existence of the connection between BEAR and the UPP is strictly classified. No one should know who you are or what you are doing here. You are friendly to the UPP. Hostile to PMC VAI and PMC We-Y. Work covertly. Complete your objectives. Leave no trace.
+
+rumc-job-callsign-bear-commander-skala = SKALA Squad Leader
+rumc-job-callsign-bear-medic-skala = SKALA Medic
+rumc-job-callsign-bear-rifleman-skala = SKALA Rifleman

@@ -23,3 +23,15 @@ au-14-job-prefix-bear-grenadier = ГРН
 au-14-job-prefix-bear-machinegunner = ПУЛ
 au-14-job-prefix-bear-medic = МЕД
 au-14-job-prefix-bear-rifleman = СТР
+
+rumc-job-callsign-bear-commander-groza = Командир отряда «Гроза»
+rumc-job-callsign-bear-machinegunner-groza = Пулемётчик отряда «Гроза»
+rumc-job-callsign-bear-medic-groza = Медик отряда «Гроза»
+rumc-job-callsign-bear-rifleman-groza = Стрелок отряда «Гроза»
+rumc-ghostrole-description-bear-machinegunner-groza = Оператор огневой поддержки ЧВК «Медведь». Вооружён пулемётом УТЁС-С. Настоящий специалист по обороне.
+
+rumc-job-greeting-bear = Вы член спецподразделения ЧВК «Медведи». Существование связи между Медведями и СПН строжайше секретно. Вы дружественны к СПН. Враждебны к ЧВК ВАИ и ЧВК Ве-Ю.
+
+rumc-job-callsign-bear-commander-skala = Командир отряда «Скала»
+rumc-job-callsign-bear-medic-skala = Медик отряда «Скала»
+rumc-job-callsign-bear-rifleman-skala = Стрелок отряда «Скала»
