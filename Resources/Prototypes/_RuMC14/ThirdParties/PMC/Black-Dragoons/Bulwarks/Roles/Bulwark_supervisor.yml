@@ -45,7 +45,7 @@
     RuMCRankSupervisor: []
   spawnMenuRoleName: Black Dragoons Supervisor
   startingGear: RuMCGearBlackDragoonsSupervisor
-  greeting: You are a member of the "Black Dragoons" PMC. You have been summoned by the TWE ambassador to provide personal security. You have been informed of rebel activity in the sector. Your primary objective is the safety of the TWE ambassador; however, with the ambassador's permission, you may also assist law enforcement agencies in suppressing the uprising. You are [color=green]friendly[/color] toward TWE forces and [color=red]hostile[/color] toward the CLF.
+  greeting: You are a member of the "Black Dragoons" PMC. You have been summoned by the TWE ambassador to provide personal security. You have been informed of rebel activity in the sector. Your primary objective is the safety of the TWE ambassador; however, with the ambassador's permission, you may also assist law enforcement agencies in suppressing the uprising. Manage all contractors in the sector to lead the Empire to greatness. You are [color=green]friendly[/color] toward TWE forces and [color=red]hostile[/color] toward the CLF.
   icon: "CMJobIconEmpty"
   joinNotifyCrew: false
   supervisors: au14-job-name-civilianambassadortwe
