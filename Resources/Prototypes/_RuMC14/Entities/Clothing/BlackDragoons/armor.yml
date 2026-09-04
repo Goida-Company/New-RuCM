@@ -5,10 +5,10 @@
   description: A custom piece of armor tailored for high durability in the field, rarely commissioned due to it's weight and cost, alongside limited conventional use, the Gen IV-H is one of the only open market heavy armored suits available. Made by Davis Proprietary.
   components:
   - type: CMArmor
-    melee: 35
-    bullet: 35
+    melee: 30
+    bullet: 30
     bio: 20
-    explosionArmor: 40
+    explosionArmor: 30
   - type: Sprite
     sprite: _RuMC14/Clothing/Black_Dragoons/armor/heavy_armor.rsi
   - type: ItemCamouflage
