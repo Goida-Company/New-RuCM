@@ -22,7 +22,7 @@
   components:
   - type: CMArmor
     melee: 30
-    bullet: 25
+    bullet: 20
     bio: 15
     explosionArmor: 20
   - type: Sprite
