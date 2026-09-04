@@ -57,4 +57,4 @@ marking-AU14UndershirtUSCM = Майка (USCM, Стандарт)
 
 marking-AU14UndershirtUSCM-blank = Майка (USCM, Стандарт)
 
-marking-RuMCUndershirtSeegSon = Майка (SeegSon, стандарт)
+marking-RuMCUndershirtSeegSon = Майка (Сигсон, стандарт)
