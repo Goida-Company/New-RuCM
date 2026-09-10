@@ -1,3 +1,4 @@
+using Content.Shared._CMU14.Yautja;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
@@ -9,6 +10,42 @@ public sealed class YautjaTeleportSystem : EntitySystem
 {
     [Dependency] private PullingSystem _pulling = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+
+    public readonly record struct ColonyDestination(EntityUid Entity, string Id, string Name);
+
+    public List<ColonyDestination> GetColonyDestinations()
+    {
+        var destinations = new List<ColonyDestination>();
+        var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var query = EntityQueryEnumerator<YautjaRelayDestinationComponent>();
+        while (query.MoveNext(out var uid, out var component))
+        {
+            if (Deleted(uid) || component.Kind != YautjaRelayDestinationKind.Ground)
+                continue;
+
+            var id = component.Id.Trim();
+            var name = component.DisplayName.Trim();
+            var transform = Transform(uid);
+            var coordinates = transform.Coordinates;
+            if (id.Length == 0 ||
+                name.Length == 0 ||
+                !coordinates.IsValid(EntityManager) ||
+                transform.MapID == MapId.Nullspace ||
+                !ids.Add(id))
+                continue;
+
+            destinations.Add(new ColonyDestination(uid, id, name));
+        }
+
+        destinations.Sort(static (left, right) =>
+        {
+            var idComparison = StringComparer.OrdinalIgnoreCase.Compare(left.Id, right.Id);
+            return idComparison != 0
+                ? idComparison
+                : StringComparer.OrdinalIgnoreCase.Compare(left.Name, right.Name);
+        });
+        return destinations;
+    }
 
     public bool TeleportTrain(EntityUid user, MapCoordinates coordinates)
     {

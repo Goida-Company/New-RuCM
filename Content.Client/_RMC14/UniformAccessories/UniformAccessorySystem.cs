@@ -48,7 +48,7 @@ public sealed partial class UniformAccessorySystem : SharedUniformAccessorySyste
         var index = 0;
         foreach (var accessory in container.ContainedEntities)
         {
-            if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
+            if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp) || !accessoryComp.ShowOnMob)
                 continue;
 
             var layer = GetKey(accessory, accessoryComp, index);
@@ -143,7 +143,7 @@ public sealed partial class UniformAccessorySystem : SharedUniformAccessorySyste
         var index = 0;
         foreach (var accessory in container.ContainedEntities)
         {
-            if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp))
+            if (!TryComp<UniformAccessoryComponent>(accessory, out var accessoryComp) || !accessoryComp.ShowOnMob)
                 continue;
 
             if (accessoryComp.PlayerSprite == null && TryComp(accessory, out SpriteComponent? accessorySprite))

@@ -205,6 +205,7 @@ cmu-yautja-mark-apply-detail = Пометить выбранную цель.
 cmu-yautja-mark-remove = Удалить
 cmu-yautja-mark-remove-detail = Очистить выбранную метку.
 cmu-yautja-mark-reason-placeholder = Необязательная причина
+cmu-yautja-mark-reason-required = Укажите причину для этой метки.
 cmu-yautja-mark-none = без метки
 cmu-yautja-mark-no-targets = В радиусе наруча нет подходящих целей.
 cmu-yautja-mark-target-summary = Целей в радиусе: {$count}.
@@ -332,6 +333,7 @@ cmu-yautja-mark-honored = Почётный
 cmu-yautja-mark-dishonored = Бесчестный
 cmu-yautja-mark-gear-carrier = Носитель снаряжения
 cmu-yautja-mark-thrall = Раб
+cmu-yautja-colony-deploy-title = Выберите место высадки на колонию
 cmu-yautja-mark-student = Ученик
 cmu-yautja-mark-blooded = Окровавленный
 cmu-yautja-mark-unknown = Неизвестно
@@ -621,3 +623,9 @@ ent-CMUActionYautjaAbominationFrenzy = Дикое безумие
 
 ent-CMUActionYautjaAbominationToggleFrenzy = Переключить режим безумия
     .desc = Переключайте Feral Frenzy между ударами по одной цели и по области.
+
+cmu-yautja-character-faction = Яутжа
+cmu-yautja-character-primer = Фракция: яутжа — охотники, следующие своему кодексу чести. Человеческие военные фракции не являются вашей стороной; руководствуйтесь правилами охоты и своего клана.
+cmu-yautja-character-primer-badblood = Фракция: отступники яутжа. Вы отвергли кодекс охотников и не принадлежите к человеческим военным фракциям.
+cmu-yautja-mending-herbs = заживляющие травы
+cmu-yautja-burn-herbs = травы от ожогов

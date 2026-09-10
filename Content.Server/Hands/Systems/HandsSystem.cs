@@ -249,7 +249,9 @@ namespace Content.Server.Hands.Systems
             var distance = Math.Clamp(length, minDistance, maxThrowRange);
             direction *= distance / length;
 
-            var throwSpeed = hands.BaseThrowspeed;
+            var throwSpeed = TryComp<Content.Shared._CMU14.Yautja.YautjaThrowComponent>(throwEnt.Value, out var yautjaThrow)
+                ? yautjaThrow.FlightSpeed
+                : hands.BaseThrowspeed;
 
             // Let other systems change the thrown entity (useful for virtual items)
             // or the throw strength.

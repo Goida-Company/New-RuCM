@@ -33,6 +33,9 @@ public sealed partial class YautjaTechItemSystem : EntitySystem
 
     private void OnDamageModifyAfterResist(Entity<DamageableComponent> ent, ref DamageModifyAfterResistEvent args)
     {
+        if (args.Impact.Delivery == DamageImpactDelivery.Thrown && HasComp<YautjaThrowComponent>(args.Tool))
+            return;
+
         if (args.Tool is not { } tool ||
             HasComp<ProjectileComponent>(tool) ||
             !TryComp(tool, out YautjaTechItemComponent? tech) ||

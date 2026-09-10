@@ -35,6 +35,7 @@ namespace Content.Server.Damage.Systems
         [Dependency] private SharedCameraRecoilSystem _sharedCameraRecoil = default!;
         [Dependency] private SharedColorFlashEffectSystem _color = default!;
         [Dependency] private EntityWhitelistSystem _whitelist = default!;
+        [Dependency] private Content.Server._CMU14.Yautja.YautjaThrowSystem _yautjaThrow = default!;
 
         public override void Initialize()
         {
@@ -61,7 +62,11 @@ namespace Content.Server.Damage.Systems
             if (TryComp<DamageImpactProfileComponent>(uid, out var profile))
                 impact = profile.GetThrownImpact(impact);
 
-            var dmg = _damageable.TryChangeDamage(
+            var sourceThrow = TryComp<YautjaThrowComponent>(uid, out var throwProfile) &&
+                              (!TryComp<YautjaSmartDiscComponent>(uid, out var smartDisc) || !smartDisc.Active);
+            var dmg = sourceThrow
+                ? _yautjaThrow.ApplyHit((uid, throwProfile!), args.Target, component, args.Component, impact)
+                : _damageable.TryChangeDamage(
                 args.Target,
                 modified,
                 component.IgnoreResistances,
@@ -89,7 +94,7 @@ namespace Content.Server.Damage.Systems
         private void OnDamageExamine(EntityUid uid, DamageOtherOnHitComponent component, ref DamageExamineEvent args)
         {
             var damage = component.Damage;
-            if (TryComp(uid, out YautjaTechItemComponent? tech))
+            if (!HasComp<YautjaThrowComponent>(uid) && TryComp(uid, out YautjaTechItemComponent? tech))
                 damage *= tech.DamageMultiplier;
 
             _damageExamine.AddDamageExamine(args.Message, _damageable.ApplyUniversalAllModifiers(damage * _damageable.UniversalThrownDamageModifier), Loc.GetString("damage-throw"));

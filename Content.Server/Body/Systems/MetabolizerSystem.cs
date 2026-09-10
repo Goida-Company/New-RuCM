@@ -1,4 +1,7 @@
+using System.Linq;
 using Content.Server.Body.Components;
+using Content.Shared._CMU14.Chemistry.Effects.Special;
+using Content.Shared._CMU14.Yautja;
 using Content.Shared._CMU14.Medical.Core;
 using Content.Shared._CMU14.Medical.Anatomy.Metabolism.Events;
 using Content.Shared._RMC14.Chemistry.Reagent;
@@ -189,6 +192,11 @@ namespace Content.Server.Body.Systems
                     if (!proto.Metabolisms.TryGetValue(group.Id, out var entry))
                         continue;
 
+                    // Nutrition uses the same pipeline locally. Chemical immunity must not
+                    // disable eating and drinking or allow a food's separate poison effects.
+                    if (group.Id != "Food" && group.Id != "Drink" && !CanMetabolizeReagent(actualEntity, proto))
+                        continue;
+
                     var rateMultiplier = isCMUHuman
                         ? GetCMURateMultiplier(medicalBody, group.Id)
                         : 1.0f;
@@ -244,6 +252,18 @@ namespace Content.Server.Body.Systems
             }
 
             _solutionContainerSystem.UpdateChemicals(soln.Value);
+        }
+
+        public bool CanMetabolizeReagent(EntityUid body, ReagentPrototype reagent)
+        {
+            var crossMetabolism = reagent.Metabolisms?.Values
+                .SelectMany(group => group.Effects).OfType<Crossmetabolizing>().FirstOrDefault();
+            // CMSS13 crossmetabolizing pre_process: ordinary chemistry cannot act on Yautja;
+            // level one alien medicine cannot act on humans, while level two permits both.
+            if (HasComp<YautjaComponent>(body))
+                return crossMetabolism != null;
+
+            return crossMetabolism == null || crossMetabolism.Potency >= 2;
         }
 
         private float GetCMURateMultiplier(EntityUid body, ProtoId<MetabolismGroupPrototype> group)

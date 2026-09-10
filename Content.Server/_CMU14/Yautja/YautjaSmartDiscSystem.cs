@@ -40,6 +40,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 {
     private const float MinimumHuntDistanceSquared = 0.04f;
     private const float DiscOrbitSpeedRatio = 0.45f;
+    private readonly HashSet<EntityUid> _pendingBoomerangCatches = new();
     private static readonly ProtoId<NpcFactionPrototype> DefaultYautjaFaction = "CMUYautja";
 
     [Dependency] private IAdminLogManager _adminLog = default!;
@@ -206,7 +207,8 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 
     private void OnThrown(Entity<YautjaSmartDiscComponent> ent, ref ThrownEvent args)
     {
-        if (ent.Comp.Active || args.User is not { } user)
+        if (ent.Comp.Active || ent.Comp.BoomerangVisualUntil != TimeSpan.Zero ||
+            args.User is not { } user || !HasComp<YautjaComponent>(user))
             return;
 
         ent.Comp.PendingThrowActivator = user;
@@ -249,6 +251,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
             return;
 
         RegisterHit(ent, target);
+        args.Handled = true;
     }
 
     private bool TryCatchDiscImpact(Entity<YautjaSmartDiscComponent> ent, EntityUid target, ThrownItemComponent thrown)
@@ -261,7 +264,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 
         if (TryComp(ent.Owner, out ItemToggleComponent? toggle) && toggle.Activated)
             _toggle.TrySetActive((ent.Owner, toggle), false, target, false);
-        else
+        else if (ent.Comp.Active)
             StopDisc(ent);
 
         if (!TerminatingOrDeleted(ent.Owner) && !TerminatingOrDeleted(target))
@@ -279,12 +282,23 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
     {
         if (!ent.Comp.Active)
         {
+            // CMSS13 calls boomerang AFTER the initial launch_towards finishes.
+            // Keep the activator until Update, after ThrownItemComponent is removed.
+            if (ent.Comp.PendingThrowActivator != null)
+                return;
+
             if (ent.Comp.ReturningToOwner &&
                 ent.Comp.CurrentTarget != null &&
                 ent.Comp.YautjaOwner != null)
             {
                 ent.Comp.CurrentTarget = null;
                 return;
+            }
+
+            if (ent.Comp.ReturningToOwner)
+            {
+                _pendingBoomerangCatches.Add(ent.Owner);
+                ent.Comp.BoomerangVisualUntil = _timing.CurTime + ent.Comp.BoomerangVisualDuration;
             }
 
             ClearPendingThrowActivation(ent.Comp);
@@ -429,6 +443,18 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        foreach (var uid in _pendingBoomerangCatches)
+        {
+            if (TerminatingOrDeleted(uid) || !TryComp<YautjaSmartDiscComponent>(uid, out var disc) ||
+                disc.YautjaOwner is not { } owner || TerminatingOrDeleted(owner))
+                continue;
+            var position = _transform.GetMapCoordinates(uid);
+            var destination = _transform.GetMapCoordinates(owner);
+            if (position.MapId == destination.MapId && (position.Position - destination.Position).LengthSquared() <= 1)
+                _hands.TryPickupAnyHand(owner, uid, animate: false);
+        }
+        _pendingBoomerangCatches.Clear();
+
         var query = EntityQueryEnumerator<YautjaSmartDiscComponent, PhysicsComponent>();
         while (query.MoveNext(out var uid, out var disc, out var physics))
         {
@@ -519,13 +545,12 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
         if (ent.Comp.PendingThrowActivator is not { } user)
             return;
 
-        if (_timing.CurTime < ent.Comp.PendingThrowActivationAt)
+        if (HasComp<ThrownItemComponent>(ent.Owner))
             return;
 
         ClearPendingThrowActivation(ent.Comp);
 
-        if (TerminatingOrDeleted(user) ||
-            !TryComp(ent.Owner, out ThrownItemComponent? _))
+        if (TerminatingOrDeleted(user) || _containers.IsEntityInContainer(ent.Owner))
         {
             return;
         }
@@ -547,11 +572,12 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
         ent.Comp.YautjaOwner = owner;
         ent.Comp.ReturningToOwner = true;
         ent.Comp.CurrentTarget = null;
-        ent.Comp.BoomerangVisualUntil = _timing.CurTime + ent.Comp.BoomerangVisualDuration;
+        // CMSS13 schedules the three-second visual reset only after both legs finish.
+        ent.Comp.BoomerangVisualUntil = TimeSpan.MaxValue;
 
         _appearance.SetData(ent.Owner, ToggleableVisuals.Enabled, true);
 
-        var target = TryFindNearestTarget(ent, out var foundTarget)
+        var target = TryFindNearestTarget(ent, out var foundTarget, 4f)
             ? foundTarget
             : owner;
 
@@ -562,7 +588,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
             if (target == owner)
                 SteerBoomerangReturn(ent.Owner, ent.Comp, physics, owner);
             else
-                SteerDisc(ent.Owner, ent.Comp, physics, owner, target);
+                LaunchBoomerangLeg(ent.Owner, ent.Comp, owner, target, 4f, 6.67f);
         }
     }
 
@@ -613,8 +639,14 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 
     private void SteerBoomerangReturn(EntityUid uid, YautjaSmartDiscComponent disc, PhysicsComponent physics, EntityUid owner)
     {
+        LaunchBoomerangLeg(uid, disc, owner, owner, 12f, 4f);
+    }
+
+    private void LaunchBoomerangLeg(EntityUid uid, YautjaSmartDiscComponent disc, EntityUid owner,
+        EntityUid target, float range, float sourceSpeed)
+    {
         var discCoords = _transform.GetMapCoordinates(uid);
-        var ownerCoords = _transform.GetMapCoordinates(owner);
+        var ownerCoords = _transform.GetMapCoordinates(target);
         if (discCoords.MapId != ownerCoords.MapId)
             return;
 
@@ -622,10 +654,18 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
         if (direction.LengthSquared() <= 0f)
             direction = Vector2.UnitX;
 
-        if (!EnsureThrown(uid, disc, physics, owner, direction))
-            return;
-
-        _physics.SetLinearVelocity(uid, direction.Normalized() * disc.ThrowSpeed, body: physics);
+        direction = direction.Normalized() * Math.Min(direction.Length(), range);
+        // The two original throws have different speeds and finite ranges. Do not
+        // use autonomous-disc orbiting or its indefinite LandTime for a boomerang.
+        if (TryComp<ThrownItemComponent>(uid, out var previous))
+            _thrown.StopThrow(uid, previous);
+        disc.ReturningToOwner = true;
+        disc.CurrentTarget = target == owner ? null : target;
+        // TryThrow adds an impulse. In zero gravity the previous leg retains its
+        // velocity, so reset it before launching towards the new target.
+        _physics.SetLinearVelocity(uid, Vector2.Zero);
+        _throwing.TryThrow(uid, direction, 10f / (10f / sourceSpeed - 0.5f), owner,
+            pushbackRatio: 0, compensateFriction: false, recoil: false, playSound: false, rotate: false);
     }
 
     private bool EnsureThrown(EntityUid uid, YautjaSmartDiscComponent disc, PhysicsComponent physics, EntityUid owner, Vector2 direction)
@@ -792,7 +832,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
             _toggle.TrySetActive((ent.Owner, null), false, ent.Comp.YautjaOwner, false);
     }
 
-    private bool TryFindNearestTarget(Entity<YautjaSmartDiscComponent> ent, out EntityUid target)
+    private bool TryFindNearestTarget(Entity<YautjaSmartDiscComponent> ent, out EntityUid target, float? range = null)
     {
         target = default;
         if (TryGetRogueTarget(ent, out target))
@@ -800,9 +840,10 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
 
         var discCoords = _transform.GetMapCoordinates(ent.Owner);
         EntityUid? closest = null;
-        var closestDistance = ent.Comp.SearchRange * ent.Comp.SearchRange;
+        var searchRange = range ?? ent.Comp.SearchRange;
+        var closestDistance = searchRange * searchRange;
 
-        foreach (var uid in _lookup.GetEntitiesInRange(discCoords, ent.Comp.SearchRange))
+        foreach (var uid in _lookup.GetEntitiesInRange(discCoords, searchRange))
         {
             if (!TryResolveTarget(uid, out var candidate) ||
                 !IsValidTarget(ent, candidate))
@@ -837,7 +878,7 @@ public sealed partial class YautjaSmartDiscSystem : EntitySystem
             resolved == ent.Comp.YautjaOwner ||
             HasComp<YautjaComponent>(resolved) ||
             !TryComp(resolved, out MobStateComponent? mobState) ||
-            !_mobState.IsAlive(resolved, mobState))
+            (ent.Comp.Active ? !_mobState.IsAlive(resolved, mobState) : _mobState.IsDead(resolved, mobState)))
         {
             return false;
         }

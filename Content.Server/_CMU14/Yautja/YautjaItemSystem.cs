@@ -60,7 +60,6 @@ namespace Content.Server._CMU14.Yautja;
 
 public sealed partial class YautjaItemSystem : EntitySystem
 {
-    private readonly record struct RelayGroundDestination(EntityUid Entity, string Id, string Name);
 
     private static readonly string[] FalconReturnSlots = { "ears", "ears2" };
     private static readonly ProtoId<NpcFactionPrototype> BadBloodYautjaFaction = "CMUYautjaBadBlood";
@@ -897,7 +896,7 @@ public sealed partial class YautjaItemSystem : EntitySystem
                 TryGetRelayDestination(destination, out _)));
         }
 
-        for (var i = 0; i < _relayDestinations.Count; i++)
+        for (var i = 0; beacon.Comp.AllowCustomDestinations && i < _relayDestinations.Count; i++)
         {
             var custom = _relayDestinations[i];
             entries.Add(new YautjaRelayBeaconDestinationEntry(
@@ -935,38 +934,9 @@ public sealed partial class YautjaItemSystem : EntitySystem
         return false;
     }
 
-    private List<RelayGroundDestination> GetGroundRelayDestinations()
+    private List<YautjaTeleportSystem.ColonyDestination> GetGroundRelayDestinations()
     {
-        var destinations = new List<RelayGroundDestination>();
-        var ids = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var query = EntityQueryEnumerator<YautjaRelayDestinationComponent>();
-        while (query.MoveNext(out var uid, out var component))
-        {
-            if (Deleted(uid) || component.Kind != YautjaRelayDestinationKind.Ground)
-                continue;
-
-            var id = component.Id.Trim();
-            var name = component.DisplayName.Trim();
-            var transform = Transform(uid);
-            var coordinates = transform.Coordinates;
-            if (id.Length == 0 ||
-                name.Length == 0 ||
-                !coordinates.IsValid(EntityManager) ||
-                transform.MapID == MapId.Nullspace ||
-                !ids.Add(id))
-                continue;
-
-            destinations.Add(new RelayGroundDestination(uid, id, name));
-        }
-
-        destinations.Sort(static (left, right) =>
-        {
-            var idComparison = StringComparer.OrdinalIgnoreCase.Compare(left.Id, right.Id);
-            return idComparison != 0
-                ? idComparison
-                : StringComparer.OrdinalIgnoreCase.Compare(left.Name, right.Name);
-        });
-        return destinations;
+        return _teleport.GetColonyDestinations();
     }
 
     private bool TryGetGroundRelayDestination(string? id, out EntityUid destination)

@@ -2509,7 +2509,7 @@ public sealed class YautjaYoungbloodTest
     }
 
     [Test]
-    public async Task ShipTeleporterRequiresConfirmationBeforeDeploying()
+    public async Task ShipTeleporterRequiresColonySelectionBeforeDeploying()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -2520,7 +2520,10 @@ public sealed class YautjaYoungbloodTest
             var entMan = server.EntMan;
             var teleporter = entMan.SpawnEntity(null, map.GridCoords);
             var hunter = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
-            var destination = entMan.SpawnEntity("CMUYautjaHuntDestinationJungleMoon", map.GridCoords.Offset(new Vector2(8, 0)));
+            var destination = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(8, 0)));
+
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).Id = "colony-test";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).DisplayName = "Colony";
 
             try
             {
@@ -2534,11 +2537,11 @@ public sealed class YautjaYoungbloodTest
                 entMan.EventBus.RaiseLocalEvent(teleporter, ref ev);
 
                 Assert.That(entMan.TryGetComponent(teleporter, out DialogComponent? dialog), Is.True);
-                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Confirm));
-                Assert.That(dialog.ConfirmEvent, Is.TypeOf<YautjaYoungbloodDeployConfirmedEvent>());
+                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Options));
+                Assert.That(dialog.Options.Single().Event, Is.TypeOf<YautjaColonyDeploySelectedEvent>());
                 Assert.That(entMan.GetComponent<TransformComponent>(hunter).Coordinates, Is.EqualTo(before));
 
-                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.ConfirmEvent!, true);
+                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.Options.Single().Event!, true);
 
                 var after = entMan.GetComponent<TransformComponent>(hunter).Coordinates;
                 Assert.That(after, Is.Not.EqualTo(before));
@@ -2559,7 +2562,7 @@ public sealed class YautjaYoungbloodTest
     }
 
     [Test]
-    public async Task AdjacentShipTeleportersOnlyOpenOneConfirmation()
+    public async Task AdjacentShipTeleportersOnlyOpenOneDestinationDialog()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -2571,7 +2574,10 @@ public sealed class YautjaYoungbloodTest
             var first = entMan.SpawnEntity(null, map.GridCoords);
             var second = entMan.SpawnEntity(null, map.GridCoords.Offset(new Vector2(1, 0)));
             var hunter = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
-            var destination = entMan.SpawnEntity("CMUYautjaHuntDestinationJungleMoon", map.GridCoords.Offset(new Vector2(8, 0)));
+            var destination = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(8, 0)));
+
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).Id = "colony-test";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).DisplayName = "Colony";
 
             try
             {

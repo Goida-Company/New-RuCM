@@ -8,6 +8,9 @@ using Content.Shared.Projectiles;
 using Content.Shared.Popups;
 using Content.Shared.Toggleable;
 using Content.Shared.Weapons.Ranged.Components;
+using Content.Shared.Item;
+using Content.Shared.Wieldable;
+using Content.Shared.Wieldable.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -25,6 +28,7 @@ public sealed partial class YautjaBowSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private YautjaTrapSystem _trap = default!;
+    [Dependency] private SharedItemSystem _item = default!;
 
     private const string ProjectileSlotId = "projectiles";
     private static readonly TimeSpan YautjaTrapXenoInterferenceDuration = TimeSpan.FromSeconds(100);
@@ -41,6 +45,8 @@ public sealed partial class YautjaBowSystem : EntitySystem
         SubscribeLocalEvent<YautjaBowComponent, EntInsertedIntoContainerMessage>(OnBowInserted);
         SubscribeLocalEvent<YautjaBowComponent, EntRemovedFromContainerMessage>(OnBowRemoved);
         SubscribeLocalEvent<YautjaBowComponent, MapInitEvent>(OnBowMapInit);
+        SubscribeLocalEvent<YautjaBowComponent, ItemWieldedEvent>(OnBowWielded, after: new[] { typeof(SharedWieldableSystem) });
+        SubscribeLocalEvent<YautjaBowComponent, ItemUnwieldedEvent>(OnBowUnwielded, after: new[] { typeof(SharedWieldableSystem) });
         SubscribeLocalEvent<YautjaArrowComponent, MapInitEvent>(OnArrowMapInit);
         SubscribeLocalEvent<YautjaArrowComponent, UseInHandEvent>(OnArrowUseInHand);
         SubscribeLocalEvent<YautjaArrowComponent, YautjaArrowWarheadSelectedEvent>(OnArrowWarheadSelected);
@@ -392,10 +398,31 @@ public sealed partial class YautjaBowSystem : EntitySystem
             !TryComp(arrowUid, out YautjaArrowComponent? arrowComp))
         {
             _appearance.SetData(bow, YautjaBowVisuals.LoadedIcon, "none");
+            UpdateBowHeldSprite(bow);
             return;
         }
 
         _appearance.SetData(bow, YautjaBowVisuals.LoadedIcon, BowLoadedIconFor(arrowComp));
+        UpdateBowHeldSprite(bow);
+    }
+
+    private void OnBowWielded(Entity<YautjaBowComponent> ent, ref ItemWieldedEvent args) => UpdateBowHeldSprite(ent);
+
+    private void OnBowUnwielded(Entity<YautjaBowComponent> ent, ref ItemUnwieldedEvent args) => UpdateBowHeldSprite(ent);
+
+    private void UpdateBowHeldSprite(EntityUid bow)
+    {
+        _appearance.TryGetData<string>(bow, YautjaBowVisuals.LoadedIcon, out var loaded);
+        var prefix = loaded switch
+        {
+            "expl" => "bow_expl",
+            "emp" => "bow_emp",
+            "loaded" or "trap" => "bow_loaded",
+            _ => "bow",
+        };
+        if (TryComp<WieldableComponent>(bow, out var wielded) && wielded.Wielded)
+            prefix += "_w";
+        _item.SetHeldPrefix(bow, prefix);
     }
 
     private static string BowLoadedIconFor(YautjaArrowComponent arrow)

@@ -13,6 +13,10 @@
     currentLanguage: Yautja
     defaultLanguage: Yautja
   - type: Yautja
+  - type: RemoveComponents
+    components:
+    - type: Perishable
+    - type: Rotting
   - type: IgnoreXenoWeedsSlowdown
   - type: Skills
     preset: CMUSkillPresetYautjaWarrior

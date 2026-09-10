@@ -272,7 +272,7 @@ public sealed partial class CMArmorSystem : EntitySystem
 
     private void OnArmorCanPerformStep(Entity<CMHardArmorComponent> ent, ref InventoryRelayedEvent<CMSurgeryCanPerformStepEvent> args)
     {
-        if (args.Args.Invalid == StepInvalidReason.None)
+        if (!args.Args.IgnoreArmor && args.Args.Invalid == StepInvalidReason.None)
             args.Args.Invalid = StepInvalidReason.Armor;
     }
 
@@ -337,7 +337,12 @@ public sealed partial class CMArmorSystem : EntitySystem
         RaiseLocalEvent(ent, ref ev);
 
         var armorPiercing = args.ArmorPiercing;
-        if (args.Tool is { } tool && Exists(tool))
+        Content.Shared._CMU14.Yautja.YautjaThrowComponent? thrownWeapon = null;
+        var sourceThrow = args.Impact.Delivery == DamageImpactDelivery.Thrown &&
+                          TryComp(args.Tool, out thrownWeapon);
+        if (sourceThrow)
+            armorPiercing = HasComp<XenoComponent>(ent) ? 0 : thrownWeapon!.ArmorPiercing;
+        if (!sourceThrow && args.Tool is { } tool && Exists(tool))
         {
             var piercingEv = new CMGetArmorPiercingEvent(ent);
             RaiseLocalEvent(tool, ref piercingEv);
@@ -396,15 +401,15 @@ public sealed partial class CMArmorSystem : EntitySystem
             {
                 Resist(args.Damage, ev.Bullet, ArmorGroup, mod.RangedArmorModifier);
             }
-            else if (HasComp<MeleeWeaponComponent>(args.Tool))
+            else if (sourceThrow || HasComp<MeleeWeaponComponent>(args.Tool))
             {
-                Resist(args.Damage, ev.Melee, ArmorGroup, mod.MeleeArmorModifier);
+                Resist(args.Damage, ev.Melee, ArmorGroup, sourceThrow ? 5 : mod.MeleeArmorModifier);
             }
             Resist(args.Damage, ev.Bio, BioGroup, mod.RangedArmorModifier);
         }
         else
         {
-            Resist(args.Damage, ev.XenoArmor, ArmorGroup, mod.RangedArmorModifier);
+            Resist(args.Damage, ev.XenoArmor, ArmorGroup, sourceThrow ? 4 : mod.RangedArmorModifier);
         }
     }
 

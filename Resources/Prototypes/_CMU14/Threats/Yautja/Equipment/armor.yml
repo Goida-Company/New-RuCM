@@ -3,6 +3,12 @@
   id: CMUYautjaArmorBase
   abstract: true
   components:
+  - type: UniformAccessoryHolder
+    allowedCategories: [Decor]
+  - type: UserInterface
+    interfaces:
+      enum.UniformAccessoriesUi.Key:
+        type: UniformAccessoryBui
   - type: Sprite
     sprite: _CMU14/Yautja/armor_clan.rsi
   - type: Clothing

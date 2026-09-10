@@ -203,7 +203,7 @@ public abstract partial class SharedStaminaSystem : EntitySystem
 
     private void OnThrowHit(EntityUid uid, StaminaDamageOnCollideComponent component, ThrowDoHitEvent args)
     {
-        if (args.Handled)
+        if (args.Handled || HasComp<YautjaThrowComponent>(uid))
             return;
 
         OnCollide(uid, component, args.Target);

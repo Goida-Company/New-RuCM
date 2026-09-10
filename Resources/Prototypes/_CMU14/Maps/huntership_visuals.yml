@@ -1314,7 +1314,7 @@
   - type: EntityStorageCloseOnMapInit
   - type: StorageFill
     contents:
-    - id: CMUYautjaMedicomp
+    - id: CMUYautjaMedicompFull
   - type: Clickable
   - type: InteractionOutline
   - type: Physics
@@ -14279,7 +14279,6 @@
     containers:
       key_slots:
       - CMUYautjaEncryptionKey
-      - CMUYautjaOverseerEncryptionKey
       - CMUYautjaBadBloodEncryptionKey
       - CMUYautjaStrandedEncryptionKey
 
@@ -29065,7 +29064,7 @@
 
 
 - type: entity
-  parent: CMUYautjaMedicomp
+  parent: CMUYautjaMedicompFull
   id: CMUHunterShipPlacedCMUYautjaMedicompMedicompSouthOffsetNeg1x7
   name: "Medicomp"
   description: "A complex kit of alien tools and medicines."
@@ -29110,7 +29109,7 @@
 
 
 - type: entity
-  parent: CMUYautjaMedicomp
+  parent: CMUYautjaMedicompFull
   id: CMUHunterShipPlacedCMUYautjaMedicompMedicompSouthOffsetNeg2x0
   name: "Medicomp"
   description: "A complex kit of alien tools and medicines."
@@ -29155,7 +29154,7 @@
 
 
 - type: entity
-  parent: CMUYautjaMedicomp
+  parent: CMUYautjaMedicompFull
   id: CMUHunterShipPlacedCMUYautjaMedicompMedicompSouthOffsetNeg2xNeg2
   name: "Medicomp"
   description: "A complex kit of alien tools and medicines."
@@ -29200,7 +29199,7 @@
 
 
 - type: entity
-  parent: CMUYautjaMedicomp
+  parent: CMUYautjaMedicompFull
   id: CMUHunterShipPlacedCMUYautjaMedicompMedicompSouthOffsetNeg3x10
   name: "Medicomp"
   description: "A complex kit of alien tools and medicines."
@@ -29245,7 +29244,7 @@
 
 
 - type: entity
-  parent: CMUYautjaMedicomp
+  parent: CMUYautjaMedicompFull
   id: CMUHunterShipPlacedCMUYautjaMedicompMedicompSouthOffsetNeg3x4
   name: "Medicomp"
   description: "A complex kit of alien tools and medicines."

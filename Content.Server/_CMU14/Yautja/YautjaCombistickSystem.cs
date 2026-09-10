@@ -18,6 +18,10 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
+using System.Numerics;
+using Robust.Shared.Map;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -41,6 +45,9 @@ public sealed partial class YautjaCombistickSystem : EntitySystem
     [Dependency] private ThrownItemSystem _thrown = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private YautjaPowerSystem _power = default!;
+    [Dependency] private SharedInteractionSystem _interaction = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private Content.Shared._RMC14.Chemistry.Reagent.RMCReagentSystem _reagent = default!;
 
     public override void Initialize()
     {
@@ -66,6 +73,7 @@ public sealed partial class YautjaCombistickSystem : EntitySystem
 
     public override void Update(float frameTime)
     {
+        UpdateTethers();
         if (_pendingContainerRecalls.Count == 0)
             return;
 
@@ -85,6 +93,48 @@ public sealed partial class YautjaCombistickSystem : EntitySystem
 
             _containers.TryRemoveFromContainer(weapon, force: true);
             Recall((weapon, chained));
+        }
+    }
+
+    private void UpdateTethers()
+    {
+        var query = EntityQueryEnumerator<YautjaChainedWeaponComponent>();
+        while (query.MoveNext(out var weapon, out var chain))
+        {
+            if (chain.LinkedTo is not { } owner)
+                continue;
+            if (TerminatingOrDeleted(owner))
+            {
+                CleanupChain((weapon, chain));
+                continue;
+            }
+            if (_containers.IsEntityInContainer(weapon))
+                continue;
+            var origin = _transform.GetMapCoordinates(owner);
+            var position = _transform.GetMapCoordinates(weapon);
+            var delta = position.Position - origin.Position;
+            // BYOND get_dist uses the maximum axis distance, including diagonals.
+            if (position.MapId == origin.MapId && Math.Max(Math.Abs(delta.X), Math.Abs(delta.Y)) <= chain.TetherRange)
+                continue;
+            if (position.MapId != origin.MapId)
+            {
+                CleanupChain((weapon, chain));
+                continue;
+            }
+            var step = new Vector2(Math.Clamp(-delta.X, -1, 1), Math.Clamp(-delta.Y, -1, 1));
+            var next = new MapCoordinates(position.Position + step, position.MapId);
+            var nextDelta = next.Position - origin.Position;
+            if (Math.Max(Math.Abs(nextDelta.X), Math.Abs(nextDelta.Y)) > chain.TetherRange ||
+                !_interaction.InRangeUnobstructed(weapon, next))
+            {
+                CleanupChain((weapon, chain));
+                continue;
+            }
+            if (TryComp<ThrownItemComponent>(weapon, out var thrown))
+                _thrown.StopThrow(weapon, thrown);
+            if (TryComp<PhysicsComponent>(weapon, out var physics))
+                _physics.SetLinearVelocity(weapon, Vector2.Zero, body: physics);
+            _transform.SetCoordinates(weapon, _transform.ToCoordinates(next));
         }
     }
 
@@ -236,6 +286,7 @@ public sealed partial class YautjaCombistickSystem : EntitySystem
 
         if (!ent.Comp.Charged)
         {
+            _popup.PopupEntity(Loc.GetString("cmu-yautja-throw-needs-blood", ("item", ent.Owner)), args.User, args.User);
             args.Cancelled = true;
             return;
         }
@@ -277,10 +328,15 @@ public sealed partial class YautjaCombistickSystem : EntitySystem
 
         foreach (var target in args.HitEntities)
         {
-            if (target == args.User || _mobState.IsDead(target) || IsSourceSimpleAnimal(target))
+            if (target == args.User || !HasComp<Content.Shared.Mobs.Components.MobStateComponent>(target) ||
+                _mobState.IsDead(target) || IsSourceSimpleAnimal(target))
                 continue;
 
             ent.Comp.Charged = true;
+            if (TryComp<Content.Shared.Body.Components.BloodstreamComponent>(target, out var blood) &&
+                _reagent.TryIndex(blood.BloodReagent, out var reagent))
+                ent.Comp.ChargeColor = reagent.SubstanceColor;
+            _popup.PopupEntity(Loc.GetString("cmu-yautja-throw-charged", ("item", ent.Owner)), args.User, args.User);
             Dirty(ent);
             return;
         }

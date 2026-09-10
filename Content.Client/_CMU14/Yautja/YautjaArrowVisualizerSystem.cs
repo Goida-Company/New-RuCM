@@ -87,5 +87,9 @@ public sealed partial class YautjaBowVisualizerSystem : VisualizerSystem<YautjaB
         };
 
         _sprite.LayerSetRsiState((uid, args.Sprite), arrowLayer, state);
+        // CMSS13 loaded bow states already contain the complete bow, not just
+        // an arrow overlay. Rendering the empty bow below them doubles its limbs.
+        if (_sprite.LayerMapTryGet((uid, args.Sprite), "base", out var baseLayer, false))
+            _sprite.LayerSetVisible((uid, args.Sprite), baseLayer, loadedIcon == "none");
     }
 }

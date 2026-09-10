@@ -456,6 +456,32 @@ public sealed class YautjaPredatorRoleTest
             Assert.That(prototypes.TryIndex<GameMapPrototype>("CMUYautjaHunterShip", out var map), Is.True);
             var options = DeserializationOptions.Default with { InitializeMaps = true };
             Assert.DoesNotThrow(() => ticker.LoadGameMap(map!, out _, options));
+
+            var medicomps = 0;
+            var burningLights = 0;
+            var query = server.EntMan.EntityQueryEnumerator<MetaDataComponent>();
+            while (query.MoveNext(out var uid, out var metadata))
+            {
+                var id = metadata.EntityPrototype?.ID ?? string.Empty;
+                if (!id.StartsWith("CMUHunterShip"))
+                    continue;
+
+                if (id.Contains("CMUYautjaMedicompMedicomp"))
+                {
+                    medicomps++;
+                    Assert.That(server.EntMan.GetComponent<StorageComponent>(uid).Container.ContainedEntities.Count,
+                        Is.EqualTo(10), $"{id}: mapped medicomps need tools and medicine");
+                }
+
+                if (id.Contains("Brazier") && !id.Contains("Frame"))
+                {
+                    burningLights++;
+                    Assert.That(server.EntMan.GetComponent<Robust.Server.GameObjects.PointLightComponent>(uid).Enabled,
+                        Is.True, $"{id}: burning braziers and torches must emit light after map initialization");
+                }
+            }
+            Assert.That(medicomps, Is.GreaterThan(0));
+            Assert.That(burningLights, Is.GreaterThan(0));
         });
 
         await pair.CleanReturnAsync();
@@ -489,6 +515,7 @@ public sealed class YautjaPredatorRoleTest
                 cfg.SetCVar(YautjaPredatorRoundCVars.RandomMinimumRounds, 1);
                 cfg.SetCVar(YautjaPredatorRoundCVars.RandomMaximumRounds, 1);
                 cfg.SetCVar(YautjaPredatorRoundCVars.RandomEnabled, true);
+                server.EntMan.System<GameTicker>().SetGamePreset("DistressSignal");
                 server.EntMan.System<GameTicker>().RestartRound();
             });
 
@@ -778,7 +805,7 @@ public sealed class YautjaPredatorRoleTest
     }
 
     [Test]
-    public async Task RelayBeaconDestinationOptionsMatchCmss13()
+    public async Task RelayBeaconDestinationOptionsAreLimitedToShips()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -790,14 +817,12 @@ public sealed class YautjaPredatorRoleTest
 
             var relay = prototypes.Index<EntityPrototype>("CMUYautjaRelayBeacon");
             Assert.That(relay.TryGetComponent<YautjaRelayBeaconComponent>(out var relayBeacon, componentFactory), Is.True);
-            Assert.That(Enum.TryParse<YautjaRelayDestinationKind>("Ground", out var ground), Is.True,
-                "The relay beacon needs a distinct multi-point ground destination kind.");
             Assert.That(relayBeacon!.AllowedDestinations, Is.EqualTo(new[]
             {
                 YautjaRelayDestinationKind.YautjaShip,
                 YautjaRelayDestinationKind.HumanShip,
-                ground,
             }));
+            Assert.That(relayBeacon.AllowCustomDestinations, Is.False);
             Assert.That(relayBeacon.PulseSound, Is.TypeOf<SoundPathSpecifier>());
             var signalPath = new ResPath("/Audio/_CMU14/Yautja/signal.ogg");
             Assert.That(((SoundPathSpecifier) relayBeacon.PulseSound).Path, Is.EqualTo(signalPath),
@@ -878,7 +903,7 @@ public sealed class YautjaPredatorRoleTest
                 entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 first = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(12, 0)));
                 second = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(16, 0)));
 
@@ -957,7 +982,7 @@ public sealed class YautjaPredatorRoleTest
                 var ui = entMan.System<SharedUserInterfaceSystem>();
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
                 var valid = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(12, 0)));
                 var blank = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(14, 0)));
@@ -1050,7 +1075,7 @@ public sealed class YautjaPredatorRoleTest
 
             var hands = entMan.System<SharedHandsSystem>();
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -1089,8 +1114,8 @@ public sealed class YautjaPredatorRoleTest
             var actions = entMan.System<ActionContainerSystem>();
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var groundBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
-            var heldBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var groundBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
+            var heldBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -1417,7 +1442,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
             var action = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
 
             try
@@ -1473,7 +1498,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
             var action = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
 
             try
@@ -1557,7 +1582,7 @@ public sealed class YautjaPredatorRoleTest
                 entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 metadata.SetEntityName(hunter, hunterName);
                 server.PlayerMan.SetAttachedEntity(session, hunter);
                 expectedArea = areas.GetAreaName(hunter);
@@ -1645,7 +1670,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -1688,7 +1713,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -1752,7 +1777,7 @@ public sealed class YautjaPredatorRoleTest
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
                 badBlood = entMan.SpawnEntity("CMUMobYautjaBadBlood", map.GridCoords.Offset(new Vector2(1, 0)));
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 metadata.SetEntityName(hunter, hunterName);
                 server.PlayerMan.SetAttachedEntity(session, badBlood);
 
@@ -1849,7 +1874,7 @@ public sealed class YautjaPredatorRoleTest
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
                 deadYautja = entMan.SpawnEntity("CMUMobYautja", map.GridCoords.Offset(new Vector2(1, 0)));
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 metadata.SetEntityName(hunter, hunterName);
                 mobState.ChangeMobState(deadYautja, MobState.Dead);
                 server.PlayerMan.SetAttachedEntity(session, deadYautja);
@@ -2326,7 +2351,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
             var nest = entMan.SpawnEntity("XenoNest", map.GridCoords);
 
             try
@@ -2373,7 +2398,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(groundMap.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", orbitMap.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", orbitMap.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, orbitMap.GridCoords);
 
             try
             {
@@ -2415,7 +2440,7 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -2467,7 +2492,7 @@ public sealed class YautjaPredatorRoleTest
                 previousAttached = session.AttachedEntity;
 
                 user = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
-                beacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                beacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 action = entMan.SpawnEntity(null, MapCoordinates.Nullspace);
                 var actionComp = entMan.EnsureComponent<ActionComponent>(action);
 
@@ -3280,6 +3305,17 @@ public sealed class YautjaPredatorRoleTest
         await pair.CleanReturnAsync();
     }
 
+    // Exercise the opt-in custom destination support separately from the shipped,
+    // ship-only relay configuration.
+    private static EntityUid SpawnConfigurableRelayBeacon(IEntityManager entities, EntityCoordinates coordinates)
+    {
+        var beacon = entities.SpawnEntity("CMUYautjaRelayBeacon", coordinates);
+        var component = entities.GetComponent<YautjaRelayBeaconComponent>(beacon);
+        component.AllowCustomDestinations = true;
+        component.AllowedDestinations.Add(YautjaRelayDestinationKind.Ground);
+        return beacon;
+    }
+
     private static HashSet<string?> ActionPrototypeIds(IEntityManager entMan, IEnumerable<EntityUid> actions)
     {
         return actions
@@ -3446,8 +3482,8 @@ public sealed class YautjaPredatorRoleTest
                 entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
                 hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-                savingBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
-                travelBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+                savingBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
+                travelBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
                 savedLocation = entMan.SpawnEntity("CMUHunterShipMarkerPredatorSpawn", map.GridCoords.Offset(new Vector2(16, 0)));
                 savedCoordinates = transform.GetMapCoordinates(savedLocation);
                 Assert.That(hands.TryPickupAnyHand(hunter, travelBeacon), Is.True);
@@ -3523,8 +3559,8 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var savingBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
-            var travelBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var savingBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
+            var travelBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -3591,8 +3627,8 @@ public sealed class YautjaPredatorRoleTest
             entMan.EnsureComponent<RMCPlanetComponent>(map.Grid.Owner);
 
             var hunter = entMan.SpawnEntity("CMUMobYautja", map.GridCoords);
-            var savingBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
-            var travelBeacon = entMan.SpawnEntity("CMUYautjaRelayBeacon", map.GridCoords);
+            var savingBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
+            var travelBeacon = SpawnConfigurableRelayBeacon(entMan, map.GridCoords);
 
             try
             {
@@ -4514,8 +4550,9 @@ public sealed class YautjaPredatorRoleTest
                 Assert.That(inventory.TryEquip(hunter, bracer, "gloves", silent: true, force: true), Is.True);
 
                 Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, student, YautjaMarkKind.Student, null), Is.True);
-                Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, thrall, YautjaMarkKind.Thrall, null), Is.True);
-                Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, thrall, YautjaMarkKind.Blooded, null), Is.True);
+                Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, thrall, YautjaMarkKind.Thrall, null), Is.False);
+                Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, thrall, YautjaMarkKind.Thrall, "Survived the hunt"), Is.True);
+                Assert.That(marks.TryMark((bracer, entMan.GetComponent<YautjaBracerComponent>(bracer)), hunter, thrall, YautjaMarkKind.Blooded, "Proved worthy"), Is.True);
 
                 Assert.Multiple(() =>
                 {
