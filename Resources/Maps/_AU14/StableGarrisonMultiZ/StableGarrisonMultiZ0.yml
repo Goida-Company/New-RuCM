@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 08/15/2026 23:28:41
-  entityCount: 61733
+  entityCount: 61736
 maps:
 - 1
 grids:
@@ -429838,4 +429838,33 @@ entities:
       containers:
         rmc_xeno_tunnel_mob_container: !type:Container
           ents: []
+- proto: CMUYautjaGroundRelayDestination
+  entities:
+  - uid: 84953
+    components:
+    - type: Transform
+      pos: 15.5,-99.5
+      parent: 1
+    - type: YautjaRelayDestination
+      kind: Ground
+      id: stable-garrison-redux.ground.1
+      displayName: Stable Garrison Redux — Западная окраина
+  - uid: 84954
+    components:
+    - type: Transform
+      pos: 47.5,-121.5
+      parent: 1
+    - type: YautjaRelayDestination
+      kind: Ground
+      id: stable-garrison-redux.ground.2
+      displayName: Stable Garrison Redux — Юго-западная окраина
+  - uid: 84955
+    components:
+    - type: Transform
+      pos: 80.5,-119.5
+      parent: 1
+    - type: YautjaRelayDestination
+      kind: Ground
+      id: stable-garrison-redux.ground.3
+      displayName: Stable Garrison Redux — Подступы к колонии
 ...

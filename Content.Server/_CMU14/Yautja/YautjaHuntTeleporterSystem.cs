@@ -27,6 +27,7 @@ public sealed partial class YautjaHuntTeleporterSystem : EntitySystem
         SubscribeLocalEvent<YautjaHuntTeleporterComponent, StepTriggerAttemptEvent>(OnStepTriggerAttempt);
         SubscribeLocalEvent<YautjaHuntTeleporterComponent, StepTriggeredOnEvent>(OnStepTriggeredOn);
         SubscribeLocalEvent<YautjaHuntTeleporterComponent, YautjaYoungbloodDeployConfirmedEvent>(OnYoungbloodDeployConfirmed);
+        SubscribeLocalEvent<YautjaHuntTeleporterComponent, YautjaColonyDeploySelectedEvent>(OnColonyDeploySelected);
     }
 
     private void OnStepTriggerAttempt(Entity<YautjaHuntTeleporterComponent> ent, ref StepTriggerAttemptEvent args)
@@ -42,6 +43,12 @@ public sealed partial class YautjaHuntTeleporterSystem : EntitySystem
         if (!CanUseTeleporter(args.Tripper, ent.Comp, true))
             return;
 
+        if (ent.Comp.Kind == YautjaHuntTeleporterKind.Ship)
+        {
+            OpenColonyDestinations(ent, args.Tripper);
+            return;
+        }
+
         if (!TryGetDestination(ent.Comp, out _))
         {
             _popup.PopupEntity(Loc.GetString("cmu-yautja-hunt-teleporter-no-destination"), args.Tripper, args.Tripper, PopupType.SmallCaution);
@@ -54,10 +61,56 @@ public sealed partial class YautjaHuntTeleporterSystem : EntitySystem
     private void OnYoungbloodDeployConfirmed(Entity<YautjaHuntTeleporterComponent> ent, ref YautjaYoungbloodDeployConfirmedEvent args)
     {
         var user = GetEntity(args.User);
-        if (Deleted(user) || !CanUseTeleporter(user, ent.Comp, true))
+        if (ent.Comp.Kind != YautjaHuntTeleporterKind.Young ||
+            !CanDeployFrom(ent, user))
             return;
 
         Teleport(ent, user);
+    }
+
+    private void OpenColonyDestinations(Entity<YautjaHuntTeleporterComponent> ent, EntityUid user)
+    {
+        var options = new List<DialogOption>();
+        foreach (var destination in _teleport.GetColonyDestinations())
+        {
+            options.Add(new DialogOption(destination.Name,
+                new YautjaColonyDeploySelectedEvent(GetNetEntity(user), destination.Id)));
+        }
+
+        if (options.Count == 0)
+        {
+            _popup.PopupEntity(Loc.GetString("cmu-yautja-hunt-teleporter-no-destination"), user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        _dialog.OpenOptions(ent, user, Loc.GetString("cmu-yautja-colony-deploy-title"), options);
+    }
+
+    private void OnColonyDeploySelected(Entity<YautjaHuntTeleporterComponent> ent, ref YautjaColonyDeploySelectedEvent args)
+    {
+        if (!TryGetEntity(args.User, out var user) || user == null ||
+            ent.Comp.Kind != YautjaHuntTeleporterKind.Ship || !CanDeployFrom(ent, user.Value))
+            return;
+
+        foreach (var destination in _teleport.GetColonyDestinations())
+        {
+            if (destination.Id != args.DestinationId)
+                continue;
+
+            _teleport.TeleportTrain(user.Value, _transform.GetMapCoordinates(destination.Entity));
+            _audio.PlayPvs(TeleportSound, user.Value);
+            return;
+        }
+    }
+
+    private bool CanDeployFrom(EntityUid teleporter, EntityUid user)
+    {
+        if (Deleted(user) || !CanUseTeleporter(user, Comp<YautjaHuntTeleporterComponent>(teleporter), true))
+            return false;
+
+        var source = _transform.GetMapCoordinates(teleporter);
+        var actor = _transform.GetMapCoordinates(user);
+        return source.MapId == actor.MapId && (source.Position - actor.Position).LengthSquared() <= 2.25f;
     }
 
     private void OpenConfirmation(Entity<YautjaHuntTeleporterComponent> ent, EntityUid user)

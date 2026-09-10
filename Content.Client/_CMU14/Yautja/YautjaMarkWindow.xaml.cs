@@ -15,6 +15,7 @@ public sealed class YautjaMarkWindow : DefaultWindow
     private readonly BoxContainer _targetList;
     private readonly Button _markButton;
     private readonly Button _unmarkButton;
+    private readonly LineEdit _reason;
 
     public event Action<NetEntity, YautjaMarkKind, string?>? OnMark;
     public event Action<NetEntity, YautjaMarkKind>? OnUnmark;
@@ -57,8 +58,16 @@ public sealed class YautjaMarkWindow : DefaultWindow
         AddMarkKind(YautjaMarkKind.Thrall);
         AddMarkKind(YautjaMarkKind.Student);
         AddMarkKind(YautjaMarkKind.Blooded);
-        _markKindOption.OnItemSelected += args => _markKindOption.SelectId(args.Id);
+        _markKindOption.OnItemSelected += args =>
+        {
+            _markKindOption.SelectId(args.Id);
+            RefreshSelectionState();
+        };
         _markKindOption.SelectId((int) YautjaMarkKind.Prey);
+
+        _reason = new LineEdit { HorizontalExpand = true };
+        _reason.OnTextChanged += _ => RefreshSelectionState();
+        controlsBody.AddChild(_reason);
 
         var targetPanel = YautjaBracerUiStyle.Section(Loc.GetString("cmu-yautja-mark-section-targets"), out var targetBody, YautjaBracerUiStyle.Amber);
         targetPanel.VerticalExpand = true;
@@ -285,7 +294,11 @@ public sealed class YautjaMarkWindow : DefaultWindow
     private void RefreshSelectionState()
     {
         var hasSelection = _selectedIndex is { } selected && selected >= 0 && selected < _entries.Count;
-        _markButton.Disabled = !hasSelection;
+        var requiresReason = YautjaMarkSystem.RequiresReason((YautjaMarkKind) _markKindOption.SelectedId);
+        _reason.PlaceHolder = Loc.GetString(requiresReason
+            ? "cmu-yautja-mark-reason-required"
+            : "cmu-yautja-mark-reason-placeholder");
+        _markButton.Disabled = !hasSelection || requiresReason && string.IsNullOrWhiteSpace(_reason.Text);
         _unmarkButton.Disabled = !hasSelection;
         _selectionLabel.Text = hasSelection
             ? Loc.GetString("cmu-yautja-mark-selection", ("target", _entries[_selectedIndex!.Value].Name))
@@ -301,8 +314,8 @@ public sealed class YautjaMarkWindow : DefaultWindow
         var kind = (YautjaMarkKind) _markKindOption.SelectedId;
         if (remove)
             OnUnmark?.Invoke(entry.Entity, kind);
-        else
-            OnMark?.Invoke(entry.Entity, kind, null);
+        else if (!YautjaMarkSystem.RequiresReason(kind) || !string.IsNullOrWhiteSpace(_reason.Text))
+            OnMark?.Invoke(entry.Entity, kind, string.IsNullOrWhiteSpace(_reason.Text) ? null : _reason.Text.Trim());
     }
 
     private void AddMarkKind(YautjaMarkKind kind)

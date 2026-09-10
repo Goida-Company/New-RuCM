@@ -8,6 +8,7 @@
   - type: UniformAccessory
     category: Decor
     limit: 99
+    showOnMob: false
   - type: YautjaTrophy
 
 - type: entity
@@ -16,6 +17,11 @@
   name: skull
   description: A bone that appears to be of human origin.
   components:
+  - type: UniformAccessory
+    showOnMob: true
+    playerSprite:
+      sprite: _CMU14/Yautja/trophy_worn.rsi
+      state: skull
   - type: Sprite
     sprite: _CMU14/Yautja/yautja_items.rsi
     state: skull2

@@ -708,7 +708,7 @@ public sealed class YautjaHuntingGroundMapTest
     }
 
     [Test]
-    public async Task DesertMoonShipTeleporterLandsOnOpenDestination()
+    public async Task DesertMoonDestinationIsOpenButShipPlatformRequiresColonyDestinations()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -749,14 +749,10 @@ public sealed class YautjaHuntingGroundMapTest
                 var ev = new StepTriggeredOnEvent(teleporter, hunter);
                 entMan.EventBus.RaiseLocalEvent(teleporter, ref ev);
 
-                Assert.That(entMan.TryGetComponent(teleporter, out DialogComponent? dialog), Is.True);
-                Assert.That(dialog!.ConfirmEvent, Is.TypeOf<YautjaYoungbloodDeployConfirmedEvent>());
-                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.ConfirmEvent!, true);
-
-                var actual = transform.GetMapCoordinates(hunter);
-                var expected = transform.GetMapCoordinates(destination);
-                Assert.That(actual.MapId, Is.EqualTo(expected.MapId));
-                Assert.That(actual.Position, Is.EqualTo(expected.Position));
+                Assert.That(entMan.HasComponent<DialogComponent>(teleporter), Is.False,
+                    "A hunting-ground marker must not be offered as a colony destination.");
+                Assert.That(transform.GetMapCoordinates(hunter).MapId,
+                    Is.Not.EqualTo(transform.GetMapCoordinates(destination).MapId));
 
                 var destinationXform = entMan.GetComponent<TransformComponent>(destination);
                 Assert.That(destinationXform.GridUid, Is.Not.Null);

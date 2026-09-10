@@ -980,6 +980,13 @@
   name: smart-disc
   description: A strange piece of alien technology. It has many jagged, whirring blades and bizarre writing.
   components:
+  - type: YautjaThrow
+    force: 25
+    speed: 6.67
+    weight: 1
+    embeddable: false
+  - type: ItemThrowRange
+    range: 7
   - type: Sprite
     sprite: _CMU14/Yautja/smart_disc.rsi
     layers:
@@ -1013,6 +1020,7 @@
       path: /Audio/Machines/button.ogg
   - type: YautjaSmartDisc
     searchRange: 7
+    throwActivationDelay: 0
     throwSpeed: 13
     spinVelocity: 24
     maxHits: 8
@@ -1054,6 +1062,12 @@
   name: plasma caster
   description: A powerful, shoulder-mounted energy weapon.
   components:
+  - type: YautjaThrow
+    force: 5
+    speed: 10
+    weight: 5
+    sharp: false
+    edge: false
   - type: Sprite
     sprite: _CMU14/Yautja/plasma_caster.rsi
     layers:
@@ -1120,6 +1134,14 @@
         path: /Audio/_CMU14/Yautja/Weapons/Plasma/pulse.wav
   - type: Appearance
 
+  - type: ItemThrowRange
+    range: 5
+  - type: LandAtCursor
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.75
+
 - type: entity
   parent: CMUYautjaPlasmaCaster
   id: CMUYautjaPlasmaCasterRetro
@@ -1154,6 +1176,101 @@
     #  cooldown: 30
     #  fireSound:
     #    path: /Audio/_CMU14/Yautja/Weapons/Plasma/pulse.wav
+
+- type: entity
+  parent: CMUYautjaPlasmaCaster
+  id: CMUYautjaPlasmaCasterEbony
+  name: ebony shoulder plasma caster
+  components:
+  - type: Sprite
+    sprite: _CMU14/Yautja/plasma_caster_ebony.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    sprite: _CMU14/Yautja/plasma_caster_ebony.rsi
+    size: Normal
+  - type: Clothing
+    sprite: _CMU14/Yautja/plasma_caster_ebony.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+
+- type: entity
+  parent: CMUYautjaPlasmaCaster
+  id: CMUYautjaPlasmaCasterSilver
+  name: silver shoulder plasma caster
+  components:
+  - type: Sprite
+    sprite: _CMU14/Yautja/plasma_caster_silver.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    sprite: _CMU14/Yautja/plasma_caster_silver.rsi
+    size: Normal
+  - type: Clothing
+    sprite: _CMU14/Yautja/plasma_caster_silver.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+
+- type: entity
+  parent: CMUYautjaPlasmaCaster
+  id: CMUYautjaPlasmaCasterBronze
+  name: bronze shoulder plasma caster
+  components:
+  - type: Sprite
+    sprite: _CMU14/Yautja/plasma_caster_bronze.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    sprite: _CMU14/Yautja/plasma_caster_bronze.rsi
+    size: Normal
+  - type: Clothing
+    sprite: _CMU14/Yautja/plasma_caster_bronze.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+
+- type: entity
+  parent: CMUYautjaPlasmaCaster
+  id: CMUYautjaPlasmaCasterCrimson
+  name: crimson shoulder plasma caster
+  components:
+  - type: Sprite
+    sprite: _CMU14/Yautja/plasma_caster_crimson.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    sprite: _CMU14/Yautja/plasma_caster_crimson.rsi
+    size: Normal
+  - type: Clothing
+    sprite: _CMU14/Yautja/plasma_caster_crimson.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+
+- type: entity
+  parent: CMUYautjaPlasmaCaster
+  id: CMUYautjaPlasmaCasterBone
+  name: bone shoulder plasma caster
+  components:
+  - type: Sprite
+    sprite: _CMU14/Yautja/plasma_caster_bone.rsi
+    layers:
+    - state: icon
+      map: [ "enum.GunVisualLayers.Base" ]
+  - type: Item
+    sprite: _CMU14/Yautja/plasma_caster_bone.rsi
+    size: Normal
+  - type: Clothing
+    sprite: _CMU14/Yautja/plasma_caster_bone.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
 
 - type: entity
   parent: [ BaseItem, RMCBaseMeleeWeapon ]
@@ -1270,6 +1387,8 @@
   components:
   - type: Sprite
     state: alt
+  - type: Item
+    heldPrefix: alt
 
 - type: entity
   parent: [ BaseItem, RMCBaseMeleeWeapon ]
@@ -1389,16 +1508,6 @@
         Slash: 2
         Piercing: 2
         Heat: 2
-  - type: Damageable
-    damageContainer: Shield
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 140
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
   - type: YautjaStoredGear
     kind: Shield
 
@@ -1485,6 +1594,7 @@
   suffix: Yautja
   components:
   - type: Stack
+    stackType: CMUYautjaMendingHerbs
     count: 10
   - type: Sprite
     sprite: _CMU14/Yautja/yautja_items.rsi
@@ -1513,6 +1623,7 @@
   suffix: Yautja
   components:
   - type: Stack
+    stackType: CMUYautjaBurnHerbs
     count: 10
   - type: Sprite
     sprite: _CMU14/Yautja/yautja_items.rsi
@@ -1532,6 +1643,20 @@
     selfTargetDoAfterMultiplier: 1
     treatBeginSound: null
     treatEndSound: null
+
+- type: stack
+  id: CMUYautjaMendingHerbs
+  name: cmu-yautja-mending-herbs
+  icon: { sprite: /Textures/_CMU14/Yautja/yautja_items.rsi, state: brute_herbs }
+  spawn: CMUYautjaAdvancedBruisePack
+  maxCount: 10
+
+- type: stack
+  id: CMUYautjaBurnHerbs
+  name: cmu-yautja-burn-herbs
+  icon: { sprite: /Textures/_CMU14/Yautja/yautja_items.rsi, state: burn_herbs }
+  spawn: CMUYautjaAdvancedOintment
+  maxCount: 10
 
 - type: entity
   parent: BaseItem

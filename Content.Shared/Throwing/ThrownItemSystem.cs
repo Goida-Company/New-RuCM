@@ -171,6 +171,9 @@ namespace Content.Shared.Throwing
 
         private void HandleCollision(EntityUid uid, ThrownItemComponent component, ref StartCollideEvent args)
         {
+            if (component.Deleted)
+                return;
+
             if (!args.OtherFixture.Hard)
                 return;
 

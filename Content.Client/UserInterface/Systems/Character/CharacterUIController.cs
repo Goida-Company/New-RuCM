@@ -7,6 +7,7 @@ using Content.Client.UserInterface.Systems.Character.Controls;
 using Content.Client.UserInterface.Systems.Character.Windows;
 using Content.Client.UserInterface.Systems.Objectives.Controls;
 using Content.Shared.Ghost;
+using Content.Shared._CMU14.Yautja;
 using Content.Shared.Input;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
@@ -234,6 +235,14 @@ public sealed partial class CharacterUIController : UIController, IOnStateEntere
     {
         if (_window == null || !_window.IsOpen)
             return;
+
+        if (_ent.HasComponent<YautjaComponent>(_player.LocalEntity) ||
+            _ent.HasComponent<YautjaHellhoundComponent>(_player.LocalEntity))
+        {
+            _window.RoleType.Text = Loc.GetString("cmu-yautja-character-faction");
+            _window.RoleType.FontColorOverride = Color.White;
+            return;
+        }
 
         if (!_ent.TryGetComponent<MindContainerComponent>(_player.LocalEntity, out var container)
             || container.Mind is null)

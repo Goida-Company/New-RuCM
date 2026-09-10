@@ -178,6 +178,7 @@ public sealed partial class YautjaMarkSystem : EntitySystem
 
         if (RequiresReason(kind) && string.IsNullOrWhiteSpace(trimmed))
         {
+            _popup.PopupClient(Loc.GetString("cmu-yautja-mark-reason-required"), hunter, hunter, PopupType.SmallCaution);
             if (mark.Marks.Count == 0)
                 RemCompDeferred<YautjaMarkComponent>(target);
 
@@ -281,7 +282,7 @@ public sealed partial class YautjaMarkSystem : EntitySystem
             or YautjaMarkKind.GearCarrier;
     }
 
-    private static bool RequiresReason(YautjaMarkKind kind)
+    public static bool RequiresReason(YautjaMarkKind kind)
     {
         return kind is YautjaMarkKind.Thrall or YautjaMarkKind.Blooded;
     }

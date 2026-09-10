@@ -14,6 +14,7 @@
   jobPreviewEntity: CMUMobYautja
   startingGear: CMUYautjaHunterSpawnGear
   usePlayerProfile: false
+  applyTraits: false
   special:
   - !type:AddComponentSpecial
     components:
@@ -37,6 +38,7 @@
   jobEntity: CMUMobYautjaHellhound
   jobPreviewEntity: CMUMobYautjaHellhound
   usePlayerProfile: false
+  applyTraits: false
 
 - type: job
   parent: CMJobBase
@@ -55,6 +57,7 @@
   jobPreviewEntity: CMUMobYautjaYoungblood
   startingGear: CMUYautjaYoungbloodGear
   usePlayerProfile: false
+  applyTraits: false
 
 - type: job
   parent: CMJobBase
@@ -73,6 +76,7 @@
   jobPreviewEntity: CMUMobYautjaBadBlood
   startingGear: CMUYautjaBadBloodSpawnGear
   usePlayerProfile: false
+  applyTraits: false
 
 - type: job
   parent: CMJobBase
@@ -91,6 +95,7 @@
   jobPreviewEntity: CMUMobYautjaMilitaryCasteSoldier
   startingGear: CMUYautjaMilitaryCasteSoldierGear
   usePlayerProfile: false
+  applyTraits: false
 
 - type: job
   parent: CMJobBase
@@ -109,6 +114,7 @@
   jobPreviewEntity: CMUMobYautjaMilitaryCasteEnforcer
   startingGear: CMUYautjaMilitaryCasteEnforcerGear
   usePlayerProfile: false
+  applyTraits: false
 
 - type: startingGear
   id: CMUYautjaMilitaryCasteSoldierGear

@@ -55,7 +55,6 @@ public sealed partial class CharacterInfoSystem : EntitySystem
 
         var objectives = new Dictionary<string, List<ObjectiveInfo>>();
         var jobTitle = Loc.GetString("character-info-no-profession");
-        var lorePrimerLines = new List<string>();
         string? jobId = null;
         string? briefing = null;
         if (_minds.TryGetMind(entity, out var mindId, out var mind))
@@ -94,8 +93,7 @@ public sealed partial class CharacterInfoSystem : EntitySystem
         }
 
         var isThreatRole = mind != null && IsThreatMind(mind);
-        PopulateLorePrimerLines(lorePrimerLines, jobId, isThreatRole);
-        AddCLFStandingOrders(lorePrimerLines, entity);
+        var lorePrimerLines = GetLorePrimerLines(entity, jobId, isThreatRole);
 
         // Check inventory and hands for JobTitleChangerComponent
         if (TryComp(entity, out InventoryComponent? _))
@@ -129,6 +127,22 @@ public sealed partial class CharacterInfoSystem : EntitySystem
         }
 
         RaiseNetworkEvent(new CharacterInfoEvent(GetNetEntity(entity), jobTitle, objectives, briefing, lorePrimerLines), args.SenderSession);
+    }
+
+    public List<string> GetLorePrimerLines(EntityUid entity, string? jobId, bool isThreatRole)
+    {
+        var lines = new List<string>();
+        if (HasComp<YautjaComponent>(entity) || HasComp<YautjaHellhoundComponent>(entity))
+        {
+            lines.Add(Loc.GetString(jobId == "CMUYautjaBadBlood"
+                ? "cmu-yautja-character-primer-badblood"
+                : "cmu-yautja-character-primer"));
+            return lines;
+        }
+
+        PopulateLorePrimerLines(lines, jobId, isThreatRole);
+        AddCLFStandingOrders(lines, entity);
+        return lines;
     }
 
     private void PopulateLorePrimerLines(List<string> lines, string? jobId, bool isThreatRole)

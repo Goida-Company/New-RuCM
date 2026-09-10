@@ -5501,7 +5501,6 @@ public sealed class YautjaSmokeTest
                 {
                     var migratedActionIds = new[]
                     {
-                        "CMUActionYautjaChangeExplosionType",
                         "CMUActionYautjaRemoveBracerAttachments",
                         "CMUActionYautjaCreateHealingCapsule",
                         "CMUActionYautjaAddTrackedItem",
@@ -5519,7 +5518,8 @@ public sealed class YautjaSmokeTest
                     foreach (var migratedActionId in migratedActionIds)
                         Assert.That(actionIds, Does.Not.Contain(migratedActionId), $"{migratedActionId} belongs to the bracer menu.");
                     Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaOpenMarkPanel"));
-                    Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaSelfDestruct"));
+                    Assert.That(actionIds, Does.Contain("CMUActionYautjaSelfDestruct"));
+                    Assert.That(actionIds, Does.Contain("CMUActionYautjaChangeExplosionType"));
                     Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaTranslator"));
                     Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaToggleBracerIdChip"));
                     Assert.That(actionIds, Does.Not.Contain("CMUActionYautjaLinkThrallBracer"));
@@ -7136,7 +7136,7 @@ public sealed class YautjaSmokeTest
     }
 
     [Test]
-    public async Task BracerChangeExplosionTypeIsMenuOnlyForWornAndHeldHunterBracer()
+    public async Task WornBracerProvidesBothSelfDestructActions()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -7173,7 +7173,8 @@ public sealed class YautjaSmokeTest
 
                 Assert.Multiple(() =>
                 {
-                    Assert.That(wornActionIds, Does.Not.Contain("CMUActionYautjaChangeExplosionType"));
+                    Assert.That(wornActionIds, Does.Contain("CMUActionYautjaChangeExplosionType"));
+                    Assert.That(wornActionIds, Does.Contain("CMUActionYautjaSelfDestruct"));
                     Assert.That(heldActionIds, Does.Not.Contain("CMUActionYautjaChangeExplosionType"));
                 });
             }
@@ -11339,10 +11340,10 @@ public sealed class YautjaSmokeTest
                 var smallExplosion = QueuedExplosions(explosions).SingleOrDefault();
                 Assert.That(smallExplosion, Is.Not.Null,
                     "CMSS13 small self-destruct gib path still calls cell_explosion(T, 800, 550, EXPLOSION_FALLOFF_SHAPE_LINEAR).");
-                Assert.That(smallExplosion!.TotalIntensity, Is.EqualTo(800));
-                Assert.That(smallExplosion.Slope, Is.EqualTo(10),
-                    "Local RMC explosion slope remains the CM-style falloff adapter value while preserving source total/max intensity facts.");
-                Assert.That(smallExplosion.MaxTileIntensity, Is.EqualTo(550));
+                Assert.That(smallExplosion!.Slope, Is.EqualTo(550));
+                Assert.That(smallExplosion.MaxTileIntensity, Is.EqualTo(800));
+                Assert.That(explosions.IntensityToRadius(smallExplosion.TotalIntensity, smallExplosion.Slope, smallExplosion.MaxTileIntensity),
+                    Is.EqualTo(800f / 550).Within(0.001));
 
                 ClearQueuedExplosions(explosions);
 
@@ -11354,10 +11355,11 @@ public sealed class YautjaSmokeTest
                 var bigExplosion = QueuedExplosions(explosions).SingleOrDefault();
                 Assert.That(bigExplosion, Is.Not.Null,
                     "CMSS13 big self-destruct calls cell_explosion(T, 600, 50, EXPLOSION_FALLOFF_SHAPE_LINEAR) on ground-level/shipped-large-SD maps.");
-                Assert.That(bigExplosion!.TotalIntensity, Is.EqualTo(600));
-                Assert.That(bigExplosion.Slope, Is.EqualTo(10),
-                    "Local RMC explosion slope remains the CM-style falloff adapter value while preserving source total/max intensity facts.");
-                Assert.That(bigExplosion.MaxTileIntensity, Is.EqualTo(50));
+                Assert.That(bigExplosion!.Slope, Is.EqualTo(50));
+                Assert.That(bigExplosion.MaxTileIntensity, Is.EqualTo(600));
+                Assert.That(explosions.IntensityToRadius(bigExplosion.TotalIntensity, bigExplosion.Slope, bigExplosion.MaxTileIntensity),
+                    Is.EqualTo(12).Within(0.001));
+                ClearQueuedExplosions(explosions);
             }
             finally
             {
@@ -12130,7 +12132,7 @@ public sealed class YautjaSmokeTest
     }
 
     [Test]
-    public async Task HuntTeleporterUsesConfiguredDestinationId()
+    public async Task ShipTeleporterUsesSelectedColonyDestinationId()
     {
         await using var pair = await PoolManager.GetServerClient();
         var server = pair.Server;
@@ -12143,8 +12145,13 @@ public sealed class YautjaSmokeTest
 
             var hunter = entMan.SpawnEntity("CMMobHuman", map.GridCoords);
             var teleporter = entMan.SpawnEntity(null, map.GridCoords);
-            var jungle = entMan.SpawnEntity("CMUYautjaHuntDestinationJungleMoon", map.GridCoords.Offset(new Vector2(10, 0)));
-            var desert = entMan.SpawnEntity("CMUYautjaHuntDestinationDesertMoon", map.GridCoords.Offset(new Vector2(20, 0)));
+            var jungle = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(10, 0)));
+            var desert = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(20, 0)));
+
+            entMan.GetComponent<YautjaRelayDestinationComponent>(jungle).Id = "jungle";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(jungle).DisplayName = "jungle";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(desert).Id = "desert";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(desert).DisplayName = "desert";
 
             try
             {
@@ -12157,9 +12164,9 @@ public sealed class YautjaSmokeTest
                 entMan.EventBus.RaiseLocalEvent(teleporter, ref ev);
 
                 Assert.That(entMan.TryGetComponent(teleporter, out DialogComponent? dialog), Is.True);
-                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Confirm));
-                Assert.That(dialog.ConfirmEvent, Is.TypeOf<YautjaYoungbloodDeployConfirmedEvent>());
-                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.ConfirmEvent!, true);
+                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Options));
+                Assert.That(dialog.Options.Single(option => option.Text == "desert").Event, Is.TypeOf<YautjaColonyDeploySelectedEvent>());
+                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.Options.Single(option => option.Text == "desert").Event!, true);
 
                 var hunterCoordinates = transform.GetMapCoordinates(hunter);
                 var desertCoordinates = transform.GetMapCoordinates(desert);
@@ -12244,7 +12251,10 @@ public sealed class YautjaSmokeTest
             var firstPulled = entMan.SpawnEntity("CMMobHuman", map.GridCoords.Offset(new Vector2(1, 0)));
             var secondPulled = entMan.SpawnEntity("CMMobHuman", map.GridCoords.Offset(new Vector2(2, 0)));
             var teleporter = entMan.SpawnEntity(null, map.GridCoords);
-            var destination = entMan.SpawnEntity("CMUYautjaHuntDestinationJungleMoon", map.GridCoords.Offset(new Vector2(10, 0)));
+            var destination = entMan.SpawnEntity("CMUYautjaGroundRelayDestination", map.GridCoords.Offset(new Vector2(10, 0)));
+
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).Id = "colony-test";
+            entMan.GetComponent<YautjaRelayDestinationComponent>(destination).DisplayName = "Colony";
 
             try
             {
@@ -12260,9 +12270,9 @@ public sealed class YautjaSmokeTest
                 entMan.EventBus.RaiseLocalEvent(teleporter, ref ev);
 
                 Assert.That(entMan.TryGetComponent(teleporter, out DialogComponent? dialog), Is.True);
-                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Confirm));
-                Assert.That(dialog.ConfirmEvent, Is.TypeOf<YautjaYoungbloodDeployConfirmedEvent>());
-                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.ConfirmEvent!, true);
+                Assert.That(dialog!.DialogType, Is.EqualTo(DialogType.Options));
+                Assert.That(dialog.Options.Single().Event, Is.TypeOf<YautjaColonyDeploySelectedEvent>());
+                entMan.EventBus.RaiseLocalEvent(teleporter, dialog.Options.Single().Event!, true);
 
                 var targetCoordinates = transform.GetMapCoordinates(destination);
                 Assert.Multiple(() =>

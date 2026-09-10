@@ -695,6 +695,8 @@ public sealed partial class YautjaHuntConsoleSystem : EntitySystem
         {
             if (Deleted(uid) ||
                 component.Kind != spawnKind ||
+                // The preserve also has Youngblood markers. Calls awaken hunters in the ship's bedrooms.
+                (spawnKind == YautjaHuntSpawnKind.Youngblood && !HasComp<YautjaPredatorSpawnPointComponent>(uid)) ||
                 !SpawnDestinationMatches(component.DestinationId, destinationId))
             {
                 continue;

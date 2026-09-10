@@ -141,6 +141,14 @@ public abstract partial class SharedCMSurgerySystem
             }
         }
 
+        // Medicomp tools can treat the wearer's wounds through Yautja armor.
+        // Keep normal surgery's equipment checks for every other procedure.
+        var medicompSelfTreatment = args.User == args.Body &&
+                                   HasComp<Content.Shared._CMU14.Yautja.YautjaComponent>(args.Body) &&
+                                   (HasComp<Content.Shared._CMU14.Yautja.CMUYautjaMedicompStabilizeStepComponent>(ent) ||
+                                    HasComp<Content.Shared._CMU14.Yautja.CMUYautjaMedicompHealingGunStepComponent>(ent) ||
+                                    HasComp<Content.Shared._CMU14.Yautja.CMUYautjaMedicompClampStepComponent>(ent));
+        args.IgnoreArmor = medicompSelfTreatment;
         RaiseLocalEvent(args.Body, ref args);
 
         if (args.Invalid != StepInvalidReason.None)

@@ -495,7 +495,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         }
     }
 
-    private void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
+    public void EmbedAttach(EntityUid uid, EntityUid target, EntityUid? user, EmbeddableProjectileComponent component)
     {
         TryComp<PhysicsComponent>(uid, out var physics);
         _physics.SetLinearVelocity(uid, Vector2.Zero, body: physics);
@@ -530,6 +530,8 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        var previousTarget = component.EmbeddedIntoUid;
+
         if (component.EmbeddedIntoUid is not null)
         {
             if (TryComp<EmbeddedContainerComponent>(component.EmbeddedIntoUid.Value, out var embeddedContainer))
@@ -555,6 +557,12 @@ public abstract partial class SharedProjectileSystem : EntitySystem
         _transform.AttachToGridOrMap(uid, xform);
         component.EmbeddedIntoUid = null;
         Dirty(uid, component);
+
+        if (previousTarget is { } target)
+        {
+            var removed = new EmbedRemovedEvent(user, target);
+            RaiseLocalEvent(uid, ref removed);
+        }
 
         // Reset whether the projectile has damaged anything if it successfully was removed
         if (TryComp<ProjectileComponent>(uid, out var projectile))

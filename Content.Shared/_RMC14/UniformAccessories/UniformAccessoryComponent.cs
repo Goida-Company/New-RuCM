@@ -12,6 +12,9 @@ public sealed partial class UniformAccessoryComponent : Component
     public Rsi? PlayerSprite;
 
     [DataField, AutoNetworkedField]
+    public bool ShowOnMob = true;
+
+    [DataField, AutoNetworkedField]
     public NetEntity? User;
 
     [DataField, AutoNetworkedField]

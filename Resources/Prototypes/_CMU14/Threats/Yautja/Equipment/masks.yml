@@ -445,6 +445,10 @@
     - state: icon
   - type: Clothing
     sprite: _CMU14/Yautja/masks/pred_mask_elite_ronin.rsi
+    clothingVisuals:
+      mask:
+      - state: equipped-MASK
+        offset: 0, 0.09375
     slots:
     - Mask
     - Suitstorage

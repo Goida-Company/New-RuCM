@@ -315,7 +315,7 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
         var rank = ResolveRankForSession(ev.Player);
         if (GetRankSpawnPolicy(rank).BypassSlotCap)
         {
-            EnsureHunterSlot(rule.Comp.PredatorJob, rule.Comp.HunterShipMap);
+            EnsureRankBypassSlot(rule.Comp);
             return;
         }
 
@@ -336,7 +336,7 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
         {
             // A late-joining senior rank must be able to select the Hunter job
             // even after the ordinary pool has reached zero.
-            EnsureHunterSlot(rule.Comp.PredatorJob, rule.Comp.HunterShipMap);
+            EnsureRankBypassSlot(rule.Comp);
             return;
         }
 
@@ -403,15 +403,16 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
         }
     }
 
-    private void EnsureHunterSlot(ProtoId<JobPrototype> job, ProtoId<GameMapPrototype> map)
+    public void EnsureRankBypassSlot(YautjaPredatorRoundComponent rule)
     {
-        if (TryGetHunterSlots(job, map, out var available) &&
-            (available is null || available.Value > 0))
+        if (TryGetHunterSlots(rule.PredatorJob, rule.HunterShipMap, out var available) &&
+            (available is null || rule.RankBypassSlotsRemaining > 0 && available.Value > 0))
             return;
 
-        foreach (var station in GetPredatorStations(job, map))
+        foreach (var station in GetPredatorStations(rule.PredatorJob, rule.HunterShipMap))
         {
-            _stationJobs.TryAdjustJobSlot(station, job.Id, 1, true);
+            if (_stationJobs.TryAdjustJobSlot(station, rule.PredatorJob.Id, 1, true))
+                rule.RankBypassSlotsRemaining++;
             break;
         }
     }
@@ -433,6 +434,13 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
 
     private void OnGameRunLevelChanged(GameRunLevelChangedEvent ev)
     {
+        if (ev.New == GameRunLevel.InRound)
+        {
+            var rules = QueryActiveRules();
+            while (rules.MoveNext(out _, out _, out var rule, out _))
+                ReleaseUnusedRankReservations(rule);
+        }
+
         // Integration tests intentionally start rounds without a selected game preset.
         // Do not inject a random Yautja rule into those dummy rounds.
         if (!_randomEnabled ||
@@ -456,6 +464,18 @@ public sealed partial class YautjaPredatorRoundSystem : GameRuleSystem<YautjaPre
         }
 
         ScheduleNextRandomHunt();
+    }
+
+    public void ReleaseUnusedRankReservations(YautjaPredatorRoundComponent rule)
+    {
+        if (rule.RankBypassSlotsRemaining == 0)
+            return;
+
+        foreach (var station in GetPredatorStations(rule.PredatorJob, rule.HunterShipMap))
+            _stationJobs.TryAdjustJobSlot(station, rule.PredatorJob.Id, -rule.RankBypassSlotsRemaining, clamp: true);
+
+        rule.RankBypassSlotsRemaining = 0;
+        rule.RoundStartBypassSlotsRemaining = 0;
     }
 
     private void SetRandomEnabled(bool enabled)

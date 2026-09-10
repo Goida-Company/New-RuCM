@@ -349,7 +349,7 @@ public sealed partial class YautjaSelfDestructSystem : EntitySystem
             epicenter,
             bracer.Comp.SelfDestructExplosion.Id,
             SelfDestructTotalIntensity(bracer.Comp),
-            bracer.Comp.SelfDestructIntensitySlope,
+            SelfDestructIntensitySlope(bracer.Comp),
             SelfDestructMaxIntensity(bracer.Comp),
             user ?? bracer.Owner,
             maxTileBreak: SelfDestructMaxTileBreak(
@@ -409,14 +409,21 @@ public sealed partial class YautjaSelfDestructSystem : EntitySystem
     internal static float SelfDestructTotalIntensity(YautjaBracerComponent bracer)
     {
         return bracer.SelfDestructExplosionType == YautjaSelfDestructExplosionType.Big
-            ? 600
-            : 800;
+            ? bracer.SelfDestructTotalIntensity
+            : 550 * MathF.PI / 3 * MathF.Pow(800f / 550, 3);
     }
 
     internal static float SelfDestructMaxIntensity(YautjaBracerComponent bracer)
     {
         return bracer.SelfDestructExplosionType == YautjaSelfDestructExplosionType.Big
-            ? 50
+            ? bracer.SelfDestructMaxIntensity
+            : 800;
+    }
+
+    internal static float SelfDestructIntensitySlope(YautjaBracerComponent bracer)
+    {
+        return bracer.SelfDestructExplosionType == YautjaSelfDestructExplosionType.Big
+            ? bracer.SelfDestructIntensitySlope
             : 550;
     }
 

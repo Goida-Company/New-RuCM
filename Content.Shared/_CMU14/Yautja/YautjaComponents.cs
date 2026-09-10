@@ -601,11 +601,13 @@ public sealed partial class YautjaBracerComponent : Component, IClothingSlots
     [DataField]
     public ProtoId<ExplosionPrototype> SelfDestructExplosion = "RMCOB";
     [DataField]
-    public float SelfDestructTotalIntensity = 14000;
+    // CMSS13 cell_explosion(600, 50): power at the center, falling by 50 per tile.
+    // Robust expects the integral over the blast area, not the center power.
+    public float SelfDestructTotalIntensity = 50 * MathF.PI / 3 * 12 * 12 * 12;
     [DataField]
-    public float SelfDestructIntensitySlope = 16;
+    public float SelfDestructIntensitySlope = 50;
     [DataField]
-    public float SelfDestructMaxIntensity = 150;
+    public float SelfDestructMaxIntensity = 600;
     [DataField]
     public int SelfDestructMaxTileBreak = 5;
     [DataField]
@@ -1244,8 +1246,11 @@ public sealed partial class YautjaChainedWeaponComponent : Component
     [DataField]
     public bool RequireActive = true;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool Charged;
+
+    [DataField, AutoNetworkedField]
+    public Color ChargeColor = Color.Red;
 
     [DataField]
     public float TetherRange = 6f;
@@ -1575,14 +1580,13 @@ public sealed partial class YautjaRelayBeaconComponent : Component
     {
         YautjaRelayDestinationKind.YautjaShip,
         YautjaRelayDestinationKind.HumanShip,
-        YautjaRelayDestinationKind.Ground,
     };
 
     [DataField]
     public EntProtoId AddTeleporterLocationActionId = "CMUActionYautjaAddTeleporterLocation";
 
     [DataField]
-    public bool AllowCustomDestinations = true;
+    public bool AllowCustomDestinations = false;
 
     [DataField]
     public EntityUid? AddTeleporterLocationAction;

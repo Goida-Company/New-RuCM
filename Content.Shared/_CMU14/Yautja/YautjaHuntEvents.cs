@@ -23,6 +23,9 @@ public sealed record YautjaPreserveEscapeChoiceEvent(NetEntity User, bool Escape
 public sealed record YautjaYoungbloodDeployConfirmedEvent(NetEntity User);
 
 [Serializable, NetSerializable]
+public sealed record YautjaColonyDeploySelectedEvent(NetEntity User, string DestinationId);
+
+[Serializable, NetSerializable]
 public sealed record YautjaYoungbloodExecutionTargetSelectedEvent(NetEntity User, NetEntity Target);
 
 [Serializable, NetSerializable]

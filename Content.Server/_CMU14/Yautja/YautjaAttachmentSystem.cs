@@ -640,14 +640,28 @@ public sealed partial class YautjaAttachmentSystem : EntitySystem
 
     private void OnStoredGearShutdown(Entity<YautjaStoredGearComponent> ent, ref ComponentShutdown args)
     {
-        if (!TerminatingOrDeleted(ent.Owner) ||
-            ent.Comp.AttachedWeapon is not { } attached ||
-            TerminatingOrDeleted(attached))
-        {
+        if (!TerminatingOrDeleted(ent.Owner))
             return;
+
+        // A deployed weapon and its installed module are separate entities.
+        // Losing the weapon must not leave the module permanently deployed.
+        if (ent.Comp.AttachmentHolder is { } holder &&
+            !TerminatingOrDeleted(holder) &&
+            TryComp(holder, out YautjaStoredGearComponent? stored) &&
+            stored.AttachedWeapon == ent.Owner)
+        {
+            stored.AttachedWeapon = null;
+            stored.Deployed = false;
+            if (stored.Bracer is { } bracer &&
+                !TerminatingOrDeleted(bracer) &&
+                TryComp(bracer, out YautjaGearContainerComponent? container))
+            {
+                _actions.SetToggled(GetAction(container, stored.Kind), IsKindDeployed(container, stored.Kind));
+            }
         }
 
-        QueueDel(attached);
+        if (ent.Comp.AttachedWeapon is { } attached && !TerminatingOrDeleted(attached))
+            QueueDel(attached);
         ent.Comp.AttachedWeapon = null;
     }
 
@@ -1075,6 +1089,11 @@ public sealed partial class YautjaAttachmentSystem : EntitySystem
 
     private bool TryRetractStoredGear(Entity<YautjaStoredGearComponent> gear, EntityUid user)
     {
+        // Moving a deployed weapon into its holder raises drop events while the
+        // move is still in progress. Do not start a second container move there.
+        if (gear.Comp.Retracting)
+            return false;
+
         var holder = gear.Comp.AttachmentHolder ?? gear.Owner;
         var stored = gear.Comp.AttachmentHolder is { } attachmentHolder && TryComp(attachmentHolder, out YautjaStoredGearComponent? attachmentStored)
             ? attachmentStored

@@ -9,6 +9,13 @@
   suffix: Yautja
   components:
   - type: YautjaHellhound
+  - type: Language
+    spokenLanguages:
+    - Yautja
+    understoodLanguages:
+    - Yautja
+    currentLanguage: Yautja
+    defaultLanguage: Yautja
   - type: GhostRole
     name: cmu-yautja-hellhound-ghost-name
     description: cmu-yautja-hellhound-ghost-description
