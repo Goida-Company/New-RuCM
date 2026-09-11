@@ -19,6 +19,7 @@ using Content.Shared._RMC14.Synth;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Access.Components;
 using Content.Shared.Actions;
+using Content.Shared.Body.Events; // RuMC edit
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.Dataset;
@@ -148,6 +149,7 @@ public sealed partial class CMUDroneOperatorSystem : EntitySystem
         SubscribeLocalEvent<CMUDroneAndroidComponent, PlayerDetachedEvent>(OnDronePlayerDetached, after: [typeof(SSDIndicatorSystem)]);
         SubscribeLocalEvent<CMUDroneAndroidComponent, ComponentShutdown>(OnDroneShutdown);
         SubscribeLocalEvent<CMUDroneAndroidComponent, EntityTerminatingEvent>(OnDroneTerminating);
+        SubscribeLocalEvent<CMUDroneAndroidComponent, BeingGibbedEvent>(OnDroneGibbed); // RuMC edit
 
         SubscribeLocalEvent<CMUDroneControlSessionComponent, CMUDroneEndControlActionEvent>(OnDroneEndControlAction);
 
@@ -611,6 +613,15 @@ public sealed partial class CMUDroneOperatorSystem : EntitySystem
         EndControlForDrone(ent.Owner, Loc.GetString("cmu-drone-control-ended-drone-lost"));
         SpawnRuinedCore(ent);
     }
+
+    // RuMC edit start
+    private void OnDroneGibbed(Entity<CMUDroneAndroidComponent> ent, ref BeingGibbedEvent args)
+    {
+        SetDroneDormantEffect(ent, false);
+        StopDroneFollowing(ent, null, false);
+        EndControlForDrone(ent.Owner, Loc.GetString("cmu-drone-control-ended-drone-lost"));
+    }
+    // RuMC edit end
 
     private void OnDroneEndControlAction(Entity<CMUDroneControlSessionComponent> ent, ref CMUDroneEndControlActionEvent args)
     {

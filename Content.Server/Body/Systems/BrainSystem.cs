@@ -36,6 +36,11 @@ namespace Content.Server.Body.Systems
             if (!_mindSystem.TryGetMind(oldEntity, out var mindId, out var mind))
                 return;
 
+            // RuMC edit start
+            if (mind.OwnedEntity != oldEntity)
+                return;
+            // RuMC edit end
+
             _mindSystem.TransferTo(mindId, newEntity, mind: mind);
         }
 
